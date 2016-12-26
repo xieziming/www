@@ -1,0 +1,263 @@
+/* -----
+reset
+----- */
+html, body, form, fieldset, p, div, h1, h2, h3, h4, h5, h6 {-webkit-text-size-adjust:none;}
+body,div,ul,ol,li,h1,h2,form,input,button,textarea,select,p,*{
+	margin:0;
+	padding:0;
+	font-size:14px;
+}
+table{
+	border-collapse:collapse;
+	border-spacing:0;
+}
+fieldset,img{
+	border:0;
+}
+address,button,caption,cite,code,dfn,em,input,optgroup,option,select,strong,textarea,th,var{
+	font:inherit;
+}
+del,ins{
+	text-decoration:none;
+}
+li{
+	list-style:none;
+}
+
+h1,h2{
+	font-weight:normal;
+	line-height:120%;
+}
+h1 {
+	font-size:140%;
+	font-weight:bold;
+}
+h2{
+	font-size:120%;
+}
+
+a{
+	color:#0079ce;
+	text-decoration:none;
+}
+/*
+additional
+*/
+.clear{
+	clear:both;
+}
+/* ----- Main Class's ----- */
+.header{
+	border-bottom:1px solid #eeeeee;
+	background:#f9f9f9;
+}
+.header,
+.content,
+.footer,
+.nav{
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:100%;
+}
+/* ----- Header ----- */
+
+/* ----- Menu ----- */
+
+.header button{
+	cursor:pointer;	
+	-moz-border-radius:.3em;
+	-webkit-border-radius:.3em;
+	border-radius:.3em;
+	border:none;
+	color:#aaaaaa;
+	border:1px solid #eeeeee;
+	background:#ffffff;
+}
+
+#menu_left {
+	float:left;
+	padding:5px;
+	margin:5px 0px 5px 2px;
+}
+#menu_right {
+	float:right;
+	padding:5px;
+	margin:5px 2px 5px 0px;
+}
+.nav_left {
+	text-align:center;
+	background:#f9f9f9;
+}
+.nav_left ul{
+}
+.nav_left li{
+	text-transform:capitalize;
+	display:block;
+	border-bottom:1px dotted #eeeeee;
+}
+.nav_left a{
+	display:block;
+	padding:10px;
+	color:#7d7d7d;
+	font-size:116%;
+}
+.nav_left a:hover{
+	background:#ffffff;
+	color:#0079ce;
+}
+.nav_right {
+	text-align:center;
+	background:#f9f9f9;
+}
+.nav_right ul{
+}
+.nav_right li{
+	text-transform:capitalize;
+	display:block;
+	border-bottom:1px dotted #eeeeee;
+}
+.nav_right a{
+	display:block;
+	padding:10px;
+	color:#7d7d7d;
+	font-size:116%;
+}
+.nav_right a:hover{
+	background:#ffffff;
+	color:#0079ce;
+}
+/* ----- Content ----- */
+.calendar{
+	border-bottom:1px solid #eeeeee;
+	padding-left:3px;
+	padding-right:5px;
+	padding-bottom:3px;
+	padding-top:3px;
+	background:#ffffff;
+}
+
+.calendar-content{
+	color:#2d2d2d;
+}
+.calendar .event {
+	line-height:120%;
+	font-size:116%;
+	padding-bottom:4px;
+	padding-top:4px;
+	margin-left:2px;
+}
+.calendar .event a {
+	
+}
+
+.time {
+	border-bottom: 1px dashed #ccc;
+	font-size:85%;
+}
+input, textarea {
+	width:100%;
+	height:16px;
+	padding-top:16px;
+	margin-right:4px;
+	background:#efefef;
+	border-radius:5px;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	border:1px solid #dedede;
+	margin-top:1px;
+	margin-bottom:1px;
+	font-size:100%;
+	color:#3a3a3a;
+}
+
+input:focus, textarea:focus {
+		border:1px solid #97d6eb;
+}
+
+textarea {
+	height:100px;
+	font-family:Arial, Helvetica, sans-serif;
+}
+select {
+	width:100%;
+	height:36px;
+	border-radius:5px;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	border:1px solid #dedede;
+	margin-bottom:1px;
+	font-size:100%;
+}
+
+table {
+		width:100%;
+}
+
+.dark{
+	background:#2d2d2d;
+	color:#dddddd;
+}
+.light{
+	background:#f9f9f9;
+	color:#2d2d2d;
+	border:1px solid #dddddd;
+}
+.calendar-content p{
+	padding:5px 0;
+}
+.calendar-content p{
+	line-height:1.8em;
+}
+.calendar-content blockquote{
+	background:url(../images/blockquote-down.png) no-repeat;
+	margin:5px 0;
+	color:#5d5d5d;
+	border-top:1px solid #eeeeee; 
+	border-bottom:1px solid #eeeeee; 
+}
+.calendar-content blockquote p{
+	background:url(../images/blockquote-up.png) no-repeat bottom right;
+	font-style:italic;
+	padding:10px 40px;
+}/* ----- Footer ----- */
+.footer{
+	background:#f9f9f9;
+}
+.footer a{
+	display:inline-block;
+}
+.footer p{
+	color:#1d1d1d;
+	padding:5px;
+}
+/* pagination */
+.pagination{
+	display:block;
+	margin:10px 0 10px 10px;
+}
+.pagination li{
+	display:inline-block;
+	margin:0 0 0 10px;
+}
+.pagination a{
+	display:block;
+	padding:5px 10px;
+	font-size:85%;
+	color:#ffffff;
+	-moz-border-radius:.3em;
+	-webkit-border-radius:.3em;
+	border-radius:.3em;
+	background:#0079ce;
+}
+.pagination a:hover{
+	background:#008ef1;
+}
+.pagination .current a{
+	color:#0079ce;
+	background:none;
+}
+.pagination .current a:hover{
+	color:#008ef1;
+}
+.pagination img{
+	display:inline-block;
+}

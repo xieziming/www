@@ -1,0 +1,181 @@
+.calendar-table {
+    table-layout:fixed;
+    border-collapse: collapse;
+   	border-spacing:0;
+    width:100%;
+}
+#calendar-table tr td {
+	padding: 6px 4px;
+  border:1px solid #DEE0C8;
+}
+
+.normal-day-heading {
+    width:14%;
+    height:25px;
+    text-align:center;
+    font-size:1em;
+}
+.weekend-heading {
+    width:15%;
+    height:25px;
+    text-align:center;
+    font-size:1em;
+    color:#000000;
+}
+.calendar-next, .calendar-prev {
+    text-align:center;
+}
+.calendar-prev a:link, .calendar-next a:link {
+    text-align:center;
+    text-decoration:none
+}
+.calendar-prev a:visited, .calendar-next a:visited {
+    text-align:center;
+    text-decoration:none;
+}
+
+.calendar-month {
+    text-align:center;
+    font-weight:bold;
+    font-size: 15px;
+}
+
+.day-with-date {
+    height:60px;
+}
+.events{
+    vertical-align:text-top;
+    text-align:left;
+    font-size:95%;
+}
+.no-events {
+    text-align:center;
+    vertical-align: middle;
+    font-size:110%;
+}
+.day-without-date {
+    width:14.2%;
+    height:60px;
+}
+span.weekend {
+	
+}
+.current-day {
+    height:60px;
+    background-color:#E4E6BF;
+}
+span.event {
+	 	text-align:left;
+    font-size:1em;
+}
+
+.calendar-date-switcher {
+    height:25px;
+    text-align:center;
+    background-color:#E4E6BF;
+}
+.calendar-date-switcher form {
+    margin:0;
+    padding:0;
+}
+.calendar-date-switcher input {
+	
+}
+.calendar-date-switcher select {
+
+}
+
+.calnk a span { 
+    display:none; 
+}
+
+.calnk a:hover {
+	position:relative; 
+	z-index:10;
+	text-decoration:none
+} 
+.calnk a:hover span {	
+    color:#333333; 
+    display:block;
+    position:absolute; 
+    margin-top:2px;
+    padding:6px;
+    max-width:350px;
+    min-width:250px;
+    *width:expression((this.offsetWidth > 350) ? (this.width = 350 +'px') : ((this.offsetWidth < 250) ? (this.width = 250 +'px') :true)); 
+    clear:both;
+    z-index:100;
+    line-height:1.2em;
+    text-decoration:none;
+}
+.calnk a:hover span span.event-title {
+    padding:0px;
+    width:96%;
+    border-bottom: #000000 solid 1px;
+    text-align:center;
+    white-space:nowrap;
+    font-weight:bold;
+    font-size:1.2em;
+    text-decoration:none;
+}
+.calnk a:hover span span.time {
+		font-size:0.95em;
+		text-align:center;
+		text-decoration:none;
+}
+
+
+.page-upcoming-events {
+    font-size:95%;
+}
+.page-todays-events {
+    font-size:95%;
+}
+
+.sidebar_event_title {
+	  font-size:85%;
+    font-weight:bold;
+}
+.sidebar_event_time {
+    font-size:80%;
+}
+.sidebar_event_content {
+    font-size:85%;
+}
+
+.calnk_side a span { 
+    display:none; 
+}
+
+.calnk_side a:hover span {	
+    color:#333333; 
+    display:block;
+    position:absolute; 
+    margin:2px;
+    padding:6px;
+    max-width:300px;
+    min-width:220px;
+    *width:expression((this.offsetWidth > 300) ? (this.width = 300 +'px') : ((this.offsetWidth < 220) ? (this.width = 220 +'px') :true)); 
+    clear:both;
+    z-index:100;
+    line-height:1.2em;
+    text-decoration:none;
+}
+
+.calnk_side a:hover span span.event-title {
+    padding:0px;
+    width:96%;
+    border-bottom: #000000 solid 1px;
+    text-align:center;
+    white-space:nowrap;
+    font-weight:bold;
+    font-size:1.0em;
+    text-decoration:none;
+}
+
+
+.calnk_side a:hover span span.time {
+		font-size:0.8em;
+		text-align:center;
+		text-decoration:none;
+}

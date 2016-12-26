@@ -1,0 +1,641 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: sss\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-01-26 18:39+0800\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-Language: French\n"
+"X-Poedit-Country: FRANCE\n"
+"X-Poedit-SearchPath-0: D:\\SVN\\Project\\wordpress\\opensource\\submit-to-wordpress_org\\plugins\\live-calendar\\trunk\n"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/category.php:9
+msgid "Category added successfully"
+msgstr "Categoria aggiunta con successo"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/category.php:11
+msgid "Error Color Format !"
+msgstr "Formato Colore Errato!"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/category.php:19
+msgid "Category deleted successfully"
+msgstr "Categoria cancellata con successo"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/category.php:25
+msgid "Edit Category"
+msgstr "Modificare categoria"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/category.php:33
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/category.php:70
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/category.php:97
+msgid "Category Name"
+msgstr "Nome della categoria"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/category.php:37
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/category.php:74
+msgid "Category Colour (include #)"
+msgstr "Colore della categoria (includere il simbolo #) "
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/category.php:41
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/category.php:78
+msgid "Font Colour (include #)"
+msgstr "Coloro del carattere (includere il simbolo #) "
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/category.php:48
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/category.php:85
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/event.php:132
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/option.php:168
+msgid "Save"
+msgstr "Salvare"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/category.php:55
+msgid "Category edited successfully"
+msgstr "Categoria modificata con successo"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/category.php:62
+msgid "Add Category"
+msgstr "Aggiungere categoria"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/category.php:88
+msgid "Manage Categories"
+msgstr "Gestire le Categorie"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/category.php:96
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/event.php:476
+msgid "ID"
+msgstr "ID"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/category.php:98
+msgid "Category Colour"
+msgstr "Colore Categoria"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/category.php:99
+msgid "Font Colour"
+msgstr "Colore Carattere"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/category.php:100
+msgid "Count"
+msgstr "Numero di eventi"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/category.php:101
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/category.php:119
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/event.php:483
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/event.php:517
+msgid "Edit"
+msgstr "Modifica"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/category.php:102
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/category.php:126
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/event.php:484
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/event.php:519
+msgid "Delete"
+msgstr "Cancella"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/category.php:122
+msgid "N/A"
+msgstr "N/A"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/category.php:126
+msgid "Are you sure you want to delete this category?"
+msgstr "Vuoi davvero eliminare questa categoria?"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/category.php:138
+msgid "There are no categories in the database - something has gone wrong!"
+msgstr "Non ci sono categorie nel database - c'è stato un errore!"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/event.php:16
+msgid "Edit Events"
+msgstr "Modifica Eventi"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/event.php:16
+msgid "Add New Event"
+msgstr "Aggiungi Nuovo Evento"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/event.php:26
+msgid "Event Title"
+msgstr "Titolo dell'Evento"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/event.php:30
+msgid "Event Description"
+msgstr "Descrizione dell'Evento"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/event.php:34
+msgid "Event Category"
+msgstr "Categoria dell'Evento"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/event.php:53
+msgid "Event City"
+msgstr "Città dell'Evento"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/event.php:57
+msgid "Event Link (Optional)"
+msgstr "Link (facoltativo)"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/event.php:61
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/event.php:479
+msgid "Start Date"
+msgstr "Data di inizio"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/event.php:78
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/event.php:104
+msgid "Select Date"
+msgstr "Selezionare una data"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/event.php:82
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/event.php:480
+msgid "End Date"
+msgstr "Data di fine"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/event.php:108
+msgid "Time (hh:mm)"
+msgstr "Orario (hh:mm)"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/event.php:125
+msgid "Optional, set blank if not required."
+msgstr "Facoltativo, lasciare bianco se non è necessario."
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/event.php:125
+msgid "Current time difference from GMT is "
+msgstr "La differenza di orario rispetto al fuso GMT è di "
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/event.php:125
+msgid " hour(s)"
+msgstr " ora(e)"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/event.php:171
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/event.php:176
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/event.php:181
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/event.php:191
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/event.php:198
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/event.php:205
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/event.php:212
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/event.php:253
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/event.php:293
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/event.php:308
+msgid "Error"
+msgstr "Errore"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/event.php:171
+msgid "Your event end date must be either after or the same as your event begin date"
+msgstr "La Data di Fine deve essere almeno uguale alla Data di Inizio dell'Evento."
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/event.php:176
+msgid "Your date formatting is correct but one or more of your dates is invalid. Check for number of days in month and leap year related errors."
+msgstr "Il formato della Data è corretta, ma la Data non è valida. Verificare il numero del giorno e/o del mese e/o dell'anno (verificare anche se questo è bisestile)."
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/event.php:181
+msgid "Both start and end dates must be entered and be in the format YYYY-MM-DD"
+msgstr "Le Date di Inizio e di Fine devono essere inserite ed essere nel formato AAAA-MM-GG."
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/event.php:191
+msgid "The time field must either be blank or be entered in the format hh:mm"
+msgstr "L'Orario va inserito nel formato hh:mm o il campo deve essere lasciato bianco"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/event.php:198
+msgid "The URL entered must either be prefixed with http:// or be completely blank"
+msgstr "La URL inserita deve contenere il prefisso http:// o il campo deve essere lasciato bianco."
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/event.php:205
+msgid "The event city must not null"
+msgstr "Va sempre inserita il nome della Città in cui si svolge Evento."
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/event.php:212
+msgid "The event title is too long"
+msgstr "Il Titolo dell'Evento è troppo lungo"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/event.php:253
+msgid "An event with the details you submitted could not be found in the database. This may indicate a problem with your database or the way in which it is configured."
+msgstr "L'Evento non può essere trovato nel database. Ciò può indicare un problema con il database o nel modo in cui è configurato."
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/event.php:257
+msgid "Event added. It will now show in your calendar."
+msgstr "Evento aggiunto. Non verrà mostrato nel Calendario."
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/event.php:265
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/event.php:281
+msgid "Failure"
+msgstr "Errore"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/event.php:265
+msgid "You can't update an event if you haven't submitted an event id"
+msgstr "Non si può modificare un Evento senza aver inserito il suo Id."
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/event.php:281
+msgid "The database failed to return data to indicate the event has been updated sucessfully. This may indicate a problem with your database or the way in which it is configured."
+msgstr "Il database non è riuscito a fornire i dati che indicano che l'Evento è stato aggiornato correttamente. Ciò può indicare un problema con il database o nel modo in cui è configurato."
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/event.php:285
+msgid "Event updated successfully"
+msgstr "Evento aggiornato correttamente"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/event.php:293
+msgid "You can't delete an event if you haven't submitted an event id"
+msgstr "Non si può cancellare un evento senza inserire un Id."
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/event.php:304
+msgid "Event deleted successfully"
+msgstr "Evento cancellato con successo"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/event.php:308
+msgid "Despite issuing a request to delete, the event still remains in the database. Please investigate."
+msgstr "Nonostante una richiesta di cancellazione, l'Evento rimane ancora nel database. Verificate."
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/event.php:344
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/live-calendar.php:260
+msgid "Events"
+msgstr "Eventi"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/event.php:344
+msgid "Add New"
+msgstr "Aggiungi"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/event.php:349
+msgid "Search"
+msgstr "Cerca"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/event.php:355
+msgid "Category : "
+msgstr "Categoria:"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/event.php:364
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/event.php:366
+msgid "All"
+msgstr "Tutto"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/event.php:377
+msgid "Start Date : "
+msgstr "Data di inizio:"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/event.php:386
+msgid "End Date : "
+msgstr "Data di fine:"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/event.php:395
+msgid "Filter"
+msgstr "Filtro"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/event.php:477
+msgid "Title"
+msgstr "Titolo"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/event.php:478
+msgid "City"
+msgstr "Città"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/event.php:481
+msgid "Start "
+msgstr "Inizio"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/event.php:481
+msgid "End Time"
+msgstr "Fine"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/event.php:482
+msgid "Category"
+msgstr "Categoria"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/event.php:519
+msgid "Are you sure you want to delete this event?"
+msgstr "Si vuole davvero cancellare questo evento?"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/event.php:542
+msgid "PrePage"
+msgstr "Pagina precedente"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/event.php:544
+msgid "Current:"
+msgstr "Pagina corrente: "
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/event.php:555
+msgid "NextPage"
+msgstr "Pagina seguente"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:85
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:89
+msgid "Next"
+msgstr "Successivo"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:98
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:102
+msgid "Prev"
+msgstr "Precedente"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:144
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:181
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:627
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:656
+msgid "All day"
+msgstr "Tutto il giorno"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:146
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:183
+msgid "Time"
+msgstr "Orario"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:148
+msgid "In "
+msgstr "a "
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:241
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:244
+msgid "Sun"
+msgstr "Dom"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:241
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:244
+msgid "Mon"
+msgstr "Lun"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:241
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:244
+msgid "Tue"
+msgstr "Mar"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:241
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:244
+msgid "Wed"
+msgstr "Mer"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:241
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:244
+msgid "Thu"
+msgstr "Gio"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:241
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:244
+msgid "Fri"
+msgstr "Ven"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:241
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:244
+msgid "Sat"
+msgstr "Sab"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:246
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:309
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:456
+msgid "January"
+msgstr "Gennaio"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:246
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:310
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:456
+msgid "February"
+msgstr "Febbraio"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:246
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:311
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:456
+msgid "March"
+msgstr "Marzo"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:246
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:312
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:456
+msgid "April"
+msgstr "Aprile"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:246
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:313
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:456
+msgid "May"
+msgstr "Maggio"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:246
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:314
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:456
+msgid "June"
+msgstr "Giugno"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:246
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:315
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:456
+msgid "July"
+msgstr "Luglio"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:246
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:316
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:456
+msgid "August"
+msgstr "Agosto"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:246
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:317
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:456
+msgid "September"
+msgstr "Settembre"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:246
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:318
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:456
+msgid "October"
+msgstr "Ottobre"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:246
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:319
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:456
+msgid "November"
+msgstr "Novembre"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:246
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:320
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:456
+msgid "December"
+msgstr "Dicembre"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:308
+msgid "Month"
+msgstr "Mese"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:322
+msgid "Year"
+msgstr "Anno"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:344
+msgid "Go"
+msgstr "Vai"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:446
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:453
+msgid "Su"
+msgstr "D"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:446
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:453
+msgid "Mo"
+msgstr "L"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:446
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:453
+msgid "Tu"
+msgstr "M"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:446
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:453
+msgid "We"
+msgstr "M"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:446
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:453
+msgid "Th"
+msgstr "G"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:446
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:453
+msgid "Fr"
+msgstr "V"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:446
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:453
+msgid "Sa"
+msgstr "S"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:576
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:582
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/live-calendar.php:351
+msgid "Upcoming Events"
+msgstr "Eventi futuri"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:593
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:599
+msgid "Current Events"
+msgstr "Eventi in corso"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:629
+msgid ", In "
+msgstr ", a "
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:641
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:667
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:697
+msgid "No event till now!"
+msgstr "Nessun evento fino ad ora!"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/function.php:658
+msgid "Between"
+msgstr "Tra"
+
+# Calendar translation file
+# Copyright (C) 2009 Kieran O'Shea
+# This file is distributed under the same license as the PACKAGE package.
+# Kieran O'Shea <kieran@kieranoshea.com>, 2009
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/live-calendar.php:257
+msgid "Calendar"
+msgstr "Calendario"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/live-calendar.php:261
+msgid "Categories"
+msgstr "Categorie"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/live-calendar.php:262
+msgid "Options"
+msgstr "Opzioni"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/live-calendar.php:298
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/live-calendar.php:299
+msgid "Live Calendar"
+msgstr "Live Calendar"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/live-calendar.php:337
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/live-calendar.php:350
+msgid "Event Calendar"
+msgstr "Calendario Eventi"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/live-calendar.php:345
+msgid "Title:"
+msgstr "Titolo:"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/live-calendar.php:348
+msgid "Display Type:"
+msgstr "Mostra Tipo:"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/live-calendar.php:352
+msgid "Recent Events"
+msgstr "Eventi Recenti"
+
+# Calendar translation file
+# Copyright (C) 2009 Kieran O'Shea
+# This file is distributed under the same license as the PACKAGE package.
+# Kieran O'Shea <kieran@kieranoshea.com>, 2009
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/live-calendar.php:357
+msgid "Calendar:"
+msgstr "Calendario:"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/live-calendar.php:359
+msgid "All Users"
+msgstr ""
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/option.php:72
+msgid "Settings saved"
+msgstr "Settaggi salvati"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/option.php:106
+msgid "Calendar Options"
+msgstr "Opzioni Calendario"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/option.php:112
+msgid "Default City"
+msgstr "Città di default"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/option.php:116
+msgid "Default Link"
+msgstr "Link di default"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/option.php:120
+msgid "Display todays events?"
+msgstr "Mostrare gli Eventi di oggi?"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/option.php:122
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/option.php:130
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/option.php:139
+msgid "Yes"
+msgstr "Si"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/option.php:123
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/option.php:131
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/option.php:140
+msgid "No"
+msgstr "No"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/option.php:128
+msgid "Display upcoming events?"
+msgstr "Mostrare i prossimi Eventi?"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/option.php:133
+msgid "for"
+msgstr "fino a"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/option.php:133
+msgid "days into the future"
+msgstr "giorni nel futuro"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/option.php:137
+msgid "Show event categories?"
+msgstr "Mostrare le Categore degli Eventi?"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/option.php:145
+msgid "Number of Recent events list?"
+msgstr "Numero di Eventi nella lista degli Eventi Recenti?"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/option.php:149
+msgid "Max characters of event title?"
+msgstr "Numero massimo di caratteri del Titolo dell'Evento?"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/option.php:153
+msgid "Max characters to truncate?"
+msgstr "Numero di caratteri da troncare?"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/option.php:157
+msgid "Background color of sidebar calendar?"
+msgstr "Colore dello sfondo del calendario nella barra laterale?"
+
+#: D:\SVN\Project\wordpress\opensource\submit-to-wordpress_org\plugins\live-calendar\trunk/option.php:161
+msgid "Font color of sidebar calendar?"
+msgstr "Colore del font del calendario nella barra laterale?"
+
