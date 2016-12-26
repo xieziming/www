@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>VBS &#8211; 谢子明</title>
+	<atom:link href="http://www.xieziming.com/tag/vbs/feed" rel="self" type="application/rss+xml" />
+	<link>http://www.xieziming.com</link>
+	<description>Suny Xie</description>
+	<lastBuildDate>Mon, 26 Dec 2016 07:34:38 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.7</generator>
+	<item>
+		<title>VBS中的类</title>
+		<link>http://www.xieziming.com/archives/7377.html</link>
+		<comments>http://www.xieziming.com/archives/7377.html#respond</comments>
+		<pubDate>Mon, 17 Sep 2012 14:06:16 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[程序]]></category>
+		<category><![CDATA[Summary]]></category>
+		<category><![CDATA[VBS]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=7377</guid>
+		<description><![CDATA[(1)Initialize 事件,在创建类的实例时发生（新建）此事件。
+<code lang="vb">
+Private Sub Class_Initialize()
+    statements
+End Sub
+</code>
+当类初始化时，statements部分由零个或多个将要运行的代码语句组成。
+
+(2)Terminate 事件,在所关联的类的实例终止（销毁）时发生此事件。
+<code lang="vb">
+Private Sub Class_Terminate()
+    statements
+End Sub
+</code>
+当类初始化时，statements 部分由零个或多个将要运行的代码语句组成。]]></description>
+				<content:encoded><![CDATA[<p><strong>1.VBS的类有两种事件：</strong></p>
+<p>(1)Initialize 事件,在创建类的实例时发生（新建）此事件。</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #E56717; font-weight: bold;">Private</span> <span style="color: #E56717; font-weight: bold;">Sub</span> Class_Initialize()
+    statements
+<span style="color: #8D38C9; font-weight: bold;">End</span> <span style="color: #E56717; font-weight: bold;">Sub</span></pre></div></div>
+
+<p>当类初始化时，statements部分由零个或多个将要运行的代码语句组成。</p>
+<p>(2)Terminate 事件,在所关联的类的实例终止（销毁）时发生此事件。</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #E56717; font-weight: bold;">Private</span> <span style="color: #E56717; font-weight: bold;">Sub</span> Class_Terminate()
+    statements
+<span style="color: #8D38C9; font-weight: bold;">End</span> <span style="color: #E56717; font-weight: bold;">Sub</span></pre></div></div>
+
+<p>当类初始化时，statements 部分由零个或多个将要运行的代码语句组成。</p>
+<p>下面是类事件的例子：</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;">Class TestClass
+  <span style="color: #E56717; font-weight: bold;">Private</span> <span style="color: #E56717; font-weight: bold;">Sub</span> Class_Initialize   <span style="color: #008000;">' 设置 Initialize 事件。
+</span>    MsgBox(<span style="color: #800000;">&quot;TestClass started&quot;</span>)
+  <span style="color: #8D38C9; font-weight: bold;">End</span> <span style="color: #E56717; font-weight: bold;">Sub</span>
+  <span style="color: #E56717; font-weight: bold;">Private</span> <span style="color: #E56717; font-weight: bold;">Sub</span> Class_Terminate   <span style="color: #008000;">' 设置 Terminate 事件。
+</span>    MsgBox(<span style="color: #800000;">&quot;TestClass terminated&quot;</span>)
+  <span style="color: #8D38C9; font-weight: bold;">End</span> <span style="color: #E56717; font-weight: bold;">Sub</span>
+<span style="color: #8D38C9; font-weight: bold;">End</span> Class
+&nbsp;
+<span style="color: #151B8D; font-weight: bold;">Set</span> X = <span style="color: #E56717; font-weight: bold;">New</span> TestClass   <span style="color: #008000;">' 创建一个 TestClass 实例。
+</span><span style="color: #151B8D; font-weight: bold;">Set</span> X = <span style="color: #00C2FF; font-weight: bold;">Nothing</span>      ' 删除实例。</pre></div></div>
+
+<p><strong>NOTE：</strong><br />
+a.类的事件方法格式是固定的，事件名是固定的，事件只能是Sub不能是Function，事件无参数；<br />
+b.类实例通过New来创建，通过Nothing来销毁；<br />
+c.记住所有的类实例都是对象，创建与销毁时记得用Set语句，没有Set是错的<br />
+d.这两个事件都不是必须的，即编写类时可以不提供这两个事件的实现代码；<br />
+e.这两个事件作用比较大，可以在这两个事件中初始化对象以及销毁对象时做一些其他的工作<br />
+f.因为VBS的两个类事件都不接受参数，所以不能在用New创建对象时初始化对象，可以另外设置一个公有的过程来完成这个任务</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/7377.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+	</channel>
+</rss>

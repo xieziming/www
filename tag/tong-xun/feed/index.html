@@ -1,0 +1,488 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>通讯 &#8211; 谢子明</title>
+	<atom:link href="http://www.xieziming.com/tag/tong-xun/feed" rel="self" type="application/rss+xml" />
+	<link>http://www.xieziming.com</link>
+	<description>Suny Xie</description>
+	<lastBuildDate>Mon, 26 Dec 2016 07:34:38 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.7</generator>
+	<item>
+		<title>COM/LPT</title>
+		<link>http://www.xieziming.com/archives/2907.html</link>
+		<comments>http://www.xieziming.com/archives/2907.html#respond</comments>
+		<pubDate>Tue, 20 Oct 2009 14:48:49 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[技术维基]]></category>
+		<category><![CDATA[程序]]></category>
+		<category><![CDATA[通讯]]></category>
+
+		<guid isPermaLink="false">http://www.ideashot.com/?p=2907</guid>
+		<description><![CDATA[串口叫做串行接口，现在的PC 机一般有两个串行口COM 1 和COM 2 。串行口不同于并行口之处在于它的数据和控制信息是一位接一位地传送出去的。虽然这样速度会慢一些，但传送距离较并行口更长，因此若要进行较长距离的通信时，应使用串行口。通常COM 1 使用的是9 针D 形连接器，也称之为RS-232接口，而COM 2 有的使用的是老式的DB25 针连接器，也称之为RS-422接口，不过目前已经很少使用。
+
+并口又称为并行接口。目前，并行接口主要作为打印机端口，采用的是25 针D 形接头。所谓“并行”，是指8 位数据同时通过并行线进行传送，这样数据传送速度大大提高，但并行传送的线路长度受到限制，因为长度增加，干扰就会增加，数据也就容易出错。目前计算机基本上都配有并口。 ]]></description>
+				<content:encoded><![CDATA[<p>在一些特定的场合下，我们想在两台PC之间进行通讯，以此来实现文件数据传输及软硬件资源共享。其前提是既没有网络环境，也没有Modem，甚至两台电脑连网卡也没装；当然PC间的距离很近（最长不超过20米）。这种想法能实现吗？</p>
+<p>答案是肯定的，而且不止一种。我们可以考虑通过并口或Com串口对两台PC直连实现点对点通讯。这里的关键是解决通讯线问题。一台普通PC，多数都具有两个9芯或25芯串口（COM1，COM2）和一个25芯并口的标配。以下分别介绍串行和并行通讯电缆的制作原理及方法（数字表示接头的引脚号，这些引脚号码在串并口上都有标注），需要补充的是，有经验的DIY总是善于“废旧利用”，比如设法利用废旧鼠标的通讯线以及闲置的旧打印电缆；并准备1个万用表用于测试制作的通讯电缆是否正确可靠。</p>
+<p>串口叫做串行接口，现在的PC 机一般有两个串行口COM 1 和COM 2 。串行口不同于并行口之处在于它的数据和控制信息是一位接一位地传送出去的。虽然这样速度会慢一些，但传送距离较并行口更长，因此若要进行较长距离的通信时，应使用串行口。通常COM 1 使用的是9 针D 形连接器，也称之为RS-232接口，而COM 2 有的使用的是老式的DB25 针连接器，也称之为RS-422接口，不过目前已经很少使用。</p>
+<p>并口又称为并行接口。目前，并行接口主要作为打印机端口，采用的是25 针D 形接头。所谓“并行”，是指8 位数据同时通过并行线进行传送，这样数据传送速度大大提高，但并行传送的线路长度受到限制，因为长度增加，干扰就会增加，数据也就容易出错。目前计算机基本上都配有并口。</p>
+<p>（一）串行通讯电缆的制作</p>
+<p>无论是9孔插头，还是25孔插头，其串行通讯电缆连接时都要遵循下列对接关系：</p>
+<p>SG←→SG　TXD←→RXD　RXD←→TXD　RTS←→CTS<br />
+CTS←→RTS　DTR←→DSR　DSR←→DTR</p>
+<p>根据上述对接关系，就可以非常方便地连接串行通讯电缆。这里顺便介绍一下上述各引脚所代表的含义：</p>
+<p>SG英文全称为Signal Ground/Common Return，表示信号地；<br />
+TXD指Transmitted Data，表示数据发送；<br />
+RXD指Received Data，表示接收数据；<br />
+RTS指Request To Send，表示发送请求；<br />
+CTS指Clear To Send，表示清除请求；<br />
+DTR指Data Terminal Ready，表示数据终端准备就绪；<br />
+DSR指Data Signal Rate Selector，表示数据置位准备就绪。</p>
+<p>在制作9芯串口连线时，需要2个9孔插头和1.5米长的至少7芯的扁平电缆，引脚连线如下所示。</p>
+<p>9孔插头－9孔插头引脚连线为：2-3、3-2、4-6、5-5、6-4、7-8、8-7。<br />
+9孔插头－25孔插头引脚连线为：2-2、3-3、4-6、5-7、6-20、7-5、8-4。<br />
+25孔插头－25孔插头引脚连线为：2-3、3-2、4-5、5-4、6-20、7-7、20-6。</p>
+<p>（二）并行通讯电缆的制作</p>
+<p>计算机上的并行口(LPT口)为25芯接口，需要选用2个25针插头来进行连接。并口速度比用串口要快得多，在通讯量较大的情况下应优先考虑并口方式。双机并口连接方式为：</p>
+<p>2-15、3-13、4-12、5-10、6-11、10-5、11-6、12-4、13-3、15-2、25-25。<br />
+<strong>并口针脚功能一览表</strong></p>
+<table>
+<thead>
+<tr>
+<td>
+针脚
+</td>
+<td>
+功能
+</td>
+<td>
+针脚
+</td>
+<td>
+功能
+</td>
+</tr>
+</thead>
+<tr>
+<td>
+1
+</td>
+<td>
+选通端，低电平有效
+</td>
+<td>
+10
+</td>
+<td>
+确认，低电平有效
+</td>
+</tr>
+<tr>
+<td>
+2
+</td>
+<td>
+数据通道0
+</td>
+<td>
+11
+</td>
+<td>
+忙
+</td>
+</tr>
+<tr>
+<td>
+3
+</td>
+<td>
+数据通道1
+</td>
+<td>
+12
+</td>
+<td>
+缺纸
+</td>
+</tr>
+<tr>
+<td>
+4
+</td>
+<td>
+数据通道2
+</td>
+<td>
+13
+</td>
+<td>
+选择
+</td>
+</tr>
+<tr>
+<td>
+5
+</td>
+<td>
+数据通道3
+</td>
+<td>
+14
+</td>
+<td>
+自动换行，低电平有效
+</td>
+</tr>
+<tr>
+<td>
+6
+</td>
+<td>
+数据通道4
+</td>
+<td>
+15
+</td>
+<td>
+错误，低电平有效
+</td>
+</tr>
+<tr>
+<td>
+7
+</td>
+<td>
+数据通道5
+</td>
+<td>
+16
+</td>
+<td>
+初始化，低电平有效
+</td>
+</tr>
+<tr>
+<td>
+8
+</td>
+<td>
+数据通道6
+</td>
+<td>
+17
+</td>
+<td>
+选择输入，低电平有效
+</td>
+</tr>
+<tr>
+<td>
+9
+</td>
+<td>
+数据通道7
+</td>
+<td width="119">
+18到25
+</td>
+<td width="165">
+地线
+</td>
+</tr>
+</table>
+<p><strong>25针串口功能一览表</strong></p>
+<table>
+<thead>
+<tr>
+<td>
+针脚
+</td>
+<td>
+功能
+</td>
+<td>
+针脚
+</td>
+<td>
+功能
+</td>
+</tr>
+</thead>
+<tr>
+<td>
+1
+</td>
+<td>
+空
+</td>
+<td>
+11
+</td>
+<td>
+空
+</td>
+</tr>
+<tr>
+<td>
+2
+</td>
+<td>
+发送数据
+</td>
+<td>
+12到17
+</td>
+<td>
+空
+</td>
+</tr>
+<tr>
+<td>
+3
+</td>
+<td>
+接收数据
+</td>
+<td>
+18
+</td>
+<td>
+空
+</td>
+</tr>
+<tr>
+<td>
+4
+</td>
+<td>
+发送请求
+</td>
+<td>
+19
+</td>
+<td>
+空
+</td>
+</tr>
+<tr>
+<td>
+5
+</td>
+<td>
+发送清除
+</td>
+<td>
+20
+</td>
+<td>
+数据终端准备完成
+</td>
+</tr>
+<tr>
+<td>
+6
+</td>
+<td>
+数据准备完成
+</td>
+<td>
+21
+</td>
+<td>
+空
+</td>
+</tr>
+<tr>
+<td>
+7
+</td>
+<td>
+信号地线
+</td>
+<td>
+22
+</td>
+<td>
+振铃指示
+</td>
+</tr>
+<tr>
+<td>
+8
+</td>
+<td>
+载波检测
+</td>
+<td>
+23到24
+</td>
+<td>
+空
+</td>
+</tr>
+<tr>
+<td>
+9
+</td>
+<td>
+空
+</td>
+<td>
+25
+</td>
+<td>
+空
+</td>
+</tr>
+<tr>
+<td>
+10
+</td>
+<td>
+空
+</td>
+<td></td>
+<td></td>
+</tr>
+</table>
+<p><strong>9针串口功能一览表</strong></p>
+<table>
+<thead>
+<tr>
+<td>
+针脚
+</td>
+<td>
+功能
+</td>
+<td>
+针脚
+</td>
+<td>
+功能
+</td>
+</tr>
+</thead>
+<tr>
+<td>
+1
+</td>
+<td>
+载波检测
+</td>
+<td>
+6
+</td>
+<td>
+数据准备完成
+</td>
+</tr>
+<tr>
+<td>
+2
+</td>
+<td>
+接收数据
+</td>
+<td>
+7
+</td>
+<td>
+发送请求
+</td>
+</tr>
+<tr>
+<td>
+3
+</td>
+<td>
+发送数据
+</td>
+<td>
+8
+</td>
+<td>
+发送清除
+</td>
+</tr>
+<tr>
+<td>
+4
+</td>
+<td>
+数据终端准备完成
+</td>
+<td>
+9
+</td>
+<td>
+振铃指示
+</td>
+</tr>
+<tr>
+<td>
+5
+</td>
+<td>
+信号地线
+</td>
+<td></td>
+<td></td>
+</tr>
+</table>
+<p><strong>联机线的连接方法</strong><br />
+联机线主要用于直接把两台电脑连接，分为串口（com1,com2）联机线和并口（lpt1）联机线。比较早一点的AT架构的电脑的串口有为9针，和25 针两种，现在的ATX架构的电脑两个串口全部是9针。打印机的接口也是25针的但功能、外观上与AT架构的25针串口不一样。于是联机线就分为4种（9针 对9针串口联机线，9针对25针串口联机线，25针对25针串口联机线，25针对25针并口联机线）其中3种串口连接，一种并口连接。并口联机线和串口联 机线最大的差别就是速度，前者明显快于后者。这些直接电缆连接线的两个头完全相同可以互换的连线方法如下表:<br />
+首先我们必须准备2个连接头，以及大约1.5米的联机线，联机线应该选用带屏蔽的多芯线，把多余未用的芯全部接在接头的金属壳（地线）作为屏蔽用。</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/2907.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>ECC协议簇学习</title>
+		<link>http://www.xieziming.com/archives/2310.html</link>
+		<comments>http://www.xieziming.com/archives/2310.html#respond</comments>
+		<pubDate>Sun, 23 Aug 2009 07:44:12 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[技术维基]]></category>
+		<category><![CDATA[技术]]></category>
+		<category><![CDATA[通讯]]></category>
+
+		<guid isPermaLink="false">http://www.ideashot.com/?p=2310</guid>
+		<description><![CDATA[<img src="http://images.xieziming.com/upload/2009/09/1/2.jpg" alt="ECC学习" />]]></description>
+				<content:encoded><![CDATA[<p>中兴传输设备ECC协议簇学习<br />
+<span id="more-2310"></span><br />
+<img src="http://images.xieziming.com/upload/2009/09/1/1.jpg" alt="ECC学习" /></p>
+<p><img src="http://images.xieziming.com/upload/2009/09/1/2.jpg" alt="ECC学习" /></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/2310.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>通信机房布线规范图</title>
+		<link>http://www.xieziming.com/archives/2425.html</link>
+		<comments>http://www.xieziming.com/archives/2425.html#respond</comments>
+		<pubDate>Sat, 04 Oct 2008 04:14:33 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[技术维基]]></category>
+		<category><![CDATA[通讯]]></category>
+
+		<guid isPermaLink="false">http://www.ideashot.com/?p=2425</guid>
+		<description><![CDATA[<img src="http://images.xieziming.com/upload/2009/09/15/3.jpg" alt="图片载入中..." />]]></description>
+				<content:encoded><![CDATA[<p><img src="http://images.xieziming.com/upload/2009/09/15/1.jpg" alt="图片载入中..." /><br />
+<span id="more-2425"></span><br />
+<img src="http://images.xieziming.com/upload/2009/09/15/2.jpg" alt="图片载入中..." /></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/2425.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+	</channel>
+</rss>

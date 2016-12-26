@@ -1,0 +1,646 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>shell &#8211; 谢子明</title>
+	<atom:link href="http://www.xieziming.com/tag/shell/feed" rel="self" type="application/rss+xml" />
+	<link>http://www.xieziming.com</link>
+	<description>Suny Xie</description>
+	<lastBuildDate>Mon, 26 Dec 2016 07:34:38 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.7</generator>
+	<item>
+		<title>Linux Shell 之Meta</title>
+		<link>http://www.xieziming.com/archives/6921.html</link>
+		<comments>http://www.xieziming.com/archives/6921.html#respond</comments>
+		<pubDate>Sat, 17 Mar 2012 08:39:51 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[程序]]></category>
+		<category><![CDATA[linux]]></category>
+		<category><![CDATA[shell]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=6921</guid>
+		<description><![CDATA[IFS 是用来拆解 command line 的每一个词(word)用的,因为 shell command line是按词来处理的。而 CR 则是用来结束 command line 用的,这也是为何我们敲 <enter> 命令就会跑的原因。
+
+除了 IFS 与 CR ,常用的 meta 还有:
+
+= : 设定变量。
+
+$ : 作变量或运算替换(请不要与 shell prompt 搞混了)。
+
+> :重导向 stdout。
+
+< :重导向 stdin。
+
+&#124;:命令管线。
+
+&#038; :重导向 file descriptor ,或将命令置于背景执行。
+
+( ):将其内的命令置於 nested subshell 执行,或用於运算或命令替换。
+
+{ }:将其内的命令置於 non-named function 中执行,或用在变量替换的界定范围。
+
+; :在前一个命令结束时,而忽略其返回值,继续执行下一个命令。
+
+&#038;& :在前一个命令结束时,若返回值为 true,继续执行下一个命令。</enter></enter>]]></description>
+				<content:encoded><![CDATA[<p>不同的命令可接受的命令行格式或有不同,一般情况下,一个标准的命令行格式为如下所列:</p>
+<p>command-name options argument</p>
+<p>若从技术细节来看,shell 会依据 IFS(Internal Field Seperator) 将 command line所输入的文字给拆解为&#8221;字段&#8221;(word)。然后再针对特殊字符(meta)先作处理,最后再重组整行 command line 。</p>
+<p>其中的 IFS 是 shell 预设使用的栏位分隔符号,可以由一个及多个如下按键组成:</p>
+<blockquote><p>
+* 空白键(White Space)<br />
+* 表格键(Tab)<br />
+* 回车键(Enter)
+</p></blockquote>
+<p><span style="color: #ff00ff;">meta</span></p>
+<p>（1）IFS:由 <space> 或 <tab> 或 <enter> 三者之一组成(我们常用 space )。</p>
+<p>（2）CR:由 </enter><enter> 产生。</p>
+<p>IFS 是用来拆解 command line 的每一个词(word)用的,因为 shell command line是按词来处理的。而 CR 则是用来结束 command line 用的,这也是为何我们敲 </enter><enter> 命令就会跑的原因。</p>
+<p>除了 IFS 与 CR ,常用的 meta 还有:</p>
+<blockquote><p>
+= : 设定变量。</p>
+<p>$ : 作变量或运算替换(请不要与 shell prompt 搞混了)。</p>
+<p>> :重导向 stdout。</p>
+<p>< :重导向 stdin。
+
+|:命令管线。
+
+&#038; :重导向 file descriptor ,或将命令置于背景执行。
+
+( ):将其内的命令置於 nested subshell 执行,或用於运算或命令替换。
+
+{ }:将其内的命令置於 non-named function 中执行,或用在变量替换的界定范围。
+
+; :在前一个命令结束时,而忽略其返回值,继续执行下一个命令。
+
+&#038;&#038; :在前一个命令结束时,若返回值为 true,继续执行下一个命令。
+
+|| :在前一个命令结束时,若返回值为 false,继续执行下一个命令。
+
+!:执行 history 列表中的命令
+</p></blockquote>
+
+<div class="wp_code"><div class="pre"><pre class="bash" style="font-family:'Times New Roman',Garamond, Times;">$ <span style="color: #007800;">A</span>=B C <span style="color: #666666; font-style: italic;"># 空白键未被关掉,作为 IFS 处理。</span>
+$ C: <span style="color: #7a0874; font-weight: bold;">command</span> not found. <span style="color: #7a0874; font-weight: bold;">&#40;</span>FIXME<span style="color: #7a0874; font-weight: bold;">&#41;</span>
+$ <span style="color: #7a0874; font-weight: bold;">echo</span> <span style="color: #007800;">$A</span>
+$ <span style="color: #007800;">A</span>=<span style="color: #ff0000;">&quot;B C&quot;</span>     <span style="color: #666666; font-style: italic;"># 空白键已被关掉,仅作为空白键处理。</span>
+$ <span style="color: #7a0874; font-weight: bold;">echo</span> <span style="color: #007800;">$A</span>
+B C
+&nbsp;
+在第一次设定 A 变量时,由於空白键没被关闭,<span style="color: #7a0874; font-weight: bold;">command</span> line 将被解读为:<span style="color: #007800;">A</span>=B 然后碰到<span style="color: #000000; font-weight: bold;">&lt;</span>ifs<span style="color: #000000; font-weight: bold;">&gt;</span>,再执行 C 命令
+&nbsp;
+在第二次设定 A 变量时,由於空白键被置于双引号中,因此被关闭,不再作为 IFS : <span style="color: #007800;">A</span>=B<span style="color: #000000; font-weight: bold;">&lt;</span>space<span style="color: #000000; font-weight: bold;">&gt;</span>C
+&nbsp;
+事实上,空白键无论在单引号还是在双引号中,均会被关闭。Enter 键亦然:
+<span style="color: #000000; font-weight: bold;">&lt;</span>code <span style="color: #007800;">lang</span>=<span style="color: #ff0000;">&quot;bash&quot;</span><span style="color: #000000; font-weight: bold;">&gt;</span>
+$ <span style="color: #007800;">A</span>=<span style="color: #ff0000;">'B
+&gt;C
+&gt;'</span>
+$ <span style="color: #7a0874; font-weight: bold;">echo</span> <span style="color: #007800;">$A</span>
+B
+C</pre></div></div>
+
+<p>在上例中,由於 <enter> 被置于单引号当中,因此不再作为 CR 字符来处理。</p>
+<p>这里的 </enter><enter> 单纯只是一个断行符号(new-line)而已, 由于command line 并没得到 CR 字符,因此进入第二个 shell prompt (PS2, > 符号表示),command line 并不会结束,一直到第三行,我们输入的 </enter><enter> 并不在单引号里面,因此并没被关闭,此时,command line 碰到 CR 字符,於是结束、交给 shell 来处理。</p>
+<p>上例的 </enter><enter> 要是被置于双引号中的话,也会同样被关闭,用 escape 亦可:</p>
+
+<div class="wp_code"><div class="pre"><pre class="bash" style="font-family:'Times New Roman',Garamond, Times;">$ <span style="color: #007800;">A</span>=B\
+<span style="color: #000000; font-weight: bold;">&gt;</span> C\
+<span style="color: #000000; font-weight: bold;">&gt;</span>
+$ <span style="color: #7a0874; font-weight: bold;">echo</span> <span style="color: #007800;">$A</span>
+B
+C</pre></div></div>
+
+<p>上例中,第一个 </enter><enter> 跟第二个 </enter><enter> 均被 escape 字符关闭了,因此也不作为 CR 来处理,但第三个 </enter><enter> 由于没被跳脱,因此作为 CR 结束 command line。<br />
+</enter></space></ifs></code></p></blockquote>
+<p></enter></tab></space></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/6921.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Shell (四)</title>
+		<link>http://www.xieziming.com/archives/7244.html</link>
+		<comments>http://www.xieziming.com/archives/7244.html#respond</comments>
+		<pubDate>Wed, 02 Jun 2010 09:13:26 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[技术维基]]></category>
+		<category><![CDATA[linux]]></category>
+		<category><![CDATA[shell]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=7244</guid>
+		<description><![CDATA[谈到 I/O redirection ，不妨先让我们认识一下 File Descriptor (FD) 。程序的运算，在大部份情况下都是进行数据(data)的处理， 这些数据从哪读进？又送出到哪里呢？这就是 file descriptor(FD) 的功用了。
+
+在 shell 程序中，最常使用的 FD 大概有三个，分别为：
+
+0: Standard Input (STDIN)
+1: Standard Output (STDOUT)
+2: Standard Error Output (STDERR)
+
+在标准情况下，这些 FD 分别跟如下设备(device)关联：
+
+stdin(0): keyboard
+stdout(1): monitor
+stderr(2): monitor
+
+我们可以用如下下命令测试一下：
+<code lang="shell">
+$ mail -s test root
+this is a test mail.
+please skip.
+^d (同时按 crtl 跟 d 键)
+</code>]]></description>
+				<content:encoded><![CDATA[<p>谈到 I/O redirection ，不妨先让我们认识一下 File Descriptor (FD) 。程序的运算，在大部份情况下都是进行数据(data)的处理， 这些数据从哪读进？又送出到哪里呢？这就是 file descriptor(FD) 的功用了。</p>
+<p>在 shell 程序中，最常使用的 FD 大概有三个，分别为：</p>
+<p>0: Standard Input (STDIN)<br />
+1: Standard Output (STDOUT)<br />
+2: Standard Error Output (STDERR)</p>
+<p>在标准情况下，这些 FD 分别跟如下设备(device)关联：</p>
+<p>stdin(0): keyboard<br />
+stdout(1): monitor<br />
+stderr(2): monitor</p>
+<p>我们可以用如下下命令测试一下：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">$ mail -s test root
+this is a test mail.
+please skip.
+^d (同时按 crtl 跟 d 键)</pre></div></div>
+
+<p>很明显，mail 程序所读进的数据，就是从 stdin 也就是 keyboard 读进的。不过，不见得每个程序的 stdin 都跟 mail 一样从keyboard 读进，因为程序作者可以从档案参数读进 stdin ，如：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">$ cat /etc/passwd</pre></div></div>
+
+<p>但，要是cat 之后没有档案参数则又如何呢？哦，请您自己玩玩看啰&#8230;. ^_^</p>
+<p>若读进的档案参数是不存在的，那我们在 monitor 上就看到了：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">$ ls no.such.file
+ls: no.such.file: No such file or directory</pre></div></div>
+
+<p>若，一个命令同时产生stdout 与 stderr 呢？那还不简单，都送到 monitor 来就好了：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">$ touch my.file
+&nbsp;
+$ ls my.file no.such.file
+ls: no.such.file: No such file or directory
+my.file</pre></div></div>
+
+<p>okay，至此，关于 FD 及其名称、还有相关联的设备，相信你已经没问题了吧？那好，接下来让我们看看如何改变这些 FD 的预设数据信道，我们可用 < 来改变读进的数据信道(stdin)，使之从指定的档案读进。我们可用 > 来改变送出的数据信道(stdout, stderr)，使之输出到指定的档案。<br />
+比方说：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">$ cat &lt; my.file
+#就是从my.file 读进数据
+$ mail -s test root &lt; /etc/passwd
+#则是从/etc/passwd 读进...</pre></div></div>
+
+<p>这样一来，stdin 将不再是从 keyboard 读进，而是从档案读进了&#8230;</p>
+<p>严格来说，< 符号之前需要指定一个 FD 的(之间不能有空白)， 但因为 0 是 < 的默认值，因此 < 与 0< 是一样的，这个好理解吧？
+
+那，要是用两个 << 又是啥呢？这是所谓的 HERE Document ，它可以让我们输入一段文本，直到读到 << 后指定的字符串。
+比方说：
+
+
+
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">$ cat &lt; &lt;FINISH
+first line here
+second line there
+third line nowhere
+FINISH</pre></div></div>
+
+<p>这样的话，cat 会读进 3 行句子，而无需从 keyboard 读进数据且要等 ^d 结束输入。至于 > 又如何呢？</p>
+<p>当你搞懂了 0< 原来就是改变 stdin 的数据输入信道之后，相信要理解如下两个 redirection 就不难了：
+
+
+
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">* 1&gt;
+* 2&gt;</pre></div></div>
+
+<p>前者是改变 stdout 的数据输出信道，后者是改变 stderr 的数据输出信道。两者都是将原本要送出到 monitor 的数据转向输出到指定档案去。由于 1 是 > 的默认值，因此，1> 与 > 是相同的，都是改 stdout 。</p>
+<p>用上次的 ls 例子来说明一下好了：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">$ ls my.file no.such.file 1&gt;file.out
+ls: no.such.file: No such file or directory
+#这样monitor 就只剩下 stderr 而已。因为 stdout 给写进 file.out 去了。
+$ ls my.file no.such.file 2&gt;file.err
+my.file
+#这样monitor 就只剩下 stdout ，因为 stderr 写进了 file.err 。
+$ ls my.file no.such.file 1&gt;file.out 2&gt;file.err
+#这样monitor 就啥也没有，因为 stdout 与 stderr 都给转到档案去了...</pre></div></div>
+
+<p>不过，有些地方还是要注意一下的。首先，是同时写入的问题。比方如下这个例子：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">$ ls my.file no.such.file 1&gt;file.both 2&gt;file.both</pre></div></div>
+
+<p>假如stdout(1) 与 stderr(2) 都同时在写入 file.both 的话， 则是采取“覆盖”方式：后来写入的覆盖前面的。让我们假设一个 stdout 与 stderr 同时写入 file.out 的情形好了：</p>
+<p>* 首先 stdout 写入10个字符<br />
+* 然后 stderr 写入 6 个字符</p>
+<p>那么，这时候原本 stdout 的前面 6 个字符就被 stderr 覆盖掉了。那，如何解决呢？所谓山不转路转、路不转人转嘛，我们可以换一个思维：将 stderr 导进 stdout 或将 stdout 导进 sterr ，而不是大家在抢同一份档案，不就行了。</p>
+<p>* 2>&#038;1 就是将 stderr 并进 stdout 作输出<br />
+* 1>&#038;2 或 >&#038;2 就是将 stdout 并进 stderr 作输出</p>
+<p>于是，前面的错误操作可以改为：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">$ ls my.file no.such.file 1&gt;file.both 2&gt;&amp;1
+#或
+$ ls my.file no.such.file 2&gt;file.both &gt;&amp;2</pre></div></div>
+
+<p>在 Linux 档案系统里，有个设备档位于 /dev/null 。许多人都问过我那是甚么玩意儿？我跟你说好了：那就是&#8221;空&#8221;啦</p>
+<p>这个 null 在 I/O Redirection 中可有用得很呢：</p>
+<p>* 若将 FD1 跟 FD2 转到 /dev/null 去，就可将 stdout 与 stderr 弄不见掉。<br />
+* 若将 FD0 接到 /dev/null 来，那就是读进 nothing 。</p>
+<p>比方说，当我们在执行一个程序时，画面会同时送出 stdout 跟 stderr ， 假如你不想看到 stderr (也不想存到档案去)，那可<br />
+以：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">$ ls my.file no.such.file 2&gt;/dev/null
+my.file
+#若要相反：只想看到stderr 呢？还不简单©u将 stdout 弄到 null 就行：
+$ ls my.file no.such.file &gt;/dev/null
+ls: no.such.file: No such file or directory</pre></div></div>
+
+<p>那接下来，假如单纯只跑程序，不想看到任何输出结果呢？</p>
+<p>除了用 >/dev/null 2>&#038;1 之外，你还可以如此：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">$ ls my.file no.such.file &amp;&gt;/dev/null
+#(提示：将 &amp;&gt; 换成 &gt;&amp; 也行啦~~! )</pre></div></div>
+
+<p>接下来，再让我们看看如下情况：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">$ echo &quot;1&quot; &gt; file.out
+$ cat file.out
+1
+$ echo &quot;2&quot; &gt; file.out
+$ cat file.out
+2</pre></div></div>
+
+<p>看来，我们在重导stdout 或 stderr 进一份档案时，似乎永远只获得最后一次导入的结果。那，之前的内容呢？<br />
+呵~~~ 要解决这个问提很简单啦，将 > 换成 >> 就好：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">$ echo &quot;3&quot; &gt;&gt; file.out
+$ cat file.out
+2
+3</pre></div></div>
+
+<p>如此一来，被重导的目标档案之内容并不会失去，而新的内容则一直增加在最后面去。再来还有一个难题要你去参透的呢：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">$ echo &quot;some text here&quot; &gt; file
+$ cat &lt; file
+some text here
+$ cat &lt; file &gt; file.bak
+$ cat &lt; file.bak
+some text here
+$ cat &lt; file &gt; file
+$ cat &lt; file</pre></div></div>
+
+<p>怎么最后那个 cat 命令看到的 file 竟是空的？要理解这一现像其实不难，这只是 priority 的问题而已：</p>
+<p>* 在 IO Redirection 中，stdout 与 stderr 的管道会先准备好，才会从 stdin 读进资料。也就是说，在上例中，> file 会先将 file 清空，然后才读进 < file ， 但这时候档案已经被清空了，因此就变成读不进任何数据了...
+
+
+
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">$ cat &lt;&gt; file
+$ cat &lt; file &gt;&gt; file</pre></div></div>
+
+<p>* 在 cm1 | cm2 | cm3 &#8230; 这段 pipe line 中，若要将 cm2 的结果存到某一档案呢？<br />
+若你写成 cm1 | cm2 > file | cm3 的话，那你肯定会发现 cm3 的 stdin 是空的(当然啦，你都将水管接到别的水池了)聪明的你或许会如此解决：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">cm1 | cm2 &gt; file ; cm3 &lt; file</pre></div></div>
+
+<p>是的，你的确可以这样做，但最大的坏处是：这样一来，file I/O 会变双倍.在 command 执行的整个过程中，file I/O 是最常见的最大效能杀手。<br />
+凡是有经验的 shell 操作者，都会尽量避免或降低 file I/O 的频率。那，上面问题还有更好方法吗？有的，那就是 tee 命令了。</p>
+<p>*所谓 tee 命令是在不影响原本 I/O 的情况下，将 stdout复制一份到档案去。</p>
+<p>因此，上面的命令行可以如此打：<br />
+</code></p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">cm1 | cm2 | tee file | cm3</pre></div></div>
+
+<p>在预设上，tee 会改写目标档案，若你要改为增加内容的话，那可用 -a 参数达成。</p>
+<p>linux shell 中&#8221;2>&#038;1&#8243;含义:</p>
+<p>对于&#038; 1 更准确的说应该是文件描述符 1,而1 一般代表的就是STDOUT_FILENO,实际上这个操作就是一个dup2(2)调用.他标准输出到all_result ,然后复制标准输出到文件描述符2(STDERR_FILENO),其后果就是文件描述符1和2指向同一个文件表项,也可以说错误的输出被合并了.其中0 表示键盘输入 1表示屏幕输出 2表示错误输出.把标准出错重定向到标准输出,然后扔到/DEV/NULL下面去。通俗的说，就是把所有标准输出和标准出错都扔到垃圾桶里面。</p>
+
+<div class="wp_code"><div class="pre"><pre class="code" style="font-family:'Times New Roman',Garamond, Times;">command &gt;out.file 2&gt;&amp;1 &amp;</pre></div></div>
+
+<p>command >out.file是将command的输出重定向到out.file文件，即输出内容不打印到屏幕上，而是输出到out.file文件中。 2>&#038;1 是将标准出错重定向到标准输出，这里的标准输出已经重定向到了out.file文件，即将标准出错也输出到out.file文件中。最后一个&#038; ， 是让该命令在后台执行。</p>
+<p>试想2>1代表什么，2与>结合代表错误重定向，而1则代表错误重定向到一个文件1，而不代表标准输出；换成2>&#038;1，&#038;与1结合就代表标准输出了，就变成错误重定向到标准输出.</p>
+<p>你可以用:</p>
+<p>ls 2>1测试一下，不会报没有2文件的错误，但会输出一个空的文件1；</p>
+<p>ls xxx 2>1测试，没有xxx这个文件的错误输出到了1中；</p>
+<p>ls xxx 2>&#038;1测试，不会生成1这个文件了，不过错误跑到标准输出了；</p>
+<p>ls xxx >out.txt 2>&#038;1, 实际上可换成 ls xxx 1>out.txt 2>&#038;1；重定向符号>默认是1,错误和输出都传到out.txt了。</p>
+<p>为何2>&#038;1要写在后面？</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">command &gt; file 2&gt;&amp;1</pre></div></div>
+
+<p>首先是command > file将标准输出重定向到file中， 2>&#038;1 是标准错误拷贝了标准输出的行为，也就是同样被重定向到file中，最终结果就是标准输出和错误都被重定向到file中。</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">command 2&gt;&amp;1 &gt;file</pre></div></div>
+
+<p>2>&#038;1 标准错误拷贝了标准输出的行为，但此时标准输出还是在终端。>file 后输出才被重定向到file，但标准错误仍然保持在终端。</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/7244.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Shell (三)</title>
+		<link>http://www.xieziming.com/archives/7152.html</link>
+		<comments>http://www.xieziming.com/archives/7152.html#respond</comments>
+		<pubDate>Wed, 19 May 2010 15:40:41 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[技术维基]]></category>
+		<category><![CDATA[shell]]></category>
+		<category><![CDATA[技术]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=7152</guid>
+		<description><![CDATA[在bash shell中，$( )与` ` (反引号)都是用来做命令替换用(command substitution)的。所谓的命令替换与我们第五章学过的变量替换差不多，都是用来重组命令行，完成引号里的命令行，然后将其结果替换出来，再重组命令行。
+
+在操作上，用$( )或` `都无所谓，只是我"个人"比较喜欢用$( )，理由是：
+
+1. ` `很容易与' ' (单引号)搞混乱，尤其对初学者来说。有时在一些奇怪的字形显示中，两种符号是一模一样的(直竖两点)。当然了，有经验的朋友还是一眼就能分辩两者。只是，若能更好的避免混乱，又何乐不为呢？
+
+2. 在多层次的复合替换中，` `须要额外的跳脱( \` )处理，而$( )则比较直观。例如：这是错的：]]></description>
+				<content:encoded><![CDATA[<p><strong>$( )与${ }：</strong></p>
+<p>在bash shell中，$( )与` ` (反引号)都是用来做命令替换用(command substitution)的。所谓的命令替换与我们第五章学过的变量替换差不多，都是用来重组命令行，完成引号里的命令行，然后将其结果替换出来，再重组命令行。</p>
+<p>例如：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">$ echo the last sunday is $(date -d &quot;last sunday&quot; +%Y-%m-%d)</pre></div></div>
+
+<p>如此便可方便得到上一星期天的日期了&#8230;上例是在linux下，在FreeBSD下应该用下面的：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">echo the last Sunday is `date ¨Cv Sunday +%Y%m%d`</pre></div></div>
+
+<p>在操作上，用$( )或` `都无所谓，只是我&#8221;个人&#8221;比较喜欢用$( )，理由是：</p>
+<p>1. ` `很容易与&#8217; &#8216; (单引号)搞混乱，尤其对初学者来说。有时在一些奇怪的字形显示中，两种符号是一模一样的(直竖两点)。当然了，有经验的朋友还是一眼就能分辩两者。只是，若能更好的避免混乱，又何乐不为呢？</p>
+<p>2. 在多层次的复合替换中，` `须要额外的跳脱( \` )处理，而$( )则比较直观。例如：这是错的：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">command1 `command2 `command3` `</pre></div></div>
+
+<p>原本的意图是要在command2 `command3`先将command3提换出来给command 2处理，然后再将结果传给command1`command2 &#8230;`来处理。然而，真正的结果在命令行中却是分成了`command2 `与&#8220;两段。</p>
+<p>正确的输入应该如下：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">command1 `command2 \`command3\` `</pre></div></div>
+
+<p>要不然，换成$( )就没问题了：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">command1 $(command2 $(command3))</pre></div></div>
+
+<p>只要你喜欢，做多少层的替换都没问题啦~~~ ^_^不过，$( )并不是没有弊端的&#8230;首先，` `基本上可用在全部的unix shell中使用，若写成shell script，其移植性比较高。而$( )并不见的每一种shell都能使用，我只能跟你说，若你用bash2的话，肯定没问题&#8230;</p>
+<p>接下来，再让我们看${ }吧&#8230;它其实就是用来作变量替换用的啦。一般情况下，$var与${var}并没有啥不一样。但是用${ }会比较精确的界定变量名称的范围，比方说：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">$ A=B
+$ echo $AB</pre></div></div>
+
+<p>原本是打算先将$A的结果替换出来，然后再补一个B字母于其后，但在命令行上，真正的结果却是只会替换变量名称为AB的值出来&#8230;若使用${ }就没问题了：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">$ echo ${A}B
+BB</pre></div></div>
+
+<p>不过，假如你只看到${ }只能用来界定变量名称的话，那你就实在太小看bash了。</p>
+<p>一般而言，A=&#8221;a b c def&#8221;这样的变量只是将$A替换为一个单一的字符串，但是改为A=(a b c def)，则是将$A定义为组数&#8230;</p>
+<p>bash的组数替换方法可参考如下方法：</p>
+<p>${A[@]}或${A· }可得到a b c def (全部组数)</p>
+<p>${A[0]}可得到a (第一个组数)，${A[1]}则为第二个组数&#8230;</p>
+<p>${#A[@]}或${#A· }可得到4 (全部组数数量)</p>
+<p>${#A[0]}可得到1 (即第一个组数(a)的长度)，${#A[3]}可得到3 (第四个组数(def)的长度)</p>
+<p>A[3]=xyz则是将第四个组数重新定义为xyz &#8230;</p>
+<p>诸如此类的&#8230;.</p>
+<p>能够善用bash的$( )与${ }可大大提高及简化shell在变量上的处理能力哦</p>
+<p>最后为大家介绍$(( ))的用途吧：它是用来作整数运算的。</p>
+<p>在bash中，$(( ))的整数运算符号大致有这些：</p>
+<p>+ &#8211; * /：分别为&#8221;加、减、乘、除&#8221;。<br />
+%：余数运算<br />
+&#038; | ^ !：分别为&#8221;AND、OR、XOR、NOT&#8221;运算。<br />
+例：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">$ a=5; b=7; c=2
+$ echo $(( a+b*c ))
+19
+$ echo $(( (a+b)/c ))
+6
+$ echo $(( (a*b)%c))
+1</pre></div></div>
+
+<p>在$(( ))中的变量名称，可于其前面加$符号来替换，也可以不用，如：$(( $a + $b * $c))也可得到19的结果。</p>
+<p>事实上，单纯用(( ))也可重定义变量值，或作testing：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">a=5; ((a++))可将$a重定义为6
+a=5; ((a--))则为a=4
+a=5; b=7; ((a &lt; b))会得到 0 (true)的返回值。</pre></div></div>
+
+<p></code></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/7152.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Shell (二)</title>
+		<link>http://www.xieziming.com/archives/7150.html</link>
+		<comments>http://www.xieziming.com/archives/7150.html#respond</comments>
+		<pubDate>Wed, 19 May 2010 15:35:56 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[技术维基]]></category>
+		<category><![CDATA[shell]]></category>
+		<category><![CDATA[技术]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=7150</guid>
+		<description><![CDATA[先说一下，为何要用( )或{ }好了。许多时候，我们在shell操作上，需要在一定条件下一次执行多个命令，也就是说，要么不执行，要么就全执行，而不是每次依序的判断是否要执行下一个命令。或是，需要从一些命令执行优先次顺中得到豁免，如算术的2*(3+4)那样...
+这时候，我们就可引入"命令群组"(command group)的概念：将多个命令集中处理。
+
+在shell command line中，一般人或许不太计较( )与{ }这两对符号的差异，虽然两者都可将多个命令作群组化处理，但若从技术细节上，却是很不一样的：
+
+( )将command group置于sub-shell去执行，也称nested sub-shell。
+
+{ }则是在同一个shell内完成，也称为non-named command group。
+
+如果你对上一章的fork与source的概念还记得的话，那就不难理解两者的差异了。要是在command group中扯上变量及其它环境的修改，我们可以根据不同的需求来使用( )或{ }。通常而言，若所作的修改是临时的，且不想影响原有或以后的设定，那我们就nested sub-shell，反之，则用non-named command group。是的，光从command line来看，( )与{ }的差别就讲完了，够轻松吧~~~ ^_^
+
+然而，若这两个meta用在其它command meta或领域中(如Regular Expression)，还是有很多差别的。
+
+我这里只想补充一个概念，就是function。所谓的function，就是用一个名字去命名一个 command group，然后再调用这个名字去执行command group。从non-namedcommand group来推断，大概你也可以猜到我要说的是{ }了吧？]]></description>
+				<content:encoded><![CDATA[<p><strong>( ) 与 { }：</strong></p>
+<p>先说一下，为何要用( )或{ }好了。许多时候，我们在shell操作上，需要在一定条件下一次执行多个命令，也就是说，要么不执行，要么就全执行，而不是每次依序的判断是否要执行下一个命令。或是，需要从一些命令执行优先次顺中得到豁免，如算术的2*(3+4)那样&#8230;<br />
+这时候，我们就可引入&#8221;命令群组&#8221;(command group)的概念：将多个命令集中处理。</p>
+<p>在shell command line中，一般人或许不太计较( )与{ }这两对符号的差异，虽然两者都可将多个命令作群组化处理，但若从技术细节上，却是很不一样的：</p>
+<p>( )将command group置于sub-shell去执行，也称nested sub-shell。</p>
+<p>{ }则是在同一个shell内完成，也称为non-named command group。</p>
+<p>如果你对上一章的fork与source的概念还记得的话，那就不难理解两者的差异了。要是在command group中扯上变量及其它环境的修改，我们可以根据不同的需求来使用( )或{ }。通常而言，若所作的修改是临时的，且不想影响原有或以后的设定，那我们就nested sub-shell，反之，则用non-named command group。是的，光从command line来看，( )与{ }的差别就讲完了，够轻松吧~~~ ^_^</p>
+<p>然而，若这两个meta用在其它command meta或领域中(如Regular Expression)，还是有很多差别的。</p>
+<p>我这里只想补充一个概念，就是function。所谓的function，就是用一个名字去命名一个 command group，然后再调用这个名字去执行command group。从non-namedcommand group来推断，大概你也可以猜到我要说的是{ }了吧？</p>
+<p>在bash中，function的定义方式有两种：</p>
+<p>方式一：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">function function_name {
+command1
+command2
+command3
+....
+}</pre></div></div>
+
+<p>方式二：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">fuction_name () {
+command1
+command2
+command3
+....
+}</pre></div></div>
+
+<p>用哪一种方式无所谓，只是若碰到所定义的名称与现有的命令或别名(Alias)冲突的话，方式二或许会失败。但方式二起码可以少打function这一串英文字母，对懒人来说(如我)，又何乐不为呢？&#8230; ^_^</p>
+<p>function在某一程度来说，也可称为&#8221;函式&#8221;，但请不要与传统编程所使用的函式(library)搞混了，毕竟两者差异很大。惟一相同的是，我们都可以随时用&#8221;已定义的名称&#8221;来调用它们&#8230;</p>
+<p>若我们在shell操作中，需要不断的重复执行某些命令，我们首先想到的，或许是将命令写成命令稿(shell script)。不过，我们也可以写成function，然后在command line中打上function_name就可当一舨的script来使用了。只是若你在shell中定义的function，除了可用unset function_name取消外，一旦退出shell，function也跟着取消。然而，在script中使用function却有许多好处，除了可以提高整体script的执行效能外(因为已被加载)，还可以节省许多重复的代码&#8230;</p>
+<p>简单而言，若你会将多个命令写成script以供调用的话，那，你可以将function看成是script中的script &#8230; ^_^</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/7150.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Shell (一)</title>
+		<link>http://www.xieziming.com/archives/7145.html</link>
+		<comments>http://www.xieziming.com/archives/7145.html#respond</comments>
+		<pubDate>Wed, 19 May 2010 14:51:55 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[技术维基]]></category>
+		<category><![CDATA[shell]]></category>
+		<category><![CDATA[技术]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=7145</guid>
+		<description><![CDATA[所谓环境变量其实就是那些会传给子进程的变量。简单而言，"遗传性"就是区分本地变量与环境变量的决定性指标。然而，从遗传的角度来看，我们也不难发现环境变量的另一个重要特征：环境变量只能从父进程到子进程单向继承。换句话说：在子进程中的环境如何变更，均不会影响父进程的环境。
+
+接下来，再让我们了解一下命令脚本(shell script)的概念。所谓的shell script讲起来很简单，就是将你平时在shell prompt后所输入的多行command line依序写入一个文件去而已。其中再加上一些条件判断、互动界面、参数运用、函数调用、等等技巧，得以让script更加"聪明"的执行，但若撇开这些技巧不谈，我们真的可以简单的看成script只不过依次执行预先写好的命令行而已。
+
+再结合以上两个概念(process + script)，那应该就不难理解如下这句话的意思了：正常来说，当我们执行一个shell script时，其实是先产生一个sub-shell的子进程，然后sub-shell再去产生命令行的子进程。然则，那让我们回到本章开始时所提到的例子再从新思考：
+cd /etc/aa/bb/cc可以执行，但是把这条命令写入shell时shell不执行！这是什么原因呀！
+
+答案是这样的：因为，一般我们跑的shell script是用subshell去执行的。
+
+从process的观念来看，是parent process产生一个child process去执行，当child结束后，会返回parent，但parent的环境是不会因child的改变而改变的。所谓的环境元数很多，凡举effective id, variable, workding dir等等...其中的workding dir ($PWD)正是楼主的疑问所在：
+当用subshell来跑script的话，sub shell的$PWD会因为cd而变更，但当返回primary shell时，$PWD是不会变更的。
+
+所谓source就是让script在当前shell内执行、而不是产生一个sub-shell来执行。由于所有执行结果均于当前shell内完成，若script的环境有所改变，当然也会改变当前环境了因此，只要我们要将原本单独输入的script命令行变成source命令的参数，就可轻易解决前例提到的问题了。]]></description>
+				<content:encoded><![CDATA[<p><strong>提问：</strong></p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">cd /etc/aa/bb/cc</pre></div></div>
+
+<p>可以执行，但是把这条命令写入shell时shell不执行！这是什么原因呀！</p>
+<p>先让我们了解一下进程(process)的观念好了。首先，我们所执行的任何程序，都是由父进程(parent process)所产生出来的一个子进程(child process)，子进程在结束后，将返回到父进程去。此一现象在Linux系统中被称为 fork。当子进程被产生的时候，将会从父进程那里获得一定的资源分配、及(更重要的是)继承父进程的环境。</p>
+<p>所谓环境变量其实就是那些会传给子进程的变量。简单而言，&#8221;遗传性&#8221;就是区分本地变量与环境变量的决定性指标。然而，从遗传的角度来看，我们也不难发现环境变量的另一个重要特征：环境变量只能从父进程到子进程单向继承。换句话说：在子进程中的环境如何变更，均不会影响父进程的环境。</p>
+<p>接下来，再让我们了解一下命令脚本(shell script)的概念。所谓的shell script讲起来很简单，就是将你平时在shell prompt后所输入的多行command line依序写入一个文件去而已。其中再加上一些条件判断、互动界面、参数运用、函数调用、等等技巧，得以让script更加&#8221;聪明&#8221;的执行，但若撇开这些技巧不谈，我们真的可以简单的看成script只不过依次执行预先写好的命令行而已。</p>
+<p>再结合以上两个概念(process + script)，那应该就不难理解如下这句话的意思了：正常来说，当我们执行一个shell script时，其实是先产生一个sub-shell的子进程，然后sub-shell再去产生命令行的子进程。然则，那让我们回到本章开始时所提到的例子再从新思考：<br />
+cd /etc/aa/bb/cc可以执行，但是把这条命令写入shell时shell不执行！这是什么原因呀！</p>
+<p>答案是这样的：因为，一般我们跑的shell script是用subshell去执行的。</p>
+<p>从process的观念来看，是parent process产生一个child process去执行，当child结束后，会返回parent，但parent的环境是不会因child的改变而改变的。所谓的环境元数很多，凡举effective id, variable, workding dir等等&#8230;其中的workding dir ($PWD)正是楼主的疑问所在：<br />
+当用subshell来跑script的话，sub shell的$PWD会因为cd而变更，但当返回primary shell时，$PWD是不会变更的。</p>
+<p>所谓source就是让script在当前shell内执行、而不是产生一个sub-shell来执行。由于所有执行结果均于当前shell内完成，若script的环境有所改变，当然也会改变当前环境了因此，只要我们要将原本单独输入的script命令行变成source命令的参数，就可轻易解决前例提到的问题了。</p>
+<p>比方说，原本我们是如此执行 script的：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">./my.script</pre></div></div>
+
+<p>现在改成这样即可：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">source ./my.script</pre></div></div>
+
+<p>或：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">. ./my.script</pre></div></div>
+
+<p>exec也是让script在同一个进程上执行，但是原有进程则被结束了。也就是简而言之：原有进程会否终止，就是exec与source/fork的最大差异了。</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/7145.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Linux Shell 之引号</title>
+		<link>http://www.xieziming.com/archives/6917.html</link>
+		<comments>http://www.xieziming.com/archives/6917.html#respond</comments>
+		<pubDate>Wed, 17 Mar 2010 07:40:35 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[程序]]></category>
+		<category><![CDATA[linux]]></category>
+		<category><![CDATA[shell]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=6917</guid>
+		<description><![CDATA[由单引号括起来的字符都作为普通字符出现。特殊字符用单引号括起来以后，也会失去原有意义，而只作为普通字符解释。例如：
+<code lang="bash">
+$ string=’$PATH’
+$ echo $string
+$PATH
+</code>
+可见$保持了其本身的含义，作为普通字符出现。
+<code lang="bash">
+howard@0[script]$ grep Susan phonebook 
+Susan Goldberg 403-212-4921 
+Susan Topple    212-234-2343 
+</code>
+如果我们想查找的是Susan Goldberg，不能直接使用grep Susan Goldberg phonebook命令，grep会把Goldberg和phonebook当作需要搜索的文件 
+<code lang="bash">
+howard@0[script]$ grep 'Susan Gold' phonebook 
+Susan Goldberg 403-212-4921 
+</code>
+当shell碰到第一个单引号时，它忽略掉其后直到右引号的所有特殊字符。]]></description>
+				<content:encoded><![CDATA[<p>在shell中引号分为三种：单引号，双引号和反引号。</p>
+<p><span style="color: #ff00ff;">* 单引号 ‘</span></p>
+<p>由单引号括起来的字符都作为普通字符出现。特殊字符用单引号括起来以后，也会失去原有意义，而只作为普通字符解释。例如：</p>
+
+<div class="wp_code"><div class="pre"><pre class="bash" style="font-family:'Times New Roman',Garamond, Times;">$ <span style="color: #007800;">string</span>=’<span style="color: #007800;">$PATH</span>’
+$ <span style="color: #7a0874; font-weight: bold;">echo</span> <span style="color: #007800;">$string</span>
+<span style="color: #007800;">$PATH</span></pre></div></div>
+
+<p>可见$保持了其本身的含义，作为普通字符出现。</p>
+
+<div class="wp_code"><div class="pre"><pre class="bash" style="font-family:'Times New Roman',Garamond, Times;">howard<span style="color: #000000; font-weight: bold;">@</span>0<span style="color: #7a0874; font-weight: bold;">&#91;</span>script<span style="color: #7a0874; font-weight: bold;">&#93;</span>$ <span style="color: #c20cb9; font-weight: bold;">grep</span> Susan phonebook 
+Susan Goldberg <span style="color: #000000;">403</span>-<span style="color: #000000;">212</span>-<span style="color: #000000;">4921</span> 
+Susan Topple    <span style="color: #000000;">212</span>-<span style="color: #000000;">234</span>-<span style="color: #000000;">2343</span></pre></div></div>
+
+<p>如果我们想查找的是Susan Goldberg，不能直接使用grep Susan Goldberg phonebook命令，grep会把Goldberg和phonebook当作需要搜索的文件</p>
+
+<div class="wp_code"><div class="pre"><pre class="bash" style="font-family:'Times New Roman',Garamond, Times;">howard<span style="color: #000000; font-weight: bold;">@</span>0<span style="color: #7a0874; font-weight: bold;">&#91;</span>script<span style="color: #7a0874; font-weight: bold;">&#93;</span>$ <span style="color: #c20cb9; font-weight: bold;">grep</span> <span style="color: #ff0000;">'Susan Gold'</span> phonebook 
+Susan Goldberg <span style="color: #000000;">403</span>-<span style="color: #000000;">212</span>-<span style="color: #000000;">4921</span></pre></div></div>
+
+<p>当shell碰到第一个单引号时，它忽略掉其后直到右引号的所有特殊字符。</p>
+<p><span style="color: #ff00ff;">* 双引号 “</span></p>
+<p>由双引号括起来的字符，除$、倒引号(`)和反斜线（\）仍保留其特殊功能外，其余字符均作为普通字符对待。“$”表示变量替换，即用其后指定的变量的值来代替$和变量；倒引号表示命令替换；仅当“\”后面的字符是下述字符之一时，“\”才是转义字符，这些字符是：“$”、“`”、“&#8221;”、“\”或换行符。转义字符告诉Shell不要对其后面的那个字符进行特殊处理，只是当作普通字符。</p>
+
+<div class="wp_code"><div class="pre"><pre class="bash" style="font-family:'Times New Roman',Garamond, Times;">$ <span style="color: #7a0874; font-weight: bold;">echo</span> <span style="color: #ff0000;">&quot;My current dir is <span style="color: #780078;">`pwd`</span> and logname is <span style="color: #007800;">$LOGNAME</span>&quot;</span>
+My current <span style="color: #c20cb9; font-weight: bold;">dir</span> is <span style="color: #000000; font-weight: bold;">/</span>home<span style="color: #000000; font-weight: bold;">/</span>mengqc and <span style="color: #c20cb9; font-weight: bold;">logname</span> is mengqc</pre></div></div>
+
+<p><span style="color: #ff00ff;">* 反引号 `</span></p>
+<p>反引号（`）这个字符所对应的键一般位于键盘的左上角，不要将其同单引号（’）混淆。反引号括起来的字符串被shell解释为命令行，在执行时，shell首先执行该命令行，并以它的标准输出结果取代整个反引号（包括两个反引号）部分。例如：</p>
+
+<div class="wp_code"><div class="pre"><pre class="bash" style="font-family:'Times New Roman',Garamond, Times;">$ <span style="color: #7a0874; font-weight: bold;">pwd</span>
+<span style="color: #000000; font-weight: bold;">/</span>home<span style="color: #000000; font-weight: bold;">/</span>xyz
+&nbsp;
+$ <span style="color: #007800;">string</span>=”current directory is <span style="color: #000000; font-weight: bold;">`</span><span style="color: #7a0874; font-weight: bold;">pwd</span><span style="color: #000000; font-weight: bold;">`</span>”
+$ <span style="color: #7a0874; font-weight: bold;">echo</span> <span style="color: #007800;">$string</span>
+current directour is <span style="color: #000000; font-weight: bold;">/</span>home<span style="color: #000000; font-weight: bold;">/</span>xyz</pre></div></div>
+
+<p>shell执行echo命令时，首先执行`pwd`中的命令pwd，并将输出结果/home/xyz取代`pwd`这部分，最后输出替换后的整个结果。</p>
+<p>利用反引号的这种功能可以进行命令置换，即把反引号括起来的执行结果赋值给指定变量。例如：</p>
+
+<div class="wp_code"><div class="pre"><pre class="bash" style="font-family:'Times New Roman',Garamond, Times;">$ <span style="color: #007800;">today</span>=<span style="color: #000000; font-weight: bold;">`</span><span style="color: #c20cb9; font-weight: bold;">date</span><span style="color: #000000; font-weight: bold;">`</span>
+$ <span style="color: #7a0874; font-weight: bold;">echo</span> Today is <span style="color: #007800;">$today</span>
+Today is Mon Apr <span style="color: #000000;">15</span> <span style="color: #000000;">16</span>:<span style="color: #000000;">20</span>:<span style="color: #000000;">13</span> CST <span style="color: #000000;">1999</span></pre></div></div>
+
+<p>对于bash的来说，命令的解释是从左到右的，首先遇到单引号和双引号，所作的解释是不一样，看这个例子：</p>
+
+<div class="wp_code"><div class="pre"><pre class="bash" style="font-family:'Times New Roman',Garamond, Times;">$ <span style="color: #007800;">a</span>=<span style="color: #000000;">1</span>
+$ <span style="color: #7a0874; font-weight: bold;">echo</span> <span style="color: #ff0000;">&quot;<span style="color: #007800;">$a</span>&quot;</span>
+<span style="color: #000000;">1</span>               <span style="color: #666666; font-style: italic;">#$被bash解释到</span>
+$ <span style="color: #7a0874; font-weight: bold;">echo</span> <span style="color: #ff0000;">&quot;'<span style="color: #007800;">$a</span>'&quot;</span>
+<span style="color: #ff0000;">'1'</span>             <span style="color: #666666; font-style: italic;">#单引号失效</span>
+$ <span style="color: #7a0874; font-weight: bold;">echo</span> <span style="color: #ff0000;">'$a'</span>
+<span style="color: #007800;">$a</span>            
+$ <span style="color: #7a0874; font-weight: bold;">echo</span> <span style="color: #ff0000;">'&quot;$a&quot;'</span>
+<span style="color: #ff0000;">&quot;<span style="color: #007800;">$a</span>&quot;</span>            <span style="color: #666666; font-style: italic;">#双引号失效</span></pre></div></div>
+
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/6917.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+	</channel>
+</rss>

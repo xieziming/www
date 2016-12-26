@@ -1,0 +1,601 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>开源 &#8211; 谢子明</title>
+	<atom:link href="http://www.xieziming.com/topic/kai-yuan/feed" rel="self" type="application/rss+xml" />
+	<link>http://www.xieziming.com</link>
+	<description>Suny Xie</description>
+	<lastBuildDate>Mon, 26 Dec 2016 07:34:38 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.7</generator>
+	<item>
+		<title>截屏工具（C++）API</title>
+		<link>http://www.xieziming.com/archives/8517.html</link>
+		<comments>http://www.xieziming.com/archives/8517.html#respond</comments>
+		<pubDate>Wed, 01 May 2013 04:47:46 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[开源]]></category>
+		<category><![CDATA[C++]]></category>
+		<category><![CDATA[原创]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=8517</guid>
+		<description><![CDATA[前阵子在搞一个Agent的监控功能，每隔几秒传回一张图，用Java编写。但发现有以下两个问题：
+
+（1） 鼠标闪，当刷新屏幕设置为3秒以下时，发现鼠标闪的非常厉害，严重影响Agent机的使用。
+（2） 当屏幕Lock，或者远程登录Agent最小化登录窗口时，将截不到图。
+
+后来搜索发现，用Java是没办法解决这个问题的，必须使用C/C++跟操作系统底层打交道才行，放在这里的话就是GDI。
+
+程序下载：
+
+ScreenCapture.zip
+
+用法：
+
+ScreenCapture.exe [filePath.jpg] [sleepTime]
+
+（1） 无参数 ———-保存图片于相同目录，文件名screen.jpg
+（2） 1个参数 —–保存图片于filePath.jpg
+（3） 2个参数 —–循环截图，间隔时间为sleepTime（毫秒），保存图片于filePath.jpg]]></description>
+				<content:encoded><![CDATA[<p>前阵子在搞一个Agent的监控功能，每隔几秒传回一张图，用Java编写。但发现有以下两个问题：</p>
+<p>（1） 鼠标闪，当刷新屏幕设置为3秒以下时，发现鼠标闪的非常厉害，严重影响Agent机的使用。<br />
+（2） 当屏幕Lock，或者远程登录Agent最小化登录窗口时，将截不到图。</p>
+<p>后来搜索发现，用Java是没办法解决这个问题的，必须使用C/C++跟操作系统底层打交道才行，放在这里的话就是GDI。</p>
+<p><strong>程序下载：</strong></p>
+<p><a href="http://images.xieziming.com/upload/file/screencapture/ScreenCapture.zip" title="download">ScreenCapture.zip</a></p>
+<p><strong>用法：</strong></p>
+<p><em>ScreenCapture.exe [filePath.jpg] [sleepTime]</em></p>
+<p>（1） 无参数  &#8212;&#8212;&#8212;-保存图片于相同目录，文件名screen.jpg<br />
+（2） 1个参数  &#8212;&#8211;保存图片于filePath.jpg<br />
+（3） 2个参数  &#8212;&#8211;循环截图，间隔时间为sleepTime（毫秒），保存图片于filePath.jpg</p>
+<p><strong>程序源码：</strong></p>
+<p>Blow is the content of ScreenCapture.cpp</p>
+
+<div class="wp_code"><div class="pre"><pre class="cpp" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #339900;">#include &quot;screen_shooter.h&quot;</span>
+<span style="color: #0000ff;">int</span> main <span style="color: #008000;">&#40;</span><span style="color: #0000ff;">int</span> argc, <span style="color: #0000ff;">char</span><span style="color: #000040;">*</span> argv<span style="color: #008000;">&#91;</span><span style="color: #008000;">&#93;</span><span style="color: #008000;">&#41;</span><span style="color: #008000;">&#123;</span>
+	ScreenShooter screen_shooter<span style="color: #008080;">;</span>
+	Screenshot<span style="color: #000040;">*</span> screenshot<span style="color: #008080;">;</span>
+	<span style="color: #0000ff;">int</span> sleepTime<span style="color: #008080;">;</span>
+	<span style="color: #0000ff;">char</span><span style="color: #000040;">*</span> filePath<span style="color: #008080;">;</span>
+	<span style="color: #0000ff;">if</span> <span style="color: #008000;">&#40;</span>argc <span style="color: #000080;">==</span> <span style="color: #0000dd;">1</span><span style="color: #008000;">&#41;</span> <span style="color: #008000;">&#123;</span>
+		filePath <span style="color: #000080;">=</span> <span style="color: #FF0000;">&quot;screen.jpg&quot;</span><span style="color: #008080;">;</span>
+		screenshot <span style="color: #000080;">=</span> screen_shooter.<span style="color: #007788;">take_screenshot</span><span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+		screenshot<span style="color: #000040;">-</span><span style="color: #000080;">&gt;</span>write_jpeg<span style="color: #008000;">&#40;</span>filePath<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+	<span style="color: #008000;">&#125;</span>
+	<span style="color: #0000ff;">if</span> <span style="color: #008000;">&#40;</span>argc <span style="color: #000080;">==</span> <span style="color: #0000dd;">2</span><span style="color: #008000;">&#41;</span> <span style="color: #008000;">&#123;</span>
+		filePath <span style="color: #000080;">=</span> argv<span style="color: #008000;">&#91;</span><span style="color: #0000dd;">1</span><span style="color: #008000;">&#93;</span><span style="color: #008080;">;</span>
+		screenshot <span style="color: #000080;">=</span> screen_shooter.<span style="color: #007788;">take_screenshot</span><span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+		screenshot<span style="color: #000040;">-</span><span style="color: #000080;">&gt;</span>write_jpeg<span style="color: #008000;">&#40;</span>filePath<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+	<span style="color: #008000;">&#125;</span>
+&nbsp;
+	<span style="color: #0000ff;">if</span> <span style="color: #008000;">&#40;</span>argc <span style="color: #000080;">==</span> <span style="color: #0000dd;">3</span><span style="color: #008000;">&#41;</span> <span style="color: #008000;">&#123;</span>
+		filePath <span style="color: #000080;">=</span> argv<span style="color: #008000;">&#91;</span><span style="color: #0000dd;">1</span><span style="color: #008000;">&#93;</span><span style="color: #008080;">;</span>
+		<span style="color: #0000dd;">sscanf</span><span style="color: #008000;">&#40;</span>argv<span style="color: #008000;">&#91;</span><span style="color: #0000dd;">2</span><span style="color: #008000;">&#93;</span>,<span style="color: #FF0000;">&quot;%d&quot;</span>,<span style="color: #000040;">&amp;</span>sleepTime<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+		<span style="color: #0000ff;">while</span><span style="color: #008000;">&#40;</span><span style="color: #0000ff;">true</span><span style="color: #008000;">&#41;</span><span style="color: #008000;">&#123;</span>
+			  screenshot <span style="color: #000080;">=</span> screen_shooter.<span style="color: #007788;">take_screenshot</span><span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+			  screenshot<span style="color: #000040;">-</span><span style="color: #000080;">&gt;</span>write_jpeg<span style="color: #008000;">&#40;</span>filePath<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+			  Sleep<span style="color: #008000;">&#40;</span>sleepTime<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+		  <span style="color: #008000;">&#125;</span>
+	<span style="color: #008000;">&#125;</span>
+&nbsp;
+	<span style="color: #0000dd;">delete</span> screenshot<span style="color: #008080;">;</span>
+	<span style="color: #0000ff;">return</span> <span style="color: #0000dd;">0</span><span style="color: #008080;">;</span>
+<span style="color: #008000;">&#125;</span></pre></div></div>
+
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/8517.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Comparison Tool</title>
+		<link>http://www.xieziming.com/archives/8575.html</link>
+		<comments>http://www.xieziming.com/archives/8575.html#respond</comments>
+		<pubDate>Mon, 07 May 2012 14:56:07 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[开源]]></category>
+		<category><![CDATA[java]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=8575</guid>
+		<description><![CDATA[<code lang="java">
+public class Tester {
+	public static void main(String[] args){
+		String control = "C:\\Eclipse\\Workspace\\Platform\\upload\\Control";
+		String actual = "C:\\Eclipse\\Workspace\\Platform\\upload\\Actual";
+		String config = "C:\\Eclipse\\Workspace\\Platform\\upload\\config";
+		String result = "C:\\Eclipse\\Workspace\\Platform\\upload\\result";
+		
+		new Comparator(control,actual,result, config,"GBMMXMNTP",false);
+		//System.out.println("Compare");
+	}
+}
+</code>]]></description>
+				<content:encoded><![CDATA[<p>今天介绍一个我之前写过的一个文件对比工具，主要要来比较有规律的文本类型文件。什么是有规律呢？</p>
+<p>（1）有分隔符，分号，&#8221;|&#8221;，逗号，空格，等等都可以，只要能分割开各列就行，并且对比文件有不同分隔符也行。<br />
+（2）每行有自己的标识列，你可以理解为“主键”，能与其他行区分开来的东西。</p>
+<p>说完了什么文件能比，再说下能怎么个比法：</p>
+<p>（1）错行相比。按上面说的，先找每行的“主键”，再对比<br />
+（2）错列相比。可以是不同列之间进行对比，有的时候你会发现，另一版本的文件突然增加了一列信息，没关系，我们可以指定要对比的列。<br />
+（3）跳过开头。文件头部有的时候有标题之类的，但你不希望对比的时候就可以忽略它们。</p>
+<p>最后，对比的结果将以Excel的形式展示，有5张sheet。分别为“只存在于Control”，“只存在与Actual”，“Difference”，“Control”，“Actual”。</p>
+<p>源代码包括以下几个文件：</p>
+<p>（1）<a href="http://images.xieziming.com/upload/file/comparator/Comparator.java.txt">Comparator.java</a> （2）<a href="http://images.xieziming.com/upload/file/comparator/Excel.java.txt">Excel.java</a> （3）<a href="http://images.xieziming.com/upload/file/comparator/Configuration.java.txt">Configuration.java</a> （4）<a href="http://images.xieziming.com/upload/file/comparator/Util.java.txt">Util.java</a> </p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/8575.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Post Views Change Log</title>
+		<link>http://www.xieziming.com/archives/7677.html</link>
+		<comments>http://www.xieziming.com/archives/7677.html#comments</comments>
+		<pubDate>Tue, 15 Nov 2011 15:15:21 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[开源]]></category>
+		<category><![CDATA[wordpress]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=7677</guid>
+		<description><![CDATA[<p><strong>V2.6.1 , released on 15 Nov 2012 </strong></p>
+（1） fix some small bugs.
+（2） re-defined some terms on dashboard page.
+<p><strong>V2.5.0 , released on 21 Mar 2011 </strong></p>
+（1） a completely new version, which cannot upgraded from the lowest versions. 
+（2） stable invoking functions (wont be changed later).
+<p><strong>V1.9.0 , released on 13 Feb 2011 </strong></p>
+（1） fixed bug in week summary.
+（2） add feature of 'excerpt' views analysis.
+（2） change some invoking functions.
+（2） optimize database table structure.
+<p><strong>V1.7.0 , released on 03 Dec 2011 </strong></p>
+（1） support cache plugin such as wp super cache.
+<p><strong>V1.2.3 , released on 02 Nov 2011 </strong></p>
+（1） fixed a bots logging error.]]></description>
+				<content:encoded><![CDATA[<p><strong><font color="#BB0000">Latest Version : V2.6.2 ( Released on 8 Mar 2013 )</font></strong></p>
+<p>（1） add &#8220;historic records remove&#8221; function.</p>
+<p><strong>V2.6.1.4 , released on 01 Dec 2012 </strong></p>
+<p>（1） fix WP 3.5 warning issue.</p>
+<p><strong>V2.6.1.2 , released on 01 Dec 2012 </strong></p>
+<p>（1） fix a security defect.</p>
+<p><strong>V2.6.1.1 , released on 15 Nov 2012 </strong></p>
+<p>（1） fix one bug on sorting.</p>
+<p><strong>V2.6.1 , released on 15 Nov 2012 </strong></p>
+<p>（1） fix some small bugs.<br />
+（2） re-defined some terms on dashboard page.</p>
+<p><strong>V2.5.0 , released on 21 Mar 2011 </strong></p>
+<p>（1） a completely new version, which cannot upgraded from the lowest versions.<br />
+（2） stable invoking functions (wont be changed later).</p>
+<p><strong>V1.9.0 , released on 13 Feb 2011 </strong></p>
+<p>（1） fixed bug in week summary.<br />
+（2） add feature of &#8216;excerpt&#8217; views analysis.<br />
+（2） change some invoking functions.<br />
+（2） optimize database table structure.</p>
+<p><strong>V1.7.0 , released on 03 Dec 2011 </strong></p>
+<p>（1） support cache plugin such as wp super cache.</p>
+<p><strong>V1.2.3 , released on 02 Nov 2011 </strong></p>
+<p>（1） fixed a bots logging error.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/7677.html/feed</wfw:commentRss>
+		<slash:comments>2</slash:comments>
+		</item>
+		<item>
+		<title>Post Views Terms</title>
+		<link>http://www.xieziming.com/archives/7580.html</link>
+		<comments>http://www.xieziming.com/archives/7580.html#comments</comments>
+		<pubDate>Tue, 01 Nov 2011 13:47:59 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[开源]]></category>
+		<category><![CDATA[wordpress]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=7580</guid>
+		<description><![CDATA[<font color="#BB0000">View / Read :</font> It indicates how many times a page/post content displayed. It's logged via the_content() invoking.
+
+<font color="#BB0000">Preview : </font>It indicates how many times a page/post excerpt displayed. It's logged via the_excerpt() invoking.
+
+<font color="#BB0000">Normal : </font>Viewed by Human
+
+<font color="#BB0000">Robot :</font> Viewed by search engine, such as Google, Yahoo, Bing...
+
+<font color="#BB0000">Viewed post :</font> How many page/post has been viewed.
+
+<font color="#BB0000">Viewed coverage :</font> The page/post has been viewed out of all post/page.
+
+<font color="#BB0000">Views summation :</font> The summation of all page/post views.]]></description>
+				<content:encoded><![CDATA[<p><font color="#BB0000">View / Read :</font><br />
+It indicates how many times a page/post content displayed. It&#8217;s logged via the_content() invoking.</p>
+<p><font color="#BB0000">Preview : </font><br />
+It indicates how many times a page/post excerpt displayed. It&#8217;s logged via the_excerpt() invoking.</p>
+<p><font color="#BB0000">Normal : </font><br />
+Viewed by Human</p>
+<p><font color="#BB0000">Robot :</font><br />
+Viewed by search engine, such as Google, Yahoo, Bing&#8230;</p>
+<p><font color="#BB0000">Viewed post :</font><br />
+How many page/post has been viewed.</p>
+<p><font color="#BB0000">Viewed coverage :</font><br />
+The page/post has been viewed out of all post/page.</p>
+<p><font color="#BB0000">Views summation :</font><br />
+The summation of all page/post views.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/7580.html/feed</wfw:commentRss>
+		<slash:comments>2</slash:comments>
+		</item>
+		<item>
+		<title>Live Calendar Q &#038; A</title>
+		<link>http://www.xieziming.com/archives/6737.html</link>
+		<comments>http://www.xieziming.com/archives/6737.html#respond</comments>
+		<pubDate>Wed, 05 Jan 2011 15:35:26 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[开源]]></category>
+		<category><![CDATA[wordpress]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=6737</guid>
+		<description><![CDATA[<strong>Case 1:  The sidebar mini calendar isn't good displayed </strong>
+After activating the plugin, the sidebar mini calendar may not good displayed. It's because you have not defined the  calendar's style. I didn't add this to the calendar.css, for various people have various answers. You can add the following code to your theme's main css, so once the plugin updated, it still remains.]]></description>
+				<content:encoded><![CDATA[<p><strong>Case 1:  The sidebar mini calendar isn&#8217;t good displayed </strong><br />
+After activating the plugin, the sidebar mini calendar may not good displayed. It&#8217;s because you have not defined the  calendar&#8217;s style. I didn&#8217;t add this to the calendar.css, for various people have various answers. You can add the following code to your theme&#8217;s main css, so once the plugin updated, it still remains.</p>
+
+<div class="wp_code"><div class="pre"><pre class="css" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #808080; font-style: italic;">/*&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; CALENDAR &lt; &lt;&lt;&lt;&lt;*/</span>
+&nbsp;
+<span style="color: #cc00cc;">#wp-calendar</span>  <span style="color: #00AA00;">&#123;</span>
+	<span style="color: #000000; font-weight: bold;">width</span><span style="color: #00AA00;">:</span> <span style="color: #933;">100%</span><span style="color: #00AA00;">;</span>
+	<span style="color: #000000; font-weight: bold;">margin</span><span style="color: #00AA00;">:</span> <span style="color: #cc66cc;">0</span> <span style="color: #933;">10px</span><span style="color: #00AA00;">;</span>
+	<span style="color: #000000; font-weight: bold;">text-align</span><span style="color: #00AA00;">:</span> <span style="color: #993333;">center</span><span style="color: #00AA00;">;</span>
+	<span style="color: #000000; font-weight: bold;">font-size</span><span style="color: #00AA00;">:</span> <span style="color: #933;">13px</span><span style="color: #00AA00;">;</span>
+<span style="color: #00AA00;">&#125;</span>
+&nbsp;
+<span style="color: #cc00cc;">#wp-calendar</span> caption  <span style="color: #00AA00;">&#123;</span>
+	<span style="color: #000000; font-weight: bold;">padding</span><span style="color: #00AA00;">:</span> <span style="color: #cc66cc;">0</span> <span style="color: #cc66cc;">0</span> <span style="color: #933;">7px</span> <span style="color: #cc66cc;">0</span><span style="color: #00AA00;">;</span>
+	<span style="color: #000000; font-weight: bold;">font-weight</span><span style="color: #00AA00;">:</span> <span style="color: #993333;">bold</span><span style="color: #00AA00;">;</span>
+	<span style="color: #000000; font-weight: bold;">text-align</span><span style="color: #00AA00;">:</span> <span style="color: #000000; font-weight: bold;">right</span><span style="color: #00AA00;">;</span>
+<span style="color: #00AA00;">&#125;</span>
+&nbsp;
+<span style="color: #cc00cc;">#wp-calendar</span> a<span style="color: #3333ff;">:link</span><span style="color: #00AA00;">,</span> <span style="color: #cc00cc;">#wp-calendar</span> a<span style="color: #3333ff;">:visited  </span><span style="color: #00AA00;">&#123;</span>
+	<span style="color: #000000; font-weight: bold;">text-decoration</span><span style="color: #00AA00;">:</span> <span style="color: #993333;">none</span><span style="color: #00AA00;">;</span>
+        <span style="color: #000000; font-weight: bold;">background-color</span><span style="color: #00AA00;">:</span> <span style="color: #cc00cc;">#E4E6BF</span><span style="color: #00AA00;">;</span>
+	<span style="color: #000000; font-weight: bold;">padding</span><span style="color: #00AA00;">:</span> <span style="color: #933;">3px</span> <span style="color: #933;">5px</span><span style="color: #00AA00;">;</span>
+<span style="color: #00AA00;">&#125;</span>
+&nbsp;
+<span style="color: #cc00cc;">#wp-calendar</span> <span style="color: #cc00cc;">#next</span>  <span style="color: #00AA00;">&#123;</span>
+	<span style="color: #000000; font-weight: bold;">text-align</span><span style="color: #00AA00;">:</span> <span style="color: #000000; font-weight: bold;">right</span><span style="color: #00AA00;">;</span>
+<span style="color: #00AA00;">&#125;</span>
+&nbsp;
+<span style="color: #cc00cc;">#wp-calendar</span> <span style="color: #cc00cc;">#prev</span>  <span style="color: #00AA00;">&#123;</span>
+	<span style="color: #000000; font-weight: bold;">text-align</span><span style="color: #00AA00;">:</span> <span style="color: #000000; font-weight: bold;">left</span><span style="color: #00AA00;">;</span>
+<span style="color: #00AA00;">&#125;</span>
+&nbsp;
+<span style="color: #cc00cc;">#wp-calendar</span> <span style="color: #cc00cc;">#next</span> a<span style="color: #3333ff;">:link</span><span style="color: #00AA00;">,</span> <span style="color: #cc00cc;">#wp-calendar</span> <span style="color: #cc00cc;">#next</span> a<span style="color: #3333ff;">:visited</span><span style="color: #00AA00;">,</span>
+<span style="color: #cc00cc;">#wp-calendar</span> <span style="color: #cc00cc;">#prev</span> a<span style="color: #3333ff;">:link</span><span style="color: #00AA00;">,</span> <span style="color: #cc00cc;">#wp-calendar</span> <span style="color: #cc00cc;">#prev</span> a<span style="color: #3333ff;">:visited  </span><span style="color: #00AA00;">&#123;</span>
+	<span style="color: #000000; font-weight: bold;">background</span><span style="color: #00AA00;">:</span> <span style="color: #993333;">none</span><span style="color: #00AA00;">;</span>
+	<span style="color: #000000; font-weight: bold;">color</span><span style="color: #00AA00;">:</span> <span style="color: #cc00cc;">#666</span><span style="color: #00AA00;">;</span>
+<span style="color: #00AA00;">&#125;</span></pre></div></div>
+
+<p><strong>Case 4:  The tooltips are messy, not neat like the demo</strong></p>
+<p>The width of event title was defined as &#8216;180px&#8217; before for most characters i typed is Chinese. It&#8217;s much less characters than that in English.So, that width don&#8217;t support much english words. Now i have changed it to max 300 , maybe it&#8217;s not enough for you but enough for me( see the demo of my calendar <a href="http://www.xieziming.com/calendar">http://www.xieziming.com/calendar</a>). If it&#8217;s not enough you can change it. The value located in calendar.css</p>
+<p>find this following code:<br />
+</code></p>
+
+<div class="wp_code"><div class="pre"><pre class="css" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #6666ff;">.calnk</span> a<span style="color: #3333ff;">:hover </span>span <span style="color: #00AA00;">&#123;</span>	
+    <span style="color: #000000; font-weight: bold;">color</span><span style="color: #00AA00;">:</span><span style="color: #cc00cc;">#333333</span><span style="color: #00AA00;">;</span> 
+    <span style="color: #000000; font-weight: bold;">display</span><span style="color: #00AA00;">:</span><span style="color: #993333;">block</span><span style="color: #00AA00;">;</span>
+    <span style="color: #000000; font-weight: bold;">position</span><span style="color: #00AA00;">:</span><span style="color: #993333;">absolute</span><span style="color: #00AA00;">;</span> 
+    <span style="color: #000000; font-weight: bold;">margin-top</span><span style="color: #00AA00;">:</span><span style="color: #933;">1px</span><span style="color: #00AA00;">;</span>
+    <span style="color: #000000; font-weight: bold;">padding</span><span style="color: #00AA00;">:</span><span style="color: #933;">6px</span><span style="color: #00AA00;">;</span>
+    <span style="color: #000000; font-weight: bold;">max-width</span><span style="color: #00AA00;">:</span><span style="color: #933;">300px</span><span style="color: #00AA00;">;</span>
+    <span style="color: #000000; font-weight: bold;">min-width</span><span style="color: #00AA00;">:</span><span style="color: #933;">200px</span><span style="color: #00AA00;">;</span>
+    <span style="color: #00AA00;">*</span><span style="color: #000000; font-weight: bold;">width</span><span style="color: #00AA00;">:</span>expression<span style="color: #00AA00;">&#40;</span><span style="color: #00AA00;">&#40;</span>this<span style="color: #6666ff;">.offsetWidth</span> <span style="color: #00AA00;">&gt;</span> <span style="color: #cc66cc;">300</span><span style="color: #00AA00;">&#41;</span> ? <span style="color: #00AA00;">&#40;</span>this.<span style="color: #000000; font-weight: bold;">width</span> <span style="color: #00AA00;">=</span> <span style="color: #cc66cc;">300</span> <span style="color: #00AA00;">+</span><span style="color: #ff0000;">'px'</span><span style="color: #00AA00;">&#41;</span> <span style="color: #00AA00;">:</span> <span style="color: #00AA00;">&#40;</span><span style="color: #00AA00;">&#40;</span>this<span style="color: #6666ff;">.offsetWidth</span> &lt; <span style="color: #cc66cc;">200</span><span style="color: #00AA00;">&#41;</span> ? <span style="color: #00AA00;">&#40;</span>this.<span style="color: #000000; font-weight: bold;">width</span> <span style="color: #00AA00;">=</span> <span style="color: #cc66cc;">200</span> <span style="color: #00AA00;">+</span><span style="color: #ff0000;">'px'</span><span style="color: #00AA00;">&#41;</span> <span style="color: #00AA00;">:</span>true<span style="color: #00AA00;">&#41;</span><span style="color: #00AA00;">&#41;</span><span style="color: #00AA00;">;</span> 
+    <span style="color: #000000; font-weight: bold;">clear</span><span style="color: #00AA00;">:</span><span style="color: #993333;">both</span><span style="color: #00AA00;">;</span>
+    <span style="color: #000000; font-weight: bold;">z-index</span><span style="color: #00AA00;">:</span><span style="color: #cc66cc;">100</span><span style="color: #00AA00;">;</span>
+    <span style="color: #000000; font-weight: bold;">line-height</span><span style="color: #00AA00;">:</span><span style="color: #933;">1.2em</span><span style="color: #00AA00;">;</span>
+<span style="color: #00AA00;">&#125;</span></pre></div></div>
+
+<p>Then change the &#8220;max-width&#8221; and the &#8220;*width&#8221;.  Hehehh, don&#8217;t change it too big, or should be a little ugly.</code></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/6737.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Post Views Q &#038; A</title>
+		<link>http://www.xieziming.com/archives/6720.html</link>
+		<comments>http://www.xieziming.com/archives/6720.html#comments</comments>
+		<pubDate>Wed, 05 Jan 2011 14:39:26 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[开源]]></category>
+		<category><![CDATA[wordpress]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=6720</guid>
+		<description><![CDATA[<font color="#00BB00"><strong>Self Test:</strong></font>
+<strong>'post-views' plugin cannot work ? the following are the self test steps:</strong>
+
+<font color="#00BB00">version 1.9.0 upgrade failed users , please refer to the case 6 in later paragraph directly.</font>
+
+1)  open a post in browser, then go to the dashboard, check the views in 'normal: analytics' (order by visited time), whether it increased or not? if it have increased, that means the plugins work well till now. If not, go to 'robot: analytics', check whether it is recorded by mistake.
+
+2) if the above is wrong, please tell me what happen, better to attach some screenshots.
+
+3) if the above is right, but the post views displayed is wrong, please attach your code segment here, i will check it. 
+
+<p align="center"><font color="#0000FF">It's recommended to see my sample code being used in my blog first <a href="http://www.xieziming.com/dev/post-views/usage" target="_blank">【Sample Code】</a></font></p>
+
+<font color="#bb0000"><strong>Uninstall Plugin:</strong></font>
+
+<strong>'post-views' plugin works badly ? i want to completely uninstall it, the following are the steps:</strong>
+
+(1) Delete database table 'post_views' and 'post_views_his', with prefix 'wp_'.
+
+(2) Delete wordpress options, using the following sql]]></description>
+				<content:encoded><![CDATA[<p><font color="#00BB00"><strong>Latest Q:</strong></font><br />
+<strong>Versions lower than v1.9.0 upgrade to v2.5.1 failure</strong></p>
+<p>The key point : please upgrade to v1.9.0 first, then upgrade to v2.5.3</p>
+<p>Steps:</p>
+<p>1. deactive older version.</p>
+<p>2. delete new version tables (_realtime, _history) , if it has been upgraded to v2.5 before, if not skip this step</p>
+<p>3. delete the options of post_views_fix_process by the follow sql ,  if it has been upgraded to v2.5 before, if not skip this step</p>
+<p>Run : SELECT * FROM wp_options WHERE option_name =&#8217;post_views_fix_process&#8217;   in phpmyadmin, it will a record, delete it.</p>
+<p>4. replace older version files with v1.9.0, then active v1.9.0 to process the upgrade actions</p>
+<p>5. go to dashboard, click &#8216;post-views&#8217; manage page( some actions will process here ), yes, just click the &#8220;post-views&#8221; page</p>
+<p>6. delete the options of post_views_fix_process by the follow sql</p>
+<p>Run : SELECT * FROM wp_options WHERE option_name =&#8217;post_views_fix_process&#8217;   in phpmyadmin, it will a record, delete it.</p>
+<p>6. deactive v1.9.0</p>
+<p>7. replace older version files with v2.5.3, then active v2.5.3 to process the upgrade actions</p>
+<p>finish.</p>
+<p>download v2.5.0  : http://wordpress.org/extend/plugins/post-views/</p>
+<p>download 1.9.0 : http://images.xieziming.com/upload/file/post_views/v1.9.0.rar</p>
+<p><font color="#00BB00"><strong>Self Test:</strong></font><br />
+<strong>&#8216;post-views&#8217; plugin cannot work ? the following are the self test steps:</strong></p>
+<p><font color="#00BB00">version 1.9.0 upgrade failed users , please refer to the case 6 in later paragraph directly.</font></p>
+<p>1)  open a post in browser, then go to the dashboard, check the views in &#8216;normal: analytics&#8217; (order by visited time), whether it increased or not? if it have increased, that means the plugins work well till now. If not, go to &#8216;robot: analytics&#8217;, check whether it is recorded by mistake.</p>
+<p>2) if the above is wrong, please tell me what happen, better to attach some screenshots.</p>
+<p>3) if the above is right, but the post views displayed is wrong, please attach your code segment here, i will check it. </p>
+<p align="center"><font color="#0000FF">It&#8217;s recommended to see my sample code being used in my blog first <a href="http://www.xieziming.com/dev/post-views/usage" target="_blank">【Sample Code】</a></font></p>
+<p><font color="#bb0000"><strong>Uninstall Plugin:</strong></font></p>
+<p><strong>&#8216;post-views&#8217; plugin works badly ? i want to completely uninstall it, the following are the steps:</strong></p>
+<p>(1) Delete database table &#8216;post_views&#8217; and &#8216;post_views_his&#8217;, with prefix &#8216;wp_&#8217;.</p>
+<p>(2) Delete wordpress options, using the following sql:</p>
+
+<div class="wp_code"><div class="pre"><pre class="sql" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #993333; font-weight: bold;">SELECT</span> <span style="color: #66cc66;">*</span> 
+<span style="color: #993333; font-weight: bold;">FROM</span>  <span style="color: #ff0000;">`wp_options`</span> 
+<span style="color: #993333; font-weight: bold;">WHERE</span>  <span style="color: #ff0000;">`option_name`</span> <span style="color: #993333; font-weight: bold;">LIKE</span>  <span style="color: #ff0000;">'post_views%'</span></pre></div></div>
+
+<p>There should be 4 records, delete all of them, or just execute the following code:</p>
+
+<div class="wp_code"><div class="pre"><pre class="sql" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #993333; font-weight: bold;">DELETE</span>
+<span style="color: #993333; font-weight: bold;">FROM</span>  <span style="color: #ff0000;">`wp_options`</span> 
+<span style="color: #993333; font-weight: bold;">WHERE</span>  <span style="color: #ff0000;">`option_name`</span> <span style="color: #993333; font-weight: bold;">LIKE</span>  <span style="color: #ff0000;">'post_views%'</span></pre></div></div>
+
+<p>Now the post-views plugin was uninstall successfully! You can choose whether to reinstall or forget it.</p>
+<p><font color="#0000FF"><strong>Issues:</strong></font><br />
+&#8211; &#8211; &#8211; &#8211; &#8211; &#8211; &#8211; &#8211; &#8211; &#8211; &#8211; &#8211; &#8211; &#8211; &#8211; &#8211; &#8211; &#8211; &#8211; &#8211; &#8211; &#8211; &#8211; &#8211; &#8211; &#8211; &#8211; &#8211; &#8211; &#8211; &#8211; &#8211; &#8211; &#8211; &#8211; &#8211; &#8211; &#8211; &#8211; &#8211; &#8211; &#8211; &#8211; &#8211; &#8211; &#8211; &#8211;<br />
+<strong> Case 6 : Post-views” version 1.9.0 cannot work</strong></p>
+<p>1) Once the update files download finished, you should click the &#8216;post views&#8217; menu first, this will trigger some update actions first to complete the upgrade. So if you haven&#8217;t done this, please retry. If this also cannot do, then go to next step.</p>
+<p>2) Check database tables, use phpMyadmin to open &#8216;wp_post_views&#8217;, &#8216;wp_post_views_his&#8217; these two tables.  Check the table&#8217;s struct, whether column &#8216;output_type&#8217; exists in both tables. if not, that means the upgrade failed.</p>
+<p>3) open table &#8216;wp_post_views&#8217;, check whether the primary key is &#8220;post_id,view_type,output_type&#8221;.  if not, that means the upgrade failed.</p>
+<p>4) open table &#8216;wp_post_views_his&#8217;, check whether the primary key is &#8220;year_id,post_id,view_type,output_type&#8221;.  if not, that means the upgrade failed.</p>
+<p>5) If the upgrade fails, please tell me for further resolution, if you don&#8217;t care about your historic data, you can completely uninstall the plugin, then reinstall it. this won&#8217;t lead to upgrade failure.</p>
+<p>For these guys whose upgrade failed, i am so sorry. But there are about 7 versions being used, i am not prefect enough to go through all test.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/6720.html/feed</wfw:commentRss>
+		<slash:comments>18</slash:comments>
+		</item>
+		<item>
+		<title>Post Views Previews</title>
+		<link>http://www.xieziming.com/archives/6717.html</link>
+		<comments>http://www.xieziming.com/archives/6717.html#comments</comments>
+		<pubDate>Wed, 05 Jan 2011 14:28:53 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[开源]]></category>
+		<category><![CDATA[wordpress]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=6717</guid>
+		<description><![CDATA[<img src="http://images.xieziming.com/upload/2011/nontopic/01/04.jpg" alt="post-views" />]]></description>
+				<content:encoded><![CDATA[<p><img src="http://images.xieziming.com/upload/2011/nontopic/01/04.jpg" alt="post-views" /></p>
+<p><img src="http://images.xieziming.com/upload/2011/nontopic/01/05.jpg" alt="post-views" /></p>
+<p><img src="http://images.xieziming.com/upload/2011/nontopic/01/06.jpg" alt="post-views" /></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/6717.html/feed</wfw:commentRss>
+		<slash:comments>3</slash:comments>
+		</item>
+		<item>
+		<title>Post Views Usage</title>
+		<link>http://www.xieziming.com/archives/6706.html</link>
+		<comments>http://www.xieziming.com/archives/6706.html#comments</comments>
+		<pubDate>Wed, 05 Jan 2011 14:13:32 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[开源]]></category>
+		<category><![CDATA[wordpress]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=6706</guid>
+		<description><![CDATA[<font color="#FF8C00"><strong>1. My Sample Code</strong></font>
+
+The following are codes being used in my blog:
+
+<img src="http://images.xieziming.com/upload/2011/nontopic/01/08.jpg" alt="ziming" />
+<code lang="php">
+// the following are codes in index.php, pls refer to http://www.xieziming.com
+
+< ?php
+
+if(function_exists('get_post_views')) { 
+        _e(' , Preview: '); 
+        echo number_format(get_post_total_previews());
+}
+
+if(function_exists('get_post_views')) { 
+        _e(' , Index: '); 
+        echo number_format(get_post_total_robotpreviews() + get_post_total_robotviews());
+} 
+
+if(function_exists('get_post_views')) { 
+        _e(' , Read: '); 
+        echo number_format(get_post_total_views());
+}
+
+?> 
+</code>]]></description>
+				<content:encoded><![CDATA[<p><font color="#FF8C00"><strong>1. My Sample Code</strong></font></p>
+<p>The following are codes being used in my blog:</p>
+<p><img src="http://images.xieziming.com/upload/2011/nontopic/01/08.jpg" alt="ziming" /></p>
+
+<div class="wp_code"><div class="pre"><pre class="php" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #666666; font-style: italic;">// the following are codes in index.php, pls refer to http://www.xieziming.com</span>
+&nbsp;
+<span style="color: #339933;">&lt;</span> ?php
+&nbsp;
+<span style="color: #b1b100;">if</span><span style="color: #009900;">&#40;</span><span style="color: #990000;">function_exists</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'get_post_views'</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span> 
+        _e<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">' , Preview: '</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> 
+        <span style="color: #b1b100;">echo</span> get_post_total_previews<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #b1b100;">if</span><span style="color: #009900;">&#40;</span><span style="color: #990000;">function_exists</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'get_post_views'</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span> 
+        _e<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">' , Index: '</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> 
+        <span style="color: #b1b100;">echo</span> get_post_total_robotviews<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span> 
+&nbsp;
+<span style="color: #b1b100;">if</span><span style="color: #009900;">&#40;</span><span style="color: #990000;">function_exists</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'get_post_views'</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span> 
+        _e<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">' , Read: '</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> 
+        <span style="color: #b1b100;">echo</span> get_post_total_views<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">?&gt;</span></pre></div></div>
+
+<p><img src="http://images.xieziming.com/upload/2011/nontopic/01/09.jpg" alt="ziming" /></p>
+
+<div class="wp_code"><div class="pre"><pre class="php" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #666666; font-style: italic;">// the following are codes in single.php, pls refer to http://www.xieziming.com/archives/1472.html</span>
+&nbsp;
+<span style="color: #339933;">&lt;</span> ?php
+&nbsp;
+<span style="color: #b1b100;">if</span><span style="color: #009900;">&#40;</span><span style="color: #990000;">function_exists</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'get_post_views'</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>  
+      _e<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'Preview : '</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> 
+      <span style="color: #b1b100;">echo</span> get_post_today_previews<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">.</span><span style="color: #0000ff;">&quot; / &quot;</span><span style="color: #339933;">.</span> get_post_total_previews<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+      _e<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">' ,Read : '</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> 
+      <span style="color: #b1b100;">echo</span> get_post_today_views<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">.</span><span style="color: #0000ff;">&quot; / &quot;</span><span style="color: #339933;">.</span>get_post_total_views<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span> 
+&nbsp;
+<span style="color: #b1b100;">if</span><span style="color: #009900;">&#40;</span><span style="color: #990000;">function_exists</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'get_post_views'</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>  
+      _e<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'Index : '</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> 
+      <span style="color: #b1b100;">echo</span> get_post_today_robotviews<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">.</span><span style="color: #0000ff;">&quot; / 
+      &quot;</span><span style="color: #339933;">.</span>get_post_total_robotviews<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span> 
+&nbsp;
+<span style="color: #000000; font-weight: bold;">?&gt;</span></pre></div></div>
+
+<p><img src="http://images.xieziming.com/upload/2011/nontopic/01/10.jpg" alt="ziming" /></p>
+
+<div class="wp_code"><div class="pre"><pre class="php" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #339933;">&lt;</span> ?php
+&nbsp;
+<span style="color: #b1b100;">if</span><span style="color: #009900;">&#40;</span><span style="color: #990000;">function_exists</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'get_post_last_viewed_time'</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>  
+       <span style="color: #b1b100;">echo</span> get_post_last_viewed_time<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'timespan'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+       _e<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">', this page was being read. '</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span> 
+&nbsp;
+<span style="color: #000000; font-weight: bold;">?&gt;</span></pre></div></div>
+
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/6706.html/feed</wfw:commentRss>
+		<slash:comments>60</slash:comments>
+		</item>
+		<item>
+		<title>WordPress SQL</title>
+		<link>http://www.xieziming.com/archives/3735.html</link>
+		<comments>http://www.xieziming.com/archives/3735.html#respond</comments>
+		<pubDate>Sun, 05 Apr 2009 12:53:17 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[开源]]></category>
+		<category><![CDATA[SQL]]></category>
+		<category><![CDATA[wordpress]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=3735</guid>
+		<description><![CDATA[<strong>1 变更Siteurl &#038; Homeurl</strong>
+WordPress将站点URL的绝对路径和本地URL保存在数据库中。因此，如果你将WordPress站点从本地主机转到你的服务器，你的站点不会加载网络，因为你的绝对路径URL仍然指向你的本地主机。你需要改变站点URL和本地URL，网站才能运作。
+解决办法:
+UPDATE wp_options SET option_value = replace(option_value, 'http://www.oldsiteurl.com', 'http://www.newsiteurl.com') WHERE option_name = 'home' OR option_name = 'siteurl';
+
+<strong>2 变更 GUID</strong>
+当你将博客从本地主机转移到你的服务器之后，或者从一个域名转到另一个新的域名，你需要在wp_posts表格修复GUID 字段的URL。因为如果输入错误，GUID可以将文章或者页面转到正确的文章绝对路径。
+解决方案:
+UPDATE wp_posts SET guid = REPLACE (guid, 'http://www.oldsiteurl.com', 'http://www.newsiteurl.com');]]></description>
+				<content:encoded><![CDATA[<p><strong>1 变更Siteurl &#038; Homeurl</strong><br />
+WordPress将站点URL的绝对路径和本地URL保存在数据库中。因此，如果你将WordPress站点从本地主机转到你的服务器，你的站点不会加载网络，因为你的绝对路径URL仍然指向你的本地主机。你需要改变站点URL和本地URL，网站才能运作。<br />
+解决办法:<br />
+UPDATE wp_options SET option_value = replace(option_value, &#8216;http://www.oldsiteurl.com&#8217;, &#8216;http://www.newsiteurl.com&#8217;)</p>
+<p><strong>2 变更 GUID</strong><br />
+当你将博客从本地主机转移到你的服务器之后，或者从一个域名转到另一个新的域名，你需要在wp_posts表格修复GUID 字段的URL。因为如果输入错误，GUID可以将文章或者页面转到正确的文章绝对路径。<br />
+解决方案:<br />
+UPDATE wp_posts SET guid = REPLACE (guid, &#8216;http://www.oldsiteurl.com&#8217;, &#8216;http://www.newsiteurl.com&#8217;);</p>
+<p><strong>3 更改内容中的URL</strong><br />
+WordPress保存在数据库中的URL链接使用绝对路径而非相对路径。在每个发布文章的记录中，它保存的是旧的URL引用旧的资源。因此，如果你需要将这些URL转的新的域名位置，就可以使用下面的方法。<br />
+解决方法:<br />
+UPDATE wp_posts SET post_content = REPLACE (post_content, &#8216;http://www.oldsiteurl.com&#8217;, &#8216;http://www.newsiteurl.com&#8217;);</p>
+<p><strong>4 只改变图像路径</strong><br />
+如果你使用亚马逊云计算服务CloudFront 作为内容交付网络 (CDN) 从服务器端卸载图片，在创建完CNAME记录后，你可以使用下面的查询语句来改变WordPress中的图形路径以下载所有的图形。<br />
+解决方法:<br />
+以下为引用的内容：<br />
+UPDATE wp_posts SET post_content = REPLACE (post_content, &#8216;src=&#8221;http://www.oldsiteurl.com&#8217;, &#8216;src=&#8221;http://yourcdn.newsiteurl.com&#8217;);</p>
+<p>你还需要用下面的查询更新图片附件的GUID:<br />
+UPDATE wp_posts SET  guid = REPLACE (guid, &#8216;http://www.oldsiteurl.com&#8217;, &#8216;http://yourcdn.newsiteurl.com&#8217;) WHERE post_type = &#8216;attachment&#8217;;</p>
+<p><strong>5 更新文章Meta标签</strong><br />
+更新文章Meta标签的方法与更新文章内容中URL方法几乎一致。如果你给每篇文章保存了额外的URL数据，你可以使用下面的查询来更改。<br />
+解决办法<br />
+UPDATE wp_postmeta SET meta_value = REPLACE (meta_value, &#8216;http://www.oldsiteurl.com&#8217;, &#8216;http://www.newsiteurl.com&#8217;);</p>
+<p><strong>6 更改默认的&#8221;Admin&#8221; 用户名</strong><br />
+安装WordPress后，会默认创建一个 “admin” 的账户名。这一点只要有使用WordPress的用户都知道。不过，这可能会带来一个安全问题，因为黑客很容易侵入并控制你的WordPress管理面板。如果你可以对这个默认的 “Admin” 用户名进行修改将会提高WordPress管理面板的安全性。<br />
+解决方法:<br />
+UPDATE wp_users SET user_login = &#8216;Your New Username&#8217; WHERE user_login = &#8216;Admin&#8217;;</p>
+<p><strong>7 重设密码</strong><br />
+想重设WordPress的密码，但是却由于各种各样的原因却无法使用重设密码这个选项？<br />
+解决方法:<br />
+UPDATE wp_users SET user_pass = MD5( &#8216;new_password&#8217; ) WHERE user_login = &#8216;your-username&#8217;;</p>
+<p><strong>8 将所有的B作者的文章归入A作者</strong><br />
+如果你想将所有的B作者下的文章转移到A作者名下，一篇一篇移动起来将会非常耗时。使用下面的SQL查询，你可以轻松地访问所有的记录将B作者的文章转到A作者下。 首先你需要进入WordPress管理面板的作者和用户页面获得作者的ID。点击作者名查看个人资料，在地址栏，查找&#8221;user_id&#8221;。得到的就是我们需要的作者ID信息。<br />
+解决方法：<br />
+UPDATE wp_posts SET post_author = &#8216;new-author-id&#8217; WHERE post_author = &#8216;old-author-id&#8217;;</p>
+<p><strong>9 删除草稿</strong><br />
+在WordPress中编辑一篇文章时，系统会保存多份修订的副本。由于过多的修订记录会加重数据库的负担造成了资源的浪费。并且，随着时间的推移，当你的文章条目达到上千条是，你的数据库就会变得越来越庞大。这样就会增加了循环迭代、数据检索影响页面的加载时间。<br />
+解决方法:<br />
+以下为引用的内容：<br />
+DELETE a,b,c FROM wp_posts a<br />
+LEFT JOIN wp_term_relationships b ON (a.ID = b.object_id)<br />
+LEFT JOIN wp_postmeta c ON (a.ID = c.post_id)<br />
+WHERE a.post_type = &#8216;revision&#8217;<br />
+注意: 注意，此方法将删除所有的文章的所有修订版，包括相关的meta数据。</p>
+<p><strong>10 删除文章Meta标签</strong><br />
+在WordPress的使用中，安装或删除插件是非常经常的。有些插件利用post meta 来存储插件相关的数据。就算你删除了这些插件，这些不必要的数据仍然保留在post_meta表格里。 你可以使用下面的语句来清除不需要的post meta 值。这将有助于加快你的数据库运行速度，减小数据。<br />
+解决方案:<br />
+DELETE FROM wp_postmeta WHERE meta_key = &#8216;your-meta-key&#8217;;</p>
+<p><strong>11 导出所有的评论邮件地址</strong><br />
+经过一点时间，你的博客可能收到了非常多评论。这些评论里包含了评论者留下的邮件地址。你可以取回这些邮件地址列入你的邮件列表中。.<br />
+解决方法:<br />
+SELECT DISTINCT comment_author_email FROM wp_comments;<br />
+获得结果后，在查询结果的操作中，选择导出导出 所有的邮件。</p>
+<p><strong>12 删除所有的Pingback</strong><br />
+热门文章会获得非常多的pingback。这样，你的数据库就变大，为了减小数据库，你可以尝试将所有这些pingbacks删除。<br />
+解决方法:<br />
+DELETE FROM wp_comments WHERE comment_type = &#8216;pingback&#8217;;</p>
+<p><strong>13 删除所有的垃圾评论</strong><br />
+如果碰到非常多垃圾评论，一个个删除的话讲会非常头疼。而是用下面的SQL 查询，就算你要删除五百多条垃圾评论也变得轻而易举了。<br />
+解决方法:<br />
+DELETE FROM wp_comments WHERE comment_approved = &#8216;spam&#8217;;<br />
+0 = Comment Awaiting Moderation<br />
+1 = Approved Comment<br />
+spam = Comment marked as Spam</p>
+<p><strong>14 确定未使用的标签</strong><br />
+在WordPress数据库中，如果你使用一个查询语句手动来删除旧的文章，旧的标签却仍然会保留并在你的标签云/列表中出现。你可以使用下面的方法识别未使用的标签并将它删除。<br />
+解决方法:<br />
+SELECT * FROM wp_terms wt<br />
+INNER JOIN wp_term_taxonomy wtt ON wt.term_id=wtt.term_id<br />
+INNER JOIN wp_term_relationships wtr ON wtr.term_taxonomy_id=wtt.term_taxonomy_id<br />
+LEFT JOIN wp_posts wp ON wp.ID=wtr.object_id<br />
+WHERE taxonomy=&#8217;post_tag&#8217;<br />
+AND ID IS null<br />
+AND NOT EXISTS(SELECT * From wp_terms wt2<br />
+INNER JOIN wp_term_taxonomy wtt2 ON wt2.term_id=wtt2.term_id WHERE wtt2.parent=wt.term_id) ORDER BY name;</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/3735.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+	</channel>
+</rss>

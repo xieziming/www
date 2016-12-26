@@ -1,0 +1,1630 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>程序 &#8211; 谢子明</title>
+	<atom:link href="http://www.xieziming.com/topic/coding/feed" rel="self" type="application/rss+xml" />
+	<link>http://www.xieziming.com</link>
+	<description>Suny Xie</description>
+	<lastBuildDate>Mon, 26 Dec 2016 07:34:38 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.7</generator>
+	<item>
+		<title>Java Socket长连接</title>
+		<link>http://www.xieziming.com/archives/8506.html</link>
+		<comments>http://www.xieziming.com/archives/8506.html#respond</comments>
+		<pubDate>Sun, 07 Apr 2013 07:17:20 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[程序]]></category>
+		<category><![CDATA[java]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=8506</guid>
+		<description><![CDATA[这段时间在写PC间通信的一些代码，用的是Java Socket，建长连接的时候总是出现socket中断连接，后来总结了下，发现一定要在服务器端/客户端实现接收和发送两个线程才可避免这个问题。
+<code lang="java">
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.net.Socket;
+
+public class Client { 
+	....
+	private void start() {
+		try {
+			Socket socket = new Socket(host, port);// 创建Socket
+			new Thread(new SendThread(socket)).start();// 启动读线程
+			new Thread(new ReceiveThread(socket)).start();// 启动收线程
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void main(String[] args) {
+		new Client().start();
+	}
+}
+</code>]]></description>
+				<content:encoded><![CDATA[<p>这段时间在写PC间通信的一些代码，用的是Java Socket，建长连接的时候总是出现socket中断连接，后来总结了下，发现一定要在服务器端/客户端实现接收和发送两个线程才可避免这个问题。</p>
+<p>Server.java</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">java.io.BufferedReader</span><span style="color: #339933;">;</span>
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">java.io.IOException</span><span style="color: #339933;">;</span>
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">java.io.InputStreamReader</span><span style="color: #339933;">;</span>
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">java.io.OutputStreamWriter</span><span style="color: #339933;">;</span>
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">java.io.Writer</span><span style="color: #339933;">;</span>
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">java.net.ServerSocket</span><span style="color: #339933;">;</span>
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">java.net.Socket</span><span style="color: #339933;">;</span>
+&nbsp;
+&nbsp;
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> Server <span style="color: #009900;">&#123;</span>
+	<span style="color: #000000; font-weight: bold;">private</span> <span style="color: #003399;">ServerSocket</span> serverSocket<span style="color: #339933;">;</span>
+	<span style="color: #000000; font-weight: bold;">private</span> <span style="color: #003399;">Socket</span> socket<span style="color: #339933;">;</span>
+	<span style="color: #000000; font-weight: bold;">private</span> <span style="color: #000066; font-weight: bold;">int</span> port <span style="color: #339933;">=</span> <span style="color: #cc66cc;">5055</span><span style="color: #339933;">;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;">private</span> <span style="color: #000066; font-weight: bold;">void</span> start<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #000000; font-weight: bold;">throws</span> <span style="color: #003399;">Exception</span> <span style="color: #009900;">&#123;</span>
+		serverSocket <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">ServerSocket</span><span style="color: #009900;">&#40;</span>port<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		<span style="color: #000000; font-weight: bold;">while</span> <span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">true</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+			socket <span style="color: #339933;">=</span> serverSocket.<span style="color: #006633;">accept</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+			<span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">Thread</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">new</span> SocketThread<span style="color: #009900;">&#40;</span>socket<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>.<span style="color: #006633;">start</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		<span style="color: #009900;">&#125;</span>
+	<span style="color: #009900;">&#125;</span>
+&nbsp;
+	<span style="color: #008000; font-style: italic; font-weight: bold;">/**
+	 * 处理socket连接s
+	 */</span>
+	<span style="color: #000000; font-weight: bold;">class</span> SocketThread <span style="color: #000000; font-weight: bold;">implements</span> <span style="color: #003399;">Runnable</span> <span style="color: #009900;">&#123;</span>
+		<span style="color: #000000; font-weight: bold;">private</span> <span style="color: #003399;">Socket</span> socket<span style="color: #339933;">;</span>
+&nbsp;
+		<span style="color: #000000; font-weight: bold;">public</span> SocketThread<span style="color: #009900;">&#40;</span><span style="color: #003399;">Socket</span> socket<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+			<span style="color: #000000; font-weight: bold;">this</span>.<span style="color: #006633;">socket</span> <span style="color: #339933;">=</span> socket<span style="color: #339933;">;</span>
+		<span style="color: #009900;">&#125;</span>
+&nbsp;
+		<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> run<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+			<span style="color: #000000; font-weight: bold;">try</span> <span style="color: #009900;">&#123;</span>
+				<span style="color: #003399;">BufferedReader</span> reader <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">BufferedReader</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">InputStreamReader</span><span style="color: #009900;">&#40;</span>socket.<span style="color: #006633;">getInputStream</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+				<span style="color: #003399;">Writer</span> writer <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">OutputStreamWriter</span><span style="color: #009900;">&#40;</span>socket.<span style="color: #006633;">getOutputStream</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+				<span style="color: #003399;">String</span> content<span style="color: #339933;">;</span>
+				<span style="color: #000000; font-weight: bold;">while</span> <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span>content <span style="color: #339933;">=</span> reader.<span style="color: #006633;">readLine</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">!=</span> <span style="color: #000066; font-weight: bold;">null</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+					<span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;receive:&quot;</span> <span style="color: #339933;">+</span> content<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+					writer.<span style="color: #006633;">write</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;this is server <span style="color: #000099; font-weight: bold;">\r</span><span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+					writer.<span style="color: #006633;">flush</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+				<span style="color: #009900;">&#125;</span>
+			<span style="color: #009900;">&#125;</span> <span style="color: #000000; font-weight: bold;">catch</span> <span style="color: #009900;">&#40;</span><span style="color: #003399;">IOException</span> e<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+				e.<span style="color: #006633;">printStackTrace</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+			<span style="color: #009900;">&#125;</span> <span style="color: #000000; font-weight: bold;">finally</span> <span style="color: #009900;">&#123;</span>
+				<span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>socket <span style="color: #339933;">!=</span> <span style="color: #000066; font-weight: bold;">null</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+					<span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #339933;">!</span>socket.<span style="color: #006633;">isClosed</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+						<span style="color: #000000; font-weight: bold;">try</span> <span style="color: #009900;">&#123;</span>
+							socket.<span style="color: #006633;">close</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+						<span style="color: #009900;">&#125;</span> <span style="color: #000000; font-weight: bold;">catch</span> <span style="color: #009900;">&#40;</span><span style="color: #003399;">IOException</span> e<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+							e.<span style="color: #006633;">printStackTrace</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+						<span style="color: #009900;">&#125;</span>
+					<span style="color: #009900;">&#125;</span>
+				<span style="color: #009900;">&#125;</span>
+&nbsp;
+			<span style="color: #009900;">&#125;</span>
+		<span style="color: #009900;">&#125;</span>
+&nbsp;
+	<span style="color: #009900;">&#125;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000066; font-weight: bold;">void</span> main<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> args<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		Server s <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> Server<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		<span style="color: #000000; font-weight: bold;">try</span> <span style="color: #009900;">&#123;</span>
+			s.<span style="color: #006633;">start</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		<span style="color: #009900;">&#125;</span> <span style="color: #000000; font-weight: bold;">catch</span> <span style="color: #009900;">&#40;</span><span style="color: #003399;">Exception</span> e<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+			e.<span style="color: #006633;">printStackTrace</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		<span style="color: #009900;">&#125;</span>
+	<span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/8506.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Java源码混淆</title>
+		<link>http://www.xieziming.com/archives/8811.html</link>
+		<comments>http://www.xieziming.com/archives/8811.html#respond</comments>
+		<pubDate>Sat, 17 Nov 2012 08:43:19 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[程序]]></category>
+		<category><![CDATA[java]]></category>
+
+		<guid isPermaLink="false">http://ideashot.com/?p=8811</guid>
+		<description><![CDATA[Java程序的编译过程与C／C++程序的编译过程截然不同。C／C++程序经编译后生成的是二进制的机器码，这种代码只有在特定平台上才能运行，通过查找表编译器可以将所有变量和方法符号的引用转换成特定的内存偏移量。而Java编译器却既不能把变量和方法等符号的引用转换为数值引用，也不能确定程序执行过程中的内存布局，而是将这些符号的引用信息保留在class文件中，由解释器在运行过程中创建内存布局，然后再通过查找表来确定一个变量或方法所在的地址。
+
+因此Java字节码文件中保留了所有方法和变量的信息符号，而这些符号根据编码规则通常带有语义信息，这就为反编译Java类文件提供了可能。也正是由于Java本身的这种特性，使得Java类文件很容易被反编译成与原文件非常相似的文件。
+
+代码混淆技术是一种重要的软件保护方法，混淆的实质就是一种变换，通过这种变换把原来的代码变成与其功能相同或相近的，但是更难被理解和反编译的代码。由于混淆技术可以根据不同的目的，不同的混淆对象采用不同的方法，这使得混淆方法非常多。
+
+<strong>代码混淆的分类</strong>
+
+根据混淆变换原理，本文将代码混淆技术分为词法变换、控制混淆、数据混淆和类结构混淆，以下将分别对这四种混淆技术加以阐述。
+
+<strong>词法变换</strong>
+词法变换的原理是对函数和变量的名称进行变换，使其违背Java命名规范中见名知义的原则。其原理依照Java虚拟机规范中有关类文件结构的规定，对常量池中存储的类、字段、方法和变量等名称的“CONSTANT Utf8 info"类型的数据项加以混淆，在保持程序语义不变的前提下将名字更改为毫无意义、无规律的字符串。这种方法具有单向性，并且没有引入额外的执行代价。目前Java字节码混淆器和混淆编译器大多支持这一功能。
+
+为了提高混淆算法的隐蔽性，Roo和Oord提出了使用标识符交换来进行词法变换，其思想是用标识符作交换而非更改成毫无意义的名字。标识符交换包括交换变量名、函数名和类型三种。使用标识符交换来进行词法变换在提高隐蔽性的同时，由于标识符的保留也为反编译者提供了方便，不具有单向性。]]></description>
+				<content:encoded><![CDATA[<p>Java程序的编译过程与C／C++程序的编译过程截然不同。C／C++程序经编译后生成的是二进制的机器码，这种代码只有在特定平台上才能运行，通过查找表编译器可以将所有变量和方法符号的引用转换成特定的内存偏移量。而Java编译器却既不能把变量和方法等符号的引用转换为数值引用，也不能确定程序执行过程中的内存布局，而是将这些符号的引用信息保留在class文件中，由解释器在运行过程中创建内存布局，然后再通过查找表来确定一个变量或方法所在的地址。</p>
+<p>因此Java字节码文件中保留了所有方法和变量的信息符号，而这些符号根据编码规则通常带有语义信息，这就为反编译Java类文件提供了可能。也正是由于Java本身的这种特性，使得Java类文件很容易被反编译成与原文件非常相似的文件。</p>
+<p>代码混淆技术是一种重要的软件保护方法，混淆的实质就是一种变换，通过这种变换把原来的代码变成与其功能相同或相近的，但是更难被理解和反编译的代码。由于混淆技术可以根据不同的目的，不同的混淆对象采用不同的方法，这使得混淆方法非常多。</p>
+<p><strong>代码混淆的分类</strong></p>
+<p>根据混淆变换原理，本文将代码混淆技术分为词法变换、控制混淆、数据混淆和类结构混淆，以下将分别对这四种混淆技术加以阐述。</p>
+<p><strong>词法变换</strong><br />
+词法变换的原理是对函数和变量的名称进行变换，使其违背Java命名规范中见名知义的原则。其原理依照Java虚拟机规范中有关类文件结构的规定，对常量池中存储的类、字段、方法和变量等名称的“CONSTANT Utf8 info&#8221;类型的数据项加以混淆，在保持程序语义不变的前提下将名字更改为毫无意义、无规律的字符串。这种方法具有单向性，并且没有引入额外的执行代价。目前Java字节码混淆器和混淆编译器大多支持这一功能。</p>
+<p>为了提高混淆算法的隐蔽性，Roo和Oord提出了使用标识符交换来进行词法变换，其思想是用标识符作交换而非更改成毫无意义的名字。标识符交换包括交换变量名、函数名和类型三种。使用标识符交换来进行词法变换在提高隐蔽性的同时，由于标识符的保留也为反编译者提供了方便，不具有单向性。</p>
+<p><strong>控制混淆</strong></p>
+<p>控制混淆是一种被广泛使用的代码混淆技术，其基本原理是通过改变程序的判断条件，或向程序中添加不透明谓词等方法来增加程序的复杂度，并且可以通过对程序结构和执行路径的调整，来增加反编译工具反编译程序的难度。目前较为流行的控制混淆变换主要有以下几种：分支插入变换、循环条件插入变换、将可化简的控制流转换成不可化简的控制流、使用对象和别名的不透明谓词和使用并行技术构建不透明谓词等。</p>
+<p>不透明谓词：一个谓词P在P点若其值在混淆时，混淆者可知而反编译者 很难获知，则称它为不透明谓词。</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/8811.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>制作Java Applet签名</title>
+		<link>http://www.xieziming.com/archives/8807.html</link>
+		<comments>http://www.xieziming.com/archives/8807.html#respond</comments>
+		<pubDate>Sat, 17 Nov 2012 08:37:20 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[程序]]></category>
+		<category><![CDATA[java]]></category>
+
+		<guid isPermaLink="false">http://ideashot.com/?p=8807</guid>
+		<description><![CDATA[(1)将java小程序打包 
+<code lang="java">
+jar cvf test.jar test.class
+</code>
+(2)生成名为chinani.store的密钥库,别名为chinani 
+<code lang="java">
+keytool -genkey -keystore chinani.store -alias chinani
+</code>
+密码：123456 (该密码及以后出现的密码都需要自己输入) 以下根据需要输入，最后确认：y
+(3)导出chinani.cer数字证书 
+<code lang="java">
+keytool -export -keystore chinani.store -alias chinani -file chinani.cer
+</code>
+
+(4)对test.jar文件进行签名 
+<code lang="java">
+jarsigner -keystore chinani.store  test.jar chinani
+</code>
+
+最后写一个html文件，运行此文件即可自动下载安装运行java小程序HTML文件内容如下：
+<code lang="html">
+<applet code=Test archive="Test.jar" width=320 height=300></applet>
+</code>]]></description>
+				<content:encoded><![CDATA[<p>怎样对java小程序签名受到很多人的关注，网上也有这些方面可供参考的文档，但都不是完整，在这里我给出一份可具体操作的文档，希望能给大家一些帮助。 </p>
+<p>场景：test.jar：内含待签名的java小程序 结果：签名后，客户端能自动下载java小程序，且java小程序能访问客户端的任何资源</p>
+<p>步骤：</p>
+<p>(1)将java小程序打包</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;">jar cvf test.<span style="color: #006633;">jar</span> test.<span style="color: #000000; font-weight: bold;">class</span></pre></div></div>
+
+<p>(2)生成名为chinani.store的密钥库,别名为chinani</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;">keytool <span style="color: #339933;">-</span>genkey <span style="color: #339933;">-</span>keystore chinani.<span style="color: #006633;">store</span> <span style="color: #339933;">-</span>alias chinani</pre></div></div>
+
+<p>密码：123456 (该密码及以后出现的密码都需要自己输入) 以下根据需要输入，最后确认：y<br />
+(3)导出chinani.cer数字证书</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;">keytool <span style="color: #339933;">-</span>export <span style="color: #339933;">-</span>keystore chinani.<span style="color: #006633;">store</span> <span style="color: #339933;">-</span>alias chinani <span style="color: #339933;">-</span>file chinani.<span style="color: #006633;">cer</span></pre></div></div>
+
+<p>(4)对test.jar文件进行签名</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;">jarsigner <span style="color: #339933;">-</span>keystore chinani.<span style="color: #006633;">store</span>  test.<span style="color: #006633;">jar</span> chinani</pre></div></div>
+
+<p>最后写一个html文件，运行此文件即可自动下载安装运行java小程序HTML文件内容如下：</p>
+
+<div class="wp_code"><div class="pre"><pre class="html" style="font-family:'Times New Roman',Garamond, Times;">&lt;applet code=Test archive=&quot;Test.jar&quot; width=320 height=300&gt;&lt;/applet&gt;</pre></div></div>
+
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/8807.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Java源码加/解密</title>
+		<link>http://www.xieziming.com/archives/8804.html</link>
+		<comments>http://www.xieziming.com/archives/8804.html#respond</comments>
+		<pubDate>Sat, 17 Nov 2012 08:24:18 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[程序]]></category>
+		<category><![CDATA[java]]></category>
+
+		<guid isPermaLink="false">http://ideashot.com/?p=8804</guid>
+		<description><![CDATA[对于传统的C或C++之类的语言来说，要在Web上保护源代码是很容易的，只要不发布它就可以。遗憾的是，Java程序的源代码很容易被别人偷看。只要有一个反编译器，任何人都可以分析别人的代码。Java的灵活性使得源代码很容易被窃取，但与此同时，它也使通过加密保护代码变得相对容易，我们唯一需要了解的就是Java的ClassLoader对象。当然，在加密过程中，有关Java Cryptography Extension（JCE）的知识也是必不可少的。
+
+有几种技术可以“模糊”Java类文件，使得反编译器处理类文件的效果大打折扣。然而，修改反编译器使之能够处理这些经过模糊处理的类文件并不是什么难事，所以不能简单地依赖模糊技术来保证源代码的安全。
+
+我们可以用流行的加密工具加密应用，比如PGP（Pretty Good Privacy）或GPG（GNU Privacy Guard）。这时，最终用户在运行应用之前必须先进行解密。但解密之后，最终用户就有了一份不加密的类文件，这和事先不进行加密没有什么差别。
+
+Java运行时装入字节码的机制隐含地意味着可以对字节码进行修改。JVM每次装入类文件时都需要一个称为ClassLoader的对象，这个对象负责把新的类装入正在运行的JVM。JVM给ClassLoader一个包含了待装入类（比如java.lang.Object）名字的字符串，然后由ClassLoader负责找到类文件，装入原始数据，并把它转换成一个Class对象。
+
+我们可以通过定制ClassLoader，在类文件执行之前修改它。这种技术的应用非常广泛――在这里，它的用途是在类文件装入之时进行解密，因此可以看成是一种即时解密器。由于解密后的字节码文件永远不会保存到文件系统，所以窃密者很难得到解密后的代码。
+
+由于把原始字节码转换成Class对象的过程完全由系统负责，所以创建定制ClassLoader对象其实并不困难，只需先获得原始数据，接着就可以进行包含解密在内的任何转换。]]></description>
+				<content:encoded><![CDATA[<p><strong>为什么要加密？</strong></p>
+<p>对于传统的C或C++之类的语言来说，要在Web上保护源代码是很容易的，只要不发布它就可以。遗憾的是，Java程序的源代码很容易被别人偷看。只要有一个反编译器，任何人都可以分析别人的代码。Java的灵活性使得源代码很容易被窃取，但与此同时，它也使通过加密保护代码变得相对容易，我们唯一需要了解的就是Java的ClassLoader对象。当然，在加密过程中，有关Java Cryptography Extension（JCE）的知识也是必不可少的。</p>
+<p>有几种技术可以“模糊”Java类文件，使得反编译器处理类文件的效果大打折扣。然而，修改反编译器使之能够处理这些经过模糊处理的类文件并不是什么难事，所以不能简单地依赖模糊技术来保证源代码的安全。</p>
+<p>我们可以用流行的加密工具加密应用，比如PGP（Pretty Good Privacy）或GPG（GNU Privacy Guard）。这时，最终用户在运行应用之前必须先进行解密。但解密之后，最终用户就有了一份不加密的类文件，这和事先不进行加密没有什么差别。</p>
+<p>Java运行时装入字节码的机制隐含地意味着可以对字节码进行修改。JVM每次装入类文件时都需要一个称为ClassLoader的对象，这个对象负责把新的类装入正在运行的JVM。JVM给ClassLoader一个包含了待装入类（比如java.lang.Object）名字的字符串，然后由ClassLoader负责找到类文件，装入原始数据，并把它转换成一个Class对象。</p>
+<p>我们可以通过定制ClassLoader，在类文件执行之前修改它。这种技术的应用非常广泛――在这里，它的用途是在类文件装入之时进行解密，因此可以看成是一种即时解密器。由于解密后的字节码文件永远不会保存到文件系统，所以窃密者很难得到解密后的代码。</p>
+<p>由于把原始字节码转换成Class对象的过程完全由系统负责，所以创建定制ClassLoader对象其实并不困难，只需先获得原始数据，接着就可以进行包含解密在内的任何转换。</p>
+<p>Java 2在一定程度上简化了定制ClassLoader的构建。在Java 2中，loadClass的缺省实现仍旧负责处理所有必需的步骤，但为了顾及各种定制的类装入过程，它还调用一个新的findClass方法。</p>
+<p>这为我们编写定制的ClassLoader提供了一条捷径，减少了麻烦：只需覆盖findClass，而不是覆盖loadClass。这种方法避免了重复所有装入器必需执行的公共步骤，因为这一切由loadClass负责。</p>
+<p>不过，本文的定制ClassLoader并不使用这种方法。原因很简单。如果由默认的ClassLoader先寻找经过加密的类文件，它可以找到；但由于类文件已经加密，所以它不会认可这个类文件，装入过程将失败。因此，我们必须自己实现loadClass，稍微增加了一些工作量。</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/8804.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>控制Windows窗体(C#)</title>
+		<link>http://www.xieziming.com/archives/7636.html</link>
+		<comments>http://www.xieziming.com/archives/7636.html#respond</comments>
+		<pubDate>Wed, 07 Nov 2012 17:57:05 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[程序]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=7636</guid>
+		<description><![CDATA[Reflection意思为反射，在.NET中，它是获取运行时类型信息的方式。一般来说，.NET的应用程序由三个部分组成，分别是程序集(Assembly)、模块(Module)、类型(class)，而反射提供一种编程的方式，让程序员可以在程序运行期获得这三个组成部分的相关信息。
+<strong>一、有关知识</strong>
+1. System.Assembly类
+Assembly允许用户访问给定程序集的元数据，它也包含可以加载和执行程序集（程序集可执行的情况下）的方法。这个功能相当强大，可以轻易地取得组件内部所有信息，并且将其应用于映射的机制。常用的有LoadFrom()方法、GetType()方法等。Assembly类可以获得正在运行的装配件信息，也可以动态地加载装配件，以及在装配件中查找类型信息，并创建该类型的实例。
+
+2. System.Type类
+Type实际上是一个抽象的基类，它有与每种数据类型对应的派生类，但一般情况下派生类只提供各种Type方法和属性的不同重载，返回对应数据类型的正确数据。它的大多数方法都是用于获取对应数据类型的成员信息，比如：构造函数、属性、方法和事件等，并且能够进行调用。常用的有GetMethod()方法、GetField()方法、GetProperty()方法等。
+
+3. 动态调用方法
+方法动态调用是指在执行期利用映射取得的类型方法成员进行动态调用，通过调用实例的Invoke()方法来实现。Invoke方法用以进行方法的动态调用，其一般的定义形式如下：
+Invoke(object obj, object[] parameters)
+第一个为object类型参数，这个参数对象本身所参考的对象，为所要调用的方法其本身所属的来源对象，而第二个数组对象parameters则是调用指定方法所需的参数集合，若是调用的方法不需传入参数，这个对象数组会参考至一个null值。
+<strong>二、映射实例</strong>
+下面通过一个实例，运用映射方法实现对Windows窗体的操纵。
+]]></description>
+				<content:encoded><![CDATA[<p>Reflection意思为反射，在.NET中，它是获取运行时类型信息的方式。一般来说，.NET的应用程序由三个部分组成，分别是程序集(Assembly)、模块(Module)、类型(class)，而反射提供一种编程的方式，让程序员可以在程序运行期获得这三个组成部分的相关信息。<br />
+<strong>一、有关知识</strong><br />
+1. System.Assembly类<br />
+Assembly允许用户访问给定程序集的元数据，它也包含可以加载和执行程序集（程序集可执行的情况下）的方法。这个功能相当强大，可以轻易地取得组件内部所有信息，并且将其应用于映射的机制。常用的有LoadFrom()方法、GetType()方法等。Assembly类可以获得正在运行的装配件信息，也可以动态地加载装配件，以及在装配件中查找类型信息，并创建该类型的实例。</p>
+<p>2. System.Type类<br />
+Type实际上是一个抽象的基类，它有与每种数据类型对应的派生类，但一般情况下派生类只提供各种Type方法和属性的不同重载，返回对应数据类型的正确数据。它的大多数方法都是用于获取对应数据类型的成员信息，比如：构造函数、属性、方法和事件等，并且能够进行调用。常用的有GetMethod()方法、GetField()方法、GetProperty()方法等。</p>
+<p>3. 动态调用方法<br />
+方法动态调用是指在执行期利用映射取得的类型方法成员进行动态调用，通过调用实例的Invoke()方法来实现。Invoke方法用以进行方法的动态调用，其一般的定义形式如下：<br />
+Invoke(object obj, object[] parameters)<br />
+第一个为object类型参数，这个参数对象本身所参考的对象，为所要调用的方法其本身所属的来源对象，而第二个数组对象parameters则是调用指定方法所需的参数集合，若是调用的方法不需传入参数，这个对象数组会参考至一个null值。<br />
+<strong>二、映射实例</strong><br />
+下面通过一个实例，运用映射方法实现对Windows窗体的操纵。</p>
+<p>1. 开发环境<br />
+操作系统：Windows XP Professional，版本5.1.2600  Service Pack 2<br />
+开发工具：Microsoft Visual Studio 2005，版本8.0.50727.42<br />
+Microsoft .NET Framework，版本2.0.50727</p>
+<p>2. 创建被操纵的Windows窗体<br />
+首先创建一个Windows窗体应用程序，名称为DataSquare，Form1窗体包含五个控件：两个textBox、两个Label和一个Button，它实现的功能是计算用户输入数的平方，并将结果显示出来。Form1是一个简单的Windows窗体程序，仅实现了计算平方值的功能，代码有待完善，在这里只是以它作为被操纵的对象来介绍如何使用.NET提供的映射方法。</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/7636.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Java集合类</title>
+		<link>http://www.xieziming.com/archives/7545.html</link>
+		<comments>http://www.xieziming.com/archives/7545.html#respond</comments>
+		<pubDate>Sun, 21 Oct 2012 03:46:43 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[程序]]></category>
+		<category><![CDATA[java]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=7545</guid>
+		<description><![CDATA[Collection是最基本的集合接口，一个Collection代表一组Object，即Collection的元素（Elements）。一些 Collection允许相同的元素而另一些不行。一些能排序而另一些不行。Java SDK不提供直接继承自Collection的类，Java SDK提供的类都是继承自Collection的“子接口”如List和Set。 
+　　　　
+如何遍历Collection中的每一个元素？不论Collection的实际类型如何，它都支持一个iterator()的方法，该方法返回一个迭代子，使用该迭代子即可逐一访问Collection中每一个元素。典型的用法如下： 
+<code lang="java">
+Iterator it = collection.iterator(); // 获得一个迭代子 
+while(it.hasNext()) { 
+　　Object obj = it.next(); // 得到下一个元素 
+} 
+</code>
+由Collection接口派生的两个接口是List和Set。 
+
+<strong>List接口</strong> 
+List是有序的Collection，使用此接口能够精确的控制每个元素插入的位置。用户能够使用索引（元素在List中的位置，类似于数组下标）来访问List中的元素，这类似于Java的数组。 和下面要提到的Set不同，List允许有相同的元素。 
+
+除了具有Collection接口必备的iterator()方法外，List还提供一个listIterator()方法，返回一个 ListIterator接口，和标准的Iterator接口相比，ListIterator多了一些add()之类的方法，允许添加，删除，设定元素，还能向前或向后遍历。 ]]></description>
+				<content:encoded><![CDATA[<p>Java集合类主要负责保存、盛装其他数据，因此集合类也称容器类。java集合类分为：set、list、map、queue四大体系。其中set代表无序、不可重复的集合；list代表有序、可重复的集合。map代表具有映射关系的集合；queue代表队列集合。</p>
+<p>Java集合类主要由两个接口派生：Collection和Map，是集合框架的根接口。</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #003399;">Collection</span> 
+├<span style="color: #003399;">List</span> 
+│├<span style="color: #003399;">LinkedList</span> 
+│├<span style="color: #003399;">ArrayList</span> 
+│└<span style="color: #003399;">Vector</span> 
+│　└<span style="color: #003399;">Stack</span> 
+│
+├Queue
+│├Dueue
+│　└ArrayDueue
+│　└<span style="color: #003399;">LinkedList</span>
+│
+└<span style="color: #003399;">Set</span> 
+&nbsp;
+<span style="color: #003399;">Map</span> 
+├<span style="color: #003399;">Hashtable</span> 
+├<span style="color: #003399;">HashMap</span> 
+├<span style="color: #003399;">WeakHashMap</span>
+└<span style="color: #003399;">TreeMap</span></pre></div></div>
+
+<p><strong>Collection接口</strong><br />
+Collection是最基本的集合接口，一个Collection代表一组Object，即Collection的元素（Elements）。一些 Collection允许相同的元素而另一些不行。一些能排序而另一些不行。Java SDK不提供直接继承自Collection的类，Java SDK提供的类都是继承自Collection的“子接口”如List和Set。<br />
+　　　　<br />
+如何遍历Collection中的每一个元素？不论Collection的实际类型如何，它都支持一个iterator()的方法，该方法返回一个迭代子，使用该迭代子即可逐一访问Collection中每一个元素。典型的用法如下：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #003399;">Iterator</span> it <span style="color: #339933;">=</span> collection.<span style="color: #006633;">iterator</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">// 获得一个迭代子 </span>
+<span style="color: #000000; font-weight: bold;">while</span><span style="color: #009900;">&#40;</span>it.<span style="color: #006633;">hasNext</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span> 
+　　<span style="color: #003399;">Object</span> obj <span style="color: #339933;">=</span> it.<span style="color: #006633;">next</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">// 得到下一个元素 </span>
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>由Collection接口派生的两个接口是List和Set。 </p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/7545.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Restful之参数获取</title>
+		<link>http://www.xieziming.com/archives/8783.html</link>
+		<comments>http://www.xieziming.com/archives/8783.html#respond</comments>
+		<pubDate>Sat, 20 Oct 2012 10:11:47 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[程序]]></category>
+		<category><![CDATA[Restful]]></category>
+
+		<guid isPermaLink="false">http://ideashot.com/?p=8783</guid>
+		<description><![CDATA[先来看@QueryParam :
+<code lang="java">
+Path("/users")
+public class UserService { 
+	@GET
+	@Path("/query")
+	public Response getUsers(
+		@QueryParam("from") int from,
+		@QueryParam("to") int to,
+		@QueryParam("orderBy") List<String> orderBy) {
+ 
+		return Response
+		   .status(200)
+		   .entity("getUsers is called, from : " + from + ", to : " + to
+			+ ", orderBy" + orderBy.toString()).build();
+ 
+	} 
+}
+</code>]]></description>
+				<content:encoded><![CDATA[<p>先来看@QueryParam :</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;">Path<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;/users&quot;</span><span style="color: #009900;">&#41;</span>
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> UserService <span style="color: #009900;">&#123;</span> 
+	@GET
+	@Path<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;/query&quot;</span><span style="color: #009900;">&#41;</span>
+	<span style="color: #000000; font-weight: bold;">public</span> Response getUsers<span style="color: #009900;">&#40;</span>
+		@QueryParam<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;from&quot;</span><span style="color: #009900;">&#41;</span> <span style="color: #000066; font-weight: bold;">int</span> from,
+		@QueryParam<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;to&quot;</span><span style="color: #009900;">&#41;</span> <span style="color: #000066; font-weight: bold;">int</span> to,
+		@QueryParam<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;orderBy&quot;</span><span style="color: #009900;">&#41;</span> List<span style="color: #339933;">&lt;</span>String<span style="color: #339933;">&gt;</span> orderBy<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+&nbsp;
+		<span style="color: #000000; font-weight: bold;">return</span> Response
+		   .<span style="color: #006633;">status</span><span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">200</span><span style="color: #009900;">&#41;</span>
+		   .<span style="color: #006633;">entity</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;getUsers is called, from : &quot;</span> <span style="color: #339933;">+</span> from <span style="color: #339933;">+</span> <span style="color: #0000ff;">&quot;, to : &quot;</span> <span style="color: #339933;">+</span> to
+			<span style="color: #339933;">+</span> <span style="color: #0000ff;">&quot;, orderBy&quot;</span> <span style="color: #339933;">+</span> orderBy.<span style="color: #006633;">toString</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>.<span style="color: #006633;">build</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+	<span style="color: #009900;">&#125;</span> 
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>URL输入为:</p>
+
+<div class="wp_code"><div class="pre"><pre class="html" style="font-family:'Times New Roman',Garamond, Times;">users/query?from=100&amp;to=200&amp;orderBy=age&amp;orderBy=name</pre></div></div>
+
+<p>此时,输出为:</p>
+
+<div class="wp_code"><div class="pre"><pre class="html" style="font-family:'Times New Roman',Garamond, Times;">getUsers is called, from : 100, to : 200, orderBy[age, name]</pre></div></div>
+
+<p>@QueryParam指定的是URL中的参数是以键值对的形式出现的,而在程序中</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;">@QueryParam<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;from&quot;</span><span style="color: #009900;">&#41;</span> <span style="color: #000066; font-weight: bold;">int</span> from</pre></div></div>
+
+<p>则读出URL中from的值, 而@PathParam中,URL中只出现参数的值,不出现键值对,比如:</p>
+
+<div class="wp_code"><div class="pre"><pre class="html" style="font-family:'Times New Roman',Garamond, Times;">/users/2011/06/30</pre></div></div>
+
+<p>@PathParam参数：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;">	@GET
+	@Path<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;{year}/{month}/{day}&quot;</span><span style="color: #009900;">&#41;</span>
+	<span style="color: #000000; font-weight: bold;">public</span> Response getUserHistory<span style="color: #009900;">&#40;</span>
+			@PathParam<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;year&quot;</span><span style="color: #009900;">&#41;</span> <span style="color: #000066; font-weight: bold;">int</span> year,
+			@PathParam<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;month&quot;</span><span style="color: #009900;">&#41;</span> <span style="color: #000066; font-weight: bold;">int</span> month, 
+			@PathParam<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;day&quot;</span><span style="color: #009900;">&#41;</span> <span style="color: #000066; font-weight: bold;">int</span> day<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+&nbsp;
+	   <span style="color: #003399;">String</span> date <span style="color: #339933;">=</span> year <span style="color: #339933;">+</span> <span style="color: #0000ff;">&quot;/&quot;</span> <span style="color: #339933;">+</span> month <span style="color: #339933;">+</span> <span style="color: #0000ff;">&quot;/&quot;</span> <span style="color: #339933;">+</span> day<span style="color: #339933;">;</span>
+&nbsp;
+	   <span style="color: #000000; font-weight: bold;">return</span> Response.<span style="color: #006633;">status</span><span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">200</span><span style="color: #009900;">&#41;</span>
+		.<span style="color: #006633;">entity</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;getUserHistory is called, year/month/day : &quot;</span> <span style="color: #339933;">+</span> date<span style="color: #009900;">&#41;</span>
+		.<span style="color: #006633;">build</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+	<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>输出为:</p>
+
+<div class="wp_code"><div class="pre"><pre class="html" style="font-family:'Times New Roman',Garamond, Times;">getUserHistory is called, year/month/day : 2011/6/30</pre></div></div>
+
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/8783.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Java自动装箱</title>
+		<link>http://www.xieziming.com/archives/7527.html</link>
+		<comments>http://www.xieziming.com/archives/7527.html#respond</comments>
+		<pubDate>Sun, 14 Oct 2012 10:58:16 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[程序]]></category>
+		<category><![CDATA[java]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=7527</guid>
+		<description><![CDATA[在Java中，数据类型可以分为两大种，基本数据类型（值类型）和类类型（引用数据类型）。基本类型的数值不是对象，不能作为对象调用其toString()、hashCode()、getClass()、equals()等等方法。
+
+所谓装箱，就是把基本类型用它们相对应的引用类型包起来，使它们可以具有对象的特质，如我们可以把int型包装成Integer类的对象，或者把double包装成Double，等等。
+
+所谓拆箱，就是跟装箱的方向相反，将Integer及Double这样的引用类型的对象重新简化为值类型的数据。
+
+装箱和拆箱是valueOf和xxValue的别名。
+<code lang="java">
+int i=10;
+Integer j=new Integer(i); //手动装箱操作
+int i1=j.intValue();//手动拆箱操作，拆箱调用了wrapper类的xxxValueOf()方法，所以记住此时不允许wrapper类的对象为null。
+
+Integer j=i;//自动装箱操作 Integer j=Integer.valueOf(10);
+int k=j;//自动拆箱操作
+</code>]]></description>
+				<content:encoded><![CDATA[<p>在Java中，数据类型可以分为两大种，基本数据类型（值类型）和类类型（引用数据类型）。基本类型的数值不是对象，不能作为对象调用其toString()、hashCode()、getClass()、equals()等等方法。</p>
+<p>所谓装箱，就是把基本类型用它们相对应的引用类型包起来，使它们可以具有对象的特质，如我们可以把int型包装成Integer类的对象，或者把double包装成Double，等等。</p>
+<p>所谓拆箱，就是跟装箱的方向相反，将Integer及Double这样的引用类型的对象重新简化为值类型的数据。</p>
+<p>装箱和拆箱是valueOf和xxValue的别名。</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000066; font-weight: bold;">int</span> i<span style="color: #339933;">=</span><span style="color: #cc66cc;">10</span><span style="color: #339933;">;</span>
+<span style="color: #003399;">Integer</span> j<span style="color: #339933;">=</span><span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">Integer</span><span style="color: #009900;">&#40;</span>i<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">//手动装箱操作</span>
+<span style="color: #000066; font-weight: bold;">int</span> i1<span style="color: #339933;">=</span>j.<span style="color: #006633;">intValue</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><span style="color: #666666; font-style: italic;">//手动拆箱操作，拆箱调用了wrapper类的xxxValueOf()方法，所以记住此时不允许wrapper类的对象为null。</span>
+&nbsp;
+<span style="color: #003399;">Integer</span> j<span style="color: #339933;">=</span>i<span style="color: #339933;">;</span><span style="color: #666666; font-style: italic;">//自动装箱操作 Integer j=Integer.valueOf(10);</span>
+<span style="color: #000066; font-weight: bold;">int</span> k<span style="color: #339933;">=</span>j<span style="color: #339933;">;</span><span style="color: #666666; font-style: italic;">//自动拆箱操作</span></pre></div></div>
+
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> EqualsDemo <span style="color: #009900;">&#123;</span>
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000066; font-weight: bold;">void</span> main<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> args<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+        <span style="color: #000066; font-weight: bold;">int</span> i1<span style="color: #339933;">=</span><span style="color: #cc66cc;">1</span>,i2<span style="color: #339933;">=</span><span style="color: #cc66cc;">1</span><span style="color: #339933;">;</span>
+        <span style="color: #003399;">Integer</span> iv1<span style="color: #339933;">=</span><span style="color: #cc66cc;">1</span>,iv2<span style="color: #339933;">=</span><span style="color: #cc66cc;">1</span><span style="color: #339933;">;</span>  
+        <span style="color: #003399;">Integer</span> in1<span style="color: #339933;">=</span><span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">Integer</span><span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">1</span><span style="color: #009900;">&#41;</span>,in2<span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">Integer</span><span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">1</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+        print<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;(1) &quot;</span> <span style="color: #339933;">+</span> <span style="color: #009900;">&#40;</span>i1<span style="color: #339933;">==</span>i2<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">//(1)</span>
+        print<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;(2) &quot;</span> <span style="color: #339933;">+</span> <span style="color: #009900;">&#40;</span>iv1<span style="color: #339933;">==</span>iv2<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">//(2)</span>
+        print<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;(3) &quot;</span> <span style="color: #339933;">+</span> <span style="color: #009900;">&#40;</span>in1<span style="color: #339933;">==</span>in2<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">//(3)</span>
+&nbsp;
+        print<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;(4) &quot;</span> <span style="color: #339933;">+</span> <span style="color: #009900;">&#40;</span>i1<span style="color: #339933;">==</span>iv1<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">//(4)</span>
+        print<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;(5) &quot;</span> <span style="color: #339933;">+</span> <span style="color: #009900;">&#40;</span>i1<span style="color: #339933;">==</span>in1<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">//(5)</span>
+        print<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;(6) &quot;</span> <span style="color: #339933;">+</span> <span style="color: #009900;">&#40;</span>iv1<span style="color: #339933;">==</span>in1<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">//(6)</span>
+    <span style="color: #009900;">&#125;</span> 
+    <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000066; font-weight: bold;">void</span> print<span style="color: #009900;">&#40;</span><span style="color: #003399;">Object</span> obj<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+        <span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span>obj<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>输出结果：<br />
+(1) true<br />
+(2) true<br />
+(3) false<br />
+(4) true<br />
+(5) true<br />
+(6) false</p>
+<p>解释：<br />
+(1) 基本类型的比较，值和地址都是相等的<br />
+(2) 自动装箱，不是调用new来完成，否则地址肯定不相等。</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #003399;">Integer</span> i<span style="color: #339933;">=</span><span style="color: #cc66cc;">1</span><span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">//相当于 Integer i=Integer.valueOf(1);</span>
+<span style="color: #008000; font-style: italic; font-weight: bold;">/**
+(1)valueOf(int)：返回一个表示指定的int值的Integer实例。如果不需要新的Integer实例，则通常应优先使用该方法，而不是构造方法 
+(2)Integer(int)：因为该方法有可能通过缓存经常请求的值而显著提高空间和时间性能。
+&nbsp;
+Byte,Integer 和Long都是缓存了-128～+127之间的对象，autoboxing的时候，如果需要boxing的值在此范围之内，则直接返回缓存的对象，没有的时候再去new. Boolean类型中直接缓存了两个Boolean对象，true和false，这样使用valueOf()方法时只需要直接返回这两个对象中的一个，而不是每次调用的时候都用new,这也就是文档里所说的通过缓存经常请求的值二显著提高空间和时间性能。
+&nbsp;
+Character因为类型的特殊性，保存的是0-127之间的对象。
+*/</span>
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #003399;">Integer</span> valueOf<span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">int</span> i<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>  
+  <span style="color: #000000; font-weight: bold;">if</span><span style="color: #009900;">&#40;</span>i <span style="color: #339933;">&gt;=</span> <span style="color: #339933;">-</span><span style="color: #cc66cc;">128</span> <span style="color: #339933;">&amp;&amp;</span> i <span style="color: #339933;">&lt;</span> <span style="color: #339933;">=</span> IntegerCache.<span style="color: #006633;">high</span><span style="color: #009900;">&#41;</span>  
+    <span style="color: #000000; font-weight: bold;">return</span> IntegerCache.<span style="color: #006633;">cache</span><span style="color: #009900;">&#91;</span>i <span style="color: #339933;">+</span> <span style="color: #cc66cc;">128</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>  
+  <span style="color: #000000; font-weight: bold;">else</span>  
+    <span style="color: #000000; font-weight: bold;">return</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">Integer</span><span style="color: #009900;">&#40;</span>i<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>如果把所有的值都改成1000，输出的结果是：<br />
+(1) true<br />
+<strong>(2) false</strong><br />
+(3) false<br />
+(4) true<br />
+(5) true<br />
+(6) false</p>
+<p>发现(2)不再是true，这是因为Integer没有缓存1000这个值。</p>
+<p>(3) 调用new来创建实例，地址不相等。如果是equals的话就是true<br />
+(4) 发生拆箱，编译之后其实调用了intValue，获得的是基本类型。<br />
+(5) 发生拆箱，编译之后其实调用了intValue，获得的是基本类型。<br />
+(6) 没有发生拆箱，但要注意下，判断条件如果改为iv1>=in1 或 iv1< =in1，则会发生拆箱，此时为true
+</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/7527.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Java装饰模式</title>
+		<link>http://www.xieziming.com/archives/7515.html</link>
+		<comments>http://www.xieziming.com/archives/7515.html#respond</comments>
+		<pubDate>Sun, 14 Oct 2012 03:13:53 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[程序]]></category>
+		<category><![CDATA[java]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=7515</guid>
+		<description><![CDATA[Decorator(Wrapper)模式的功能是：给一个对象添加一些额外的职责（操作），虽然此功能可以用继承实现，但装饰模式比生成子类更灵活些。 装饰的意思：就是包装一下。把另的对象包装一下。我这里只简单示例下怎么使用。 
+ 
+业务接口 Component： 
+<code lang="java">    
+/**  
+ * 业务接口  
+ */    
+public interface Component {        
+    void operation();    
+}  
+</code>
+具体业务 ConcreteComponent： 
+<code lang="java">    
+/**  
+ * 具体业务类.  
+ */    
+public class ConcreteComponent implements Component {    
+    
+    public void operation() {    
+        System.out.println("I'm "+this.getClass().getName());    
+    } 
+}  
+</code>]]></description>
+				<content:encoded><![CDATA[<p>Decorator(Wrapper)模式的功能是：给一个对象添加一些额外的职责（操作），虽然此功能可以用继承实现，但装饰模式比生成子类更灵活些。 装饰的意思：就是包装一下。把另的对象包装一下。我这里只简单示例下怎么使用。 </p>
+<p>业务接口 Component：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #008000; font-style: italic; font-weight: bold;">/**  
+ * 业务接口  
+ */</span>    
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">interface</span> <span style="color: #003399;">Component</span> <span style="color: #009900;">&#123;</span>        
+    <span style="color: #000066; font-weight: bold;">void</span> operation<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>    
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>具体业务 ConcreteComponent：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #008000; font-style: italic; font-weight: bold;">/**  
+ * 具体业务类.  
+ */</span>    
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> ConcreteComponent <span style="color: #000000; font-weight: bold;">implements</span> <span style="color: #003399;">Component</span> <span style="color: #009900;">&#123;</span>    
+&nbsp;
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> operation<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>    
+        <span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;I'm &quot;</span><span style="color: #339933;">+</span><span style="color: #000000; font-weight: bold;">this</span>.<span style="color: #006633;">getClass</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>.<span style="color: #006633;">getName</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>    
+    <span style="color: #009900;">&#125;</span> 
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>装饰 Decorator：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #008000; font-style: italic; font-weight: bold;">/**  
+ * 装饰类.  
+ */</span>    
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> Decorator <span style="color: #000000; font-weight: bold;">implements</span> <span style="color: #003399;">Component</span> <span style="color: #009900;">&#123;</span>    
+&nbsp;
+    <span style="color: #000000; font-weight: bold;">private</span> <span style="color: #003399;">Component</span> component<span style="color: #339933;">;</span>    
+&nbsp;
+    <span style="color: #000000; font-weight: bold;">public</span> Decorator<span style="color: #009900;">&#40;</span><span style="color: #003399;">Component</span> component<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>    
+        <span style="color: #000000; font-weight: bold;">this</span>.<span style="color: #006633;">component</span> <span style="color: #339933;">=</span> component<span style="color: #339933;">;</span>    
+    <span style="color: #009900;">&#125;</span>    
+&nbsp;
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> operation<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>    
+        component.<span style="color: #006633;">operation</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>    
+    <span style="color: #009900;">&#125;</span>    
+&nbsp;
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/7515.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Java自定义注解</title>
+		<link>http://www.xieziming.com/archives/7513.html</link>
+		<comments>http://www.xieziming.com/archives/7513.html#respond</comments>
+		<pubDate>Sat, 13 Oct 2012 10:48:49 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[程序]]></category>
+		<category><![CDATA[java]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=7513</guid>
+		<description><![CDATA[下面是一个使用注解和解析注解(通过反射机制)的实例
+<code lang="java">
+package Test_annotation;
+import java.lang.reflect.Method;
+public class Test_1 {
+	/*
+	 * 被注解的三个方法
+	 */
+	@Test(id = 1, description = "hello method_1")
+	public void method_1() {
+	}
+
+	@Test(id = 2)
+	public void method_2() {
+	}
+
+	@Test(id = 3, description = "last method")
+	public void method_3() {
+	}
+
+	/*
+	 * 解析注解，将Test_1类 所有被注解方法 的信息打印出来
+	 */
+	public static void main(String[] args) {
+		Method[] methods = Test_1.class.getDeclaredMethods();
+		for (Method method : methods) {
+			/*
+			 * 判断方法中是否有指定注解类型的注解
+			 */
+			boolean hasAnnotation = method.isAnnotationPresent(Test.class);
+			if (hasAnnotation) {
+				/*
+				 * 根据注解类型返回方法的指定类型注解
+				 */
+				Test annotation = method.getAnnotation(Test.class);
+				System.out.println("Test( method = " + method.getName()
+						+ " , id = " + annotation.id() + " , description = "
+						+ annotation.description() + " )");
+			}
+		}
+	}
+
+}
+</code>]]></description>
+				<content:encoded><![CDATA[<p>注解（Annotation） 为我们在代码中添加信息提供了一种形式化的方法，是我们可以在稍后某个时刻方便地使用这些数据（通过 解析注解 来使用这些数据）。注解的语法比较简单，除了@符号的使用以外，它基本上与java的固有语法一致，java内置了三种注解，定义在java.lang包中。</p>
+<p><strong>@Override</strong>  表示当前方法是覆盖父类的方法。<br />
+<strong>@Deprecated</strong>  表示当前元素是不赞成使用的。<br />
+<strong>@SuppressWarnings</strong> 表示关闭一些不当的编译器警告信息。</p>
+<p>注解主要用于：</p>
+<p>(1)编写文档：通过代码里标识的元数据生成文档。<br />
+(2)代码分析：通过代码里标识的元数据对代码进行分析。<br />
+(3)编译检查：通过代码里标识的元数据让编译器能实现基本的编译检查</p>
+<p>要实现一个自定义注解，必须通过 @interface 关键字来定义。且在 @interface 之前，需要通过元注解来描述该注解的使用范围（ @Target ）、生命周期（ @Retention ）及其他。</p>
+<p>下面是一个定义注解的实例</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">package</span> <span style="color: #006699;">Test_annotation</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">java.lang.annotation.Documented</span><span style="color: #339933;">;</span>
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">java.lang.annotation.Inherited</span><span style="color: #339933;">;</span>
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">java.lang.annotation.Retention</span><span style="color: #339933;">;</span>
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">java.lang.annotation.Target</span><span style="color: #339933;">;</span>
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">java.lang.annotation.ElementType</span><span style="color: #339933;">;</span>
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">java.lang.annotation.RetentionPolicy</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">/*
+ * 元注解@Target,@Retention,@Documented,@Inherited
+ * 
+ *     @Target 表示该注解用于什么地方，可能的 ElemenetType 参数包括：
+ *         ElemenetType.CONSTRUCTOR 构造器声明
+ *         ElemenetType.FIELD 域声明（包括 enum 实例）
+ *         ElemenetType.LOCAL_VARIABLE 局部变量声明
+ *         ElemenetType.METHOD 方法声明
+ *         ElemenetType.PACKAGE 包声明
+ *         ElemenetType.PARAMETER 参数声明
+ *         ElemenetType.TYPE 类，接口（包括注解类型）或enum声明
+ *         
+ *     @Retention 表示在什么级别保存该注解信息。可选的 RetentionPolicy 参数包括：
+ *         RetentionPolicy.SOURCE 注解将被编译器丢弃
+ *         RetentionPolicy.CLASS 注解在class文件中可用，但会被VM丢弃
+ *         RetentionPolicy.RUNTIME VM将在运行期也保留注释，因此可以通过反射机制读取注解的信息。
+ *         
+ *     @Documented 将此注解包含在 javadoc 中
+ *     
+ *     @Inherited 允许子类继承父类中的注解
+ *   
+ */</span>
+@Target<span style="color: #009900;">&#40;</span>ElementType.<span style="color: #006633;">METHOD</span><span style="color: #009900;">&#41;</span>
+@Retention<span style="color: #009900;">&#40;</span>RetentionPolicy.<span style="color: #006633;">RUNTIME</span><span style="color: #009900;">&#41;</span>
+@Documented
+@Inherited
+<span style="color: #666666; font-style: italic;">/*
+ * 定义注解 Test
+ * 注解中含有两个元素 id 和 description
+ * description 元素 有默认值 &quot;no description&quot;
+ */</span>
+<span style="color: #000000; font-weight: bold;">public</span> @<span style="color: #000000; font-weight: bold;">interface</span> Test <span style="color: #009900;">&#123;</span>
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">int</span> id<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #003399;">String</span> description<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #000000; font-weight: bold;">default</span> <span style="color: #0000ff;">&quot;no description&quot;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>下面是一个使用注解和解析注解(通过反射机制)的实例</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">package</span> <span style="color: #006699;">Test_annotation</span><span style="color: #339933;">;</span>
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">java.lang.reflect.Method</span><span style="color: #339933;">;</span>
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> Test_1 <span style="color: #009900;">&#123;</span>
+	<span style="color: #666666; font-style: italic;">/*
+	 * 被注解的三个方法
+	 */</span>
+	@Test<span style="color: #009900;">&#40;</span>id <span style="color: #339933;">=</span> <span style="color: #cc66cc;">1</span>, description <span style="color: #339933;">=</span> <span style="color: #0000ff;">&quot;hello method_1&quot;</span><span style="color: #009900;">&#41;</span>
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> method_1<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+	<span style="color: #009900;">&#125;</span>
+&nbsp;
+	@Test<span style="color: #009900;">&#40;</span>id <span style="color: #339933;">=</span> <span style="color: #cc66cc;">2</span><span style="color: #009900;">&#41;</span>
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> method_2<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+	<span style="color: #009900;">&#125;</span>
+&nbsp;
+	@Test<span style="color: #009900;">&#40;</span>id <span style="color: #339933;">=</span> <span style="color: #cc66cc;">3</span>, description <span style="color: #339933;">=</span> <span style="color: #0000ff;">&quot;last method&quot;</span><span style="color: #009900;">&#41;</span>
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> method_3<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+	<span style="color: #009900;">&#125;</span>
+&nbsp;
+	<span style="color: #666666; font-style: italic;">/*
+	 * 解析注解，将Test_1类 所有被注解方法 的信息打印出来
+	 */</span>
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000066; font-weight: bold;">void</span> main<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> args<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		<span style="color: #003399;">Method</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> methods <span style="color: #339933;">=</span> Test_1.<span style="color: #000000; font-weight: bold;">class</span>.<span style="color: #006633;">getDeclaredMethods</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		<span style="color: #000000; font-weight: bold;">for</span> <span style="color: #009900;">&#40;</span><span style="color: #003399;">Method</span> method <span style="color: #339933;">:</span> methods<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+			<span style="color: #666666; font-style: italic;">/*
+			 * 判断方法中是否有指定注解类型的注解
+			 */</span>
+			<span style="color: #000066; font-weight: bold;">boolean</span> hasAnnotation <span style="color: #339933;">=</span> method.<span style="color: #006633;">isAnnotationPresent</span><span style="color: #009900;">&#40;</span>Test.<span style="color: #000000; font-weight: bold;">class</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+			<span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>hasAnnotation<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+				<span style="color: #666666; font-style: italic;">/*
+				 * 根据注解类型返回方法的指定类型注解
+				 */</span>
+				Test annotation <span style="color: #339933;">=</span> method.<span style="color: #006633;">getAnnotation</span><span style="color: #009900;">&#40;</span>Test.<span style="color: #000000; font-weight: bold;">class</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+				<span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;Test( method = &quot;</span> <span style="color: #339933;">+</span> method.<span style="color: #006633;">getName</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+						<span style="color: #339933;">+</span> <span style="color: #0000ff;">&quot; , id = &quot;</span> <span style="color: #339933;">+</span> annotation.<span style="color: #006633;">id</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">+</span> <span style="color: #0000ff;">&quot; , description = &quot;</span>
+						<span style="color: #339933;">+</span> annotation.<span style="color: #006633;">description</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">+</span> <span style="color: #0000ff;">&quot; )&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+			<span style="color: #009900;">&#125;</span>
+		<span style="color: #009900;">&#125;</span>
+	<span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>输出结果如下：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;">Test<span style="color: #009900;">&#40;</span> method <span style="color: #339933;">=</span> method_1 , id <span style="color: #339933;">=</span> <span style="color: #cc66cc;">1</span> , description <span style="color: #339933;">=</span> hello method_1 <span style="color: #009900;">&#41;</span>
+Test<span style="color: #009900;">&#40;</span> method <span style="color: #339933;">=</span> method_2 , id <span style="color: #339933;">=</span> <span style="color: #cc66cc;">2</span> , description <span style="color: #339933;">=</span> no description <span style="color: #009900;">&#41;</span>
+Test<span style="color: #009900;">&#40;</span> method <span style="color: #339933;">=</span> method_3 , id <span style="color: #339933;">=</span> <span style="color: #cc66cc;">3</span> , description <span style="color: #339933;">=</span> last method <span style="color: #009900;">&#41;</span></pre></div></div>
+
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/7513.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Java枚举类</title>
+		<link>http://www.xieziming.com/archives/7511.html</link>
+		<comments>http://www.xieziming.com/archives/7511.html#respond</comments>
+		<pubDate>Sat, 13 Oct 2012 10:00:33 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[程序]]></category>
+		<category><![CDATA[java]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=7511</guid>
+		<description><![CDATA[1、Color枚举类是特殊的class，其枚举值(RED,BLUE...)是Color的类对象(类实例)：
+<code lang="java"> 
+Color c=Color.RED; 
+</code>
+而且这些枚举值都是public static final的，也就是我们经常所定义的常量方式，因此枚举类中的枚举值最好全部大写。
+
+2、即然枚举类是class，当然在枚举类型中有构造器，方法和数据域。但是，枚举类的构造器有很大的不同：
+(1) 构造器只是在构造枚举值的时候被调用。
+<code lang="java">  
+enum Color{  
+  // 枚举列表必须写在最前面，否则编译出错
+   RED(255,0,0),BLUE(0,0,255),BLACK(0,0,0),YELLOW(255,255,0),GREEN(0,255,0);  
+  //赋值必须是都赋值或都不赋值，不能一部分赋值一部分不赋值，如果不赋值则不能写构造器，赋值编译也出错
+  //这里private也可以不用写，因为构造器默认是private, 从而保证构造函数只能在内部使用
+  private Color(int rv,int gv,int bv){  
+    this.redValue=rv;  
+    this.greenValue=gv;  
+    this.blueValue=bv;  
+  }  
+  
+  public String toString(){  //自定义的public方法  
+    return super.toString()+"("+redValue+","+greenValue+","+blueValue+")";  
+  }  
+     
+  private int redValue;  //自定义数据域，private为了封装。  
+    private int greenValue;  
+    private int blueValue;  
+ } 
+</code> ]]></description>
+				<content:encoded><![CDATA[<p>枚举类型是JDK5.0的新特征。下面就是一个典型枚举类型的定义：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">enum</span> <span style="color: #003399;">Color</span><span style="color: #009900;">&#123;</span>  
+    RED,BLUE,BLACK,YELLOW,GREEN  
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>显然，enum很像特殊的class，实际上enum声明定义的类型就是一个类。而这些类都是类库中Enum类的子类(java.lang.Enum<e>)。它们<strong>继承</strong>了这个Enum中的许多有用的方法。在Color.java中编写此段代码并编译，虽然语法上不像是在定义类，但枚举类型本质上就是一个类。所以编译完成后，会产生一个Color.class文件。</p>
+<p>下面我们就详细介绍enum定义的枚举类的特征及其用法。</p>
+<p>1、Color枚举类是特殊的class，其枚举值(RED,BLUE&#8230;)是Color的类对象(类实例)：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #003399;">Color</span> c<span style="color: #339933;">=</span><span style="color: #003399;">Color</span>.<span style="color: #006633;">RED</span><span style="color: #339933;">;</span></pre></div></div>
+
+<p>而且这些枚举值都是public static final的，也就是我们经常所定义的常量方式，因此枚举类中的枚举值最好全部大写。</p>
+<p>2、即然枚举类是class，当然在枚举类型中有构造器，方法和数据域。但是，枚举类的构造器有很大的不同：<br />
+(1) 构造器只是在构造枚举值的时候被调用。</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">enum</span> <span style="color: #003399;">Color</span><span style="color: #009900;">&#123;</span>  
+  <span style="color: #666666; font-style: italic;">// 枚举列表必须写在最前面，否则编译出错</span>
+   RED<span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">255</span>,<span style="color: #cc66cc;">0</span>,<span style="color: #cc66cc;">0</span><span style="color: #009900;">&#41;</span>,BLUE<span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">0</span>,<span style="color: #cc66cc;">0</span>,<span style="color: #cc66cc;">255</span><span style="color: #009900;">&#41;</span>,BLACK<span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">0</span>,<span style="color: #cc66cc;">0</span>,<span style="color: #cc66cc;">0</span><span style="color: #009900;">&#41;</span>,YELLOW<span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">255</span>,<span style="color: #cc66cc;">255</span>,<span style="color: #cc66cc;">0</span><span style="color: #009900;">&#41;</span>,GREEN<span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">0</span>,<span style="color: #cc66cc;">255</span>,<span style="color: #cc66cc;">0</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+  <span style="color: #666666; font-style: italic;">//赋值必须是都赋值或都不赋值，不能一部分赋值一部分不赋值，如果不赋值则不能写构造器，赋值编译也出错</span>
+  <span style="color: #666666; font-style: italic;">//这里private也可以不用写，因为构造器默认是private, 从而保证构造函数只能在内部使用</span>
+  <span style="color: #000000; font-weight: bold;">private</span> <span style="color: #003399;">Color</span><span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">int</span> rv,<span style="color: #000066; font-weight: bold;">int</span> gv,<span style="color: #000066; font-weight: bold;">int</span> bv<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>  
+    <span style="color: #000000; font-weight: bold;">this</span>.<span style="color: #006633;">redValue</span><span style="color: #339933;">=</span>rv<span style="color: #339933;">;</span>  
+    <span style="color: #000000; font-weight: bold;">this</span>.<span style="color: #006633;">greenValue</span><span style="color: #339933;">=</span>gv<span style="color: #339933;">;</span>  
+    <span style="color: #000000; font-weight: bold;">this</span>.<span style="color: #006633;">blueValue</span><span style="color: #339933;">=</span>bv<span style="color: #339933;">;</span>  
+  <span style="color: #009900;">&#125;</span>  
+&nbsp;
+  <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #003399;">String</span> toString<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>  <span style="color: #666666; font-style: italic;">//自定义的public方法  </span>
+    <span style="color: #000000; font-weight: bold;">return</span> <span style="color: #000000; font-weight: bold;">super</span>.<span style="color: #006633;">toString</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">+</span><span style="color: #0000ff;">&quot;(&quot;</span><span style="color: #339933;">+</span>redValue<span style="color: #339933;">+</span><span style="color: #0000ff;">&quot;,&quot;</span><span style="color: #339933;">+</span>greenValue<span style="color: #339933;">+</span><span style="color: #0000ff;">&quot;,&quot;</span><span style="color: #339933;">+</span>blueValue<span style="color: #339933;">+</span><span style="color: #0000ff;">&quot;)&quot;</span><span style="color: #339933;">;</span>  
+  <span style="color: #009900;">&#125;</span>  
+&nbsp;
+  <span style="color: #000000; font-weight: bold;">private</span> <span style="color: #000066; font-weight: bold;">int</span> redValue<span style="color: #339933;">;</span>  <span style="color: #666666; font-style: italic;">//自定义数据域，private为了封装。  </span>
+    <span style="color: #000000; font-weight: bold;">private</span> <span style="color: #000066; font-weight: bold;">int</span> greenValue<span style="color: #339933;">;</span>  
+    <span style="color: #000000; font-weight: bold;">private</span> <span style="color: #000066; font-weight: bold;">int</span> blueValue<span style="color: #339933;">;</span>  
+ <span style="color: #009900;">&#125;</span></pre></div></div>
+
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/7511.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Java类的生存周期</title>
+		<link>http://www.xieziming.com/archives/7508.html</link>
+		<comments>http://www.xieziming.com/archives/7508.html#respond</comments>
+		<pubDate>Thu, 11 Oct 2012 14:44:51 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[程序]]></category>
+		<category><![CDATA[java]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=7508</guid>
+		<description><![CDATA[首先来了解一下jvm（java虚拟机）中的几个比较重要的内存区域，这几个区域在java类的生命周期中扮演着比较重要的角色：
+
+<strong>方法区：</strong>在java的虚拟机中有一块专门用来存放已经加载的类信息、常量、静态变量以及方法代码的内存区域，叫做方法区。
+
+<strong>常量池：</strong>常量池是方法区的一部分，主要用来存放常量和类中的符号引用等信息。
+<strong>堆区：</strong>用于存放类的对象实例。
+<strong>栈区：</strong>也叫java虚拟机栈，是由一个一个的栈帧组成的后进先出的栈式结构，栈桢中存放方法运行时产生的局部变量、方法出口等信息。当调用一个方法时，虚拟机栈中就会创建一个栈帧存放这些数据，当方法调用完成时，栈帧消失，如果方法中调用了其他方法，则继续在栈顶创建新的栈桢。
+
+除了以上四个内存区域之外，jvm中的运行时内存区域还包括本地方法栈和程序计数器，这两个区域与java类的生命周期关系不是很大，在这里就不说了。
+
+类的成员变量有两种：一种是被static关键字修饰的变量，叫类变量或静态变量，一种是没有被static修饰的，叫做实例变量。
+
+静态变量和实例变量的区别在于：
+
+类静态变量在内存中只有一个，java虚拟机在加载类的过程中为静态变量分配内存，静态变量位于方法区，被类的所有实例共享，静态变量可以通过类名直接访问。静态变量的生命周期取决于类的生命周期，当类被加载的时候，静态变量被创建并分配内存空间，当类被卸载时，静态变量被摧毁，并释放所占有的内存。
+
+类的每一个实例都有相应的实例变量，每创建一个类的实例，java虚拟机为实例变量分配一次内存，实例变量位于堆区中，实例变量的生命周期取决于实例的生命周期，当创建实例时，实例变量同时被创建，并分配内存，当实例被销毁时，实例变量被销毁，并释放所占有的内存空间。
+
+变量的生命周期和对象的生命周期是不同的概念。成员变量结束生命周期时，并不意味着它所引用对象也结束生命周期。]]></description>
+				<content:encoded><![CDATA[<p>首先来了解一下jvm（java虚拟机）中的几个比较重要的内存区域，这几个区域在java类的生命周期中扮演着比较重要的角色：</p>
+<p><strong>方法区：</strong>在java的虚拟机中有一块专门用来存放已经加载的类信息、常量、静态变量以及方法代码的内存区域，叫做方法区。</p>
+<p><strong>常量池：</strong>常量池是方法区的一部分，主要用来存放常量和类中的符号引用等信息。<br />
+<strong>堆区：</strong>用于存放类的对象实例。<br />
+<strong>栈区：</strong>也叫java虚拟机栈，是由一个一个的栈帧组成的后进先出的栈式结构，栈桢中存放方法运行时产生的局部变量、方法出口等信息。当调用一个方法时，虚拟机栈中就会创建一个栈帧存放这些数据，当方法调用完成时，栈帧消失，如果方法中调用了其他方法，则继续在栈顶创建新的栈桢。</p>
+<p>除了以上四个内存区域之外，jvm中的运行时内存区域还包括本地方法栈和程序计数器，这两个区域与java类的生命周期关系不是很大，在这里就不说了。</p>
+<p>类的成员变量有两种：一种是被static关键字修饰的变量，叫类变量或静态变量，一种是没有被static修饰的，叫做实例变量。</p>
+<p>静态变量和实例变量的区别在于：</p>
+<p>类静态变量在内存中只有一个，java虚拟机在加载类的过程中为静态变量分配内存，静态变量位于方法区，被类的所有实例共享，静态变量可以通过类名直接访问。静态变量的生命周期取决于类的生命周期，当类被加载的时候，静态变量被创建并分配内存空间，当类被卸载时，静态变量被摧毁，并释放所占有的内存。</p>
+<p>类的每一个实例都有相应的实例变量，每创建一个类的实例，java虚拟机为实例变量分配一次内存，实例变量位于堆区中，实例变量的生命周期取决于实例的生命周期，当创建实例时，实例变量同时被创建，并分配内存，当实例被销毁时，实例变量被销毁，并释放所占有的内存空间。</p>
+<p>变量的生命周期和对象的生命周期是不同的概念。成员变量结束生命周期时，并不意味着它所引用对象也结束生命周期。</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/7508.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Java代理机制</title>
+		<link>http://www.xieziming.com/archives/7499.html</link>
+		<comments>http://www.xieziming.com/archives/7499.html#respond</comments>
+		<pubDate>Wed, 10 Oct 2012 17:42:25 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[程序]]></category>
+		<category><![CDATA[java]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=7499</guid>
+		<description><![CDATA[代理模式的作用是：为其他对象提供一种代理以控制对这个对象的访问。在某些情况下，一个客户不想或者不能直接引用另一个对象，而代理对象可以在客户端和目标对象之间起到中介的作用。 
+
+代理模式一般涉及到的角色有： 
+
+<strong>抽象角色：</strong>声明真实对象和代理对象的共同接口； 
+
+<strong>代理角色：</strong>代理对象角色内部含有对真实对象的引用，从而可以操作真实对象，同时代理对象提供与真实对象相同的接口以便在任何时刻都能代替真实对象。同时，代理对象可以在执行真实对象操作时，附加其他的操作，相当于对真实对象进行封装。 
+
+<strong>真实角色：</strong>代理角色所代表的真实对象，是我们最终要引用的对象。
+
+抽象角色： 
+<code lang="java">
+interface Subject { 
+  public void request(); 
+}  
+</code>
+真实角色：实现了Subject的request()方法。 
+<code lang="java">
+public class RealSubject implements Subject { 
+  public RealSubject() { } 
+  public void request() { 
+   System.out.println("From real subject."); 
+  } 
+} 
+</code>]]></description>
+				<content:encoded><![CDATA[<p>代理模式的作用是：为其他对象提供一种代理以控制对这个对象的访问。在某些情况下，一个客户不想或者不能直接引用另一个对象，而代理对象可以在客户端和目标对象之间起到中介的作用。 </p>
+<p>代理模式一般涉及到的角色有： </p>
+<p><strong>抽象角色：</strong>声明真实对象和代理对象的共同接口； </p>
+<p><strong>代理角色：</strong>代理对象角色内部含有对真实对象的引用，从而可以操作真实对象，同时代理对象提供与真实对象相同的接口以便在任何时刻都能代替真实对象。同时，代理对象可以在执行真实对象操作时，附加其他的操作，相当于对真实对象进行封装。 </p>
+<p><strong>真实角色：</strong>代理角色所代表的真实对象，是我们最终要引用的对象。</p>
+<p>抽象角色：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">interface</span> Subject <span style="color: #009900;">&#123;</span> 
+  <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> request<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> 
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>真实角色：实现了Subject的request()方法。</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> RealSubject <span style="color: #000000; font-weight: bold;">implements</span> Subject <span style="color: #009900;">&#123;</span> 
+  <span style="color: #000000; font-weight: bold;">public</span> RealSubject<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span> <span style="color: #009900;">&#125;</span> 
+  <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> request<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span> 
+   <span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;From real subject.&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> 
+  <span style="color: #009900;">&#125;</span> 
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>代理角色：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> ProxySubject <span style="color: #000000; font-weight: bold;">extends</span> Subject <span style="color: #009900;">&#123;</span> 
+  <span style="color: #000000; font-weight: bold;">private</span> RealSubject realSubject<span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">//以真实角色作为代理角色的属性 </span>
+  <span style="color: #000000; font-weight: bold;">public</span> ProxySubject<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span> <span style="color: #009900;">&#125;</span> 
+  <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> request<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span> <span style="color: #666666; font-style: italic;">//该方法封装了真实对象的request方法 </span>
+    preRequest<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> 
+    <span style="color: #000000; font-weight: bold;">if</span><span style="color: #009900;">&#40;</span> realSubject <span style="color: #339933;">==</span> <span style="color: #000066; font-weight: bold;">null</span> <span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span> 
+       realSubject <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> RealSubject<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> 
+    <span style="color: #009900;">&#125;</span> 
+    realSubject.<span style="color: #006633;">request</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">//此处执行真实对象的request方法 </span>
+    postRequest<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> 
+  <span style="color: #009900;">&#125;</span> 
+&nbsp;
+  <span style="color: #000000; font-weight: bold;">private</span> <span style="color: #000066; font-weight: bold;">void</span> preRequest<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span> 
+    <span style="color: #666666; font-style: italic;">//something you want to do before requesting </span>
+  <span style="color: #009900;">&#125;</span> 
+  <span style="color: #000000; font-weight: bold;">private</span> <span style="color: #000066; font-weight: bold;">void</span> postRequest<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span> 
+    <span style="color: #666666; font-style: italic;">//something you want to do after requesting </span>
+  <span style="color: #009900;">&#125;</span> 
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>客户端调用：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;">Subject sub<span style="color: #339933;">=</span><span style="color: #000000; font-weight: bold;">new</span> ProxySubject<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> 
+Sub.<span style="color: #006633;">request</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre></div></div>
+
+<p>由以上代码可以看出，客户实际需要调用的是RealSubject类的request()方法，现在用ProxySubject来代理 RealSubject类，同样达到目的，同时还封装了其他方法(preRequest(),postRequest())，可以处理一些其他问题。 </p>
+<p>另外，如果要按照上述的方法使用代理模式，那么真实角色必须是事先已经存在的，并将其作为代理对象的内部属性。但是实际使用时，一个真实角色必须对应一个代理角色，如果大量使用会导致类的急剧膨胀；此外，如果事先并不知道真实角色，该如何使用代理呢？这个问题可以通过Java的动态代理类来解决。 </p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/7499.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Java反射机制</title>
+		<link>http://www.xieziming.com/archives/7496.html</link>
+		<comments>http://www.xieziming.com/archives/7496.html#respond</comments>
+		<pubDate>Wed, 10 Oct 2012 16:19:01 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[程序]]></category>
+		<category><![CDATA[java]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=7496</guid>
+		<description><![CDATA[JAVA反射机制是在运行状态中，对于任意一个类，都能够知道这个类的所有属性和方法；对于任意一个对象，都能够调用它的任意一个方法和属性；这种动态获取的信息以及动态调用对象的方法的功能称为java语言的反射机制。
+
+Java反射机制主要提供了以下功能： 在运行时判断任意一个对象所属的类；在运行时构造任意一个类的对象；在运行时判断任意一个类所具有的成员变量和方法；在运行时调用任意一个对象的方法。
+
+
+【案例1】通过一个对象获得完整的包名和类名
+<code lang="java">
+package Reflect; 
+/**
+ * 通过一个对象获得完整的包名和类名
+ * */
+class Demo{
+    //other codes...
+}
+ 
+class hello{
+    public static void main(String[] args) {
+        Demo demo=new Demo();
+        System.out.println(demo.getClass().getName());
+    }
+}
+</code>
+【运行结果】：Reflect.Demo]]></description>
+				<content:encoded><![CDATA[<p>JAVA反射机制是在运行状态中，对于任意一个类，都能够知道这个类的所有属性和方法；对于任意一个对象，都能够调用它的任意一个方法和属性；这种动态获取的信息以及动态调用对象的方法的功能称为java语言的反射机制。</p>
+<p>Java反射机制主要提供了以下功能： 在运行时判断任意一个对象所属的类；在运行时构造任意一个类的对象；在运行时判断任意一个类所具有的成员变量和方法；在运行时调用任意一个对象的方法。</p>
+<p>【案例1】通过一个对象获得完整的包名和类名</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">package</span> <span style="color: #006699;">Reflect</span><span style="color: #339933;">;</span> 
+<span style="color: #008000; font-style: italic; font-weight: bold;">/**
+ * 通过一个对象获得完整的包名和类名
+ * */</span>
+<span style="color: #000000; font-weight: bold;">class</span> Demo<span style="color: #009900;">&#123;</span>
+    <span style="color: #666666; font-style: italic;">//other codes...</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">class</span> hello<span style="color: #009900;">&#123;</span>
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000066; font-weight: bold;">void</span> main<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> args<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+        Demo demo<span style="color: #339933;">=</span><span style="color: #000000; font-weight: bold;">new</span> Demo<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        <span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span>demo.<span style="color: #006633;">getClass</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>.<span style="color: #006633;">getName</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>【运行结果】：Reflect.Demo</p>
+<p>【案例2】实例化Class类对象</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">package</span> <span style="color: #006699;">Reflect</span><span style="color: #339933;">;</span>
+<span style="color: #000000; font-weight: bold;">class</span> Demo<span style="color: #009900;">&#123;</span>
+    <span style="color: #666666; font-style: italic;">//other codes...</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">class</span> hello<span style="color: #009900;">&#123;</span>
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000066; font-weight: bold;">void</span> main<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> args<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+        Class<span style="color: #339933;">&lt;</span> <span style="color: #339933;">?&gt;</span> demo1<span style="color: #339933;">=</span><span style="color: #000066; font-weight: bold;">null</span><span style="color: #339933;">;</span>
+        Class<span style="color: #339933;">&lt;</span> <span style="color: #339933;">?&gt;</span> demo2<span style="color: #339933;">=</span><span style="color: #000066; font-weight: bold;">null</span><span style="color: #339933;">;</span>
+        Class<span style="color: #339933;">&lt;</span> <span style="color: #339933;">?&gt;</span> demo3<span style="color: #339933;">=</span><span style="color: #000066; font-weight: bold;">null</span><span style="color: #339933;">;</span>
+        <span style="color: #000000; font-weight: bold;">try</span><span style="color: #009900;">&#123;</span>
+            <span style="color: #666666; font-style: italic;">//一般尽量采用这种形式</span>
+            demo1<span style="color: #339933;">=</span><span style="color: #000000; font-weight: bold;">Class</span>.<span style="color: #006633;">forName</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;Reflect.Demo&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        <span style="color: #009900;">&#125;</span><span style="color: #000000; font-weight: bold;">catch</span><span style="color: #009900;">&#40;</span><span style="color: #003399;">Exception</span> e<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+            e.<span style="color: #006633;">printStackTrace</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        <span style="color: #009900;">&#125;</span>
+        demo2<span style="color: #339933;">=</span><span style="color: #000000; font-weight: bold;">new</span> Demo<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>.<span style="color: #006633;">getClass</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        demo3<span style="color: #339933;">=</span>Demo.<span style="color: #000000; font-weight: bold;">class</span><span style="color: #339933;">;</span>
+&nbsp;
+        <span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;类名称   &quot;</span><span style="color: #339933;">+</span>demo1.<span style="color: #006633;">getName</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        <span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;类名称   &quot;</span><span style="color: #339933;">+</span>demo2.<span style="color: #006633;">getName</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        <span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;类名称   &quot;</span><span style="color: #339933;">+</span>demo3.<span style="color: #006633;">getName</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+    <span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>【运行结果】：<br />
+类名称   Reflect.Demo<br />
+类名称   Reflect.Demo<br />
+类名称   Reflect.Demo</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/7496.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Java堆栈</title>
+		<link>http://www.xieziming.com/archives/7486.html</link>
+		<comments>http://www.xieziming.com/archives/7486.html#respond</comments>
+		<pubDate>Tue, 09 Oct 2012 15:47:22 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[程序]]></category>
+		<category><![CDATA[java]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=7486</guid>
+		<description><![CDATA[Java中每个方法被执行的时候都会同时创建一个栈帧（stack frame）用于存储局部变量表、操作栈、动态链接、方法出口等信息。
+
+局部变量表存放了编译期可知的各种基本数据类型（boolean、byte、char、short、int、float、long、double）、对象引用（reference类型，它不等同于对象本身，根据不同的虚拟机实现，它可能是一个指向对象起始地址的引用指针，也可能指向一个代表对象的句柄或者其他与此对象相关的位置）和returnAddress类型（指向了一条字节码指令的地址）。
+
+Java把内存划分成两种：一种是栈内存，一种是堆内存。栈中存放是局部变量，堆中存放的是实例变量和对象(数组也是对象类型)。
+
+栈有一个很重要的特殊性，就是存在栈中的数据可以共享。假设我们同时定义：
+<code lang="java">
+int a = 3; 
+int b = 3； 
+</code>
+编译器先处理int a = 3；首先它会在栈中创建一个变量为a的引用，然后查找栈中是否有3这个值，假如没找到，就将3存放进来，然后将a指向3。接着处理int b = 3；在创建完b的引用变量后，由于在栈中已经有3这个值，便将b直接指向3。这样，就出现了a与b同时均指向3的情况。这时，假如再令a=4；那么编译器 会重新搜索栈中是否有4值，假如没有，则将4存放进来，并令a指向4；假如已经有了，则直接将a指向这个地址。因此a值的改变不会影响到b的值。要留意这 种数据的共享与两个对象的引用同时指向一个对象的这种共享是不同的，由于这种情况a的修改并不会影响到b, 它是由编译器完成的，它有利于节省空间。而一个对象引用变量修改了这个对象的内部状态，会影响到另一个对象引用变量。 
+
+String是一个特殊的包装类数据。可以用： 
+<code lang="java">
+String str = new String("abc"); 
+String str = "abc"; 
+</code>
+两种的形式来创建，第一种是用new()来新建对象的，它会在存放于堆中。每调用一次就会创建一个新的对象。而第二种是先在栈中创建一个对String类的对象引用变量str，然后查找栈中有没有存放"abc"，假如没有，则将"abc"存放进栈，并令str指向”abc”，假如已经有”abc” 则直接令str指向“abc”。 ]]></description>
+				<content:encoded><![CDATA[<p>Java中每个方法被执行的时候都会同时创建一个栈帧（stack frame）用于存储局部变量表、操作栈、动态链接、方法出口等信息。</p>
+<p>局部变量表存放了编译期可知的各种基本数据类型（boolean、byte、char、short、int、float、long、double）、对象引用（reference类型，它不等同于对象本身，根据不同的虚拟机实现，它可能是一个指向对象起始地址的引用指针，也可能指向一个代表对象的句柄或者其他与此对象相关的位置）和returnAddress类型（指向了一条字节码指令的地址）。</p>
+<p>Java把内存划分成两种：一种是栈内存，一种是堆内存。栈中存放是局部变量，堆中存放的是实例变量和对象(数组也是对象类型)。</p>
+<p>栈有一个很重要的特殊性，就是存在栈中的数据可以共享。假设我们同时定义：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000066; font-weight: bold;">int</span> a <span style="color: #339933;">=</span> <span style="color: #cc66cc;">3</span><span style="color: #339933;">;</span> 
+<span style="color: #000066; font-weight: bold;">int</span> b <span style="color: #339933;">=</span> <span style="color: #cc66cc;">3</span>；</pre></div></div>
+
+<p>编译器先处理int a = 3；首先它会在栈中创建一个变量为a的引用，然后查找栈中是否有3这个值，假如没找到，就将3存放进来，然后将a指向3。接着处理int b = 3；在创建完b的引用变量后，由于在栈中已经有3这个值，便将b直接指向3。这样，就出现了a与b同时均指向3的情况。这时，假如再令a=4；那么编译器 会重新搜索栈中是否有4值，假如没有，则将4存放进来，并令a指向4；假如已经有了，则直接将a指向这个地址。因此a值的改变不会影响到b的值。要留意这 种数据的共享与两个对象的引用同时指向一个对象的这种共享是不同的，由于这种情况a的修改并不会影响到b, 它是由编译器完成的，它有利于节省空间。而一个对象引用变量修改了这个对象的内部状态，会影响到另一个对象引用变量。 </p>
+<p>String是一个特殊的包装类数据。可以用：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #003399;">String</span> str <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">String</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;abc&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> 
+<span style="color: #003399;">String</span> str <span style="color: #339933;">=</span> <span style="color: #0000ff;">&quot;abc&quot;</span><span style="color: #339933;">;</span></pre></div></div>
+
+<p>两种的形式来创建，第一种是用new()来新建对象的，它会在存放于堆中。每调用一次就会创建一个新的对象。而第二种是先在栈中创建一个对String类的对象引用变量str，然后查找栈中有没有存放&#8221;abc&#8221;，假如没有，则将&#8221;abc&#8221;存放进栈，并令str指向”abc”，假如已经有”abc” 则直接令str指向“abc”。 </p>
+<p>比较类里面的数值是否相等时，用equals()方法；当测试两个包装类的引用是否指向同一个对象时，用==，下面用例子说明上面的理论。</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #003399;">String</span> str1 <span style="color: #339933;">=</span> <span style="color: #0000ff;">&quot;abc&quot;</span><span style="color: #339933;">;</span> 
+<span style="color: #003399;">String</span> str2 <span style="color: #339933;">=</span> <span style="color: #0000ff;">&quot;abc&quot;</span><span style="color: #339933;">;</span> 
+<span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span>str1<span style="color: #339933;">==</span>str2<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">//true</span></pre></div></div>
+
+<p>可以看出str1和str2是指向同一个对象的。</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #003399;">String</span> str1 <span style="color: #339933;">=</span><span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">String</span> <span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;abc&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> 
+<span style="color: #003399;">String</span> str2 <span style="color: #339933;">=</span><span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">String</span> <span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;abc&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> 
+<span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span>str1<span style="color: #339933;">==</span>str2<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">// false</span></pre></div></div>
+
+<p>用new的方式是天生不同的对象。每一次产生一个。 </p>
+<p>因此用第二种方式创建多个”abc”字符串,在内存中实在只存在一个对象而已. 这种写法有利与节省内存空间. 同时它可以在一定程度上进步程序的运行速度，由于JVM会自动根据栈中数据的实际情况来决定是否有必要创建新对象。</p>
+<p>而对于String str = new String(&#8220;abc&#8221;)；的代码，则一概在堆中创建新对象，而不管其字符串值是否相等，是否有必要创建新对象，从而加重了程序的负担。 </p>
+<p>另一方面, 要留意: 我们在使用诸如String str = &#8220;abc&#8221;；的格式定义类时，总是想当然地以为，创建了String类的对象str。担心陷阱！对象可能并没有被创建！而可能只是指向一个先前已经创建的对象。只有通过new()方法才能保证每次都创建一个新的对象。</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/7486.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Java单例模式</title>
+		<link>http://www.xieziming.com/archives/7481.html</link>
+		<comments>http://www.xieziming.com/archives/7481.html#respond</comments>
+		<pubDate>Mon, 08 Oct 2012 16:05:11 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[程序]]></category>
+		<category><![CDATA[java]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=7481</guid>
+		<description><![CDATA[单例模式的主要目的是希望对象只创建一个实例，并且提供一个全局的访问点。
+<code lang="java"> 
+public class SingletonKerriganA {  
+    private static SingletonKerriganA instance = null;  
+   
+    public static SingletonKerriganA getInstance() {  
+        if (instance == null) {                              
+            instance = new SingletonKerriganA(); 
+        }  
+        return instance;  
+    }  
+} 
+</code>
+这个写法我们把四点需求从上往下检测，发现第二点的时候就出了问题，假设这样的场景：两个线程并发调用SingletonKerriganA.getInstance()，假设线程一先判断完instance是否为null，既代码中的line A进入到line B的位置。刚刚判断完毕后，JVM将CPU资源切换给线程二，由于线程一还没执行line B，所以instance仍然是空的，因此线程二执行了new SignletonKerriganA()操作。片刻之后，线程一被重新唤醒，它执行的仍然是new SignletonKerriganA()操作，好了，问题来了，两个Kerrigan谁是李逵谁是李鬼？]]></description>
+				<content:encoded><![CDATA[<p>单例模式的主要目的是希望对象只创建一个实例，并且提供一个全局的访问点。</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> SingletonKerriganA <span style="color: #009900;">&#123;</span>  
+    <span style="color: #000000; font-weight: bold;">private</span> <span style="color: #000000; font-weight: bold;">static</span> SingletonKerriganA instance <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">null</span><span style="color: #339933;">;</span>  
+&nbsp;
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">static</span> SingletonKerriganA getInstance<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>  
+        <span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>instance <span style="color: #339933;">==</span> <span style="color: #000066; font-weight: bold;">null</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>                              
+            instance <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> SingletonKerriganA<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> 
+        <span style="color: #009900;">&#125;</span>  
+        <span style="color: #000000; font-weight: bold;">return</span> instance<span style="color: #339933;">;</span>  
+    <span style="color: #009900;">&#125;</span>  
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>假设这样的场景：两个线程并发调用SingletonKerriganA.getInstance()，假设线程一先判断完instance是否为null，既代码中的line A进入到line B的位置。刚刚判断完毕后，JVM将CPU资源切换给线程二，由于线程一还没执行line B，所以instance仍然是空的，因此线程二执行了new SignletonKerriganA()操作。片刻之后，线程一被重新唤醒，它执行的仍然是new SignletonKerriganA()操作，好了，问题来了，两个Kerrigan谁是李逵谁是李鬼？</p>
+<p>紧接着，我们做单例模式的第二次尝试：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> SingletonKerriganB <span style="color: #009900;">&#123;</span>   
+    <span style="color: #000000; font-weight: bold;">private</span> <span style="color: #000000; font-weight: bold;">static</span> SingletonKerriganB instance <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">null</span><span style="color: #339933;">;</span>  
+&nbsp;
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">synchronized</span> <span style="color: #000000; font-weight: bold;">static</span> SingletonKerriganB getInstance<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>  
+        <span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>instance <span style="color: #339933;">==</span> <span style="color: #000066; font-weight: bold;">null</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>  
+            instance <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> SingletonKerriganB<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+        <span style="color: #009900;">&#125;</span>  
+        <span style="color: #000000; font-weight: bold;">return</span> instance<span style="color: #339933;">;</span>  
+    <span style="color: #009900;">&#125;</span>  
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>比起第一段代码仅仅在方法中多了一个synchronized修饰符，现在可以保证不会出线程问题了。但是这里有个很大（至少耗时比例上很大）的性能问题。除了第一次调用时是执行了SingletonKerriganB的构造函数之外，以后的每一次调用都是直接返回instance对象。返回对象这个操作耗时是很小的，绝大部分的耗时都用在synchronized修饰符的同步准备上，因此从性能上说很不划算。</p>
+<p>那继续把代码改成下面的样子：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> SingletonKerriganC <span style="color: #009900;">&#123;</span>  
+    <span style="color: #000000; font-weight: bold;">private</span> <span style="color: #000000; font-weight: bold;">static</span> SingletonKerriganC instance <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">null</span><span style="color: #339933;">;</span>  
+&nbsp;
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">static</span> SingletonKerriganC getInstance<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>  
+        <span style="color: #000000; font-weight: bold;">synchronized</span> <span style="color: #009900;">&#40;</span>SingletonKerriganC.<span style="color: #000000; font-weight: bold;">class</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>  
+            <span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>instance <span style="color: #339933;">==</span> <span style="color: #000066; font-weight: bold;">null</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>  
+                instance <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> SingletonKerriganC<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+            <span style="color: #009900;">&#125;</span>  
+        <span style="color: #009900;">&#125;</span>  
+        <span style="color: #000000; font-weight: bold;">return</span> instance<span style="color: #339933;">;</span>  
+    <span style="color: #009900;">&#125;</span>  
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>基本上，把synchronized移动到代码内部是没有什么意义的，每次调用getInstance()还是要进行同步。同步本身没有问题，但是我们只希望在第一次创建Kerrigan实例的时候进行同步，因此我们有了下面的写法——双重锁定检查（DCL）。</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> SingletonKerriganD <span style="color: #009900;">&#123;</span>   
+    <span style="color: #000000; font-weight: bold;">private</span> <span style="color: #000000; font-weight: bold;">static</span> SingletonKerriganD instance <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">null</span><span style="color: #339933;">;</span>  
+&nbsp;
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">static</span> SingletonKerriganD getInstance<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>  
+        <span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>instance <span style="color: #339933;">==</span> <span style="color: #000066; font-weight: bold;">null</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>  
+            <span style="color: #000000; font-weight: bold;">synchronized</span> <span style="color: #009900;">&#40;</span>SingletonKerriganD.<span style="color: #000000; font-weight: bold;">class</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>  
+                <span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>instance <span style="color: #339933;">==</span> <span style="color: #000066; font-weight: bold;">null</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>  
+                    instance <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> SingletonKerriganD<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+                <span style="color: #009900;">&#125;</span>  
+            <span style="color: #009900;">&#125;</span>  
+        <span style="color: #009900;">&#125;</span>  
+        <span style="color: #000000; font-weight: bold;">return</span> instance<span style="color: #339933;">;</span>  
+    <span style="color: #009900;">&#125;</span>  
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>看起来这样已经达到了我们的要求，除了第一次创建对象之外，其他的访问在第一个if中就返回了，因此不会走到同步块中。已经完美了吗？</p>
+<p>我们来看看这个场景：假设线程一执行到instance = new SingletonKerriganD()这句，这里看起来是一句话，但实际上它并不是一个原子操作（原子操作的意思就是这条语句要么就被执行完，要么就没有被执行过，不能出现执行了一半这种情形）。事实上高级语言里面非原子操作有很多，我们只要看看这句话被编译后在JVM执行的对应汇编代码就发现，这句话被编译成8条汇编指令，大致做了3件事情：</p>
+<p>1.给Kerrigan的实例分配内存。<br />
+2.初始化Kerrigan的构造器<br />
+3.将instance对象指向分配的内存空间（注意到这步instance就非null了）。</p>
+<p>但是，由于Java编译器允许处理器乱序执行（out-of-order），以及JDK1.5之前JMM（Java Memory Medel）中Cache、寄存器到主内存回写顺序的规定，上面的第二点和第三点的顺序是无法保证的，也就是说，执行顺序可能是1-2-3也可能是1-3-2，如果是后者，并且在3执行完毕、2未执行之前，被切换到线程二上，这时候instance因为已经在线程一内执行过了第三点，instance已经是非空了，所以线程二直接拿走instance，然后使用，然后顺理成章地报错，而且这种难以跟踪难以重现的错误估计调试上一星期都未必能找得出来，真是一茶几的杯具啊。</p>
+<p>代码倒越来越复杂了，现在先来个返璞归真，根据JLS（Java Language Specification）中的规定，一个类在一个ClassLoader中只会被初始化一次，这点是JVM本身保证的，那就把初始化实例的事情扔给JVM好了，代码被改成这样：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> SingletonKerriganE <span style="color: #009900;">&#123;</span>  
+    <span style="color: #000000; font-weight: bold;">private</span> <span style="color: #000000; font-weight: bold;">static</span> SingletonKerriganE instance <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> SingletonKerriganE<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+&nbsp;
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">static</span> SingletonKerriganE getInstance<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>  
+        <span style="color: #000000; font-weight: bold;">return</span> instance<span style="color: #339933;">;</span>  
+    <span style="color: #009900;">&#125;</span>  
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>好吧，如果这种写法是完美的话，那前面那么几大段话就是作者在消遣各位读者。这种写法不会出现并发问题，但是它是饿汉式的，在ClassLoader加载类后Kerrigan的实例就会第一时间被创建，饿汉式的创建方式在一些场景中将无法使用：譬如Kerrigan实例的创建是依赖参数或者配置文件的，在getInstance()之前必须调用某个方法设置参数给它，那样这种单例写法就无法使用了。</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> SingletonKerriganF <span style="color: #009900;">&#123;</span>    
+    <span style="color: #000000; font-weight: bold;">private</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000000; font-weight: bold;">class</span> SingletonHolder <span style="color: #009900;">&#123;</span>  
+        <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000000; font-weight: bold;">final</span> SingletonKerriganF INSTANCE <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> SingletonKerriganF<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+    <span style="color: #009900;">&#125;</span>  
+&nbsp;
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">static</span> SingletonKerriganF getInstance<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>  
+        <span style="color: #000000; font-weight: bold;">return</span> SingletonHolder.<span style="color: #006633;">INSTANCE</span><span style="color: #339933;">;</span>  
+    <span style="color: #009900;">&#125;</span>  
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>这种写法仍然使用JVM本身机制保证了线程安全问题；由于SingletonHolder是私有的，除了getInstance()之外没有办法访问它，因此它是懒汉式的；同时读取实例的时候不会进行同步，没有性能缺陷；也不依赖JDK版本。</p>
+<p>一般我们会加入一个private或者protected的构造函数，这样系统就不会自动添加那个public的构造函数了，因此只能调用里面的static方法，无法通过new创建对象。</p>
+<p>如果单例对象有必要实现Serializable接口（很少出现），则应当同时实现readResolve()方法来保证反序列化的时候得到原来的对象。</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> SingletonKerrigan <span style="color: #000000; font-weight: bold;">implements</span> <span style="color: #003399;">Serializable</span> <span style="color: #009900;">&#123;</span>     
+    <span style="color: #000000; font-weight: bold;">private</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000000; font-weight: bold;">class</span> SingletonHolder <span style="color: #009900;">&#123;</span>  
+        <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000000; font-weight: bold;">final</span> SingletonKerrigan INSTANCE <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> SingletonKerrigan<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+    <span style="color: #009900;">&#125;</span>  
+&nbsp;
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">static</span> SingletonKerrigan getInstance<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>  
+        <span style="color: #000000; font-weight: bold;">return</span> SingletonHolder.<span style="color: #006633;">INSTANCE</span><span style="color: #339933;">;</span>  
+    <span style="color: #009900;">&#125;</span>  
+&nbsp;
+    <span style="color: #008000; font-style: italic; font-weight: bold;">/** 
+     * private的构造函数用于避免外界直接使用new来实例化对象 
+     */</span>  
+    <span style="color: #000000; font-weight: bold;">private</span> SingletonKerrigan<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>  
+    <span style="color: #009900;">&#125;</span>  
+&nbsp;
+    <span style="color: #008000; font-style: italic; font-weight: bold;">/** 
+     * readResolve方法应对单例对象被序列化时候 
+     */</span>  
+    <span style="color: #000000; font-weight: bold;">private</span> <span style="color: #003399;">Object</span> readResolve<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>  
+        <span style="color: #000000; font-weight: bold;">return</span> getInstance<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+    <span style="color: #009900;">&#125;</span>  
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/7481.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Java静态工厂模式</title>
+		<link>http://www.xieziming.com/archives/7473.html</link>
+		<comments>http://www.xieziming.com/archives/7473.html#respond</comments>
+		<pubDate>Mon, 08 Oct 2012 14:50:10 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[程序]]></category>
+		<category><![CDATA[java]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=7473</guid>
+		<description><![CDATA[创建类的实例的最常见的方式是用new语句调用类的构造方法。在这种情况下，程序可以创建类的任意多个实例，每执行一条new语句，都会导致Java虚拟机的堆区中产生一个新的对象。假如类需要进一步封装创建自身实例的细节，并且控制自身实例的数目，那么可以提供静态工厂方法。
+       
+所谓的工厂是提供一个特定的类，这个类是专门用来创建对象实例，客户端无须关心具体的实现。这个模式由三个部分组成。
+
+<strong>抽象类：</strong>它对外提供方法的调用，屏蔽了内部具体的实现。
+
+<strong>具体实现类：</strong>相同类的不同实体的具体实现，一般情况下它包含多个实现类。
+
+<strong>工厂类：</strong>它提供一个统一的生成具体对象的方法，在这个方法中会有一些逻辑的判断，根据参数的不同来创建不同的实例。一般情况下，这个工厂类定义成为了static的类型，所以也称为静态工厂模式。
+
+<strong>优点：</strong>
+
+(1) 构造函数有命名的限制，而静态方法有自己的名字，更加易于理解。
+
+(2) 静态工厂方法在每次调用的时候不要求创建一个新的对象。这种做法对于一个要频繁创建相同对象的程序来说，可以极大的提高性能。它使得一个类可以保证是一个singleton；他使非可变类可以保证“不会有两个相等的实例存在”。
+
+(3) 静态工厂方法在选择返回类型时有更大的灵活性。使用静态工厂方法，可以通过调用方法时使用不同的参数创建不同类的实例，还可以创建非公有类的对象，这就封装了类的实现细节。]]></description>
+				<content:encoded><![CDATA[<p>创建类的实例的最常见的方式是用new语句调用类的构造方法。在这种情况下，程序可以创建类的任意多个实例，每执行一条new语句，都会导致Java虚拟机的堆区中产生一个新的对象。假如类需要进一步封装创建自身实例的细节，并且控制自身实例的数目，那么可以提供静态工厂方法。</p>
+<p>所谓的工厂是提供一个特定的类，这个类是专门用来创建对象实例，客户端无须关心具体的实现。这个模式由三个部分组成。</p>
+<p><strong>抽象类：</strong>它对外提供方法的调用，屏蔽了内部具体的实现。</p>
+<p><strong>具体实现类：</strong>相同类的不同实体的具体实现，一般情况下它包含多个实现类。</p>
+<p><strong>工厂类：</strong>它提供一个统一的生成具体对象的方法，在这个方法中会有一些逻辑的判断，根据参数的不同来创建不同的实例。一般情况下，这个工厂类定义成为了static的类型，所以也称为静态工厂模式。</p>
+<p><strong>优点：</strong></p>
+<p>(1) 构造函数有命名的限制，而静态方法有自己的名字，更加易于理解。</p>
+<p>(2) 静态工厂方法在每次调用的时候不要求创建一个新的对象。这种做法对于一个要频繁创建相同对象的程序来说，可以极大的提高性能。它使得一个类可以保证是一个singleton；他使非可变类可以保证“不会有两个相等的实例存在”。</p>
+<p>(3) 静态工厂方法在选择返回类型时有更大的灵活性。使用静态工厂方法，可以通过调用方法时使用不同的参数创建不同类的实例，还可以创建非公有类的对象，这就封装了类的实现细节。</p>
+<p><strong>缺点：</strong></p>
+<p>(1) 如果一个类是通过静态工厂方法来取得实例的，并且该类的构造函数都不是公有的或者保护的，那该类就不可能有子类（被继承），子类的构造函数需要首先调用父类的构造函数，因为父类的构造函数是private的,所以即使我们假设继承成功的话,那么子类也根本没有权限去调用父类的私有构造函数，所以是无法被继承的。</p>
+<p>(2)毕竟通过构造函数创建实例还是SUN公司所提倡的，静态工厂方法跟其他的静态方法区别不大，这样创建的实例谁又知道这个静态方法是创建实例呢？弥补的办法就是：静态工厂方法名字使用valueOf或者getInstance.</p>
+<p>3、当实现类比较多时，工厂类中的逻辑判断会比较复杂。而且当新增实现类时，需要修改工厂类的代码，违反了开-闭原则。要避免这种情况的发生，可以使用反射机制来避免这种问题。</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/7473.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Firefox插件制作</title>
+		<link>http://www.xieziming.com/archives/7457.html</link>
+		<comments>http://www.xieziming.com/archives/7457.html#respond</comments>
+		<pubDate>Sat, 06 Oct 2012 15:02:37 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[程序]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=7457</guid>
+		<description><![CDATA[1、Firefox 的界面引擎是非常出色的，可以用XML和Javascript来定义界面的布局、属性、动作等。界面的布局XML是Firefox自定义的格式，叫做XUL ，XUL提供对界面各种元素如：按钮、菜单、工具栏等的描述，并将各个界面元素的动作以事件的形式邦定到Javascript. 这一点和HTML十分类似。
+
+2、Firefox 的插件是一个有特定目录结构和文件的文件夹，打包成zip文件后，再重命名为 XXX.xpi，便成了一个插件。通常的目录文件结构如下：
+<code lang="html">
+extension.xpi:   
+/install.rdf
+/components/*
+/components/cmdline.js
+/defaults/
+/defaults/preferences/*.js
+/plugins/*
+/chrome.manifest
+/chrome/icons/default/*
+/chrome/
+/chrome/content/
+</code>
+这个目录中除了 chrome目录  chrome.manifest install.rdf  这三个以外都不是必须的。]]></description>
+				<content:encoded><![CDATA[<p>首先需要知道什么是“Firefox插件”。这里说的“插件”只是一个通俗的说法，其实Firefox的插件分两种类型，一种extension，叫扩展，一种是plugin，我们叫插件.两种是完全不同的两个东西。extension相对来说简单很多，用的主要是XUL，只是xml的一个变相。通俗的讲,“扩展”是基于Firefox本身增加的一些实用功能,而“插件”则是在Firefox之外独立编写的程序,用于显示网页中的特定内容如Flash、视频和Java 等。具体的官网说明如下https://developer.mozilla.org/en/Gecko_Plugin_API_Reference</p>
+<p>一、 插件的标准</p>
+<p>  1、在windows平台，火狐的插件是以动态库形式（dll）存在的，并只去识别在其安装目录下plugins文件夹下的dll；<br />
+  2、dll的名是以8.3原则来命名的，即其名字所包含的字符不超过8个字符且以dll结尾的文件，还有一个规定就是其名字必须以np开头，例如：npXXX.dll，而XXX不超过六个字符；<br />
+  3、dll是属于MIME（一种标准）类型，要不火狐浏览器不认识他；<br />
+  4、dll导出的函数必须是NP_GetEntryPoints、NP_Initialize、NP_Shutdown是这三个，这是火狐浏览器能够识别的在个接口，具体说明在插件的生命周期中说明。</p>
+<p>二、 插件的生命周期</p>
+<p>  1、 第一次打开含量有插件的页面时，浏览器最先调用NP_GetEntryPoints作为调用插件的入口，此方法也只在第一次加载插件时调用。<br />
+  2、 调用NP_GetEntryPoints后，浏览器会调用NP_Initialize初始化插件，NP_Initialize只在第一次调用时被浏览器调用，与NP_Initialize配对的是NP_Shutdown，NP_Shutdown是在关闭了所有含有该插件的页面后被浏览器调用，在生命周期内也只被调用一次<br />
+  3、 调用NP_Initialize后，浏览器会调会NPP_New来创建一个插件实例，每打开一个页面都会调用NPP_New一次来创建一个插件实例，与NPP_New配对的是NPP_Destory，在每关闭一个页面都会调用NPP_Destory来释放NPP_New创建的实例<br />
+  4、 调用NP_Initialize后，一般会调用NPP_SetWindow来调置窗口，对于没有窗口的插件当然不用调用。<br />
+注：火狐插件开发的sdk划分为两类接口，一类是与插件相关的，以NPP或者NP开头的；一类是与浏览器相关的，以NPN开头的。</p>
+<p>三、 页面调用插件的方式</p>
+<p> 1、 通过object方式调用：与IE调用ActiveX控件的方式一样的，不同的是IE调用ActiveX控件是通过ClassID来标识的，而火狐的控件是通过MIME的值来标识。<br />
+ 2、 通过embed方式调用：与object方式类似，但操作方面简单一些</p>
+<p>四、 插件与页面的信息传递</p>
+<p>插件与页面的信息是通过插件的接口与JS进行信息传递。在火狐插件有一类接口可以直接读取页面的JS函数，并从函数中获取相应的值或者调置相关的值。</p>
+<p>我们下面要讲的是扩展extension。</p>
+<p>1、Firefox 的界面引擎是非常出色的，可以用XML和Javascript来定义界面的布局、属性、动作等。界面的布局XML是Firefox自定义的格式，叫做XUL ，XUL提供对界面各种元素如：按钮、菜单、工具栏等的描述，并将各个界面元素的动作以事件的形式邦定到Javascript. 这一点和HTML十分类似。</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/7457.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Javascript之DOM</title>
+		<link>http://www.xieziming.com/archives/7451.html</link>
+		<comments>http://www.xieziming.com/archives/7451.html#comments</comments>
+		<pubDate>Thu, 04 Oct 2012 14:58:16 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[程序]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=7451</guid>
+		<description><![CDATA[1.访问节点：
+访问html元素：var oHtml=document.documentElement;
+获取head元素：var oHead=oHtml.firstChild;
+获取body元素：var oBody=oHtml.lastChild; 或者 var oBody=document.body;
+
+也可以通过childNodes来做同样的工作：
+var oHead=oHtml.childNodes[0] 或者 oHtml.childNodes.item(0);
+var oBody=oHtml.childNodes[1] 或者 oHtml.childNodes.item(1);
+
+判断节点间关系：
+<code lang="javascript">
+alert(oHead.parentNode==oHtml);  
+alert(oBody.previousSibling==oHead);
+alert(oHead.nextSibling==oBody);
+alert(oHead.ownerDocument==document);
+</code>
+2.检测节点类型：
+通过节点的nodeType属性来检验节点类型：
+<code lang="javascript">
+alert(document.nodeType);  //输出9
+</code>]]></description>
+				<content:encoded><![CDATA[<p>1.访问节点：<br />
+访问html元素：var oHtml=document.documentElement;<br />
+获取head元素：var oHead=oHtml.firstChild;<br />
+获取body元素：var oBody=oHtml.lastChild; 或者 var oBody=document.body;</p>
+<p>也可以通过childNodes来做同样的工作：<br />
+var oHead=oHtml.childNodes[0] 或者 oHtml.childNodes.item(0);<br />
+var oBody=oHtml.childNodes[1] 或者 oHtml.childNodes.item(1);</p>
+<p>判断节点间关系：</p>
+
+<div class="wp_code"><div class="pre"><pre class="javascript" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000066;">alert</span><span style="color: #009900;">&#40;</span>oHead.<span style="color: #660066;">parentNode</span><span style="color: #339933;">==</span>oHtml<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+<span style="color: #000066;">alert</span><span style="color: #009900;">&#40;</span>oBody.<span style="color: #660066;">previousSibling</span><span style="color: #339933;">==</span>oHead<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #000066;">alert</span><span style="color: #009900;">&#40;</span>oHead.<span style="color: #660066;">nextSibling</span><span style="color: #339933;">==</span>oBody<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #000066;">alert</span><span style="color: #009900;">&#40;</span>oHead.<span style="color: #660066;">ownerDocument</span><span style="color: #339933;">==</span>document<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre></div></div>
+
+<p>2.检测节点类型：<br />
+通过节点的nodeType属性来检验节点类型：</p>
+
+<div class="wp_code"><div class="pre"><pre class="javascript" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000066;">alert</span><span style="color: #009900;">&#40;</span>document.<span style="color: #660066;">nodeType</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  <span style="color: #006600; font-style: italic;">//输出9</span></pre></div></div>
+
+<p>3.处理特性<br />
+处理特性可以使用标准的NameNodeMap中的方法：<br />
+getNamedItem(name), removeNamedItem(name),  setNamedItem(node), item(pos)</p>
+<p>比如:</p>
+
+<div class="wp_code"><div class="pre"><pre class="javascript" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #339933;">&lt;</span>p id<span style="color: #339933;">=</span><span style="color: #3366CC;">&quot;test&quot;</span><span style="color: #339933;">&gt;</span>测试<span style="color: #339933;">&lt;/</span>p<span style="color: #339933;">&gt;</span></pre></div></div>
+
+<p>假设变量oP是上面的p节点的引用，我们要访问oP的id属性:</p>
+
+<div class="wp_code"><div class="pre"><pre class="javascript" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #003366; font-weight: bold;">var</span> sId<span style="color: #339933;">=</span>oP.<span style="color: #660066;">attributes</span>.<span style="color: #660066;">getNamedItem</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;id&quot;</span><span style="color: #009900;">&#41;</span>.<span style="color: #660066;">nodeValue</span><span style="color: #339933;">;</span></pre></div></div>
+
+<p>这些方法用起来很累赘,所以DOM又定义了三个方法来简化:<br />
+getAttribute(name)         ——返回名称为name的属性的值<br />
+setAttribute(name,value)   ——顾名思义<br />
+removeAttribute(name)      ——顾名思义  </p>
+<p>上面的例子可以改写为：</p>
+
+<div class="wp_code"><div class="pre"><pre class="javascript" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #003366; font-weight: bold;">var</span> sId<span style="color: #339933;">=</span>oP.<span style="color: #660066;">getAttribute</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;name&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre></div></div>
+
+<p>4.访问指定节点：<br />
+熟知的getElementByTagName(name),getElementByName(name),getElementById(id)三个方法，不再展开。</p>
+<p>5.创建和操作节点：<br />
+（1）创建新节点<br />
+createAttribute(name)<br />
+createComment(text)<br />
+createElement(tagName)<br />
+createTextNode(text)</p>
+
+<div class="wp_code"><div class="pre"><pre class="javascript" style="font-family:'Times New Roman',Garamond, Times;">&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;createElement() Example&lt;/title&gt;
+        <span style="color: #339933;">&lt;</span>script type<span style="color: #339933;">=</span><span style="color: #3366CC;">&quot;text/javascript&quot;</span><span style="color: #339933;">&gt;</span>
+            <span style="color: #003366; font-weight: bold;">function</span> createMessage<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                <span style="color: #003366; font-weight: bold;">var</span> oP <span style="color: #339933;">=</span> document.<span style="color: #660066;">createElement</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;p&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+                <span style="color: #003366; font-weight: bold;">var</span> oText <span style="color: #339933;">=</span> document.<span style="color: #660066;">createTextNode</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;Hello World!&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+                oP.<span style="color: #660066;">appendChild</span><span style="color: #009900;">&#40;</span>oText<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+                document.<span style="color: #660066;">body</span>.<span style="color: #660066;">appendChild</span><span style="color: #009900;">&#40;</span>oP<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+            <span style="color: #009900;">&#125;</span>
+        <span style="color: #339933;">&lt;/</span>script<span style="color: #339933;">&gt;</span>
+    &lt;/head&gt;
+    &lt;body onload=&quot;createMessage()&quot;&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</pre></div></div>
+
+<p>（3）removeChild(),replaceChild()和insertBefore()<br />
+从方法名称就知道是干什么的：删除节点，替换节点，插入节点。需要注意的是replaceChild和insertBefore两个参数都是新节点在前，旧节点在后。</p>
+<p>（4）createDocumentFragment()<br />
+此方法主要是为了解决大量添加节点时，速度过慢。通过创建一个文档碎片节点，将要添加的新节点附加在此碎片节点上，然后再将文档碎片节点append到body上面，替代多次append到body节点。</p>
+
+<div class="wp_code"><div class="pre"><pre class="javascript" style="font-family:'Times New Roman',Garamond, Times;">&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;insertBefore() Example&lt;/title&gt;
+        <span style="color: #339933;">&lt;</span>script type<span style="color: #339933;">=</span><span style="color: #3366CC;">&quot;text/javascript&quot;</span><span style="color: #339933;">&gt;</span>
+            <span style="color: #003366; font-weight: bold;">function</span> addMessages<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                <span style="color: #003366; font-weight: bold;">var</span> arrText <span style="color: #339933;">=</span> <span style="color: #009900;">&#91;</span><span style="color: #3366CC;">&quot;first&quot;</span><span style="color: #339933;">,</span> <span style="color: #3366CC;">&quot;second&quot;</span><span style="color: #339933;">,</span> <span style="color: #3366CC;">&quot;third&quot;</span><span style="color: #339933;">,</span> <span style="color: #3366CC;">&quot;fourth&quot;</span><span style="color: #339933;">,</span> <span style="color: #3366CC;">&quot;fifth&quot;</span><span style="color: #339933;">,</span> <span style="color: #3366CC;">&quot;sixth&quot;</span><span style="color: #339933;">,</span> <span style="color: #3366CC;">&quot;seventh&quot;</span><span style="color: #339933;">,</span> <span style="color: #3366CC;">&quot;eighth&quot;</span><span style="color: #339933;">,</span> <span style="color: #3366CC;">&quot;ninth&quot;</span><span style="color: #339933;">,</span> <span style="color: #3366CC;">&quot;tenth&quot;</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+&nbsp;
+                <span style="color: #003366; font-weight: bold;">var</span> oFragment <span style="color: #339933;">=</span> document.<span style="color: #660066;">createDocumentFragment</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+                <span style="color: #000066; font-weight: bold;">for</span> <span style="color: #009900;">&#40;</span><span style="color: #003366; font-weight: bold;">var</span> i<span style="color: #339933;">=</span><span style="color: #CC0000;">0</span><span style="color: #339933;">;</span> i <span style="color: #339933;">&lt;</span> arrText.<span style="color: #660066;">length</span><span style="color: #339933;">;</span> i<span style="color: #339933;">++</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                    <span style="color: #003366; font-weight: bold;">var</span> oP <span style="color: #339933;">=</span> document.<span style="color: #660066;">createElement</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;p&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+                    <span style="color: #003366; font-weight: bold;">var</span> oText <span style="color: #339933;">=</span> document.<span style="color: #660066;">createTextNode</span><span style="color: #009900;">&#40;</span>arrText<span style="color: #009900;">&#91;</span>i<span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+                    oP.<span style="color: #660066;">appendChild</span><span style="color: #009900;">&#40;</span>oText<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+                    oFragment.<span style="color: #660066;">appendChild</span><span style="color: #009900;">&#40;</span>oP<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+                <span style="color: #009900;">&#125;</span>
+&nbsp;
+                document.<span style="color: #660066;">body</span>.<span style="color: #660066;">appendChild</span><span style="color: #009900;">&#40;</span>oFragment<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+            <span style="color: #009900;">&#125;</span>
+        <span style="color: #339933;">&lt;/</span>script<span style="color: #339933;">&gt;</span>
+    &lt;/script&gt;&lt;/head&gt;
+    &lt;body onload=&quot;addMessages()&quot;&gt;
+&nbsp;
+    &lt;/body&gt;
+&lt;/html&gt;</pre></div></div>
+
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/7451.html/feed</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+		<item>
+		<title>DOM</title>
+		<link>http://www.xieziming.com/archives/7446.html</link>
+		<comments>http://www.xieziming.com/archives/7446.html#respond</comments>
+		<pubDate>Thu, 04 Oct 2012 13:23:44 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[程序]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=7446</guid>
+		<description><![CDATA[<strong>查找并访问节点：</strong>
+(1)通过使用 getElementById() 和 getElementsByTagName() 方法
+(2)通过使用一个元素节点的 parentNode、firstChild 以及 lastChild 属性
+
+getElementById() 和 getElementsByTagName() 这两种方法，可查找整个 HTML 文档中的任何 HTML 元素。这两种方法会忽略文档的结构。假如您希望查找文档中所有的 <p> 元素，getElementsByTagName() 会把它们全部找到，不管 </p><p> 元素处于文档中的哪个层次。同时，getElementById() 方法也会返回正确的元素，不论它被隐藏在文档结构中的什么位置。
+
+注：getElementById() 无法工作在 XML 中。在 XML 文档中，您必须通过拥有类型 id 的属性来进行搜索，而此类型必须在 XML DTD 中进行声明。
+<code lang="javascript">
+document.getElementById('maindiv').getElementsByTagName("p"); 
+</code>
+<strong>节点列表(nodeList)：</strong>
+当我们使用节点列表时，通常要把此列表保存在一个变量中，就像这样：
+<code lang="javascript">
+var x=document.getElementsByTagName("p");
+</code></p>]]></description>
+				<content:encoded><![CDATA[<p><strong>节点：</strong><br />
+根据 DOM，HTML 文档中的每个成分都是一个节点。DOM 是这样规定的：<br />
+(1)整个文档是一个文档节点<br />
+(2)每个 HTML 标签是一个元素节点<br />
+(3)包含在 HTML 元素中的文本是文本节点<br />
+(4)每一个 HTML 属性是一个属性节点<br />
+(5)注释属于注释节点</p>
+<p><strong>查找并访问节点：</strong><br />
+(1)通过使用 getElementById() 和 getElementsByTagName() 方法<br />
+(2)通过使用一个元素节点的 parentNode、firstChild 以及 lastChild 属性</p>
+<p>getElementById() 和 getElementsByTagName() 这两种方法，可查找整个 HTML 文档中的任何 HTML 元素。这两种方法会忽略文档的结构。假如您希望查找文档中所有的 </p>
+<p> 元素，getElementsByTagName() 会把它们全部找到，不管 </p>
+<p> 元素处于文档中的哪个层次。同时，getElementById() 方法也会返回正确的元素，不论它被隐藏在文档结构中的什么位置。</p>
+<p>注：getElementById() 无法工作在 XML 中。在 XML 文档中，您必须通过拥有类型 id 的属性来进行搜索，而此类型必须在 XML DTD 中进行声明。</p>
+
+<div class="wp_code"><div class="pre"><pre class="javascript" style="font-family:'Times New Roman',Garamond, Times;">document.<span style="color: #660066;">getElementById</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'maindiv'</span><span style="color: #009900;">&#41;</span>.<span style="color: #660066;">getElementsByTagName</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;p&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre></div></div>
+
+<p><strong>节点列表(nodeList)：</strong><br />
+当我们使用节点列表时，通常要把此列表保存在一个变量中，就像这样：</p>
+
+<div class="wp_code"><div class="pre"><pre class="javascript" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #003366; font-weight: bold;">var</span> x<span style="color: #339933;">=</span>document.<span style="color: #660066;">getElementsByTagName</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;p&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre></div></div>
+
+<p>现在，变量 x 包含着页面中所有 </p>
+<p> 元素的一个列表，并且我们可以通过它们的索引号来访问这些 </p>
+<p> 元素(索引号从 0 开始)。<br />
+您可以通过使用 length 属性来循环遍历节点列表：</p>
+
+<div class="wp_code"><div class="pre"><pre class="javascript" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #003366; font-weight: bold;">var</span> x<span style="color: #339933;">=</span>document.<span style="color: #660066;">getElementsByTagName</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;p&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #000066; font-weight: bold;">for</span> <span style="color: #009900;">&#40;</span><span style="color: #003366; font-weight: bold;">var</span> i<span style="color: #339933;">=</span><span style="color: #CC0000;">0</span><span style="color: #339933;">;</span>i<span style="color: #339933;">&lt;</span>x .<span style="color: #660066;">length</span><span style="color: #339933;">;</span>i<span style="color: #339933;">++</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span> 
+  <span style="color: #006600; font-style: italic;">// do something with each paragraph</span>
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>您也可以通过索引号来访问某个具体的元素。</p>
+<p><strong>parentNode、firstChild以及lastChild</strong><br />
+这三个属性 parentNode、firstChild 以及 lastChild 可遵循文档的结构，在文档中进行“短距离的旅行”。</p>
+
+<div class="wp_code"><div class="pre"><pre class="html" style="font-family:'Times New Roman',Garamond, Times;">&lt;table&gt;
+  &lt;tr&gt;
+    &lt;td&gt;John&lt;/td&gt;
+    &lt;td&gt;Doe&lt;/td&gt;
+    &lt;td&gt;Alaska&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;</pre></div></div>
+
+<p>在上面的HTML代码中，第一个 </p>
+<td> 是 </p>
+<tr> 元素的首个子元素（firstChild），而最后一个 </p>
+<td> 是 </p>
+<tr>元素的最后一个子元素（lastChild）。<br />
+此外，</tr>
+<tr> 是每个 </p>
+<td>元 素的父节点（parentNode）。</p>
+<p>对 firstChild 最普遍的用法是访问某个元素的文本：</p>
+
+<div class="wp_code"><div class="pre"><pre class="javascript" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #003366; font-weight: bold;">var</span> x<span style="color: #339933;">=</span><span style="color: #009900;">&#91;</span>a paragraph<span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+<span style="color: #003366; font-weight: bold;">var</span> text<span style="color: #339933;">=</span>x.<span style="color: #660066;">firstChild</span>.<span style="color: #660066;">nodeValue</span><span style="color: #339933;">;</span></pre></div></div>
+
+<p>parentNode 属性常被用来改变文档的结构。假设您希望从文档中删除带有 id 为 &#8220;maindiv&#8221; 的节点：</p>
+
+<div class="wp_code"><div class="pre"><pre class="javascript" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #003366; font-weight: bold;">var</span> x<span style="color: #339933;">=</span>document.<span style="color: #660066;">getElementById</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;maindiv&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+x.<span style="color: #660066;">parentNode</span>.<span style="color: #660066;">removeChild</span><span style="color: #009900;">&#40;</span>x<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre></div></div>
+
+<p>首先，您需要找到带有指定 id 的节点，然后移至其父节点并执行 removeChild() 方法。</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/7446.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+	</channel>
+</rss>

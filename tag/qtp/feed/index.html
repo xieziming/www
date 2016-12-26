@@ -1,0 +1,821 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>QTP &#8211; 谢子明</title>
+	<atom:link href="http://www.xieziming.com/tag/qtp/feed" rel="self" type="application/rss+xml" />
+	<link>http://www.xieziming.com</link>
+	<description>Suny Xie</description>
+	<lastBuildDate>Mon, 26 Dec 2016 07:34:38 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.7</generator>
+	<item>
+		<title>QTP插件拓展（C#）</title>
+		<link>http://www.xieziming.com/archives/7614.html</link>
+		<comments>http://www.xieziming.com/archives/7614.html#respond</comments>
+		<pubDate>Sat, 10 Nov 2012 15:01:17 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[测试]]></category>
+		<category><![CDATA[QTP]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=7614</guid>
+		<description><![CDATA[QTP能录制那些不被直接支持的.NET控件，但是以低级鼠标和键盘操作，例如“Drag”、“Drop”，这样的脚本的可理解性、可维护性都很差，并且由于位置受分辨率等因素的影响，容易导致回放脚本时失败。
+<font color="#00BB00"><strong>安装Custom Server模板</strong></font>
+通过安装QTP的.NET插件提供的Custom Server C#项目模板到Visual Studio.NET中，利用Visual Studio.NET开发工具来建立Custom Server项目，适用.NET插件的扩展模块。在QTP安装目录中的“\bin\Custom ”目录下，可以找到名为“InstWizard.msi”的安装文件，用于安装Custom Server模板。安装完成后，打开Visual Studio.NET 2005，可以发现在C#项目中多了一个名为“QuickTest CustomServer”的模板。
+<font color="#00BB00"><strong>建立.NET控件的测试扩展项目</strong></font>
+安装好CustomServer项目模板后，就可以开始创建CustomServer项目，编写QTP的.NET插件扩展程序。
+（1）选择“QuickTest CustomServer”，输入项目名和存储位置后，单击“确定”按钮。
+（2）在“Server class name”中输入“TrackBarCustomerServer”，选中“Customize Record process”和“Customize Run process”，接受其他的默认设置，然后单击“Next”按钮。
+（3）在“Customized Control type”中输入“System.Windows.Forms.TrackBar”，然后单击“Finish”按钮，完成设置。这样就创建了一个基本的CustomServer项目框架。
+<font color="#00BB00"><strong>创建CustomServer项目</strong></font>
+（1）实现控件录制逻辑
+创建了基本的项目框架后，还需要实现控件的录制逻辑。在“TrackBarCustomerServer”类中，添加如下方法。
+<code lang="java">
+public void OnValueChanged(object sender, EventArgs e){
+       System.Windows.Forms.TrackBar trackBar = (System.Windows.Forms. TrackBar) sender;
+       // 获取新的值
+       int newValue = trackBar.Value;
+       // 把SetValue 命令录制到测试脚本中
+       RecordFunction("SetValue", RecordingMode.RECORD_SEND_LINE, newValue);
+}
+</code>]]></description>
+				<content:encoded><![CDATA[<p>QTP能录制那些不被直接支持的.NET控件，但是以低级鼠标和键盘操作，例如“Drag”、“Drop”，这样的脚本的可理解性、可维护性都很差，并且由于位置受分辨率等因素的影响，容易导致回放脚本时失败。</p>
+<p><font color="#00BB00"><strong>安装Custom Server模板</strong></font></p>
+<p>通过安装QTP的.NET插件提供的Custom Server C#项目模板到Visual Studio.NET中，利用Visual Studio.NET开发工具来建立Custom Server项目，适用.NET插件的扩展模块。在QTP安装目录中的“\bin\Custom ”目录下，可以找到名为“InstWizard.msi”的安装文件，用于安装Custom Server模板。安装完成后，打开Visual Studio.NET 2005，可以发现在C#项目中多了一个名为“QuickTest CustomServer”的模板。</p>
+<p><font color="#00BB00"><strong>建立.NET控件的测试扩展项目</strong></font></p>
+<p>安装好CustomServer项目模板后，就可以开始创建CustomServer项目，编写QTP的.NET插件扩展程序。<br />
+（1）选择“QuickTest CustomServer”，输入项目名和存储位置后，单击“确定”按钮。<br />
+（2）在“Server class name”中输入“TrackBarCustomerServer”，选中“Customize Record process”和“Customize Run process”，接受其他的默认设置，然后单击“Next”按钮。<br />
+（3）在“Customized Control type”中输入“System.Windows.Forms.TrackBar”，然后单击“Finish”按钮，完成设置。这样就创建了一个基本的CustomServer项目框架。</p>
+<p><font color="#00BB00"><strong>创建CustomServer项目</strong></font></p>
+<p>（1）实现控件录制逻辑<br />
+创建了基本的项目框架后，还需要实现控件的录制逻辑。在“TrackBarCustomerServer”类中，添加如下方法。</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> OnValueChanged<span style="color: #009900;">&#40;</span>object sender, EventArgs e<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+       <span style="color: #003399;">System</span>.<span style="color: #006633;">Windows</span>.<span style="color: #006633;">Forms</span>.<span style="color: #006633;">TrackBar</span> trackBar <span style="color: #339933;">=</span> <span style="color: #009900;">&#40;</span><span style="color: #003399;">System</span>.<span style="color: #006633;">Windows</span>.<span style="color: #006633;">Forms</span>. <span style="color: #006633;">TrackBar</span><span style="color: #009900;">&#41;</span> sender<span style="color: #339933;">;</span>
+       <span style="color: #666666; font-style: italic;">// 获取新的值</span>
+       <span style="color: #000066; font-weight: bold;">int</span> newValue <span style="color: #339933;">=</span> trackBar.<span style="color: #006633;">Value</span><span style="color: #339933;">;</span>
+       <span style="color: #666666; font-style: italic;">// 把SetValue 命令录制到测试脚本中</span>
+       RecordFunction<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;SetValue&quot;</span>, RecordingMode.<span style="color: #006633;">RECORD_SEND_LINE</span>, newValue<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>该方法用于在TrackBar控件的ValueChanged事件发生时，获取TrackBar控件的新值，然后，调用RecordFunction方法的SetValue命令，设置TrackBar控件的新值。</p>
+<p>RecordFunction是QTP的.NET插件扩展API提供的一个方法，用于往测试脚本中写入一行。其使用方法如下：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> RecordFunction<span style="color: #009900;">&#40;</span>
+       string strFunc, <span style="color: #666666; font-style: italic;">// 回放脚本时，测试对象执行的方法</span>
+       RecordingMode eMode, <span style="color: #666666; font-style: italic;">// RecordingMode枚举中的一个</span>
+       params object<span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> parameters <span style="color: #666666; font-style: italic;">// 要写入的变量值</span>
+<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre></div></div>
+
+<p>（2）注册TrackBar控件的事件处理器<br />
+在InitEventListener方法中，添加如下代码，用于注册TrackBar控件的OnValueChanged事件处理器：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">public</span> override <span style="color: #000066; font-weight: bold;">void</span> InitEventListener<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+       <span style="color: #666666; font-style: italic;">// 为OnValueChanged新建一个事件处理器</span>
+       <span style="color: #003399;">Delegate</span> e <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">System</span>.<span style="color: #006633;">EventHandler</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">this</span>.<span style="color: #006633;">OnValueChanged</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+       <span style="color: #666666; font-style: italic;">// 添加处理器</span>
+       AddHandler<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;ValueChanged&quot;</span>, e<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>（3）实现控件的运行逻辑<br />
+还要实现控件的测试运行逻辑，在测试运行时，告诉QTP按指定的行为操作控件。因此，需要编写TrackBar控件的SetValue方法。在ITrackBarCustomerServerReplay接口中，添加SetValue方法，如下所示：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">interface</span> ITrackBarCustomerServerReplay<span style="color: #009900;">&#123;</span>
+       <span style="color: #666666; font-style: italic;">// 在ITrackBarCustomerServerReplay接口中添加SetValue方法</span>
+       <span style="color: #000066; font-weight: bold;">void</span> SetValue<span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">int</span> newValue<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>然后在TrackBarCustomerServer类中添加SetValue方法的实现，如下代码所示：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> SetValue<span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">int</span> newValue<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+       <span style="color: #003399;">System</span>.<span style="color: #006633;">Windows</span>.<span style="color: #006633;">Forms</span>.<span style="color: #006633;">TrackBar</span> trackBar <span style="color: #339933;">=</span> <span style="color: #009900;">&#40;</span><span style="color: #003399;">System</span>.<span style="color: #006633;">Windows</span>.<span style="color: #006633;">Forms</span>. <span style="color: #006633;">TrackBar</span><span style="color: #009900;">&#41;</span> SourceControl<span style="color: #339933;">;</span>
+       <span style="color: #666666; font-style: italic;">// 改变trackBar控件的值</span>
+       trackBar.<span style="color: #006633;">Value</span> <span style="color: #339933;">=</span> newValue<span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>（4）对QTP进行配置<br />
+在完成上面的代码编写后，编译整个项目，然后，就可以通过配置项目中的“Configuration.XML”文件，以便在QTP的录制和测试运行TrackBar控件的过程中使用这个Custom Server的逻辑。<br />
+（4.1）双击打开Configuration.XML文件。<br />
+XML文件内容大致如下所示：</p>
+
+<div class="wp_code"><div class="pre"><pre class="xml" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #808080; font-style: italic;">&lt;!-- Merge this XML content into file &quot;&lt;QuickTest Professional&gt;\dat\ SwfConfig.xml&quot;. --&gt;</span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;control</span> <span style="color: #000066;">Type</span>=<span style="color: #ff0000;">&quot;System.Windows.Forms.TrackBar&quot;</span> <span style="color: #000000; font-weight: bold;">&gt;</span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;customrecord<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;component<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;context<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>AUT<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/context<span style="color: #000000; font-weight: bold;">&gt;</span></span><span style="color: #000000; font-weight: bold;">&lt;dllname<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>D:\QTP\MyWork\QuickTestCustomServer1\QuickTestCustomServer1\Bin\ QuickTestCustomServer1.dll<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/dllname<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;typename<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>QuickTestCustomServer1.TrackBarCustomerServer <span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/typename<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/component<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/customrecord<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;customreplay<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;component<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;context<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>AUT<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/context<span style="color: #000000; font-weight: bold;">&gt;</span></span><span style="color: #000000; font-weight: bold;">&lt;dllname<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>D:\QTP\MyWork\QuickTestCustomServer1\QuickTestCustomServer1\Bin\ QuickTestCustomServer1.dll<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/dllname<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;typename<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>QuickTestCustomServer1.TrackBarCustomerServer <span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/typename<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/component<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/customreplay<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/control<span style="color: #000000; font-weight: bold;">&gt;</span></span></span></pre></div></div>
+
+<p>（4.2）把其中的“&lt;Control&gt;”到“&lt;/Control&gt;”的这段内容复制，然后，打开&lt; QTP安装目录 &gt;\dat 中的SwfConfig.xml文件，把刚才复制的内容替换SwfConfig.xml文件中的“&lt;Controls&gt;”到“&lt;/Controls&gt;”段内的内容。粘贴后，SwfConfig.xml文件的内容如下所示：</p>
+
+<div class="wp_code"><div class="pre"><pre class="xml" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #009900;">&lt; ?xml <span style="color: #000066;">version</span>=<span style="color: #ff0000;">&quot;1.0&quot;</span> <span style="color: #000066;">encoding</span>=<span style="color: #ff0000;">&quot;UTF-8&quot;</span><span style="color: #000000; font-weight: bold;">?&gt;</span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;controls<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;control</span> <span style="color: #000066;">Type</span>=<span style="color: #ff0000;">&quot;System.Windows.Forms.TrackBar&quot;</span> <span style="color: #000000; font-weight: bold;">&gt;</span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;customrecord<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;component<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;context<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>AUT<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/context<span style="color: #000000; font-weight: bold;">&gt;</span></span><span style="color: #000000; font-weight: bold;">&lt;dllname<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>D:\QTP\MyWork\QuickTestCustomServer1\QuickTestCustomServer1\Bin\ QuickTestCustomServer1.dll<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/dllname<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;typename<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>QuickTestCustomServer1.TrackBarCustomerServer <span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/typename<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/component<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/customrecord<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;customreplay<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;component<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;context<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>AUT<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/context<span style="color: #000000; font-weight: bold;">&gt;</span></span><span style="color: #000000; font-weight: bold;">&lt;dllname<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>D:\QTP\MyWork\QuickTestCustomServer1\QuickTestCustomServer1\Bin\ QuickTestCustomServer1.dll<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/dllname<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;typename<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>QuickTestCustomServer1.TrackBarCustomerServer <span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/typename<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/component<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/customreplay<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/control<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/controls<span style="color: #000000; font-weight: bold;">&gt;</span></span></span></pre></div></div>
+
+<p>（4.3）确保<dllname>元素中包含了正确的Custom Server编译的DLL的正确路径，然后保存SwfConfig.xml文件。</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/7614.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>QTP调用外部函数</title>
+		<link>http://www.xieziming.com/archives/7729.html</link>
+		<comments>http://www.xieziming.com/archives/7729.html#respond</comments>
+		<pubDate>Sat, 10 Nov 2012 14:31:50 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[测试]]></category>
+		<category><![CDATA[QTP]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=7729</guid>
+		<description><![CDATA[QTP主要提供了3种DLL的调用方式，这3种调用方式分别为Extern、CreateObject和DotNetFactory。这3种调用方式都分别对应着不同类型的DLL。
+
+首先Extern所调用的DLL为WIN32 API - DLL，Createobject所调用的是ActiveX类型的DLL，这类DLL其实应用的最多，AOM \ EOM等都是此类型的DLL，最后一种.NET Factory是直接调用.Net framework 或者.NET自定义的DLL。
+
+<strong>Extern：</strong>
+(1)例子一：
+<code lang="vb">
+'#######启动浏览器######## 
+systemutil.Run "iexplore.exe"
+
+'#######创建API  Extern对象########## 
+Extern.Declare micHWnd, "GetForegroundWindow", "user32.dll", "GetForegroundWindow"
+
+'######使用WIN32 API获取窗口的句柄###### 
+hwnd = Extern.GetForegroundWindow()
+
+'########通过获取的句柄控制浏览器窗口并跳转百度##### 
+Browser("hwnd:=" &#038; hwnd).Navigate "http://www.baidu.com"
+</code>]]></description>
+				<content:encoded><![CDATA[<p>QTP主要提供了3种DLL的调用方式，这3种调用方式分别为Extern、CreateObject和DotNetFactory。这3种调用方式都分别对应着不同类型的DLL。</p>
+<p>首先Extern所调用的DLL为WIN32 API &#8211; DLL，Createobject所调用的是ActiveX类型的DLL，这类DLL其实应用的最多，AOM \ EOM等都是此类型的DLL，最后一种.NET Factory是直接调用.Net framework 或者.NET自定义的DLL。</p>
+<p><strong>Extern：</strong><br />
+例子一：</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #008000;">'#######启动浏览器######## 
+</span>systemutil.Run <span style="color: #800000;">&quot;iexplore.exe&quot;</span>
+&nbsp;
+<span style="color: #008000;">'#######创建API  Extern对象########## 
+</span>Extern.<span style="color: #151B8D; font-weight: bold;">Declare</span> micHWnd, <span style="color: #800000;">&quot;GetForegroundWindow&quot;</span>, <span style="color: #800000;">&quot;user32.dll&quot;</span>, <span style="color: #800000;">&quot;GetForegroundWindow&quot;</span>
+&nbsp;
+<span style="color: #008000;">'######使用WIN32 API获取窗口的句柄###### 
+</span>hwnd = Extern.GetForegroundWindow()
+&nbsp;
+<span style="color: #008000;">'########通过获取的句柄控制浏览器窗口并跳转百度##### 
+</span>Browser(<span style="color: #800000;">&quot;hwnd:=&quot;</span> &amp; hwnd).Navigate <span style="color: #800000;">&quot;http://www.baidu.com&quot;</span></pre></div></div>
+
+<p>例子二：</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;">Const SW_MINIMIZE = 6
+<span style="color: #008000;">'声明user32.dll中的ShowWindow方法
+</span>Extern.<span style="color: #151B8D; font-weight: bold;">Declare</span> micLong,<span style="color: #800000;">&quot;ShowWindow&quot;</span>,<span style="color: #800000;">&quot;user32.dll&quot;</span>,<span style="color: #800000;">&quot;ShowWindow&quot;</span>,micLong,micLong
+&nbsp;
+<span style="color: #008000;">'高亮QTP窗口对象
+</span>Window(<span style="color: #800000;">&quot;text:=QuickTest.*&quot;</span>).highlight
+&nbsp;
+<span style="color: #008000;">'获取QTP自身的窗口对象的句柄属性
+</span>ohwnd = Window(<span style="color: #800000;">&quot;text:=QuickTest.*&quot;</span>).GetROProperty(<span style="color: #800000;">&quot;HWND&quot;</span>)
+&nbsp;
+<span style="color: #008000;">'调用ShowWindow方法 并加入最小化窗口参数
+</span>Extern.ShowWindow ohwnd,SW_MINIMIZE
+&nbsp;
+<span style="color: #008000;">'等待两秒钟
+</span>wait 2</pre></div></div>
+
+<p>注：QTP本身并没有加入反HOOK注入，因此，同样可以把QTP自身程序窗口加入到对象库中并对其进行一些操作。以上脚本就是直接通过Window(&#8220;text:=QuickTest.*&#8221;)获取到QTP对象窗口的，获取到之后即可方便做操作。</p>
+<p><strong>Createobject：</strong></p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #151B8D; font-weight: bold;">Set</span> oIE = <span style="color: #E56717; font-weight: bold;">CreateObject</span>(<span style="color: #800000;">&quot;InternetExplorer.Application&quot;</span>)
+oIE.Visible = <span style="color: #00C2FF; font-weight: bold;">True</span>  <span style="color: #008000;">'设置可见
+</span>oIE.Navigate <span style="color: #800000;">&quot;http://www.baidu.com&quot;</span>  '跳转URL</pre></div></div>
+
+<p><strong>DotNetFactory：</strong></p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #151B8D; font-weight: bold;">Set</span> var_CreateInstance = DotNetFactory.CreateInstance（<span style="color: #800000;">&quot;System.Windows.Forms.Form&quot;</span>， <span style="color: #800000;">&quot;System.Windows.Forms&quot;</span>）
+var_CreateInstance.Show</pre></div></div>
+
+<p>下面我说一下如何用DotNetFactory调用我们自己开发的。net类库。</p>
+<p>首先用Visual Studio 2003或者2005创建一个新项目：类库，我用的是C#.新建一个类，假设命名空间是Test.myTest，类名是QTPTest。我们再新建一个公共方法：　public string DoAction（）假设编译后产生的文件是d：\mtTest.dll.下面我们在QTP里面写脚本：</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #151B8D; font-weight: bold;">Set</span> obj = DotNetFactory.CreateInstance（<span style="color: #800000;">&quot;Test.myTest.QTPTest&quot;</span>， <span style="color: #800000;">&quot;d：\mtTest.dll&quot;</span>）
+obj.DoAction</pre></div></div>
+
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/7729.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>QTP Action 参数传递</title>
+		<link>http://www.xieziming.com/archives/7382.html</link>
+		<comments>http://www.xieziming.com/archives/7382.html#respond</comments>
+		<pubDate>Mon, 17 Sep 2012 14:29:49 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[测试]]></category>
+		<category><![CDATA[QTP]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=7382</guid>
+		<description><![CDATA[以QTP的Flight为例子讲下Action参数传递。
+<code lang="vb">
+SystemUtil.Run "C:\Program Files\Mercury\QuickTest Professional\samples\flight\app\flight4a.exe","","C:\Program Files\Mercury\QuickTest Professional\samples\flight\app\","open"
+Dialog("Login").WinEdit("Agent Name:").Set Parameter("InAction1")
+wait 5
+Dialog("Login").WinEdit("Agent Name:").Type  micTab
+Dialog("Login").WinEdit("Password:").SetSecure "4649c633ffc8803c10097292953c6334fde3e923"
+Dialog("Login").WinEdit("Password:").Type  micReturn
+Window("Flight Reservation").Close
+Parameter("OutAction1") = True
+</code>
+然后，鼠标选中Keyword View中的Action1，点右键---Action Property，在Parameters的Tab标签下，分别加入：输入参数 InAction1 ，类型String；输出参数 OutAction1，类型 Boolean。]]></description>
+				<content:encoded><![CDATA[<p>以QTP的Flight为例子讲下Top Level的Action参数传递。</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;">SystemUtil.Run <span style="color: #800000;">&quot;C:\Program Files\Mercury\QuickTest Professional\samples\flight\app\flight4a.exe&quot;</span>,<span style="color: #800000;">&quot;&quot;</span>,<span style="color: #800000;">&quot;C:\Program Files\Mercury\QuickTest Professional\samples\flight\app\&quot;</span>,<span style="color: #800000;">&quot;open&quot;</span>
+Dialog(<span style="color: #800000;">&quot;Login&quot;</span>).WinEdit(<span style="color: #800000;">&quot;Agent Name:&quot;</span>).<span style="color: #151B8D; font-weight: bold;">Set</span> Parameter(<span style="color: #800000;">&quot;InAction1&quot;</span>)
+wait 5
+Dialog(<span style="color: #800000;">&quot;Login&quot;</span>).WinEdit(<span style="color: #800000;">&quot;Agent Name:&quot;</span>).<span style="color: #151B8D; font-weight: bold;">Type</span>  micTab
+Dialog(<span style="color: #800000;">&quot;Login&quot;</span>).WinEdit(<span style="color: #800000;">&quot;Password:&quot;</span>).SetSecure <span style="color: #800000;">&quot;4649c633ffc8803c10097292953c6334fde3e923&quot;</span>
+Dialog(<span style="color: #800000;">&quot;Login&quot;</span>).WinEdit(<span style="color: #800000;">&quot;Password:&quot;</span>).<span style="color: #151B8D; font-weight: bold;">Type</span>  micReturn
+Window(<span style="color: #800000;">&quot;Flight Reservation&quot;</span>).<span style="color: #8D38C9; font-weight: bold;">Close</span>
+Parameter(<span style="color: #800000;">&quot;OutAction1&quot;</span>) = <span style="color: #00C2FF; font-weight: bold;">True</span></pre></div></div>
+
+<p>然后，鼠标选中Keyword View中的Action1，点右键&#8212;Action Property，在Parameters的Tab标签下，分别加入：输入参数 InAction1 ，类型String；输出参数 OutAction1，类型 Boolean。</p>
+<p>再然后，在QTP的菜单File&#8212;>>Settings的Parameters的Tab标签下，分别加入：输入参数 InParam1 ，类型String；输出参数 OutParam1，类型 Boolean。</p>
+<p>接着，鼠标还是选中Keyword View中的Action1，点右键，这次点“Action Call Properties”，在Parameter Values里进行参数化传递设置，把InParam1的值传递给InAction1，把OutAction1的值传递给OutParam1。</p>
+<p>以上设置完毕后，点“保存”，保存到C:\下，存为Test1好了。</p>
+<p>最后，在你的硬盘上新建一个vbs文件，文件内容如下：</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #151B8D; font-weight: bold;">Dim</span> qtApp ,pDefColl,pDef ,rtParams,rtParam 
+<span style="color: #151B8D; font-weight: bold;">Set</span> qtApp = <span style="color: #E56717; font-weight: bold;">CreateObject</span>(<span style="color: #800000;">&quot;QuickTest.Application&quot;</span>) 
+qtApp.Launch 
+qtApp.Visible = <span style="color: #00C2FF; font-weight: bold;">True</span> 
+qtApp.<span style="color: #151B8D; font-weight: bold;">Open</span> <span style="color: #800000;">&quot;C:\Test1&quot;</span> 
+<span style="color: #151B8D; font-weight: bold;">Set</span> pDefColl = qtApp.Test.ParameterDefinitions 
+<span style="color: #008000;">'cnt = pDefColl.Count 
+</span><span style="color: #008000;">'Indx = 1 
+</span><span style="color: #008000;">'While Indx &lt; = cnt 
+</span>    <span style="color: #008000;">'Set pDef = pDefColl.Item(Indx) 
+</span>    <span style="color: #008000;">'Indx = Indx + 1 
+</span><span style="color: #008000;">'Wend 
+</span><span style="color: #151B8D; font-weight: bold;">Set</span> rtParams = pDefColl.GetParameters() 
+<span style="color: #151B8D; font-weight: bold;">Set</span> rtParam = rtParams.Item(<span style="color: #800000;">&quot;InParam1&quot;</span>) 
+rtParam.Value = <span style="color: #800000;">&quot;songfun&quot;</span> 
+qtApp.Test.Run , <span style="color: #00C2FF; font-weight: bold;">True</span>, rtParams
+MsgBox rtParams.Item(<span style="color: #800000;">&quot;OutParam1&quot;</span>).Value</pre></div></div>
+
+<p>做完这步之后，保存这个vbs文件，双击执行这个vbs文件，你会发现它自动启动了QTP，而且进行了自动测试，最后还取到了运行成功与否的布尔值。</p>
+<p>它的参数的整个传递过程是：</p>
+<p>外部vbs文件 传参数给QuickTest的Test的输入参数InParam1，然后InParam1传参数到InAction1去驱动了Action1的测试，然后通过这个Action1得出了OutAction1的值，然后通过OutAction1传给OutParam1，最后再传回到vbs文件中。示例用MsgBox来打出重新传回到vbs文件中的字符串。</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/7382.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>QTP控制Java程序原理</title>
+		<link>http://www.xieziming.com/archives/7366.html</link>
+		<comments>http://www.xieziming.com/archives/7366.html#respond</comments>
+		<pubDate>Sun, 16 Sep 2012 13:41:43 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[测试]]></category>
+		<category><![CDATA[java]]></category>
+		<category><![CDATA[QTP]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=7366</guid>
+		<description><![CDATA[首先，添加如下环境变量：
+<code lang="java">
+_JAVA_OPTIONS：
+-Xrunjvmhook -Xbootclasspath/a:C:\PROGRA~1\HP\QUICKT~1\bin\JAVA_S~1\classes;C:\PROGRA~1\HP\QUICKT~1\bin\JAVA_S~1\classes\jasmine.jar
+
+JAVA_TOOL_OPTIONS：
+-agentlib:jvmhook
+</code>
+此时再起的JVM的时候会有如下log出现：
+<code lang="java">
+Picked up JAVA_TOOL_OPTIONS: -agentlib:jvmhook
+Picked up _JAVA_OPTIONS: -Xrunjvmhook -Xbootclasspath/a:\PROGRA~1\HP\QUICKT~1\bin\JAVA_S~1\classes;D:\PROGRA~1\HP\QUICKT~1\bin\JAVA_S~1\classes\jasmine.jar
+Loading HP QuickTest Professional Java Support (version 10.0.2297.0) (SUN 1.5.0_09)
+</code>]]></description>
+				<content:encoded><![CDATA[<p>首先，添加如下环境变量：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;">_JAVA_OPTIONS：
+<span style="color: #339933;">-</span>Xrunjvmhook <span style="color: #339933;">-</span>Xbootclasspath<span style="color: #339933;">/</span>a<span style="color: #339933;">:</span>C<span style="color: #339933;">:</span>\PROGRA~<span style="color: #cc66cc;">1</span>\HP\QUICKT~<span style="color: #cc66cc;">1</span>\bin\JAVA_S~<span style="color: #cc66cc;">1</span>\classes<span style="color: #339933;">;</span>C<span style="color: #339933;">:</span>\PROGRA~<span style="color: #cc66cc;">1</span>\HP\QUICKT~<span style="color: #cc66cc;">1</span>\bin\JAVA_S~<span style="color: #cc66cc;">1</span>\classes\jasmine.<span style="color: #006633;">jar</span>
+&nbsp;
+JAVA_TOOL_OPTIONS：
+<span style="color: #339933;">-</span>agentlib<span style="color: #339933;">:</span>jvmhook</pre></div></div>
+
+<p>此时再起JVM的时候会有如下log出现：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;">Picked up JAVA_TOOL_OPTIONS<span style="color: #339933;">:</span> <span style="color: #339933;">-</span>agentlib<span style="color: #339933;">:</span>jvmhook
+Picked up _JAVA_OPTIONS<span style="color: #339933;">:</span> <span style="color: #339933;">-</span>Xrunjvmhook <span style="color: #339933;">-</span>Xbootclasspath<span style="color: #339933;">/</span>a<span style="color: #339933;">:</span>\PROGRA~<span style="color: #cc66cc;">1</span>\HP\QUICKT~<span style="color: #cc66cc;">1</span>\bin\JAVA_S~<span style="color: #cc66cc;">1</span>\classes<span style="color: #339933;">;</span>D<span style="color: #339933;">:</span>\PROGRA~<span style="color: #cc66cc;">1</span>\HP\QUICKT~<span style="color: #cc66cc;">1</span>\bin\JAVA_S~<span style="color: #cc66cc;">1</span>\classes\jasmine.<span style="color: #006633;">jar</span>
+Loading HP QuickTest Professional Java Support <span style="color: #009900;">&#40;</span>version 10.0.2297.0<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#40;</span>SUN 1.5.0_09<span style="color: #009900;">&#41;</span></pre></div></div>
+
+<p>接下来呢就要利用Java的JVMTI技术来实现对Java程序的控制了。大体的意思就是JVM提供了一些接口,你可以向JVM注册你感兴趣的事件,比如我们这里感兴趣的是JVM加载类的时候,我们希望有途径把我们自己的代码有选择的注入到类里.在JVMTI中,这个事件就是JVMTI_EVENT_CLASS_FILE_LOAD_HOOK .当JVM加载类的时候,会调用我们注册的回调函数,而我们就可以在这个函数里做自己想做的事。</p>
+<p>要实现这个目的,就要实现一个动态库,也就是JVMTI中的agent,在这个动态库中,有两个函数是必须的: Agent_OnLoad和Agent_OnUnload,他们是JVM与代理交互的接口.当一个代理被JVM加载后,首先调用Agent_OnLoad 这个方法;同样的,代理被JVM卸载后马上会调用Agent_OnUnload.我们就在Agent_OnLoad这个方法里注册感兴趣的事件,之后 JVM就会在&#8221;有事&#8221;的时候通知我们.要使用agent,就要在启动JVM的时候告诉他要用到那个agent:</p>
+<p>java -agentlib:<agentlibname><br />
+这个agentLibName就是有我实现的动态库的名字,因系统而定,在Windows是jvmhook.dll,</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #008000; font-style: italic; font-weight: bold;">/** Will return all methods of a give class */</span>
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">native</span> <span style="color: #003399;">Object</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> getAllObjects<span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">Class</span> clazz<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">//native方法，获取当前Object用，定义在jvmhook.dll里。</span>
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">native</span> <span style="color: #003399;">String</span> getMethodName<span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">long</span> methodId<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">//native方法，定义在jvmhook.dll里。</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">//下面是Jboss-Profiler的部分实现代码</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #003399;">Object</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> getAllObjects<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span> clazz<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+        <span style="color: #003399;">ArrayList</span> list <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">ArrayList</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        <span style="color: #000000; font-weight: bold;">Class</span> <span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> classes <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">this</span>.<span style="color: #006633;">getLoadedClasses</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        <span style="color: #000000; font-weight: bold;">for</span> <span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">int</span> i<span style="color: #339933;">=</span><span style="color: #cc66cc;">0</span><span style="color: #339933;">;</span>i<span style="color: #339933;">&lt;</span>classes .<span style="color: #006633;">length</span><span style="color: #339933;">;</span>i<span style="color: #339933;">++</span><span style="color: #009900;">&#41;</span>
+        <span style="color: #009900;">&#123;</span>
+            <span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>classes<span style="color: #009900;">&#91;</span>i<span style="color: #009900;">&#93;</span>.<span style="color: #006633;">getName</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>.<span style="color: #006633;">equals</span><span style="color: #009900;">&#40;</span>clazz<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>
+            <span style="color: #009900;">&#123;</span>
+                <span style="color: #003399;">Object</span> objs<span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">this</span>.<span style="color: #006633;">getAllObjects</span><span style="color: #009900;">&#40;</span>classes<span style="color: #009900;">&#91;</span>i<span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+                <span style="color: #000000; font-weight: bold;">for</span> <span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">int</span> count<span style="color: #339933;">=</span><span style="color: #cc66cc;">0</span><span style="color: #339933;">;</span>count<span style="color: #339933;">&lt;</span>objs.<span style="color: #006633;">length</span><span style="color: #339933;">;</span>count<span style="color: #339933;">++</span><span style="color: #009900;">&#41;</span>
+                <span style="color: #009900;">&#123;</span>
+                    list.<span style="color: #006633;">add</span><span style="color: #009900;">&#40;</span>objs<span style="color: #009900;">&#91;</span>count<span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+                <span style="color: #009900;">&#125;</span>
+            <span style="color: #009900;">&#125;</span>
+        <span style="color: #009900;">&#125;</span>
+        <span style="color: #000000; font-weight: bold;">return</span> list.<span style="color: #006633;">toArray</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #003399;">Field</span> getObjectField<span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">Class</span> clazz, <span style="color: #000066; font-weight: bold;">int</span> fieldId<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+      <span style="color: #003399;">ArrayList</span> list <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">ArrayList</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+      list.<span style="color: #006633;">add</span><span style="color: #009900;">&#40;</span>clazz<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+      <span style="color: #000000; font-weight: bold;">while</span> <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span>clazz <span style="color: #339933;">=</span> clazz.<span style="color: #006633;">getSuperclass</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">!=</span><span style="color: #000066; font-weight: bold;">null</span><span style="color: #009900;">&#41;</span>
+      <span style="color: #009900;">&#123;</span>
+            list.<span style="color: #006633;">add</span><span style="color: #009900;">&#40;</span>clazz<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+      <span style="color: #009900;">&#125;</span>
+&nbsp;
+      <span style="color: #000000; font-weight: bold;">for</span> <span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">int</span> i<span style="color: #339933;">=</span>list.<span style="color: #006633;">size</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">-</span><span style="color: #cc66cc;">1</span><span style="color: #339933;">;</span>i<span style="color: #339933;">&gt;=</span><span style="color: #cc66cc;">0</span><span style="color: #339933;">;</span>i<span style="color: #339933;">--</span><span style="color: #009900;">&#41;</span>
+      <span style="color: #009900;">&#123;</span>
+            <span style="color: #003399;">Field</span> fields<span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">Class</span><span style="color: #009900;">&#41;</span>list.<span style="color: #006633;">get</span><span style="color: #009900;">&#40;</span>i<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>.<span style="color: #006633;">getDeclaredFields</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+            <span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>fieldId<span style="color: #339933;">&lt;</span>fields .<span style="color: #006633;">length</span><span style="color: #009900;">&#41;</span>
+            <span style="color: #009900;">&#123;</span>
+                  <span style="color: #000000; font-weight: bold;">return</span> fields<span style="color: #009900;">&#91;</span>fieldId<span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+            <span style="color: #009900;">&#125;</span>
+            fieldId <span style="color: #339933;">-=</span> fields.<span style="color: #006633;">length</span><span style="color: #339933;">;</span>
+      <span style="color: #009900;">&#125;</span>
+      <span style="color: #000000; font-weight: bold;">return</span> <span style="color: #000066; font-weight: bold;">null</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span></pre></div></div>
+
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/7366.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Application Monitor</title>
+		<link>http://www.xieziming.com/archives/6661.html</link>
+		<comments>http://www.xieziming.com/archives/6661.html#respond</comments>
+		<pubDate>Wed, 11 May 2011 11:57:15 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[测试]]></category>
+		<category><![CDATA[java]]></category>
+		<category><![CDATA[QTP]]></category>
+		<category><![CDATA[程序]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=6661</guid>
+		<description><![CDATA[<code lang="java">
+import java.awt.AWTException;  
+import java.awt.Image;  
+import java.awt.MenuItem;  
+import java.awt.PopupMenu;  
+import java.awt.SystemTray;  
+import java.awt.Toolkit;  
+import java.awt.TrayIcon;  
+import java.awt.event.ActionEvent;  
+import java.awt.event.ActionListener;  
+  
+import javax.swing.JDialog;
+import javax.swing.JFrame;  
+import javax.swing.JOptionPane;
+  
+  
+public class Launcher{  
+      
+    public Launcher() {  
+         this.setTray();  
+         QTPMonitor qtpm= new QTPMonitor();
+         qtpm.start();
+    }  
+</code>]]></description>
+				<content:encoded><![CDATA[<p>These monitor program includes 3 class files as follows:</p>
+<p><strong>Launcher.java</strong></p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">java.awt.AWTException</span><span style="color: #339933;">;</span>  
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">java.awt.Image</span><span style="color: #339933;">;</span>  
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">java.awt.MenuItem</span><span style="color: #339933;">;</span>  
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">java.awt.PopupMenu</span><span style="color: #339933;">;</span>  
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">java.awt.SystemTray</span><span style="color: #339933;">;</span>  
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">java.awt.Toolkit</span><span style="color: #339933;">;</span>  
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">java.awt.TrayIcon</span><span style="color: #339933;">;</span>  
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">java.awt.event.ActionEvent</span><span style="color: #339933;">;</span>  
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">java.awt.event.ActionListener</span><span style="color: #339933;">;</span>  
+&nbsp;
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">javax.swing.JDialog</span><span style="color: #339933;">;</span>
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">javax.swing.JFrame</span><span style="color: #339933;">;</span>  
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">javax.swing.JOptionPane</span><span style="color: #339933;">;</span>
+&nbsp;
+&nbsp;
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> Launcher<span style="color: #009900;">&#123;</span>  
+&nbsp;
+    <span style="color: #000000; font-weight: bold;">public</span> Launcher<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>  
+         <span style="color: #000000; font-weight: bold;">this</span>.<span style="color: #006633;">setTray</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+         QTPMonitor qtpm<span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> QTPMonitor<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+         qtpm.<span style="color: #006633;">start</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>  
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> setTray<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>  
+&nbsp;
+        <span style="color: #000000; font-weight: bold;">if</span><span style="color: #009900;">&#40;</span>SystemTray.<span style="color: #006633;">isSupported</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+            <span style="color: #003399;">PopupMenu</span> popMenu <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">PopupMenu</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+            <span style="color: #003399;">MenuItem</span> itemAbout <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">MenuItem</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;About&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+            itemAbout.<span style="color: #006633;">addActionListener</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">ActionListener</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>  
+                <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> actionPerformed<span style="color: #009900;">&#40;</span><span style="color: #003399;">ActionEvent</span> e<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>  
+                	<span style="color: #003399;">Object</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> options <span style="color: #339933;">=</span> <span style="color: #009900;">&#123;</span><span style="color: #0000ff;">&quot;I SEE&quot;</span><span style="color: #009900;">&#125;</span><span style="color: #339933;">;</span>
+                	<span style="color: #003399;">JOptionPane</span>.<span style="color: #006633;">showOptionDialog</span><span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">null</span>, <span style="color: #0000ff;">&quot;SUNY Z M XIE, XFOS, GBM_ITT&quot;</span>, <span style="color: #0000ff;">&quot;About QTP Monitor&quot;</span>,<span style="color: #003399;">JOptionPane</span>.<span style="color: #006633;">YES_OPTION</span>, <span style="color: #003399;">JOptionPane</span>.<span style="color: #006633;">INFORMATION_MESSAGE</span>, <span style="color: #000066; font-weight: bold;">null</span>, options, options<span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">0</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+                <span style="color: #009900;">&#125;</span>                 
+            <span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+&nbsp;
+            <span style="color: #003399;">MenuItem</span> itmExit <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">MenuItem</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;Stop &amp; Exit&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+            itmExit.<span style="color: #006633;">addActionListener</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">ActionListener</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>  
+                <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> actionPerformed<span style="color: #009900;">&#40;</span><span style="color: #003399;">ActionEvent</span> e<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>  
+                	<span style="color: #003399;">System</span>.<span style="color: #006633;">exit</span><span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">0</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+                <span style="color: #009900;">&#125;</span>  
+            <span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+            popMenu.<span style="color: #006633;">add</span><span style="color: #009900;">&#40;</span>itemAbout<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> 
+            popMenu.<span style="color: #006633;">add</span><span style="color: #009900;">&#40;</span>itmExit<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+&nbsp;
+            SystemTray tray <span style="color: #339933;">=</span> SystemTray.<span style="color: #006633;">getSystemTray</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+            <span style="color: #003399;">Image</span> image <span style="color: #339933;">=</span> <span style="color: #003399;">Toolkit</span>.<span style="color: #006633;">getDefaultToolkit</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>.<span style="color: #006633;">getImage</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;trayIconImage/sina.jpg&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+&nbsp;
+            <span style="color: #003399;">String</span> text <span style="color: #339933;">=</span> <span style="color: #0000ff;">&quot;QTP Monitor&quot;</span><span style="color: #339933;">;</span>  
+            TrayIcon trayIcon <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> TrayIcon<span style="color: #009900;">&#40;</span>image,text,popMenu<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+            <span style="color: #000000; font-weight: bold;">try</span> <span style="color: #009900;">&#123;</span>  
+                tray.<span style="color: #006633;">add</span><span style="color: #009900;">&#40;</span>trayIcon<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+            <span style="color: #009900;">&#125;</span> <span style="color: #000000; font-weight: bold;">catch</span> <span style="color: #009900;">&#40;</span><span style="color: #003399;">AWTException</span> e1<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>  
+                e1.<span style="color: #006633;">printStackTrace</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+            <span style="color: #009900;">&#125;</span>  
+        <span style="color: #009900;">&#125;</span>  
+    <span style="color: #009900;">&#125;</span>  
+&nbsp;
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> showSetting<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+    	<span style="color: #003399;">JDialog</span> JDG_about <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">JDialog</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    	JDG_about.<span style="color: #006633;">setTitle</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;About QTP Monitor&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    	JDG_about.<span style="color: #006633;">setSize</span><span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">200</span>,<span style="color: #cc66cc;">100</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+    	JDG_about.<span style="color: #006633;">setDefaultCloseOperation</span><span style="color: #009900;">&#40;</span><span style="color: #003399;">JDialog</span>.<span style="color: #006633;">DISPOSE_ON_CLOSE</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    	<span style="color: #003399;">Toolkit</span> tk <span style="color: #339933;">=</span> <span style="color: #003399;">Toolkit</span>.<span style="color: #006633;">getDefaultToolkit</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    	JDG_about.<span style="color: #006633;">setLocation</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span>tk.<span style="color: #006633;">getScreenSize</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>.<span style="color: #006633;">height</span> <span style="color: #339933;">-</span>JDG_about.<span style="color: #006633;">HEIGHT</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">/</span><span style="color: #cc66cc;">2</span>, <span style="color: #009900;">&#40;</span>tk.<span style="color: #006633;">getScreenSize</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>.<span style="color: #006633;">width</span> <span style="color: #339933;">-</span> JDG_about.<span style="color: #006633;">WIDTH</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">/</span><span style="color: #cc66cc;">2</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+      	JDG_about.<span style="color: #006633;">setVisible</span><span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">true</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+    <span style="color: #009900;">&#125;</span>
+&nbsp;
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000066; font-weight: bold;">void</span> main<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> args<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>  
+        <span style="color: #000000; font-weight: bold;">new</span> Launcher<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+    <span style="color: #009900;">&#125;</span>  
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/6661.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>QTP 同步等待</title>
+		<link>http://www.xieziming.com/archives/6678.html</link>
+		<comments>http://www.xieziming.com/archives/6678.html#respond</comments>
+		<pubDate>Sun, 26 Dec 2010 15:33:01 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[测试]]></category>
+		<category><![CDATA[QTP]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=6678</guid>
+		<description><![CDATA[<strong>1. 对象的默认等待时间</strong>
+
+QTP识别对象时，会有一个默认的等待时间，可以在File-->Settings-->Run-->Object synchronization中设置，默认时间是20秒，也就是说当执行到第2步时，网页还没有完全打开，这样的话QTP找不到第2步中需要的对象，那 么它会在20秒内不断的尝试查找对象，如果百度这个网页在20秒之内完全打开，那么这个方法就可行（网页全部打开的话，第2步所需的对象就会被找到），如 果超过20秒还不行的话，请参考下面几种方式。
+
+<strong>2. 使用.Sync方法(只能在Web中使用)</strong>
+<code lang="php">
+　　Browser("Browser").Navigatehttp://www.baidu.com
+　　Browser("Browser").Page("百度").Sync
+　　Browser("百度一下，你就知道").Page("百度一下，你就知道").WebEdit("wd").Set "Avepoint"
+</code>
+
+第2句的意思就是等待百度这个页面完全打开，才继续执行下面操作。
+
+<strong>3. QTP系统自带的同步点功能</strong>
+
+还是上面的例子，在录制状态下，选择Insert-->Synchronization Point，选择要同步的对象，设置要同步的属性，我们可以对对象的Enable，visible一类表示状态的属性做同步点，生成如下脚本
+<code lang="php">
+　　Browser("百度一下，你就知道").Page("百度一下，你就知道").WebEdit("wd").WaitProperty "visible", True, 100000
+</code>]]></description>
+				<content:encoded><![CDATA[<p><strong>1. 对象的默认等待时间</strong></p>
+<p>QTP识别对象时，会有一个默认的等待时间，可以在File&#8211;>Settings&#8211;>Run&#8211;>Object synchronization中设置，默认时间是20秒，也就是说当执行到第2步时，网页还没有完全打开，这样的话QTP找不到第2步中需要的对象，那 么它会在20秒内不断的尝试查找对象，如果百度这个网页在20秒之内完全打开，那么这个方法就可行（网页全部打开的话，第2步所需的对象就会被找到），如 果超过20秒还不行的话，请参考下面几种方式。</p>
+<p><strong>2. 使用.Sync方法(只能在Web中使用)</strong></p>
+
+<div class="wp_code"><div class="pre"><pre class="php" style="font-family:'Times New Roman',Garamond, Times;">　　Browser<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;Browser&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">.</span>Navigatehttp<span style="color: #339933;">:</span><span style="color: #666666; font-style: italic;">//www.baidu.com</span>
+　　Browser<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;Browser&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">.</span>Page<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;百度&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">.</span>Sync
+　　Browser<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;百度一下，你就知道&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">.</span>Page<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;百度一下，你就知道&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">.</span>WebEdit<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;wd&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">.</span>Set <span style="color: #0000ff;">&quot;Avepoint&quot;</span></pre></div></div>
+
+<p>第2句的意思就是等待百度这个页面完全打开，才继续执行下面操作。</p>
+<p><strong>3. QTP系统自带的同步点功能</strong></p>
+<p>还是上面的例子，在录制状态下，选择Insert&#8211;>Synchronization Point，选择要同步的对象，设置要同步的属性，我们可以对对象的Enable，visible一类表示状态的属性做同步点，生成如下脚本</p>
+
+<div class="wp_code"><div class="pre"><pre class="php" style="font-family:'Times New Roman',Garamond, Times;">　　Browser<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;百度一下，你就知道&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">.</span>Page<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;百度一下，你就知道&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">.</span>WebEdit<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;wd&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">.</span>WaitProperty <span style="color: #0000ff;">&quot;visible&quot;</span><span style="color: #339933;">,</span> <span style="color: #009900; font-weight: bold;">True</span><span style="color: #339933;">,</span> <span style="color: #cc66cc;">100000</span></pre></div></div>
+
+<p>这句话的意思就是在100秒的时间内，等待WebEdit这个对象的visible属性，只要它的visible属性变为true，那么就执行 下面操作，最后的100000单位是毫秒，如果在100000毫秒（100秒）后还没有等到visible = true，直接执行下面操作。</p>
+<p><strong>4. 利用VBS语句</strong></p>
+
+<div class="wp_code"><div class="pre"><pre class="php" style="font-family:'Times New Roman',Garamond, Times;">　　<span style="color: #b1b100;">Do</span> until Browser<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;百度一下，你就知道&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">.</span>Page<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;百度一下，你就知道&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">.</span>WebEdit<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;wd&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">.</span>Exist<span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">5</span><span style="color: #009900;">&#41;</span>
+　　    Wait<span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">1</span><span style="color: #009900;">&#41;</span>
+　　Loop</pre></div></div>
+
+<p>判断WebEdite这个对象是否出现，如果没有出现，执行Wait(1)，如果出现，跳出循环。</p>
+<p><strong>5. 死等大法</strong></p>
+<p>就是用Wait()语句设置等待时间，死等，比如Wait(10)，就是脚本停止10秒，任何操作都不做，10秒之后继续往下执行操作。</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/6678.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>QTP DataTable</title>
+		<link>http://www.xieziming.com/archives/6406.html</link>
+		<comments>http://www.xieziming.com/archives/6406.html#respond</comments>
+		<pubDate>Tue, 23 Nov 2010 14:29:28 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[测试]]></category>
+		<category><![CDATA[QTP]]></category>
+		<category><![CDATA[技术]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=6406</guid>
+		<description><![CDATA[<code lang="vb">
+DataTable.GetSheet(dtSheet)
+DataTable.GetSheetCount
+DataTable.[GetSheet.]GetRowCount
+DataTable.[GetSheet.]GetParameterCount
+DataTable.GetSheet(sSheetName).GetParameter(“ColumName”).ValueByName(iRowNumber)
+DataTable.[GetSheet.]GetCurrentRow
+DataTable.[GetSheet.]SetCurrentRow(RowNumber)
+DataTable.Value(ParameterID [, SheetID])  or DataTable (ParameterID [, SheetID])
+DataTable.AddSheet(SheetName)
+DataTable.DeleteSheet(SheetName)
+DataTable.Export(filename)
+DataTable.ExportSheet(filename,SheetName)
+DataTable.Import(FileName)
+DataTable.ImportSheet(FileName, SheetSource, SheetDest)
+</code>]]></description>
+				<content:encoded><![CDATA[<p><strong>Global Sheet和Local Sheet：</strong></p>
+<p>1．Global Sheet是一个全局变量。有几行数据，程序就要回放几次（不需要循环语句）<br />
+如果当前的Global Sheet中有3行测试数据。第1次执行使用第一行数据test1，第二次执行使用第二行数据test2，第三次执行使用第三行数据test3，依此可以一直类推下去。</p>
+<p>现在设置了3行测试数据，这些数据不一定是我们每次都需要的，那该怎么办？删除它们？等需要了再添加？那多麻烦。QTP提供了一个很有用的功能，那就是Data Table iterations设置（QTP上方菜单栏→File→Settings→Run）。</p>
+<p>2. Local Sheet是个局部变量，它并不受Data Table iterations控制，无论有多少行数据，它只运行一次（如果Global Sheet没有数据，或只有一行数据，或设置为只运行一次）。</p>
+<p>即使Global Sheet没有数据，仍然可以通过别的方式（代码控制的方式排除在外）去执行Local Sheet下的所有行。在Test Flow里反击Action后可以进入Action的一些相关设置。它和Global的Data Table iterations设置界面相似，在这里选中Run on all rows就可以执行Local Sheet下的所有测试数据了。虽然都是执行所有行数据，不过它们的区别还是很大的。Local Sheet执行了3次自身Action的迭代，而Global Sheet就相当于执行了3次脚本。</p>
+<p>在最后，还总结了一些Global和Local之间的逻辑规则，大致为以下几点：<br />
+　　<br />
+● Global不止一行数据（设置为Run on all rows，以下都是……），Action也设置为Run on all rows（以下都是……）且假设双方都具有3行测试数据，此时Global和Action的每行都要运行且同步运行（即Global在取第2行数据时，Action也对应地取它的第二行数据）。<br />
+　　<br />
+● 当Global不止一行数据且Global的行数大于Action的行数，那么当Action执行到最后一行后，Global以后所执行的行数，Action都用它的最后一行数据去补，比如Action的最后一行测试数据是test3，那么即使Global执行到了100行，也一直对应的是Action中test3的这一行数据。<br />
+　　<br />
+● 引用上面的条件，如果Global的行数小于Action的行数的话，Action就执行不到最后一行了。</p>
+<p><strong>QTP的DataTable操作操作包括：</strong></p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;">DataTable.GetSheet(dtSheet)
+DataTable.GetSheetCount
+DataTable.[GetSheet.]GetRowCount
+DataTable.[GetSheet.]GetParameterCount
+DataTable.GetSheet(sSheetName).GetParameter(“ColumName”).ValueByName(iRowNumber)
+DataTable.[GetSheet].GetCurrentRow
+DataTable.[GetSheet].SetCurrentRow(RowNumber)
+DataTable.[GetSheet].SetNextRow
+DataTable.Value(ParameterID [, SheetID])  <span style="color: #8D38C9; font-weight: bold;">or</span> DataTable (ParameterID [, SheetID])
+DataTable.AddSheet(SheetName)
+DataTable.DeleteSheet(SheetName)
+DataTable.Export(filename)
+DataTable.ExportSheet(filename,SheetName)
+DataTable.Import(FileName)
+DataTable.ImportSheet(FileName, SheetSource, SheetDest)</pre></div></div>
+
+<p>1.得到datatable总行数的命令：<strong>GetRowCount</strong><br />
+描述：返回运行时数据表的第一个工作表（用于测试的全局表或用于业务组件的业务组件表）中最长的列中的总行数。<br />
+语法：DataTable.GetSheet(&#8220;MySheet&#8221;).GetRowCount</p>
+<p>返回值：数字</p>
+<p>示例：以下示例使用 GetRowCount 方法查找 MySheet 运行时数据表中最长的列中的总行数，并将其写入报告。</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;">rowcount = DataTable.GetSheet(<span style="color: #800000;">&quot;MySheet&quot;</span>).GetRowCount
+Reporter.ReportEvent 2, <span style="color: #800000;">&quot;数据工作表中有 &quot;</span> &amp;rowcount, <span style="color: #800000;">&quot;行。&quot;</span></pre></div></div>
+
+<p>2.得到datatable运行时的动态列数：<strong>GetParameterCount</strong><br />
+语法：DTSheet.GetParameterCount</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;">paramcount = DataTable.GetSheet(<span style="color: #800000;">&quot;MySheet&quot;</span>).GetParameterCount</pre></div></div>
+
+<p>3.<strong>GetCurrentRow</strong>方法<br />
+描述：返回运行时数据表的第一个工作表（用于测试的全局表或用于业务组件的业务组件表）中的当前（活动）行。<br />
+语法：DataTable.GetSheet(&#8220;MySheet&#8221;).GetCurrentRow<br />
+返回值：数字<br />
+示例：以下示例使用 GetCurrentRow 方法检索当前在运行时数据表中使用的行，并将其写入报告。</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;">row = DataTable.GetSheet(<span style="color: #800000;">&quot;MySheet&quot;</span>).GetCurrentRow
+Reporter.ReportEvent 1, <span style="color: #800000;">&quot;行号&quot;</span>, row</pre></div></div>
+
+<p>4. 设置当前active的行数（第一行为1）：<strong>SetCurrentRow</strong><br />
+语法：DataTable.GetSheet(&#8220;MySheet&#8221;).SetCurrentRow(RowNumber)</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;">DataTable.SetCurrentRow(tb_i+1)
+DataTable.GetSheet(<span style="color: #800000;">&quot;Action1&quot;</span>).SetCurrentRow(tb_i+1)</pre></div></div>
+
+<p>&#8216;注：你也可以用GetCurrentRow来获取Action1的行，然后再用SetCurrentRow来保持两个Action的当前行一致：</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;">DataTable.SetCurrentRow(tb_i+1)
+CurrRow = DataTable.GetSheet(<span style="color: #800000;">&quot;Action1&quot;</span>).GetCurrentRow
+DataTable.GetSheet(<span style="color: #800000;">&quot;Action2&quot;</span>).SetCurrentRow(CurrRow)</pre></div></div>
+
+<p>5. 指向下一行数据：<strong>SetNextRow</strong></p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #151B8D; font-weight: bold;">Dim</span> i,j
+j = DataTable.GetRowCount
+<span style="color: #8D38C9; font-weight: bold;">For</span> i=1 <span style="color: #8D38C9; font-weight: bold;">to</span> j
+  Window(<span style="color: #800000;">&quot;Windows Internet Explorer&quot;</span>).WinObject(<span style="color: #800000;">&quot;Internet Explorer_Server&quot;</span>).<span style="color: #151B8D; font-weight: bold;">Type</span> DataTable(<span style="color: #800000;">&quot;content2&quot;</span>, dtGlobalSheet)
+  Browser(<span style="color: #800000;">&quot;Browser&quot;</span>).Page(<span style="color: #800000;">&quot;写日志 - XXX&quot;</span>).WebButton(<span style="color: #800000;">&quot;发 表&quot;</span>).Click
+  Datatable.GetSheet(<span style="color: #800000;">&quot;Global&quot;</span>).SetNextRow
+<span style="color: #8D38C9; font-weight: bold;">Next</span></pre></div></div>
+
+<p>6.查询、设置datatable的数值：</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;">DataTable(<span style="color: #800000;">&quot;Col&quot;</span>, <span style="color: #800000;">&quot;Action2&quot;</span>)   <span style="color: #008000;">'就是读取Action2的Col列。
+</span>
+<span style="color: #008000;">'同样，表也可以用数字代替：
+</span>DataTable(1, 2)    <span style="color: #008000;">'这样就是读取第二个Action表的第一列
+</span>
+<span style="color: #008000;">'还有一种写法：
+</span>DataTable(1, <span style="color: #800000;">&quot;Action2&quot;</span>)  <span style="color: #008000;">'这样就是读取Action2的第一列，不管第一列叫什么名字，都能读
+</span>       
+<span style="color: #008000;">'还有一种赋值方法
+</span>aParam2=DataTable(“AccountsNumber”,dtGlobalSheet)
+&nbsp;
+<span style="color: #008000;">'还有一种赋值方法，但是有一个前提就是：必须只能是测试只包含一个操作的情况：
+</span>          
+aParam3=DataTable(“AccountsNumber”,dtLocalSheet)
+&nbsp;
+datatable.value(<span style="color: #800000;">&quot;num&quot;</span>)’只在global形式下的一种省略形式；完整形式是:
+datatable.value(<span style="color: #800000;">&quot;num&quot;</span>,dtlocalsheet)
+&nbsp;
+<span style="color: #008000;">'向某一列的单元格赋值:
+</span>datatable.value(<span style="color: #800000;">&quot;column_name&quot;</span>,dtlocalsheet)=<span style="color: #800000;">&quot;nanjing&quot;</span>
+&nbsp;
+DataTable.Value(<span style="color: #800000;">&quot;Destination&quot;</span>, <span style="color: #800000;">&quot;ActionA&quot;</span>)=<span style="color: #800000;">&quot;New York&quot;</span>            
+DataTable.Value(2,3)=<span style="color: #800000;">&quot;New York&quot;</span>
+DataTable(<span style="color: #800000;">&quot;Destination&quot;</span>, dtlocalSheet)=<span style="color: #800000;">&quot;New York&quot;</span>    
+&nbsp;
+Call_date= DataTable.Value(<span style="color: #800000;">&quot;Date&quot;</span>,<span style="color: #800000;">&quot;add Conference Call&quot;</span>)  '为Call_date赋值</pre></div></div>
+
+<p>7. 取datatable特定行的数据：</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;">DataTable.GetSheet(<span style="color: #800000;">&quot;Action1&quot;</span>).GetParameter(<span style="color: #800000;">&quot;test\&quot;</span>).ValueByRow(4)</pre></div></div>
+
+<p>8  AddSheet 方法<br />
+描述：向运行时数据表中添加指定工作表并返回该工作表，以便可以直接在同一语句中设置新工作表的属性。<br />
+语法：DataTable.AddSheet(SheetName)<br />
+示例：以下示例先使用 AddSheet 方法在运行时数据表中新建工作表&#8221;MySheet&#8221;，然后向新工作表中添加参数。</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #151B8D; font-weight: bold;">Dim</span> Variable
+Variable=DataTable.AddSheet (<span style="color: #800000;">&quot;MySheet&quot;</span>).AddParameter(<span style="color: #800000;">&quot;Time&quot;</span>, <span style="color: #800000;">&quot;8:00&quot;</span>)</pre></div></div>
+
+<p>9  DeleteSheet方法<br />
+描述：从运行时数据表中删除指定工作表。<br />
+语法：DataTable.DeleteSheet SheetID<br />
+示例：以下示例使用 DeleteSheet 方法从运行时数据表中删除工作表&#8221;MySheet&#8221;。</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;">DataTable.DeleteSheet <span style="color: #800000;">&quot;MySheet&quot;</span></pre></div></div>
+
+<p>10  Export方法<br />
+描述：在指定位置保存运行时数据表的副本。<br />
+语法：DataTable.Export(FileName)<br />
+示例：以下示例使用 Export 方法将测试的数据表副本保存在 C:\flights.xls 中。</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;">DataTable.Export (<span style="color: #800000;">&quot;C:\flights.xls&quot;</span>)</pre></div></div>
+
+<p>11 ExportSheet方法<br />
+描述：将运行时数据表的指定工作表导出到指定文件中。如果指定文件不存在，则将创建一个新文件并保存指定工作表。如果当前文件存在，但是该文件不包含具有指定工作表名称的工作表，则将插入该工作表作为文件的最后一个工作表。如果当前文件存在且包含指定工作表，则导出的工作表将覆盖现有工作表。</p>
+<p>语法：DataTable.ExportSheet(FileName, DTSheet)<br />
+DTSheet 变量 要导出的运行时数据表工作表的名称或索引。索引值从 1 开始。 </p>
+<p>示例：以下示例使用 ExportSheet 方法将运行时数据表的第一个工作表保存到 name.xls 文件中。</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;">DataTable.ExportSheet <span style="color: #800000;">&quot;C:\name.xls&quot;</span> ,1
+DataTable.ExportSheet <span style="color: #800000;">&quot;C:\name.xls&quot;</span> , <span style="color: #800000;">&quot; MySheet &quot;</span></pre></div></div>
+
+<p>12 GetSheet方法<br />
+描述 ：返回运行时数据表中的指定工作表。<br />
+语法 ：DataTable.GetSheet(SheetID)<br />
+SheetID 变量 标识要返回的工作表。SheetID 可以是工作表名称或索引。索引值从 1 开始。<br />
+返回值：DTSheet 对象<br />
+示例：以下示例使用 GetSheet 方法返回运行时数据表的&#8221;MySheet&#8221;工作表，以便向其中添加参数。</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;">MyParam=DataTable.GetSheet (<span style="color: #800000;">&quot;MySheet&quot;</span>).AddParameter(<span style="color: #800000;">&quot;Time&quot;</span>, <span style="color: #800000;">&quot;8:00&quot;</span>)</pre></div></div>
+
+<p>您还可以使用该方法向&#8221;MySheet&#8221;本地表中添加参数（注意，不会返回值）。</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;">DataTable.GetSheet (<span style="color: #800000;">&quot;MySheet&quot;</span>).AddParameter <span style="color: #800000;">&quot;Time&quot;</span>, <span style="color: #800000;">&quot;8:00&quot;</span></pre></div></div>
+
+<p>13 GetSheetCount方法<br />
+描述：返回运行时数据表中的总工作表数。<br />
+语法：DataTable.GetSheetCount<br />
+返回值：数字<br />
+示例：以下示例使用 GetSheetCount 方法查找运行时数据表中的总工作表数，并将其写入报告。</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;">sheetcount = DataTable.GetSheetCount
+Reporter.ReportEvent 0, <span style="color: #800000;">&quot;工作表编号&quot;</span>, <span style="color: #800000;">&quot;数据表中有&quot;</span> &amp; sheetcount &amp; <span style="color: #800000;">&quot;个工作表。</span></pre></div></div>
+
+<p>14 Import方法<br />
+描述：将指定的 Microsoft Excel 文件导入运行时数据表。</p>
+<p>注意：导入的表必须与测试或组件匹配。列名必须与测试或组件中的参数匹配，并且工作表名称（用于测试）必须与操作名匹配。如果导入的 Excel 表包含组合框或列表单元格、条件格式或其他特殊单元格格式，则不会导入这些格式，并且单元格在数据表中显示时包含固定值。</p>
+<p>语法：DataTable.Import(FileName)<br />
+FileName 字符串型 要导入的 Excel 表的完整路径。 </p>
+<p>示例：导入的表将替换现有运行时数据表（包括所有数据表）中的所有数据。以下示例使用 Import 方法将 flights.xls 表导入运行时数据表。</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;">DataTable.Import (<span style="color: #800000;">&quot;C:\flights.xls&quot;</span>)</pre></div></div>
+
+<p>15 ImportSheet方法<br />
+描述：将指定文件的工作表导入运行时数据表的指定工作表。导入的工作表中的数据将替换目标工作表中的数据（请参阅 SheetDest 参数）。</p>
+<p>注意：导入的工作表中的列标题必须与工作表导入操作中的数据表参数名匹配。否则，测试或组件可能会失败。导入的工作表会自动采用它所替换的工作表的名称。如果导入的 Excel 工作表包含组合框或列表单元格、条件格式或其他特殊单元格格式，则不会导入这些格式，并且单元格在数据表中显示时包含固定值。</p>
+<p>语法：DataTable.ImportSheet(FileName, SheetSource, SheetDest)</p>
+<p>FileName 字符串型 要从中导入工作表的 Excel 表的完整路径。<br />
+SheetSource 变量 要从文件导入的工作表的名称或索引。索引值从 1 开始。<br />
+SheetDest 变量 数据表中要用 SheetSource 替换的工作表的名称或索引。索引值从 1 开始。 </p>
+<p>示例：以下示例使用 ImportSheet 方法将 name.xls 表的第一个工作表导入测试的运行时数据表中的Action1工作表。</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;">DataTable.ImportSheet <span style="color: #800000;">&quot;C:\name.xls&quot;</span> ,1 ,<span style="color: #800000;">&quot; Action1&quot;</span>
+DataTable.ImportSheet <span style="color: #800000;">&quot;C:\name.xls&quot;</span> ,1 ,<span style="color: #800000;">&quot; Global&quot;</span></pre></div></div>
+
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/6406.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>外部调用QTP</title>
+		<link>http://www.xieziming.com/archives/6398.html</link>
+		<comments>http://www.xieziming.com/archives/6398.html#respond</comments>
+		<pubDate>Mon, 22 Nov 2010 14:24:42 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[测试]]></category>
+		<category><![CDATA[QTP]]></category>
+		<category><![CDATA[技术]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=6398</guid>
+		<description><![CDATA[外部调用QTP:
+<code lang="vb">
+Dim qtApp
+Set qtApp = CreateObject("QuickTest.Application") ' 创建 Application 对象
+qtApp.Launch '启动 QuickTest
+qtApp.Visible = True ' 使其可见
+</code>]]></description>
+				<content:encoded><![CDATA[<p>外部调用QTP:</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #151B8D; font-weight: bold;">Dim</span> qtApp
+<span style="color: #151B8D; font-weight: bold;">Set</span> qtApp = <span style="color: #E56717; font-weight: bold;">CreateObject</span>(<span style="color: #800000;">&quot;QuickTest.Application&quot;</span>) <span style="color: #008000;">' 创建 Application 对象
+</span>qtApp.Launch <span style="color: #008000;">'启动 QuickTest
+</span>qtApp.Visible = <span style="color: #00C2FF; font-weight: bold;">True</span> <span style="color: #008000;">' 使其可见
+</span>qtapp.<span style="color: #151B8D; font-weight: bold;">Open</span> <span style="color: #800000;">&quot;d:\Test&quot;</span> <span style="color: #008000;">'打开相应的QTP测试脚本 
+</span>qtapp.Test.Run <span style="color: #008000;">'运行测试脚本 
+</span>qtapp.Quit <span style="color: #008000;">'退出QTP
+</span><span style="color: #151B8D; font-weight: bold;">Set</span> qtapp=<span style="color: #00C2FF; font-weight: bold;">Nothing</span> '释放</pre></div></div>
+
+<p>1.执行以上代码时，系统多出一个QTAutomationAgent.exe的进程，此进程在运行完以上代码后会自动关闭,但是需要注意的是，当我们在调试代码或者是做非法中止以上代码而为能使以上代码执行到最后完毕的话，此进程不会自动关闭，这样就会导致我们第二次创建AOM对象时报错，因此大家如果在调试此代码时遇到“远程过程调用失败”的类似错误提示，就可以试试kill掉QTAutomationAgent.exe这个进程，然后重新调试下代码就ok了。</p>
+<p>2.如果在QTP直接创建AOM对象是会报错的，因为QTP只允许有一个实例对象，当我们已经开启了一个QTP之后就不可以再创建另外一个QTP了，因此这个时候我们可以直接使用</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #151B8D; font-weight: bold;">Set</span> qtapp = <span style="color: #E56717; font-weight: bold;">GETOBJECT</span>(<span style="color: #800000;">&quot;&quot;</span>,<span style="color: #800000;">&quot;quicktest.application&quot;</span>)
+qtapp.Visible = <span style="color: #00C2FF; font-weight: bold;">false</span></pre></div></div>
+
+<p>来对当前启动的QTP进行操作,当我们添加下图脚本后，我们点击运行后当前QTP就会自动隐藏，运行完后自动恢复可见.</p>
+<p>3.当我们还需要对QTP的设置进行自动化时，由于QTP的设置较多，一个个写的话会很繁琐，因此我们可以先在QTP里设置好，然后直接在QTP的setting和option选项中点击generate scripting进行导出，这样能去我们很多的精力来写代码。</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/6398.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+	</channel>
+</rss>

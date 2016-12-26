@@ -1,0 +1,1135 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Automation &#8211; 谢子明</title>
+	<atom:link href="http://www.xieziming.com/tag/automation/feed" rel="self" type="application/rss+xml" />
+	<link>http://www.xieziming.com</link>
+	<description>Suny Xie</description>
+	<lastBuildDate>Mon, 26 Dec 2016 07:34:38 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.7</generator>
+	<item>
+		<title>UI Automation自定义控件处理</title>
+		<link>http://www.xieziming.com/archives/9488.html</link>
+		<comments>http://www.xieziming.com/archives/9488.html#respond</comments>
+		<pubDate>Fri, 07 Aug 2015 09:10:34 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[测试]]></category>
+		<category><![CDATA[Automation]]></category>
+		<category><![CDATA[UI Automation]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=9488</guid>
+		<description><![CDATA[在做Wpf/Winform UI自动化测试的时候，我们往往不得不面对一个非标准的控件，通过常规的方法我们是得不到控件信息的。下面是一个解决方法：
+
+（1）在被测软件该控件类上通过实现接口添加对自动化的支持。
+<code lang="csharp">
+protected override System.Windows.Automation.Peers.AutomationPeer OnCreateAutomationPeer() 
+{ 
+     ImprovedPivotGridAutomationPeer peer = new ImprovedPivotGridAutomationPeer(gridPresenter); 
+     peer.InvalidatePeer(); 
+     return peer; 
+}  
+</code>]]></description>
+				<content:encoded><![CDATA[<p>在做Wpf/Winform UI自动化测试的时候，我们往往不得不面对一个非标准的控件，通过常规的方法我们是得不到控件信息的。下面是一个解决方法：</p>
+<p>（1）在被测软件该控件类上通过实现接口添加对自动化的支持。</p>
+
+<div class="wp_code"><div class="pre"><pre class="csharp" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #0600FF; font-weight: bold;">protected</span> <span style="color: #0600FF; font-weight: bold;">override</span> <span style="color: #000000;">System</span><span style="color: #008000;">.</span><span style="color: #0000FF;">Windows</span><span style="color: #008000;">.</span><span style="color: #0000FF;">Automation</span><span style="color: #008000;">.</span><span style="color: #0000FF;">Peers</span><span style="color: #008000;">.</span><span style="color: #0000FF;">AutomationPeer</span> OnCreateAutomationPeer<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span> 
+<span style="color: #008000;">&#123;</span> 
+     ImprovedPivotGridAutomationPeer peer <span style="color: #008000;">=</span> <span style="color: #008000;">new</span> ImprovedPivotGridAutomationPeer<span style="color: #008000;">&#40;</span>gridPresenter<span style="color: #008000;">&#41;</span><span style="color: #008000;">;</span> 
+     peer<span style="color: #008000;">.</span><span style="color: #0000FF;">InvalidatePeer</span><span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span><span style="color: #008000;">;</span> 
+     <span style="color: #0600FF; font-weight: bold;">return</span> peer<span style="color: #008000;">;</span> 
+<span style="color: #008000;">&#125;</span></pre></div></div>
+
+<p>接口实现：</p>
+
+<div class="wp_code"><div class="pre"><pre class="csharp" style="font-family:'Times New Roman',Garamond, Times;">  <span style="color: #0600FF; font-weight: bold;">public</span> <span style="color: #6666cc; font-weight: bold;">class</span> ImprovedPivotGridAutomationPeer <span style="color: #008000;">:</span> AutomationPeer 
+    <span style="color: #008000;">&#123;</span> 
+        ImprovedGridPresenter gridPresenter<span style="color: #008000;">;</span> 
+        List<span style="color: #008000;">&lt;</span>AutomationPeer<span style="color: #008000;">&gt;</span> children <span style="color: #008000;">=</span> <span style="color: #0600FF; font-weight: bold;">null</span><span style="color: #008000;">;</span> 
+        <span style="color: #0600FF; font-weight: bold;">public</span> ImprovedPivotGridAutomationPeer<span style="color: #008000;">&#40;</span>ImprovedGridPresenter gridPresenter<span style="color: #008000;">&#41;</span> 
+        <span style="color: #008000;">&#123;</span> 
+            <span style="color: #0600FF; font-weight: bold;">this</span><span style="color: #008000;">.</span><span style="color: #0000FF;">gridPresenter</span> <span style="color: #008000;">=</span> gridPresenter<span style="color: #008000;">;</span> 
+        <span style="color: #008000;">&#125;</span> 
+&nbsp;
+        <span style="color: #0600FF; font-weight: bold;">protected</span> <span style="color: #0600FF; font-weight: bold;">override</span> <span style="color: #6666cc; font-weight: bold;">string</span> GetAcceleratorKeyCore<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span> 
+        <span style="color: #008000;">&#123;</span> 
+            <span style="color: #0600FF; font-weight: bold;">return</span> <span style="color: #6666cc; font-weight: bold;">string</span><span style="color: #008000;">.</span><span style="color: #0000FF;">Empty</span><span style="color: #008000;">;</span> 
+        <span style="color: #008000;">&#125;</span> 
+&nbsp;
+        <span style="color: #0600FF; font-weight: bold;">protected</span> <span style="color: #0600FF; font-weight: bold;">override</span> <span style="color: #6666cc; font-weight: bold;">string</span> GetAccessKeyCore<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span> 
+        <span style="color: #008000;">&#123;</span> 
+            <span style="color: #0600FF; font-weight: bold;">return</span> <span style="color: #6666cc; font-weight: bold;">string</span><span style="color: #008000;">.</span><span style="color: #0000FF;">Empty</span><span style="color: #008000;">;</span> 
+        <span style="color: #008000;">&#125;</span> 
+&nbsp;
+        <span style="color: #0600FF; font-weight: bold;">protected</span> <span style="color: #0600FF; font-weight: bold;">override</span> AutomationControlType GetAutomationControlTypeCore<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span> 
+        <span style="color: #008000;">&#123;</span> 
+            <span style="color: #0600FF; font-weight: bold;">return</span> AutomationControlType<span style="color: #008000;">.</span><span style="color: #0000FF;">DataGrid</span><span style="color: #008000;">;</span> 
+        <span style="color: #008000;">&#125;</span> 
+&nbsp;
+        <span style="color: #0600FF; font-weight: bold;">protected</span> <span style="color: #0600FF; font-weight: bold;">override</span> <span style="color: #6666cc; font-weight: bold;">string</span> GetAutomationIdCore<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span> 
+        <span style="color: #008000;">&#123;</span> 
+            <span style="color: #0600FF; font-weight: bold;">return</span> <span style="color: #666666;">&quot;ImprovedPivotGrid&quot;</span><span style="color: #008000;">;</span> 
+        <span style="color: #008000;">&#125;</span> 
+&nbsp;
+        <span style="color: #0600FF; font-weight: bold;">protected</span> <span style="color: #0600FF; font-weight: bold;">override</span> Rect GetBoundingRectangleCore<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span> 
+        <span style="color: #008000;">&#123;</span> 
+            <span style="color: #0600FF; font-weight: bold;">return</span> Rect<span style="color: #008000;">.</span><span style="color: #0000FF;">Empty</span><span style="color: #008000;">;</span> 
+        <span style="color: #008000;">&#125;</span> 
+&nbsp;
+        <span style="color: #0600FF; font-weight: bold;">protected</span> <span style="color: #0600FF; font-weight: bold;">override</span> List<span style="color: #008000;">&lt;</span>AutomationPeer<span style="color: #008000;">&gt;</span> GetChildrenCore<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span> 
+        <span style="color: #008000;">&#123;</span> 
+            children <span style="color: #008000;">=</span> <span style="color: #008000;">new</span> List<span style="color: #008000;">&lt;</span>AutomationPeer<span style="color: #008000;">&gt;</span><span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span><span style="color: #008000;">;</span> 
+            <span style="color: #0600FF; font-weight: bold;">for</span><span style="color: #008000;">&#40;</span><span style="color: #6666cc; font-weight: bold;">int</span> i<span style="color: #008000;">=</span><span style="color: #FF0000;">0</span><span style="color: #008000;">;</span> i<span style="color: #008000;">&lt;</span>gridPresenter<span style="color: #008000;">.</span><span style="color: #0000FF;">GridMetrics</span><span style="color: #008000;">.</span><span style="color: #0000FF;">RowCount</span><span style="color: #008000;">;</span>i<span style="color: #008000;">++</span><span style="color: #008000;">&#41;</span><span style="color: #008000;">&#123;</span> 
+                <span style="color: #0600FF; font-weight: bold;">for</span> <span style="color: #008000;">&#40;</span><span style="color: #6666cc; font-weight: bold;">int</span> j<span style="color: #008000;">=</span><span style="color: #FF0000;">0</span><span style="color: #008000;">;</span> j<span style="color: #008000;">&lt;</span>gridPresenter<span style="color: #008000;">.</span><span style="color: #0000FF;">GridMetrics</span><span style="color: #008000;">.</span><span style="color: #0000FF;">ColumnCount</span><span style="color: #008000;">;</span>j<span style="color: #008000;">++</span><span style="color: #008000;">&#41;</span> 
+                <span style="color: #008000;">&#123;</span> 
+                    <span style="color: #0600FF; font-weight: bold;">try</span> 
+                    <span style="color: #008000;">&#123;</span> 
+                        CellData cellData <span style="color: #008000;">=</span> gridPresenter<span style="color: #008000;">.</span><span style="color: #0000FF;">GetCellData</span><span style="color: #008000;">&#40;</span>j, i<span style="color: #008000;">&#41;</span><span style="color: #008000;">;</span> 
+                        <span style="color: #0600FF; font-weight: bold;">if</span> <span style="color: #008000;">&#40;</span>cellData<span style="color: #008000;">.</span><span style="color: #0000FF;">CellType</span><span style="color: #008000;">.</span><span style="color: #0000FF;">Equals</span><span style="color: #008000;">&#40;</span>CellType<span style="color: #008000;">.</span><span style="color: #0000FF;">RowHeader</span><span style="color: #008000;">&#41;</span> <span style="color: #008000;">||</span> cellData<span style="color: #008000;">.</span><span style="color: #0000FF;">CellType</span><span style="color: #008000;">.</span><span style="color: #0000FF;">Equals</span><span style="color: #008000;">&#40;</span>CellType<span style="color: #008000;">.</span><span style="color: #0000FF;">ColumnHeader</span><span style="color: #008000;">&#41;</span> <span style="color: #008000;">||</span> cellData<span style="color: #008000;">.</span><span style="color: #0000FF;">CellType</span><span style="color: #008000;">.</span><span style="color: #0000FF;">Equals</span><span style="color: #008000;">&#40;</span>CellType<span style="color: #008000;">.</span><span style="color: #0600FF; font-weight: bold;">Value</span><span style="color: #008000;">&#41;</span><span style="color: #008000;">&#41;</span> 
+                        <span style="color: #008000;">&#123;</span> 
+                            children<span style="color: #008000;">.</span><span style="color: #0600FF; font-weight: bold;">Add</span><span style="color: #008000;">&#40;</span><span style="color: #008000;">new</span> ImprovedPivotGridCellAutomationPeer<span style="color: #008000;">&#40;</span>gridPresenter, cellData<span style="color: #008000;">&#41;</span><span style="color: #008000;">&#41;</span><span style="color: #008000;">;</span> 
+                        <span style="color: #008000;">&#125;</span> 
+                    <span style="color: #008000;">&#125;</span> 
+                    <span style="color: #0600FF; font-weight: bold;">catch</span> 
+                    <span style="color: #008000;">&#123;</span> 
+                        <span style="color: #008080; font-style: italic;">//if error </span>
+                    <span style="color: #008000;">&#125;</span> 
+                <span style="color: #008000;">&#125;</span>                        
+            <span style="color: #008000;">&#125;</span> 
+            <span style="color: #0600FF; font-weight: bold;">return</span> children<span style="color: #008000;">;</span> 
+        <span style="color: #008000;">&#125;</span> 
+&nbsp;
+        <span style="color: #0600FF; font-weight: bold;">protected</span> <span style="color: #0600FF; font-weight: bold;">override</span> Point GetClickablePointCore<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span> 
+        <span style="color: #008000;">&#123;</span> 
+            <span style="color: #0600FF; font-weight: bold;">return</span> <span style="color: #008000;">new</span> Point<span style="color: #008000;">&#40;</span><span style="color: #FF0000;">0</span>, <span style="color: #FF0000;">0</span><span style="color: #008000;">&#41;</span><span style="color: #008000;">;</span> 
+        <span style="color: #008000;">&#125;</span> 
+&nbsp;
+        <span style="color: #0600FF; font-weight: bold;">protected</span> <span style="color: #0600FF; font-weight: bold;">override</span> <span style="color: #6666cc; font-weight: bold;">string</span> GetHelpTextCore<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span> 
+        <span style="color: #008000;">&#123;</span> 
+            <span style="color: #0600FF; font-weight: bold;">return</span> <span style="color: #6666cc; font-weight: bold;">string</span><span style="color: #008000;">.</span><span style="color: #0000FF;">Empty</span><span style="color: #008000;">;</span> 
+        <span style="color: #008000;">&#125;</span> 
+&nbsp;
+        <span style="color: #0600FF; font-weight: bold;">protected</span> <span style="color: #0600FF; font-weight: bold;">override</span> <span style="color: #6666cc; font-weight: bold;">string</span> GetItemStatusCore<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span> 
+        <span style="color: #008000;">&#123;</span> 
+            <span style="color: #0600FF; font-weight: bold;">return</span> <span style="color: #6666cc; font-weight: bold;">string</span><span style="color: #008000;">.</span><span style="color: #0000FF;">Empty</span><span style="color: #008000;">;</span> 
+        <span style="color: #008000;">&#125;</span> 
+&nbsp;
+        <span style="color: #0600FF; font-weight: bold;">protected</span> <span style="color: #0600FF; font-weight: bold;">override</span> <span style="color: #6666cc; font-weight: bold;">string</span> GetItemTypeCore<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span> 
+        <span style="color: #008000;">&#123;</span> 
+            <span style="color: #0600FF; font-weight: bold;">return</span> <span style="color: #6666cc; font-weight: bold;">string</span><span style="color: #008000;">.</span><span style="color: #0000FF;">Empty</span><span style="color: #008000;">;</span> 
+        <span style="color: #008000;">&#125;</span> 
+&nbsp;
+        <span style="color: #0600FF; font-weight: bold;">protected</span> <span style="color: #0600FF; font-weight: bold;">override</span> AutomationPeer GetLabeledByCore<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span> 
+        <span style="color: #008000;">&#123;</span> 
+            <span style="color: #0600FF; font-weight: bold;">return</span> <span style="color: #0600FF; font-weight: bold;">this</span><span style="color: #008000;">;</span> 
+        <span style="color: #008000;">&#125;</span> 
+&nbsp;
+        <span style="color: #0600FF; font-weight: bold;">protected</span> <span style="color: #0600FF; font-weight: bold;">override</span> <span style="color: #6666cc; font-weight: bold;">string</span> GetNameCore<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span> 
+        <span style="color: #008000;">&#123;</span> 
+            <span style="color: #0600FF; font-weight: bold;">return</span> <span style="color: #666666;">&quot;ImprovedPivotGrid&quot;</span><span style="color: #008000;">;</span> 
+        <span style="color: #008000;">&#125;</span> 
+&nbsp;
+        <span style="color: #0600FF; font-weight: bold;">protected</span> <span style="color: #0600FF; font-weight: bold;">override</span> <span style="color: #6666cc; font-weight: bold;">string</span> GetClassNameCore<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span> 
+        <span style="color: #008000;">&#123;</span> 
+            <span style="color: #0600FF; font-weight: bold;">return</span> gridPresenter<span style="color: #008000;">.</span><span style="color: #0000FF;">GetType</span><span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span><span style="color: #008000;">.</span><span style="color: #0000FF;">ToString</span><span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span><span style="color: #008000;">;</span> 
+        <span style="color: #008000;">&#125;</span> 
+&nbsp;
+        <span style="color: #0600FF; font-weight: bold;">protected</span> <span style="color: #0600FF; font-weight: bold;">override</span> AutomationOrientation GetOrientationCore<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span> 
+        <span style="color: #008000;">&#123;</span> 
+            <span style="color: #0600FF; font-weight: bold;">return</span> AutomationOrientation<span style="color: #008000;">.</span><span style="color: #0000FF;">None</span><span style="color: #008000;">;</span> 
+        <span style="color: #008000;">&#125;</span> 
+&nbsp;
+        <span style="color: #0600FF; font-weight: bold;">public</span> <span style="color: #0600FF; font-weight: bold;">override</span> <span style="color: #6666cc; font-weight: bold;">object</span> GetPattern<span style="color: #008000;">&#40;</span>PatternInterface patternInterface<span style="color: #008000;">&#41;</span> 
+        <span style="color: #008000;">&#123;</span> 
+            <span style="color: #0600FF; font-weight: bold;">if</span> <span style="color: #008000;">&#40;</span>patternInterface <span style="color: #008000;">==</span> PatternInterface<span style="color: #008000;">.</span><span style="color: #0600FF; font-weight: bold;">Value</span><span style="color: #008000;">&#41;</span> 
+            <span style="color: #008000;">&#123;</span> 
+                <span style="color: #0600FF; font-weight: bold;">return</span> <span style="color: #008000;">new</span> ImprovedPivotGridValuePattern<span style="color: #008000;">&#40;</span>gridPresenter<span style="color: #008000;">&#41;</span><span style="color: #008000;">;</span> 
+            <span style="color: #008000;">&#125;</span> 
+            <span style="color: #0600FF; font-weight: bold;">return</span> <span style="color: #0600FF; font-weight: bold;">null</span><span style="color: #008000;">;</span> 
+        <span style="color: #008000;">&#125;</span> 
+&nbsp;
+        <span style="color: #0600FF; font-weight: bold;">protected</span> <span style="color: #0600FF; font-weight: bold;">override</span> <span style="color: #6666cc; font-weight: bold;">bool</span> HasKeyboardFocusCore<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span> 
+        <span style="color: #008000;">&#123;</span> 
+            <span style="color: #0600FF; font-weight: bold;">return</span> <span style="color: #0600FF; font-weight: bold;">false</span><span style="color: #008000;">;</span> 
+        <span style="color: #008000;">&#125;</span> 
+&nbsp;
+        <span style="color: #0600FF; font-weight: bold;">protected</span> <span style="color: #0600FF; font-weight: bold;">override</span> <span style="color: #6666cc; font-weight: bold;">bool</span> IsContentElementCore<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span> 
+        <span style="color: #008000;">&#123;</span> 
+            <span style="color: #0600FF; font-weight: bold;">return</span> <span style="color: #0600FF; font-weight: bold;">true</span><span style="color: #008000;">;</span> 
+        <span style="color: #008000;">&#125;</span> 
+&nbsp;
+        <span style="color: #0600FF; font-weight: bold;">protected</span> <span style="color: #0600FF; font-weight: bold;">override</span> <span style="color: #6666cc; font-weight: bold;">bool</span> IsControlElementCore<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span> 
+        <span style="color: #008000;">&#123;</span> 
+            <span style="color: #0600FF; font-weight: bold;">return</span> <span style="color: #0600FF; font-weight: bold;">true</span><span style="color: #008000;">;</span> 
+        <span style="color: #008000;">&#125;</span> 
+&nbsp;
+        <span style="color: #0600FF; font-weight: bold;">protected</span> <span style="color: #0600FF; font-weight: bold;">override</span> <span style="color: #6666cc; font-weight: bold;">bool</span> IsEnabledCore<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span> 
+        <span style="color: #008000;">&#123;</span> 
+            <span style="color: #0600FF; font-weight: bold;">return</span> <span style="color: #0600FF; font-weight: bold;">true</span><span style="color: #008000;">;</span> 
+        <span style="color: #008000;">&#125;</span> 
+&nbsp;
+        <span style="color: #0600FF; font-weight: bold;">protected</span> <span style="color: #0600FF; font-weight: bold;">override</span> <span style="color: #6666cc; font-weight: bold;">bool</span> IsKeyboardFocusableCore<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span> 
+        <span style="color: #008000;">&#123;</span> 
+            <span style="color: #0600FF; font-weight: bold;">return</span> <span style="color: #0600FF; font-weight: bold;">false</span><span style="color: #008000;">;</span> 
+        <span style="color: #008000;">&#125;</span> 
+&nbsp;
+        <span style="color: #0600FF; font-weight: bold;">protected</span> <span style="color: #0600FF; font-weight: bold;">override</span> <span style="color: #6666cc; font-weight: bold;">bool</span> IsOffscreenCore<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span> 
+        <span style="color: #008000;">&#123;</span> 
+            <span style="color: #0600FF; font-weight: bold;">return</span> <span style="color: #0600FF; font-weight: bold;">false</span><span style="color: #008000;">;</span> 
+        <span style="color: #008000;">&#125;</span> 
+&nbsp;
+        <span style="color: #0600FF; font-weight: bold;">protected</span> <span style="color: #0600FF; font-weight: bold;">override</span> <span style="color: #6666cc; font-weight: bold;">bool</span> IsPasswordCore<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span> 
+        <span style="color: #008000;">&#123;</span> 
+            <span style="color: #0600FF; font-weight: bold;">return</span> <span style="color: #0600FF; font-weight: bold;">false</span><span style="color: #008000;">;</span> 
+        <span style="color: #008000;">&#125;</span> 
+&nbsp;
+        <span style="color: #0600FF; font-weight: bold;">protected</span> <span style="color: #0600FF; font-weight: bold;">override</span> <span style="color: #6666cc; font-weight: bold;">bool</span> IsRequiredForFormCore<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span> 
+        <span style="color: #008000;">&#123;</span> 
+            <span style="color: #0600FF; font-weight: bold;">return</span> <span style="color: #0600FF; font-weight: bold;">false</span><span style="color: #008000;">;</span> 
+        <span style="color: #008000;">&#125;</span> 
+&nbsp;
+        <span style="color: #0600FF; font-weight: bold;">protected</span> <span style="color: #0600FF; font-weight: bold;">override</span> <span style="color: #6666cc; font-weight: bold;">void</span> SetFocusCore<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span> 
+        <span style="color: #008000;">&#123;</span> 
+&nbsp;
+        <span style="color: #008000;">&#125;</span> 
+    <span style="color: #008000;">&#125;</span> 
+&nbsp;
+    <span style="color: #008000;">&#91;</span>ComVisible<span style="color: #008000;">&#40;</span><span style="color: #0600FF; font-weight: bold;">true</span><span style="color: #008000;">&#41;</span><span style="color: #008000;">&#93;</span> 
+    <span style="color: #0600FF; font-weight: bold;">public</span> <span style="color: #6666cc; font-weight: bold;">class</span> ImprovedPivotGridValuePattern <span style="color: #008000;">:</span> IValueProvider 
+    <span style="color: #008000;">&#123;</span> 
+        ImprovedGridPresenter gridPresenter<span style="color: #008000;">;</span> 
+        <span style="color: #0600FF; font-weight: bold;">public</span> ImprovedPivotGridValuePattern<span style="color: #008000;">&#40;</span>ImprovedGridPresenter gridPresenter<span style="color: #008000;">&#41;</span> 
+        <span style="color: #008000;">&#123;</span> 
+            <span style="color: #0600FF; font-weight: bold;">this</span><span style="color: #008000;">.</span><span style="color: #0000FF;">gridPresenter</span> <span style="color: #008000;">=</span> gridPresenter<span style="color: #008000;">;</span> 
+        <span style="color: #008000;">&#125;</span> 
+        <span style="color: #0600FF; font-weight: bold;">public</span> <span style="color: #6666cc; font-weight: bold;">bool</span> IsReadOnly <span style="color: #008000;">&#123;</span> <span style="color: #0600FF; font-weight: bold;">get</span> <span style="color: #008000;">&#123;</span> <span style="color: #0600FF; font-weight: bold;">return</span> <span style="color: #0600FF; font-weight: bold;">true</span><span style="color: #008000;">;</span> <span style="color: #008000;">&#125;</span> <span style="color: #008000;">&#125;</span> 
+        <span style="color: #0600FF; font-weight: bold;">public</span> <span style="color: #6666cc; font-weight: bold;">string</span> <span style="color: #0600FF; font-weight: bold;">Value</span> 
+        <span style="color: #008000;">&#123;</span> 
+            <span style="color: #0600FF; font-weight: bold;">get</span> 
+            <span style="color: #008000;">&#123;</span> 
+                <span style="color: #0600FF; font-weight: bold;">return</span> gridPresenter<span style="color: #008000;">.</span><span style="color: #0000FF;">GridMetrics</span><span style="color: #008000;">.</span><span style="color: #0000FF;">ColumnCount</span> <span style="color: #008000;">+</span> <span style="color: #666666;">&quot; : &quot;</span> <span style="color: #008000;">+</span> gridPresenter<span style="color: #008000;">.</span><span style="color: #0000FF;">GridMetrics</span><span style="color: #008000;">.</span><span style="color: #0000FF;">ColumnCount</span> <span style="color: #008000;">;</span> 
+            <span style="color: #008000;">&#125;</span> 
+        <span style="color: #008000;">&#125;</span> 
+&nbsp;
+        <span style="color: #0600FF; font-weight: bold;">public</span> <span style="color: #6666cc; font-weight: bold;">void</span> SetValue<span style="color: #008000;">&#40;</span><span style="color: #6666cc; font-weight: bold;">string</span> <span style="color: #0600FF; font-weight: bold;">value</span><span style="color: #008000;">&#41;</span> <span style="color: #008000;">&#123;</span> <span style="color: #0600FF; font-weight: bold;">return</span><span style="color: #008000;">;</span> <span style="color: #008000;">&#125;</span> 
+    <span style="color: #008000;">&#125;</span></pre></div></div>
+
+<p>同时，如果只是想暴露一些application的信息，我们可以通过在某控件上（xaml文件）绑定/添加一个<strong>AutomationProperties.HelpText</strong>属性。该属性不会有任何的UI影响，但却可以通过UI Automation的Property取出。</p>
+<p>例如：<br />
+Main.xaml</p>
+
+<div class="wp_code"><div class="pre"><pre class="csharp" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #008000;">&lt;</span>TextBlock FontSize<span style="color: #008000;">=</span><span style="color: #666666;">&quot;8&quot;</span> Text<span style="color: #008000;">=</span><span style="color: #666666;">&quot;{Binding Type}&quot;</span> AutomationProperties<span style="color: #008000;">.</span><span style="color: #0000FF;">HelpText</span><span style="color: #008000;">=</span><span style="color: #666666;">&quot;{Binding yourWord}&quot;</span><span style="color: #008000;">&gt;</span></pre></div></div>
+
+<p>Main.cs</p>
+
+<div class="wp_code"><div class="pre"><pre class="csharp" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #0600FF; font-weight: bold;">public</span> <span style="color: #6666cc; font-weight: bold;">String</span> myWord
+<span style="color: #008000;">&#123;</span>
+    <span style="color: #0600FF; font-weight: bold;">get</span>
+    <span style="color: #008000;">&#123;</span>
+        <span style="color: #0600FF; font-weight: bold;">return</span> <span style="color: #666666;">&quot;hello world!&quot;</span>
+    <span style="color: #008000;">&#125;</span>
+<span style="color: #008000;">&#125;</span>
+&nbsp;
+然后呢，我们就可以在客户端用HelpText等property取出这些特意暴露出来的值了。</pre></div></div>
+
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/9488.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>UI Automation通过相对位置来进行对象识别</title>
+		<link>http://www.xieziming.com/archives/9487.html</link>
+		<comments>http://www.xieziming.com/archives/9487.html#respond</comments>
+		<pubDate>Sun, 07 Jun 2015 09:08:24 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[测试]]></category>
+		<category><![CDATA[Automation]]></category>
+		<category><![CDATA[UI Automation]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=9487</guid>
+		<description><![CDATA[下面这个类是用来辅助我们通过相对位置关系来找控件。
+
+<code lang="csharp">
+class LocationFinder 
+    { 
+        AutomationElement element; 
+        public LocationFinder(AutomationElement element) 
+        { 
+            this.element = element; 
+        } 
+
+        public AutomationElement getWindow(AutomationElement element) 
+        { 
+            TreeWalker tWalker = TreeWalker.ControlViewWalker; 
+            AutomationElement parentItem = tWalker.GetParent(element); 
+            if (!parentItem.Current.ControlType.Equals(ControlType.Window)) 
+            { 
+                return getWindow(parentItem); 
+            } 
+            return parentItem; 
+        } 
+</code>]]></description>
+				<content:encoded><![CDATA[<p>下面这个类是用来辅助我们通过相对位置关系来找控件。</p>
+
+<div class="wp_code"><div class="pre"><pre class="csharp" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #6666cc; font-weight: bold;">class</span> LocationFinder 
+    <span style="color: #008000;">&#123;</span> 
+        AutomationElement element<span style="color: #008000;">;</span> 
+        <span style="color: #0600FF; font-weight: bold;">public</span> LocationFinder<span style="color: #008000;">&#40;</span>AutomationElement element<span style="color: #008000;">&#41;</span> 
+        <span style="color: #008000;">&#123;</span> 
+            <span style="color: #0600FF; font-weight: bold;">this</span><span style="color: #008000;">.</span><span style="color: #0000FF;">element</span> <span style="color: #008000;">=</span> element<span style="color: #008000;">;</span> 
+        <span style="color: #008000;">&#125;</span> 
+&nbsp;
+        <span style="color: #0600FF; font-weight: bold;">public</span> AutomationElement getWindow<span style="color: #008000;">&#40;</span>AutomationElement element<span style="color: #008000;">&#41;</span> 
+        <span style="color: #008000;">&#123;</span> 
+            TreeWalker tWalker <span style="color: #008000;">=</span> TreeWalker<span style="color: #008000;">.</span><span style="color: #0000FF;">ControlViewWalker</span><span style="color: #008000;">;</span> 
+            AutomationElement parentItem <span style="color: #008000;">=</span> tWalker<span style="color: #008000;">.</span><span style="color: #0000FF;">GetParent</span><span style="color: #008000;">&#40;</span>element<span style="color: #008000;">&#41;</span><span style="color: #008000;">;</span> 
+            <span style="color: #0600FF; font-weight: bold;">if</span> <span style="color: #008000;">&#40;</span><span style="color: #008000;">!</span>parentItem<span style="color: #008000;">.</span><span style="color: #0000FF;">Current</span><span style="color: #008000;">.</span><span style="color: #0000FF;">ControlType</span><span style="color: #008000;">.</span><span style="color: #0000FF;">Equals</span><span style="color: #008000;">&#40;</span>ControlType<span style="color: #008000;">.</span><span style="color: #0000FF;">Window</span><span style="color: #008000;">&#41;</span><span style="color: #008000;">&#41;</span> 
+            <span style="color: #008000;">&#123;</span> 
+                <span style="color: #0600FF; font-weight: bold;">return</span> getWindow<span style="color: #008000;">&#40;</span>parentItem<span style="color: #008000;">&#41;</span><span style="color: #008000;">;</span> 
+            <span style="color: #008000;">&#125;</span> 
+            <span style="color: #0600FF; font-weight: bold;">return</span> parentItem<span style="color: #008000;">;</span> 
+        <span style="color: #008000;">&#125;</span> 
+&nbsp;
+        <span style="color: #0600FF; font-weight: bold;">public</span> AutomationElement getSameXAutomationElement<span style="color: #008000;">&#40;</span>ControlType controlType, LocationDirection direction<span style="color: #008000;">&#41;</span> 
+        <span style="color: #008000;">&#123;</span> 
+            List<span style="color: #008000;">&lt;</span>AutomationElement<span style="color: #008000;">&gt;</span> xelements <span style="color: #008000;">=</span> getSameXAutomationElement<span style="color: #008000;">&#40;</span>controlType<span style="color: #008000;">&#41;</span><span style="color: #008000;">;</span> 
+            <span style="color: #0600FF; font-weight: bold;">foreach</span> <span style="color: #008000;">&#40;</span>AutomationElement xelement <span style="color: #0600FF; font-weight: bold;">in</span> xelements<span style="color: #008000;">&#41;</span> 
+            <span style="color: #008000;">&#123;</span> 
+                <span style="color: #0600FF; font-weight: bold;">if</span> <span style="color: #008000;">&#40;</span>xelement<span style="color: #008000;">.</span><span style="color: #0000FF;">Current</span><span style="color: #008000;">.</span><span style="color: #0000FF;">ControlType</span><span style="color: #008000;">.</span><span style="color: #0000FF;">Equals</span><span style="color: #008000;">&#40;</span>controlType<span style="color: #008000;">&#41;</span><span style="color: #008000;">&#41;</span> 
+                <span style="color: #008000;">&#123;</span> 
+                    <span style="color: #0600FF; font-weight: bold;">if</span> <span style="color: #008000;">&#40;</span><span style="color: #008000;">&#40;</span>xelement<span style="color: #008000;">.</span><span style="color: #0000FF;">Current</span><span style="color: #008000;">.</span><span style="color: #0000FF;">BoundingRectangle</span><span style="color: #008000;">.</span><span style="color: #0000FF;">Top</span> <span style="color: #008000;">-</span> element<span style="color: #008000;">.</span><span style="color: #0000FF;">Current</span><span style="color: #008000;">.</span><span style="color: #0000FF;">BoundingRectangle</span><span style="color: #008000;">.</span><span style="color: #0000FF;">Top</span><span style="color: #008000;">&#41;</span> <span style="color: #008000;">&gt;</span> <span style="color: #FF0000;">2</span> <span style="color: #008000;">&amp;&amp;</span> direction<span style="color: #008000;">.</span><span style="color: #0000FF;">Equals</span><span style="color: #008000;">&#40;</span>LocationDirection<span style="color: #008000;">.</span><span style="color: #0000FF;">UP</span><span style="color: #008000;">&#41;</span><span style="color: #008000;">&#41;</span> <span style="color: #0600FF; font-weight: bold;">return</span> xelement<span style="color: #008000;">;</span> 
+                    <span style="color: #0600FF; font-weight: bold;">if</span> <span style="color: #008000;">&#40;</span><span style="color: #008000;">&#40;</span>element<span style="color: #008000;">.</span><span style="color: #0000FF;">Current</span><span style="color: #008000;">.</span><span style="color: #0000FF;">BoundingRectangle</span><span style="color: #008000;">.</span><span style="color: #0000FF;">Top</span> <span style="color: #008000;">-</span> xelement<span style="color: #008000;">.</span><span style="color: #0000FF;">Current</span><span style="color: #008000;">.</span><span style="color: #0000FF;">BoundingRectangle</span><span style="color: #008000;">.</span><span style="color: #0000FF;">Top</span><span style="color: #008000;">&#41;</span> <span style="color: #008000;">&gt;</span> <span style="color: #FF0000;">2</span> <span style="color: #008000;">&amp;&amp;</span> direction<span style="color: #008000;">.</span><span style="color: #0000FF;">Equals</span><span style="color: #008000;">&#40;</span>LocationDirection<span style="color: #008000;">.</span><span style="color: #0000FF;">DOWN</span><span style="color: #008000;">&#41;</span><span style="color: #008000;">&#41;</span> <span style="color: #0600FF; font-weight: bold;">return</span> xelement<span style="color: #008000;">;</span> 
+                <span style="color: #008000;">&#125;</span> 
+            <span style="color: #008000;">&#125;</span> 
+&nbsp;
+            <span style="color: #0600FF; font-weight: bold;">return</span> <span style="color: #0600FF; font-weight: bold;">null</span><span style="color: #008000;">;</span> 
+        <span style="color: #008000;">&#125;</span> 
+&nbsp;
+        <span style="color: #0600FF; font-weight: bold;">public</span> AutomationElement getSameYAutomationElement<span style="color: #008000;">&#40;</span>ControlType controlType, LocationDirection direction<span style="color: #008000;">&#41;</span> 
+        <span style="color: #008000;">&#123;</span> 
+            List<span style="color: #008000;">&lt;</span>AutomationElement<span style="color: #008000;">&gt;</span> yelements <span style="color: #008000;">=</span> getSameYAutomationElement<span style="color: #008000;">&#40;</span>controlType<span style="color: #008000;">&#41;</span><span style="color: #008000;">;</span> 
+            <span style="color: #0600FF; font-weight: bold;">foreach</span> <span style="color: #008000;">&#40;</span>AutomationElement yelement <span style="color: #0600FF; font-weight: bold;">in</span> yelements<span style="color: #008000;">&#41;</span> 
+            <span style="color: #008000;">&#123;</span> 
+                <span style="color: #0600FF; font-weight: bold;">if</span> <span style="color: #008000;">&#40;</span>yelement<span style="color: #008000;">.</span><span style="color: #0000FF;">Current</span><span style="color: #008000;">.</span><span style="color: #0000FF;">ControlType</span><span style="color: #008000;">.</span><span style="color: #0000FF;">Equals</span><span style="color: #008000;">&#40;</span>controlType<span style="color: #008000;">&#41;</span><span style="color: #008000;">&#41;</span> 
+                <span style="color: #008000;">&#123;</span> 
+                    <span style="color: #0600FF; font-weight: bold;">if</span> <span style="color: #008000;">&#40;</span><span style="color: #008000;">&#40;</span>yelement<span style="color: #008000;">.</span><span style="color: #0000FF;">Current</span><span style="color: #008000;">.</span><span style="color: #0000FF;">BoundingRectangle</span><span style="color: #008000;">.</span><span style="color: #0000FF;">Left</span> <span style="color: #008000;">-</span> element<span style="color: #008000;">.</span><span style="color: #0000FF;">Current</span><span style="color: #008000;">.</span><span style="color: #0000FF;">BoundingRectangle</span><span style="color: #008000;">.</span><span style="color: #0000FF;">Left</span><span style="color: #008000;">&#41;</span> <span style="color: #008000;">&gt;</span> <span style="color: #FF0000;">2</span> <span style="color: #008000;">&amp;&amp;</span> direction<span style="color: #008000;">.</span><span style="color: #0000FF;">Equals</span><span style="color: #008000;">&#40;</span>LocationDirection<span style="color: #008000;">.</span><span style="color: #0000FF;">RIGHT</span><span style="color: #008000;">&#41;</span><span style="color: #008000;">&#41;</span> <span style="color: #0600FF; font-weight: bold;">return</span> yelement<span style="color: #008000;">;</span> 
+                    <span style="color: #0600FF; font-weight: bold;">if</span> <span style="color: #008000;">&#40;</span><span style="color: #008000;">&#40;</span>element<span style="color: #008000;">.</span><span style="color: #0000FF;">Current</span><span style="color: #008000;">.</span><span style="color: #0000FF;">BoundingRectangle</span><span style="color: #008000;">.</span><span style="color: #0000FF;">Left</span> <span style="color: #008000;">-</span> yelement<span style="color: #008000;">.</span><span style="color: #0000FF;">Current</span><span style="color: #008000;">.</span><span style="color: #0000FF;">BoundingRectangle</span><span style="color: #008000;">.</span><span style="color: #0000FF;">Left</span><span style="color: #008000;">&#41;</span> <span style="color: #008000;">&gt;</span> <span style="color: #FF0000;">2</span> <span style="color: #008000;">&amp;&amp;</span> direction<span style="color: #008000;">.</span><span style="color: #0000FF;">Equals</span><span style="color: #008000;">&#40;</span>LocationDirection<span style="color: #008000;">.</span><span style="color: #0000FF;">LEFT</span><span style="color: #008000;">&#41;</span><span style="color: #008000;">&#41;</span> <span style="color: #0600FF; font-weight: bold;">return</span> yelement<span style="color: #008000;">;</span> 
+                <span style="color: #008000;">&#125;</span> 
+            <span style="color: #008000;">&#125;</span> 
+&nbsp;
+            <span style="color: #0600FF; font-weight: bold;">return</span> <span style="color: #0600FF; font-weight: bold;">null</span><span style="color: #008000;">;</span> 
+        <span style="color: #008000;">&#125;</span> 
+&nbsp;
+        <span style="color: #0600FF; font-weight: bold;">public</span> List<span style="color: #008000;">&lt;</span>AutomationElement<span style="color: #008000;">&gt;</span> getSameXAutomationElement<span style="color: #008000;">&#40;</span>ControlType controlType<span style="color: #008000;">&#41;</span> 
+        <span style="color: #008000;">&#123;</span> 
+            List<span style="color: #008000;">&lt;</span>AutomationElement<span style="color: #008000;">&gt;</span> elements <span style="color: #008000;">=</span> <span style="color: #008000;">new</span> List<span style="color: #008000;">&lt;</span>AutomationElement<span style="color: #008000;">&gt;</span><span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span><span style="color: #008000;">;</span> 
+            List<span style="color: #008000;">&lt;</span>AutomationElement<span style="color: #008000;">&gt;</span> xelements <span style="color: #008000;">=</span> getSameXAutomationElement<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span><span style="color: #008000;">;</span> 
+            <span style="color: #0600FF; font-weight: bold;">foreach</span> <span style="color: #008000;">&#40;</span>AutomationElement element <span style="color: #0600FF; font-weight: bold;">in</span> xelements<span style="color: #008000;">&#41;</span> 
+            <span style="color: #008000;">&#123;</span> 
+                <span style="color: #0600FF; font-weight: bold;">if</span> <span style="color: #008000;">&#40;</span><span style="color: #008000;">!</span>element<span style="color: #008000;">.</span><span style="color: #0000FF;">Current</span><span style="color: #008000;">.</span><span style="color: #0000FF;">ControlType</span><span style="color: #008000;">.</span><span style="color: #0000FF;">Equals</span><span style="color: #008000;">&#40;</span>controlType<span style="color: #008000;">&#41;</span><span style="color: #008000;">&#41;</span> 
+                <span style="color: #008000;">&#123;</span> 
+                    elements<span style="color: #008000;">.</span><span style="color: #0600FF; font-weight: bold;">Add</span><span style="color: #008000;">&#40;</span>element<span style="color: #008000;">&#41;</span><span style="color: #008000;">;</span> 
+                <span style="color: #008000;">&#125;</span> 
+            <span style="color: #008000;">&#125;</span> 
+&nbsp;
+            <span style="color: #0600FF; font-weight: bold;">return</span> elements<span style="color: #008000;">;</span> 
+        <span style="color: #008000;">&#125;</span> 
+&nbsp;
+        <span style="color: #0600FF; font-weight: bold;">public</span> List<span style="color: #008000;">&lt;</span>AutomationElement<span style="color: #008000;">&gt;</span> getSameYAutomationElement<span style="color: #008000;">&#40;</span>ControlType controlType<span style="color: #008000;">&#41;</span> 
+        <span style="color: #008000;">&#123;</span> 
+            List<span style="color: #008000;">&lt;</span>AutomationElement<span style="color: #008000;">&gt;</span> elements <span style="color: #008000;">=</span> <span style="color: #008000;">new</span> List<span style="color: #008000;">&lt;</span>AutomationElement<span style="color: #008000;">&gt;</span><span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span><span style="color: #008000;">;</span> 
+            List<span style="color: #008000;">&lt;</span>AutomationElement<span style="color: #008000;">&gt;</span> yelements <span style="color: #008000;">=</span> getSameYAutomationElement<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span><span style="color: #008000;">;</span> 
+            <span style="color: #0600FF; font-weight: bold;">foreach</span> <span style="color: #008000;">&#40;</span>AutomationElement element <span style="color: #0600FF; font-weight: bold;">in</span> yelements<span style="color: #008000;">&#41;</span> 
+            <span style="color: #008000;">&#123;</span> 
+                <span style="color: #0600FF; font-weight: bold;">if</span> <span style="color: #008000;">&#40;</span><span style="color: #008000;">!</span>element<span style="color: #008000;">.</span><span style="color: #0000FF;">Current</span><span style="color: #008000;">.</span><span style="color: #0000FF;">ControlType</span><span style="color: #008000;">.</span><span style="color: #0000FF;">Equals</span><span style="color: #008000;">&#40;</span>controlType<span style="color: #008000;">&#41;</span><span style="color: #008000;">&#41;</span> 
+                <span style="color: #008000;">&#123;</span> 
+                    elements<span style="color: #008000;">.</span><span style="color: #0600FF; font-weight: bold;">Add</span><span style="color: #008000;">&#40;</span>element<span style="color: #008000;">&#41;</span><span style="color: #008000;">;</span> 
+                <span style="color: #008000;">&#125;</span> 
+            <span style="color: #008000;">&#125;</span> 
+&nbsp;
+            <span style="color: #0600FF; font-weight: bold;">return</span> elements<span style="color: #008000;">;</span> 
+        <span style="color: #008000;">&#125;</span> 
+&nbsp;
+        <span style="color: #0600FF; font-weight: bold;">public</span> List<span style="color: #008000;">&lt;</span>AutomationElement<span style="color: #008000;">&gt;</span> getSameXAutomationElement<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span> 
+        <span style="color: #008000;">&#123;</span> 
+            List<span style="color: #008000;">&lt;</span>AutomationElement<span style="color: #008000;">&gt;</span> elements <span style="color: #008000;">=</span> <span style="color: #008000;">new</span> List<span style="color: #008000;">&lt;</span>AutomationElement<span style="color: #008000;">&gt;</span><span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span><span style="color: #008000;">;</span> 
+            AutomationElement window <span style="color: #008000;">=</span> getWindow<span style="color: #008000;">&#40;</span>element<span style="color: #008000;">&#41;</span><span style="color: #008000;">;</span> 
+&nbsp;
+            TreeWalker tWalker <span style="color: #008000;">=</span> TreeWalker<span style="color: #008000;">.</span><span style="color: #0000FF;">ControlViewWalker</span><span style="color: #008000;">;</span> 
+            AutomationElement childElement <span style="color: #008000;">=</span> tWalker<span style="color: #008000;">.</span><span style="color: #0000FF;">GetFirstChild</span><span style="color: #008000;">&#40;</span>window<span style="color: #008000;">&#41;</span><span style="color: #008000;">;</span> 
+&nbsp;
+            <span style="color: #0600FF; font-weight: bold;">while</span> <span style="color: #008000;">&#40;</span>childElement <span style="color: #008000;">!=</span> <span style="color: #0600FF; font-weight: bold;">null</span><span style="color: #008000;">&#41;</span> 
+            <span style="color: #008000;">&#123;</span> 
+                <span style="color: #0600FF; font-weight: bold;">if</span> <span style="color: #008000;">&#40;</span>childElement <span style="color: #008000;">!=</span> element <span style="color: #008000;">&amp;&amp;</span> Math<span style="color: #008000;">.</span><span style="color: #0000FF;">Abs</span><span style="color: #008000;">&#40;</span>childElement<span style="color: #008000;">.</span><span style="color: #0000FF;">Current</span><span style="color: #008000;">.</span><span style="color: #0000FF;">BoundingRectangle</span><span style="color: #008000;">.</span><span style="color: #0000FF;">Top</span> <span style="color: #008000;">-</span> element<span style="color: #008000;">.</span><span style="color: #0000FF;">Current</span><span style="color: #008000;">.</span><span style="color: #0000FF;">BoundingRectangle</span><span style="color: #008000;">.</span><span style="color: #0000FF;">Top</span><span style="color: #008000;">&#41;</span> <span style="color: #008000;">&lt;</span> <span style="color: #FF0000;">5</span><span style="color: #008000;">&#41;</span> 
+                <span style="color: #008000;">&#123;</span> 
+                    elements<span style="color: #008000;">.</span><span style="color: #0600FF; font-weight: bold;">Add</span><span style="color: #008000;">&#40;</span>childElement<span style="color: #008000;">&#41;</span><span style="color: #008000;">;</span> 
+                <span style="color: #008000;">&#125;</span> 
+                childElement <span style="color: #008000;">=</span> tWalker<span style="color: #008000;">.</span><span style="color: #0000FF;">GetNextSibling</span><span style="color: #008000;">&#40;</span>childElement<span style="color: #008000;">&#41;</span><span style="color: #008000;">;</span> 
+            <span style="color: #008000;">&#125;</span> 
+            <span style="color: #0600FF; font-weight: bold;">return</span> elements<span style="color: #008000;">;</span> 
+        <span style="color: #008000;">&#125;</span> 
+&nbsp;
+        <span style="color: #0600FF; font-weight: bold;">public</span> List<span style="color: #008000;">&lt;</span>AutomationElement<span style="color: #008000;">&gt;</span> getSameYAutomationElement<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span> 
+        <span style="color: #008000;">&#123;</span> 
+            List<span style="color: #008000;">&lt;</span>AutomationElement<span style="color: #008000;">&gt;</span> elements <span style="color: #008000;">=</span> <span style="color: #008000;">new</span> List<span style="color: #008000;">&lt;</span>AutomationElement<span style="color: #008000;">&gt;</span><span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span><span style="color: #008000;">;</span> 
+            AutomationElement window <span style="color: #008000;">=</span> getWindow<span style="color: #008000;">&#40;</span>element<span style="color: #008000;">&#41;</span><span style="color: #008000;">;</span> 
+&nbsp;
+            TreeWalker tWalker <span style="color: #008000;">=</span> TreeWalker<span style="color: #008000;">.</span><span style="color: #0000FF;">ControlViewWalker</span><span style="color: #008000;">;</span> 
+            AutomationElement childElement <span style="color: #008000;">=</span> tWalker<span style="color: #008000;">.</span><span style="color: #0000FF;">GetFirstChild</span><span style="color: #008000;">&#40;</span>window<span style="color: #008000;">&#41;</span><span style="color: #008000;">;</span> 
+&nbsp;
+            <span style="color: #0600FF; font-weight: bold;">while</span> <span style="color: #008000;">&#40;</span>childElement <span style="color: #008000;">!=</span> <span style="color: #0600FF; font-weight: bold;">null</span><span style="color: #008000;">&#41;</span> 
+            <span style="color: #008000;">&#123;</span> 
+                <span style="color: #0600FF; font-weight: bold;">if</span> <span style="color: #008000;">&#40;</span>childElement <span style="color: #008000;">!=</span> element <span style="color: #008000;">&amp;&amp;</span> Math<span style="color: #008000;">.</span><span style="color: #0000FF;">Abs</span><span style="color: #008000;">&#40;</span>childElement<span style="color: #008000;">.</span><span style="color: #0000FF;">Current</span><span style="color: #008000;">.</span><span style="color: #0000FF;">BoundingRectangle</span><span style="color: #008000;">.</span><span style="color: #0000FF;">Left</span> <span style="color: #008000;">-</span> element<span style="color: #008000;">.</span><span style="color: #0000FF;">Current</span><span style="color: #008000;">.</span><span style="color: #0000FF;">BoundingRectangle</span><span style="color: #008000;">.</span><span style="color: #0000FF;">Left</span><span style="color: #008000;">&#41;</span> <span style="color: #008000;">&lt;</span> <span style="color: #FF0000;">5</span><span style="color: #008000;">&#41;</span> 
+                <span style="color: #008000;">&#123;</span> 
+                    elements<span style="color: #008000;">.</span><span style="color: #0600FF; font-weight: bold;">Add</span><span style="color: #008000;">&#40;</span>childElement<span style="color: #008000;">&#41;</span><span style="color: #008000;">;</span> 
+                <span style="color: #008000;">&#125;</span> 
+                childElement <span style="color: #008000;">=</span> tWalker<span style="color: #008000;">.</span><span style="color: #0000FF;">GetNextSibling</span><span style="color: #008000;">&#40;</span>childElement<span style="color: #008000;">&#41;</span><span style="color: #008000;">;</span> 
+            <span style="color: #008000;">&#125;</span> 
+            <span style="color: #0600FF; font-weight: bold;">return</span> elements<span style="color: #008000;">;</span> 
+        <span style="color: #008000;">&#125;</span> 
+    <span style="color: #008000;">&#125;</span></pre></div></div>
+
+
+<div class="wp_code"><div class="pre"><pre class="csharp" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #6666cc; font-weight: bold;">enum</span> LocationDirection
+<span style="color: #008000;">&#123;</span>
+    LEFT <span style="color: #008000;">=</span> <span style="color: #FF0000;">0</span>,
+    RIGHT <span style="color: #008000;">=</span> <span style="color: #FF0000;">1</span>,
+    UP <span style="color: #008000;">=</span> <span style="color: #FF0000;">2</span>,
+    DOWN <span style="color: #008000;">=</span> <span style="color: #FF0000;">3</span>
+<span style="color: #008000;">&#125;</span></pre></div></div>
+
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/9487.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>UI Automation对象识别方式</title>
+		<link>http://www.xieziming.com/archives/9468.html</link>
+		<comments>http://www.xieziming.com/archives/9468.html#respond</comments>
+		<pubDate>Thu, 07 May 2015 07:03:48 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[测试]]></category>
+		<category><![CDATA[Automation]]></category>
+		<category><![CDATA[UI Automation]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=9468</guid>
+		<description><![CDATA[UI Automation中查询子元素有两种方式，一种是通过TreeWalker类的GetFirstChild和GetLastChild方法。一种是通过AutomationElement类的FindFirst和FirstAll方法。
+
+在UIA中，程序UI的每一个部分都被认为是一个AutomationElement类，他们是一个树状的结构，Desktop被认为是每个windows based app的UIA树状图的根，从类的定义中，我们也可以看到一个AutomationElement类中有一个static的RootElement属性。
+
+<strong>对象识别：</strong>
+
+<code lang="csharp">
+AutomationnElement desktop = AutomationElement.RootElement;
+PropertyCondition typeCond = new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Window);
+PropertyCondition nameCond = new PropertyCondition(AutomationElement.NameProperty, "Trader Desktop");
+AutomationElement traderDesktop = desktop.findFirst(TreeScope.Children, new AndCondition(nameCond, typeCond));
+AutomationElementCollection traderDesktops = desktop.findAll(TreeScope.Children, new AndCondition(nameCond, typeCond));
+</code>]]></description>
+				<content:encoded><![CDATA[<p>UI Automation中查询子元素有两种方式，一种是通过TreeWalker类的GetFirstChild和GetLastChild方法。一种是通过AutomationElement类的FindFirst和FirstAll方法。</p>
+<p>在UIA中，程序UI的每一个部分都被认为是一个AutomationElement类，他们是一个树状的结构，Desktop被认为是每个windows based app的UIA树状图的根，从类的定义中，我们也可以看到一个AutomationElement类中有一个static的RootElement属性。</p>
+<p><strong>对象识别：</strong></p>
+
+<div class="wp_code"><div class="pre"><pre class="csharp" style="font-family:'Times New Roman',Garamond, Times;">AutomationnElement desktop <span style="color: #008000;">=</span> AutomationElement<span style="color: #008000;">.</span><span style="color: #0000FF;">RootElement</span><span style="color: #008000;">;</span>
+PropertyCondition typeCond <span style="color: #008000;">=</span> <span style="color: #008000;">new</span> PropertyCondition<span style="color: #008000;">&#40;</span>AutomationElement<span style="color: #008000;">.</span><span style="color: #0000FF;">ControlTypeProperty</span>, ControlType<span style="color: #008000;">.</span><span style="color: #0000FF;">Window</span><span style="color: #008000;">&#41;</span><span style="color: #008000;">;</span>
+PropertyCondition nameCond <span style="color: #008000;">=</span> <span style="color: #008000;">new</span> PropertyCondition<span style="color: #008000;">&#40;</span>AutomationElement<span style="color: #008000;">.</span><span style="color: #0000FF;">NameProperty</span>, <span style="color: #666666;">&quot;Trader Desktop&quot;</span><span style="color: #008000;">&#41;</span><span style="color: #008000;">;</span>
+AutomationElement traderDesktop <span style="color: #008000;">=</span> desktop<span style="color: #008000;">.</span><span style="color: #0000FF;">findFirst</span><span style="color: #008000;">&#40;</span>TreeScope<span style="color: #008000;">.</span><span style="color: #0000FF;">Children</span>, <span style="color: #008000;">new</span> AndCondition<span style="color: #008000;">&#40;</span>nameCond, typeCond<span style="color: #008000;">&#41;</span><span style="color: #008000;">&#41;</span><span style="color: #008000;">;</span>
+AutomationElementCollection traderDesktops <span style="color: #008000;">=</span> desktop<span style="color: #008000;">.</span><span style="color: #0000FF;">findAll</span><span style="color: #008000;">&#40;</span>TreeScope<span style="color: #008000;">.</span><span style="color: #0000FF;">Children</span>, <span style="color: #008000;">new</span> AndCondition<span style="color: #008000;">&#40;</span>nameCond, typeCond<span style="color: #008000;">&#41;</span><span style="color: #008000;">&#41;</span><span style="color: #008000;">;</span></pre></div></div>
+
+<p><strong>对象遍历：</strong></p>
+<blockquote><p>
+<strong>ContentViewWalker</strong><br />
+表示一个预定义的 TreeWalker，其中包含目录树中标记为内容控件的元素的视图。Content View则是Control View的一个子集，它只包含能和用户直接交互真实信息的控件，比如接受键盘输入的Textbox，选择不同值的Combobox；而诸如lable等控件则不会包含在其中</p>
+<p><strong>ControlViewWalker</strong><br />
+表示一个预定义的 TreeWalker，其中包含目录树中标记为控件的元素的视图。Control View是Raw View的子集，它最贴近于最终用户所能感知的UI结构，但是它不包含不能和用户相互交互的一些UI，例如listview的header，toolbar等等。</p>
+<p><strong>RawViewWalker</strong><br />
+表示一个预定义的 TreeWalker，其中包含目录树中所有元素的视图。Raw View提供的信息最多，也是其他view的基础，最贴近于程序本身的编程结构。
+</p></blockquote>
+
+<div class="wp_code"><div class="pre"><pre class="csharp" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #0600FF; font-weight: bold;">private</span> <span style="color: #6666cc; font-weight: bold;">void</span> WalkControlElements<span style="color: #008000;">&#40;</span>AutomationElement rootElement, TreeNode treeNode<span style="color: #008000;">&#41;</span> <span style="color: #008000;">&#123;</span> 
+     <span style="color: #008080; font-style: italic;">//TreeWalker.ControlViewWalker, TreeWalker.ContentViewWalker, TreeWalker.RawViewWalker</span>
+     AutomationElement elementNode <span style="color: #008000;">=</span> TreeWalker<span style="color: #008000;">.</span><span style="color: #0000FF;">ControlViewWalker</span><span style="color: #008000;">.</span><span style="color: #0000FF;">GetFirstChild</span><span style="color: #008000;">&#40;</span>rootElement<span style="color: #008000;">&#41;</span>
+     <span style="color: #0600FF; font-weight: bold;">while</span> <span style="color: #008000;">&#40;</span>elementNode <span style="color: #008000;">!=</span> <span style="color: #0600FF; font-weight: bold;">null</span><span style="color: #008000;">&#41;</span> <span style="color: #008000;">&#123;</span> 
+        TreeNode childTreeNode <span style="color: #008000;">=</span> treeNode<span style="color: #008000;">.</span><span style="color: #0000FF;">Nodes</span><span style="color: #008000;">.</span><span style="color: #0600FF; font-weight: bold;">Add</span><span style="color: #008000;">&#40;</span>elementNode<span style="color: #008000;">.</span><span style="color: #0000FF;">Current</span><span style="color: #008000;">.</span><span style="color: #0000FF;">ControlType</span><span style="color: #008000;">.</span><span style="color: #0000FF;">LocalizedControlType</span><span style="color: #008000;">&#41;</span><span style="color: #008000;">;</span>
+        WalkControlElements<span style="color: #008000;">&#40;</span>elementNode, childTreeNode<span style="color: #008000;">&#41;</span><span style="color: #008000;">;</span> 
+        elementNode <span style="color: #008000;">=</span> TreeWalker<span style="color: #008000;">.</span><span style="color: #0000FF;">ControlViewWalker</span><span style="color: #008000;">.</span><span style="color: #0000FF;">GetNextSibling</span><span style="color: #008000;">&#40;</span>elementNode<span style="color: #008000;">&#41;</span><span style="color: #008000;">;</span> 
+     <span style="color: #008000;">&#125;</span> 
+<span style="color: #008000;">&#125;</span></pre></div></div>
+
+<p>为什么有了微软给出的对象识别（过滤）方式，我们还要自己做对象的遍历：</p>
+<blockquote><p>
+微软给出的对象识别（过滤）主要就是利用TreeWalker.ControlViewWalker来遍历所有的标准控件，然后根据过滤条件来筛选。但对于那些非标准控件，一开始就被排除了，这个时候我们就需要使用RawViewWalker.
+</p></blockquote>
+<p>两者之间还是有性能上的区别，在MSDN的TreeWalker类说明中有这么一段话描述：“使用 TreeWalker 在 UI 自动化目录树中导航可能导致进程间调用，并且其效率不如使用 FindAll 或 FindFirst 方法来定位元素”。有效率上的区别，这点很关键，要知道在一个元素非常多的被测试应用程序上，有很大一部分的工作就在于定位元素，即查找元素，如果测试用例有成百上千条的时候，这两种查找元素的方式有一点效率上的差异，通过大数量级的测试用例运行后的累积效应，其测试所用总时间也会差异较大。</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/9468.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>微软UI Automation</title>
+		<link>http://www.xieziming.com/archives/9480.html</link>
+		<comments>http://www.xieziming.com/archives/9480.html#respond</comments>
+		<pubDate>Tue, 07 Apr 2015 08:28:16 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[测试]]></category>
+		<category><![CDATA[Automation]]></category>
+		<category><![CDATA[UI Automation]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=9480</guid>
+		<description><![CDATA[MS UI Automation（Microsoft User Interface Automation：UIA）随.NET Framework一起发布。 什么是MS UI Automation： MS UI Automation是MSAA技术的一个替代品：即让控件和应用程序具有更好的可达性（accessible），它就是几个dll，提供了一套API和Interface及其相应的模式，让软件的开发者遵循该模式去实现相应的interface，从而软件的使用者（不仅仅是客户，还包括例如测试人员想编写一些自动化测试代码来完成程序相关的业务逻辑）能更好的使用该软件。 和原来的MSAA相比较：UIA重新设计了一套架构，无论是对传统的winform，还是新的wpf，定义了一套统一的模型；其API的使用也相对更简单；同时，和.NET Framework一起，也有inspect.exe和UIA Verify的工具来辅助大家来使用UIA。 UIA之架构 MS UIA明确定义了两个role： （1）UIA Provider即软件本身，主要是软件的开发人员依据相应的模式去实现相关的interface。对于标准控件而言，默认是支持UIA的，而对于自定义的控件，需要实现该控件的行为对应于UIA所定义的interface。 （2）UIA Client即自动化脚本和相关的assistive technology applications，从测试人员的角度出发，主要是调用相应的API去实现自动化测试脚本 UIA主要有4个DLL： （1）UIAutomationProvider.dll，定义了各种行为的interface，例如，假设有个自定义的控件，开发人员觉得它需要支持Dock行为，就需要实现IDockProvider接口。 （2）UIAutomaitonClient.dll，定义了各种控件模式，以及一些用来支持更好的定位控件的辅助条件搜索类。 （3）UIAutomationCore.dll则是用来支持UIA provider和client之间的通信的。 （4）UIAutomationClientssideProviders.dll则主要是用来支持传统的winform的标准控件的。]]></description>
+				<content:encoded><![CDATA[<p>MS UI Automation（Microsoft User Interface Automation：UIA）随.NET Framework一起发布。</p>
+<p><strong>什么是MS UI Automation：</strong></p>
+<blockquote><p>
+MS UI Automation是MSAA技术的一个替代品：即让控件和应用程序具有更好的可达性（accessible），它就是几个dll，提供了一套API和Interface及其相应的模式，让软件的开发者遵循该模式去实现相应的interface，从而软件的使用者（不仅仅是客户，还包括例如测试人员想编写一些自动化测试代码来完成程序相关的业务逻辑）能更好的使用该软件。
+</p></blockquote>
+<p>和原来的MSAA相比较：UIA重新设计了一套架构，无论是对传统的winform，还是新的wpf，定义了一套统一的模型；其API的使用也相对更简单；同时，和.NET Framework一起，也有inspect.exe和UIA Verify的工具来辅助大家来使用UIA。</p>
+<p><strong>UIA之架构</strong></p>
+<p>MS UIA明确定义了两个role：</p>
+<blockquote><p>
+（1）UIA Provider即软件本身，主要是软件的开发人员依据相应的模式去实现相关的interface。对于标准控件而言，默认是支持UIA的，而对于自定义的控件，需要实现该控件的行为对应于UIA所定义的interface。</p>
+<p>（2）UIA Client即自动化脚本和相关的assistive technology applications，从测试人员的角度出发，主要是调用相应的API去实现自动化测试脚本
+</p></blockquote>
+<p>UIA主要有4个DLL：</p>
+<blockquote><p>
+（1）UIAutomationProvider.dll，定义了各种行为的interface，例如，假设有个自定义的控件，开发人员觉得它需要支持Dock行为，就需要实现IDockProvider接口。</p>
+<p>（2）UIAutomaitonClient.dll，定义了各种控件模式，以及一些用来支持更好的定位控件的辅助条件搜索类。</p>
+<p>（3）UIAutomationCore.dll则是用来支持UIA provider和client之间的通信的。</p>
+<p>（4）UIAutomationClientssideProviders.dll则主要是用来支持传统的winform的标准控件的。
+</p></blockquote>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/9480.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Jemmy入门之Waiter</title>
+		<link>http://www.xieziming.com/archives/8630.html</link>
+		<comments>http://www.xieziming.com/archives/8630.html#respond</comments>
+		<pubDate>Wed, 10 Apr 2013 08:23:38 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[测试]]></category>
+		<category><![CDATA[Automation]]></category>
+		<category><![CDATA[Jemmy]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=8630</guid>
+		<description><![CDATA[Jemmy中Waiter主要用于等待某个动作做完或者等待某个对象出现。在规定时间没做完的话会抛出超时异常。
+<code lang="java">
+/**
+ * 可以看到它实现了Waitable, Timeoutable, Outputable这三个接口
+ * 不过不是很明白它为啥要实现Waitable
+ */
+public class Waiter implements Waitable, Timeoutable, Outputable {
+	/**
+	 * timeout 常量，其中WAIT_TIME一般后来会被覆盖
+	 */
+	private final static long TIME_DELTA = 10;
+	private final static long WAIT_TIME = 60000;
+	private final static long AFTER_WAIT_TIME = 0;
+
+	private Waitable waitable;
+	private long startTime = 0;
+	private long endTime = -1;
+	private Object result;
+	private Timeouts timeouts;
+	private String waitingTimeOrigin;
+	private TestOut out;
+</code>]]></description>
+				<content:encoded><![CDATA[<p>Jemmy中Waiter主要用于等待某个动作做完或者等待某个对象出现。在规定时间没做完的话会抛出超时异常。</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #008000; font-style: italic; font-weight: bold;">/**
+ * 可以看到它实现了Waitable, Timeoutable, Outputable这三个接口
+ * 不过不是很明白它为啥要实现Waitable
+ */</span>
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> Waiter <span style="color: #000000; font-weight: bold;">implements</span> Waitable, Timeoutable, Outputable <span style="color: #009900;">&#123;</span>
+	<span style="color: #008000; font-style: italic; font-weight: bold;">/**
+	 * timeout 常量，其中WAIT_TIME一般后来会被覆盖
+	 */</span>
+	<span style="color: #000000; font-weight: bold;">private</span> <span style="color: #000000; font-weight: bold;">final</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000066; font-weight: bold;">long</span> TIME_DELTA <span style="color: #339933;">=</span> <span style="color: #cc66cc;">10</span><span style="color: #339933;">;</span>
+	<span style="color: #000000; font-weight: bold;">private</span> <span style="color: #000000; font-weight: bold;">final</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000066; font-weight: bold;">long</span> WAIT_TIME <span style="color: #339933;">=</span> <span style="color: #cc66cc;">60000</span><span style="color: #339933;">;</span>
+	<span style="color: #000000; font-weight: bold;">private</span> <span style="color: #000000; font-weight: bold;">final</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000066; font-weight: bold;">long</span> AFTER_WAIT_TIME <span style="color: #339933;">=</span> <span style="color: #cc66cc;">0</span><span style="color: #339933;">;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;">private</span> Waitable waitable<span style="color: #339933;">;</span>
+	<span style="color: #000000; font-weight: bold;">private</span> <span style="color: #000066; font-weight: bold;">long</span> startTime <span style="color: #339933;">=</span> <span style="color: #cc66cc;">0</span><span style="color: #339933;">;</span>
+	<span style="color: #000000; font-weight: bold;">private</span> <span style="color: #000066; font-weight: bold;">long</span> endTime <span style="color: #339933;">=</span> <span style="color: #339933;">-</span><span style="color: #cc66cc;">1</span><span style="color: #339933;">;</span>
+	<span style="color: #000000; font-weight: bold;">private</span> <span style="color: #003399;">Object</span> result<span style="color: #339933;">;</span>
+	<span style="color: #000000; font-weight: bold;">private</span> Timeouts timeouts<span style="color: #339933;">;</span>
+	<span style="color: #000000; font-weight: bold;">private</span> <span style="color: #003399;">String</span> waitingTimeOrigin<span style="color: #339933;">;</span>
+	<span style="color: #000000; font-weight: bold;">private</span> TestOut out<span style="color: #339933;">;</span>
+&nbsp;
+	<span style="color: #008000; font-style: italic; font-weight: bold;">/**
+	 * Constructor.
+	 * 
+	 * @param w
+	 *            Waitable object defining waiting criteria.
+	 */</span>
+	<span style="color: #000000; font-weight: bold;">public</span> Waiter<span style="color: #009900;">&#40;</span>Waitable w<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		<span style="color: #000000; font-weight: bold;">super</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		setTimeouts<span style="color: #009900;">&#40;</span>JemmyProperties.<span style="color: #006633;">getProperties</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>.<span style="color: #006633;">getTimeouts</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		setOutput<span style="color: #009900;">&#40;</span>JemmyProperties.<span style="color: #006633;">getProperties</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>.<span style="color: #006633;">getOutput</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		waitable <span style="color: #339933;">=</span> w<span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+       <span style="color: #008000; font-style: italic; font-weight: bold;">/**
+	 * 初始化Waiter的timeout常量
+	 */</span>
+	<span style="color: #000000; font-weight: bold;">static</span> <span style="color: #009900;">&#123;</span>
+		Timeouts.<span style="color: #006633;">initDefault</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;Waiter.TimeDelta&quot;</span>, TIME_DELTA<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		Timeouts.<span style="color: #006633;">initDefault</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;Waiter.WaitingTime&quot;</span>, WAIT_TIME<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		Timeouts.<span style="color: #006633;">initDefault</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;Waiter.AfterWaitingTime&quot;</span>, AFTER_WAIT_TIME<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+&nbsp;
+	<span style="color: #008000; font-style: italic; font-weight: bold;">/**
+	 * 这个函数经常用于改写Waiter.WaitingTime，以实现自定义的等待时间
+	 * @param timeouts
+	 * 传入的timeouts，一般都包含了一些在其他类的静态初始化了的timeout，比如从
+         * ComponentOperator传入的话一般会包含WAIT_COMPONENT_TIMEOUT这个timeout
+	 * @param useAsWaitingTime
+	 * 用来覆盖&quot;Waiter.WaitingTime&quot;的timeout，比如ComponentOperator.WaitComponentTimeout.
+	 * @return the cloned timeouts.
+	 */</span>
+	<span style="color: #000000; font-weight: bold;">public</span> Timeouts setTimeoutsToCloneOf<span style="color: #009900;">&#40;</span>Timeouts timeouts,	<span style="color: #003399;">String</span> useAsWaitingTime<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		Timeouts t <span style="color: #339933;">=</span> timeouts.<span style="color: #006633;">cloneThis</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		t.<span style="color: #006633;">setTimeout</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;Waiter.WaitingTime&quot;</span>, t.<span style="color: #006633;">getTimeout</span><span style="color: #009900;">&#40;</span>useAsWaitingTime<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		setTimeouts<span style="color: #009900;">&#40;</span>t<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		<span style="color: #000000; font-weight: bold;">return</span> t<span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+&nbsp;
+	<span style="color: #008000; font-style: italic; font-weight: bold;">/**
+	 * Waits for not null result of actionProduced method of Waitable
+	 * implementation passed into constructor.
+	 * 
+	 * @param waitableObject
+	 *            Object to be passed into actionProduced method.
+	 * @return non null result of action.
+	 * @throws TimeoutExpiredException
+	 * @exception InterruptedException
+	 */</span>
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #003399;">Object</span> waitAction<span style="color: #009900;">&#40;</span><span style="color: #003399;">Object</span> waitableObject<span style="color: #009900;">&#41;</span> <span style="color: #000000; font-weight: bold;">throws</span> <span style="color: #003399;">InterruptedException</span> <span style="color: #009900;">&#123;</span>
+                startTime <span style="color: #339933;">=</span> <span style="color: #003399;">System</span>.<span style="color: #006633;">currentTimeMillis</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		<span style="color: #000066; font-weight: bold;">long</span> timeDelta <span style="color: #339933;">=</span> timeouts.<span style="color: #006633;">getTimeout</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;Waiter.TimeDelta&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		<span style="color: #000000; font-weight: bold;">while</span> <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span>result <span style="color: #339933;">=</span> checkActionProduced<span style="color: #009900;">&#40;</span>waitableObject<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">==</span> <span style="color: #000066; font-weight: bold;">null</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                      <span style="color: #008000; font-style: italic; font-weight: bold;">/**
+                        * 每隔多少毫秒检查一次动作是否完成
+                        */</span>
+			<span style="color: #003399;">Thread</span>.<span style="color: #006633;">currentThread</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>.<span style="color: #006633;">sleep</span><span style="color: #009900;">&#40;</span>timeDelta<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+                      <span style="color: #008000; font-style: italic; font-weight: bold;">/**
+                        * 超时检查
+                        */</span>
+			<span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>timeoutExpired<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+				<span style="color: #000000; font-weight: bold;">throw</span> <span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">new</span> TimeoutExpiredException<span style="color: #009900;">&#40;</span>getActualDescription<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+			<span style="color: #009900;">&#125;</span>
+		<span style="color: #009900;">&#125;</span>
+		endTime <span style="color: #339933;">=</span> <span style="color: #003399;">System</span>.<span style="color: #006633;">currentTimeMillis</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		<span style="color: #003399;">Thread</span>.<span style="color: #006633;">currentThread</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>.<span style="color: #006633;">sleep</span><span style="color: #009900;">&#40;</span>timeouts.<span style="color: #006633;">getTimeout</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;Waiter.AfterWaitingTime&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		<span style="color: #000000; font-weight: bold;">return</span> <span style="color: #009900;">&#40;</span>result<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+&nbsp;
+        <span style="color: #008000; font-style: italic; font-weight: bold;">/**
+         * 检查动作是否完成，所以需要等待的动作必须实现Waitable的actionProduced方法。
+         */</span>
+	<span style="color: #000000; font-weight: bold;">private</span> <span style="color: #003399;">Object</span> checkActionProduced<span style="color: #009900;">&#40;</span><span style="color: #003399;">Object</span> obj<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		<span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>waitable <span style="color: #339933;">!=</span> <span style="color: #000066; font-weight: bold;">null</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+			<span style="color: #000000; font-weight: bold;">return</span> <span style="color: #009900;">&#40;</span>waitable.<span style="color: #006633;">actionProduced</span><span style="color: #009900;">&#40;</span>obj<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		<span style="color: #009900;">&#125;</span> <span style="color: #000000; font-weight: bold;">else</span> <span style="color: #009900;">&#123;</span>
+			<span style="color: #000000; font-weight: bold;">return</span> <span style="color: #009900;">&#40;</span>actionProduced<span style="color: #009900;">&#40;</span>obj<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		<span style="color: #009900;">&#125;</span>
+	<span style="color: #009900;">&#125;</span>
+       <span style="color: #008000; font-style: italic; font-weight: bold;">/**
+         * 检查是否超时。
+         */</span>
+	<span style="color: #000000; font-weight: bold;">private</span> <span style="color: #000066; font-weight: bold;">boolean</span> timeoutExpired<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		<span style="color: #000000; font-weight: bold;">return</span> <span style="color: #009900;">&#40;</span>timeFromStart<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">&gt;</span> timeouts.<span style="color: #006633;">getTimeout</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;Waiter.WaitingTime&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+        <span style="color: #000000; font-weight: bold;">protected</span> <span style="color: #000066; font-weight: bold;">long</span> timeFromStart<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		<span style="color: #000000; font-weight: bold;">return</span> <span style="color: #009900;">&#40;</span><span style="color: #003399;">System</span>.<span style="color: #006633;">currentTimeMillis</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">-</span> startTime<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/8630.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Jemmy入门之接口</title>
+		<link>http://www.xieziming.com/archives/8626.html</link>
+		<comments>http://www.xieziming.com/archives/8626.html#respond</comments>
+		<pubDate>Sat, 30 Mar 2013 03:09:05 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[测试]]></category>
+		<category><![CDATA[Automation]]></category>
+		<category><![CDATA[Jemmy]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=8626</guid>
+		<description><![CDATA[Jemmy里定义了很多的接口，比如做一个动作的时候（ActionProducer）会实现Action, Waitable,Timeoutable这三个接口。
+<code lang="java">
+public interface Waitable{
+    /**
+     * Checks if wait criteria have been met.
+     * @param obj optional waiting parameter.
+     * @return null is criteria have not been met.
+     */
+    public Object actionProduced(Object obj);
+
+    /**
+     * Returns description.
+     * @return a description of the wait criteria.
+     */
+    public String getDescription();
+}
+</code>
+
+<code lang="java">
+public interface Timeoutable {
+    /**
+     * Defines current timeouts.
+     * @param t A collection of timeout assignments.
+     * @see #getTimeouts
+     */
+    public void setTimeouts(Timeouts t);
+
+    /**
+     * Return current timeouts.
+     * @return the collection of current timeout assignments.
+     * @see #setTimeouts
+     */
+    public Timeouts getTimeouts();
+}
+</code>]]></description>
+				<content:encoded><![CDATA[<p>Jemmy里定义了很多的接口，比如做一个动作的时候（ActionProducer）会实现Action, Waitable,Timeoutable这三个接口。</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">interface</span> Waitable<span style="color: #009900;">&#123;</span>
+    <span style="color: #008000; font-style: italic; font-weight: bold;">/**
+     * Checks if wait criteria have been met.
+     * @param obj optional waiting parameter.
+     * @return null is criteria have not been met.
+     */</span>
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #003399;">Object</span> actionProduced<span style="color: #009900;">&#40;</span><span style="color: #003399;">Object</span> obj<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+    <span style="color: #008000; font-style: italic; font-weight: bold;">/**
+     * Returns description.
+     * @return a description of the wait criteria.
+     */</span>
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #003399;">String</span> getDescription<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">interface</span> Timeoutable <span style="color: #009900;">&#123;</span>
+    <span style="color: #008000; font-style: italic; font-weight: bold;">/**
+     * Defines current timeouts.
+     * @param t A collection of timeout assignments.
+     * @see #getTimeouts
+     */</span>
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> setTimeouts<span style="color: #009900;">&#40;</span>Timeouts t<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+    <span style="color: #008000; font-style: italic; font-weight: bold;">/**
+     * Return current timeouts.
+     * @return the collection of current timeout assignments.
+     * @see #setTimeouts
+     */</span>
+    <span style="color: #000000; font-weight: bold;">public</span> Timeouts getTimeouts<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">interface</span> Outputable <span style="color: #009900;">&#123;</span>
+    <span style="color: #008000; font-style: italic; font-weight: bold;">/**
+     * Defines print output streams or writers.
+     * @param out Identify the streams or writers used for print output.
+     * @see #getOutput
+     */</span>
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> setOutput<span style="color: #009900;">&#40;</span>TestOut out<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+    <span style="color: #008000; font-style: italic; font-weight: bold;">/**
+     * Returns print output streams or writers.
+     * @return an object that contains references to objects for
+     * printing to output and err streams.
+     * @see #setOutput
+     */</span>
+    <span style="color: #000000; font-weight: bold;">public</span> TestOut getOutput<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">interface</span> <span style="color: #003399;">Action</span><span style="color: #009900;">&#123;</span>
+    <span style="color: #008000; font-style: italic; font-weight: bold;">/**
+     * Executes this action.
+     * @param obj action argument. This argument might be the method
+     * parameter in an invocation of
+     * ActionProducer.produceAction(Object).  This argument
+     * might be a java.lang.String[] that lists the
+     * command line arguments used to execute a test (or not).
+     * @return action result.
+     */</span>
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #003399;">Object</span> launch<span style="color: #009900;">&#40;</span><span style="color: #003399;">Object</span> obj<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+    <span style="color: #008000; font-style: italic; font-weight: bold;">/**
+     * Returns the description value.
+     * @return Action description.
+     */</span>
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #003399;">String</span> getDescription<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">interface</span> Scenario <span style="color: #009900;">&#123;</span>
+    <span style="color: #008000; font-style: italic; font-weight: bold;">/**
+     * Defines a way to execute this test scenario.
+     * @param param An object passed to configure the test scenario
+     * execution.  For example, this parameter might be a
+     * &lt;code&gt;java.lang.String[]&lt;code&gt; object that lists the
+     * command line arguments to the Java application corresponding
+     * to a test.
+     * @return an int that tells something about the execution.
+     * For, example, a status code.
+     */</span>
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">int</span> runIt<span style="color: #009900;">&#40;</span><span style="color: #003399;">Object</span> param<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/8626.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Jemmy入门之ActionProducer</title>
+		<link>http://www.xieziming.com/archives/8636.html</link>
+		<comments>http://www.xieziming.com/archives/8636.html#respond</comments>
+		<pubDate>Sun, 10 Mar 2013 09:02:07 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[测试]]></category>
+		<category><![CDATA[Automation]]></category>
+		<category><![CDATA[Jemmy]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=8636</guid>
+		<description><![CDATA[ActionProducer是Scenario的基类，主要是执行一个在预期时间内要完成的动作。
+<code lang="java">
+public class ActionProducer extends Thread implements Action, Waitable,	Timeoutable {
+	/**
+	 * timeout 常量，一般用来覆盖Waiter的WAIT_TIME
+	 */
+	private final static long ACTION_TIMEOUT = 10000;
+
+	private Action action;
+	private boolean needWait = true;
+	private Object parameter;
+	private boolean finished;
+	private Object result = null;
+	private Timeouts timeouts;
+	private Waiter waiter;
+	private TestOut output;
+	private Throwable exception;
+</code>]]></description>
+				<content:encoded><![CDATA[<p>ActionProducer是Scenario的基类，主要是执行一个在预期时间内要完成的动作。</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> ActionProducer <span style="color: #000000; font-weight: bold;">extends</span> <span style="color: #003399;">Thread</span> <span style="color: #000000; font-weight: bold;">implements</span> <span style="color: #003399;">Action</span>, Waitable,	Timeoutable <span style="color: #009900;">&#123;</span>
+	<span style="color: #008000; font-style: italic; font-weight: bold;">/**
+	 * timeout 常量，一般用来覆盖Waiter的WAIT_TIME
+	 */</span>
+	<span style="color: #000000; font-weight: bold;">private</span> <span style="color: #000000; font-weight: bold;">final</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000066; font-weight: bold;">long</span> ACTION_TIMEOUT <span style="color: #339933;">=</span> <span style="color: #cc66cc;">10000</span><span style="color: #339933;">;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;">private</span> <span style="color: #003399;">Action</span> action<span style="color: #339933;">;</span>
+	<span style="color: #000000; font-weight: bold;">private</span> <span style="color: #000066; font-weight: bold;">boolean</span> needWait <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">true</span><span style="color: #339933;">;</span>
+	<span style="color: #000000; font-weight: bold;">private</span> <span style="color: #003399;">Object</span> parameter<span style="color: #339933;">;</span>
+	<span style="color: #000000; font-weight: bold;">private</span> <span style="color: #000066; font-weight: bold;">boolean</span> finished<span style="color: #339933;">;</span>
+	<span style="color: #000000; font-weight: bold;">private</span> <span style="color: #003399;">Object</span> result <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">null</span><span style="color: #339933;">;</span>
+	<span style="color: #000000; font-weight: bold;">private</span> Timeouts timeouts<span style="color: #339933;">;</span>
+	<span style="color: #000000; font-weight: bold;">private</span> Waiter waiter<span style="color: #339933;">;</span>
+	<span style="color: #000000; font-weight: bold;">private</span> TestOut output<span style="color: #339933;">;</span>
+	<span style="color: #000000; font-weight: bold;">private</span> <span style="color: #003399;">Throwable</span> exception<span style="color: #339933;">;</span>
+&nbsp;
+	<span style="color: #008000; font-style: italic; font-weight: bold;">/**
+	 * Creates a producer for an action.
+	 * 
+	 * @param a
+	 *            Action implementation.
+	 * @param nw
+	 *            Defines if produceAction method should wait for
+	 *            the end of action.
+	 */</span>
+	<span style="color: #000000; font-weight: bold;">public</span> ActionProducer<span style="color: #009900;">&#40;</span><span style="color: #003399;">Action</span> a, <span style="color: #000066; font-weight: bold;">boolean</span> nw<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		<span style="color: #000000; font-weight: bold;">super</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		waiter <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> Waiter<span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">this</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		action <span style="color: #339933;">=</span> a<span style="color: #339933;">;</span>
+		needWait <span style="color: #339933;">=</span> nw<span style="color: #339933;">;</span>
+		setTimeouts<span style="color: #009900;">&#40;</span>JemmyProperties.<span style="color: #006633;">getProperties</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>.<span style="color: #006633;">getTimeouts</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		setOutput<span style="color: #009900;">&#40;</span>JemmyProperties.<span style="color: #006633;">getProperties</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>.<span style="color: #006633;">getOutput</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		finished <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">false</span><span style="color: #339933;">;</span>
+		exception <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">null</span><span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+        <span style="color: #008000; font-style: italic; font-weight: bold;">/**
+	 * 初始化Waiter的timeout常量
+	 */</span>
+	<span style="color: #000000; font-weight: bold;">static</span> <span style="color: #009900;">&#123;</span>
+		Timeouts.<span style="color: #006633;">initDefault</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;ActionProducer.MaxActionTime&quot;</span>, ACTION_TIMEOUT<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+&nbsp;
+&nbsp;
+	<span style="color: #008000; font-style: italic; font-weight: bold;">/**
+	 * Starts execution. Uses ActionProducer.MaxActionTime timeout.
+	 * 
+	 * @param obj
+	 *            Parameter to be passed into action's
+	 *            launch(Object) method. This parameter might be a
+	 *            java.lang.String[] that lists a test's command
+	 *            line arguments.
+	 * @param actionTimeOrigin
+	 *            is used for timeout reporting, if non-null.
+	 * @return launch(Object) result.
+	 * @throws TimeoutExpiredException
+	 * @exception InterruptedException
+	 */</span>
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #003399;">Object</span> produceAction<span style="color: #009900;">&#40;</span><span style="color: #003399;">Object</span> obj, <span style="color: #003399;">String</span> actionTimeOrigin<span style="color: #009900;">&#41;</span> <span style="color: #000000; font-weight: bold;">throws</span> <span style="color: #003399;">InterruptedException</span> <span style="color: #009900;">&#123;</span>
+		parameter <span style="color: #339933;">=</span> obj<span style="color: #339933;">;</span>
+		<span style="color: #000000; font-weight: bold;">synchronized</span> <span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">this</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+			finished <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">false</span><span style="color: #339933;">;</span>
+		<span style="color: #009900;">&#125;</span>
+		start<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><span style="color: #666666; font-style: italic;">//thread started, run mothod kick off</span>
+		<span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>needWait<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+			waiter.<span style="color: #006633;">setTimeoutsToCloneOf</span><span style="color: #009900;">&#40;</span>timeouts,<span style="color: #0000ff;">&quot;ActionProducer.MaxActionTime&quot;</span>, actionTimeOrigin<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+			<span style="color: #000000; font-weight: bold;">try</span> <span style="color: #009900;">&#123;</span>
+				waiter.<span style="color: #006633;">waitAction</span><span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">null</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+			<span style="color: #009900;">&#125;</span> <span style="color: #000000; font-weight: bold;">catch</span> <span style="color: #009900;">&#40;</span>TimeoutExpiredException e<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+				interrupt<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+				<span style="color: #000000; font-weight: bold;">throw</span> <span style="color: #009900;">&#40;</span>e<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+			<span style="color: #009900;">&#125;</span>
+		<span style="color: #009900;">&#125;</span>
+		<span style="color: #000000; font-weight: bold;">return</span> <span style="color: #009900;">&#40;</span>result<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+        <span style="color: #008000; font-style: italic; font-weight: bold;">/**
+	 * 在produceAction中的start函数调用后开始，在单独的线程
+	 */</span>
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">final</span> <span style="color: #000066; font-weight: bold;">void</span> run<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		result <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">null</span><span style="color: #339933;">;</span>
+		<span style="color: #000000; font-weight: bold;">try</span> <span style="color: #009900;">&#123;</span>
+			result <span style="color: #339933;">=</span> launchAction<span style="color: #009900;">&#40;</span>parameter<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		<span style="color: #009900;">&#125;</span> <span style="color: #000000; font-weight: bold;">catch</span> <span style="color: #009900;">&#40;</span><span style="color: #003399;">Throwable</span> e<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+			exception <span style="color: #339933;">=</span> e<span style="color: #339933;">;</span>
+		<span style="color: #009900;">&#125;</span>
+		<span style="color: #000000; font-weight: bold;">synchronized</span> <span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">this</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+			finished <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">true</span><span style="color: #339933;">;</span>
+		<span style="color: #009900;">&#125;</span>
+	<span style="color: #009900;">&#125;</span>
+&nbsp;
+        <span style="color: #000000; font-weight: bold;">private</span> <span style="color: #003399;">Object</span> launchAction<span style="color: #009900;">&#40;</span><span style="color: #003399;">Object</span> obj<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		<span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>action <span style="color: #339933;">!=</span> <span style="color: #000066; font-weight: bold;">null</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+			<span style="color: #000000; font-weight: bold;">return</span> <span style="color: #009900;">&#40;</span>action.<span style="color: #006633;">launch</span><span style="color: #009900;">&#40;</span>obj<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		<span style="color: #009900;">&#125;</span> <span style="color: #000000; font-weight: bold;">else</span> <span style="color: #009900;">&#123;</span>
+			<span style="color: #000000; font-weight: bold;">return</span> <span style="color: #009900;">&#40;</span>launch<span style="color: #009900;">&#40;</span>obj<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		<span style="color: #009900;">&#125;</span>
+	<span style="color: #009900;">&#125;</span>
+&nbsp;
+	<span style="color: #008000; font-style: italic; font-weight: bold;">/**
+	 * 实现Waitable接口
+	 */</span>
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">final</span> <span style="color: #003399;">Object</span> actionProduced<span style="color: #009900;">&#40;</span><span style="color: #003399;">Object</span> obj<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		<span style="color: #000000; font-weight: bold;">synchronized</span> <span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">this</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+			<span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>finished<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+				<span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>result <span style="color: #339933;">==</span> <span style="color: #000066; font-weight: bold;">null</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+					<span style="color: #000000; font-weight: bold;">return</span> <span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">Integer</span><span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">0</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+				<span style="color: #009900;">&#125;</span> <span style="color: #000000; font-weight: bold;">else</span> <span style="color: #009900;">&#123;</span>
+					<span style="color: #000000; font-weight: bold;">return</span> <span style="color: #009900;">&#40;</span>result<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+				<span style="color: #009900;">&#125;</span>
+			<span style="color: #009900;">&#125;</span> <span style="color: #000000; font-weight: bold;">else</span> <span style="color: #009900;">&#123;</span>
+				<span style="color: #000000; font-weight: bold;">return</span> <span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">null</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+			<span style="color: #009900;">&#125;</span>
+		<span style="color: #009900;">&#125;</span>
+	<span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/8636.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>当我们谈论自动化测试</title>
+		<link>http://www.xieziming.com/archives/7801.html</link>
+		<comments>http://www.xieziming.com/archives/7801.html#respond</comments>
+		<pubDate>Fri, 21 Dec 2012 13:04:18 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[测试]]></category>
+		<category><![CDATA[Automation]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=7801</guid>
+		<description><![CDATA[Cockburn在《敏捷软件开发》中提到“沟通的成功依赖于发送者和接收者有可以引用的共同体验”，因此当我们提到自动化测试时，就一定需要有共同的词汇表。首先，什么是自动化测试？<strong>对一些人来说，一提到自动化测试，第一个闪过脑海的念头就是QTP、WebDriver等自动化测试工具，以及依据这些工具建立的针对功能或是UI的自动化测试测试脚本，但其实这些只是自动化测试中的一小部分而已，在我看来，所有“使用机器的能力”对测试进行部分或全部自动化的操作都应该被叫做“自动化测试”。无论是针对代码中的类或是方法建立的单元测试，还是针对产品建立的需要人工参与的diff的方式，都是自动化测试的具体方法。</strong>对测试来说，自动化测试不是一个存在的目标，而仅仅是一种用以达成测试目标的手段。我们希望从自动化测试中得到什么？自动化测试覆盖率？自动化测试覆盖率是用来衡量自动化测试所占比例的一种手段，但这仍然不是我们在项目中开展自动化测试的目标。我们在项目中开展自动化测试，目标只能是“通过自动化测试提高测试或是产品的质量”。因此，在谈论自动化测试时，可以被称为目标的，只能是下面这几项：
+
+（1）在保证相同的测试覆盖率的情况下，减少人力资源的投入;
+（2）在相同人力资源投入的情况下，增加了测试覆盖率;
+（3）让测试的执行向上游移动，帮助开发者更早的发现产品中的问题，从而降低修复成本。]]></description>
+				<content:encoded><![CDATA[<p>Cockburn在《敏捷软件开发》中提到“沟通的成功依赖于发送者和接收者有可以引用的共同体验”，因此当我们提到自动化测试时，就一定需要有共同的词汇表。首先，什么是自动化测试？</p>
+<p><strong>对一些人来说，一提到自动化测试，第一个闪过脑海的念头就是QTP、WebDriver等自动化测试工具，以及依据这些工具建立的针对功能或是UI的自动化测试测试脚本，但其实这些只是自动化测试中的一小部分而已，在我看来，所有“使用机器的能力”对测试进行部分或全部自动化的操作都应该被叫做“自动化测试”。无论是针对代码中的类或是方法建立的单元测试，还是针对产品建立的需要人工参与的diff的方式，都是自动化测试的具体方法。</strong></p>
+<p>对测试来说，自动化测试不是一个存在的目标，而仅仅是一种用以达成测试目标的手段。我们希望从自动化测试中得到什么？自动化测试覆盖率？自动化测试覆盖率是用来衡量自动化测试所占比例的一种手段，但这仍然不是我们在项目中开展自动化测试的目标。我们在项目中开展自动化测试，目标只能是“通过自动化测试提高测试或是产品的质量”。因此，在谈论自动化测试时，可以被称为目标的，只能是下面这几项：</p>
+<p>（1）在保证相同的测试覆盖率的情况下，减少人力资源的投入;<br />
+（2）在相同人力资源投入的情况下，增加了测试覆盖率;<br />
+（3）让测试的执行向上游移动，帮助开发者更早的发现产品中的问题，从而降低修复成本。</p>
+<p>有了目标，剩下来的就是怎么做的问题。“减少人力资源的投入”是一个最容易被直观理解的自动化测试目标，因此，不少团队的做法就是“用自动化测试替代手工测试”，将原先需要手工执行的测试用例变成UI自动化测试用例，改由自动化测试工具来执行脚本。<strong>不能说，这种方式没有效果，但由于自动化测试在识别缺陷方面的有效性远远低于手工测试（从UI测试的角度来说，一个非“预期”产生的缺陷很难被自动化测试发现，而手工测试则能轻松的发现这个缺陷），而且由于UI本身的变化性，要想达到和手工测试相同的覆盖率，单纯的UI自动化测试往往很难证明自己的投资回报。</strong></p>
+<p>“增加测试覆盖率”是自动化测试可以产生收益的另一个方面。容易想到的例子是性能测试和模糊测试（Fuzz testing）。依靠机器的能力，模拟大量用户的并发，以及依靠机器的能力，<strong>基于规则产生大量随机数据并发送给服务器，用于检测服务器可能的安全性问题</strong>，在这些领域，自动化测试能带来明显的收益。但，当我说到“增加测试覆盖率”时，我所想要谈论的<strong>不仅仅</strong>是性能测试或是模糊测试这一类的针对应用某个质量属性的验证。</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/7801.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>QTP自动化框架建设</title>
+		<link>http://www.xieziming.com/archives/8475.html</link>
+		<comments>http://www.xieziming.com/archives/8475.html#respond</comments>
+		<pubDate>Sat, 24 Mar 2012 04:24:40 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[测试]]></category>
+		<category><![CDATA[Automation]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=8475</guid>
+		<description><![CDATA[其实自动化测试框架就是一种规范的集合体，在自动化测试团队开发过程中，经常会遇到很多这样和那样的问题，例如：
+
+（1）测试脚本不统一，出现很多重复脚本；
+（2）在对象库中含有很多重复对象，导致对象混乱；
+（3）测试脚本全部为Hard Code，没有实现部分可配置，导致维护成本过大。
+
+以上这些只是一些比较常见的问题，其实在自动化测试过程当中遇到的问题还远远不止这些，那么要解决这些问题，就必须要为其定义适合项目的规范。例如，脚本不统一，可以对每个脚本写法定义严格的规范，定制共享函数库；对象库重复混乱，可以使用共享对象库来解决；测试脚本全部为Hard Code，则可以把部分的关键字进行分离。
+
+下面我主要通过三个方面来阐述我的一点框架测试建议。
+
+<font color="#00BB00"><strong>1. 测试数据</strong></font>
+对于规模不大的自动化测试，我建议采用Excel来组织你的测试数据。当然，我们还是要采取分层的方式，有一张总表以及具体的细表。每条test data都有它自己的工作流。工作方式类似的如下方式：
+
+QTP载入Excel数据文件，通过遍历总表所有行来执行所有的test cases。在这个大循环内，通过总表的索引取出细表的数据，然后以列名为key存放在VBS里的字典里，在脚本中用的时候直接TestDataDictionary.Item("Column_Name")取出即可。
+
+<font color="#00BB00"><strong>2. 工作流</strong></font>
+建议采用XML来组织你的workflow，下面是个简单的例子：
+<code lang="xml">
+<flow_forA>
+<function> function_step1</function>
+<function> function_step2</function>
+<function> function_step3</function>
+</flow_forA>
+</code>
+比如我们在测试数据中给该test cases定的工作流是flow_forA，则QTP在执行的时候会去work flows里找到名字叫flow_forA的节点，并遍历执行它的子节点函数来完成这个工作流。]]></description>
+				<content:encoded><![CDATA[<p>其实自动化测试框架就是一种规范的集合体，在自动化测试团队开发过程中，经常会遇到很多这样和那样的问题，例如：</p>
+<p>（1）测试脚本不统一，出现很多重复脚本；<br />
+（2）在对象库中含有很多重复对象，导致对象混乱；<br />
+（3）测试脚本全部为Hard Code，没有实现部分可配置，导致维护成本过大。</p>
+<p>以上这些只是一些比较常见的问题，其实在自动化测试过程当中遇到的问题还远远不止这些，那么要解决这些问题，就必须要为其定义适合项目的规范。例如，脚本不统一，可以对每个脚本写法定义严格的规范，定制共享函数库；对象库重复混乱，可以使用共享对象库来解决；测试脚本全部为Hard Code，则可以把部分的关键字进行分离。</p>
+<p>下面我主要通过三个方面来阐述我的一点框架测试建议。</p>
+<p><font color="#00BB00"><strong>1. 测试数据</strong></font><br />
+对于规模不大的自动化测试，我建议采用Excel来组织你的测试数据。当然，我们还是要采取分层的方式，有一张总表以及具体的细表。每条test data都有它自己的工作流。工作方式类似的如下方式：</p>
+<p>QTP载入Excel数据文件，通过遍历总表所有行来执行所有的test cases。在这个大循环内，通过总表的索引取出细表的数据，然后以列名为key存放在VBS里的字典里，在脚本中用的时候直接TestDataDictionary.Item(&#8220;Column_Name&#8221;)取出即可。</p>
+<p><font color="#00BB00"><strong>2. 工作流</strong></font><br />
+建议采用XML来组织你的workflow，下面是个简单的例子：</p>
+
+<div class="wp_code"><div class="pre"><pre class="xml" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;flow_forA<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+     <span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;function<span style="color: #000000; font-weight: bold;">&gt;</span></span></span> function_step1<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/function<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+     <span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;function<span style="color: #000000; font-weight: bold;">&gt;</span></span></span> function_step2<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/function<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+     <span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;function<span style="color: #000000; font-weight: bold;">&gt;</span></span></span> function_step3<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/function<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/flow_forA<span style="color: #000000; font-weight: bold;">&gt;</span></span></span></pre></div></div>
+
+<p>比如我们在测试数据中给该test cases定的工作流是flow_forA，则QTP在执行的时候会去work flows里找到名字叫flow_forA的节点，并遍历执行它的子节点函数来完成这个工作流。每个函数都有一个返回值来表示执行结果，当其中某个结果为fail的时候，QTP应该退出执行。</p>
+<p><font color="#00BB00"><strong>3. 多进程</strong></font></p>
+<p>QTP有两个不好的地方，一个是它的脚本执行/对象识别速度过慢。另一个是它的独占性，一台PC只能有一个QTP实例。第一个缺点我们还能通过优化对象识别方法来克服，而第二个我们就无能为力了。。。。</p>
+<p>这样一来，为了加快测试执行，我们通常需要同时在几台PC上运行QTP。那怎么来分配我们的test cases给QTP以及收集测试结果呢？</p>
+<p>最原始的方法可能是给每台PC分配独有的test cases，最后把这些PC上的运行结果收集在一起。这样做有几个缺点：（1）PC使用率不够高。因为分配到的test cases数量和运行时间的差异，总有些PC会在其他PC还在运行时结束，这就造成了测试资源的闲置。（2）需要额外的精力来收集各PC的运行结果。（3）当某些PC意外停止运行的时候（QTP错误，PC死机等），分配给它的test cases就无法被执行了。</p>
+<p>基于上述考虑，我建议使用shared folder或者数据库来同步各PC.每台PC都有完整的test cases列表，在loop这个列表时去取该test case当时的状态，是还没被执行，正在被执行还是已经执行完毕了。同时，在运行这个test case的时候更新它的状态。下面以share folder方式为例子来具体讲下。</p>
+<p>（1）每台PC的测试脚本以及测试数据都是一样的，都配置了test cases status的shared folder路径。比如\\testing_pc\test_case_status<br />
+（2）各PC载入完整的测试数据（测试用例列表），在Loop这个列表的时候，去shared folder查询当前要执行的test case的状态，如果没有任何信息，说明还没被执行过，这时创建一个文件来更新该test case的状态，比如创建\\testing_pc\test_case_status\\testcase_A.lock。如果该test case是lock状态说明正在被执行，于是放弃执行，转至下一个test case。<br />
+（3）当某test case执行完毕或者错误退出时，删除lock状态。</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/8475.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>漫谈工业过程控制系统</title>
+		<link>http://www.xieziming.com/archives/7140.html</link>
+		<comments>http://www.xieziming.com/archives/7140.html#respond</comments>
+		<pubDate>Fri, 13 May 2011 15:10:04 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[网摘]]></category>
+		<category><![CDATA[Automation]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=7140</guid>
+		<description><![CDATA[常见的工业控制系统有分布式控制系统（Distributed Control System，简称DCS）、可编程序逻辑控制器（Programmable Logic Controller，简称PLC）、容错控制器（Fail Safe Controller，简称FSC）、多功能控制器（Multifunctional Controller，简称MFC）等。FSC就是特别可靠的PLC，使用起来也特别麻烦；MFC是专用于强电系统（输变电、大功率电机、变频电机等）的PLC；所以粗粗归类，也就是PLC和DCS两大类。
+ 
+
+在谈PLC和DCS之前，应该指出，还有一类系统通常不作为工业过程控制问题考虑，那就是像导弹控制、汽车发动机控制、洗衣机控制、电热咖啡壶控制等，这些控制问题一般使用专用的控制系统，和被控制对象紧密结合，通常称为嵌入式系统（embeded control system），不在这篇小文的范围内。
+ 
+
+控制问题分两大类：连续控制和断续控制（也叫开关控制）。汽车的方向盘就是连续控制的一个例子，司机连续地恰到好处地转动方向盘以控制方向；电饭煲的温度控制就是断续控制的一个例子，只有开和关两个位置，按下开关后，温度上升到一定的时候，自动断电；温度下来了，又自动加电保温。稍微复杂一点的断续控制可以是多位控制，除了全开、全关两个位置外，中间还可以有一个甚至多个渐进的半开位置。一般来说，DCS适合连续过程控制，像化工、发电、冶金、造纸的工艺过程，PLC适合断续过程控制，像各种机电设备。这是由不同的历史背景导致的。在还没有计算机的远古时代，连续控制的PID是用气动或者电动调节器（行话叫单元仪表）实现的，连锁保护则是用继电器实现的。前者控制阀门或者变频电机连续变化，达到精确控制。后者则是自动化的开关控制，用于在某一事件触发下，自动执行一系列动作。复杂一点的继电器控制还有延时，可以执行一系列步骤，每一步可以包含一定的延时，传统上用凸轮实现。复杂继电器控制还可以包含滞环（也叫死区）等比较“反动”的功能。在很长的时间里，单元仪表和继电器之间是井水不犯河水，老死不相往来，直到数字式计算机的出现。]]></description>
+				<content:encoded><![CDATA[<p>常见的工业控制系统有分布式控制系统（Distributed Control System，简称DCS）、可编程序逻辑控制器（Programmable Logic Controller，简称PLC）、容错控制器（Fail Safe Controller，简称FSC）、多功能控制器（Multifunctional Controller，简称MFC）等。FSC就是特别可靠的PLC，使用起来也特别麻烦；MFC是专用于强电系统（输变电、大功率电机、变频电机等）的PLC；所以粗粗归类，也就是PLC和DCS两大类。</p>
+<p>在谈PLC和DCS之前，应该指出，还有一类系统通常不作为工业过程控制问题考虑，那就是像导弹控制、汽车发动机控制、洗衣机控制、电热咖啡壶控制等，这些控制问题一般使用专用的控制系统，和被控制对象紧密结合，通常称为嵌入式系统（embeded control system），不在这篇小文的范围内。</p>
+<p>控制问题分两大类：连续控制和断续控制（也叫开关控制）。汽车的方向盘就是连续控制的一个例子，司机连续地恰到好处地转动方向盘以控制方向；电饭煲的温度控制就是断续控制的一个例子，只有开和关两个位置，按下开关后，温度上升到一定的时候，自动断电；温度下来了，又自动加电保温。稍微复杂一点的断续控制可以是多位控制，除了全开、全关两个位置外，中间还可以有一个甚至多个渐进的半开位置。一般来说，DCS适合连续过程控制，像化工、发电、冶金、造纸的工艺过程，PLC适合断续过程控制，像各种机电设备。这是由不同的历史背景导致的。在还没有计算机的远古时代，连续控制的PID是用气动或者电动调节器（行话叫单元仪表）实现的，连锁保护则是用继电器实现的。前者控制阀门或者变频电机连续变化，达到精确控制。后者则是自动化的开关控制，用于在某一事件触发下，自动执行一系列动作。复杂一点的继电器控制还有延时，可以执行一系列步骤，每一步可以包含一定的延时，传统上用凸轮实现。复杂继电器控制还可以包含滞环（也叫死区）等比较“反动”的功能。在很长的时间里，单元仪表和继电器之间是井水不犯河水，老死不相往来，直到数字式计算机的出现。</p>
+<p>冯·诺依曼同学发明二进制计算机的概念，成功地打破了连续变量和离散变量的界限，这是计算机控制可以实现连续的PID控制和离散的继电器控制的基础。PID在本质上是一个数学计算，计算机的计算能力强大，做PID当然不在话下。事实上，即使不太先进的计算机也可以以一当百，一台计算机巡回扫描，把百十个PID回路吃下来不成问题。计算机还可以实现更先进的数学控制方法，如最优控制、自适应控制、模型预估控制等，用软件“连接”串级、前馈、分程、比例、超驰控制回路也比单元仪表时代拖电线容易得太多，很快就在工业界得到极大的欢迎。计算机控制用显示屏代替动辄几十米长的仪表板，也使超大型的控制系统得以实用化。早年的计算机控制系统大多采用大型计算机，如IBM的AIX系统，最不济也是DEC的PDP11，或者后来的VAX。但是集中的大型计算机是计算机控制系统可靠性的薄弱环节，一旦这台大型计算机出故障，整个系统就当掉了。 </p>
+<p>为了提高计算机控制系统的可靠性，人们做了很多努力。冗余计算机是最早的解决方案，但微机的出现，在根本上解决了计算机控制系统的可靠性问题。微机的成本低，体积小，于是分散到很多基本控制单元但又通过网络连接的所谓集散控制系统就应运而生了，这就是今天的DCS。DCS的基本单元具有基本的I/O和控制功能，即使和网络断开，也能保证基本的控制功能。但和网络相连，就可以实现更强大的控制和管理功能。这就使所谓“集散”的缘由。</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/7140.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>自动控制理论（一）</title>
+		<link>http://www.xieziming.com/archives/7125.html</link>
+		<comments>http://www.xieziming.com/archives/7125.html#respond</comments>
+		<pubDate>Fri, 13 May 2011 14:37:50 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[网摘]]></category>
+		<category><![CDATA[Automation]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=7125</guid>
+		<description><![CDATA[小时候喜欢看杂书，没什么东西看，不正在文化大革命嘛？不过看进去了两个“化”：机械化和自动化。打小就没有弄明白，这机械化和自动化到底有什么差别，机器不是自己就会动的吗？长大了，总算稍微明白了一点，这机械化是力气活，用机器代替人的体力劳动，但还是要人管着的，不然机器是不知道该干什么不该干什么的；这自动化嘛，就是代替人的重复脑力劳动，是用来管机器的。也就是说，自动化是管着机械化的，或者说学自动化的是管着学机械的……啊，不对，不对，哪是哪啊！
+
+
+有人考证古代就有自动化的实例，但现代意义上的自动控制开始于瓦特的蒸汽机。据说纽考门比瓦特先发明蒸汽机，但是蒸汽机的转速控制问题没有解决，弄不好转速飞升，机器损坏不说，还可能说大事故。瓦特在蒸汽机的转轴上安了一个小棍，棍的一端和放汽阀连着，棍的另一端是一个小重锤，棍中间某个地方通过支点和转轴连接。转轴转起来的时候，重锤由于离心力的缘故挥起来。转速太高了，重锤挥得很高，放汽阀就被按下去，转速下降；转速太低了，重锤不起来，放汽阀就被松开，转速回升。这样，蒸汽机可以自动保持稳定的转速，即保证安全，又方便使用。也就是因为这个小小的转速调节器，瓦特的名字和工业革命连在一起，而纽考门的名字就要到历史书里去找了。
+
+ 
+
+类似的例子在机械系统里很多，家居必备的抽水马桶是另一个例子。放水冲刷后，水箱里水位降低，浮子随水面下降，进水阀打开。随着水位的升高，进水阀逐渐关闭，直到水位达到规定高度，进水阀完全关闭，水箱的水正好准备下一次使用。这是一个非常简单但非常巧妙的水位控制系统，是一个经典的设计，但不容易用经典的控制理论来分析，不过这是题外话了。
+
+ 
+
+这些机械系统设计巧妙，工作可靠，实在是巧夺天工。但是在实用中，如果每次都需要这样的创造性思维，那太累，最好有一个系统的方法，可以解决“所有”的自动控制问题，这就是控制理论的由来。]]></description>
+				<content:encoded><![CDATA[<p><strong>引子</strong></p>
+<p>小时候喜欢看杂书，没什么东西看，不正在文化大革命嘛？不过看进去了两个“化”：机械化和自动化。打小就没有弄明白，这机械化和自动化到底有什么差别，机器不是自己就会动的吗？长大了，总算稍微明白了一点，这机械化是力气活，用机器代替人的体力劳动，但还是要人管着的，不然机器是不知道该干什么不该干什么的；这自动化嘛，就是代替人的重复脑力劳动，是用来管机器的。也就是说，自动化是管着机械化的，或者说学自动化的是管着学机械的……啊，不对，不对，哪是哪啊！</p>
+<p>有人考证古代就有自动化的实例，但现代意义上的自动控制开始于瓦特的蒸汽机。据说纽考门比瓦特先发明蒸汽机，但是蒸汽机的转速控制问题没有解决，弄不好转速飞升，机器损坏不说，还可能说大事故。瓦特在蒸汽机的转轴上安了一个小棍，棍的一端和放汽阀连着，棍的另一端是一个小重锤，棍中间某个地方通过支点和转轴连接。转轴转起来的时候，重锤由于离心力的缘故挥起来。转速太高了，重锤挥得很高，放汽阀就被按下去，转速下降；转速太低了，重锤不起来，放汽阀就被松开，转速回升。这样，蒸汽机可以自动保持稳定的转速，即保证安全，又方便使用。也就是因为这个小小的转速调节器，瓦特的名字和工业革命连在一起，而纽考门的名字就要到历史书里去找了。</p>
+<p>类似的例子在机械系统里很多，家居必备的抽水马桶是另一个例子。放水冲刷后，水箱里水位降低，浮子随水面下降，进水阀打开。随着水位的升高，进水阀逐渐关闭，直到水位达到规定高度，进水阀完全关闭，水箱的水正好准备下一次使用。这是一个非常简单但非常巧妙的水位控制系统，是一个经典的设计，但不容易用经典的控制理论来分析，不过这是题外话了。</p>
+<p>这些机械系统设计巧妙，工作可靠，实在是巧夺天工。但是在实用中，如果每次都需要这样的创造性思维，那太累，最好有一个系统的方法，可以解决“所有”的自动控制问题，这就是控制理论的由来。</p>
+<p><strong>反馈和动态</strong></p>
+<p>从小大人就教我们，走路要看路。为什么呢？要是不看着路，走路走歪了也不知道，结果就是东撞西撞的。要是看着路呢？走歪了，马上就看到，赶紧调整脚步，走回到正道上来。这里有自动控制里的第一个重要概念：反馈（feedback）。</p>
+<p>反馈是一个过程：</p>
+<p>1、设定目标，对小朋友走路的例子来说，就是前进的路线。</p>
+<p>2、测量状态，小朋友的眼睛看着路，就是在测量自己的前进方向。</p>
+<p>3、将测量到的状态和设定的目标比较，把眼睛看到的前进方向和心里想的前进方向作比较，判断前进方向是否正确；如果不正确，相差有多少。</p>
+<p>4、调整行动，在心里根据实际前进方向和设定目标的偏差，决定调整的量。</p>
+<p>5、实际执行，也就是实际挪动脚步，重回正确的前进方向。</p>
+<p>在整个走路的过程中，这个反馈过程周而复始，不断进行，这样，小朋友就不会走得东倒西歪了。但是，这里有一个问题：如果所有的事情都是在瞬时里同时发生的，那这个反馈过程就无法工作。要使反馈工作，一定要有一定的反应时间。还好，世上之事，都有一个过程，这就为反馈赢得了所需要的时间。</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/7125.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>自动控制理论（二）</title>
+		<link>http://www.xieziming.com/archives/7133.html</link>
+		<comments>http://www.xieziming.com/archives/7133.html#respond</comments>
+		<pubDate>Fri, 13 May 2011 12:59:11 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[网摘]]></category>
+		<category><![CDATA[Automation]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=7133</guid>
+		<description><![CDATA[形形色色的控制理论再牛，没有被控过程的数学模型，照样抓瞎。前面的洗澡水温就是一个数学模型。这个模型是杜撰的，当然可以很容易地给它所有模型参数。但在实际中，模型参数不会从天上掉下来。多少科学家毕生致力于建立某一特定的物理、生物、化学或别的学科的数学模型，基本机制已经清楚的模型都不容易建立，更不用说很多过程的基本机制或深层机制并不清楚。所以靠机理推导被控过程的数学模型是可能的，但对日常的控制问题来说，并不实际。这就是控制理论的另一个分支—辨识—一显身手的地方了。
+
+ 
+
+如果给定一个模型，也就是一个数学公式，给它一组输入数据，模型就可以计算出对应的输出数据。比如说，给定模型y=2*x+1，再给出x=1，2，3，4，那y就等于3，5，7，9，就这么很简单。辨识的问题反过来，先给定一个模型结构，在这里就是y=a*x+b，已知输入-输出数据是x=1，2时y=3，5，要求计算出a和b。显然，这是一个二元一次方程，谁都会解。在实际中，输入-输出的观察数据含有测量噪声，这对参数估计的精度不利；但通常积累观察的数据量远远超过未知参数的个数，不说数学，感觉上这就应该对克服测量噪声有利，关键是怎么利用这“多余”的数据。一个办法是把数据组两两配对，借众多的二元一次方程，然后对解出来的a和b作平均。还有一个办法就是有名的最小二乘法了，说穿了，就是以a和b为最优化的“控制量”，使模型输出和实际观测值之间的累积平方误差为最小。
+
+ 
+
+实际工业过程大多有多年的运行经验，大量的数据不成问题。对于大多数常见过程，模型的基本结构和定性性质也可以猜一个八九不离十，有了如此有力的数学“大锤”，那么应该可以砸开一切建模的硬核桃啦。且慢，世上没有真正的“神奇子弹”，一个问题解决了，另一个同等难度的问题又会出现。对于辨识来说，问题有好几个。]]></description>
+				<content:encoded><![CDATA[<p><strong>辨识</strong></p>
+<p>形形色色的控制理论再牛，没有被控过程的数学模型，照样抓瞎。前面的洗澡水温就是一个数学模型。这个模型是杜撰的，当然可以很容易地给它所有模型参数。但在实际中，模型参数不会从天上掉下来。多少科学家毕生致力于建立某一特定的物理、生物、化学或别的学科的数学模型，基本机制已经清楚的模型都不容易建立，更不用说很多过程的基本机制或深层机制并不清楚。所以靠机理推导被控过程的数学模型是可能的，但对日常的控制问题来说，并不实际。这就是控制理论的另一个分支—辨识—一显身手的地方了。</p>
+<p>如果给定一个模型，也就是一个数学公式，给它一组输入数据，模型就可以计算出对应的输出数据。比如说，给定模型y=2*x+1，再给出x=1，2，3，4，那y就等于3，5，7，9，就这么很简单。辨识的问题反过来，先给定一个模型结构，在这里就是y=a*x+b，已知输入-输出数据是x=1，2时y=3，5，要求计算出a和b。显然，这是一个二元一次方程，谁都会解。在实际中，输入-输出的观察数据含有测量噪声，这对参数估计的精度不利；但通常积累观察的数据量远远超过未知参数的个数，不说数学，感觉上这就应该对克服测量噪声有利，关键是怎么利用这“多余”的数据。一个办法是把数据组两两配对，借众多的二元一次方程，然后对解出来的a和b作平均。还有一个办法就是有名的最小二乘法了，说穿了，就是以a和b为最优化的“控制量”，使模型输出和实际观测值之间的累积平方误差为最小。</p>
+<p>实际工业过程大多有多年的运行经验，大量的数据不成问题。对于大多数常见过程，模型的基本结构和定性性质也可以猜一个八九不离十，有了如此有力的数学“大锤”，那么应该可以砸开一切建模的硬核桃啦。且慢，世上没有真正的“神奇子弹”，一个问题解决了，另一个同等难度的问题又会出现。对于辨识来说，问题有好几个。</p>
+<p>第一个问题是工业数据的闭环性。大多数重要参数都有闭环回路控制。如果没有闭环回路控制，那要么就是过程特性实在太复杂，简单回路控制不了；要么就是这个参数其实不重要，飘移一点没人在乎。然而，一旦闭环，系统地输入和输出就是相关的了。这一相关不要紧，输入-输出数据之间的因果性就全乱了：输出通过被控过程本身和输入相关（这是好的，辨识就是要测算出这个相关关系，输出要是和输入不相关，也没有控制或辨识什么事了），输入通过反馈和输出相关；输入-输出成为一个闭合系统，你可以用任意多条定理或方法证明同样的事：由于因果不分，闭环辨识是不可能的，除非另外加入“新鲜”的激励，比如使劲变设定值，或者在闭环回路里额外施加独立于输入、输出的激励信号，比如“莫名其妙”地把阀门动几下。弄到最后，工业数据到底能用多少，就不是一个简单的回答。有的过程常年稳定操作，像乙烯装置，只有小范围的微调。这倒不是人家懒或者不求上进，而是这些装置早已高度优化，常年操作在极其接近极限的位置，但原料和产品单一，所以工艺状况不怎么大变。这种系统的闭环数据用起来很吃力，常常必须做一定的开环试验。有的过程经常在不同的状态之间转换（transition），或者由于不同的原料，如“吃”得很杂的炼油厂，或者由于不同的产品，如聚乙烯装置，这实际上就是“使劲变设定值”，是新鲜的激励。这种系统的闭环数据比较好用，但有别的问题，下面要谈到。</p>
+<p>第二个问题是动态和稳态。动态模型的作用有两个：一是描述需要多少时间输出才能达到某一数值；二是输出最终能够达到什么数值。用股票市场举一个例子，你需要知道两件事：一是这支股票最后会升到多少，二是需要多少时间才能升到那里，只知道其中一个对你并没有太大的用处。当然为了简化，这里假定这支股票一路飙升，不来忽升忽降（也就是非线性）或跌买涨卖（也就是闭环影响）的名堂。这就要求输入-输出数据必须包含充分的动态和稳态信息，过于偏颇其中一方面对另一方面会不利。所以，长期稳定运行的过程中可能包含足够的稳态数据，但动态不足；常年不怎么稳定的过程可能包含足够的动态数据，但稳态不足。用PID控制打比方，精确的稳态数据有助于计算正确的比例控制增益，精确的动态数据有助于计算正确的积分和微分增益，显然，把比例增益整对了更为重要。为了获得精确的稳态，在辨识中常常需要等过程开环稳定下来才进行下一步，但是问题是，实际过程有时时间常数很长，几个精馏塔一串联，时间常数几个小时是客气的，一、两天都是可能的。这样一来，一个不太大的模型，十来个变量，开环试验一做就是一、两个星期或者更长。要是一个装置能够两个星期开环，那也不需要什么控制了。</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/7133.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+	</channel>
+</rss>

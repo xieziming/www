@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Selenium &#8211; 谢子明</title>
+	<atom:link href="http://www.xieziming.com/tag/selenium/feed" rel="self" type="application/rss+xml" />
+	<link>http://www.xieziming.com</link>
+	<description>Suny Xie</description>
+	<lastBuildDate>Mon, 26 Dec 2016 07:34:38 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.7</generator>
+	<item>
+		<title>WebDriver（一）</title>
+		<link>http://www.xieziming.com/archives/7661.html</link>
+		<comments>http://www.xieziming.com/archives/7661.html#comments</comments>
+		<pubDate>Tue, 13 Nov 2012 16:19:21 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[测试]]></category>
+		<category><![CDATA[Selenium]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=7661</guid>
+		<description><![CDATA[WebDriver与之前Selenium的JS注入实现不同，直接利用了浏览器native support来操作浏览器。所以对于不同平台，不同的浏览器，必须依赖一个特定的浏览器的native component来实现把WebDriver API的调用转化为浏览器的native invoke。
+
+在我们new一个WebDriver的过程中，Selenium首先会确认浏览器的native component是否存在可用而且版本匹配。接着就在目标浏览器里启动一整套Web Service，这套Web Service使用了Selenium自己设计定义的协议，名字叫做<strong>The WebDriver Wire Protocol</strong>。这套协议非常之强大，几乎可以操作浏览器做任何事情，包括打开、关闭、最大化、最小化、元素定位、元素点击、上传文件等等等等。
+
+WebDriver Wire协议是通用的，也就是说不管是FirefoxDriver还是ChromeDriver，启动之后都会在某一个端口启动基于这套协议的Web Service。例如FirefoxDriver初始化成功之后，默认会从http://localhost:7055开始，而ChromeDriver则大概是http://localhost:46350之类的。接下来，我们调用WebDriver的任何API，都需要借助一个<strong>ComandExecutor</strong>发送一个命令，实际上是一个HTTP request给46350端口上的Web Service。在我们的HTTP request的body中，会以WebDriver Wire协议规定的<strong>JSON</strong>格式的字符串来告诉Selenium我们希望浏览器接下来做什么事情。
+
+不同浏览器的WebDriver子类，都需要依赖特定的浏览器原生组件，例如Firefox就需要一个add-on名字叫webdriver.xpi。而IE的话就需要用到一个dll文件来转化Web Service的命令为浏览器native的调用。]]></description>
+				<content:encoded><![CDATA[<p>WebDriver与之前Selenium的JS注入实现不同，直接利用了浏览器native support来操作浏览器。所以对于不同平台，不同的浏览器，必须依赖一个特定的浏览器的native component来实现把WebDriver API的调用转化为浏览器的native invoke。</p>
+<p>在我们new一个WebDriver的过程中，Selenium首先会确认浏览器的native component是否存在可用而且版本匹配。接着就在目标浏览器里启动一整套Web Service，这套Web Service使用了Selenium自己设计定义的协议，名字叫做<strong>The WebDriver Wire Protocol</strong>。这套协议非常之强大，几乎可以操作浏览器做任何事情，包括打开、关闭、最大化、最小化、元素定位、元素点击、上传文件等等等等。</p>
+<p>WebDriver Wire协议是通用的，也就是说不管是FirefoxDriver还是ChromeDriver，启动之后都会在某一个端口启动基于这套协议的Web Service。例如FirefoxDriver初始化成功之后，默认会从http://localhost:7055开始，而ChromeDriver则大概是http://localhost:46350之类的。接下来，我们调用WebDriver的任何API，都需要借助一个<strong>ComandExecutor</strong>发送一个命令，实际上是一个HTTP request给46350端口上的Web Service。在我们的HTTP request的body中，会以WebDriver Wire协议规定的<strong>JSON</strong>格式的字符串来告诉Selenium我们希望浏览器接下来做什么事情。</p>
+<p>不同浏览器的WebDriver子类，都需要依赖特定的浏览器原生组件，例如Firefox就需要一个add-on名字叫webdriver.xpi。而IE的话就需要用到一个dll文件来转化Web Service的命令为浏览器native的调用。</p>
+<p>关于WebDriver Wire协议的细节，比如希望了解这套Web Service能够做哪些事情，可以阅读Selenium官方的协议文档， 在Selenium的源码中，我们可以找到一个HttpCommandExecutor这个类，里面维护了一个Map<String, CommandInfo>，它负责将一个个代表命令的简单字符串key，转化为相应的URL，因为REST的理念是将所有的操作视作一个个状态，每一个状态对应一个URI。所以当我们以特定的URL发送HTTP request给这个RESTful web service之后，它就能解析出需要执行的操作。截取一段源码如下：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;">nameToUrl <span style="color: #339933;">=</span> ImmutableMap.<span style="color: #339933;">&lt;</span>String, CommandInfo<span style="color: #339933;">&gt;</span>builder<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>  
+        .<span style="color: #006633;">put</span><span style="color: #009900;">&#40;</span>NEW_SESSION, post<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;/session&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>  
+        .<span style="color: #006633;">put</span><span style="color: #009900;">&#40;</span>QUIT, delete<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;/session/:sessionId&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>  
+        .<span style="color: #006633;">put</span><span style="color: #009900;">&#40;</span>GET_CURRENT_WINDOW_HANDLE, get<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;/session/:sessionId/window_handle&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>  
+        .<span style="color: #006633;">put</span><span style="color: #009900;">&#40;</span>GET_WINDOW_HANDLES, get<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;/session/:sessionId/window_handles&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>  
+        .<span style="color: #006633;">put</span><span style="color: #009900;">&#40;</span>GET, post<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;/session/:sessionId/url&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>  
+&nbsp;
+         <span style="color: #666666; font-style: italic;">// The Alert API is still experimental and should not be used.  </span>
+        .<span style="color: #006633;">put</span><span style="color: #009900;">&#40;</span>GET_ALERT, get<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;/session/:sessionId/alert&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>  
+        .<span style="color: #006633;">put</span><span style="color: #009900;">&#40;</span>DISMISS_ALERT, post<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;/session/:sessionId/dismiss_alert&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>  
+        .<span style="color: #006633;">put</span><span style="color: #009900;">&#40;</span>ACCEPT_ALERT, post<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;/session/:sessionId/accept_alert&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>  
+        .<span style="color: #006633;">put</span><span style="color: #009900;">&#40;</span>GET_ALERT_TEXT, get<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;/session/:sessionId/alert_text&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>  
+        .<span style="color: #006633;">put</span><span style="color: #009900;">&#40;</span>SET_ALERT_VALUE, post<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;/session/:sessionId/alert_text&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span></pre></div></div>
+
+<p>可以看到实际发送的URL都是相对路径，后缀多以/session/:sessionId开头，这也意味着WebDriver每次启动浏览器都会分配一个独立的sessionId，多线程并行的时候彼此之间不会有冲突和干扰。例如我们最常用的一个WebDriver的API，getWebElement在这里就会转化为/session/:sessionId/element这个URL，然后在发出的HTTP request body内再附上具体的参数比如by ID还是CSS还是Xpath，各自的值又是什么。收到并执行了这个操作之后，也会回复一个HTTP response。内容也是JSON，会返回找到的WebElement的各种细节，比如text、CSS selector、tag name、class name等等。</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/7661.html/feed</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+		<item>
+		<title>Selenium Core</title>
+		<link>http://www.xieziming.com/archives/6830.html</link>
+		<comments>http://www.xieziming.com/archives/6830.html#respond</comments>
+		<pubDate>Fri, 11 Mar 2011 14:21:03 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[测试]]></category>
+		<category><![CDATA[Selenium]]></category>
+		<category><![CDATA[Summary]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=6830</guid>
+		<description><![CDATA[Selenium是ThroughtWorks公司的一个强大的开源Web功能测试工具系列，这个系列现在主要包括以下4款：
+
+<strong>Selenium Core</strong>：支持DHTML的测试案例（效果类似数据驱动测试），它由一些纯js代码组成， 可以运行在windows/linux的不同browser上。它是Selenium IDE和Selenium RC的引擎。
+
+<strong>Selenium IDE</strong>：支持并且只支持Firefox浏览器，属于Firefox的一个插件，支持的浏览器太少，而依附于Firefox 也不便于日后开展自动化测试，但是，它的录制快捷好用！并且有代码转换功能，可以把Selenium 语言测试用例转为C#,Java，PHP,Ruby，Prel,Groovy,Python等语言的测试案例。
+
+<strong>Selenium RC</strong>：Selenium Remote Control。
+
+<strong>Selenium Grid</strong>：允许同时并行地、在不同的环境上运行多个测试任务，能极大加快Web应用的功能测试。
+
+<strong>Selenium Core HTA</strong>：Selenium Core HTA其实是Selenium Core的额外模式，你只要Selenium Core配置稍加修改，即为HTA模式，Selenium Core HTA可以在IE最高安全等级（特权）下工作，这意味着它仅能在IE下工作，由于限制较大，下面将排除对Selenium Core HTA的讨论。]]></description>
+				<content:encoded><![CDATA[<p>Selenium是ThroughtWorks公司的一个强大的开源Web功能测试工具系列，这个系列现在主要包括以下4款：</p>
+<p><strong>Selenium Core</strong>：支持DHTML的测试案例（效果类似数据驱动测试），它由一些纯js代码组成， 可以运行在windows/linux的不同browser上。它是Selenium IDE和Selenium RC的引擎。</p>
+<p><strong>Selenium IDE</strong>：支持并且只支持Firefox浏览器，属于Firefox的一个插件，支持的浏览器太少，而依附于Firefox 也不便于日后开展自动化测试，但是，它的录制快捷好用！并且有代码转换功能，可以把Selenium 语言测试用例转为C#,Java，PHP,Ruby，Prel,Groovy,Python等语言的测试案例。</p>
+<p><strong>Selenium RC</strong>：Selenium Remote Control。</p>
+<p><strong>Selenium Grid</strong>：允许同时并行地、在不同的环境上运行多个测试任务，能极大加快Web应用的功能测试。</p>
+<p><strong>Selenium Core HTA</strong>：Selenium Core HTA其实是Selenium Core的额外模式，你只要Selenium Core配置稍加修改，即为HTA模式，Selenium Core HTA可以在IE最高安全等级（特权）下工作，这意味着它仅能在IE下工作，由于限制较大，下面将排除对Selenium Core HTA的讨论。<br />
+===== 浏览器支持 =====</p>
+<p>(1).Selenium IDE仅可以在Firefox中工作。<br />
+　　<br />
+(2).Selenium Remote Control支持很多浏览器，包括最常用的：firefox，ie，safari等N款浏览器。<br />
+　　<br />
+(3).Selenium Core支持的浏览器是最广的，这点和它的实现有关。作为IDE和RC的引擎，Selenium Core几乎可以在任何浏览器中工作。<br />
+　　<br />
+<strong>需要远程安装：是否需要在被测网站的服务端安装？</strong><br />
+　　<br />
+这里只有Selenium Core需要，这是出于同源策略的原因。这也是Selenium Core一个很大的限制，试问，如果你要测试Google.com，还得在google的服务器上装一个Selenium Core，那是多搞笑的一件事。<br />
+　　<br />
+而Selenium IDE和Selenium Core HTA不会被同源策略所限制，因为他们对浏览器扩展了。<br />
+　　<br />
+Selenium RC提供一个代码服务器来保证Selenium JS文件看似来自相同的远程服务器，从而符合同源策略；代理服务器欺骗浏览器，让它认为这里的确有像http://www.google.com/selenium/这样的目录。</p>
+<p>===== Selenium RC(Remote Control) =====</p>
+<p>Selenium RC(Remote Control)是一个基于java编写的开源测试工具，允许使用多种语言编写自动化的WEB UI测试用例。这个工具提供一个Selenium Server可以启动，停止和控制绝大多数主流浏览器，这个服务器使用AJAX直接和浏览器进行交互，可以使用HTTP GET/POST请求向Selenium Server发送命令。 </p>
+<p>Selenium-RC安装包包含两部分：Selenium-server、Selenium-client-driver（各语言版本分别对应一个 client-driver.jar），server为测试服务器，client-driver为测试用例的API（编写测试用例的使用用到）。 </p>
+<p>==== 启动Server：====</p>
+<p>启动命令java -jar Selenium-server.jar 可以带参数启动，如java -jar selenium-server.jar -interactive为以交互模式启动，这里自己可以将启动操作制作成简单的.bat或.sh脚本，如bat脚本(此脚本与selenium- server.jar在同一级目录下)。</p>
+<p>==== 开发运行测试用例： ====</p>
+<p>1. 解压Selenium-RC压缩包，取出selenium-java-client-driver.jar </p>
+<p>2. 打开Java IDE(Eclipse, NetBeans, IntelliJ, Netweaver, etc.) </p>
+<p>3. 新建一个project </p>
+<p>4. 将selenium-java-client-driver.jar导入此project的classpath </p>
+<p>5. 将Selenium-IDE录制好的html脚本转换成java文件，导入新建的project（可能需要稍作修改，如添加assert判断用例是否测试通过），或直接使用selenium-java-client API编写测试用例。本工具同时支持Junit和TestNg测试框架。 </p>
+<p>6. 启动Selenium Server </p>
+<p>7. 在Java IDE 或命令行执行编写好的测试用例</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/6830.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Selenium之WebDriver</title>
+		<link>http://www.xieziming.com/archives/6832.html</link>
+		<comments>http://www.xieziming.com/archives/6832.html#respond</comments>
+		<pubDate>Sat, 12 Feb 2011 08:15:10 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[测试]]></category>
+		<category><![CDATA[Selenium]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=6832</guid>
+		<description><![CDATA[<em><strong>（1）页面导航</strong></em>：
+<code lang="java">
+driver.get( "http://www.google.com" );
+</code>
+完全装载页面后将控制返回给测试脚本。注意：当页面又很多AJAX调用时，该接口无法确认页面是否完全装载，这是需要使用"waits"。
+
+<em><strong>（2）与页面交互</strong></em>
+<code lang="java">
+<input type= "text" name= "passwd" id= "passwd-id" />
+//找到输入框元素
+WebElement element;
+element = driver.findElement(By.id( "passwd-id" ));
+element = driver.findElement(By.name( "passwd" ));
+element = driver.findElement(By.xpath( "//input[@id=’passwd-id’]" ));
+//XPATH返回第一个匹配到的元素，如果没有匹配到，抛出NoSuchElementException
+
+//在输入框中输入内容
+element.sendKeys( "some text" );
+element.sendKeys( " and some" , Keys.ARROW_DOWN); （按向下箭头）
+//任何页面元素都可以调用sendKeys，例如可以测试一些快捷方式键，键盘的每次输入都是附加在文本串的后面
+
+//清除输入框内容
+element.clear(); 
+
+//获取输入框的文本内容：
+element.getText(); 
+</code>]]></description>
+				<content:encoded><![CDATA[<p><strong>===== Selenium 2 背景 =====</strong></p>
+<p>Selenium 1是一款流行和完善的测试框架，支持众多浏览器（因其JavaScript实现），允许用户通过许多编程语言（从Java/C#到PHP、Erlang……）​。WebDriver弥补了Selenium 1的缺点​，跳出了Javascript的沙箱（嵌入到被测Web应用中），针对各个浏览器而开发，提供快速、轻量级的浏览器模拟器​。与浏览器的紧密集成支持创建更高级的测试，避免了JavaScript安全模型导致的限制。除了来自浏览器厂商的支持，WebDriver还利用操作系统级的调用模拟用户输入。</p>
+<p><strong>===== WebDriver的几个实现 =====</strong></p>
+<p><span style="color: #800080;"><strong>HtmlUnit Driver</strong></span> &#8211; &#8211; &#8211; -&gt; org.openqa.selenium.htmlunit.HtmlUnitDriver<br />
+<span style="color: #800080;"><strong>Firefox Driver</strong></span> &#8211; &#8211; &#8211; -&gt; org.openqa.selenium.firefox.FirefoxDriver<br />
+<span style="color: #800080;"><strong>Internet Explorer Driver</strong></span> &#8211; &#8211; &#8211; -&gt; org.openqa.selenium.ie.InternetExplorerDriver<br />
+<span style="color: #800080;"><strong>Chrome Driver</strong></span> &#8211; &#8211; &#8211; -&gt; org.openqa.selenium.chrome.ChromeDriver</p>
+<p><strong>ps：</strong><br />
+（1）HtmlUnit Driver是纯java的驱动器，全部在内存中运行，不会实际打开浏览器，但其速度很快。<br />
+（2）Firefox Driver：速度慢。</p>
+<p>===== <strong>WebDriver常用的函数接口 =====</strong></p>
+<p>以HtmlUnitDriver为例：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;">WebDriver driver <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> HtmlUnitDriver<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+WebDriver driver <span style="color: #339933;">=</span> newFirefoxDriver<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> 
+WebDriver driver <span style="color: #339933;">=</span> newInternetExplorerDriver <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre></div></div>
+
+<p><em><strong>（1）页面导航</strong></em>：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;">driver.<span style="color: #006633;">get</span><span style="color: #009900;">&#40;</span> <span style="color: #0000ff;">&quot;http://www.google.com&quot;</span> <span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre></div></div>
+
+<p>完全装载页面后将控制返回给测试脚本。注意：当页面又很多AJAX调用时，该接口无法确认页面是否完全装载，这时需要使用&#8221;waits&#8221;。</p>
+<p><em><strong>（2）与页面交互</strong></em></p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #339933;">&lt;</span>input type<span style="color: #339933;">=</span> <span style="color: #0000ff;">&quot;text&quot;</span> name<span style="color: #339933;">=</span> <span style="color: #0000ff;">&quot;passwd&quot;</span> id<span style="color: #339933;">=</span> <span style="color: #0000ff;">&quot;passwd-id&quot;</span> <span style="color: #339933;">/&gt;</span>
+<span style="color: #666666; font-style: italic;">//找到输入框元素</span>
+WebElement element<span style="color: #339933;">;</span>
+element <span style="color: #339933;">=</span> driver.<span style="color: #006633;">findElement</span><span style="color: #009900;">&#40;</span>By.<span style="color: #006633;">id</span><span style="color: #009900;">&#40;</span> <span style="color: #0000ff;">&quot;passwd-id&quot;</span> <span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+element <span style="color: #339933;">=</span> driver.<span style="color: #006633;">findElement</span><span style="color: #009900;">&#40;</span>By.<span style="color: #006633;">name</span><span style="color: #009900;">&#40;</span> <span style="color: #0000ff;">&quot;passwd&quot;</span> <span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+element <span style="color: #339933;">=</span> driver.<span style="color: #006633;">findElement</span><span style="color: #009900;">&#40;</span>By.<span style="color: #006633;">xpath</span><span style="color: #009900;">&#40;</span> <span style="color: #0000ff;">&quot;//input[@id=’passwd-id’]&quot;</span> <span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #666666; font-style: italic;">//XPATH返回第一个匹配到的元素，如果没有匹配到，抛出NoSuchElementException</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">//在输入框中输入内容</span>
+element.<span style="color: #006633;">sendKeys</span><span style="color: #009900;">&#40;</span> <span style="color: #0000ff;">&quot;some text&quot;</span> <span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+element.<span style="color: #006633;">sendKeys</span><span style="color: #009900;">&#40;</span> <span style="color: #0000ff;">&quot; and some&quot;</span> , Keys.<span style="color: #006633;">ARROW_DOWN</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> （按向下箭头）
+<span style="color: #666666; font-style: italic;">//任何页面元素都可以调用sendKeys，例如可以测试一些快捷方式键，键盘的每次输入都是附加在文本串的后面</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">//清除输入框内容</span>
+element.<span style="color: #006633;">clear</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> 
+&nbsp;
+<span style="color: #666666; font-style: italic;">//获取输入框的文本内容：</span>
+element.<span style="color: #006633;">getText</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">//? element.getAttribute(&quot;value&quot;);</span></pre></div></div>
+
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/6832.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+	</channel>
+</rss>

@@ -1,0 +1,616 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Summary &#8211; 谢子明</title>
+	<atom:link href="http://www.xieziming.com/tag/summary/feed" rel="self" type="application/rss+xml" />
+	<link>http://www.xieziming.com</link>
+	<description>Suny Xie</description>
+	<lastBuildDate>Mon, 26 Dec 2016 07:34:38 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.7</generator>
+	<item>
+		<title>质疑和反驳</title>
+		<link>http://www.xieziming.com/archives/7605.html</link>
+		<comments>http://www.xieziming.com/archives/7605.html#respond</comments>
+		<pubDate>Sun, 04 Nov 2012 03:46:29 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[网摘]]></category>
+		<category><![CDATA[java]]></category>
+		<category><![CDATA[Summary]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=7605</guid>
+		<description><![CDATA[“所有程序员都会写自己看得懂的代码，但只有优秀的程序员才写大家看得懂的代码。”
+
+更重要的是，要代码能够“看得懂”，主要是靠足够多的注释吗？扯淡！
+
+反对我的人会说，软件公司做产品赚钱，它们希望你的代码让不熟悉项目的新员工快速阅读、上手。这确实是个矛盾。说白了，你写的代码要和一个团队的能力匹配。在一个鱼龙混杂的团队，甚至一个糟糕的团队，你写出的代码也许很难和大伙儿产生共鸣，他们希望你写最普通最易懂的代码，没有精巧的设计（我指的是，“某一些精巧的设计，恰恰是以降低代码的可维护性为代价的”），没有语言高级特性，看着只有顺序、循环、分支判断的基本代码。
+
+所以许多上进的程序员，会希望在一个牛人的团队里工作。这就像足球运动员一样，因为足球是集体运动，一个足球运动员能达到的高度，是和他所在的团队息息相关的。在一个优秀的团队里，大家个性各有千秋，擅长领域不甚相同，但是都学习迅速，能力不差太远，大家阅读代码都能够很快理解和领会，而且讨论问题可以用一些程序员才明白的隐喻（比如有人说“我觉得这里应该用一个builder来实现”，大家都明白builder指的是什么），氛围和效率显而易见。
+
+如果你恰好对当前需要用到的业务和技术特别熟悉，领先团队里其他人一大截怎么办？那你就该在做设计编码的时候先行一步，<strong>你是那个最该去做架构设计、写骨架代码的人，完成一个架子以后再来给大家讲解，并和大家讨论，改进现有的设计。</strong>也就是说，你要多做一些更重要的事，而不是和大家一起分析、一起讨论，甚至一人负责一个模块，最后的结果就是大家根本和你讨论不到一块儿去。]]></description>
+				<content:encoded><![CDATA[<font color="#00BB00"><strong>为代码写足够的注释，让代码易于理解</strong></font>
+<p>“所有程序员都会写自己看得懂的代码，但只有优秀的程序员才写大家看得懂的代码。”</p>
+<p>这话没错，但是——什么才是“大家看得懂”的定义？我有必要让我的C++代码对于一个月前才明白指针和引用区别的初学者简单易懂么？</p>
+<p>更重要的是，要代码能够“看得懂”，主要是靠足够多的注释吗？扯淡！</p>
+<p>反对我的人会说，软件公司做产品赚钱，它们希望你的代码让不熟悉项目的新员工快速阅读、上手。这确实是个矛盾。说白了，你写的代码要和一个团队的能力匹配。在一个鱼龙混杂的团队，甚至一个糟糕的团队，你写出的代码也许很难和大伙儿产生共鸣，他们希望你写最普通最易懂的代码，没有精巧的设计（我指的是，“某一些精巧的设计，恰恰是以降低代码的可维护性为代价的”），没有语言高级特性，看着只有顺序、循环、分支判断的基本代码。</p>
+<p>所以许多上进的程序员，会希望在一个牛人的团队里工作。这就像足球运动员一样，因为足球是集体运动，一个足球运动员能达到的高度，是和他所在的团队息息相关的。在一个优秀的团队里，大家个性各有千秋，擅长领域不甚相同，但是都学习迅速，能力不差太远，大家阅读代码都能够很快理解和领会，而且讨论问题可以用一些程序员才明白的隐喻（比如有人说“我觉得这里应该用一个builder来实现”，大家都明白builder指的是什么），氛围和效率显而易见。</p>
+<p>如果你恰好对当前需要用到的业务和技术特别熟悉，领先团队里其他人一大截怎么办？那你就该在做设计编码的时候先行一步，<strong>你是那个最该去做架构设计、写骨架代码的人，完成一个架子以后再来给大家讲解，并和大家讨论，改进现有的设计。</strong>也就是说，你要多做一些更重要的事，而不是和大家一起分析、一起讨论，甚至一人负责一个模块，最后的结果就是大家根本和你讨论不到一块儿去。</p>
+<p>要代码“看得懂”，是设计出来的，而不是注释加出来的。这和产品质量一样，产品质量是设计出来的，而不是测试测出来的。注释的意义在于对当前代码自解释做不到的地方进行补充。</p>
+<p>所以，你的代码要易于理解，首先要保持简洁和清晰，这既包括良好的设计，也包括良好的编码习惯，也就是说，代码是自解释的，其次才通过注释的补充，让代码更易懂。注意，我不是说注释不重要和不必要，而是说，注释应该完成它自己的功用，它远不能代替代码本身自我解释的价值。</p>
+<p>举一个简单的例子，你可以这样写代码：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #008000; font-style: italic; font-weight: bold;">/**
+ * 图表模型
+ */</span>
+<span style="color: #000000; font-weight: bold;">class</span> Chart<span style="color: #009900;">&#123;</span>
+    <span style="color: #008000; font-style: italic; font-weight: bold;">/**
+     * 图表长度
+     */</span>
+    <span style="color: #000000; font-weight: bold;">private</span> <span style="color: #000066; font-weight: bold;">int</span> length<span style="color: #339933;">;</span>   
+&nbsp;
+    <span style="color: #008000; font-style: italic; font-weight: bold;">/**
+     * 获取图表长度
+     * @return 图表长度
+     */</span>
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">int</span> getLength<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+        <span style="color: #000000; font-weight: bold;">return</span> <span style="color: #000000; font-weight: bold;">this</span>.<span style="color: #006633;">length</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span> 
+&nbsp;
+    <span style="color: #008000; font-style: italic; font-weight: bold;">/**
+     * 设置图表长度
+     * @param length 图表长度
+     */</span>
+&nbsp;
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> setLength<span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">int</span> length<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+        <span style="color: #000000; font-weight: bold;">this</span>.<span style="color: #006633;">length</span> <span style="color: #339933;">=</span> length<span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/7605.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Java多态总结</title>
+		<link>http://www.xieziming.com/archives/7402.html</link>
+		<comments>http://www.xieziming.com/archives/7402.html#respond</comments>
+		<pubDate>Mon, 24 Sep 2012 15:32:11 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[程序]]></category>
+		<category><![CDATA[java]]></category>
+		<category><![CDATA[Summary]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=7402</guid>
+		<description><![CDATA[Java的多态性总结： 
+
+(1) 首先, 要明确Child对Parent发生了方法的overload还是overwrite，根据参数类型及个数。 
+
+(2) 如果是overload，则Child继承了Parent的方法，相当于Child多加了父类的方法。 
+
+(3) 如果是overwrite， 则Child类不会有父类的该方法，而是把该方法重写了，所以该方法存在于父类中，子类只是重写了。要想调用父类的该方法，只能通过super关键字调用。java 的这种机制遵循一个原则：当超类对象引用变量引用子类对象时，被引用对象的类型而不是引用变量的类型决定了调用谁的成员方法，但是这个被调用的方法必须是在超类中定义过的，也就是说被子类覆盖的方法。 
+
+(4) 接下来，观察方法执行时的参数类型； 
+
+(5) 然后看调用对象的声明类型和实例类型； 
+
+(6) 方法的调度采用最精确参数匹配。]]></description>
+				<content:encoded><![CDATA[<p>多态是指程序中定义的引用变量所指向的具体类型和通过该引用变量发出的方法调用在编程时并不确定，而是在程序运行期间才确定，即一个引用变量倒底会指向哪个类的实例对象，该引用变量发出的方法调用到底是哪个类中实现的方法，必须在由程序运行期间才能决定。</p>
+<p>比方一下:</p>
+<p>你和你朋友都是烟鬼,</p>
+<p>某日,你没有带烟, 而你朋友有n种烟,</p>
+<p>你说: 来根烟,</p>
+<p>朋友给你一根;</p>
+<p>你通过烟的过滤嘴, 品出为白沙烟</p>
+<p>你再要一根,</p>
+<p>品出这次是芙蓉王,</p>
+<p>再要一根,</p>
+<p>品出这次是熊猫</p>
+<p>&#8230;</p>
+<p>上面描述的就是多态!</p>
+<p>烟 a = 白沙<br />
+烟 b = 芙蓉王<br />
+烟 c = 熊猫</p>
+<p>但发现没有, 仅仅通过&#8221;烟&#8221;基类, 引用到不同的具体类对象, 就能让你调用到不同的对象, 这就是多态. 而烟到你嘴里[此时你还没有发现是那种烟], 你仅仅凭借&#8221;吸&#8221;的动作,就识别出来,到底是哪种烟对象</p>
+<p>这就是多态的悬机.</p>
+<p>多态须具备:</p>
+<p>1. 基类和各个子类</p>
+<p>2. 基类引用, 指向实例化的子类对象.</p>
+<p>再举一个鸡的例子,</p>
+<p>鸡是所有其它鸡的基类, 定义了一个方法shape(), 此方法能指明鸡的形态. 所有的子类[火鸡,山鸡,田鸡等],都有这个shape方法, 表明自己的形态,</p>
+<p>如果用下面的方法定义我需要具体的鸡,</p>
+<p>[基类 引用 = 实现类的对象]</p>
+<p>for example:</p>
+<p>鸡 a = new 火鸡();</p>
+<p>鸡 a = new 田鸡();</p>
+<p>鸡 a = new 山鸡();</p>
+<p>鸡 a = new 母鸡();</p>
+<p>当我使用的时候, 我采用 a 这个引用,</p>
+<p>a.shape(), 就会得到鸡的形态.</p>
+<p>如果我定义的是</p>
+<p>鸡 a = new 火鸡();</p>
+<p>那么a.shape得到的是火鸡的形态, 而不需要用具体的</p>
+<p>火鸡 a = new 火鸡(); 再通过a.shape得到火鸡的形态</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/7402.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>VBS中的类</title>
+		<link>http://www.xieziming.com/archives/7377.html</link>
+		<comments>http://www.xieziming.com/archives/7377.html#respond</comments>
+		<pubDate>Mon, 17 Sep 2012 14:06:16 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[程序]]></category>
+		<category><![CDATA[Summary]]></category>
+		<category><![CDATA[VBS]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=7377</guid>
+		<description><![CDATA[(1)Initialize 事件,在创建类的实例时发生（新建）此事件。
+<code lang="vb">
+Private Sub Class_Initialize()
+    statements
+End Sub
+</code>
+当类初始化时，statements部分由零个或多个将要运行的代码语句组成。
+
+(2)Terminate 事件,在所关联的类的实例终止（销毁）时发生此事件。
+<code lang="vb">
+Private Sub Class_Terminate()
+    statements
+End Sub
+</code>
+当类初始化时，statements 部分由零个或多个将要运行的代码语句组成。]]></description>
+				<content:encoded><![CDATA[<p><strong>1.VBS的类有两种事件：</strong></p>
+<p>(1)Initialize 事件,在创建类的实例时发生（新建）此事件。</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #E56717; font-weight: bold;">Private</span> <span style="color: #E56717; font-weight: bold;">Sub</span> Class_Initialize()
+    statements
+<span style="color: #8D38C9; font-weight: bold;">End</span> <span style="color: #E56717; font-weight: bold;">Sub</span></pre></div></div>
+
+<p>当类初始化时，statements部分由零个或多个将要运行的代码语句组成。</p>
+<p>(2)Terminate 事件,在所关联的类的实例终止（销毁）时发生此事件。</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #E56717; font-weight: bold;">Private</span> <span style="color: #E56717; font-weight: bold;">Sub</span> Class_Terminate()
+    statements
+<span style="color: #8D38C9; font-weight: bold;">End</span> <span style="color: #E56717; font-weight: bold;">Sub</span></pre></div></div>
+
+<p>当类初始化时，statements 部分由零个或多个将要运行的代码语句组成。</p>
+<p>下面是类事件的例子：</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;">Class TestClass
+  <span style="color: #E56717; font-weight: bold;">Private</span> <span style="color: #E56717; font-weight: bold;">Sub</span> Class_Initialize   <span style="color: #008000;">' 设置 Initialize 事件。
+</span>    MsgBox(<span style="color: #800000;">&quot;TestClass started&quot;</span>)
+  <span style="color: #8D38C9; font-weight: bold;">End</span> <span style="color: #E56717; font-weight: bold;">Sub</span>
+  <span style="color: #E56717; font-weight: bold;">Private</span> <span style="color: #E56717; font-weight: bold;">Sub</span> Class_Terminate   <span style="color: #008000;">' 设置 Terminate 事件。
+</span>    MsgBox(<span style="color: #800000;">&quot;TestClass terminated&quot;</span>)
+  <span style="color: #8D38C9; font-weight: bold;">End</span> <span style="color: #E56717; font-weight: bold;">Sub</span>
+<span style="color: #8D38C9; font-weight: bold;">End</span> Class
+&nbsp;
+<span style="color: #151B8D; font-weight: bold;">Set</span> X = <span style="color: #E56717; font-weight: bold;">New</span> TestClass   <span style="color: #008000;">' 创建一个 TestClass 实例。
+</span><span style="color: #151B8D; font-weight: bold;">Set</span> X = <span style="color: #00C2FF; font-weight: bold;">Nothing</span>      ' 删除实例。</pre></div></div>
+
+<p><strong>NOTE：</strong><br />
+a.类的事件方法格式是固定的，事件名是固定的，事件只能是Sub不能是Function，事件无参数；<br />
+b.类实例通过New来创建，通过Nothing来销毁；<br />
+c.记住所有的类实例都是对象，创建与销毁时记得用Set语句，没有Set是错的<br />
+d.这两个事件都不是必须的，即编写类时可以不提供这两个事件的实现代码；<br />
+e.这两个事件作用比较大，可以在这两个事件中初始化对象以及销毁对象时做一些其他的工作<br />
+f.因为VBS的两个类事件都不接受参数，所以不能在用New创建对象时初始化对象，可以另外设置一个公有的过程来完成这个任务</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/7377.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Java Layout总结</title>
+		<link>http://www.xieziming.com/archives/7351.html</link>
+		<comments>http://www.xieziming.com/archives/7351.html#respond</comments>
+		<pubDate>Sat, 15 Sep 2012 10:19:35 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[程序]]></category>
+		<category><![CDATA[java]]></category>
+		<category><![CDATA[Summary]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=7351</guid>
+		<description><![CDATA[BorderLayout 也是一种非常简单的布局策略，它把容器内的空间简单地划分为:North,South,East,West和Center 5个区域，每加入一个组件都应该指明把这个组件加在哪个区域中。一般每个区域只能有一个component, 若在一个区域中加上多个component，则只有最后加上的那个是可见的。BorderLayout是顶层容器（Window，Frame, Dialog）的默认布局管理器。
+
+有五个位置组件：这个界面最多只能显示5个控件。加入控件的时候，可以指定加入的方位，默认的情况是加入到中间。
+在BorderLayout中整理尺寸是，四周的控件会被调整，调整会按照布局管理器的内部规则计算出应该占多少位置，然后中间的组件会占去剩下的空间。其变化规律为:组件的相对位置不变,大小发生变化.例如容器变高了,则North、South 区域不变,West、Center、East区域变高;如果容器变宽了,West、East区域不变,North、Center、South区域变宽.不一定所有的区域都有组件,如果四周的区域（West、East、North、South区域）没有组件,则由Center区域去补充,但是如果 Center区域没有组件,则保持空白.
+<code lang="java">
+//使用BorderLayout的构造方法，可设置其component的间距。如： 
+BorderLayout(); //component间没有间距 
+BorderLayout(int hgap,int vgap); // hgap和vgap分别对应水平和垂直方向的间距。 
+</code>
+<code lang="java">
+import java.awt.*;
+public class buttonDir{
+      public static void main(String args[]){
+            Frame f = new Frame("BorderLayout");
+            f.setLayout(new BorderLayout());
+            f.add("North", new Button("North");
+            f.add("South", new Button("South");
+            f.add("East", new Button("East");
+            f.add("West", new Button("West");
+            f.add("Center", new Button("Center");
+            f.setSize(200,200);
+            f.setVisible(true);
+      }
+}
+</code>]]></description>
+				<content:encoded><![CDATA[<p><strong>BorderLayout布局管理器：</strong><br />
+BorderLayout 也是一种非常简单的布局策略，它把容器内的空间简单地划分为:North,South,East,West和Center 5个区域，每加入一个组件都应该指明把这个组件加在哪个区域中。BorderLayout是顶层容器（Window，Frame, Dialog）的默认布局管理器。</p>
+<p>BorderLayout界面最多只能显示5个控件,若在一个区域中加上多个component，则只有最后加上的那个是可见的。加入控件的时候，可以指定加入的方位，默认的情况是加入到中间。</p>
+<p>当容器的大小发生变化时,用BorderLayout管理的组件会发生变化,其变化规律是:组件的相对位置不变,大小发生变化.例如容器变高了,则North、South 区域不变,West、Center、East区域变高;如果容器变宽了,West、East区域不变,North、Center、South区域变宽.不一定所有的区域都有组件,如果四周的区域（West、East、North、South区域）没有组件,则由Center区域去补充,但是如果 Center区域没有组件,则保持空白.</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #666666; font-style: italic;">//使用BorderLayout的构造方法，可设置其component的间距。如： </span>
+<span style="color: #003399;">BorderLayout</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">//component间没有间距 </span>
+<span style="color: #003399;">BorderLayout</span><span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">int</span> hgap,<span style="color: #000066; font-weight: bold;">int</span> vgap<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">// hgap和vgap分别对应水平和垂直方向的间距。</span></pre></div></div>
+
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">java.awt.*</span><span style="color: #339933;">;</span>
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> buttonDir<span style="color: #009900;">&#123;</span>
+      <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000066; font-weight: bold;">void</span> main<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span> args<span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+            <span style="color: #003399;">Frame</span> f <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">Frame</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;BorderLayout&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+            f.<span style="color: #006633;">setLayout</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">BorderLayout</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+            f.<span style="color: #006633;">add</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;North&quot;</span>, <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">Button</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;North&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+            f.<span style="color: #006633;">add</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;South&quot;</span>, <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">Button</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;South&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+            f.<span style="color: #006633;">add</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;East&quot;</span>, <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">Button</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;East&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+            f.<span style="color: #006633;">add</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;West&quot;</span>, <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">Button</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;West&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+            f.<span style="color: #006633;">add</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;Center&quot;</span>, <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">Button</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;Center&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+            f.<span style="color: #006633;">setSize</span><span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">200</span>,<span style="color: #cc66cc;">200</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+            f.<span style="color: #006633;">setVisible</span><span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">true</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+      <span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p><strong>FlowLayout布局管理器：</strong><br />
+流式布局管理器把容器看成一个行集，好象平时在一张纸上写字一样，一行写满就换下一行。行高是用一行中的控件高度决定的。FlowLayout是Panel的默认布局。在生成流式布局时能够指定显示的对齐方式，默认情况下是居中（FlowLayout.CENTER）。当容器的大小发生变化时,用FlowLayout管理的组件会发生变化,其变化规律是:组件的大小不变,但是相对位置会发生变化.</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #003399;">FlowLayout</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>  <span style="color: #666666; font-style: italic;">//生成一个默认的流式布局,组件在容器里居中,每个组件之间留下5个像素的距离. </span>
+<span style="color: #003399;">FlowLayout</span><span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">int</span> alinment<span style="color: #009900;">&#41;</span> <span style="color: #666666; font-style: italic;">//align决定component的位置，其值有FlowLayout.LEFT</span>
+<span style="color: #003399;">FlowLayout</span><span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">int</span> alignment,<span style="color: #000066; font-weight: bold;">int</span> hgap,<span style="color: #000066; font-weight: bold;">int</span> vgap<span style="color: #009900;">&#41;</span> <span style="color: #666666; font-style: italic;">//hgap和vgap分别对应水平和垂直方向的间距，缺省为5单位(unit)</span></pre></div></div>
+
+<p><strong>GirdLayout布局管理器：</strong><br />
+Grid布局管理器提供了放置component的灵活手段。程序员可以建立一个有多行和多列的布局管理器，然后component就可以按一定的次序（从左到右，从上到下）进行排列。 </p>
+<p>当Grid布局管理器对应的窗口发生变化时，内部component的相对位置并不变化，只有大小发生变化。 </p>
+<p>Grid布局管理器总是忽略component倾向的大小(prefered size)，它把每个component的大小设置成相同的。</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #003399;">GridLayout</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #666666; font-style: italic;">//缺省建立一行的布局，每个component占居一列 </span>
+<span style="color: #003399;">GridLayout</span><span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">int</span> rows, <span style="color: #000066; font-weight: bold;">int</span> cols<span style="color: #009900;">&#41;</span> <span style="color: #666666; font-style: italic;">//建立指定行和列的布局，rows和cols对应行数和列数 </span>
+<span style="color: #003399;">GridLayout</span><span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">int</span> rows, <span style="color: #000066; font-weight: bold;">int</span> cols, <span style="color: #000066; font-weight: bold;">int</span> hgap, <span style="color: #000066; font-weight: bold;">int</span> vgap<span style="color: #009900;">&#41;</span> <span style="color: #666666; font-style: italic;">//建立指定行列数和间距的布局，hgap和vgap分别对应水平和垂直间距。</span></pre></div></div>
+
+<p><strong>当控件数多于或少于构造函数里的行数和列数时，行数时固定的，列数根据情况增减。另，构造函数里的行数和列数能够有一个为零，但是不能都为零。当容器里增加控件时候，容器内将向0的那个方向增长。</strong></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/7351.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Java QA</title>
+		<link>http://www.xieziming.com/archives/7397.html</link>
+		<comments>http://www.xieziming.com/archives/7397.html#respond</comments>
+		<pubDate>Sat, 18 Feb 2012 13:10:44 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[程序]]></category>
+		<category><![CDATA[java]]></category>
+		<category><![CDATA[Summary]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=7397</guid>
+		<description><![CDATA[JAVA的参数传递总是传"值"，但是传值方式也分为两种方式，它们是靠传递参数的类型区分的。这两种类型分别为JAVA的基础类型和Object(对象)类型；基础类型包括boolean,byte,short,char,int,long,float,double,而Object就是对象,如数组。
+此时结果的输出将是1,而且只要你的值在Main函数中没变，a的值不管怎么传都不回变，这是因为a是传值，而这个"值"是a的一个拷贝，a的值在传递后的改变只是改变了a的拷贝的内容，并没有改变真正的a的值。
+<code lang="java">
+public class A{                                  
+     public static void main(String arg[]){    
+       int[] a=new int[1];                               
+       a[0]=3;                                             
+       method1(a);                                       
+       System.out.println(a[0]);                      
+     }                                          
+     public static void method1(int[] a){        
+      a[0]--;                                                  
+     }                                                          
+}           
+ </code>]]></description>
+				<content:encoded><![CDATA[<p>1. 为什么在某方法内定义一个匿名内部类，并且希望它使用外部定义的对象，那么要求此方法的参数引用要声明为final?</p>
+<p>这是一个编译器设计的问题，如果你了解java的编译原理的话很容易理解。首先，内部类被编译的时候会生成一个单独的内部类的.class文件，这个文件并不与外部类在同一class文件中。当外部类传的参数被内部类调用时，从java程序的角度来看是直接的调用例如：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> dosome<span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">final</span> <span style="color: #003399;">String</span> a,<span style="color: #000000; font-weight: bold;">final</span> <span style="color: #000066; font-weight: bold;">int</span> b<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>  
+     <span style="color: #000000; font-weight: bold;">class</span> Dosome<span style="color: #009900;">&#123;</span>
+          <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> dosome<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+              <span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span>a<span style="color: #339933;">+</span>b<span style="color: #009900;">&#41;</span>
+          <span style="color: #009900;">&#125;</span>
+     <span style="color: #009900;">&#125;</span><span style="color: #339933;">;</span>  
+     Dosome some<span style="color: #339933;">=</span><span style="color: #000000; font-weight: bold;">new</span> Dosome<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+     some.<span style="color: #006633;">dosome</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>从代码来看好像是那个内部类直接调用的a参数和b参数，但是实际上不是，在java编译器编译以后实际的操作代码是</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">class</span> Outer$Dosome<span style="color: #009900;">&#123;</span>  
+    <span style="color: #000000; font-weight: bold;">public</span> Dosome<span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">final</span> <span style="color: #003399;">String</span> a,<span style="color: #000000; font-weight: bold;">final</span> <span style="color: #000066; font-weight: bold;">int</span> b<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>  
+        <span style="color: #000000; font-weight: bold;">this</span>.<span style="color: #006633;">Dosome</span>$a<span style="color: #339933;">=</span>a<span style="color: #339933;">;</span>  
+        <span style="color: #000000; font-weight: bold;">this</span>.<span style="color: #006633;">Dosome</span>$b<span style="color: #339933;">=</span>b<span style="color: #339933;">;</span>  
+    <span style="color: #009900;">&#125;</span>  
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> dosome<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>  
+        <span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">this</span>.<span style="color: #006633;">Dosome</span>$a<span style="color: #339933;">+</span><span style="color: #000000; font-weight: bold;">this</span>.<span style="color: #006633;">Dosome</span>$b<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+    <span style="color: #009900;">&#125;</span>  
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>从以上代码看来，内部类并不是直接调用方法传进来的参数，而是内部类将传进来的参数通过自己的构造器备份到了自己的内部，自己内部的方法调用的实际是自己的属性而不是外部类方法的参数。</p>
+<p>这样理解就很容易得出为什么要用final了，因为两者从外表看起来是同一个东西，实际上却不是这样，如果内部类改掉了这些参数的值也不可能影响到原参数，然而这样却失去了参数的一致性，因为从编程人员的角度来看他们是同一个东西，如果编程人员在程序设计的时候在内部类中改掉参数的值，但是外部调用的时候又发现值其实没有被改掉，这就让人非常的难以理解和接受，为了避免这种尴尬的问题存在，所以编译器设计人员把内部类能够使用的参数设定为必须是final来规避这种莫名其妙错误的存在。</p>
+<p>2. Java参数传递</p>
+<p>JAVA的参数传递总是传&#8221;值&#8221;，但是传值方式也分为两种方式，它们是靠传递参数的类型区分的。这两种类型分别为JAVA的基础类型和Object(对象)类型；基础类型包括boolean,byte,short,char,int,long,float,double,而Object就是对象,如数组。<br />
+此时结果的输出将是1,而且只要你的值在Main函数中没变，a的值不管怎么传都不回变，这是因为a是传值，而这个&#8221;值&#8221;是a的一个拷贝，a的值在传递后的改变只是改变了a的拷贝的内容，并没有改变真正的a的值。</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> A<span style="color: #009900;">&#123;</span>                                  
+     <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000066; font-weight: bold;">void</span> main<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span> arg<span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>    
+       <span style="color: #000066; font-weight: bold;">int</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> a<span style="color: #339933;">=</span><span style="color: #000000; font-weight: bold;">new</span> <span style="color: #000066; font-weight: bold;">int</span><span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">1</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>                               
+       a<span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">0</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">=</span><span style="color: #cc66cc;">3</span><span style="color: #339933;">;</span>                                             
+       method1<span style="color: #009900;">&#40;</span>a<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>                                       
+       <span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span>a<span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">0</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>                      
+     <span style="color: #009900;">&#125;</span>                                          
+     <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000066; font-weight: bold;">void</span> method1<span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">int</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> a<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>        
+      a<span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">0</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">--;</span>                                                  
+     <span style="color: #009900;">&#125;</span>                                                          
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> A<span style="color: #009900;">&#123;</span>
+     <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000066; font-weight: bold;">void</span> main<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span> arg<span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>    
+       <span style="color: #000066; font-weight: bold;">int</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> a<span style="color: #339933;">=</span><span style="color: #000000; font-weight: bold;">new</span> <span style="color: #000066; font-weight: bold;">int</span><span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">1</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>                               
+       a<span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">0</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">=</span><span style="color: #cc66cc;">3</span><span style="color: #339933;">;</span>                                             
+       method1<span style="color: #009900;">&#40;</span>a<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>                                       
+       <span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span>a<span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">0</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>                      
+     <span style="color: #009900;">&#125;</span>
+     <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000066; font-weight: bold;">void</span> method1<span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">int</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> a<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+       a<span style="color: #339933;">=</span><span style="color: #000000; font-weight: bold;">new</span> <span style="color: #000066; font-weight: bold;">int</span><span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">0</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+       a<span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">0</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">=</span><span style="color: #cc66cc;">4</span><span style="color: #339933;">;</span>
+     <span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>上边的结果将是2，下边的结果将是3(未变)，原因是：在传递的参数为对象时，这个传递的&#8221;值&#8221;中放的内容实际上是对向所在的地址，上边的情况是指针定位到对象的地址后，在上面把内容给改了，所以数组的值后会改变，而下边的情况为给对象新分配了一个指针到新的地址上面去，所以所有的操作都在新的地址上面，并不会影响原来的值。注：对于String,Interger,Boolean,Double等的系统对象，它们虽然是Object，但是任何方式的传递参数的值得改变并不会影响原来的值。</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/7397.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>2011年度博客访问统计</title>
+		<link>http://www.xieziming.com/archives/6685.html</link>
+		<comments>http://www.xieziming.com/archives/6685.html#respond</comments>
+		<pubDate>Sat, 31 Dec 2011 14:04:05 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[Summary]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=6685</guid>
+		<description><![CDATA[<img src="http://images.xieziming.com/upload/2011/nontopic/12/2.jpg" alt="ziming" />]]></description>
+				<content:encoded><![CDATA[<p><img src="http://images.xieziming.com/upload/2011/nontopic/12/1.jpg" alt="ziming" /></p>
+<p align="center">自从把技术文章转移到wiki站之后博客的访问量下降很多，目前的访客主要以直接访问为主。</p>
+<p><img src="http://images.xieziming.com/upload/2011/nontopic/12/3.jpg" alt="ziming" /></p>
+<p align="center">访客来自 <strong>140</strong> 个国家和地区，主要由我写的三个开源插件吸引而来。</p>
+<p><img src="http://images.xieziming.com/upload/2011/nontopic/12/2.jpg" alt="ziming" /></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/6685.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>西北行青旅总结</title>
+		<link>http://www.xieziming.com/archives/6188.html</link>
+		<comments>http://www.xieziming.com/archives/6188.html#respond</comments>
+		<pubDate>Sat, 05 Nov 2011 16:25:11 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[Summary]]></category>
+		<category><![CDATA[旅行]]></category>
+		<category><![CDATA[青旅]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=6188</guid>
+		<description><![CDATA[<img src="http://images.xieziming.com/upload/2011/nontopic/11/1.jpg" alt="ziming" />]]></description>
+				<content:encoded><![CDATA[<p><img src="http://images.xieziming.com/upload/2011/nontopic/11/1.jpg" alt="ziming" /></p>
+<p><strong>宁夏银川吉祥·西夏青年旅舍 （**）</strong></p>
+<p>官方网站：http://www.nxhostel.com/?page_id=6</p>
+<p>预订热线： 0951-2023021</p>
+<p>机场：从机场可以乘坐大巴到终点，换乘102路到宁夏大学南门，然后继续步行200m即到</p>
+<p>火车站：距银川火车站3公里，可直接乘坐102，18，303路等到宁夏大学南门，然后向继续步行200m即到。或者直接打车到亚麻厂办公楼，起步价即到。</p>
+<p>汽车站：南门汽车站可直接乘坐102路至宁夏大学南门，然后继续步行200m即到</p>
+<p><img src="http://images.xieziming.com/upload/2011/10/03/4.jpg" alt="ziming" /></p>
+<p><strong>青海塔顶阳光国际青年旅舍（***）</strong></p>
+<p>官方网站：http://www.yhachina.com/ls.php?id=101 或者 http://www.tdyg-inn.com/ydfj.htm</p>
+<p>预定电话：0971-8215571， 13997171500</p>
+<p>地址：青海西宁城中区文化街18号文庙东楼三层</p>
+<p>飞机：距离西宁机场30公里，乘机场大巴（25元/人）到五一路口下车，换乘出租不跳表即到；包出租自西宁机场到文化街文庙约80-100元，适合3-4人包车。</p>
+<p>火车：距离西宁火车站5公里，乘公交车1、40、3、16、31路（火车站始发）/20、22、26、32路（路过火车站）到大什字站下车 ，慢行2-5分钟即到，票价1元。出站乘出租8元左右即到</p>
+<p>汽车：距离西宁火车站5公里，乘公交车1、40、3、16、31路（火车站始发）/20、22、26、32路（路过汽车站）到大什字站下车 ，慢行2-5分钟即到，票价1元。出站乘出租8元左右即到</p>
+<p><img src="http://images.xieziming.com/upload/2011/10/09/1.jpg" alt="ziming" /></p>
+<p><strong>敦煌风非沙国际青年旅舍（****）</strong></p>
+<p>地址：甘肃省敦煌市月牙泉风景区</p>
+<p>电话：0937-8882000， 0937-8882002， 18793795678</p>
+<p>火车站：<br />
+（1）搭乘市区专车中巴到沙洲市场，然后转3路公交车到月牙泉风景区，再按照指引路牌前行约800米即到。<br />
+（2）搭乘出租车。</p>
+<p>汽车站：<br />
+（1）搭乘3路公交车到月牙泉风景区，再按照指引路牌前行约800米即到。<br />
+（2）搭乘出租车。</p>
+<p><img src="http://images.xieziming.com/upload/2011/10/09/2.jpg" alt="ziming" /></p>
+<p><strong>新疆白桦林国际青年旅舍（***）</strong></p>
+<p>地址：乌鲁木齐市 南湖南路186号(市政府绿色广场边)</p>
+<p>电话：0991-4881428</p>
+<p>火车站：<br />
+（1）打车：火车站-外环-广汇桥-下河滩-友好路桥-上河滩-市政府（南湖）15元.<br />
+（2）火车站坐8路58路公车到北门医药公司站转73,104,61路到“电信公司”下车.</p>
+<p><img src="http://images.xieziming.com/upload/2011/10/22/4.jpg" alt="ziming" /></p>
+<p><strong>兰州花儿国际青年旅舍（*）</strong></p>
+<p>地址： 兰州市段家滩路704号创意文化产业园内</p>
+<p>电话： 13099259808</p>
+<p>火车站：<br />
+（1）打车10元。<br />
+（2）公交16路至金城宾馆换138 创意产业园/油泵油嘴厂站，马路对面即是。</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/6188.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Selenium Core</title>
+		<link>http://www.xieziming.com/archives/6830.html</link>
+		<comments>http://www.xieziming.com/archives/6830.html#respond</comments>
+		<pubDate>Fri, 11 Mar 2011 14:21:03 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[测试]]></category>
+		<category><![CDATA[Selenium]]></category>
+		<category><![CDATA[Summary]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=6830</guid>
+		<description><![CDATA[Selenium是ThroughtWorks公司的一个强大的开源Web功能测试工具系列，这个系列现在主要包括以下4款：
+
+<strong>Selenium Core</strong>：支持DHTML的测试案例（效果类似数据驱动测试），它由一些纯js代码组成， 可以运行在windows/linux的不同browser上。它是Selenium IDE和Selenium RC的引擎。
+
+<strong>Selenium IDE</strong>：支持并且只支持Firefox浏览器，属于Firefox的一个插件，支持的浏览器太少，而依附于Firefox 也不便于日后开展自动化测试，但是，它的录制快捷好用！并且有代码转换功能，可以把Selenium 语言测试用例转为C#,Java，PHP,Ruby，Prel,Groovy,Python等语言的测试案例。
+
+<strong>Selenium RC</strong>：Selenium Remote Control。
+
+<strong>Selenium Grid</strong>：允许同时并行地、在不同的环境上运行多个测试任务，能极大加快Web应用的功能测试。
+
+<strong>Selenium Core HTA</strong>：Selenium Core HTA其实是Selenium Core的额外模式，你只要Selenium Core配置稍加修改，即为HTA模式，Selenium Core HTA可以在IE最高安全等级（特权）下工作，这意味着它仅能在IE下工作，由于限制较大，下面将排除对Selenium Core HTA的讨论。]]></description>
+				<content:encoded><![CDATA[<p>Selenium是ThroughtWorks公司的一个强大的开源Web功能测试工具系列，这个系列现在主要包括以下4款：</p>
+<p><strong>Selenium Core</strong>：支持DHTML的测试案例（效果类似数据驱动测试），它由一些纯js代码组成， 可以运行在windows/linux的不同browser上。它是Selenium IDE和Selenium RC的引擎。</p>
+<p><strong>Selenium IDE</strong>：支持并且只支持Firefox浏览器，属于Firefox的一个插件，支持的浏览器太少，而依附于Firefox 也不便于日后开展自动化测试，但是，它的录制快捷好用！并且有代码转换功能，可以把Selenium 语言测试用例转为C#,Java，PHP,Ruby，Prel,Groovy,Python等语言的测试案例。</p>
+<p><strong>Selenium RC</strong>：Selenium Remote Control。</p>
+<p><strong>Selenium Grid</strong>：允许同时并行地、在不同的环境上运行多个测试任务，能极大加快Web应用的功能测试。</p>
+<p><strong>Selenium Core HTA</strong>：Selenium Core HTA其实是Selenium Core的额外模式，你只要Selenium Core配置稍加修改，即为HTA模式，Selenium Core HTA可以在IE最高安全等级（特权）下工作，这意味着它仅能在IE下工作，由于限制较大，下面将排除对Selenium Core HTA的讨论。<br />
+===== 浏览器支持 =====</p>
+<p>(1).Selenium IDE仅可以在Firefox中工作。<br />
+　　<br />
+(2).Selenium Remote Control支持很多浏览器，包括最常用的：firefox，ie，safari等N款浏览器。<br />
+　　<br />
+(3).Selenium Core支持的浏览器是最广的，这点和它的实现有关。作为IDE和RC的引擎，Selenium Core几乎可以在任何浏览器中工作。<br />
+　　<br />
+<strong>需要远程安装：是否需要在被测网站的服务端安装？</strong><br />
+　　<br />
+这里只有Selenium Core需要，这是出于同源策略的原因。这也是Selenium Core一个很大的限制，试问，如果你要测试Google.com，还得在google的服务器上装一个Selenium Core，那是多搞笑的一件事。<br />
+　　<br />
+而Selenium IDE和Selenium Core HTA不会被同源策略所限制，因为他们对浏览器扩展了。<br />
+　　<br />
+Selenium RC提供一个代码服务器来保证Selenium JS文件看似来自相同的远程服务器，从而符合同源策略；代理服务器欺骗浏览器，让它认为这里的确有像http://www.google.com/selenium/这样的目录。</p>
+<p>===== Selenium RC(Remote Control) =====</p>
+<p>Selenium RC(Remote Control)是一个基于java编写的开源测试工具，允许使用多种语言编写自动化的WEB UI测试用例。这个工具提供一个Selenium Server可以启动，停止和控制绝大多数主流浏览器，这个服务器使用AJAX直接和浏览器进行交互，可以使用HTTP GET/POST请求向Selenium Server发送命令。 </p>
+<p>Selenium-RC安装包包含两部分：Selenium-server、Selenium-client-driver（各语言版本分别对应一个 client-driver.jar），server为测试服务器，client-driver为测试用例的API（编写测试用例的使用用到）。 </p>
+<p>==== 启动Server：====</p>
+<p>启动命令java -jar Selenium-server.jar 可以带参数启动，如java -jar selenium-server.jar -interactive为以交互模式启动，这里自己可以将启动操作制作成简单的.bat或.sh脚本，如bat脚本(此脚本与selenium- server.jar在同一级目录下)。</p>
+<p>==== 开发运行测试用例： ====</p>
+<p>1. 解压Selenium-RC压缩包，取出selenium-java-client-driver.jar </p>
+<p>2. 打开Java IDE(Eclipse, NetBeans, IntelliJ, Netweaver, etc.) </p>
+<p>3. 新建一个project </p>
+<p>4. 将selenium-java-client-driver.jar导入此project的classpath </p>
+<p>5. 将Selenium-IDE录制好的html脚本转换成java文件，导入新建的project（可能需要稍作修改，如添加assert判断用例是否测试通过），或直接使用selenium-java-client API编写测试用例。本工具同时支持Junit和TestNg测试框架。 </p>
+<p>6. 启动Selenium Server </p>
+<p>7. 在Java IDE 或命令行执行编写好的测试用例</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/6830.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>测试工程师如何和开发工程师交流</title>
+		<link>http://www.xieziming.com/archives/6826.html</link>
+		<comments>http://www.xieziming.com/archives/6826.html#respond</comments>
+		<pubDate>Fri, 11 Feb 2011 12:50:05 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[测试]]></category>
+		<category><![CDATA[Summary]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=6826</guid>
+		<description><![CDATA[1、要耐心和细心细心是测试工程师的一个基本素质，测试工程师是对质量负责的人，涉及到质量问题，就不能含糊，因此一定要细心，细心对待每一个可能的BUG、细心对待每一段被你检查的代码，细心对待每一个你撰写的BUG报告，细心对待你发出的每一封邮件。细心是一种态度，你的态度迟早会感染和你合作的开发人员，而这往往是合作愉快的基础。至于说到耐心，在我的工作经历中，不厌其烦地向开发人员解释一个BUG，让他认识到BUG的重要性是经常的事情，其实想想也很正常，对任何人来说，被人指出自己的缺点和不足都不是让人舒服的事情，因此，一点不耐烦的情绪就可能引起对方很大的反感，给自己的工作带来不必要的麻烦。 
+
+2、要懂得尊重对方开发是一件需要全面和综合考虑的工作，开发工作中，由于各种原因导致程序中出现问题是很正常的现象，作为测试工程师，发现了这些问题并不值得你夸耀，也不能说明你比开发工程师聪明。一个好的测试工程师一定是懂得尊重开发工程师的人，尊重对方的技术水平，尊重对方的代码。我接触过的开发人员都是挺和善的，一般来说，对他们最大的尊重就是承认他的专业水平，承认他的代码。对他们来说，代码就像是自己的孩子一样：）因此，记得在合适的时候表达你对他的尊重，赞扬一下他代码的精妙之处。 
+
+3、要能设身处地为对方着想开发工程师一般都处在较大的工作压力下，他的上司直接考核他们的指标很大程度上是已完成的代码，所以在工作任务紧张的时候，对于测试工程师报上来的BUG会拖延解决甚至是推脱，给测试工程师的感觉就是很不合作。那么在这个时候，就需要设身处地的为对方着想了，每个人都会为自己的工作在内心排定优先级，如果他认为解决你发现的BUG不是重要的事情，那么最大的可能就是你并没有向他解释清楚这个BUG的严重程度。发现BUG是我们的责任，敦促BUG得到解决是我们更重要的责任，因此，我们可以心平气和地和开发人员坐下来讨论一下BUG的严重程度，和他一起排定BUG的优先级别并确定解决的时间。 
+
+4、要有原则不要忘记，测试工程师需要对产品的质量负责，在这一点上一定要有原则。测试工程师可以和开发工程师建立良好的个人关系，但在具体的事情上，一定要按照公司的相关流程来处理。当然，在坚持原则的同时，可以采用一些委婉的表达方式，可以在允许的情况下尽量体谅开发工程师，但请记住，一个有原则的测试工程师才能真正帮助开发工程师，才能赢得开发工程师的尊重。 ]]></description>
+				<content:encoded><![CDATA[<p>作为测试工程师，在日常工作中接触最多的当然是团队中的开发工程师，如何和开发工程师进行有效的交流是测试工程师面对的重要问题。 </p>
+<p>一般来说，在一个团队中，总是有开发人员喜欢和不喜欢的测试工程师，这两者之间的工作效率和效果都有很大的差异。当然，不能武断地说测试人员不喜欢的测试工程师就一定是效率低下的测试工程师，或者说是不合格的测试工程师，但一般来说，那些容易得到开发人员认可的工程师在测试时总能够更好地发现缺陷和敦促开发人员解决缺陷。 测试工程师和开发工程师承担的是开发工作的两个不同方面，说得极端一点，一个是创建，一个是破坏，虽然两者的最终目的都是一样的，但在达成目标的方式上却有很大的差异。因此，在为同一个目标奋斗的过程中，发生冲突也是难免的，但通过下面的一些建议，换个视角看看开发人员的生活和工作，可能很多的冲突就能化解于无形了。 </p>
+<p>Cem Kaner在《Testing Computer Software》书中有一段话: “The best tester is not the one who finds the most bugs or who embarrasses the most developers. The best tester is the one who gets the most bugs fixed.” （最好的测试人员不是发现最多BUG或是使得最多开发人员不自在的人，而是能够[说服开发人员]修正最多BUG的人），建议大家好好理解这句话。 </p>
+<p>至于我个人，是从开发工程师转为测试工程师的，对于开发工程师的处境和想法也曾有过切身的体会，或许是这个原因，让我在和开发工程师交流的过程中还算是比较顺利，和他们相处得也还不错。在我的测试经历中，也接触过相当多的开发工程师，这里我把和开发人员交流的经验归结为“五要四不要”： </p>
+<p>【五要】 </p>
+<p>1、要耐心和细心细心是测试工程师的一个基本素质，测试工程师是对质量负责的人，涉及到质量问题，就不能含糊，因此一定要细心，细心对待每一个可能的BUG、细心对待每一段被你检查的代码，细心对待每一个你撰写的BUG报告，细心对待你发出的每一封邮件。细心是一种态度，你的态度迟早会感染和你合作的开发人员，而这往往是合作愉快的基础。至于说到耐心，在我的工作经历中，不厌其烦地向开发人员解释一个BUG，让他认识到BUG的重要性是经常的事情，其实想想也很正常，对任何人来说，被人指出自己的缺点和不足都不是让人舒服的事情，因此，一点不耐烦的情绪就可能引起对方很大的反感，给自己的工作带来不必要的麻烦。 </p>
+<p>2、要懂得尊重对方开发是一件需要全面和综合考虑的工作，开发工作中，由于各种原因导致程序中出现问题是很正常的现象，作为测试工程师，发现了这些问题并不值得你夸耀，也不能说明你比开发工程师聪明。一个好的测试工程师一定是懂得尊重开发工程师的人，尊重对方的技术水平，尊重对方的代码。我接触过的开发人员都是挺和善的，一般来说，对他们最大的尊重就是承认他的专业水平，承认他的代码。对他们来说，代码就像是自己的孩子一样：）因此，记得在合适的时候表达你对他的尊重，赞扬一下他代码的精妙之处。 </p>
+<p>3、要能设身处地为对方着想开发工程师一般都处在较大的工作压力下，他的上司直接考核他们的指标很大程度上是已完成的代码，所以在工作任务紧张的时候，对于测试工程师报上来的BUG会拖延解决甚至是推脱，给测试工程师的感觉就是很不合作。那么在这个时候，就需要设身处地的为对方着想了，每个人都会为自己的工作在内心排定优先级，如果他认为解决你发现的BUG不是重要的事情，那么最大的可能就是你并没有向他解释清楚这个BUG的严重程度。发现BUG是我们的责任，敦促BUG得到解决是我们更重要的责任，因此，我们可以心平气和地和开发人员坐下来讨论一下BUG的严重程度，和他一起排定BUG的优先级别并确定解决的时间。 </p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/6826.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Happy Chinese New Year</title>
+		<link>http://www.xieziming.com/archives/5438.html</link>
+		<comments>http://www.xieziming.com/archives/5438.html#respond</comments>
+		<pubDate>Mon, 31 Jan 2011 01:54:23 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[杂记]]></category>
+		<category><![CDATA[Summary]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=5438</guid>
+		<description><![CDATA[<img src="http://images.xieziming.com/upload/2011/nontopic/01/03.jpg" alt="ziming" />
+<p align="center"><strong>Happy Chinese New Year, And I Will Be On Vacation In Next Two Weeks.</strong></p>]]></description>
+				<content:encoded><![CDATA[<p><img src="http://images.xieziming.com/upload/2011/nontopic/01/01.jpg" alt="ziming" /></p>
+<p align="center">Analytics of last 3 months</p>
+<p><img src="http://images.xieziming.com/upload/2011/nontopic/01/02.jpg" alt="ziming" /></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/5438.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>程序员图书推荐</title>
+		<link>http://www.xieziming.com/archives/6962.html</link>
+		<comments>http://www.xieziming.com/archives/6962.html#respond</comments>
+		<pubDate>Wed, 24 Mar 2010 05:14:55 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[技术维基]]></category>
+		<category><![CDATA[Summary]]></category>
+		<category><![CDATA[推荐]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=6962</guid>
+		<description><![CDATA[“如果能时光倒流，回到过去，作为一个开发人员，你可以告诉自己在职业生涯初期应该读一本，你会选择哪本书呢？我希望这个书单列表内容丰富，可以涵盖很多东西。”
+
+<span style="color: #800080;">1. 《代码大全》</span>
+
+“优秀的编程实践的百科全书，《代码大全》注重个人技术，其中所有东西加起来，就是我们本能所说的“编写整洁的代码”。这本书有50页在谈论代码布局。”
+
+对于新手来说，这本书中的观念有点高阶了。到你准备阅读此书时，你应该已经知道并实践过书中99%的观念。
+
+<span style="color: #800080;">2. 《程序员修炼之道》</span>
+
+对于那些已经学习过编程机制的程序员来说，这是一本卓越的书。或许他们还是在校生，但对要自己做什么，还感觉不是很安全。就像草图和架构之间的差别。虽然你在学校课堂上学到的是画图，你也可以画的很漂亮，但如果你觉得你不太知道从哪儿下手，如果某人要你独自画一个P2P的音乐交换网络图，那这本书就适合你了。—— Joel
+
+<span style="color: #800080;">3. 《计算机程序的构造和解释》</span>
+
+《代码大全》、《重构》和《设计模式》这些经典书会教给你高效的工作习惯和交易细节。其他像《人件集》、《计算机编程心理学》和《人月神话》这些书会深入软件开发的心理层面。其他书籍则处理算法。这些书都有自己所属的位置。
+
+然而《计算机程序的构造和解释》与这些不同。这是一本会启发你的书，它会燃起你编写出色程序的热情；它还将教会你认识并欣赏美；它会让你有种敬畏，让你难以抑制地渴望学习更多的东西。其他书或许会让你成为一位更出色的程序员，但此书将一定会让你成为一名程序员。
+
+同时，你将会学到其他东西，函数式编程（第三章）、惰性计算、元编程、虚拟机、解释器和编译器。
+
+一些人认为此书不适合新手。个人认为，虽然我并不完全认同要有一些编程经验才能读此书，但我还是一定推荐给初学者。毕竟这本书是写给著名的6.001，是麻省理工学院的入门编程课程。此书或许需要多做努力（尤其你在做练习的时候，你也应当如此），但这个价是对得起这本书的。]]></description>
+				<content:encoded><![CDATA[<p>“如果能时光倒流，回到过去，作为一个开发人员，你可以告诉自己在职业生涯初期应该读一本，你会选择哪本书呢？我希望这个书单列表内容丰富，可以涵盖很多东西。”</p>
+<p><span style="color: #800080;">1. 《代码大全》</span></p>
+<p>“优秀的编程实践的百科全书，《代码大全》注重个人技术，其中所有东西加起来，就是我们本能所说的“编写整洁的代码”。这本书有50页在谈论代码布局。”</p>
+<p>对于新手来说，这本书中的观念有点高阶了。到你准备阅读此书时，你应该已经知道并实践过书中99%的观念。</p>
+<p><span style="color: #800080;">2. 《程序员修炼之道》</span></p>
+<p>对于那些已经学习过编程机制的程序员来说，这是一本卓越的书。或许他们还是在校生，但对要自己做什么，还感觉不是很安全。就像草图和架构之间的差别。虽然你在学校课堂上学到的是画图，你也可以画的很漂亮，但如果你觉得你不太知道从哪儿下手，如果某人要你独自画一个P2P的音乐交换网络图，那这本书就适合你了。—— Joel</p>
+<p><span style="color: #800080;">3. 《计算机程序的构造和解释》</span></p>
+<p>《代码大全》、《重构》和《设计模式》这些经典书会教给你高效的工作习惯和交易细节。其他像《人件集》、《计算机编程心理学》和《人月神话》这些书会深入软件开发的心理层面。其他书籍则处理算法。这些书都有自己所属的位置。</p>
+<p>然而《计算机程序的构造和解释》与这些不同。这是一本会启发你的书，它会燃起你编写出色程序的热情；它还将教会你认识并欣赏美；它会让你有种敬畏，让你难以抑制地渴望学习更多的东西。其他书或许会让你成为一位更出色的程序员，但此书将一定会让你成为一名程序员。</p>
+<p>同时，你将会学到其他东西，函数式编程（第三章）、惰性计算、元编程、虚拟机、解释器和编译器。</p>
+<p>一些人认为此书不适合新手。个人认为，虽然我并不完全认同要有一些编程经验才能读此书，但我还是一定推荐给初学者。毕竟这本书是写给著名的6.001，是麻省理工学院的入门编程课程。此书或许需要多做努力（尤其你在做练习的时候，你也应当如此），但这个价是对得起这本书的。</p>
+<p><span style="color: #800080;">4. 《C程序设计语言》</span></p>
+<p>这本书简洁易读，会教给你三件事：C 编程语言；如何像程序员一样思考；底层计算模型。（这对理解“底层”非常重要）—— Nathan</p>
+<p><span style="color: #800080;">5. 《算法导论》</span></p>
+<p>《代码大全》教你如何正确编程；《人月神话》教你如何正确管理；《设计模式》教你如何正确设计……</p>
+<p>在我看来，代码只是一个工具，并非精髓。开发软件的主要部分是创建新算法或重新实现现有算法。其他部分则像重新组装乐高砖块或创建“管理”层。我依然梦想这样的工作，我的大部分时间（&gt;50%）是在写算法，其他“管理”细节则留给其他人…… —— Ran Biron</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/6962.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+	</channel>
+</rss>

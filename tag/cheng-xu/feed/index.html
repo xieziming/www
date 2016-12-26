@@ -1,0 +1,3177 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>程序 &#8211; 谢子明</title>
+	<atom:link href="http://www.xieziming.com/tag/cheng-xu/feed" rel="self" type="application/rss+xml" />
+	<link>http://www.xieziming.com</link>
+	<description>Suny Xie</description>
+	<lastBuildDate>Mon, 26 Dec 2016 07:34:38 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.7</generator>
+	<item>
+		<title>Solaris内存统计</title>
+		<link>http://www.xieziming.com/archives/7693.html</link>
+		<comments>http://www.xieziming.com/archives/7693.html#respond</comments>
+		<pubDate>Fri, 16 Nov 2012 17:01:37 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[技术维基]]></category>
+		<category><![CDATA[linux]]></category>
+		<category><![CDATA[程序]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=7693</guid>
+		<description><![CDATA[首先Solaris上的swap跟普通的Unix/Linux上的swap机制有一点不同，Solaris上的swap用的是一个Virtual Swap Space概念, swap空间再也不是单指硬盘的分区或文件。虚拟Swap空间包含两个部分：部分物理内存和传统上的swap分区。经过适当的配置，可以使系统需要swap空间时，先使用内存部分的swap空间，如果内存部分的swap空间不够，再使用磁盘部分的swap空间。这样，也许你硬盘上的swap空间很少得到使用了，甚至根本不需要swap分区。
+
+<strong>物理内存:</strong>
+<code lang="bash">
+sushi@gbs00827:/xfosUAT/xfos_sushi/thirdparty/suny/NFR_SUNY/core/results/NFR_18_NORMAL_RUN_1>prtconf &#124; head -2 or prtconf -vp &#124;grep Mem
+System Configuration:  Sun Microsystems  i86pc
+Memory size: 73717 Megabytes
+</code>
+
+在Solaris下，swap命令是用来查看当前系统中的swap信息的。-l 参数和-s参数表达的是同样的意思，区别就在于一个查看的是物理的swap space,一个是当前系统的virtual swap space。
+
+<strong>虚拟交换空间:</strong>
+<code lang="bash">
+sushi@gbs00827:/xfosUAT/xfos_sushi/thirdparty/suny/NFR_SUNY/core/results/NFR_18_NORMAL_RUN_1>swap -s
+total: 8376304k bytes allocated + 6829196k reserved = 15205500k used, 60836672k available
+</code>]]></description>
+				<content:encoded><![CDATA[<p>首先Solaris上的swap跟普通的Unix/Linux上的swap机制有一点不同，Solaris上的swap用的是一个Virtual Swap Space概念, swap空间再也不是单指硬盘的分区或文件。虚拟Swap空间包含两个部分：部分物理内存和传统上的swap分区。经过适当的配置，可以使系统需要swap空间时，先使用内存部分的swap空间，如果内存部分的swap空间不够，再使用磁盘部分的swap空间。这样，也许你硬盘上的swap空间很少得到使用了，甚至根本不需要swap分区。</p>
+<p><strong>物理内存:</strong></p>
+
+<div class="wp_code"><div class="pre"><pre class="bash" style="font-family:'Times New Roman',Garamond, Times;">sushi<span style="color: #000000; font-weight: bold;">@</span>gbs00827:<span style="color: #000000; font-weight: bold;">/</span>xfosUAT<span style="color: #000000; font-weight: bold;">/</span>xfos_sushi<span style="color: #000000; font-weight: bold;">/</span>thirdparty<span style="color: #000000; font-weight: bold;">/</span>suny<span style="color: #000000; font-weight: bold;">/</span>NFR_SUNY<span style="color: #000000; font-weight: bold;">/</span>core<span style="color: #000000; font-weight: bold;">/</span>results<span style="color: #000000; font-weight: bold;">/</span>NFR_18_NORMAL_RUN_1<span style="color: #000000; font-weight: bold;">&gt;</span>prtconf <span style="color: #000000; font-weight: bold;">|</span> <span style="color: #c20cb9; font-weight: bold;">head</span> <span style="color: #660033;">-2</span> or prtconf <span style="color: #660033;">-vp</span> <span style="color: #000000; font-weight: bold;">|</span><span style="color: #c20cb9; font-weight: bold;">grep</span> Mem
+System Configuration:  Sun Microsystems  i86pc
+Memory <span style="color: #c20cb9; font-weight: bold;">size</span>: <span style="color: #000000;">73717</span> Megabytes</pre></div></div>
+
+<p>在Solaris下，swap命令是用来查看当前系统中的swap信息的。-l 参数和-s参数表达的是同样的意思，区别就在于一个查看的是物理的swap space,一个是当前系统的virtual swap space。</p>
+<p><strong>虚拟交换空间:</strong></p>
+
+<div class="wp_code"><div class="pre"><pre class="bash" style="font-family:'Times New Roman',Garamond, Times;">sushi<span style="color: #000000; font-weight: bold;">@</span>gbs00827:<span style="color: #000000; font-weight: bold;">/</span>xfosUAT<span style="color: #000000; font-weight: bold;">/</span>xfos_sushi<span style="color: #000000; font-weight: bold;">/</span>thirdparty<span style="color: #000000; font-weight: bold;">/</span>suny<span style="color: #000000; font-weight: bold;">/</span>NFR_SUNY<span style="color: #000000; font-weight: bold;">/</span>core<span style="color: #000000; font-weight: bold;">/</span>results<span style="color: #000000; font-weight: bold;">/</span>NFR_18_NORMAL_RUN_1<span style="color: #000000; font-weight: bold;">&gt;</span>swap <span style="color: #660033;">-s</span>
+total: 8376304k bytes allocated + 6829196k reserved = 15205500k used, 60836672k available</pre></div></div>
+
+<p>虚拟交换空间大小 =  物理磁盘交换空间大小 +  内存中的交换空间大小.</p>
+<p><strong>物理磁盘交换空间:</strong></p>
+
+<div class="wp_code"><div class="pre"><pre class="bash" style="font-family:'Times New Roman',Garamond, Times;">sushi<span style="color: #000000; font-weight: bold;">@</span>gbs00827:<span style="color: #000000; font-weight: bold;">/</span>xfosUAT<span style="color: #000000; font-weight: bold;">/</span>xfos_sushi<span style="color: #000000; font-weight: bold;">/</span>thirdparty<span style="color: #000000; font-weight: bold;">/</span>suny<span style="color: #000000; font-weight: bold;">/</span>NFR_SUNY<span style="color: #000000; font-weight: bold;">/</span>core<span style="color: #000000; font-weight: bold;">/</span>results<span style="color: #000000; font-weight: bold;">/</span>NFR_18_NORMAL_RUN_1<span style="color: #000000; font-weight: bold;">&gt;</span>swap <span style="color: #660033;">-l</span>
+swapfile             dev  swaplo blocks   <span style="color: #c20cb9; font-weight: bold;">free</span>
+<span style="color: #000000; font-weight: bold;">/</span>dev<span style="color: #000000; font-weight: bold;">/</span>md<span style="color: #000000; font-weight: bold;">/</span>dsk<span style="color: #000000; font-weight: bold;">/</span>d1      <span style="color: #000000; font-weight: bold;">**</span>,<span style="color: #000000;">1</span>       <span style="color: #000000;">8</span> <span style="color: #000000;">41945704</span> <span style="color: #000000;">41945704</span>
+&nbsp;
+sushi<span style="color: #000000; font-weight: bold;">@</span>gbs00827:<span style="color: #000000; font-weight: bold;">/</span>xfosUAT<span style="color: #000000; font-weight: bold;">/</span>xfos_sushi<span style="color: #000000; font-weight: bold;">/</span>thirdparty<span style="color: #000000; font-weight: bold;">/</span>suny<span style="color: #000000; font-weight: bold;">/</span>NFR_SUNY<span style="color: #000000; font-weight: bold;">/</span>core<span style="color: #000000; font-weight: bold;">/</span>results<span style="color: #000000; font-weight: bold;">/</span>NFR_18_NORMAL_RUN_1<span style="color: #000000; font-weight: bold;">&gt;</span>top
+<span style="color: #000000;">378</span> processes: <span style="color: #000000;">349</span> sleeping, <span style="color: #000000;">27</span> stopped, <span style="color: #000000;">2</span> on cpu
+CPU states: <span style="color: #000000;">79.5</span><span style="color: #000000; font-weight: bold;">%</span> idle, <span style="color: #000000;">12.3</span><span style="color: #000000; font-weight: bold;">%</span> user,  <span style="color: #000000;">8.2</span><span style="color: #000000; font-weight: bold;">%</span> kernel,  <span style="color: #000000;">0.0</span><span style="color: #000000; font-weight: bold;">%</span> iowait,  <span style="color: #000000;">0.0</span><span style="color: #000000; font-weight: bold;">%</span> swap
+Memory: 72G phys mem, 53G <span style="color: #c20cb9; font-weight: bold;">free</span> mem, 20G total swap, 20G <span style="color: #c20cb9; font-weight: bold;">free</span> swap
+&nbsp;
+   PID USERNAME LWP PRI NICE  SIZE   RES STATE    TIME    CPU COMMAND
+ <span style="color: #000000;">15227</span> sushi    <span style="color: #000000;">999</span>  <span style="color: #000000;">59</span>    <span style="color: #000000;">0</span>  466M  439M <span style="color: #c20cb9; font-weight: bold;">sleep</span>   <span style="color: #000000;">14</span>:07  <span style="color: #000000;">1.00</span><span style="color: #000000; font-weight: bold;">%</span> java</pre></div></div>
+
+<p>这样 41945704KB + 20G = 60G =虚拟交换空间大小</p>
+
+<div class="wp_code"><div class="pre"><pre class="bash" style="font-family:'Times New Roman',Garamond, Times;">sushi<span style="color: #000000; font-weight: bold;">@</span>gbs00827:<span style="color: #000000; font-weight: bold;">/</span>xfosUAT<span style="color: #000000; font-weight: bold;">/</span>xfos_sushi<span style="color: #000000; font-weight: bold;">/</span>thirdparty<span style="color: #000000; font-weight: bold;">/</span>suny<span style="color: #000000; font-weight: bold;">/</span>NFR_SUNY<span style="color: #000000; font-weight: bold;">/</span>core<span style="color: #000000; font-weight: bold;">&gt;</span><span style="color: #c20cb9; font-weight: bold;">vmstat</span> <span style="color: #000000;">2</span>
+ kthr      memory            page            disk          faults      cpu
+ r b <span style="color: #c20cb9; font-weight: bold;">w</span>   swap  <span style="color: #c20cb9; font-weight: bold;">free</span>  re  mf pi po fr de sr m0 m1 <span style="color: #000000; font-weight: bold;">**</span> <span style="color: #c20cb9; font-weight: bold;">m4</span>   <span style="color: #000000; font-weight: bold;">in</span>   sy   cs us sy <span style="color: #c20cb9; font-weight: bold;">id</span>
+ <span style="color: #000000;">3</span> <span style="color: #000000;">0</span> <span style="color: #000000;">0</span> <span style="color: #000000;">56865308</span> <span style="color: #000000;">51170924</span> <span style="color: #000000;">486</span> <span style="color: #000000;">3467</span> <span style="color: #000000;">0</span> <span style="color: #000000;">0</span> <span style="color: #000000;">0</span> <span style="color: #000000;">0</span> <span style="color: #000000;">0</span> <span style="color: #000000;">0</span>  <span style="color: #000000;">0</span>  <span style="color: #000000;">0</span>  <span style="color: #000000;">0</span> <span style="color: #000000;">5150</span> <span style="color: #000000;">19539</span> <span style="color: #000000;">5871</span> <span style="color: #000000;">1</span>  <span style="color: #000000;">1</span> <span style="color: #000000;">98</span>
+ <span style="color: #000000;">0</span> <span style="color: #000000;">0</span> <span style="color: #000000;">0</span> <span style="color: #000000;">56865268</span> <span style="color: #000000;">51173240</span> <span style="color: #000000;">0</span> <span style="color: #000000;">47</span> <span style="color: #000000;">0</span> <span style="color: #000000;">0</span>  <span style="color: #000000;">0</span>  <span style="color: #000000;">0</span>  <span style="color: #000000;">0</span>  <span style="color: #000000;">0</span>  <span style="color: #000000;">0</span>  <span style="color: #000000;">0</span>  <span style="color: #000000;">0</span> <span style="color: #000000;">4959</span> <span style="color: #000000;">4790</span> <span style="color: #000000;">5273</span>  <span style="color: #000000;">0</span>  <span style="color: #000000;">1</span> <span style="color: #000000;">99</span>
+&nbsp;
+sushi<span style="color: #000000; font-weight: bold;">@</span>gbs00827:<span style="color: #000000; font-weight: bold;">/</span>xfosUAT<span style="color: #000000; font-weight: bold;">/</span>xfos_sushi<span style="color: #000000; font-weight: bold;">/</span>thirdparty<span style="color: #000000; font-weight: bold;">/</span>suny<span style="color: #000000; font-weight: bold;">/</span>NFR_SUNY<span style="color: #000000; font-weight: bold;">/</span>core<span style="color: #000000; font-weight: bold;">&gt;</span>top
+<span style="color: #000000;">293</span> processes: <span style="color: #000000;">266</span> sleeping, <span style="color: #000000;">26</span> stopped, <span style="color: #000000;">1</span> on cpu
+CPU states: <span style="color: #000000;">97.7</span><span style="color: #000000; font-weight: bold;">%</span> idle,  <span style="color: #000000;">0.7</span><span style="color: #000000; font-weight: bold;">%</span> user,  <span style="color: #000000;">1.6</span><span style="color: #000000; font-weight: bold;">%</span> kernel,  <span style="color: #000000;">0.0</span><span style="color: #000000; font-weight: bold;">%</span> iowait,  <span style="color: #000000;">0.0</span><span style="color: #000000; font-weight: bold;">%</span> swap
+Memory: 72G phys mem, 49G <span style="color: #c20cb9; font-weight: bold;">free</span> mem, 20G total swap, 20G <span style="color: #c20cb9; font-weight: bold;">free</span> swap</pre></div></div>
+
+<p>vmstat 中的swap是可用虚拟交换空间的意思，它等于虚拟交换空间(可用部分) = 物理磁盘交换空间(可用部分) +  内存中的交换空间(可用部分).</p>
+<p>vmstat中的free是可用的剩余内存的意思, 它的大小等于系统可用物理内存大小.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/7693.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>RESTful</title>
+		<link>http://www.xieziming.com/archives/7666.html</link>
+		<comments>http://www.xieziming.com/archives/7666.html#respond</comments>
+		<pubDate>Sat, 10 Nov 2012 16:23:20 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[测试]]></category>
+		<category><![CDATA[程序]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=7666</guid>
+		<description><![CDATA[<strong>资源（Resources）</strong>
+
+所谓"资源"，就是网络上的一个实体，或者说是网络上的一个具体信息。它可以是一段文本、一张图片、一首歌曲、一种服务，总之就是一个具体的实在。你可以用一个URI（统一资源定位符）指向它，每种资源对应一个特定的URI。要获取这个资源，访问它的URI就可以，因此URI就成了每一个资源的地址或独一无二的识别符。
+
+<strong>表现层（Representation）</strong>
+"资源"是一种信息实体，它可以有多种外在表现形式。我们把"资源"具体呈现出来的形式，叫做它的"表现层"（Representation）。比如，文本可以用txt格式表现，也可以用HTML格式、XML格式、JSON格式表现，甚至可以采用二进制格式；图片可以用JPG格式表现，也可以用PNG格式表现。
+
+URI只代表资源的实体，不代表它的形式。严格地说，有些网址最后的".html"后缀名是不必要的，因为这个后缀名表示格式，属于"表现层"范畴，而URI应该只代表"资源"的位置。它的具体表现形式，应该在HTTP请求的头信息中用Accept和Content-Type字段指定，这两个字段才是对"表现层"的描述。
+
+<strong>状态转化（State Transfer）</strong>
+互联网通信协议HTTP协议，是一个无状态协议。这意味着，所有的状态都保存在服务器端。因此，如果客户端想要操作服务器，必须通过某种手段，让服务器端发生"状态转化"（State Transfer）。而这种转化是建立在表现层之上的，所以就是"表现层状态转化"。
+
+客户端用到的手段，只能是HTTP协议。具体来说，就是HTTP协议里面，四个表示操作方式的动词：GET、POST、PUT、DELETE。它们分别对应四种基本操作：GET用来获取资源，POST用来新建资源（也可以用于更新资源），PUT用来更新资源，DELETE用来删除资源。]]></description>
+				<content:encoded><![CDATA[<p>要理解RESTful架构，最好的方法就是去理解Representational State Transfer这个词组到底是什么意思，它的每一个词代表了什么涵义。如果你把这个名称搞懂了，也就不难体会REST是一种什么样的设计。</p>
+<p><strong>资源（Resources）</strong></p>
+<p>所谓&#8221;资源&#8221;，就是网络上的一个实体，或者说是网络上的一个具体信息。它可以是一段文本、一张图片、一首歌曲、一种服务，总之就是一个具体的实在。你可以用一个URI（统一资源定位符）指向它，每种资源对应一个特定的URI。要获取这个资源，访问它的URI就可以，因此URI就成了每一个资源的地址或独一无二的识别符。</p>
+<p><strong>表现层（Representation）</strong><br />
+&#8220;资源&#8221;是一种信息实体，它可以有多种外在表现形式。我们把&#8221;资源&#8221;具体呈现出来的形式，叫做它的&#8221;表现层&#8221;（Representation）。比如，文本可以用txt格式表现，也可以用HTML格式、XML格式、JSON格式表现，甚至可以采用二进制格式；图片可以用JPG格式表现，也可以用PNG格式表现。</p>
+<p>URI只代表资源的实体，不代表它的形式。严格地说，有些网址最后的&#8221;.html&#8221;后缀名是不必要的，因为这个后缀名表示格式，属于&#8221;表现层&#8221;范畴，而URI应该只代表&#8221;资源&#8221;的位置。它的具体表现形式，应该在HTTP请求的头信息中用Accept和Content-Type字段指定，这两个字段才是对&#8221;表现层&#8221;的描述。</p>
+<p><strong>状态转化（State Transfer）</strong><br />
+互联网通信协议HTTP协议，是一个无状态协议。这意味着，所有的状态都保存在服务器端。因此，如果客户端想要操作服务器，必须通过某种手段，让服务器端发生&#8221;状态转化&#8221;（State Transfer）。而这种转化是建立在表现层之上的，所以就是&#8221;表现层状态转化&#8221;。</p>
+<p>客户端用到的手段，只能是HTTP协议。具体来说，就是HTTP协议里面，四个表示操作方式的动词：GET、POST、PUT、DELETE。它们分别对应四种基本操作：GET用来获取资源，POST用来新建资源（也可以用于更新资源），PUT用来更新资源，DELETE用来删除资源。</p>
+<p>说了这么多，到底为什么要用REST这种设计风格呢，好处如下：</p>
+<p>（1）可以充分利用缓存cache来提高响应速度<br />
+（2）通讯本身的无状态可以让不同的服务器处理所有类型的请求，提供了服务器的扩展性<br />
+（3）浏览器就可以充当客户端，简化软件需求</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/7666.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>遍历windows窗口控件</title>
+		<link>http://www.xieziming.com/archives/7620.html</link>
+		<comments>http://www.xieziming.com/archives/7620.html#respond</comments>
+		<pubDate>Sat, 10 Nov 2012 16:05:29 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[测试]]></category>
+		<category><![CDATA[程序]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=7620</guid>
+		<description><![CDATA[<strong>FindWindowEx ：</strong>
+<code lang="cpp">
+HWND FindWindowEx(
+　　HWND hwndParent, // handle to parent window
+　　HWND hwndChildAfter, // handle to child window
+　　LPCTSTR lpszClass, // class name
+　　LPCTSTR lpszWindow // window name
+　　);
+</code>
+参数：
+（1）hwndParent：要查找子窗口的父窗口句柄。如果hwndParent为NULL，则函数以桌面窗口为父窗口，查找桌面窗口的所有子窗口。如果hwndParent是HWND_MESSAGE，函数仅查找所有消息窗口。
+
+（2）hwndChildAfter ：子窗口句柄。查找从在Z序中的下一个子窗口开始。子窗口必须为hwndParent窗口的直接子窗口而非后代窗口。如果HwndChildAfter为NULL，查找从hwndParent的第一个子窗口开始。如果hwndParent 和 hwndChildAfter同时为NULL，则函数查找所有的顶层窗口及消息窗口。
+
+（3）lpszClass：指向一个指定了类名的空结束字符串，或一个标识类名字符串的成员的指针。如果该参数为一个成员，则它必须为前次调用theGlobaIAddAtom函数产生的全局成员。该成员为16位，必须位于lpClassName的低16位，高位必须为0。]]></description>
+				<content:encoded><![CDATA[<p>我们要做的事有两个：<br />
+（1）遍历/查找 windows 窗口<br />
+（2）遍历windows窗口里的所有控件</p>
+<p><strong>FindWindowEx ：</strong></p>
+
+<div class="wp_code"><div class="pre"><pre class="cpp" style="font-family:'Times New Roman',Garamond, Times;">HWND FindWindowEx<span style="color: #008000;">&#40;</span>
+　　HWND hwndParent, <span style="color: #666666;">// handle to parent window</span>
+　　HWND hwndChildAfter, <span style="color: #666666;">// handle to child window</span>
+　　LPCTSTR lpszClass, <span style="color: #666666;">// class name</span>
+　　LPCTSTR lpszWindow <span style="color: #666666;">// window name</span>
+　　<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span></pre></div></div>
+
+<p>参数：<br />
+（1）hwndParent：要查找子窗口的父窗口句柄。如果hwndParent为NULL，则函数以桌面窗口为父窗口，查找桌面窗口的所有子窗口。如果hwndParent是HWND_MESSAGE，函数仅查找所有消息窗口。</p>
+<p>（2）hwndChildAfter ：子窗口句柄。查找从在Z序中的下一个子窗口开始。子窗口必须为hwndParent窗口的直接子窗口而非后代窗口。如果HwndChildAfter为NULL，查找从hwndParent的第一个子窗口开始。如果hwndParent 和 hwndChildAfter同时为NULL，则函数查找所有的顶层窗口及消息窗口。</p>
+<p>（3）lpszClass：指向一个指定了类名的空结束字符串，或一个标识类名字符串的成员的指针。如果该参数为一个成员，则它必须为前次调用theGlobaIAddAtom函数产生的全局成员。该成员为16位，必须位于lpClassName的低16位，高位必须为0。</p>
+<p>（4）lpszWindow：指向一个指定了窗口名（窗口标题）的空结束字符串。如果该参数为 NULL，则为所有窗口全匹配。</p>
+<p><strong>FindWindow ：</strong></p>
+
+<div class="wp_code"><div class="pre"><pre class="cpp" style="font-family:'Times New Roman',Garamond, Times;">HWND FindWindow<span style="color: #008000;">&#40;</span>
+　　LPCSTR lpClassName,
+　　LPCSTR lpWindowName
+　　<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span></pre></div></div>
+
+<p>参数：<br />
+（1）lpClassName ： 指向一个以null结尾的、用来指定类名的字符串或一个可以确定类名字符串的原子。如果这个参数是一个原子，那么它必须是一个在调用此函数前已经通过GlobalAddAtom函数创建好的全局原子。这个原子（一个16bit的值），必须被放置在lpClassName的低位字节中，lpClassName的高位字节置零。如果该参数为null时，将会寻找任何与lpWindowName参数匹配的窗口。<br />
+　　<br />
+（2）lpWindowName ： 指向一个以null结尾的、用来指定窗口名（即窗口标题）的字符串。如果此参数为NULL，则匹配所有窗口名。</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/7620.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>控制window程序</title>
+		<link>http://www.xieziming.com/archives/7626.html</link>
+		<comments>http://www.xieziming.com/archives/7626.html#respond</comments>
+		<pubDate>Fri, 09 Nov 2012 16:38:34 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[测试]]></category>
+		<category><![CDATA[程序]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=7626</guid>
+		<description><![CDATA[获取进程管理器中被选中进程的名字 ：
+<code lang="cpp">
+int APIENTRY WinMain(HINSTANCE hInstance,HINSTANCE hPrevInstance,LPSTR lpCmdLine,int nCmdShow){
+	HWND hwnd;
+	int iItem=0;
+	LVITEM lvitem, *plvitem;
+	char ItemBuf[512],*pItem;
+	DWORD PID;
+	HANDLE hProcess;
+	hwnd=FindWindow("#32770","Windows 任务管理器");
+	hwnd=FindWindowEx(hwnd,0,"#32770",0);
+	hwnd=FindWindowEx(hwnd,0,"SysListView32",0);
+	if (!hwnd)
+		MessageBox(NULL,"[Windows 任务管理器] 尚未启动！","错误！",NULL);
+	else{
+		iItem=SendMessage(hwnd,LVM_GETNEXTITEM,-1,LVNI_SELECTED);
+		if (iItem==-1)
+			MessageBox(NULL,"没有指定目标进程 ！","错误！",NULL);
+		else{
+			GetWindowThreadProcessId(hwnd, &#038;PID);
+			hProcess=OpenProcess(PROCESS_ALL_ACCESS,false,PID);
+			if (!hProcess)
+				MessageBox(NULL,"获取进程句柄操作失败！","错误！",NULL);
+			else{
+				plvitem=(LVITEM*)VirtualAllocEx(hProcess, NULL, sizeof(LVITEM), MEM_COMMIT, PAGE_READWRITE);
+				pItem=(char*)VirtualAllocEx(hProcess, NULL, 512, MEM_COMMIT, PAGE_READWRITE);
+				if ((!plvitem)&#124;&#124;(!pItem))
+					MessageBox(NULL,"无法分配内存！","错误！",NULL);
+				else{
+					lvitem.cchTextMax=512;
+					lvitem.iSubItem=0; //ProcessName
+					lvitem.pszText=pItem;
+					WriteProcessMemory(hProcess, plvitem, &#038;lvitem, sizeof(LVITEM), NULL);
+					SendMessage(hwnd, LVM_GETITEMTEXT, (WPARAM)iItem, (LPARAM)plvitem);
+					ReadProcessMemory(hProcess, pItem, ItemBuf, 512, NULL);	
+					MessageBox(NULL,ItemBuf,"ItemBuf",NULL);
+				}
+			}
+		}
+	}
+	//释放内存
+	CloseHandle(hwnd);
+	CloseHandle(hProcess);
+	VirtualFreeEx(hProcess, plvitem, 0, MEM_RELEASE);
+	VirtualFreeEx(hProcess, pItem, 0, MEM_RELEASE);
+	return 0;
+}
+</code>]]></description>
+				<content:encoded><![CDATA[<p>获取进程管理器中被选中进程的名字 ：</p>
+
+<div class="wp_code"><div class="pre"><pre class="cpp" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #0000ff;">int</span> APIENTRY WinMain<span style="color: #008000;">&#40;</span>HINSTANCE hInstance,HINSTANCE hPrevInstance,LPSTR lpCmdLine,<span style="color: #0000ff;">int</span> nCmdShow<span style="color: #008000;">&#41;</span><span style="color: #008000;">&#123;</span>
+	HWND hwnd<span style="color: #008080;">;</span>
+	<span style="color: #0000ff;">int</span> iItem<span style="color: #000080;">=</span><span style="color: #0000dd;">0</span><span style="color: #008080;">;</span>
+	LVITEM lvitem, <span style="color: #000040;">*</span>plvitem<span style="color: #008080;">;</span>
+	<span style="color: #0000ff;">char</span> ItemBuf<span style="color: #008000;">&#91;</span><span style="color: #0000dd;">512</span><span style="color: #008000;">&#93;</span>,<span style="color: #000040;">*</span>pItem<span style="color: #008080;">;</span>
+	DWORD PID<span style="color: #008080;">;</span>
+	HANDLE hProcess<span style="color: #008080;">;</span>
+	hwnd<span style="color: #000080;">=</span>FindWindow<span style="color: #008000;">&#40;</span><span style="color: #FF0000;">&quot;#32770&quot;</span>,<span style="color: #FF0000;">&quot;Windows 任务管理器&quot;</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+	hwnd<span style="color: #000080;">=</span>FindWindowEx<span style="color: #008000;">&#40;</span>hwnd,<span style="color: #0000dd;">0</span>,<span style="color: #FF0000;">&quot;#32770&quot;</span>,<span style="color: #0000dd;">0</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+	hwnd<span style="color: #000080;">=</span>FindWindowEx<span style="color: #008000;">&#40;</span>hwnd,<span style="color: #0000dd;">0</span>,<span style="color: #FF0000;">&quot;SysListView32&quot;</span>,<span style="color: #0000dd;">0</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+	<span style="color: #0000ff;">if</span> <span style="color: #008000;">&#40;</span><span style="color: #000040;">!</span>hwnd<span style="color: #008000;">&#41;</span>
+		MessageBox<span style="color: #008000;">&#40;</span><span style="color: #0000ff;">NULL</span>,<span style="color: #FF0000;">&quot;[Windows 任务管理器] 尚未启动！&quot;</span>,<span style="color: #FF0000;">&quot;错误！&quot;</span>,<span style="color: #0000ff;">NULL</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+	<span style="color: #0000ff;">else</span><span style="color: #008000;">&#123;</span>
+		iItem<span style="color: #000080;">=</span>SendMessage<span style="color: #008000;">&#40;</span>hwnd,LVM_GETNEXTITEM,<span style="color: #000040;">-</span><span style="color: #0000dd;">1</span>,LVNI_SELECTED<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+		<span style="color: #0000ff;">if</span> <span style="color: #008000;">&#40;</span>iItem<span style="color: #000080;">==</span><span style="color: #000040;">-</span><span style="color: #0000dd;">1</span><span style="color: #008000;">&#41;</span>
+			MessageBox<span style="color: #008000;">&#40;</span><span style="color: #0000ff;">NULL</span>,<span style="color: #FF0000;">&quot;没有指定目标进程 ！&quot;</span>,<span style="color: #FF0000;">&quot;错误！&quot;</span>,<span style="color: #0000ff;">NULL</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+		<span style="color: #0000ff;">else</span><span style="color: #008000;">&#123;</span>
+			GetWindowThreadProcessId<span style="color: #008000;">&#40;</span>hwnd, <span style="color: #000040;">&amp;</span>PID<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+			hProcess<span style="color: #000080;">=</span>OpenProcess<span style="color: #008000;">&#40;</span>PROCESS_ALL_ACCESS,<span style="color: #0000ff;">false</span>,PID<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+			<span style="color: #0000ff;">if</span> <span style="color: #008000;">&#40;</span><span style="color: #000040;">!</span>hProcess<span style="color: #008000;">&#41;</span>
+				MessageBox<span style="color: #008000;">&#40;</span><span style="color: #0000ff;">NULL</span>,<span style="color: #FF0000;">&quot;获取进程句柄操作失败！&quot;</span>,<span style="color: #FF0000;">&quot;错误！&quot;</span>,<span style="color: #0000ff;">NULL</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+			<span style="color: #0000ff;">else</span><span style="color: #008000;">&#123;</span>
+				plvitem<span style="color: #000080;">=</span><span style="color: #008000;">&#40;</span>LVITEM<span style="color: #000040;">*</span><span style="color: #008000;">&#41;</span>VirtualAllocEx<span style="color: #008000;">&#40;</span>hProcess, <span style="color: #0000ff;">NULL</span>, <span style="color: #0000dd;">sizeof</span><span style="color: #008000;">&#40;</span>LVITEM<span style="color: #008000;">&#41;</span>, MEM_COMMIT, PAGE_READWRITE<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+				pItem<span style="color: #000080;">=</span><span style="color: #008000;">&#40;</span><span style="color: #0000ff;">char</span><span style="color: #000040;">*</span><span style="color: #008000;">&#41;</span>VirtualAllocEx<span style="color: #008000;">&#40;</span>hProcess, <span style="color: #0000ff;">NULL</span>, <span style="color: #0000dd;">512</span>, MEM_COMMIT, PAGE_READWRITE<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+				<span style="color: #0000ff;">if</span> <span style="color: #008000;">&#40;</span><span style="color: #008000;">&#40;</span><span style="color: #000040;">!</span>plvitem<span style="color: #008000;">&#41;</span><span style="color: #000040;">||</span><span style="color: #008000;">&#40;</span><span style="color: #000040;">!</span>pItem<span style="color: #008000;">&#41;</span><span style="color: #008000;">&#41;</span>
+					MessageBox<span style="color: #008000;">&#40;</span><span style="color: #0000ff;">NULL</span>,<span style="color: #FF0000;">&quot;无法分配内存！&quot;</span>,<span style="color: #FF0000;">&quot;错误！&quot;</span>,<span style="color: #0000ff;">NULL</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+				<span style="color: #0000ff;">else</span><span style="color: #008000;">&#123;</span>
+					lvitem.<span style="color: #007788;">cchTextMax</span><span style="color: #000080;">=</span><span style="color: #0000dd;">512</span><span style="color: #008080;">;</span>
+					lvitem.<span style="color: #007788;">iSubItem</span><span style="color: #000080;">=</span><span style="color: #0000dd;">0</span><span style="color: #008080;">;</span> <span style="color: #666666;">//ProcessName</span>
+					lvitem.<span style="color: #007788;">pszText</span><span style="color: #000080;">=</span>pItem<span style="color: #008080;">;</span>
+					WriteProcessMemory<span style="color: #008000;">&#40;</span>hProcess, plvitem, <span style="color: #000040;">&amp;</span>lvitem, <span style="color: #0000dd;">sizeof</span><span style="color: #008000;">&#40;</span>LVITEM<span style="color: #008000;">&#41;</span>, <span style="color: #0000ff;">NULL</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+					SendMessage<span style="color: #008000;">&#40;</span>hwnd, LVM_GETITEMTEXT, <span style="color: #008000;">&#40;</span>WPARAM<span style="color: #008000;">&#41;</span>iItem, <span style="color: #008000;">&#40;</span>LPARAM<span style="color: #008000;">&#41;</span>plvitem<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+					ReadProcessMemory<span style="color: #008000;">&#40;</span>hProcess, pItem, ItemBuf, <span style="color: #0000dd;">512</span>, <span style="color: #0000ff;">NULL</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>	
+					MessageBox<span style="color: #008000;">&#40;</span><span style="color: #0000ff;">NULL</span>,ItemBuf,<span style="color: #FF0000;">&quot;ItemBuf&quot;</span>,<span style="color: #0000ff;">NULL</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+				<span style="color: #008000;">&#125;</span>
+			<span style="color: #008000;">&#125;</span>
+		<span style="color: #008000;">&#125;</span>
+	<span style="color: #008000;">&#125;</span>
+	<span style="color: #666666;">//释放内存</span>
+	CloseHandle<span style="color: #008000;">&#40;</span>hwnd<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+	CloseHandle<span style="color: #008000;">&#40;</span>hProcess<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+	VirtualFreeEx<span style="color: #008000;">&#40;</span>hProcess, plvitem, <span style="color: #0000dd;">0</span>, MEM_RELEASE<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+	VirtualFreeEx<span style="color: #008000;">&#40;</span>hProcess, pItem, <span style="color: #0000dd;">0</span>, MEM_RELEASE<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+	<span style="color: #0000ff;">return</span> <span style="color: #0000dd;">0</span><span style="color: #008080;">;</span>
+<span style="color: #008000;">&#125;</span></pre></div></div>
+
+<p>更改进程管理器中的值</p>
+
+<div class="wp_code"><div class="pre"><pre class="cpp" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #0000ff;">int</span> APIENTRY WinMain<span style="color: #008000;">&#40;</span>HINSTANCE hInstance,HINSTANCE hPrevInstance,LPSTR lpCmdLine,<span style="color: #0000ff;">int</span> nCmdShow<span style="color: #008000;">&#41;</span><span style="color: #008000;">&#123;</span>
+	HWND hwnd<span style="color: #008080;">;</span>
+	<span style="color: #0000ff;">int</span> iItem<span style="color: #000080;">=</span><span style="color: #0000dd;">0</span><span style="color: #008080;">;</span>
+	LVITEM lvitem, <span style="color: #000040;">*</span>plvitem<span style="color: #008080;">;</span>
+	DWORD PID<span style="color: #008080;">;</span>
+	HANDLE hProcess<span style="color: #008080;">;</span>
+	<span style="color: #0000ff;">char</span> <span style="color: #000040;">*</span>p_MyItemText<span style="color: #008080;">;</span><span style="color: #666666;">//目标程序中用来存放TEXT的地址</span>
+	<span style="color: #666666;">//The pszText member is the pointer to a null-terminated</span>
+	<span style="color: #666666;">// string containing the new text; it can also be NULL.</span>
+	<span style="color: #666666;">//以上信息是从API手册中获得的，故在本例中字符串长度不能&gt;=12，</span>
+	<span style="color: #666666;">//以确保字符串后有NULL。</span>
+	<span style="color: #0000ff;">char</span> str_MyItemText<span style="color: #008000;">&#91;</span><span style="color: #0000dd;">12</span><span style="color: #008000;">&#93;</span><span style="color: #000080;">=</span><span style="color: #008000;">&#123;</span><span style="color: #0000dd;">0</span><span style="color: #008000;">&#125;</span><span style="color: #008080;">;</span>
+	<span style="color: #0000dd;">strcpy</span><span style="color: #008000;">&#40;</span>str_MyItemText,<span style="color: #FF0000;">&quot;天津 赵春生&quot;</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+	hwnd<span style="color: #000080;">=</span>FindWindow<span style="color: #008000;">&#40;</span><span style="color: #FF0000;">&quot;#32770&quot;</span>,<span style="color: #FF0000;">&quot;Windows 任务管理器&quot;</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+	hwnd<span style="color: #000080;">=</span>FindWindowEx<span style="color: #008000;">&#40;</span>hwnd,<span style="color: #0000dd;">0</span>,<span style="color: #FF0000;">&quot;#32770&quot;</span>,<span style="color: #0000dd;">0</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+	hwnd<span style="color: #000080;">=</span>FindWindowEx<span style="color: #008000;">&#40;</span>hwnd,<span style="color: #0000dd;">0</span>,<span style="color: #FF0000;">&quot;SysListView32&quot;</span>,<span style="color: #0000dd;">0</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+	<span style="color: #0000ff;">if</span> <span style="color: #008000;">&#40;</span><span style="color: #000040;">!</span>hwnd<span style="color: #008000;">&#41;</span>
+		MessageBox<span style="color: #008000;">&#40;</span><span style="color: #0000ff;">NULL</span>,<span style="color: #FF0000;">&quot;[Windows 任务管理器] 尚未启动！&quot;</span>,<span style="color: #FF0000;">&quot;错误！&quot;</span>,<span style="color: #0000ff;">NULL</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+	<span style="color: #0000ff;">else</span><span style="color: #008000;">&#123;</span>
+		GetWindowThreadProcessId<span style="color: #008000;">&#40;</span>hwnd, <span style="color: #000040;">&amp;</span>PID<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+		hProcess<span style="color: #000080;">=</span>OpenProcess<span style="color: #008000;">&#40;</span>PROCESS_ALL_ACCESS,<span style="color: #0000ff;">false</span>,PID<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+		<span style="color: #0000ff;">if</span> <span style="color: #008000;">&#40;</span><span style="color: #000040;">!</span>hProcess<span style="color: #008000;">&#41;</span>
+			MessageBox<span style="color: #008000;">&#40;</span><span style="color: #0000ff;">NULL</span>,<span style="color: #FF0000;">&quot;获取进程句柄操作失败！&quot;</span>,<span style="color: #FF0000;">&quot;错误！&quot;</span>,<span style="color: #0000ff;">NULL</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+		<span style="color: #0000ff;">else</span><span style="color: #008000;">&#123;</span>
+			plvitem<span style="color: #000080;">=</span><span style="color: #008000;">&#40;</span>LVITEM<span style="color: #000040;">*</span><span style="color: #008000;">&#41;</span>VirtualAllocEx<span style="color: #008000;">&#40;</span>hProcess, <span style="color: #0000ff;">NULL</span>, <span style="color: #0000dd;">sizeof</span><span style="color: #008000;">&#40;</span>LVITEM<span style="color: #008000;">&#41;</span>, MEM_COMMIT, PAGE_READWRITE<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+			p_MyItemText<span style="color: #000080;">=</span><span style="color: #008000;">&#40;</span><span style="color: #0000ff;">char</span><span style="color: #000040;">*</span><span style="color: #008000;">&#41;</span>VirtualAllocEx<span style="color: #008000;">&#40;</span>hProcess, <span style="color: #0000ff;">NULL</span>, <span style="color: #0000dd;">12</span>, MEM_COMMIT, PAGE_READWRITE<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+			<span style="color: #0000ff;">if</span> <span style="color: #008000;">&#40;</span><span style="color: #008000;">&#40;</span><span style="color: #000040;">!</span>plvitem<span style="color: #008000;">&#41;</span><span style="color: #000040;">||</span><span style="color: #008000;">&#40;</span><span style="color: #000040;">!</span>p_MyItemText<span style="color: #008000;">&#41;</span><span style="color: #008000;">&#41;</span>
+				MessageBox<span style="color: #008000;">&#40;</span><span style="color: #0000ff;">NULL</span>,<span style="color: #FF0000;">&quot;无法分配内存！&quot;</span>,<span style="color: #FF0000;">&quot;错误！&quot;</span>,<span style="color: #0000ff;">NULL</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+			<span style="color: #0000ff;">else</span><span style="color: #008000;">&#123;</span>
+				MessageBox<span style="color: #008000;">&#40;</span><span style="color: #0000ff;">NULL</span>,<span style="color: #FF0000;">&quot;本演示程序将更改TaskManager中第6个项目中第1列的内容。&quot;</span>,<span style="color: #FF0000;">&quot;提示&quot;</span>,<span style="color: #0000ff;">NULL</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+				iItem<span style="color: #000080;">=</span><span style="color: #0000dd;">5</span><span style="color: #008080;">;</span><span style="color: #666666;">//5在这里是第六个（从零开始）</span>
+				lvitem.<span style="color: #007788;">iSubItem</span><span style="color: #000080;">=</span><span style="color: #0000dd;">0</span><span style="color: #008080;">;</span><span style="color: #666666;">//同上</span>
+				lvitem.<span style="color: #007788;">pszText</span><span style="color: #000080;">=</span>p_MyItemText<span style="color: #008080;">;</span>
+				WriteProcessMemory<span style="color: #008000;">&#40;</span>hProcess, p_MyItemText, <span style="color: #000040;">&amp;</span>str_MyItemText, <span style="color: #0000dd;">12</span>, <span style="color: #0000ff;">NULL</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+				WriteProcessMemory<span style="color: #008000;">&#40;</span>hProcess, plvitem, <span style="color: #000040;">&amp;</span>lvitem, <span style="color: #0000dd;">sizeof</span><span style="color: #008000;">&#40;</span>LVITEM<span style="color: #008000;">&#41;</span>, <span style="color: #0000ff;">NULL</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+				<span style="color: #666666;">//向目标程序发送LVM_SETITEMTEXT消息</span>
+				SendMessage<span style="color: #008000;">&#40;</span>hwnd, LVM_SETITEMTEXT, <span style="color: #008000;">&#40;</span>WPARAM<span style="color: #008000;">&#41;</span>iItem, <span style="color: #008000;">&#40;</span>LPARAM<span style="color: #008000;">&#41;</span>plvitem<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+			<span style="color: #008000;">&#125;</span>
+		<span style="color: #008000;">&#125;</span>
+	<span style="color: #008000;">&#125;</span>
+	<span style="color: #666666;">//释放内存</span>
+	CloseHandle<span style="color: #008000;">&#40;</span>hwnd<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+	CloseHandle<span style="color: #008000;">&#40;</span>hProcess<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+	VirtualFreeEx<span style="color: #008000;">&#40;</span>hProcess, plvitem, <span style="color: #0000dd;">0</span>, MEM_RELEASE<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+	VirtualFreeEx<span style="color: #008000;">&#40;</span>hProcess, p_MyItemText, <span style="color: #0000dd;">0</span>, MEM_RELEASE<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+&nbsp;
+	<span style="color: #0000ff;">return</span> <span style="color: #0000dd;">0</span><span style="color: #008080;">;</span>
+<span style="color: #008000;">&#125;</span></pre></div></div>
+
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/7626.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>控制Windows窗体(C#)</title>
+		<link>http://www.xieziming.com/archives/7636.html</link>
+		<comments>http://www.xieziming.com/archives/7636.html#respond</comments>
+		<pubDate>Wed, 07 Nov 2012 17:57:05 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[程序]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=7636</guid>
+		<description><![CDATA[Reflection意思为反射，在.NET中，它是获取运行时类型信息的方式。一般来说，.NET的应用程序由三个部分组成，分别是程序集(Assembly)、模块(Module)、类型(class)，而反射提供一种编程的方式，让程序员可以在程序运行期获得这三个组成部分的相关信息。
+<strong>一、有关知识</strong>
+1. System.Assembly类
+Assembly允许用户访问给定程序集的元数据，它也包含可以加载和执行程序集（程序集可执行的情况下）的方法。这个功能相当强大，可以轻易地取得组件内部所有信息，并且将其应用于映射的机制。常用的有LoadFrom()方法、GetType()方法等。Assembly类可以获得正在运行的装配件信息，也可以动态地加载装配件，以及在装配件中查找类型信息，并创建该类型的实例。
+
+2. System.Type类
+Type实际上是一个抽象的基类，它有与每种数据类型对应的派生类，但一般情况下派生类只提供各种Type方法和属性的不同重载，返回对应数据类型的正确数据。它的大多数方法都是用于获取对应数据类型的成员信息，比如：构造函数、属性、方法和事件等，并且能够进行调用。常用的有GetMethod()方法、GetField()方法、GetProperty()方法等。
+
+3. 动态调用方法
+方法动态调用是指在执行期利用映射取得的类型方法成员进行动态调用，通过调用实例的Invoke()方法来实现。Invoke方法用以进行方法的动态调用，其一般的定义形式如下：
+Invoke(object obj, object[] parameters)
+第一个为object类型参数，这个参数对象本身所参考的对象，为所要调用的方法其本身所属的来源对象，而第二个数组对象parameters则是调用指定方法所需的参数集合，若是调用的方法不需传入参数，这个对象数组会参考至一个null值。
+<strong>二、映射实例</strong>
+下面通过一个实例，运用映射方法实现对Windows窗体的操纵。
+]]></description>
+				<content:encoded><![CDATA[<p>Reflection意思为反射，在.NET中，它是获取运行时类型信息的方式。一般来说，.NET的应用程序由三个部分组成，分别是程序集(Assembly)、模块(Module)、类型(class)，而反射提供一种编程的方式，让程序员可以在程序运行期获得这三个组成部分的相关信息。<br />
+<strong>一、有关知识</strong><br />
+1. System.Assembly类<br />
+Assembly允许用户访问给定程序集的元数据，它也包含可以加载和执行程序集（程序集可执行的情况下）的方法。这个功能相当强大，可以轻易地取得组件内部所有信息，并且将其应用于映射的机制。常用的有LoadFrom()方法、GetType()方法等。Assembly类可以获得正在运行的装配件信息，也可以动态地加载装配件，以及在装配件中查找类型信息，并创建该类型的实例。</p>
+<p>2. System.Type类<br />
+Type实际上是一个抽象的基类，它有与每种数据类型对应的派生类，但一般情况下派生类只提供各种Type方法和属性的不同重载，返回对应数据类型的正确数据。它的大多数方法都是用于获取对应数据类型的成员信息，比如：构造函数、属性、方法和事件等，并且能够进行调用。常用的有GetMethod()方法、GetField()方法、GetProperty()方法等。</p>
+<p>3. 动态调用方法<br />
+方法动态调用是指在执行期利用映射取得的类型方法成员进行动态调用，通过调用实例的Invoke()方法来实现。Invoke方法用以进行方法的动态调用，其一般的定义形式如下：<br />
+Invoke(object obj, object[] parameters)<br />
+第一个为object类型参数，这个参数对象本身所参考的对象，为所要调用的方法其本身所属的来源对象，而第二个数组对象parameters则是调用指定方法所需的参数集合，若是调用的方法不需传入参数，这个对象数组会参考至一个null值。<br />
+<strong>二、映射实例</strong><br />
+下面通过一个实例，运用映射方法实现对Windows窗体的操纵。</p>
+<p>1. 开发环境<br />
+操作系统：Windows XP Professional，版本5.1.2600  Service Pack 2<br />
+开发工具：Microsoft Visual Studio 2005，版本8.0.50727.42<br />
+Microsoft .NET Framework，版本2.0.50727</p>
+<p>2. 创建被操纵的Windows窗体<br />
+首先创建一个Windows窗体应用程序，名称为DataSquare，Form1窗体包含五个控件：两个textBox、两个Label和一个Button，它实现的功能是计算用户输入数的平方，并将结果显示出来。Form1是一个简单的Windows窗体程序，仅实现了计算平方值的功能，代码有待完善，在这里只是以它作为被操纵的对象来介绍如何使用.NET提供的映射方法。</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/7636.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Restful之参数获取</title>
+		<link>http://www.xieziming.com/archives/8783.html</link>
+		<comments>http://www.xieziming.com/archives/8783.html#respond</comments>
+		<pubDate>Sat, 20 Oct 2012 10:11:47 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[程序]]></category>
+		<category><![CDATA[Restful]]></category>
+
+		<guid isPermaLink="false">http://ideashot.com/?p=8783</guid>
+		<description><![CDATA[先来看@QueryParam :
+<code lang="java">
+Path("/users")
+public class UserService { 
+	@GET
+	@Path("/query")
+	public Response getUsers(
+		@QueryParam("from") int from,
+		@QueryParam("to") int to,
+		@QueryParam("orderBy") List<String> orderBy) {
+ 
+		return Response
+		   .status(200)
+		   .entity("getUsers is called, from : " + from + ", to : " + to
+			+ ", orderBy" + orderBy.toString()).build();
+ 
+	} 
+}
+</code>]]></description>
+				<content:encoded><![CDATA[<p>先来看@QueryParam :</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;">Path<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;/users&quot;</span><span style="color: #009900;">&#41;</span>
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> UserService <span style="color: #009900;">&#123;</span> 
+	@GET
+	@Path<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;/query&quot;</span><span style="color: #009900;">&#41;</span>
+	<span style="color: #000000; font-weight: bold;">public</span> Response getUsers<span style="color: #009900;">&#40;</span>
+		@QueryParam<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;from&quot;</span><span style="color: #009900;">&#41;</span> <span style="color: #000066; font-weight: bold;">int</span> from,
+		@QueryParam<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;to&quot;</span><span style="color: #009900;">&#41;</span> <span style="color: #000066; font-weight: bold;">int</span> to,
+		@QueryParam<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;orderBy&quot;</span><span style="color: #009900;">&#41;</span> List<span style="color: #339933;">&lt;</span>String<span style="color: #339933;">&gt;</span> orderBy<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+&nbsp;
+		<span style="color: #000000; font-weight: bold;">return</span> Response
+		   .<span style="color: #006633;">status</span><span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">200</span><span style="color: #009900;">&#41;</span>
+		   .<span style="color: #006633;">entity</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;getUsers is called, from : &quot;</span> <span style="color: #339933;">+</span> from <span style="color: #339933;">+</span> <span style="color: #0000ff;">&quot;, to : &quot;</span> <span style="color: #339933;">+</span> to
+			<span style="color: #339933;">+</span> <span style="color: #0000ff;">&quot;, orderBy&quot;</span> <span style="color: #339933;">+</span> orderBy.<span style="color: #006633;">toString</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>.<span style="color: #006633;">build</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+	<span style="color: #009900;">&#125;</span> 
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>URL输入为:</p>
+
+<div class="wp_code"><div class="pre"><pre class="html" style="font-family:'Times New Roman',Garamond, Times;">users/query?from=100&amp;to=200&amp;orderBy=age&amp;orderBy=name</pre></div></div>
+
+<p>此时,输出为:</p>
+
+<div class="wp_code"><div class="pre"><pre class="html" style="font-family:'Times New Roman',Garamond, Times;">getUsers is called, from : 100, to : 200, orderBy[age, name]</pre></div></div>
+
+<p>@QueryParam指定的是URL中的参数是以键值对的形式出现的,而在程序中</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;">@QueryParam<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;from&quot;</span><span style="color: #009900;">&#41;</span> <span style="color: #000066; font-weight: bold;">int</span> from</pre></div></div>
+
+<p>则读出URL中from的值, 而@PathParam中,URL中只出现参数的值,不出现键值对,比如:</p>
+
+<div class="wp_code"><div class="pre"><pre class="html" style="font-family:'Times New Roman',Garamond, Times;">/users/2011/06/30</pre></div></div>
+
+<p>@PathParam参数：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;">	@GET
+	@Path<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;{year}/{month}/{day}&quot;</span><span style="color: #009900;">&#41;</span>
+	<span style="color: #000000; font-weight: bold;">public</span> Response getUserHistory<span style="color: #009900;">&#40;</span>
+			@PathParam<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;year&quot;</span><span style="color: #009900;">&#41;</span> <span style="color: #000066; font-weight: bold;">int</span> year,
+			@PathParam<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;month&quot;</span><span style="color: #009900;">&#41;</span> <span style="color: #000066; font-weight: bold;">int</span> month, 
+			@PathParam<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;day&quot;</span><span style="color: #009900;">&#41;</span> <span style="color: #000066; font-weight: bold;">int</span> day<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+&nbsp;
+	   <span style="color: #003399;">String</span> date <span style="color: #339933;">=</span> year <span style="color: #339933;">+</span> <span style="color: #0000ff;">&quot;/&quot;</span> <span style="color: #339933;">+</span> month <span style="color: #339933;">+</span> <span style="color: #0000ff;">&quot;/&quot;</span> <span style="color: #339933;">+</span> day<span style="color: #339933;">;</span>
+&nbsp;
+	   <span style="color: #000000; font-weight: bold;">return</span> Response.<span style="color: #006633;">status</span><span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">200</span><span style="color: #009900;">&#41;</span>
+		.<span style="color: #006633;">entity</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;getUserHistory is called, year/month/day : &quot;</span> <span style="color: #339933;">+</span> date<span style="color: #009900;">&#41;</span>
+		.<span style="color: #006633;">build</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+	<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>输出为:</p>
+
+<div class="wp_code"><div class="pre"><pre class="html" style="font-family:'Times New Roman',Garamond, Times;">getUserHistory is called, year/month/day : 2011/6/30</pre></div></div>
+
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/8783.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>IE插件</title>
+		<link>http://www.xieziming.com/archives/7464.html</link>
+		<comments>http://www.xieziming.com/archives/7464.html#respond</comments>
+		<pubDate>Sun, 07 Oct 2012 03:49:52 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[技术维基]]></category>
+		<category><![CDATA[程序]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=7464</guid>
+		<description><![CDATA[插件是一种遵循一定规范的应用程序接口编写出来的程序。很多软件都有插件，例如在IE中，安装相关的插件后，WEB浏览器能够直接调用插件程序，用于处理特定类型的文件。 IE浏览器常见的插件例如：Flash插件、RealPlayer插件、MMS插件、MIDI五线谱插件、ActiveX插件等等。
+
+顺便说一下插件和组件的区别是，插件是属于程序接口的程序，组件在ASP中就是控件、对象，ASP/IIS的标准安装提供了11个可安装组件。ASP的FSO组件，它就是最常用的Scripting.FileSystemObject对象。
+
+根据插件在浏览器中的加载位置,可以分为工具条(Toolbar)、浏览器辅助(BHO)、搜索挂接(URL SEARCHHOOK)、下载ActiveX(ACTIVEX)。
+
+<strong>(1)下载ActiveX(ACTIVEX):</strong>
+ActiveX插件也叫做OLE控件或OCX控件,它是一些软件组件或对象,可以将其插入到WEB网页或其它应用程序中.在因特网上,ActiveX插件软件的特点是:一般软件需要用户单独下载然后执行安装,而ActiveX插件是当用户浏览到特定的网页时,IE浏览器即可自动下载并提示用户安装.
+
+ActiveX插件安装的前提是必须先下载,然后经过认证,最终用户确认同意方能安装,因此嵌有ActiveX脚本程序的页面可能会变得非常慢,甚至导致浏览器瞬间失去响应.
+
+<strong>(2)浏览器辅助(BHO)</strong>
+BHO全称Browser Helper Object, 是一种随因特网浏览器(如IE)每次启动而自动执行的小程序.通常情况下,一个BHO文件是由其它软件安装到用户的系统中的.例如一些带有下载功能的广告软件,它可能会安装一个BHO文件从而追踪用户在上网冲浪遇到的众多网页广告.
+
+通常的BHO会帮助用户更方便地浏览因特网或调用上网辅助功能,也有一部分BHO被人称为广告软件(Adware)或间谍软件(Spyware),它们监视用户的上网行为并把记录的相关数据报告给BHO的创建者.BHO也可能会与其它运行中的程序发生冲突,从而导致诸如各种页面错误,运行时间错误等等现象,通常阻止了正常浏览的进行.]]></description>
+				<content:encoded><![CDATA[<p>插件是一种遵循一定规范的应用程序接口编写出来的程序。很多软件都有插件，例如在IE中，安装相关的插件后，WEB浏览器能够直接调用插件程序，用于处理特定类型的文件。 IE浏览器常见的插件例如：Flash插件、RealPlayer插件、MMS插件、MIDI五线谱插件、ActiveX插件等等。</p>
+<p>顺便说一下插件和组件的区别是，插件是属于程序接口的程序，组件在ASP中就是控件、对象，ASP/IIS的标准安装提供了11个可安装组件。ASP的FSO组件，它就是最常用的Scripting.FileSystemObject对象。</p>
+<p>根据插件在浏览器中的加载位置,可以分为工具条(Toolbar)、浏览器辅助(BHO)、搜索挂接(URL SEARCHHOOK)、下载ActiveX(ACTIVEX)。</p>
+<p><strong>(1)下载ActiveX(ACTIVEX):</strong><br />
+ActiveX插件也叫做OLE控件或OCX控件,它是一些软件组件或对象,可以将其插入到WEB网页或其它应用程序中.在因特网上,ActiveX插件软件的特点是:一般软件需要用户单独下载然后执行安装,而ActiveX插件是当用户浏览到特定的网页时,IE浏览器即可自动下载并提示用户安装.</p>
+<p>ActiveX插件安装的前提是必须先下载,然后经过认证,最终用户确认同意方能安装,因此嵌有ActiveX脚本程序的页面可能会变得非常慢,甚至导致浏览器瞬间失去响应.</p>
+<p><strong>(2)浏览器辅助(BHO)</strong><br />
+BHO全称Browser Helper Object, 是一种随因特网浏览器(如IE)每次启动而自动执行的小程序.通常情况下,一个BHO文件是由其它软件安装到用户的系统中的.例如一些带有下载功能的广告软件,它可能会安装一个BHO文件从而追踪用户在上网冲浪遇到的众多网页广告.</p>
+<p>通常的BHO会帮助用户更方便地浏览因特网或调用上网辅助功能,也有一部分BHO被人称为广告软件(Adware)或间谍软件(Spyware),它们监视用户的上网行为并把记录的相关数据报告给BHO的创建者.BHO也可能会与其它运行中的程序发生冲突,从而导致诸如各种页面错误,运行时间错误等等现象,通常阻止了正常浏览的进行.</p>
+<p><strong>(3)搜索挂接(URL SEARCHHOOK)</strong><br />
+用户在地址栏中输入非标准的网址,如英文字符或者中文的时候,当地址栏无法对输入字符串解释成功时,浏览器会自动打开一个以用户输入的字符串为搜索词的结果页面,帮助用户找到需要的内容.URLSearchhook对象就是完成搜索功能的插件.它通常是由第三方公司或者个人开发,通过插件的方式安装到浏览器上, 目的是为了帮助用户更好的使用互联网.例如用户在地址栏中输入&#8221;手机&#8221;,就可以直接看到手机搜索结果.也有一些企业或者个人为了达到提高网站访问或其它商业目的,在用户不知情的情况下修改IE浏览器的URLSearchhook.</p>
+<p><strong>(4)工具条(Toolbar)</strong><br />
+工具条,通常指加载在浏览器的辅助工具.它位于浏览器标准工具条的下方,在IE工具栏空白处点击右键,可以查看所有已经安装的工具条,通过勾选显示或者隐藏已安装的工具条。</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/7464.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Firefox插件制作</title>
+		<link>http://www.xieziming.com/archives/7457.html</link>
+		<comments>http://www.xieziming.com/archives/7457.html#respond</comments>
+		<pubDate>Sat, 06 Oct 2012 15:02:37 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[程序]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=7457</guid>
+		<description><![CDATA[1、Firefox 的界面引擎是非常出色的，可以用XML和Javascript来定义界面的布局、属性、动作等。界面的布局XML是Firefox自定义的格式，叫做XUL ，XUL提供对界面各种元素如：按钮、菜单、工具栏等的描述，并将各个界面元素的动作以事件的形式邦定到Javascript. 这一点和HTML十分类似。
+
+2、Firefox 的插件是一个有特定目录结构和文件的文件夹，打包成zip文件后，再重命名为 XXX.xpi，便成了一个插件。通常的目录文件结构如下：
+<code lang="html">
+extension.xpi:   
+/install.rdf
+/components/*
+/components/cmdline.js
+/defaults/
+/defaults/preferences/*.js
+/plugins/*
+/chrome.manifest
+/chrome/icons/default/*
+/chrome/
+/chrome/content/
+</code>
+这个目录中除了 chrome目录  chrome.manifest install.rdf  这三个以外都不是必须的。]]></description>
+				<content:encoded><![CDATA[<p>首先需要知道什么是“Firefox插件”。这里说的“插件”只是一个通俗的说法，其实Firefox的插件分两种类型，一种extension，叫扩展，一种是plugin，我们叫插件.两种是完全不同的两个东西。extension相对来说简单很多，用的主要是XUL，只是xml的一个变相。通俗的讲,“扩展”是基于Firefox本身增加的一些实用功能,而“插件”则是在Firefox之外独立编写的程序,用于显示网页中的特定内容如Flash、视频和Java 等。具体的官网说明如下https://developer.mozilla.org/en/Gecko_Plugin_API_Reference</p>
+<p>一、 插件的标准</p>
+<p>  1、在windows平台，火狐的插件是以动态库形式（dll）存在的，并只去识别在其安装目录下plugins文件夹下的dll；<br />
+  2、dll的名是以8.3原则来命名的，即其名字所包含的字符不超过8个字符且以dll结尾的文件，还有一个规定就是其名字必须以np开头，例如：npXXX.dll，而XXX不超过六个字符；<br />
+  3、dll是属于MIME（一种标准）类型，要不火狐浏览器不认识他；<br />
+  4、dll导出的函数必须是NP_GetEntryPoints、NP_Initialize、NP_Shutdown是这三个，这是火狐浏览器能够识别的在个接口，具体说明在插件的生命周期中说明。</p>
+<p>二、 插件的生命周期</p>
+<p>  1、 第一次打开含量有插件的页面时，浏览器最先调用NP_GetEntryPoints作为调用插件的入口，此方法也只在第一次加载插件时调用。<br />
+  2、 调用NP_GetEntryPoints后，浏览器会调用NP_Initialize初始化插件，NP_Initialize只在第一次调用时被浏览器调用，与NP_Initialize配对的是NP_Shutdown，NP_Shutdown是在关闭了所有含有该插件的页面后被浏览器调用，在生命周期内也只被调用一次<br />
+  3、 调用NP_Initialize后，浏览器会调会NPP_New来创建一个插件实例，每打开一个页面都会调用NPP_New一次来创建一个插件实例，与NPP_New配对的是NPP_Destory，在每关闭一个页面都会调用NPP_Destory来释放NPP_New创建的实例<br />
+  4、 调用NP_Initialize后，一般会调用NPP_SetWindow来调置窗口，对于没有窗口的插件当然不用调用。<br />
+注：火狐插件开发的sdk划分为两类接口，一类是与插件相关的，以NPP或者NP开头的；一类是与浏览器相关的，以NPN开头的。</p>
+<p>三、 页面调用插件的方式</p>
+<p> 1、 通过object方式调用：与IE调用ActiveX控件的方式一样的，不同的是IE调用ActiveX控件是通过ClassID来标识的，而火狐的控件是通过MIME的值来标识。<br />
+ 2、 通过embed方式调用：与object方式类似，但操作方面简单一些</p>
+<p>四、 插件与页面的信息传递</p>
+<p>插件与页面的信息是通过插件的接口与JS进行信息传递。在火狐插件有一类接口可以直接读取页面的JS函数，并从函数中获取相应的值或者调置相关的值。</p>
+<p>我们下面要讲的是扩展extension。</p>
+<p>1、Firefox 的界面引擎是非常出色的，可以用XML和Javascript来定义界面的布局、属性、动作等。界面的布局XML是Firefox自定义的格式，叫做XUL ，XUL提供对界面各种元素如：按钮、菜单、工具栏等的描述，并将各个界面元素的动作以事件的形式邦定到Javascript. 这一点和HTML十分类似。</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/7457.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Javascript之DOM</title>
+		<link>http://www.xieziming.com/archives/7451.html</link>
+		<comments>http://www.xieziming.com/archives/7451.html#comments</comments>
+		<pubDate>Thu, 04 Oct 2012 14:58:16 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[程序]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=7451</guid>
+		<description><![CDATA[1.访问节点：
+访问html元素：var oHtml=document.documentElement;
+获取head元素：var oHead=oHtml.firstChild;
+获取body元素：var oBody=oHtml.lastChild; 或者 var oBody=document.body;
+
+也可以通过childNodes来做同样的工作：
+var oHead=oHtml.childNodes[0] 或者 oHtml.childNodes.item(0);
+var oBody=oHtml.childNodes[1] 或者 oHtml.childNodes.item(1);
+
+判断节点间关系：
+<code lang="javascript">
+alert(oHead.parentNode==oHtml);  
+alert(oBody.previousSibling==oHead);
+alert(oHead.nextSibling==oBody);
+alert(oHead.ownerDocument==document);
+</code>
+2.检测节点类型：
+通过节点的nodeType属性来检验节点类型：
+<code lang="javascript">
+alert(document.nodeType);  //输出9
+</code>]]></description>
+				<content:encoded><![CDATA[<p>1.访问节点：<br />
+访问html元素：var oHtml=document.documentElement;<br />
+获取head元素：var oHead=oHtml.firstChild;<br />
+获取body元素：var oBody=oHtml.lastChild; 或者 var oBody=document.body;</p>
+<p>也可以通过childNodes来做同样的工作：<br />
+var oHead=oHtml.childNodes[0] 或者 oHtml.childNodes.item(0);<br />
+var oBody=oHtml.childNodes[1] 或者 oHtml.childNodes.item(1);</p>
+<p>判断节点间关系：</p>
+
+<div class="wp_code"><div class="pre"><pre class="javascript" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000066;">alert</span><span style="color: #009900;">&#40;</span>oHead.<span style="color: #660066;">parentNode</span><span style="color: #339933;">==</span>oHtml<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+<span style="color: #000066;">alert</span><span style="color: #009900;">&#40;</span>oBody.<span style="color: #660066;">previousSibling</span><span style="color: #339933;">==</span>oHead<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #000066;">alert</span><span style="color: #009900;">&#40;</span>oHead.<span style="color: #660066;">nextSibling</span><span style="color: #339933;">==</span>oBody<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #000066;">alert</span><span style="color: #009900;">&#40;</span>oHead.<span style="color: #660066;">ownerDocument</span><span style="color: #339933;">==</span>document<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre></div></div>
+
+<p>2.检测节点类型：<br />
+通过节点的nodeType属性来检验节点类型：</p>
+
+<div class="wp_code"><div class="pre"><pre class="javascript" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000066;">alert</span><span style="color: #009900;">&#40;</span>document.<span style="color: #660066;">nodeType</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  <span style="color: #006600; font-style: italic;">//输出9</span></pre></div></div>
+
+<p>3.处理特性<br />
+处理特性可以使用标准的NameNodeMap中的方法：<br />
+getNamedItem(name), removeNamedItem(name),  setNamedItem(node), item(pos)</p>
+<p>比如:</p>
+
+<div class="wp_code"><div class="pre"><pre class="javascript" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #339933;">&lt;</span>p id<span style="color: #339933;">=</span><span style="color: #3366CC;">&quot;test&quot;</span><span style="color: #339933;">&gt;</span>测试<span style="color: #339933;">&lt;/</span>p<span style="color: #339933;">&gt;</span></pre></div></div>
+
+<p>假设变量oP是上面的p节点的引用，我们要访问oP的id属性:</p>
+
+<div class="wp_code"><div class="pre"><pre class="javascript" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #003366; font-weight: bold;">var</span> sId<span style="color: #339933;">=</span>oP.<span style="color: #660066;">attributes</span>.<span style="color: #660066;">getNamedItem</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;id&quot;</span><span style="color: #009900;">&#41;</span>.<span style="color: #660066;">nodeValue</span><span style="color: #339933;">;</span></pre></div></div>
+
+<p>这些方法用起来很累赘,所以DOM又定义了三个方法来简化:<br />
+getAttribute(name)         ——返回名称为name的属性的值<br />
+setAttribute(name,value)   ——顾名思义<br />
+removeAttribute(name)      ——顾名思义  </p>
+<p>上面的例子可以改写为：</p>
+
+<div class="wp_code"><div class="pre"><pre class="javascript" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #003366; font-weight: bold;">var</span> sId<span style="color: #339933;">=</span>oP.<span style="color: #660066;">getAttribute</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;name&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre></div></div>
+
+<p>4.访问指定节点：<br />
+熟知的getElementByTagName(name),getElementByName(name),getElementById(id)三个方法，不再展开。</p>
+<p>5.创建和操作节点：<br />
+（1）创建新节点<br />
+createAttribute(name)<br />
+createComment(text)<br />
+createElement(tagName)<br />
+createTextNode(text)</p>
+
+<div class="wp_code"><div class="pre"><pre class="javascript" style="font-family:'Times New Roman',Garamond, Times;">&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;createElement() Example&lt;/title&gt;
+        <span style="color: #339933;">&lt;</span>script type<span style="color: #339933;">=</span><span style="color: #3366CC;">&quot;text/javascript&quot;</span><span style="color: #339933;">&gt;</span>
+            <span style="color: #003366; font-weight: bold;">function</span> createMessage<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                <span style="color: #003366; font-weight: bold;">var</span> oP <span style="color: #339933;">=</span> document.<span style="color: #660066;">createElement</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;p&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+                <span style="color: #003366; font-weight: bold;">var</span> oText <span style="color: #339933;">=</span> document.<span style="color: #660066;">createTextNode</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;Hello World!&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+                oP.<span style="color: #660066;">appendChild</span><span style="color: #009900;">&#40;</span>oText<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+                document.<span style="color: #660066;">body</span>.<span style="color: #660066;">appendChild</span><span style="color: #009900;">&#40;</span>oP<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+            <span style="color: #009900;">&#125;</span>
+        <span style="color: #339933;">&lt;/</span>script<span style="color: #339933;">&gt;</span>
+    &lt;/head&gt;
+    &lt;body onload=&quot;createMessage()&quot;&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</pre></div></div>
+
+<p>（3）removeChild(),replaceChild()和insertBefore()<br />
+从方法名称就知道是干什么的：删除节点，替换节点，插入节点。需要注意的是replaceChild和insertBefore两个参数都是新节点在前，旧节点在后。</p>
+<p>（4）createDocumentFragment()<br />
+此方法主要是为了解决大量添加节点时，速度过慢。通过创建一个文档碎片节点，将要添加的新节点附加在此碎片节点上，然后再将文档碎片节点append到body上面，替代多次append到body节点。</p>
+
+<div class="wp_code"><div class="pre"><pre class="javascript" style="font-family:'Times New Roman',Garamond, Times;">&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;insertBefore() Example&lt;/title&gt;
+        <span style="color: #339933;">&lt;</span>script type<span style="color: #339933;">=</span><span style="color: #3366CC;">&quot;text/javascript&quot;</span><span style="color: #339933;">&gt;</span>
+            <span style="color: #003366; font-weight: bold;">function</span> addMessages<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                <span style="color: #003366; font-weight: bold;">var</span> arrText <span style="color: #339933;">=</span> <span style="color: #009900;">&#91;</span><span style="color: #3366CC;">&quot;first&quot;</span><span style="color: #339933;">,</span> <span style="color: #3366CC;">&quot;second&quot;</span><span style="color: #339933;">,</span> <span style="color: #3366CC;">&quot;third&quot;</span><span style="color: #339933;">,</span> <span style="color: #3366CC;">&quot;fourth&quot;</span><span style="color: #339933;">,</span> <span style="color: #3366CC;">&quot;fifth&quot;</span><span style="color: #339933;">,</span> <span style="color: #3366CC;">&quot;sixth&quot;</span><span style="color: #339933;">,</span> <span style="color: #3366CC;">&quot;seventh&quot;</span><span style="color: #339933;">,</span> <span style="color: #3366CC;">&quot;eighth&quot;</span><span style="color: #339933;">,</span> <span style="color: #3366CC;">&quot;ninth&quot;</span><span style="color: #339933;">,</span> <span style="color: #3366CC;">&quot;tenth&quot;</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+&nbsp;
+                <span style="color: #003366; font-weight: bold;">var</span> oFragment <span style="color: #339933;">=</span> document.<span style="color: #660066;">createDocumentFragment</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+                <span style="color: #000066; font-weight: bold;">for</span> <span style="color: #009900;">&#40;</span><span style="color: #003366; font-weight: bold;">var</span> i<span style="color: #339933;">=</span><span style="color: #CC0000;">0</span><span style="color: #339933;">;</span> i <span style="color: #339933;">&lt;</span> arrText.<span style="color: #660066;">length</span><span style="color: #339933;">;</span> i<span style="color: #339933;">++</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                    <span style="color: #003366; font-weight: bold;">var</span> oP <span style="color: #339933;">=</span> document.<span style="color: #660066;">createElement</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;p&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+                    <span style="color: #003366; font-weight: bold;">var</span> oText <span style="color: #339933;">=</span> document.<span style="color: #660066;">createTextNode</span><span style="color: #009900;">&#40;</span>arrText<span style="color: #009900;">&#91;</span>i<span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+                    oP.<span style="color: #660066;">appendChild</span><span style="color: #009900;">&#40;</span>oText<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+                    oFragment.<span style="color: #660066;">appendChild</span><span style="color: #009900;">&#40;</span>oP<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+                <span style="color: #009900;">&#125;</span>
+&nbsp;
+                document.<span style="color: #660066;">body</span>.<span style="color: #660066;">appendChild</span><span style="color: #009900;">&#40;</span>oFragment<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+            <span style="color: #009900;">&#125;</span>
+        <span style="color: #339933;">&lt;/</span>script<span style="color: #339933;">&gt;</span>
+    &lt;/script&gt;&lt;/head&gt;
+    &lt;body onload=&quot;addMessages()&quot;&gt;
+&nbsp;
+    &lt;/body&gt;
+&lt;/html&gt;</pre></div></div>
+
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/7451.html/feed</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+		<item>
+		<title>DOM</title>
+		<link>http://www.xieziming.com/archives/7446.html</link>
+		<comments>http://www.xieziming.com/archives/7446.html#respond</comments>
+		<pubDate>Thu, 04 Oct 2012 13:23:44 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[程序]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=7446</guid>
+		<description><![CDATA[<strong>查找并访问节点：</strong>
+(1)通过使用 getElementById() 和 getElementsByTagName() 方法
+(2)通过使用一个元素节点的 parentNode、firstChild 以及 lastChild 属性
+
+getElementById() 和 getElementsByTagName() 这两种方法，可查找整个 HTML 文档中的任何 HTML 元素。这两种方法会忽略文档的结构。假如您希望查找文档中所有的 <p> 元素，getElementsByTagName() 会把它们全部找到，不管 </p><p> 元素处于文档中的哪个层次。同时，getElementById() 方法也会返回正确的元素，不论它被隐藏在文档结构中的什么位置。
+
+注：getElementById() 无法工作在 XML 中。在 XML 文档中，您必须通过拥有类型 id 的属性来进行搜索，而此类型必须在 XML DTD 中进行声明。
+<code lang="javascript">
+document.getElementById('maindiv').getElementsByTagName("p"); 
+</code>
+<strong>节点列表(nodeList)：</strong>
+当我们使用节点列表时，通常要把此列表保存在一个变量中，就像这样：
+<code lang="javascript">
+var x=document.getElementsByTagName("p");
+</code></p>]]></description>
+				<content:encoded><![CDATA[<p><strong>节点：</strong><br />
+根据 DOM，HTML 文档中的每个成分都是一个节点。DOM 是这样规定的：<br />
+(1)整个文档是一个文档节点<br />
+(2)每个 HTML 标签是一个元素节点<br />
+(3)包含在 HTML 元素中的文本是文本节点<br />
+(4)每一个 HTML 属性是一个属性节点<br />
+(5)注释属于注释节点</p>
+<p><strong>查找并访问节点：</strong><br />
+(1)通过使用 getElementById() 和 getElementsByTagName() 方法<br />
+(2)通过使用一个元素节点的 parentNode、firstChild 以及 lastChild 属性</p>
+<p>getElementById() 和 getElementsByTagName() 这两种方法，可查找整个 HTML 文档中的任何 HTML 元素。这两种方法会忽略文档的结构。假如您希望查找文档中所有的 </p>
+<p> 元素，getElementsByTagName() 会把它们全部找到，不管 </p>
+<p> 元素处于文档中的哪个层次。同时，getElementById() 方法也会返回正确的元素，不论它被隐藏在文档结构中的什么位置。</p>
+<p>注：getElementById() 无法工作在 XML 中。在 XML 文档中，您必须通过拥有类型 id 的属性来进行搜索，而此类型必须在 XML DTD 中进行声明。</p>
+
+<div class="wp_code"><div class="pre"><pre class="javascript" style="font-family:'Times New Roman',Garamond, Times;">document.<span style="color: #660066;">getElementById</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'maindiv'</span><span style="color: #009900;">&#41;</span>.<span style="color: #660066;">getElementsByTagName</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;p&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre></div></div>
+
+<p><strong>节点列表(nodeList)：</strong><br />
+当我们使用节点列表时，通常要把此列表保存在一个变量中，就像这样：</p>
+
+<div class="wp_code"><div class="pre"><pre class="javascript" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #003366; font-weight: bold;">var</span> x<span style="color: #339933;">=</span>document.<span style="color: #660066;">getElementsByTagName</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;p&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre></div></div>
+
+<p>现在，变量 x 包含着页面中所有 </p>
+<p> 元素的一个列表，并且我们可以通过它们的索引号来访问这些 </p>
+<p> 元素(索引号从 0 开始)。<br />
+您可以通过使用 length 属性来循环遍历节点列表：</p>
+
+<div class="wp_code"><div class="pre"><pre class="javascript" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #003366; font-weight: bold;">var</span> x<span style="color: #339933;">=</span>document.<span style="color: #660066;">getElementsByTagName</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;p&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #000066; font-weight: bold;">for</span> <span style="color: #009900;">&#40;</span><span style="color: #003366; font-weight: bold;">var</span> i<span style="color: #339933;">=</span><span style="color: #CC0000;">0</span><span style="color: #339933;">;</span>i<span style="color: #339933;">&lt;</span>x .<span style="color: #660066;">length</span><span style="color: #339933;">;</span>i<span style="color: #339933;">++</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span> 
+  <span style="color: #006600; font-style: italic;">// do something with each paragraph</span>
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>您也可以通过索引号来访问某个具体的元素。</p>
+<p><strong>parentNode、firstChild以及lastChild</strong><br />
+这三个属性 parentNode、firstChild 以及 lastChild 可遵循文档的结构，在文档中进行“短距离的旅行”。</p>
+
+<div class="wp_code"><div class="pre"><pre class="html" style="font-family:'Times New Roman',Garamond, Times;">&lt;table&gt;
+  &lt;tr&gt;
+    &lt;td&gt;John&lt;/td&gt;
+    &lt;td&gt;Doe&lt;/td&gt;
+    &lt;td&gt;Alaska&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;</pre></div></div>
+
+<p>在上面的HTML代码中，第一个 </p>
+<td> 是 </p>
+<tr> 元素的首个子元素（firstChild），而最后一个 </p>
+<td> 是 </p>
+<tr>元素的最后一个子元素（lastChild）。<br />
+此外，</tr>
+<tr> 是每个 </p>
+<td>元 素的父节点（parentNode）。</p>
+<p>对 firstChild 最普遍的用法是访问某个元素的文本：</p>
+
+<div class="wp_code"><div class="pre"><pre class="javascript" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #003366; font-weight: bold;">var</span> x<span style="color: #339933;">=</span><span style="color: #009900;">&#91;</span>a paragraph<span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+<span style="color: #003366; font-weight: bold;">var</span> text<span style="color: #339933;">=</span>x.<span style="color: #660066;">firstChild</span>.<span style="color: #660066;">nodeValue</span><span style="color: #339933;">;</span></pre></div></div>
+
+<p>parentNode 属性常被用来改变文档的结构。假设您希望从文档中删除带有 id 为 &#8220;maindiv&#8221; 的节点：</p>
+
+<div class="wp_code"><div class="pre"><pre class="javascript" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #003366; font-weight: bold;">var</span> x<span style="color: #339933;">=</span>document.<span style="color: #660066;">getElementById</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;maindiv&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+x.<span style="color: #660066;">parentNode</span>.<span style="color: #660066;">removeChild</span><span style="color: #009900;">&#40;</span>x<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre></div></div>
+
+<p>首先，您需要找到带有指定 id 的节点，然后移至其父节点并执行 removeChild() 方法。</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/7446.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Equals与Hashcode</title>
+		<link>http://www.xieziming.com/archives/7437.html</link>
+		<comments>http://www.xieziming.com/archives/7437.html#respond</comments>
+		<pubDate>Thu, 04 Oct 2012 06:20:42 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[程序]]></category>
+		<category><![CDATA[java]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=7437</guid>
+		<description><![CDATA[1. 首先equals()是从object类中继承过来的。 equals()方法在object类中定义如下： 
+<code lang="java">
+public boolean equals(Object obj) { 
+   return (this == obj); 
+} 
+</code>
+很明显是对两个对象的地址值进行的比较（即比较引用是否相同）。但是我们必需清楚，当String 、Math、Integer、Double等这些封装类在使用equals()方法时，已经覆盖了object类的equals（）方法。比如在String类中如下：
+<code lang="java">
+public boolean equals(Object anObject) { 
+   if (this == anObject) { 
+      return true; 
+   } 
+  if (anObject instanceof String) { 
+      String anotherString = (String)anObject; 
+      int n = count; 
+      if (n == anotherString.count) { 
+         char v1[] = value; 
+         char v2[] = anotherString.value; 
+         int i = offset; 
+         int j = anotherString.offset; 
+         while (n-- != 0) { 
+            if (v1[i++] != v2[j++]) return false; 
+         } 
+         return true; 
+      } 
+  } 
+  return false; 
+}
+</code>]]></description>
+				<content:encoded><![CDATA[<p>1. 首先equals()是从object类中继承过来的。 equals()方法在object类中定义如下：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">boolean</span> equals<span style="color: #009900;">&#40;</span><span style="color: #003399;">Object</span> obj<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span> 
+   <span style="color: #000000; font-weight: bold;">return</span> <span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">this</span> <span style="color: #339933;">==</span> obj<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> 
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>很明显是对两个对象的地址值进行的比较（即比较引用是否相同）。但是我们必需清楚，当String 、Math、Integer、Double等这些封装类在使用equals()方法时，已经覆盖了object类的equals()方法。<br />
+比如在String类中如下：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">boolean</span> equals<span style="color: #009900;">&#40;</span><span style="color: #003399;">Object</span> anObject<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span> 
+   <span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">this</span> <span style="color: #339933;">==</span> anObject<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span> 
+      <span style="color: #000000; font-weight: bold;">return</span> <span style="color: #000066; font-weight: bold;">true</span><span style="color: #339933;">;</span> 
+   <span style="color: #009900;">&#125;</span> 
+   <span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>anObject <span style="color: #000000; font-weight: bold;">instanceof</span> <span style="color: #003399;">String</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span> 
+      <span style="color: #003399;">String</span> anotherString <span style="color: #339933;">=</span> <span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span><span style="color: #009900;">&#41;</span>anObject<span style="color: #339933;">;</span> 
+      <span style="color: #000066; font-weight: bold;">int</span> n <span style="color: #339933;">=</span> count<span style="color: #339933;">;</span> 
+      <span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>n <span style="color: #339933;">==</span> anotherString.<span style="color: #006633;">count</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span> 
+         <span style="color: #000066; font-weight: bold;">char</span> v1<span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> value<span style="color: #339933;">;</span> 
+         <span style="color: #000066; font-weight: bold;">char</span> v2<span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> anotherString.<span style="color: #006633;">value</span><span style="color: #339933;">;</span> 
+         <span style="color: #000066; font-weight: bold;">int</span> i <span style="color: #339933;">=</span> offset<span style="color: #339933;">;</span> 
+         <span style="color: #000066; font-weight: bold;">int</span> j <span style="color: #339933;">=</span> anotherString.<span style="color: #006633;">offset</span><span style="color: #339933;">;</span> 
+         <span style="color: #000000; font-weight: bold;">while</span> <span style="color: #009900;">&#40;</span>n<span style="color: #339933;">--</span> <span style="color: #339933;">!=</span> <span style="color: #cc66cc;">0</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span> 
+            <span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>v1<span style="color: #009900;">&#91;</span>i<span style="color: #339933;">++</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">!=</span> v2<span style="color: #009900;">&#91;</span>j<span style="color: #339933;">++</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span> <span style="color: #000000; font-weight: bold;">return</span> <span style="color: #000066; font-weight: bold;">false</span><span style="color: #339933;">;</span> 
+         <span style="color: #009900;">&#125;</span> 
+         <span style="color: #000000; font-weight: bold;">return</span> <span style="color: #000066; font-weight: bold;">true</span><span style="color: #339933;">;</span> 
+      <span style="color: #009900;">&#125;</span> 
+   <span style="color: #009900;">&#125;</span> 
+   <span style="color: #000000; font-weight: bold;">return</span> <span style="color: #000066; font-weight: bold;">false</span><span style="color: #339933;">;</span> 
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>或者看看下面这个重写的equals(Object obj)方法：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> UserInfo <span style="color: #009900;">&#123;</span>
+  <span style="color: #000000; font-weight: bold;">private</span> <span style="color: #003399;">String</span> userName<span style="color: #339933;">;</span>
+  <span style="color: #000000; font-weight: bold;">private</span> <span style="color: #000066; font-weight: bold;">int</span> userAge<span style="color: #339933;">;</span> 
+  <span style="color: #000000; font-weight: bold;">public</span> UserInfo<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span> userName, <span style="color: #000066; font-weight: bold;">int</span> userAge<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+    <span style="color: #000000; font-weight: bold;">super</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #000000; font-weight: bold;">this</span>.<span style="color: #006633;">userName</span> <span style="color: #339933;">=</span> userName<span style="color: #339933;">;</span>
+    <span style="color: #000000; font-weight: bold;">this</span>.<span style="color: #006633;">userAge</span> <span style="color: #339933;">=</span> userAge<span style="color: #339933;">;</span>
+  <span style="color: #009900;">&#125;</span>
+  @Override
+  <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">boolean</span> equals<span style="color: #009900;">&#40;</span><span style="color: #003399;">Object</span> obj<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+    <span style="color: #000000; font-weight: bold;">if</span><span style="color: #009900;">&#40;</span>obj<span style="color: #339933;">==</span><span style="color: #000000; font-weight: bold;">this</span><span style="color: #009900;">&#41;</span>   <span style="color: #000000; font-weight: bold;">return</span> <span style="color: #000066; font-weight: bold;">true</span><span style="color: #339933;">;</span>
+    UserInfo userinfo<span style="color: #339933;">=</span><span style="color: #009900;">&#40;</span>UserInfo<span style="color: #009900;">&#41;</span>obj<span style="color: #339933;">;</span>
+    <span style="color: #000000; font-weight: bold;">if</span><span style="color: #009900;">&#40;</span>userName.<span style="color: #006633;">equals</span><span style="color: #009900;">&#40;</span>userinfo.<span style="color: #006633;">getUserName</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">&amp;&amp;</span> userAge<span style="color: #339933;">==</span>userinfo.<span style="color: #006633;">getUserAge</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>  <span style="color: #000000; font-weight: bold;">return</span> <span style="color: #000066; font-weight: bold;">true</span><span style="color: #339933;">;</span>
+    <span style="color: #000000; font-weight: bold;">return</span> <span style="color: #000066; font-weight: bold;">false</span><span style="color: #339933;">;</span>
+  <span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>很明显，这是进行的内容比较，而已经不再是地址的比较。依次类推Double、Integer、Math等等这些类都是重写了equals()方法的，从而进行的是内容的比较。当然了基本类型是进行值的比较，这个没有什么好说的。 </p>
+<p>我们还应该注意，Java语言对equals()的要求如下，这些要求是必须遵循的：</p>
+<p>• 对称性：如果x.equals(y)返回是“true”，那么y.equals(x)也应该返回是“true”。<br />
+• 反射性：x.equals(x)必须返回是“true”。<br />
+• 类推性：如果x.equals(y)返回是“true”，而且y.equals(z)返回是“true”，那么z.equals(x)也应该返回是“true”。<br />
+• 还有一致性：如果x.equals(y)返回是“true”，只要x和y内容一直不变，不管你重复x.equals(y)多少次，返回都是“true”。<br />
+• 任何情况下，x.equals(null)，永远返回是“false”；x.equals(和x不同类型的对象)永远返回是“false”。 </p>
+<p>以上这五点是重写equals()方法时，必须遵守的准则，如果违反会出现意想不到的结果，请大家一定要遵守。 </p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/7437.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Java IO类</title>
+		<link>http://www.xieziming.com/archives/7000.html</link>
+		<comments>http://www.xieziming.com/archives/7000.html#respond</comments>
+		<pubDate>Wed, 03 Oct 2012 13:20:35 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[程序]]></category>
+		<category><![CDATA[java]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=7000</guid>
+		<description><![CDATA[(1)FileInputStream和FileOutputStream
+节点流，用于从文件中读取或往文件中写入字节流。如果在构造FileOutputStream时，文件已经存在，则覆盖这个文件。
+
+(2)BufferedInputStream和BufferedOutputStream
+过滤流，需要使用已经存在的节点流来构造，提供带缓冲的读写，提高了读写的效率。
+
+(3)DataInputStream和DataOutputStream
+过滤流，需要使用已经存在的节点流来构造，提供了读写Java中的基本数据类型的功能。
+
+(4)PipedInputStream和PipedOutputStream
+管道流，用于线程间的通信。一个线程的PipedInputStream对象从另一个线程的PipedOutputStream对象读取输入。要使管道流有用，必须同时构造管道输入流和管道输出流。]]></description>
+				<content:encoded><![CDATA[<p><strong>Java IO类分类：</strong></p>
+<p>按流向分:　　<br />
+输入流: 程序可以从中读取数据的流。　　<br />
+输出流: 程序能向其中写入数据的流。<br />
+　　<br />
+按数据传输单位分:　　<br />
+字节流: 以字节为单位传输数据的流<br />
+字符流: 以字符为单位传输数据的流<br />
+　　<br />
+按功能分:　　<br />
+节点流：从特定的地方读写的流类，例如：磁盘或一块内存区域。<br />
+过滤流：使用节点流作为输入或输出。过滤流是使用一个已经存在的输入流或输出流连接创建的。 </p>
+<p>InputStream和Reader是所有输入流的基类，OutputStream和Writer是所有输出流的基类。他们都是抽象类，本身并不能创建实例来执行输入，但他们有输入/输出流的模版，所以它们的方法是所有的输入/输出流可以用的方法。</p>
+<p>从Stream到Reader,Writer的转换类：InputStreamReader, OutputStreamWriter</p>
+<p>BufferedReader(FileReader(String)), BufferedReader(InputStreamReader(FileInputStream(String)))</p>
+<p><strong>简单来讲，要有BufferedReader，先要有Reader，这个Reader可以直接来自FileReader,也可以从InputStream转化而来，这个时候就需要InputStreamReader做桥梁。</strong></p>
+<p>InputStreamReader和FileReader处于同一层，读写方法差不多。</p>
+<p><strong>基本的流类:</strong></p>
+<p>(1)FileInputStream和FileOutputStream<br />
+节点流，用于从文件中读取或往文件中写入字节流。如果在构造FileOutputStream时，文件已经存在，则覆盖这个文件。</p>
+<p>(2)BufferedInputStream和BufferedOutputStream<br />
+过滤流，需要使用已经存在的节点流来构造，提供带缓冲的读写，提高了读写的效率。</p>
+<p>(3)DataInputStream和DataOutputStream<br />
+过滤流，需要使用已经存在的节点流来构造，提供了读写Java中的基本数据类型的功能。</p>
+<p>(4)PipedInputStream和PipedOutputStream<br />
+管道流，用于线程间的通信。一个线程的PipedInputStream对象从另一个线程的PipedOutputStream对象读取输入。要使管道流有用，必须同时构造管道输入流和管道输出流。</p>
+<p>在InputStream里常用的方法：</p>
+<p>int read(): 从输入流中读取单个字节<br />
+int read(byte[] b): 从输入流中读取最多b.length个字节，将读取的字节存在数组b中，返回实际读取的字节数<br />
+int read(byte[] b, int off, int len): 从输入流中读取最多len个字节数据，并将其存储在数字b中，放入b数组中时，并不是从数组起点开始，而是从off位置开始，返回实际读取字节数。</p>
+<p>在Reader里经常使用的方法：</p>
+<p>int read(): 从输入流中读取单个字符<br />
+int read(char[] c): 从输入流读取最多c.length个字符数据，并将其存储在字符数组c中，返回实际读取的字符<br />
+int read(char[] c, int off, int len): 从输入流中读取最多len个字符的数据，将读取的数据放到字符数组c中保存，从数组的off开始读取。</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/7000.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Http协议</title>
+		<link>http://www.xieziming.com/archives/7409.html</link>
+		<comments>http://www.xieziming.com/archives/7409.html#respond</comments>
+		<pubDate>Wed, 03 Oct 2012 08:55:41 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[程序]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=7409</guid>
+		<description><![CDATA[HTTP是一个基于request/response模式的、无状态（statelesness）的协议，理论上这意味着每次请求，你的浏览器都要重新连接到服务器。实际中，你可以使用Keep-Alive消息头在你的浏览器和服务器之间保持持续的连接
+
+幂等性（Idempotence）意味着某种操作应用多次，结果也不会改变。GET和PUT类型的HTTP请求是幂等性的，而POST不是。换句话说，不能缓存POST响应。
+
+<strong>HTTP request由三部分组成</strong>
+（1）请求行：Method Request-URI HTTP-Version CRLF
+（2）消息报头：普通报头 + 请求报头 + 实体报头
+（3）空行
+（4）请求正文：实体内容
+
+请求行：Method Request-URI HTTP-Version CRLF //请求方法 要请求的资源 HTTP协议版本 回车
+例子：GET /form.html HTTP/1.1 CRLF]]></description>
+				<content:encoded><![CDATA[<p>HTTP是一个基于request/response模式的、无状态（statelesness）的协议，理论上这意味着每次请求，你的浏览器都要重新连接到服务器。实际中，你可以使用Keep-Alive消息头在你的浏览器和服务器之间保持持续的连接</p>
+<p>幂等性（Idempotence）意味着某种操作应用多次，结果也不会改变。GET和PUT类型的HTTP请求是幂等性的，而POST不是。换句话说，不能缓存POST响应。</p>
+<p><strong>HTTP request由三部分组成</strong><br />
+（1）请求行：Method Request-URI HTTP-Version CRLF<br />
+（2）消息报头：普通报头 + 请求报头 + 实体报头<br />
+（3）空行<br />
+（4）请求正文：实体内容</p>
+<p>请求行：Method Request-URI HTTP-Version CRLF //请求方法 要请求的资源 HTTP协议版本 回车<br />
+例子：GET /form.html HTTP/1.1 CRLF</p>
+<p>Methods：</p>
+<blockquote><p>GET 请求request-URI所标示资源（常用请求，也可提交表单），数据在URI后附加，数据大小受限制<br />
+POST 在request-URI所标示资源后附加数据（提交表单），数据在请求正文中<br />
+HEAD 请求request-URI所标示资源的响应消息报头（服务器不返回实体内容，用于测试）<br />
+PUT 请求存储资源，用request-URI标示<br />
+DELETE 请求删除request-URI所标示的资源<br />
+TARCE 请求服务器回送请求信息，用于测试或诊断<br />
+CONNECT 保留，暂未使用<br />
+OPTIONS 请求查询服务器性能、资源相关选项</p></blockquote>
+<p>HTTP request简单例子：</p>
+
+<div class="wp_code"><div class="pre"><pre class="html" style="font-family:'Times New Roman',Garamond, Times;">POST /TheStockExchange/Trading/GetStockPrice.asp HTTP/1.1
+Host: localhost
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 11
+&nbsp;
+Symbol=MSFT</pre></div></div>
+
+<p>HTTP request例子：</p>
+
+<div class="wp_code"><div class="pre"><pre class="html" style="font-family:'Times New Roman',Garamond, Times;">GET /dy/deco/2011/0427/mblog_zs.jpg HTTP/1.1   GET方式
+Accept: */*     浏览器接受类型
+Referer: http://www.sina.com.cn/    从哪里跳转到图片的
+Accept-Language: zh-cn        支持语言
+Accept-Encoding: gzip, deflate   支持的压缩编码
+User-Agent: Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 2.0.50727; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729; NetworkBench/5.0.1.20) 客户端浏览器信息
+Host: i2.sinaimg.cn  主机
+Connection: Keep-Alive  持久连接方式</pre></div></div>
+
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/7409.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Application Monitor</title>
+		<link>http://www.xieziming.com/archives/6661.html</link>
+		<comments>http://www.xieziming.com/archives/6661.html#respond</comments>
+		<pubDate>Wed, 11 May 2011 11:57:15 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[测试]]></category>
+		<category><![CDATA[java]]></category>
+		<category><![CDATA[QTP]]></category>
+		<category><![CDATA[程序]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=6661</guid>
+		<description><![CDATA[<code lang="java">
+import java.awt.AWTException;  
+import java.awt.Image;  
+import java.awt.MenuItem;  
+import java.awt.PopupMenu;  
+import java.awt.SystemTray;  
+import java.awt.Toolkit;  
+import java.awt.TrayIcon;  
+import java.awt.event.ActionEvent;  
+import java.awt.event.ActionListener;  
+  
+import javax.swing.JDialog;
+import javax.swing.JFrame;  
+import javax.swing.JOptionPane;
+  
+  
+public class Launcher{  
+      
+    public Launcher() {  
+         this.setTray();  
+         QTPMonitor qtpm= new QTPMonitor();
+         qtpm.start();
+    }  
+</code>]]></description>
+				<content:encoded><![CDATA[<p>These monitor program includes 3 class files as follows:</p>
+<p><strong>Launcher.java</strong></p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">java.awt.AWTException</span><span style="color: #339933;">;</span>  
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">java.awt.Image</span><span style="color: #339933;">;</span>  
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">java.awt.MenuItem</span><span style="color: #339933;">;</span>  
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">java.awt.PopupMenu</span><span style="color: #339933;">;</span>  
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">java.awt.SystemTray</span><span style="color: #339933;">;</span>  
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">java.awt.Toolkit</span><span style="color: #339933;">;</span>  
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">java.awt.TrayIcon</span><span style="color: #339933;">;</span>  
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">java.awt.event.ActionEvent</span><span style="color: #339933;">;</span>  
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">java.awt.event.ActionListener</span><span style="color: #339933;">;</span>  
+&nbsp;
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">javax.swing.JDialog</span><span style="color: #339933;">;</span>
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">javax.swing.JFrame</span><span style="color: #339933;">;</span>  
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">javax.swing.JOptionPane</span><span style="color: #339933;">;</span>
+&nbsp;
+&nbsp;
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> Launcher<span style="color: #009900;">&#123;</span>  
+&nbsp;
+    <span style="color: #000000; font-weight: bold;">public</span> Launcher<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>  
+         <span style="color: #000000; font-weight: bold;">this</span>.<span style="color: #006633;">setTray</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+         QTPMonitor qtpm<span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> QTPMonitor<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+         qtpm.<span style="color: #006633;">start</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>  
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> setTray<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>  
+&nbsp;
+        <span style="color: #000000; font-weight: bold;">if</span><span style="color: #009900;">&#40;</span>SystemTray.<span style="color: #006633;">isSupported</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+            <span style="color: #003399;">PopupMenu</span> popMenu <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">PopupMenu</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+            <span style="color: #003399;">MenuItem</span> itemAbout <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">MenuItem</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;About&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+            itemAbout.<span style="color: #006633;">addActionListener</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">ActionListener</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>  
+                <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> actionPerformed<span style="color: #009900;">&#40;</span><span style="color: #003399;">ActionEvent</span> e<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>  
+                	<span style="color: #003399;">Object</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> options <span style="color: #339933;">=</span> <span style="color: #009900;">&#123;</span><span style="color: #0000ff;">&quot;I SEE&quot;</span><span style="color: #009900;">&#125;</span><span style="color: #339933;">;</span>
+                	<span style="color: #003399;">JOptionPane</span>.<span style="color: #006633;">showOptionDialog</span><span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">null</span>, <span style="color: #0000ff;">&quot;SUNY Z M XIE, XFOS, GBM_ITT&quot;</span>, <span style="color: #0000ff;">&quot;About QTP Monitor&quot;</span>,<span style="color: #003399;">JOptionPane</span>.<span style="color: #006633;">YES_OPTION</span>, <span style="color: #003399;">JOptionPane</span>.<span style="color: #006633;">INFORMATION_MESSAGE</span>, <span style="color: #000066; font-weight: bold;">null</span>, options, options<span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">0</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+                <span style="color: #009900;">&#125;</span>                 
+            <span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+&nbsp;
+            <span style="color: #003399;">MenuItem</span> itmExit <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">MenuItem</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;Stop &amp; Exit&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+            itmExit.<span style="color: #006633;">addActionListener</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">ActionListener</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>  
+                <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> actionPerformed<span style="color: #009900;">&#40;</span><span style="color: #003399;">ActionEvent</span> e<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>  
+                	<span style="color: #003399;">System</span>.<span style="color: #006633;">exit</span><span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">0</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+                <span style="color: #009900;">&#125;</span>  
+            <span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+            popMenu.<span style="color: #006633;">add</span><span style="color: #009900;">&#40;</span>itemAbout<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> 
+            popMenu.<span style="color: #006633;">add</span><span style="color: #009900;">&#40;</span>itmExit<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+&nbsp;
+            SystemTray tray <span style="color: #339933;">=</span> SystemTray.<span style="color: #006633;">getSystemTray</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+            <span style="color: #003399;">Image</span> image <span style="color: #339933;">=</span> <span style="color: #003399;">Toolkit</span>.<span style="color: #006633;">getDefaultToolkit</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>.<span style="color: #006633;">getImage</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;trayIconImage/sina.jpg&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+&nbsp;
+            <span style="color: #003399;">String</span> text <span style="color: #339933;">=</span> <span style="color: #0000ff;">&quot;QTP Monitor&quot;</span><span style="color: #339933;">;</span>  
+            TrayIcon trayIcon <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> TrayIcon<span style="color: #009900;">&#40;</span>image,text,popMenu<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+            <span style="color: #000000; font-weight: bold;">try</span> <span style="color: #009900;">&#123;</span>  
+                tray.<span style="color: #006633;">add</span><span style="color: #009900;">&#40;</span>trayIcon<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+            <span style="color: #009900;">&#125;</span> <span style="color: #000000; font-weight: bold;">catch</span> <span style="color: #009900;">&#40;</span><span style="color: #003399;">AWTException</span> e1<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>  
+                e1.<span style="color: #006633;">printStackTrace</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+            <span style="color: #009900;">&#125;</span>  
+        <span style="color: #009900;">&#125;</span>  
+    <span style="color: #009900;">&#125;</span>  
+&nbsp;
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> showSetting<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+    	<span style="color: #003399;">JDialog</span> JDG_about <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">JDialog</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    	JDG_about.<span style="color: #006633;">setTitle</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;About QTP Monitor&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    	JDG_about.<span style="color: #006633;">setSize</span><span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">200</span>,<span style="color: #cc66cc;">100</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+    	JDG_about.<span style="color: #006633;">setDefaultCloseOperation</span><span style="color: #009900;">&#40;</span><span style="color: #003399;">JDialog</span>.<span style="color: #006633;">DISPOSE_ON_CLOSE</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    	<span style="color: #003399;">Toolkit</span> tk <span style="color: #339933;">=</span> <span style="color: #003399;">Toolkit</span>.<span style="color: #006633;">getDefaultToolkit</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    	JDG_about.<span style="color: #006633;">setLocation</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span>tk.<span style="color: #006633;">getScreenSize</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>.<span style="color: #006633;">height</span> <span style="color: #339933;">-</span>JDG_about.<span style="color: #006633;">HEIGHT</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">/</span><span style="color: #cc66cc;">2</span>, <span style="color: #009900;">&#40;</span>tk.<span style="color: #006633;">getScreenSize</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>.<span style="color: #006633;">width</span> <span style="color: #339933;">-</span> JDG_about.<span style="color: #006633;">WIDTH</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">/</span><span style="color: #cc66cc;">2</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+      	JDG_about.<span style="color: #006633;">setVisible</span><span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">true</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+    <span style="color: #009900;">&#125;</span>
+&nbsp;
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000066; font-weight: bold;">void</span> main<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> args<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>  
+        <span style="color: #000000; font-weight: bold;">new</span> Launcher<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+    <span style="color: #009900;">&#125;</span>  
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/6661.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>为博客添加flash批量上传功能</title>
+		<link>http://www.xieziming.com/archives/4743.html</link>
+		<comments>http://www.xieziming.com/archives/4743.html#respond</comments>
+		<pubDate>Sun, 11 Jul 2010 10:58:41 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[杂记]]></category>
+		<category><![CDATA[php]]></category>
+		<category><![CDATA[程序]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=4743</guid>
+		<description><![CDATA[存放博客图片主机的FTP上传速度让我郁闷的不是一天两天了，HTTP上传与FTP上传咋就差距这么大呢！很喜欢Dokuwiki带的flash批量上传插件，那速度真是省心啊！
+
+昨天搞了一天终于把它移植了过来，顺便加了自定义上传目录的功能，这下子图片上传方便快捷多了。
+
+<img src="http://images.xieziming.com/upload/2010/nontopic/08/33.jpg" alt="ideashot" />
+
+模块主要有两部分组成，一个是前端的flash（值得称道的是它是外带AS的，以后修改就方便多了），后台用PHP来处理，其实很简单，要做的事就是把上传的临时文件MOVE到正确的路径。
+]]></description>
+				<content:encoded><![CDATA[<p>存放博客图片主机的FTP上传速度让我郁闷的不是一天两天了，HTTP上传与FTP上传咋就差距这么大呢！很喜欢Dokuwiki带的flash批量上传插件，那速度真是省心啊！</p>
+<p>昨天搞了一天终于把它移植了过来，顺便加了自定义上传目录的功能，这下子图片上传方便快捷多了。</p>
+<p><img src="http://images.xieziming.com/upload/2010/nontopic/08/33.jpg" alt="ideashot" /></p>
+<p>模块主要有两部分组成，一个是前端的flash（值得称道的是它是外带AS的，以后修改就方便多了），后台用PHP来处理，其实很简单，要做的事就是把上传的临时文件MOVE到正确的路径。</p>
+
+<div class="wp_code"><div class="pre"><pre class="php" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">&lt;?php</span>
+<span style="color: #000088;">$upload_dir</span><span style="color: #339933;">=</span> <span style="color: #000088;">$_SERVER</span><span style="color: #009900;">&#91;</span><span style="color: #0000ff;">'DOCUMENT_ROOT'</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">.</span><span style="color: #0000ff;">&quot;/upload/&quot;</span><span style="color: #339933;">.</span><span style="color: #000088;">$_GET</span><span style="color: #009900;">&#91;</span><span style="color: #0000ff;">'key'</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+mkdirs<span style="color: #009900;">&#40;</span><span style="color: #000088;">$upload_dir</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">function</span> mkdirs<span style="color: #009900;">&#40;</span><span style="color: #000088;">$dir</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>  
+	<span style="color: #b1b100;">if</span><span style="color: #009900;">&#40;</span><span style="color: #339933;">!</span><span style="color: #990000;">is_dir</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$dir</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>  
+		<span style="color: #b1b100;">if</span><span style="color: #009900;">&#40;</span><span style="color: #339933;">!</span>mkdirs<span style="color: #009900;">&#40;</span><span style="color: #990000;">dirname</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$dir</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>   
+				<span style="color: #b1b100;">return</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #339933;">;</span>  
+		<span style="color: #009900;">&#125;</span>   
+		<span style="color: #b1b100;">if</span><span style="color: #009900;">&#40;</span><span style="color: #339933;">!</span><span style="color: #990000;">mkdir</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$dir</span><span style="color: #339933;">,</span><span style="color: #208080;">0777</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>  
+			<span style="color: #b1b100;">return</span> <span style="color: #009900; font-weight: bold;">false</span><span style="color: #339933;">;</span>   
+		<span style="color: #009900;">&#125;</span>  
+	<span style="color: #009900;">&#125;</span>   
+	<span style="color: #b1b100;">return</span> <span style="color: #009900; font-weight: bold;">true</span><span style="color: #339933;">;</span> 
+<span style="color: #009900;">&#125;</span>   
+&nbsp;
+<span style="color: #000088;">$attachment</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$_FILES</span><span style="color: #009900;">&#91;</span><span style="color: #0000ff;">'Filedata'</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$filename</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$attachment</span><span style="color: #009900;">&#91;</span><span style="color: #0000ff;">'name'</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$fileext</span> <span style="color: #339933;">=</span> <span style="color: #990000;">substr</span><span style="color: #009900;">&#40;</span><span style="color: #990000;">strrchr</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$filename</span><span style="color: #339933;">,</span><span style="color: #0000ff;">'.'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span><span style="color: #cc66cc;">1</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #000088;">$path</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$upload_dir</span><span style="color: #339933;">.</span><span style="color: #0000ff;">&quot;/&quot;</span><span style="color: #339933;">.</span><span style="color: #000088;">$filename</span><span style="color: #339933;">;</span>
+<span style="color: #990000;">move_uploaded_file</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$attachment</span><span style="color: #009900;">&#91;</span><span style="color: #0000ff;">'tmp_name'</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">,</span><span style="color: #000088;">$path</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">?&gt;</span></pre></div></div>
+
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/4743.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>链接器和装入器</title>
+		<link>http://www.xieziming.com/archives/7170.html</link>
+		<comments>http://www.xieziming.com/archives/7170.html#respond</comments>
+		<pubDate>Tue, 25 May 2010 14:39:49 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[技术维基]]></category>
+		<category><![CDATA[程序]]></category>
+		<category><![CDATA[网摘]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=7170</guid>
+		<description><![CDATA[<strong>1．静态链接、静态装入</strong>
+
+这种方法最早被采用，其特点是简单，不需要操作系统提供任何额外的支持。像C这样的编程语言从很早开始就已经支持分别编译了，程序的不同模块可以并行开发，然后独立编译为相应的目标文件。在得到了所有的目标文件后，静态链接、静态装入的做法是将所有目标文件链接成一个可执行映象，随后在创建进程时将该可执行映象一次全部装入内存。
+
+举个简单的例子，假设我们开发了两个程序Prog1和Prog2，Prog1由main1.c、utilities.c以及errhdl1.c三部分组成，分别对应程序的主框架、一些公用的辅助函数（其作用相当于库）以及错误处理部分，这三部分代码编译后分别得到各自对应的目标文件main1.o、utilities.o以及errhdl1.o。同样，Prog2由main2.c、utilities.c以及errhdl2.c三部分组成，三部分代码编译后分别得到各自对应的目标文件main2.o、utilities.o以及errhdl2.o。值得注意的是，这里Prog1和Prog2使用了相同的公用辅助函数utilities.o。当我们采用静态链接、静态装入的方法，可以看到，首先就硬盘的使用来讲，虽然两个程序共享使用了utilities，但这并没有在硬盘保存的可执行程序映象上体现出来。相反，utilities.o被链接进了每一个用到它的程序的可执行映象。内存的使用也是如此，操作系统在创建进程时将程序的可执行映象一次全部装入内存，之后进程才能开始运行。如前所述，采用这种方法使得操作系统的实现变得非常简单，但其缺点也是显而易见的。首先，既然两个程序使用的是相同的utilities.o，那么我们只要在硬盘上保存utilities.o的一份拷贝应该就足够了；另外，假如程序在运行过程中没有出现任何错误，那么错误处理部分的代码就不应该被装入内存。因此静态链接、静态装入的方法不但浪费了硬盘空间，同时也浪费了内存空间。由于早期系统的内存资源十分宝贵，所以后者对早期的系统来讲更加致命。]]></description>
+				<content:encoded><![CDATA[<p><strong>链接器和装入器的基本工作原理</strong></p>
+<p>一个程序要想在内存中运行，除了编译之外还要经过链接和装入这两个步骤。从程序员的角度来看，引入这两个步骤带来的好处就是可以直接在程序中使用printf和errno这种有意义的函数名和变量名，而不用明确指明printf和errno在标准C库中的地址。当然，为了将程序员从早期直接使用地址编程的梦魇中解救出来，编译器和汇编器在这当中做出了革命性的贡献。编译器和汇编器的出现使得程序员可以在程序中使用更具意义的符号来为函数和变量命名，这样使得程序在正确性和可读性等方面都得到了极大的提高。但是随着C语言这种支持分别编译的程序设计语言的流行，一个完整的程序往往被分割为若干个独立的部分并行开发，而各个模块间通过函数接口或全局变量进行通讯。这就带来了一个问题，编译器只能在一个模块内部完成符号名到地址的转换工作，不同模块间的符号解析由谁来做呢？比如前面所举的例子，调用printf的用户程序和实现了printf的标准C库显然就是两个不同的模块。实际上，这个工作是由链接器来完成的。</p>
+<p>为了解决不同模块间的链接问题，链接器主要有两个工作要做――符号解析和重定位：</p>
+<p><strong>符号解析：</strong>当一个模块使用了在该模块中没有定义过的函数或全局变量时，编译器生成的符号表会标记出所有这样的函数或全局变量，而链接器的责任就是要到别的模块中去查找它们的定义，如果没有找到合适的定义或者找到的合适的定义不唯一，符号解析都无法正常完成。</p>
+<p><strong>重定位：</strong>编译器在编译生成目标文件时，通常都使用从零开始的相对地址。然而，在链接过程中，链接器将从一个指定的地址开始，根据输入的目标文件的顺序以段为单位将它们一个接一个的拼装起来。除了目标文件的拼装之外，在重定位的过程中还完成了两个任务：一是生成最终的符号表；二是对代码段中的某些位置进行修改，所有需要修改的位置都由编译器生成的重定位表指出。</p>
+<p>举个简单的例子，上面的概念对读者来说就一目了然了。假如我们有一个程序由两部分构成，m.c中的main函数调用f.c中实现的函数sum：</p>
+
+<div class="wp_code"><div class="pre"><pre class="c" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #808080; font-style: italic;">/* m.c */</span>
+<span style="color: #993333;">int</span> i <span style="color: #339933;">=</span> <span style="color: #0000dd;">1</span><span style="color: #339933;">;</span>
+<span style="color: #993333;">int</span> j <span style="color: #339933;">=</span> <span style="color: #0000dd;">2</span><span style="color: #339933;">;</span>
+<span style="color: #000000; font-weight: bold;">extern</span> <span style="color: #993333;">int</span> sum<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #993333;">void</span> main<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#123;</span>
+        <span style="color: #993333;">int</span> s<span style="color: #339933;">;</span>
+        s <span style="color: #339933;">=</span> sum<span style="color: #009900;">&#40;</span>i<span style="color: #339933;">,</span> j<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #808080; font-style: italic;">/* f.c */</span>
+<span style="color: #993333;">int</span> sum<span style="color: #009900;">&#40;</span><span style="color: #993333;">int</span> i<span style="color: #339933;">,</span> <span style="color: #993333;">int</span> j<span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#123;</span>
+        <span style="color: #b1b100;">return</span> i <span style="color: #339933;">+</span> j<span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>在Linux用gcc分别将两段源程序编译成目标文件：</p>
+
+<div class="wp_code"><div class="pre"><pre class="c" style="font-family:'Times New Roman',Garamond, Times;">$ gcc <span style="color: #339933;">-</span>c m.<span style="color: #202020;">c</span>
+$ gcc <span style="color: #339933;">-</span>c f.<span style="color: #202020;">c</span></pre></div></div>
+
+<p>我们通过objdump来看看在编译过程中生成的符号表和重定位表：</p>
+
+<div class="wp_code"><div class="pre"><pre class="c" style="font-family:'Times New Roman',Garamond, Times;">$ objdump <span style="color: #339933;">-</span>x m.<span style="color: #202020;">o</span>
+……
+SYMBOL TABLE<span style="color: #339933;">:</span>
+……
+<span style="color: #208080;">00000000</span> g		O .<span style="color: #202020;">data</span>  <span style="color: #208080;">00000004</span> i
+<span style="color: #208080;">00000004</span> g		O .<span style="color: #202020;">data</span>  <span style="color: #208080;">00000004</span> j
+<span style="color: #208080;">00000000</span> g		F .<span style="color: #202020;">text</span>  <span style="color: #208080;">00000021</span> main
+<span style="color: #208080;">00000000</span>         <span style="color: #339933;">*</span>UND<span style="color: #339933;">*</span>  <span style="color: #208080;">00000000</span> sum
+RELOCATION RECORDS FOR <span style="color: #009900;">&#91;</span>.<span style="color: #202020;">text</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">:</span>
+OFFSET   TYPE              VALUE
+<span style="color: #208080;">00000007</span> R_386_32          j
+0000000d R_386_32          i
+<span style="color: #208080;">00000013</span> R_386_PC32        sum</pre></div></div>
+
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/7170.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>网站配色表</title>
+		<link>http://www.xieziming.com/archives/5528.html</link>
+		<comments>http://www.xieziming.com/archives/5528.html#respond</comments>
+		<pubDate>Tue, 23 Feb 2010 09:07:26 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[技术维基]]></category>
+		<category><![CDATA[API]]></category>
+		<category><![CDATA[程序]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=5528</guid>
+		<description><![CDATA[<table cellspacing="2" width="550" align="center">
+<tbody>
+<tr>
+<td width="60" height="30" bgcolor="#ffffff"></td>
+<td width="60">#FFFFFF</td>
+<td width="60" height="30" bgcolor="#fffff0"></td>
+<td width="60">#FFFFF0</td>
+<td width="60" height="30" bgcolor="#ffffe0"></td>
+<td width="60">#FFFFE0</td>
+<td width="60" height="30" bgcolor="#ffff00"></td>
+<td width="60">#FFFF00</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#fffafa"></td>
+<td width="60">#FFFAFA</td>
+<td width="60" height="30" bgcolor="#fffaf0"></td>
+<td width="60">#FFFAF0</td>
+<td width="60" height="30" bgcolor="#fffacd"></td>
+<td width="60">#FFFACD</td>
+<td width="60" height="30" bgcolor="#fff8dc"></td>
+<td width="60">#FFF8DC</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#fff68f"></td>
+<td width="60">#FFF68F</td>
+<td width="60" height="30" bgcolor="#fff5ee"></td>
+<td width="60">#FFF5EE</td>
+<td width="60" height="30" bgcolor="#fff0f5"></td>
+<td width="60">#FFF0F5</td>
+<td width="60" height="30" bgcolor="#ffefdb"></td>
+<td width="60">#FFEFDB</td>
+</tr>
+</tbody>
+</table>]]></description>
+				<content:encoded><![CDATA[<table cellspacing="2" width="640" align="center">
+<tbody>
+<tr>
+<td width="60" height="30" bgcolor="#ffffff"></td>
+<td width="60">#FFFFFF</td>
+<td width="60" height="30" bgcolor="#fffff0"></td>
+<td width="60">#FFFFF0</td>
+<td width="60" height="30" bgcolor="#ffffe0"></td>
+<td width="60">#FFFFE0</td>
+<td width="60" height="30" bgcolor="#ffff00"></td>
+<td width="60">#FFFF00</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#fffafa"></td>
+<td width="60">#FFFAFA</td>
+<td width="60" height="30" bgcolor="#fffaf0"></td>
+<td width="60">#FFFAF0</td>
+<td width="60" height="30" bgcolor="#fffacd"></td>
+<td width="60">#FFFACD</td>
+<td width="60" height="30" bgcolor="#fff8dc"></td>
+<td width="60">#FFF8DC</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#fff68f"></td>
+<td width="60">#FFF68F</td>
+<td width="60" height="30" bgcolor="#fff5ee"></td>
+<td width="60">#FFF5EE</td>
+<td width="60" height="30" bgcolor="#fff0f5"></td>
+<td width="60">#FFF0F5</td>
+<td width="60" height="30" bgcolor="#ffefdb"></td>
+<td width="60">#FFEFDB</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#ffefd5"></td>
+<td width="60">#FFEFD5</td>
+<td width="60" height="30" bgcolor="#ffec8b"></td>
+<td width="60">#FFEC8B</td>
+<td width="60" height="30" bgcolor="#ffebcd"></td>
+<td width="60">#FFEBCD</td>
+<td width="60" height="30" bgcolor="#ffe7ba"></td>
+<td width="60">#FFE7BA</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#ffe4e1"></td>
+<td width="60">#FFE4E1</td>
+<td width="60" height="30" bgcolor="#ffe4c4"></td>
+<td width="60">#FFE4C4</td>
+<td width="60" height="30" bgcolor="#ffe4b5"></td>
+<td width="60">#FFE4B5</td>
+<td width="60" height="30" bgcolor="#ffe1ff"></td>
+<td width="60">#FFE1FF</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#ffdead"></td>
+<td width="60">#FFDEAD</td>
+<td width="60" height="30" bgcolor="#ffdab9"></td>
+<td width="60">#FFDAB9</td>
+<td width="60" height="30" bgcolor="#ffd700"></td>
+<td width="60">#FFD700</td>
+<td width="60" height="30" bgcolor="#ffd39b"></td>
+<td width="60">#FFD39B</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#ffc1c1"></td>
+<td width="60">#FFC1C1</td>
+<td width="60" height="30" bgcolor="#ffc125"></td>
+<td width="60">#FFC125</td>
+<td width="60" height="30" bgcolor="#ffc0cb"></td>
+<td width="60">#FFC0CB</td>
+<td width="60" height="30" bgcolor="#ffbbff"></td>
+<td width="60">#FFBBFF</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#ffb90f"></td>
+<td width="60">#FFB90F</td>
+<td width="60" height="30" bgcolor="#ffb6c1"></td>
+<td width="60">#FFB6C1</td>
+<td width="60" height="30" bgcolor="#ffb5c5"></td>
+<td width="60">#FFB5C5</td>
+<td width="60" height="30" bgcolor="#ffaeb9"></td>
+<td width="60">#FFAEB9</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#ffa54f"></td>
+<td width="60">#FFA54F</td>
+<td width="60" height="30" bgcolor="#ffa500"></td>
+<td width="60">#FFA500</td>
+<td width="60" height="30" bgcolor="#ffa07a"></td>
+<td width="60">#FFA07A</td>
+<td width="60" height="30" bgcolor="#ff8c69"></td>
+<td width="60">#FF8C69</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#ff8c00"></td>
+<td width="60">#FF8C00</td>
+<td width="60" height="30" bgcolor="#ff83fa"></td>
+<td width="60">#FF83FA</td>
+<td width="60" height="30" bgcolor="#ff82ab"></td>
+<td width="60">#FF82AB</td>
+<td width="60" height="30" bgcolor="#ff8247"></td>
+<td width="60">#FF8247</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#ff7f50"></td>
+<td width="60">#FF7F50</td>
+<td width="60" height="30" bgcolor="#ff7f24"></td>
+<td width="60">#FF7F24</td>
+<td width="60" height="30" bgcolor="#ff7f00"></td>
+<td width="60">#FF7F00</td>
+<td width="60" height="30" bgcolor="#ff7256"></td>
+<td width="60">#FF7256</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#ff6eb4"></td>
+<td width="60">#FF6EB4</td>
+<td width="60" height="30" bgcolor="#ff6a6a"></td>
+<td width="60">#FF6A6A</td>
+<td width="60" height="30" bgcolor="#ff69b4"></td>
+<td width="60">#FF69B4</td>
+<td width="60" height="30" bgcolor="#ff6347"></td>
+<td width="60">#FF6347</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#ff4500"></td>
+<td width="60">#FF4500</td>
+<td width="60" height="30" bgcolor="#ff4040"></td>
+<td width="60">#FF4040</td>
+<td width="60" height="30" bgcolor="#ff3e96"></td>
+<td width="60">#FF3E96</td>
+<td width="60" height="30" bgcolor="#ff34b3"></td>
+<td width="60">#FF34B3</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#ff3030"></td>
+<td width="60">#FF3030</td>
+<td width="60" height="30" bgcolor="#ff1493"></td>
+<td width="60">#FF1493</td>
+<td width="60" height="30" bgcolor="#ff00ff"></td>
+<td width="60">#FF00FF</td>
+<td width="60" height="30" bgcolor="#ff0000"></td>
+<td width="60">#FF0000</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#fdf5e6"></td>
+<td width="60">#FDF5E6</td>
+<td width="60" height="30" bgcolor="#fcfcfc"></td>
+<td width="60">#FCFCFC</td>
+<td width="60" height="30" bgcolor="#fafafa"></td>
+<td width="60">#FAFAFA</td>
+<td width="60" height="30" bgcolor="#fafad2"></td>
+<td width="60">#FAFAD2</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#faf0e6"></td>
+<td width="60">#FAF0E6</td>
+<td width="60" height="30" bgcolor="#faebd7"></td>
+<td width="60">#FAEBD7</td>
+<td width="60" height="30" bgcolor="#fa8072"></td>
+<td width="60">#FA8072</td>
+<td width="60" height="30" bgcolor="#f8f8ff"></td>
+<td width="60">#F8F8FF</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#f7f7f7"></td>
+<td width="60">#F7F7F7</td>
+<td width="60" height="30" bgcolor="#f5fffa"></td>
+<td width="60">#F5FFFA</td>
+<td width="60" height="30" bgcolor="#f5f5f5"></td>
+<td width="60">#F5F5F5</td>
+<td width="60" height="30" bgcolor="#f5f5dc"></td>
+<td width="60">#F5F5DC</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#f5deb3"></td>
+<td width="60">#F5DEB3</td>
+<td width="60" height="30" bgcolor="#f4f4f4"></td>
+<td width="60">#F4F4F4</td>
+<td width="60" height="30" bgcolor="#f4a460"></td>
+<td width="60">#F4A460</td>
+<td width="60" height="30" bgcolor="#f2f2f2"></td>
+<td width="60">#F2F2F2</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#f0ffff"></td>
+<td width="60">#F0FFFF</td>
+<td width="60" height="30" bgcolor="#f0fff0"></td>
+<td width="60">#F0FFF0</td>
+<td width="60" height="30" bgcolor="#f0f8ff"></td>
+<td width="60">#F0F8FF</td>
+<td width="60" height="30" bgcolor="#f0f0f0"></td>
+<td width="60">#F0F0F0</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#f0e68c"></td>
+<td width="60">#F0E68C</td>
+<td width="60" height="30" bgcolor="#f08080"></td>
+<td width="60">#F08080</td>
+<td width="60" height="30" bgcolor="#eeeee0"></td>
+<td width="60">#EEEEE0</td>
+<td width="60" height="30" bgcolor="#eeeed1"></td>
+<td width="60">#EEEED1</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#eeee00"></td>
+<td width="60">#EEEE00</td>
+<td width="60" height="30" bgcolor="#eee9e9"></td>
+<td width="60">#EEE9E9</td>
+<td width="60" height="30" bgcolor="#eee9bf"></td>
+<td width="60">#EEE9BF</td>
+<td width="60" height="30" bgcolor="#eee8cd"></td>
+<td width="60">#EEE8CD</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#eee8aa"></td>
+<td width="60">#EEE8AA</td>
+<td width="60" height="30" bgcolor="#eee685"></td>
+<td width="60">#EEE685</td>
+<td width="60" height="30" bgcolor="#eee5de"></td>
+<td width="60">#EEE5DE</td>
+<td width="60" height="30" bgcolor="#eee0e5"></td>
+<td width="60">#EEE0E5</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#eedfcc"></td>
+<td width="60">#EEDFCC</td>
+<td width="60" height="30" bgcolor="#eedc82"></td>
+<td width="60">#EEDC82</td>
+<td width="60" height="30" bgcolor="#eed8ae"></td>
+<td width="60">#EED8AE</td>
+<td width="60" height="30" bgcolor="#eed5d2"></td>
+<td width="60">#EED5D2</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#eed5b7"></td>
+<td width="60">#EED5B7</td>
+<td width="60" height="30" bgcolor="#eed2ee"></td>
+<td width="60">#EED2EE</td>
+<td width="60" height="30" bgcolor="#eecfa1"></td>
+<td width="60">#EECFA1</td>
+<td width="60" height="30" bgcolor="#eecbad"></td>
+<td width="60">#EECBAD</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#eec900"></td>
+<td width="60">#EEC900</td>
+<td width="60" height="30" bgcolor="#eec591"></td>
+<td width="60">#EEC591</td>
+<td width="60" height="30" bgcolor="#eeb4b4"></td>
+<td width="60">#EEB4B4</td>
+<td width="60" height="30" bgcolor="#eeb422"></td>
+<td width="60">#EEB422</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#eeaeee"></td>
+<td width="60">#EEAEEE</td>
+<td width="60" height="30" bgcolor="#eead0e"></td>
+<td width="60">#EEAD0E</td>
+<td width="60" height="30" bgcolor="#eea9b8"></td>
+<td width="60">#EEA9B8</td>
+<td width="60" height="30" bgcolor="#eea2ad"></td>
+<td width="60">#EEA2AD</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#ee9a49"></td>
+<td width="60">#EE9A49</td>
+<td width="60" height="30" bgcolor="#ee9a00"></td>
+<td width="60">#EE9A00</td>
+<td width="60" height="30" bgcolor="#ee9572"></td>
+<td width="60">#EE9572</td>
+<td width="60" height="30" bgcolor="#ee82ee"></td>
+<td width="60">#EE82EE</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#ee8262"></td>
+<td width="60">#EE8262</td>
+<td width="60" height="30" bgcolor="#ee7ae9"></td>
+<td width="60">#EE7AE9</td>
+<td width="60" height="30" bgcolor="#ee799f"></td>
+<td width="60">#EE799F</td>
+<td width="60" height="30" bgcolor="#ee7942"></td>
+<td width="60">#EE7942</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#ee6021"></td>
+<td width="60">#EE6021</td>
+<td width="60" height="30" bgcolor="#ee6000"></td>
+<td width="60">#EE6000</td>
+<td width="60" height="30" bgcolor="#ee6aa7"></td>
+<td width="60">#EE6AA7</td>
+<td width="60" height="30" bgcolor="#ee6a50"></td>
+<td width="60">#EE6A50</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#ee6363"></td>
+<td width="60">#EE6363</td>
+<td width="60" height="30" bgcolor="#ee5c42"></td>
+<td width="60">#EE5C42</td>
+<td width="60" height="30" bgcolor="#ee4000"></td>
+<td width="60">#EE4000</td>
+<td width="60" height="30" bgcolor="#ee3b3b"></td>
+<td width="60">#EE3B3B</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#ee3a8c"></td>
+<td width="60">#EE3A8C</td>
+<td width="60" height="30" bgcolor="#ee30a7"></td>
+<td width="60">#EE30A7</td>
+<td width="60" height="30" bgcolor="#ee2c2c"></td>
+<td width="60">#EE2C2C</td>
+<td width="60" height="30" bgcolor="#ee1289"></td>
+<td width="60">#EE1289</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#ee00ee"></td>
+<td width="60">#EE00EE</td>
+<td width="60" height="30" bgcolor="#ee0000"></td>
+<td width="60">#EE0000</td>
+<td width="60" height="30" bgcolor="#ededed"></td>
+<td width="60">#EDEDED</td>
+<td width="60" height="30" bgcolor="#ebebeb"></td>
+<td width="60">#EBEBEB</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#eaeaea"></td>
+<td width="60">#EAEAEA</td>
+<td width="60" height="30" bgcolor="#e9967a"></td>
+<td width="60">#E9967A</td>
+<td width="60" height="30" bgcolor="#e8e8e8"></td>
+<td width="60">#E8E8E8</td>
+<td width="60" height="30" bgcolor="#e6e6fa"></td>
+<td width="60">#E6E6FA</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#e5e5e5"></td>
+<td width="60">#E5E5E5</td>
+<td width="60" height="30" bgcolor="#e3e3e3"></td>
+<td width="60">#E3E3E3</td>
+<td width="60" height="30" bgcolor="#e0ffff"></td>
+<td width="60">#E0FFFF</td>
+<td width="60" height="30" bgcolor="#e0eeee"></td>
+<td width="60">#E0EEEE</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#e0eee0"></td>
+<td width="60">#E0EEE0</td>
+<td width="60" height="30" bgcolor="#e0e0e0"></td>
+<td width="60">#E0E0E0</td>
+<td width="60" height="30" bgcolor="#e066ff"></td>
+<td width="60">#E066FF</td>
+<td width="60" height="30" bgcolor="#dedede"></td>
+<td width="60">#DEDEDE</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#deb887"></td>
+<td width="60">#DEB887</td>
+<td width="60" height="30" bgcolor="#dda0dd"></td>
+<td width="60">#DDA0DD</td>
+<td width="60" height="30" bgcolor="#dcdcdc"></td>
+<td width="60">#DCDCDC</td>
+<td width="60" height="30" bgcolor="#dc143c"></td>
+<td width="60">#DC143C</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#dbdbdb"></td>
+<td width="60">#DBDBDB</td>
+<td width="60" height="30" bgcolor="#db7093"></td>
+<td width="60">#DB7093</td>
+<td width="60" height="30" bgcolor="#daa520"></td>
+<td width="60">#DAA520</td>
+<td width="60" height="30" bgcolor="#da70d6"></td>
+<td width="60">#DA70D6</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#d9d9d9"></td>
+<td width="60">#D9D9D9</td>
+<td width="60" height="30" bgcolor="#d8bfd8"></td>
+<td width="60">#D8BFD8</td>
+<td width="60" height="30" bgcolor="#d6d6d6"></td>
+<td width="60">#D6D6D6</td>
+<td width="60" height="30" bgcolor="#d4d4d4"></td>
+<td width="60">#D4D4D4</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#d3d3d3"></td>
+<td width="60">#D3D3D3</td>
+<td width="60" height="30" bgcolor="#d2b48c"></td>
+<td width="60">#D2B48C</td>
+<td width="60" height="30" bgcolor="#d2691e"></td>
+<td width="60">#D2691E</td>
+<td width="60" height="30" bgcolor="#d1eeee"></td>
+<td width="60">#D1EEEE</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#d1d1d1"></td>
+<td width="60">#D1D1D1</td>
+<td width="60" height="30" bgcolor="#d15fee"></td>
+<td width="60">#D15FEE</td>
+<td width="60" height="30" bgcolor="#d02090"></td>
+<td width="60">#D02090</td>
+<td width="60" height="30" bgcolor="#cfcfcf"></td>
+<td width="60">#CFCFCF</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#cdcdc1"></td>
+<td width="60">#CDCDC1</td>
+<td width="60" height="30" bgcolor="#cdcdb4"></td>
+<td width="60">#CDCDB4</td>
+<td width="60" height="30" bgcolor="#cdcd00"></td>
+<td width="60">#CDCD00</td>
+<td width="60" height="30" bgcolor="#cdc9c9"></td>
+<td width="60">#CDC9C9</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#cdc9a5"></td>
+<td width="60">#CDC9A5</td>
+<td width="60" height="30" bgcolor="#cdc8b1"></td>
+<td width="60">#CDC8B1</td>
+<td width="60" height="30" bgcolor="#cdc673"></td>
+<td width="60">#CDC673</td>
+<td width="60" height="30" bgcolor="#cdc5bf"></td>
+<td width="60">#CDC5BF</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#cdc1c5"></td>
+<td width="60">#CDC1C5</td>
+<td width="60" height="30" bgcolor="#cdc0b0"></td>
+<td width="60">#CDC0B0</td>
+<td width="60" height="30" bgcolor="#cdbe70"></td>
+<td width="60">#CDBE70</td>
+<td width="60" height="30" bgcolor="#cdba96"></td>
+<td width="60">#CDBA96</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#cdb7b5"></td>
+<td width="60">#CDB7B5</td>
+<td width="60" height="30" bgcolor="#cdb79e"></td>
+<td width="60">#CDB79E</td>
+<td width="60" height="30" bgcolor="#cdb5cd"></td>
+<td width="60">#CDB5CD</td>
+<td width="60" height="30" bgcolor="#cdb38b"></td>
+<td width="60">#CDB38B</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#cdaf95"></td>
+<td width="60">#CDAF95</td>
+<td width="60" height="30" bgcolor="#cdad00"></td>
+<td width="60">#CDAD00</td>
+<td width="60" height="30" bgcolor="#cdaa7d"></td>
+<td width="60">#CDAA7D</td>
+<td width="60" height="30" bgcolor="#cd9b9b"></td>
+<td width="60">#CD9B9B</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#cd9b1d"></td>
+<td width="60">#CD9B1D</td>
+<td width="60" height="30" bgcolor="#cd96cd"></td>
+<td width="60">#CD96CD</td>
+<td width="60" height="30" bgcolor="#cd950c"></td>
+<td width="60">#CD950C</td>
+<td width="60" height="30" bgcolor="#cd919e"></td>
+<td width="60">#CD919E</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#cd8c95"></td>
+<td width="60">#CD8C95</td>
+<td width="60" height="30" bgcolor="#cd853f"></td>
+<td width="60">#CD853F</td>
+<td width="60" height="30" bgcolor="#cd8500"></td>
+<td width="60">#CD8500</td>
+<td width="60" height="30" bgcolor="#cd8162"></td>
+<td width="60">#CD8162</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#cd7054"></td>
+<td width="60">#CD7054</td>
+<td width="60" height="30" bgcolor="#cd69c9"></td>
+<td width="60">#CD69C9</td>
+<td width="60" height="30" bgcolor="#cd6889"></td>
+<td width="60">#CD6889</td>
+<td width="60" height="30" bgcolor="#cd6839"></td>
+<td width="60">#CD6839</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#cd661d"></td>
+<td width="60">#CD661D</td>
+<td width="60" height="30" bgcolor="#cd6600"></td>
+<td width="60">#CD6600</td>
+<td width="60" height="30" bgcolor="#cd6090"></td>
+<td width="60">#CD6090</td>
+<td width="60" height="30" bgcolor="#cd5c5c"></td>
+<td width="60">#CD5C5C</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#cd5b45"></td>
+<td width="60">#CD5B45</td>
+<td width="60" height="30" bgcolor="#cd5555"></td>
+<td width="60">#CD5555</td>
+<td width="60" height="30" bgcolor="#cd4f39"></td>
+<td width="60">#CD4F39</td>
+<td width="60" height="30" bgcolor="#cd3700"></td>
+<td width="60">#CD3700</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#cd3333"></td>
+<td width="60">#CD3333</td>
+<td width="60" height="30" bgcolor="#cd3278"></td>
+<td width="60">#CD3278</td>
+<td width="60" height="30" bgcolor="#cd2990"></td>
+<td width="60">#CD2990</td>
+<td width="60" height="30" bgcolor="#cd2626"></td>
+<td width="60">#CD2626</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#cd1060"></td>
+<td width="60">#CD1060</td>
+<td width="60" height="30" bgcolor="#cd00cd"></td>
+<td width="60">#CD00CD</td>
+<td width="60" height="30" bgcolor="#cd0000"></td>
+<td width="60">#CD0000</td>
+<td width="60" height="30" bgcolor="#cccccc"></td>
+<td width="60">#CCCCCC</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#caff70"></td>
+<td width="60">#CAFF70</td>
+<td width="60" height="30" bgcolor="#cae1ff"></td>
+<td width="60">#CAE1FF</td>
+<td width="60" height="30" bgcolor="#c9c9c9"></td>
+<td width="60">#C9C9C9</td>
+<td width="60" height="30" bgcolor="#c7c7c7"></td>
+<td width="60">#C7C7C7</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#c71585"></td>
+<td width="60">#C71585</td>
+<td width="60" height="30" bgcolor="#c6e2ff"></td>
+<td width="60">#C6E2FF</td>
+<td width="60" height="30" bgcolor="#c67171"></td>
+<td width="60">#C67171</td>
+<td width="60" height="30" bgcolor="#c5c1aa"></td>
+<td width="60">#C5C1AA</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#c4c4c4"></td>
+<td width="60">#C4C4C4</td>
+<td width="60" height="30" bgcolor="#c2c2c2"></td>
+<td width="60">#C2C2C2</td>
+<td width="60" height="30" bgcolor="#c1ffc1"></td>
+<td width="60">#C1FFC1</td>
+<td width="60" height="30" bgcolor="#c1cdcd"></td>
+<td width="60">#C1CDCD</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#c1cdc1"></td>
+<td width="60">#C1CDC1</td>
+<td width="60" height="30" bgcolor="#c1c1c1"></td>
+<td width="60">#C1C1C1</td>
+<td width="60" height="30" bgcolor="#c0ff3e"></td>
+<td width="60">#C0FF3E</td>
+<td width="60" height="30" bgcolor="#bfefff"></td>
+<td width="60">#BFEFFF</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#bfbfbf"></td>
+<td width="60">#BFBFBF</td>
+<td width="60" height="30" bgcolor="#bf3eff"></td>
+<td width="60">#BF3EFF</td>
+<td width="60" height="30" bgcolor="#bebebe"></td>
+<td width="60">#BEBEBE</td>
+<td width="60" height="30" bgcolor="#bdbdbd"></td>
+<td width="60">#BDBDBD</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#bdb60b"></td>
+<td width="60">#BDB60B</td>
+<td width="60" height="30" bgcolor="#bcee68"></td>
+<td width="60">#BCEE68</td>
+<td width="60" height="30" bgcolor="#bcd2ee"></td>
+<td width="60">#BCD2EE</td>
+<td width="60" height="30" bgcolor="#bc8f8f"></td>
+<td width="60">#BC8F8F</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#bbffff"></td>
+<td width="60">#BBFFFF</td>
+<td width="60" height="30" bgcolor="#bababa"></td>
+<td width="60">#BABABA</td>
+<td width="60" height="30" bgcolor="#ba55d3"></td>
+<td width="60">#BA55D3</td>
+<td width="60" height="30" bgcolor="#b9d3ee"></td>
+<td width="60">#B9D3EE</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#b8b8b8"></td>
+<td width="60">#B8B8B8</td>
+<td width="60" height="30" bgcolor="#b8860b"></td>
+<td width="60">#B8860B</td>
+<td width="60" height="30" bgcolor="#b7b7b7"></td>
+<td width="60">#B7B7B7</td>
+<td width="60" height="30" bgcolor="#b5b5b5"></td>
+<td width="60">#B5B5B5</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#b4eeb4"></td>
+<td width="60">#B4EEB4</td>
+<td width="60" height="30" bgcolor="#b4cdcd"></td>
+<td width="60">#B4CDCD</td>
+<td width="60" height="30" bgcolor="#b452cd"></td>
+<td width="60">#B452CD</td>
+<td width="60" height="30" bgcolor="#b3ee3a"></td>
+<td width="60">#B3EE3A</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#b3b3b3"></td>
+<td width="60">#B3B3B3</td>
+<td width="60" height="30" bgcolor="#b2dfee"></td>
+<td width="60">#B2DFEE</td>
+<td width="60" height="30" bgcolor="#b23aee"></td>
+<td width="60">#B23AEE</td>
+<td width="60" height="30" bgcolor="#b22222"></td>
+<td width="60">#B22222</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#b0e2ff"></td>
+<td width="60">#B0E2FF</td>
+<td width="60" height="30" bgcolor="#b0e0e6"></td>
+<td width="60">#B0E0E6</td>
+<td width="60" height="30" bgcolor="#b0c4de"></td>
+<td width="60">#B0C4DE</td>
+<td width="60" height="30" bgcolor="#b0b0b0"></td>
+<td width="60">#B0B0B0</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#b03060"></td>
+<td width="60">#B03060</td>
+<td width="60" height="30" bgcolor="#aeeeee"></td>
+<td width="60">#AEEEEE</td>
+<td width="60" height="30" bgcolor="#adff2f"></td>
+<td width="60">#ADFF2F</td>
+<td width="60" height="30" bgcolor="#add8e6"></td>
+<td width="60">#ADD8E6</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#adadad"></td>
+<td width="60">#ADADAD</td>
+<td width="60" height="30" bgcolor="#ababab"></td>
+<td width="60">#ABABAB</td>
+<td width="60" height="30" bgcolor="#ab82ff"></td>
+<td width="60">#AB82FF</td>
+<td width="60" height="30" bgcolor="#aaaaaa"></td>
+<td width="60">#AAAAAA</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#a9a9a9"></td>
+<td width="60">#A9A9A9</td>
+<td width="60" height="30" bgcolor="#a8a8a8"></td>
+<td width="60">#A8A8A8</td>
+<td width="60" height="30" bgcolor="#a6a6a6"></td>
+<td width="60">#A6A6A6</td>
+<td width="60" height="30" bgcolor="#a52a2a"></td>
+<td width="60">#A52A2A</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#a4d3ee"></td>
+<td width="60">#A4D3EE</td>
+<td width="60" height="30" bgcolor="#a3a3a3"></td>
+<td width="60">#A3A3A3</td>
+<td width="60" height="30" bgcolor="#a2cd5a"></td>
+<td width="60">#A2CD5A</td>
+<td width="60" height="30" bgcolor="#a2b5cd"></td>
+<td width="60">#A2B5CD</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#a1a1a1"></td>
+<td width="60">#A1A1A1</td>
+<td width="60" height="30" bgcolor="#a0522d"></td>
+<td width="60">#A0522D</td>
+<td width="60" height="30" bgcolor="#a020f0"></td>
+<td width="60">#A020F0</td>
+<td width="60" height="30" bgcolor="#9fb6cd"></td>
+<td width="60">#9FB6CD</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#9f79ee"></td>
+<td width="60">#9F79EE</td>
+<td width="60" height="30" bgcolor="#9e9e9e"></td>
+<td width="60">#9E9E9E</td>
+<td width="60" height="30" bgcolor="#9c9c9c"></td>
+<td width="60">#9C9C9C</td>
+<td width="60" height="30" bgcolor="#9bcd9b"></td>
+<td width="60">#9BCD9B</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#9b30ff"></td>
+<td width="60">#9B30FF</td>
+<td width="60" height="30" bgcolor="#9aff9a"></td>
+<td width="60">#9AFF9A</td>
+<td width="60" height="30" bgcolor="#9acd32"></td>
+<td width="60">#9ACD32</td>
+<td width="60" height="30" bgcolor="#9ac0cd"></td>
+<td width="60">#9AC0CD</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#9a32cd"></td>
+<td width="60">#9A32CD</td>
+<td width="60" height="30" bgcolor="#999999"></td>
+<td width="60">#999999</td>
+<td width="60" height="30" bgcolor="#9932cc"></td>
+<td width="60">#9932CC</td>
+<td width="60" height="30" bgcolor="#98fb98"></td>
+<td width="60">#98FB98</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#98f5ff"></td>
+<td width="60">#98F5FF</td>
+<td width="60" height="30" bgcolor="#97ffff"></td>
+<td width="60">#97FFFF</td>
+<td width="60" height="30" bgcolor="#96cdcd"></td>
+<td width="60">#96CDCD</td>
+<td width="60" height="30" bgcolor="#969696"></td>
+<td width="60">#969696</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#949494"></td>
+<td width="60">#949494</td>
+<td width="60" height="30" bgcolor="#9400d3"></td>
+<td width="60">#9400D3</td>
+<td width="60" height="30" bgcolor="#9370db"></td>
+<td width="60">#9370DB</td>
+<td width="60" height="30" bgcolor="#919191"></td>
+<td width="60">#919191</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#912cee"></td>
+<td width="60">#912CEE</td>
+<td width="60" height="30" bgcolor="#90ee90"></td>
+<td width="60">#90EE90</td>
+<td width="60" height="30" bgcolor="#8fbc8f"></td>
+<td width="60">#8FBC8F</td>
+<td width="60" height="30" bgcolor="#8f8f8f"></td>
+<td width="60">#8F8F8F</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#8ee5ee"></td>
+<td width="60">#8EE5EE</td>
+<td width="60" height="30" bgcolor="#8e8e8e"></td>
+<td width="60">#8E8E8E</td>
+<td width="60" height="30" bgcolor="#8e8e38"></td>
+<td width="60">#8E8E38</td>
+<td width="60" height="30" bgcolor="#8e388e"></td>
+<td width="60">#8E388E</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#8deeee"></td>
+<td width="60">#8DEEEE</td>
+<td width="60" height="30" bgcolor="#8db6cd"></td>
+<td width="60">#8DB6CD</td>
+<td width="60" height="30" bgcolor="#8c8c8c"></td>
+<td width="60">#8C8C8C</td>
+<td width="60" height="30" bgcolor="#8b8b83"></td>
+<td width="60">#8B8B83</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#8b8b7a"></td>
+<td width="60">#8B8B7A</td>
+<td width="60" height="30" bgcolor="#8b8b00"></td>
+<td width="60">#8B8B00</td>
+<td width="60" height="30" bgcolor="#8b8989"></td>
+<td width="60">#8B8989</td>
+<td width="60" height="30" bgcolor="#8b8970"></td>
+<td width="60">#8B8970</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#8b8878"></td>
+<td width="60">#8B8878</td>
+<td width="60" height="30" bgcolor="#8b8682"></td>
+<td width="60">#8B8682</td>
+<td width="60" height="30" bgcolor="#8b864e"></td>
+<td width="60">#8B864E</td>
+<td width="60" height="30" bgcolor="#8b8386"></td>
+<td width="60">#8B8386</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#8b8378"></td>
+<td width="60">#8B8378</td>
+<td width="60" height="30" bgcolor="#8b814c"></td>
+<td width="60">#8B814C</td>
+<td width="60" height="30" bgcolor="#8b7e66"></td>
+<td width="60">#8B7E66</td>
+<td width="60" height="30" bgcolor="#8b7d7b"></td>
+<td width="60">#8B7D7B</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#8b7d6b"></td>
+<td width="60">#8B7D6B</td>
+<td width="60" height="30" bgcolor="#8b7b8b"></td>
+<td width="60">#8B7B8B</td>
+<td width="60" height="30" bgcolor="#8b795e"></td>
+<td width="60">#8B795E</td>
+<td width="60" height="30" bgcolor="#8b7605"></td>
+<td width="60">#8B7605</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#8b6000"></td>
+<td width="60">#8B6000</td>
+<td width="60" height="30" bgcolor="#8b7355"></td>
+<td width="60">#8B7355</td>
+<td width="60" height="30" bgcolor="#8b6969"></td>
+<td width="60">#8B6969</td>
+<td width="60" height="30" bgcolor="#8b6914"></td>
+<td width="60">#8B6914</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#8b668b"></td>
+<td width="60">#8B668B</td>
+<td width="60" height="30" bgcolor="#8b6508"></td>
+<td width="60">#8B6508</td>
+<td width="60" height="30" bgcolor="#8b636c"></td>
+<td width="60">#8B636C</td>
+<td width="60" height="30" bgcolor="#8b5f65"></td>
+<td width="60">#8B5F65</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#8b5a2b"></td>
+<td width="60">#8B5A2B</td>
+<td width="60" height="30" bgcolor="#8b5a00"></td>
+<td width="60">#8B5A00</td>
+<td width="60" height="30" bgcolor="#8b5742"></td>
+<td width="60">#8B5742</td>
+<td width="60" height="30" bgcolor="#8b4c39"></td>
+<td width="60">#8B4C39</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#8b4789"></td>
+<td width="60">#8B4789</td>
+<td width="60" height="30" bgcolor="#8b460d"></td>
+<td width="60">#8B460D</td>
+<td width="60" height="30" bgcolor="#8b4726"></td>
+<td width="60">#8B4726</td>
+<td width="60" height="30" bgcolor="#8b4513"></td>
+<td width="60">#8B4513</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#8b4500"></td>
+<td width="60">#8B4500</td>
+<td width="60" height="30" bgcolor="#8b3e2f"></td>
+<td width="60">#8B3E2F</td>
+<td width="60" height="30" bgcolor="#8b3a62"></td>
+<td width="60">#8B3A62</td>
+<td width="60" height="30" bgcolor="#8b3a3a"></td>
+<td width="60">#8B3A3A</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#8b3626"></td>
+<td width="60">#8B3626</td>
+<td width="60" height="30" bgcolor="#8b2500"></td>
+<td width="60">#8B2500</td>
+<td width="60" height="30" bgcolor="#8b2323"></td>
+<td width="60">#8B2323</td>
+<td width="60" height="30" bgcolor="#8b2252"></td>
+<td width="60">#8B2252</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#8b1c62"></td>
+<td width="60">#8B1C62</td>
+<td width="60" height="30" bgcolor="#8b1a1a"></td>
+<td width="60">#8B1A1A</td>
+<td width="60" height="30" bgcolor="#8b0a50"></td>
+<td width="60">#8B0A50</td>
+<td width="60" height="30" bgcolor="#8b008b"></td>
+<td width="60">#8B008B</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#8b0000"></td>
+<td width="60">#8B0000</td>
+<td width="60" height="30" bgcolor="#8a8a8a"></td>
+<td width="60">#8A8A8A</td>
+<td width="60" height="30" bgcolor="#8a2be2"></td>
+<td width="60">#8A2BE2</td>
+<td width="60" height="30" bgcolor="#8968cd"></td>
+<td width="60">#8968CD</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#87ceff"></td>
+<td width="60">#87CEFF</td>
+<td width="60" height="30" bgcolor="#87cefa"></td>
+<td width="60">#87CEFA</td>
+<td width="60" height="30" bgcolor="#87ceeb"></td>
+<td width="60">#87CEEB</td>
+<td width="60" height="30" bgcolor="#878787"></td>
+<td width="60">#878787</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#858585"></td>
+<td width="60">#858585</td>
+<td width="60" height="30" bgcolor="#848484"></td>
+<td width="60">#848484</td>
+<td width="60" height="30" bgcolor="#8470ff"></td>
+<td width="60">#8470FF</td>
+<td width="60" height="30" bgcolor="#838b8b"></td>
+<td width="60">#838B8B</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#838b83"></td>
+<td width="60">#838B83</td>
+<td width="60" height="30" bgcolor="#836fff"></td>
+<td width="60">#836FFF</td>
+<td width="60" height="30" bgcolor="#828282"></td>
+<td width="60">#828282</td>
+<td width="60" height="30" bgcolor="#7fffd4"></td>
+<td width="60">#7FFFD4</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#7fff00"></td>
+<td width="60">#7FFF00</td>
+<td width="60" height="30" bgcolor="#7f7f7f"></td>
+<td width="60">#7F7F7F</td>
+<td width="60" height="30" bgcolor="#7ec0ee"></td>
+<td width="60">#7EC0EE</td>
+<td width="60" height="30" bgcolor="#7d9ec0"></td>
+<td width="60">#7D9EC0</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#7d7d7d"></td>
+<td width="60">#7D7D7D</td>
+<td width="60" height="30" bgcolor="#7d26cd"></td>
+<td width="60">#7D26CD</td>
+<td width="60" height="30" bgcolor="#7cfc00"></td>
+<td width="60">#7CFC00</td>
+<td width="60" height="30" bgcolor="#7ccd7c"></td>
+<td width="60">#7CCD7C</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#7b68ee"></td>
+<td width="60">#7B68EE</td>
+<td width="60" height="30" bgcolor="#7ac5cd"></td>
+<td width="60">#7AC5CD</td>
+<td width="60" height="30" bgcolor="#7a8b8b"></td>
+<td width="60">#7A8B8B</td>
+<td width="60" height="30" bgcolor="#7a7a7a"></td>
+<td width="60">#7A7A7A</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#7a67ee"></td>
+<td width="60">#7A67EE</td>
+<td width="60" height="30" bgcolor="#7a378b"></td>
+<td width="60">#7A378B</td>
+<td width="60" height="30" bgcolor="#79cdcd"></td>
+<td width="60">#79CDCD</td>
+<td width="60" height="30" bgcolor="#787878"></td>
+<td width="60">#787878</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#778899"></td>
+<td width="60">#778899</td>
+<td width="60" height="30" bgcolor="#60eec6"></td>
+<td width="60">#60EEC6</td>
+<td width="60" height="30" bgcolor="#60ee00"></td>
+<td width="60">#60EE00</td>
+<td width="60" height="30" bgcolor="#606060"></td>
+<td width="60">#606060</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#737373"></td>
+<td width="60">#737373</td>
+<td width="60" height="30" bgcolor="#71c671"></td>
+<td width="60">#71C671</td>
+<td width="60" height="30" bgcolor="#7171c6"></td>
+<td width="60">#7171C6</td>
+<td width="60" height="30" bgcolor="#708090"></td>
+<td width="60">#708090</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#707070"></td>
+<td width="60">#707070</td>
+<td width="60" height="30" bgcolor="#6e8b3d"></td>
+<td width="60">#6E8B3D</td>
+<td width="60" height="30" bgcolor="#6e7b8b"></td>
+<td width="60">#6E7B8B</td>
+<td width="60" height="30" bgcolor="#6e6e6e"></td>
+<td width="60">#6E6E6E</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#6ca6cd"></td>
+<td width="60">#6CA6CD</td>
+<td width="60" height="30" bgcolor="#6c7b8b"></td>
+<td width="60">#6C7B8B</td>
+<td width="60" height="30" bgcolor="#6b8e23"></td>
+<td width="60">#6B8E23</td>
+<td width="60" height="30" bgcolor="#6b6b6b"></td>
+<td width="60">#6B6B6B</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#6a5acd"></td>
+<td width="60">#6A5ACD</td>
+<td width="60" height="30" bgcolor="#698b69"></td>
+<td width="60">#698B69</td>
+<td width="60" height="30" bgcolor="#698b22"></td>
+<td width="60">#698B22</td>
+<td width="60" height="30" bgcolor="#696969"></td>
+<td width="60">#696969</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#6959cd"></td>
+<td width="60">#6959CD</td>
+<td width="60" height="30" bgcolor="#68838b"></td>
+<td width="60">#68838B</td>
+<td width="60" height="30" bgcolor="#68228b"></td>
+<td width="60">#68228B</td>
+<td width="60" height="30" bgcolor="#66cdaa"></td>
+<td width="60">#66CDAA</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#66cd00"></td>
+<td width="60">#66CD00</td>
+<td width="60" height="30" bgcolor="#668b8b"></td>
+<td width="60">#668B8B</td>
+<td width="60" height="30" bgcolor="#666666"></td>
+<td width="60">#666666</td>
+<td width="60" height="30" bgcolor="#6495ed"></td>
+<td width="60">#6495ED</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#63b8ff"></td>
+<td width="60">#63B8FF</td>
+<td width="60" height="30" bgcolor="#636363"></td>
+<td width="60">#636363</td>
+<td width="60" height="30" bgcolor="#616161"></td>
+<td width="60">#616161</td>
+<td width="60" height="30" bgcolor="#607b8b"></td>
+<td width="60">#607B8B</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#5f9ea0"></td>
+<td width="60">#5F9EA0</td>
+<td width="60" height="30" bgcolor="#5e5e5e"></td>
+<td width="60">#5E5E5E</td>
+<td width="60" height="30" bgcolor="#5d478b"></td>
+<td width="60">#5D478B</td>
+<td width="60" height="30" bgcolor="#5cacee"></td>
+<td width="60">#5CACEE</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#5c5c5c"></td>
+<td width="60">#5C5C5C</td>
+<td width="60" height="30" bgcolor="#5b5b5b"></td>
+<td width="60">#5B5B5B</td>
+<td width="60" height="30" bgcolor="#595959"></td>
+<td width="60">#595959</td>
+<td width="60" height="30" bgcolor="#560607"></td>
+<td width="60">#560607</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#556b2f"></td>
+<td width="60">#556B2F</td>
+<td width="60" height="30" bgcolor="#555555"></td>
+<td width="60">#555555</td>
+<td width="60" height="30" bgcolor="#551a8b"></td>
+<td width="60">#551A8B</td>
+<td width="60" height="30" bgcolor="#54ff9f"></td>
+<td width="60">#54FF9F</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#548b54"></td>
+<td width="60">#548B54</td>
+<td width="60" height="30" bgcolor="#545454"></td>
+<td width="60">#545454</td>
+<td width="60" height="30" bgcolor="#53868b"></td>
+<td width="60">#53868B</td>
+<td width="60" height="30" bgcolor="#528b8b"></td>
+<td width="60">#528B8B</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#525252"></td>
+<td width="60">#525252</td>
+<td width="60" height="30" bgcolor="#515151"></td>
+<td width="60">#515151</td>
+<td width="60" height="30" bgcolor="#4f94cd"></td>
+<td width="60">#4F94CD</td>
+<td width="60" height="30" bgcolor="#4f4f4f"></td>
+<td width="60">#4F4F4F</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#4eee94"></td>
+<td width="60">#4EEE94</td>
+<td width="60" height="30" bgcolor="#4d4d4d"></td>
+<td width="60">#4D4D4D</td>
+<td width="60" height="30" bgcolor="#4b0082"></td>
+<td width="60">#4B0082</td>
+<td width="60" height="30" bgcolor="#4a708b"></td>
+<td width="60">#4A708B</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#4a4a4a"></td>
+<td width="60">#4A4A4A</td>
+<td width="60" height="30" bgcolor="#48d1cc"></td>
+<td width="60">#48D1CC</td>
+<td width="60" height="30" bgcolor="#4860ff"></td>
+<td width="60">#4860FF</td>
+<td width="60" height="30" bgcolor="#483d8b"></td>
+<td width="60">#483D8B</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#474747"></td>
+<td width="60">#474747</td>
+<td width="60" height="30" bgcolor="#473c8b"></td>
+<td width="60">#473C8B</td>
+<td width="60" height="30" bgcolor="#4682b4"></td>
+<td width="60">#4682B4</td>
+<td width="60" height="30" bgcolor="#458b74"></td>
+<td width="60">#458B74</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#458b00"></td>
+<td width="60">#458B00</td>
+<td width="60" height="30" bgcolor="#454545"></td>
+<td width="60">#454545</td>
+<td width="60" height="30" bgcolor="#43cd80"></td>
+<td width="60">#43CD80</td>
+<td width="60" height="30" bgcolor="#436eee"></td>
+<td width="60">#436EEE</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#424242"></td>
+<td width="60">#424242</td>
+<td width="60" height="30" bgcolor="#4169e1"></td>
+<td width="60">#4169E1</td>
+<td width="60" height="30" bgcolor="#40e0d0"></td>
+<td width="60">#40E0D0</td>
+<td width="60" height="30" bgcolor="#404040"></td>
+<td width="60">#404040</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#3d3d3d"></td>
+<td width="60">#3D3D3D</td>
+<td width="60" height="30" bgcolor="#3cb371"></td>
+<td width="60">#3CB371</td>
+<td width="60" height="30" bgcolor="#3b3b3b"></td>
+<td width="60">#3B3B3B</td>
+<td width="60" height="30" bgcolor="#3a5fcd"></td>
+<td width="60">#3A5FCD</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#388e8e"></td>
+<td width="60">#388E8E</td>
+<td width="60" height="30" bgcolor="#383838"></td>
+<td width="60">#383838</td>
+<td width="60" height="30" bgcolor="#36648b"></td>
+<td width="60">#36648B</td>
+<td width="60" height="30" bgcolor="#363636"></td>
+<td width="60">#363636</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#333333"></td>
+<td width="60">#333333</td>
+<td width="60" height="30" bgcolor="#32cd32"></td>
+<td width="60">#32CD32</td>
+<td width="60" height="30" bgcolor="#303030"></td>
+<td width="60">#303030</td>
+<td width="60" height="30" bgcolor="#2f4f4f"></td>
+<td width="60">#2F4F4F</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#2e8b57"></td>
+<td width="60">#2E8B57</td>
+<td width="60" height="30" bgcolor="#2e2e2e"></td>
+<td width="60">#2E2E2E</td>
+<td width="60" height="30" bgcolor="#2b2b2b"></td>
+<td width="60">#2B2B2B</td>
+<td width="60" height="30" bgcolor="#292929"></td>
+<td width="60">#292929</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#282828"></td>
+<td width="60">#282828</td>
+<td width="60" height="30" bgcolor="#27408b"></td>
+<td width="60">#27408B</td>
+<td width="60" height="30" bgcolor="#262626"></td>
+<td width="60">#262626</td>
+<td width="60" height="30" bgcolor="#242424"></td>
+<td width="60">#242424</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#228b22"></td>
+<td width="60">#228B22</td>
+<td width="60" height="30" bgcolor="#218868"></td>
+<td width="60">#218868</td>
+<td width="60" height="30" bgcolor="#212121"></td>
+<td width="60">#212121</td>
+<td width="60" height="30" bgcolor="#20b2aa"></td>
+<td width="60">#20B2AA</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#1f1f1f"></td>
+<td width="60">#1F1F1F</td>
+<td width="60" height="30" bgcolor="#1e90ff"></td>
+<td width="60">#1E90FF</td>
+<td width="60" height="30" bgcolor="#1e1e1e"></td>
+<td width="60">#1E1E1E</td>
+<td width="60" height="30" bgcolor="#1c86ee"></td>
+<td width="60">#1C86EE</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#1c1c1c"></td>
+<td width="60">#1C1C1C</td>
+<td width="60" height="30" bgcolor="#1a1a1a"></td>
+<td width="60">#1A1A1A</td>
+<td width="60" height="30" bgcolor="#191970"></td>
+<td width="60">#191970</td>
+<td width="60" height="30" bgcolor="#1874cd"></td>
+<td width="60">#1874CD</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#171717"></td>
+<td width="60">#171717</td>
+<td width="60" height="30" bgcolor="#141414"></td>
+<td width="60">#141414</td>
+<td width="60" height="30" bgcolor="#121212"></td>
+<td width="60">#121212</td>
+<td width="60" height="30" bgcolor="#104e8b"></td>
+<td width="60">#104E8B</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#0f0f0f"></td>
+<td width="60">#0F0F0F</td>
+<td width="60" height="30" bgcolor="#0d0d0d"></td>
+<td width="60">#0D0D0D</td>
+<td width="60" height="30" bgcolor="#0a0a0a"></td>
+<td width="60">#0A0A0A</td>
+<td width="60" height="30" bgcolor="#080808"></td>
+<td width="60">#080808</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#050505"></td>
+<td width="60">#050505</td>
+<td width="60" height="30" bgcolor="#030303"></td>
+<td width="60">#030303</td>
+<td width="60" height="30" bgcolor="#00ffff"></td>
+<td width="60">#00FFFF</td>
+<td width="60" height="30" bgcolor="#00ff7f"></td>
+<td width="60">#00FF7F</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#00ff00"></td>
+<td width="60">#00FF00</td>
+<td width="60" height="30" bgcolor="#00fa9a"></td>
+<td width="60">#00FA9A</td>
+<td width="60" height="30" bgcolor="#00f5ff"></td>
+<td width="60">#00F5FF</td>
+<td width="60" height="30" bgcolor="#00eeee"></td>
+<td width="60">#00EEEE</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#00ee60"></td>
+<td width="60">#00EE60</td>
+<td width="60" height="30" bgcolor="#00ee00"></td>
+<td width="60">#00EE00</td>
+<td width="60" height="30" bgcolor="#00e5ee"></td>
+<td width="60">#00E5EE</td>
+<td width="60" height="30" bgcolor="#00ced1"></td>
+<td width="60">#00CED1</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#00cdcd"></td>
+<td width="60">#00CDCD</td>
+<td width="60" height="30" bgcolor="#00cd66"></td>
+<td width="60">#00CD66</td>
+<td width="60" height="30" bgcolor="#00cd00"></td>
+<td width="60">#00CD00</td>
+<td width="60" height="30" bgcolor="#00c5cd"></td>
+<td width="60">#00C5CD</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#00bfff"></td>
+<td width="60">#00BFFF</td>
+<td width="60" height="30" bgcolor="#00b2ee"></td>
+<td width="60">#00B2EE</td>
+<td width="60" height="30" bgcolor="#009acd"></td>
+<td width="60">#009ACD</td>
+<td width="60" height="30" bgcolor="#008b8b"></td>
+<td width="60">#008B8B</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#008b45"></td>
+<td width="60">#008B45</td>
+<td width="60" height="30" bgcolor="#008b00"></td>
+<td width="60">#008B00</td>
+<td width="60" height="30" bgcolor="#00868b"></td>
+<td width="60">#00868B</td>
+<td width="60" height="30" bgcolor="#00688b"></td>
+<td width="60">#00688B</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#006400"></td>
+<td width="60">#006400</td>
+<td width="60" height="30" bgcolor="#0000ff"></td>
+<td width="60">#0000FF</td>
+<td width="60" height="30" bgcolor="#0000ee"></td>
+<td width="60">#0000EE</td>
+<td width="60" height="30" bgcolor="#0000cd"></td>
+<td width="60">#0000CD</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#0000aa"></td>
+<td width="60">#0000AA</td>
+<td width="60" height="30" bgcolor="#00008b"></td>
+<td width="60">#00008B</td>
+<td width="60" height="30" bgcolor="#000080"></td>
+<td width="60">#000080</td>
+<td width="60" height="30" bgcolor="#000000"></td>
+<td width="60">#000000</td>
+</tr>
+</tbody>
+</table>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/5528.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Java垃圾回收算法</title>
+		<link>http://www.xieziming.com/archives/6805.html</link>
+		<comments>http://www.xieziming.com/archives/6805.html#respond</comments>
+		<pubDate>Fri, 05 Feb 2010 05:57:26 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[程序]]></category>
+		<category><![CDATA[java]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=6805</guid>
+		<description><![CDATA[    内存管理就是查找出不再使用的对象，释放这些对象占用的内存空间，为其他对象的分配提供足够的内存空间。在一些编程语言(C,C++)中，内存管理是程序员的职责。内存管理使开发变得复杂，而且会造成许多潜在的bug和不可知的崩溃。导致程序猿花费大量时间debug来修复这些很隐蔽的问题。
+
+    在精确的内存管理中经常发生一个问题是悬摆指针 (dangling references )。程序猿可能释放一个对象占用的内存空间，即使这个对象还在被其他对象引用。如果一个对象引用另一个被不小心 释放的对象，这个释放对象的内存空间可能被重新分配新的对象，这个时候，不可预期的结果就可能发生了，而且很可能是致命的。
+
+    另一个在精确内存管理中经常发生的问题是内存泄露 (menory leaks )。泄露经常是对象占用的内存空间不再被任何其他对象引用，但是这个对象没有被回收。例如，如果你打算回收一个列表的空间，但是不小心只释放了列表的第一个元素，这个列表的其他元素将一直持有内存空间，因为这个列表引用已经不存在了，其他元素占用的空间得不到释放，造成了泄露。久而久之，类似的泄露累计，将会填满内存空间，导致没有足够的内存分配给其他的新对象。
+
+    鉴于上面的原因，Java做出一个明智但艰难的抉择，自动内存管 理。程序猿不再管理负责的内存分配和回收，把更多的精力放在业务开发上。承担次任务的是Java中的垃圾收集器，它能解决悬摆指针，内存泄露问题。对象的引用关系会被垃圾收集器检索到，当某个对象不再被任何对象引用的时候，垃圾收集器会自动回收。]]></description>
+				<content:encoded><![CDATA[<p><strong>=====  自动内存管理  =====</strong><br />
+    内存管理就是查找出不再使用的对象，释放这些对象占用的内存空间，为其他对象的分配提供足够的内存空间。在一些编程语言(C,C++)中，内存管理是程序员的职责。内存管理使开发变得复杂，而且会造成许多潜在的bug和不可知的崩溃。导致程序猿花费大量时间debug来修复这些很隐蔽的问题。</p>
+<p>    在精确的内存管理中经常发生一个问题是悬摆指针 (dangling references )。程序猿可能释放一个对象占用的内存空间，即使这个对象还在被其他对象引用。如果一个对象引用另一个被不小心 释放的对象，这个释放对象的内存空间可能被重新分配新的对象，这个时候，不可预期的结果就可能发生了，而且很可能是致命的。</p>
+<p>    另一个在精确内存管理中经常发生的问题是内存泄露 (menory leaks )。泄露经常是对象占用的内存空间不再被任何其他对象引用，但是这个对象没有被回收。例如，如果你打算回收一个列表的空间，但是不小心只释放了列表的第一个元素，这个列表的其他元素将一直持有内存空间，因为这个列表引用已经不存在了，其他元素占用的空间得不到释放，造成了泄露。久而久之，类似的泄露累计，将会填满内存空间，导致没有足够的内存分配给其他的新对象。</p>
+<p>    鉴于上面的原因，Java做出一个明智但艰难的抉择，自动内存管 理。程序猿不再管理负责的内存分配和回收，把更多的精力放在业务开发上。承担次任务的是Java中的垃圾收集器，它能解决悬摆指针，内存泄露问题。对象的引用关系会被垃圾收集器检索到，当某个对象不再被任何对象引用的时候，垃圾收集器会自动回收。</p>
+<p><strong>=====  垃圾收集的概念  =====</strong><br />
+一个垃圾回收器的职责：</p>
+<blockquote><p>
+分配内存</p>
+<p>确保被引用的对象留在内存中</p>
+<p>释放那些不再被任何其他对象引用的对象占用的内存空间
+</p></blockquote>
+<p>    如果一个对象在以根对象 (root objects )为首的引用链中可达 ，那么这个对象是存活 的；否则，这个对象已经死亡 (将要被回收)。查找并释放不可达对象占用内存空间的过程，成为垃圾回收。</p>
+<p>    垃圾回收能解决大部分问题，但不是所有问题。你可以不断创建新的对象，并保持这写对象的引用，直到没有足够的内存位置(操作系统可能会用到交换空间，虚拟内存等保证系统正常运行，但是效率会下降)。</p>
+<p>    对于垃圾收集器分配和回收内存的算法，对程序员来说是透明的，通常对象内存空间是从堆 (heap )中分配的。</p>
+<p>    垃圾收集器控制着垃圾回收的时间。通常，垃圾回收发生在整个堆或者堆一部分已经被填满或者堆的使用情况达到某个阈值 。对象内存分配需要垃圾收集器在堆中找到特定大小的连续 空间 ，而垃圾回收又会产生碎片 ，导致内存空间不连续。所以为了避免碎片，垃圾回收过程会有一些动作保证内存连续。</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/6805.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>PHP通过字符串调用函数</title>
+		<link>http://www.xieziming.com/archives/6695.html</link>
+		<comments>http://www.xieziming.com/archives/6695.html#respond</comments>
+		<pubDate>Fri, 01 Jan 2010 14:18:16 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[程序]]></category>
+		<category><![CDATA[php]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=6695</guid>
+		<description><![CDATA[<code lang="php">
+function a($b,$c){
+		echo $b;
+		echo $c;
+}
+call_user_func('a', "111","222");
+call_user_func('a', "333","444");
+
+//显示 111 222 333 444
+?>
+
+//调用类内部的方法比较奇怪，居然用的是array，不知道开发者是如何考虑的，当然省去了new，也是满有新意的:
+class a {
+		function b($c){
+				echo $c;
+		}
+}
+call_user_func(array("a", "b"),"111");
+
+//显示 111
+?>
+</code>]]></description>
+				<content:encoded><![CDATA[<p><strong>1. call_user_func</strong></p>
+
+<div class="wp_code"><div class="pre"><pre class="php" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">function</span> a<span style="color: #009900;">&#40;</span><span style="color: #000088;">$b</span><span style="color: #339933;">,</span><span style="color: #000088;">$c</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+		<span style="color: #b1b100;">echo</span> <span style="color: #000088;">$b</span><span style="color: #339933;">;</span>
+		<span style="color: #b1b100;">echo</span> <span style="color: #000088;">$c</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span>
+<span style="color: #990000;">call_user_func</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'a'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;111&quot;</span><span style="color: #339933;">,</span><span style="color: #0000ff;">&quot;222&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #990000;">call_user_func</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'a'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;333&quot;</span><span style="color: #339933;">,</span><span style="color: #0000ff;">&quot;444&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">//显示 111 222 333 444</span>
+<span style="color: #000000; font-weight: bold;">?&gt;</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">//调用类内部的方法比较奇怪，居然用的是array，不知道开发者是如何考虑的，当然省去了new，也是满有新意的:</span>
+<span style="color: #000000; font-weight: bold;">class</span> a <span style="color: #009900;">&#123;</span>
+		<span style="color: #000000; font-weight: bold;">function</span> b<span style="color: #009900;">&#40;</span><span style="color: #000088;">$c</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+				<span style="color: #b1b100;">echo</span> <span style="color: #000088;">$c</span><span style="color: #339933;">;</span>
+		<span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span>
+<span style="color: #990000;">call_user_func</span><span style="color: #009900;">&#40;</span><span style="color: #990000;">array</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;a&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;b&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span><span style="color: #0000ff;">&quot;111&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">//显示 111</span>
+<span style="color: #000000; font-weight: bold;">?&gt;</span></pre></div></div>
+
+<p><strong>2. call_user_func_array</strong></p>
+<p>call_user_func_array函数和call_user_func很相似，只不过是换了一种方式传递了参数，让参数的结构更清晰:</p>
+
+<div class="wp_code"><div class="pre"><pre class="php" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">function</span> a<span style="color: #009900;">&#40;</span><span style="color: #000088;">$b</span><span style="color: #339933;">,</span> <span style="color: #000088;">$c</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+		<span style="color: #b1b100;">echo</span> <span style="color: #000088;">$b</span><span style="color: #339933;">;</span>
+		<span style="color: #b1b100;">echo</span> <span style="color: #000088;">$c</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span>
+<span style="color: #990000;">call_user_func_array</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'a'</span><span style="color: #339933;">,</span> <span style="color: #990000;">array</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;111&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;222&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">//显示 111 222</span>
+<span style="color: #000000; font-weight: bold;">?&gt;</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">//call_user_func_array函数也可以调用类内部的方法的</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">Class</span> ClassA<span style="color: #009900;">&#123;</span>
+		<span style="color: #000000; font-weight: bold;">function</span> bc<span style="color: #009900;">&#40;</span><span style="color: #000088;">$b</span><span style="color: #339933;">,</span> <span style="color: #000088;">$c</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+    		<span style="color: #000088;">$bc</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$b</span> <span style="color: #339933;">+</span> <span style="color: #000088;">$c</span><span style="color: #339933;">;</span>
+				<span style="color: #b1b100;">echo</span> <span style="color: #000088;">$bc</span><span style="color: #339933;">;</span>
+		<span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span>
+<span style="color: #990000;">call_user_func_array</span><span style="color: #009900;">&#40;</span><span style="color: #990000;">array</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'ClassA'</span><span style="color: #339933;">,</span><span style="color: #0000ff;">'bc'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span> <span style="color: #990000;">array</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;111&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;222&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">//显示 333</span>
+<span style="color: #000000; font-weight: bold;">?&gt;</span></pre></div></div>
+
+<p>call_user_func函数和call_user_func_array函数都支持引用，这让他们和普通的函数调用更趋于功能一致:</p>
+
+<div class="wp_code"><div class="pre"><pre class="php" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">function</span> a<span style="color: #009900;">&#40;</span><span style="color: #339933;">&amp;</span><span style="color: #000088;">$b</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+		<span style="color: #000088;">$b</span><span style="color: #339933;">++;</span>
+<span style="color: #009900;">&#125;</span>
+<span style="color: #000088;">$c</span> <span style="color: #339933;">=</span> <span style="color: #cc66cc;">0</span><span style="color: #339933;">;</span>
+<span style="color: #990000;">call_user_func</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'a'</span><span style="color: #339933;">,</span> <span style="color: #339933;">&amp;</span><span style="color: #000088;">$c</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #b1b100;">echo</span> <span style="color: #000088;">$c</span><span style="color: #339933;">;</span><span style="color: #666666; font-style: italic;">//显示 1</span>
+<span style="color: #990000;">call_user_func_array</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'a'</span><span style="color: #339933;">,</span> <span style="color: #990000;">array</span><span style="color: #009900;">&#40;</span><span style="color: #339933;">&amp;</span><span style="color: #000088;">$c</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #b1b100;">echo</span> <span style="color: #000088;">$c</span><span style="color: #339933;">;</span><span style="color: #666666; font-style: italic;">//显示 2</span></pre></div></div>
+
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/6695.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>COM/LPT</title>
+		<link>http://www.xieziming.com/archives/2907.html</link>
+		<comments>http://www.xieziming.com/archives/2907.html#respond</comments>
+		<pubDate>Tue, 20 Oct 2009 14:48:49 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[技术维基]]></category>
+		<category><![CDATA[程序]]></category>
+		<category><![CDATA[通讯]]></category>
+
+		<guid isPermaLink="false">http://www.ideashot.com/?p=2907</guid>
+		<description><![CDATA[串口叫做串行接口，现在的PC 机一般有两个串行口COM 1 和COM 2 。串行口不同于并行口之处在于它的数据和控制信息是一位接一位地传送出去的。虽然这样速度会慢一些，但传送距离较并行口更长，因此若要进行较长距离的通信时，应使用串行口。通常COM 1 使用的是9 针D 形连接器，也称之为RS-232接口，而COM 2 有的使用的是老式的DB25 针连接器，也称之为RS-422接口，不过目前已经很少使用。
+
+并口又称为并行接口。目前，并行接口主要作为打印机端口，采用的是25 针D 形接头。所谓“并行”，是指8 位数据同时通过并行线进行传送，这样数据传送速度大大提高，但并行传送的线路长度受到限制，因为长度增加，干扰就会增加，数据也就容易出错。目前计算机基本上都配有并口。 ]]></description>
+				<content:encoded><![CDATA[<p>在一些特定的场合下，我们想在两台PC之间进行通讯，以此来实现文件数据传输及软硬件资源共享。其前提是既没有网络环境，也没有Modem，甚至两台电脑连网卡也没装；当然PC间的距离很近（最长不超过20米）。这种想法能实现吗？</p>
+<p>答案是肯定的，而且不止一种。我们可以考虑通过并口或Com串口对两台PC直连实现点对点通讯。这里的关键是解决通讯线问题。一台普通PC，多数都具有两个9芯或25芯串口（COM1，COM2）和一个25芯并口的标配。以下分别介绍串行和并行通讯电缆的制作原理及方法（数字表示接头的引脚号，这些引脚号码在串并口上都有标注），需要补充的是，有经验的DIY总是善于“废旧利用”，比如设法利用废旧鼠标的通讯线以及闲置的旧打印电缆；并准备1个万用表用于测试制作的通讯电缆是否正确可靠。</p>
+<p>串口叫做串行接口，现在的PC 机一般有两个串行口COM 1 和COM 2 。串行口不同于并行口之处在于它的数据和控制信息是一位接一位地传送出去的。虽然这样速度会慢一些，但传送距离较并行口更长，因此若要进行较长距离的通信时，应使用串行口。通常COM 1 使用的是9 针D 形连接器，也称之为RS-232接口，而COM 2 有的使用的是老式的DB25 针连接器，也称之为RS-422接口，不过目前已经很少使用。</p>
+<p>并口又称为并行接口。目前，并行接口主要作为打印机端口，采用的是25 针D 形接头。所谓“并行”，是指8 位数据同时通过并行线进行传送，这样数据传送速度大大提高，但并行传送的线路长度受到限制，因为长度增加，干扰就会增加，数据也就容易出错。目前计算机基本上都配有并口。</p>
+<p>（一）串行通讯电缆的制作</p>
+<p>无论是9孔插头，还是25孔插头，其串行通讯电缆连接时都要遵循下列对接关系：</p>
+<p>SG←→SG　TXD←→RXD　RXD←→TXD　RTS←→CTS<br />
+CTS←→RTS　DTR←→DSR　DSR←→DTR</p>
+<p>根据上述对接关系，就可以非常方便地连接串行通讯电缆。这里顺便介绍一下上述各引脚所代表的含义：</p>
+<p>SG英文全称为Signal Ground/Common Return，表示信号地；<br />
+TXD指Transmitted Data，表示数据发送；<br />
+RXD指Received Data，表示接收数据；<br />
+RTS指Request To Send，表示发送请求；<br />
+CTS指Clear To Send，表示清除请求；<br />
+DTR指Data Terminal Ready，表示数据终端准备就绪；<br />
+DSR指Data Signal Rate Selector，表示数据置位准备就绪。</p>
+<p>在制作9芯串口连线时，需要2个9孔插头和1.5米长的至少7芯的扁平电缆，引脚连线如下所示。</p>
+<p>9孔插头－9孔插头引脚连线为：2-3、3-2、4-6、5-5、6-4、7-8、8-7。<br />
+9孔插头－25孔插头引脚连线为：2-2、3-3、4-6、5-7、6-20、7-5、8-4。<br />
+25孔插头－25孔插头引脚连线为：2-3、3-2、4-5、5-4、6-20、7-7、20-6。</p>
+<p>（二）并行通讯电缆的制作</p>
+<p>计算机上的并行口(LPT口)为25芯接口，需要选用2个25针插头来进行连接。并口速度比用串口要快得多，在通讯量较大的情况下应优先考虑并口方式。双机并口连接方式为：</p>
+<p>2-15、3-13、4-12、5-10、6-11、10-5、11-6、12-4、13-3、15-2、25-25。<br />
+<strong>并口针脚功能一览表</strong></p>
+<table>
+<thead>
+<tr>
+<td>
+针脚
+</td>
+<td>
+功能
+</td>
+<td>
+针脚
+</td>
+<td>
+功能
+</td>
+</tr>
+</thead>
+<tr>
+<td>
+1
+</td>
+<td>
+选通端，低电平有效
+</td>
+<td>
+10
+</td>
+<td>
+确认，低电平有效
+</td>
+</tr>
+<tr>
+<td>
+2
+</td>
+<td>
+数据通道0
+</td>
+<td>
+11
+</td>
+<td>
+忙
+</td>
+</tr>
+<tr>
+<td>
+3
+</td>
+<td>
+数据通道1
+</td>
+<td>
+12
+</td>
+<td>
+缺纸
+</td>
+</tr>
+<tr>
+<td>
+4
+</td>
+<td>
+数据通道2
+</td>
+<td>
+13
+</td>
+<td>
+选择
+</td>
+</tr>
+<tr>
+<td>
+5
+</td>
+<td>
+数据通道3
+</td>
+<td>
+14
+</td>
+<td>
+自动换行，低电平有效
+</td>
+</tr>
+<tr>
+<td>
+6
+</td>
+<td>
+数据通道4
+</td>
+<td>
+15
+</td>
+<td>
+错误，低电平有效
+</td>
+</tr>
+<tr>
+<td>
+7
+</td>
+<td>
+数据通道5
+</td>
+<td>
+16
+</td>
+<td>
+初始化，低电平有效
+</td>
+</tr>
+<tr>
+<td>
+8
+</td>
+<td>
+数据通道6
+</td>
+<td>
+17
+</td>
+<td>
+选择输入，低电平有效
+</td>
+</tr>
+<tr>
+<td>
+9
+</td>
+<td>
+数据通道7
+</td>
+<td width="119">
+18到25
+</td>
+<td width="165">
+地线
+</td>
+</tr>
+</table>
+<p><strong>25针串口功能一览表</strong></p>
+<table>
+<thead>
+<tr>
+<td>
+针脚
+</td>
+<td>
+功能
+</td>
+<td>
+针脚
+</td>
+<td>
+功能
+</td>
+</tr>
+</thead>
+<tr>
+<td>
+1
+</td>
+<td>
+空
+</td>
+<td>
+11
+</td>
+<td>
+空
+</td>
+</tr>
+<tr>
+<td>
+2
+</td>
+<td>
+发送数据
+</td>
+<td>
+12到17
+</td>
+<td>
+空
+</td>
+</tr>
+<tr>
+<td>
+3
+</td>
+<td>
+接收数据
+</td>
+<td>
+18
+</td>
+<td>
+空
+</td>
+</tr>
+<tr>
+<td>
+4
+</td>
+<td>
+发送请求
+</td>
+<td>
+19
+</td>
+<td>
+空
+</td>
+</tr>
+<tr>
+<td>
+5
+</td>
+<td>
+发送清除
+</td>
+<td>
+20
+</td>
+<td>
+数据终端准备完成
+</td>
+</tr>
+<tr>
+<td>
+6
+</td>
+<td>
+数据准备完成
+</td>
+<td>
+21
+</td>
+<td>
+空
+</td>
+</tr>
+<tr>
+<td>
+7
+</td>
+<td>
+信号地线
+</td>
+<td>
+22
+</td>
+<td>
+振铃指示
+</td>
+</tr>
+<tr>
+<td>
+8
+</td>
+<td>
+载波检测
+</td>
+<td>
+23到24
+</td>
+<td>
+空
+</td>
+</tr>
+<tr>
+<td>
+9
+</td>
+<td>
+空
+</td>
+<td>
+25
+</td>
+<td>
+空
+</td>
+</tr>
+<tr>
+<td>
+10
+</td>
+<td>
+空
+</td>
+<td></td>
+<td></td>
+</tr>
+</table>
+<p><strong>9针串口功能一览表</strong></p>
+<table>
+<thead>
+<tr>
+<td>
+针脚
+</td>
+<td>
+功能
+</td>
+<td>
+针脚
+</td>
+<td>
+功能
+</td>
+</tr>
+</thead>
+<tr>
+<td>
+1
+</td>
+<td>
+载波检测
+</td>
+<td>
+6
+</td>
+<td>
+数据准备完成
+</td>
+</tr>
+<tr>
+<td>
+2
+</td>
+<td>
+接收数据
+</td>
+<td>
+7
+</td>
+<td>
+发送请求
+</td>
+</tr>
+<tr>
+<td>
+3
+</td>
+<td>
+发送数据
+</td>
+<td>
+8
+</td>
+<td>
+发送清除
+</td>
+</tr>
+<tr>
+<td>
+4
+</td>
+<td>
+数据终端准备完成
+</td>
+<td>
+9
+</td>
+<td>
+振铃指示
+</td>
+</tr>
+<tr>
+<td>
+5
+</td>
+<td>
+信号地线
+</td>
+<td></td>
+<td></td>
+</tr>
+</table>
+<p><strong>联机线的连接方法</strong><br />
+联机线主要用于直接把两台电脑连接，分为串口（com1,com2）联机线和并口（lpt1）联机线。比较早一点的AT架构的电脑的串口有为9针，和25 针两种，现在的ATX架构的电脑两个串口全部是9针。打印机的接口也是25针的但功能、外观上与AT架构的25针串口不一样。于是联机线就分为4种（9针 对9针串口联机线，9针对25针串口联机线，25针对25针串口联机线，25针对25针并口联机线）其中3种串口连接，一种并口连接。并口联机线和串口联 机线最大的差别就是速度，前者明显快于后者。这些直接电缆连接线的两个头完全相同可以互换的连线方法如下表:<br />
+首先我们必须准备2个连接头，以及大约1.5米的联机线，联机线应该选用带屏蔽的多芯线，把多余未用的芯全部接在接头的金属壳（地线）作为屏蔽用。</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/2907.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+	</channel>
+</rss>

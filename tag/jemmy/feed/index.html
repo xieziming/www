@@ -1,0 +1,455 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Jemmy &#8211; 谢子明</title>
+	<atom:link href="http://www.xieziming.com/tag/jemmy/feed" rel="self" type="application/rss+xml" />
+	<link>http://www.xieziming.com</link>
+	<description>Suny Xie</description>
+	<lastBuildDate>Mon, 26 Dec 2016 07:34:38 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.7</generator>
+	<item>
+		<title>Jemmy入门之Waiter</title>
+		<link>http://www.xieziming.com/archives/8630.html</link>
+		<comments>http://www.xieziming.com/archives/8630.html#respond</comments>
+		<pubDate>Wed, 10 Apr 2013 08:23:38 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[测试]]></category>
+		<category><![CDATA[Automation]]></category>
+		<category><![CDATA[Jemmy]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=8630</guid>
+		<description><![CDATA[Jemmy中Waiter主要用于等待某个动作做完或者等待某个对象出现。在规定时间没做完的话会抛出超时异常。
+<code lang="java">
+/**
+ * 可以看到它实现了Waitable, Timeoutable, Outputable这三个接口
+ * 不过不是很明白它为啥要实现Waitable
+ */
+public class Waiter implements Waitable, Timeoutable, Outputable {
+	/**
+	 * timeout 常量，其中WAIT_TIME一般后来会被覆盖
+	 */
+	private final static long TIME_DELTA = 10;
+	private final static long WAIT_TIME = 60000;
+	private final static long AFTER_WAIT_TIME = 0;
+
+	private Waitable waitable;
+	private long startTime = 0;
+	private long endTime = -1;
+	private Object result;
+	private Timeouts timeouts;
+	private String waitingTimeOrigin;
+	private TestOut out;
+</code>]]></description>
+				<content:encoded><![CDATA[<p>Jemmy中Waiter主要用于等待某个动作做完或者等待某个对象出现。在规定时间没做完的话会抛出超时异常。</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #008000; font-style: italic; font-weight: bold;">/**
+ * 可以看到它实现了Waitable, Timeoutable, Outputable这三个接口
+ * 不过不是很明白它为啥要实现Waitable
+ */</span>
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> Waiter <span style="color: #000000; font-weight: bold;">implements</span> Waitable, Timeoutable, Outputable <span style="color: #009900;">&#123;</span>
+	<span style="color: #008000; font-style: italic; font-weight: bold;">/**
+	 * timeout 常量，其中WAIT_TIME一般后来会被覆盖
+	 */</span>
+	<span style="color: #000000; font-weight: bold;">private</span> <span style="color: #000000; font-weight: bold;">final</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000066; font-weight: bold;">long</span> TIME_DELTA <span style="color: #339933;">=</span> <span style="color: #cc66cc;">10</span><span style="color: #339933;">;</span>
+	<span style="color: #000000; font-weight: bold;">private</span> <span style="color: #000000; font-weight: bold;">final</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000066; font-weight: bold;">long</span> WAIT_TIME <span style="color: #339933;">=</span> <span style="color: #cc66cc;">60000</span><span style="color: #339933;">;</span>
+	<span style="color: #000000; font-weight: bold;">private</span> <span style="color: #000000; font-weight: bold;">final</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000066; font-weight: bold;">long</span> AFTER_WAIT_TIME <span style="color: #339933;">=</span> <span style="color: #cc66cc;">0</span><span style="color: #339933;">;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;">private</span> Waitable waitable<span style="color: #339933;">;</span>
+	<span style="color: #000000; font-weight: bold;">private</span> <span style="color: #000066; font-weight: bold;">long</span> startTime <span style="color: #339933;">=</span> <span style="color: #cc66cc;">0</span><span style="color: #339933;">;</span>
+	<span style="color: #000000; font-weight: bold;">private</span> <span style="color: #000066; font-weight: bold;">long</span> endTime <span style="color: #339933;">=</span> <span style="color: #339933;">-</span><span style="color: #cc66cc;">1</span><span style="color: #339933;">;</span>
+	<span style="color: #000000; font-weight: bold;">private</span> <span style="color: #003399;">Object</span> result<span style="color: #339933;">;</span>
+	<span style="color: #000000; font-weight: bold;">private</span> Timeouts timeouts<span style="color: #339933;">;</span>
+	<span style="color: #000000; font-weight: bold;">private</span> <span style="color: #003399;">String</span> waitingTimeOrigin<span style="color: #339933;">;</span>
+	<span style="color: #000000; font-weight: bold;">private</span> TestOut out<span style="color: #339933;">;</span>
+&nbsp;
+	<span style="color: #008000; font-style: italic; font-weight: bold;">/**
+	 * Constructor.
+	 * 
+	 * @param w
+	 *            Waitable object defining waiting criteria.
+	 */</span>
+	<span style="color: #000000; font-weight: bold;">public</span> Waiter<span style="color: #009900;">&#40;</span>Waitable w<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		<span style="color: #000000; font-weight: bold;">super</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		setTimeouts<span style="color: #009900;">&#40;</span>JemmyProperties.<span style="color: #006633;">getProperties</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>.<span style="color: #006633;">getTimeouts</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		setOutput<span style="color: #009900;">&#40;</span>JemmyProperties.<span style="color: #006633;">getProperties</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>.<span style="color: #006633;">getOutput</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		waitable <span style="color: #339933;">=</span> w<span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+       <span style="color: #008000; font-style: italic; font-weight: bold;">/**
+	 * 初始化Waiter的timeout常量
+	 */</span>
+	<span style="color: #000000; font-weight: bold;">static</span> <span style="color: #009900;">&#123;</span>
+		Timeouts.<span style="color: #006633;">initDefault</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;Waiter.TimeDelta&quot;</span>, TIME_DELTA<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		Timeouts.<span style="color: #006633;">initDefault</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;Waiter.WaitingTime&quot;</span>, WAIT_TIME<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		Timeouts.<span style="color: #006633;">initDefault</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;Waiter.AfterWaitingTime&quot;</span>, AFTER_WAIT_TIME<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+&nbsp;
+	<span style="color: #008000; font-style: italic; font-weight: bold;">/**
+	 * 这个函数经常用于改写Waiter.WaitingTime，以实现自定义的等待时间
+	 * @param timeouts
+	 * 传入的timeouts，一般都包含了一些在其他类的静态初始化了的timeout，比如从
+         * ComponentOperator传入的话一般会包含WAIT_COMPONENT_TIMEOUT这个timeout
+	 * @param useAsWaitingTime
+	 * 用来覆盖&quot;Waiter.WaitingTime&quot;的timeout，比如ComponentOperator.WaitComponentTimeout.
+	 * @return the cloned timeouts.
+	 */</span>
+	<span style="color: #000000; font-weight: bold;">public</span> Timeouts setTimeoutsToCloneOf<span style="color: #009900;">&#40;</span>Timeouts timeouts,	<span style="color: #003399;">String</span> useAsWaitingTime<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		Timeouts t <span style="color: #339933;">=</span> timeouts.<span style="color: #006633;">cloneThis</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		t.<span style="color: #006633;">setTimeout</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;Waiter.WaitingTime&quot;</span>, t.<span style="color: #006633;">getTimeout</span><span style="color: #009900;">&#40;</span>useAsWaitingTime<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		setTimeouts<span style="color: #009900;">&#40;</span>t<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		<span style="color: #000000; font-weight: bold;">return</span> t<span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+&nbsp;
+	<span style="color: #008000; font-style: italic; font-weight: bold;">/**
+	 * Waits for not null result of actionProduced method of Waitable
+	 * implementation passed into constructor.
+	 * 
+	 * @param waitableObject
+	 *            Object to be passed into actionProduced method.
+	 * @return non null result of action.
+	 * @throws TimeoutExpiredException
+	 * @exception InterruptedException
+	 */</span>
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #003399;">Object</span> waitAction<span style="color: #009900;">&#40;</span><span style="color: #003399;">Object</span> waitableObject<span style="color: #009900;">&#41;</span> <span style="color: #000000; font-weight: bold;">throws</span> <span style="color: #003399;">InterruptedException</span> <span style="color: #009900;">&#123;</span>
+                startTime <span style="color: #339933;">=</span> <span style="color: #003399;">System</span>.<span style="color: #006633;">currentTimeMillis</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		<span style="color: #000066; font-weight: bold;">long</span> timeDelta <span style="color: #339933;">=</span> timeouts.<span style="color: #006633;">getTimeout</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;Waiter.TimeDelta&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		<span style="color: #000000; font-weight: bold;">while</span> <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span>result <span style="color: #339933;">=</span> checkActionProduced<span style="color: #009900;">&#40;</span>waitableObject<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">==</span> <span style="color: #000066; font-weight: bold;">null</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                      <span style="color: #008000; font-style: italic; font-weight: bold;">/**
+                        * 每隔多少毫秒检查一次动作是否完成
+                        */</span>
+			<span style="color: #003399;">Thread</span>.<span style="color: #006633;">currentThread</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>.<span style="color: #006633;">sleep</span><span style="color: #009900;">&#40;</span>timeDelta<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+                      <span style="color: #008000; font-style: italic; font-weight: bold;">/**
+                        * 超时检查
+                        */</span>
+			<span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>timeoutExpired<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+				<span style="color: #000000; font-weight: bold;">throw</span> <span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">new</span> TimeoutExpiredException<span style="color: #009900;">&#40;</span>getActualDescription<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+			<span style="color: #009900;">&#125;</span>
+		<span style="color: #009900;">&#125;</span>
+		endTime <span style="color: #339933;">=</span> <span style="color: #003399;">System</span>.<span style="color: #006633;">currentTimeMillis</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		<span style="color: #003399;">Thread</span>.<span style="color: #006633;">currentThread</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>.<span style="color: #006633;">sleep</span><span style="color: #009900;">&#40;</span>timeouts.<span style="color: #006633;">getTimeout</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;Waiter.AfterWaitingTime&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		<span style="color: #000000; font-weight: bold;">return</span> <span style="color: #009900;">&#40;</span>result<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+&nbsp;
+        <span style="color: #008000; font-style: italic; font-weight: bold;">/**
+         * 检查动作是否完成，所以需要等待的动作必须实现Waitable的actionProduced方法。
+         */</span>
+	<span style="color: #000000; font-weight: bold;">private</span> <span style="color: #003399;">Object</span> checkActionProduced<span style="color: #009900;">&#40;</span><span style="color: #003399;">Object</span> obj<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		<span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>waitable <span style="color: #339933;">!=</span> <span style="color: #000066; font-weight: bold;">null</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+			<span style="color: #000000; font-weight: bold;">return</span> <span style="color: #009900;">&#40;</span>waitable.<span style="color: #006633;">actionProduced</span><span style="color: #009900;">&#40;</span>obj<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		<span style="color: #009900;">&#125;</span> <span style="color: #000000; font-weight: bold;">else</span> <span style="color: #009900;">&#123;</span>
+			<span style="color: #000000; font-weight: bold;">return</span> <span style="color: #009900;">&#40;</span>actionProduced<span style="color: #009900;">&#40;</span>obj<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		<span style="color: #009900;">&#125;</span>
+	<span style="color: #009900;">&#125;</span>
+       <span style="color: #008000; font-style: italic; font-weight: bold;">/**
+         * 检查是否超时。
+         */</span>
+	<span style="color: #000000; font-weight: bold;">private</span> <span style="color: #000066; font-weight: bold;">boolean</span> timeoutExpired<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		<span style="color: #000000; font-weight: bold;">return</span> <span style="color: #009900;">&#40;</span>timeFromStart<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">&gt;</span> timeouts.<span style="color: #006633;">getTimeout</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;Waiter.WaitingTime&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+        <span style="color: #000000; font-weight: bold;">protected</span> <span style="color: #000066; font-weight: bold;">long</span> timeFromStart<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		<span style="color: #000000; font-weight: bold;">return</span> <span style="color: #009900;">&#40;</span><span style="color: #003399;">System</span>.<span style="color: #006633;">currentTimeMillis</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">-</span> startTime<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/8630.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Jemmy入门之接口</title>
+		<link>http://www.xieziming.com/archives/8626.html</link>
+		<comments>http://www.xieziming.com/archives/8626.html#respond</comments>
+		<pubDate>Sat, 30 Mar 2013 03:09:05 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[测试]]></category>
+		<category><![CDATA[Automation]]></category>
+		<category><![CDATA[Jemmy]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=8626</guid>
+		<description><![CDATA[Jemmy里定义了很多的接口，比如做一个动作的时候（ActionProducer）会实现Action, Waitable,Timeoutable这三个接口。
+<code lang="java">
+public interface Waitable{
+    /**
+     * Checks if wait criteria have been met.
+     * @param obj optional waiting parameter.
+     * @return null is criteria have not been met.
+     */
+    public Object actionProduced(Object obj);
+
+    /**
+     * Returns description.
+     * @return a description of the wait criteria.
+     */
+    public String getDescription();
+}
+</code>
+
+<code lang="java">
+public interface Timeoutable {
+    /**
+     * Defines current timeouts.
+     * @param t A collection of timeout assignments.
+     * @see #getTimeouts
+     */
+    public void setTimeouts(Timeouts t);
+
+    /**
+     * Return current timeouts.
+     * @return the collection of current timeout assignments.
+     * @see #setTimeouts
+     */
+    public Timeouts getTimeouts();
+}
+</code>]]></description>
+				<content:encoded><![CDATA[<p>Jemmy里定义了很多的接口，比如做一个动作的时候（ActionProducer）会实现Action, Waitable,Timeoutable这三个接口。</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">interface</span> Waitable<span style="color: #009900;">&#123;</span>
+    <span style="color: #008000; font-style: italic; font-weight: bold;">/**
+     * Checks if wait criteria have been met.
+     * @param obj optional waiting parameter.
+     * @return null is criteria have not been met.
+     */</span>
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #003399;">Object</span> actionProduced<span style="color: #009900;">&#40;</span><span style="color: #003399;">Object</span> obj<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+    <span style="color: #008000; font-style: italic; font-weight: bold;">/**
+     * Returns description.
+     * @return a description of the wait criteria.
+     */</span>
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #003399;">String</span> getDescription<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">interface</span> Timeoutable <span style="color: #009900;">&#123;</span>
+    <span style="color: #008000; font-style: italic; font-weight: bold;">/**
+     * Defines current timeouts.
+     * @param t A collection of timeout assignments.
+     * @see #getTimeouts
+     */</span>
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> setTimeouts<span style="color: #009900;">&#40;</span>Timeouts t<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+    <span style="color: #008000; font-style: italic; font-weight: bold;">/**
+     * Return current timeouts.
+     * @return the collection of current timeout assignments.
+     * @see #setTimeouts
+     */</span>
+    <span style="color: #000000; font-weight: bold;">public</span> Timeouts getTimeouts<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">interface</span> Outputable <span style="color: #009900;">&#123;</span>
+    <span style="color: #008000; font-style: italic; font-weight: bold;">/**
+     * Defines print output streams or writers.
+     * @param out Identify the streams or writers used for print output.
+     * @see #getOutput
+     */</span>
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> setOutput<span style="color: #009900;">&#40;</span>TestOut out<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+    <span style="color: #008000; font-style: italic; font-weight: bold;">/**
+     * Returns print output streams or writers.
+     * @return an object that contains references to objects for
+     * printing to output and err streams.
+     * @see #setOutput
+     */</span>
+    <span style="color: #000000; font-weight: bold;">public</span> TestOut getOutput<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">interface</span> <span style="color: #003399;">Action</span><span style="color: #009900;">&#123;</span>
+    <span style="color: #008000; font-style: italic; font-weight: bold;">/**
+     * Executes this action.
+     * @param obj action argument. This argument might be the method
+     * parameter in an invocation of
+     * ActionProducer.produceAction(Object).  This argument
+     * might be a java.lang.String[] that lists the
+     * command line arguments used to execute a test (or not).
+     * @return action result.
+     */</span>
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #003399;">Object</span> launch<span style="color: #009900;">&#40;</span><span style="color: #003399;">Object</span> obj<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+    <span style="color: #008000; font-style: italic; font-weight: bold;">/**
+     * Returns the description value.
+     * @return Action description.
+     */</span>
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #003399;">String</span> getDescription<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">interface</span> Scenario <span style="color: #009900;">&#123;</span>
+    <span style="color: #008000; font-style: italic; font-weight: bold;">/**
+     * Defines a way to execute this test scenario.
+     * @param param An object passed to configure the test scenario
+     * execution.  For example, this parameter might be a
+     * &lt;code&gt;java.lang.String[]&lt;code&gt; object that lists the
+     * command line arguments to the Java application corresponding
+     * to a test.
+     * @return an int that tells something about the execution.
+     * For, example, a status code.
+     */</span>
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">int</span> runIt<span style="color: #009900;">&#40;</span><span style="color: #003399;">Object</span> param<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/8626.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Jemmy入门之ActionProducer</title>
+		<link>http://www.xieziming.com/archives/8636.html</link>
+		<comments>http://www.xieziming.com/archives/8636.html#respond</comments>
+		<pubDate>Sun, 10 Mar 2013 09:02:07 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[测试]]></category>
+		<category><![CDATA[Automation]]></category>
+		<category><![CDATA[Jemmy]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=8636</guid>
+		<description><![CDATA[ActionProducer是Scenario的基类，主要是执行一个在预期时间内要完成的动作。
+<code lang="java">
+public class ActionProducer extends Thread implements Action, Waitable,	Timeoutable {
+	/**
+	 * timeout 常量，一般用来覆盖Waiter的WAIT_TIME
+	 */
+	private final static long ACTION_TIMEOUT = 10000;
+
+	private Action action;
+	private boolean needWait = true;
+	private Object parameter;
+	private boolean finished;
+	private Object result = null;
+	private Timeouts timeouts;
+	private Waiter waiter;
+	private TestOut output;
+	private Throwable exception;
+</code>]]></description>
+				<content:encoded><![CDATA[<p>ActionProducer是Scenario的基类，主要是执行一个在预期时间内要完成的动作。</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> ActionProducer <span style="color: #000000; font-weight: bold;">extends</span> <span style="color: #003399;">Thread</span> <span style="color: #000000; font-weight: bold;">implements</span> <span style="color: #003399;">Action</span>, Waitable,	Timeoutable <span style="color: #009900;">&#123;</span>
+	<span style="color: #008000; font-style: italic; font-weight: bold;">/**
+	 * timeout 常量，一般用来覆盖Waiter的WAIT_TIME
+	 */</span>
+	<span style="color: #000000; font-weight: bold;">private</span> <span style="color: #000000; font-weight: bold;">final</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000066; font-weight: bold;">long</span> ACTION_TIMEOUT <span style="color: #339933;">=</span> <span style="color: #cc66cc;">10000</span><span style="color: #339933;">;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;">private</span> <span style="color: #003399;">Action</span> action<span style="color: #339933;">;</span>
+	<span style="color: #000000; font-weight: bold;">private</span> <span style="color: #000066; font-weight: bold;">boolean</span> needWait <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">true</span><span style="color: #339933;">;</span>
+	<span style="color: #000000; font-weight: bold;">private</span> <span style="color: #003399;">Object</span> parameter<span style="color: #339933;">;</span>
+	<span style="color: #000000; font-weight: bold;">private</span> <span style="color: #000066; font-weight: bold;">boolean</span> finished<span style="color: #339933;">;</span>
+	<span style="color: #000000; font-weight: bold;">private</span> <span style="color: #003399;">Object</span> result <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">null</span><span style="color: #339933;">;</span>
+	<span style="color: #000000; font-weight: bold;">private</span> Timeouts timeouts<span style="color: #339933;">;</span>
+	<span style="color: #000000; font-weight: bold;">private</span> Waiter waiter<span style="color: #339933;">;</span>
+	<span style="color: #000000; font-weight: bold;">private</span> TestOut output<span style="color: #339933;">;</span>
+	<span style="color: #000000; font-weight: bold;">private</span> <span style="color: #003399;">Throwable</span> exception<span style="color: #339933;">;</span>
+&nbsp;
+	<span style="color: #008000; font-style: italic; font-weight: bold;">/**
+	 * Creates a producer for an action.
+	 * 
+	 * @param a
+	 *            Action implementation.
+	 * @param nw
+	 *            Defines if produceAction method should wait for
+	 *            the end of action.
+	 */</span>
+	<span style="color: #000000; font-weight: bold;">public</span> ActionProducer<span style="color: #009900;">&#40;</span><span style="color: #003399;">Action</span> a, <span style="color: #000066; font-weight: bold;">boolean</span> nw<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		<span style="color: #000000; font-weight: bold;">super</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		waiter <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> Waiter<span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">this</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		action <span style="color: #339933;">=</span> a<span style="color: #339933;">;</span>
+		needWait <span style="color: #339933;">=</span> nw<span style="color: #339933;">;</span>
+		setTimeouts<span style="color: #009900;">&#40;</span>JemmyProperties.<span style="color: #006633;">getProperties</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>.<span style="color: #006633;">getTimeouts</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		setOutput<span style="color: #009900;">&#40;</span>JemmyProperties.<span style="color: #006633;">getProperties</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>.<span style="color: #006633;">getOutput</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		finished <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">false</span><span style="color: #339933;">;</span>
+		exception <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">null</span><span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+        <span style="color: #008000; font-style: italic; font-weight: bold;">/**
+	 * 初始化Waiter的timeout常量
+	 */</span>
+	<span style="color: #000000; font-weight: bold;">static</span> <span style="color: #009900;">&#123;</span>
+		Timeouts.<span style="color: #006633;">initDefault</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;ActionProducer.MaxActionTime&quot;</span>, ACTION_TIMEOUT<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+&nbsp;
+&nbsp;
+	<span style="color: #008000; font-style: italic; font-weight: bold;">/**
+	 * Starts execution. Uses ActionProducer.MaxActionTime timeout.
+	 * 
+	 * @param obj
+	 *            Parameter to be passed into action's
+	 *            launch(Object) method. This parameter might be a
+	 *            java.lang.String[] that lists a test's command
+	 *            line arguments.
+	 * @param actionTimeOrigin
+	 *            is used for timeout reporting, if non-null.
+	 * @return launch(Object) result.
+	 * @throws TimeoutExpiredException
+	 * @exception InterruptedException
+	 */</span>
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #003399;">Object</span> produceAction<span style="color: #009900;">&#40;</span><span style="color: #003399;">Object</span> obj, <span style="color: #003399;">String</span> actionTimeOrigin<span style="color: #009900;">&#41;</span> <span style="color: #000000; font-weight: bold;">throws</span> <span style="color: #003399;">InterruptedException</span> <span style="color: #009900;">&#123;</span>
+		parameter <span style="color: #339933;">=</span> obj<span style="color: #339933;">;</span>
+		<span style="color: #000000; font-weight: bold;">synchronized</span> <span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">this</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+			finished <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">false</span><span style="color: #339933;">;</span>
+		<span style="color: #009900;">&#125;</span>
+		start<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><span style="color: #666666; font-style: italic;">//thread started, run mothod kick off</span>
+		<span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>needWait<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+			waiter.<span style="color: #006633;">setTimeoutsToCloneOf</span><span style="color: #009900;">&#40;</span>timeouts,<span style="color: #0000ff;">&quot;ActionProducer.MaxActionTime&quot;</span>, actionTimeOrigin<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+			<span style="color: #000000; font-weight: bold;">try</span> <span style="color: #009900;">&#123;</span>
+				waiter.<span style="color: #006633;">waitAction</span><span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">null</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+			<span style="color: #009900;">&#125;</span> <span style="color: #000000; font-weight: bold;">catch</span> <span style="color: #009900;">&#40;</span>TimeoutExpiredException e<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+				interrupt<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+				<span style="color: #000000; font-weight: bold;">throw</span> <span style="color: #009900;">&#40;</span>e<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+			<span style="color: #009900;">&#125;</span>
+		<span style="color: #009900;">&#125;</span>
+		<span style="color: #000000; font-weight: bold;">return</span> <span style="color: #009900;">&#40;</span>result<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+        <span style="color: #008000; font-style: italic; font-weight: bold;">/**
+	 * 在produceAction中的start函数调用后开始，在单独的线程
+	 */</span>
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">final</span> <span style="color: #000066; font-weight: bold;">void</span> run<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		result <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">null</span><span style="color: #339933;">;</span>
+		<span style="color: #000000; font-weight: bold;">try</span> <span style="color: #009900;">&#123;</span>
+			result <span style="color: #339933;">=</span> launchAction<span style="color: #009900;">&#40;</span>parameter<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		<span style="color: #009900;">&#125;</span> <span style="color: #000000; font-weight: bold;">catch</span> <span style="color: #009900;">&#40;</span><span style="color: #003399;">Throwable</span> e<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+			exception <span style="color: #339933;">=</span> e<span style="color: #339933;">;</span>
+		<span style="color: #009900;">&#125;</span>
+		<span style="color: #000000; font-weight: bold;">synchronized</span> <span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">this</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+			finished <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">true</span><span style="color: #339933;">;</span>
+		<span style="color: #009900;">&#125;</span>
+	<span style="color: #009900;">&#125;</span>
+&nbsp;
+        <span style="color: #000000; font-weight: bold;">private</span> <span style="color: #003399;">Object</span> launchAction<span style="color: #009900;">&#40;</span><span style="color: #003399;">Object</span> obj<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		<span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>action <span style="color: #339933;">!=</span> <span style="color: #000066; font-weight: bold;">null</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+			<span style="color: #000000; font-weight: bold;">return</span> <span style="color: #009900;">&#40;</span>action.<span style="color: #006633;">launch</span><span style="color: #009900;">&#40;</span>obj<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		<span style="color: #009900;">&#125;</span> <span style="color: #000000; font-weight: bold;">else</span> <span style="color: #009900;">&#123;</span>
+			<span style="color: #000000; font-weight: bold;">return</span> <span style="color: #009900;">&#40;</span>launch<span style="color: #009900;">&#40;</span>obj<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		<span style="color: #009900;">&#125;</span>
+	<span style="color: #009900;">&#125;</span>
+&nbsp;
+	<span style="color: #008000; font-style: italic; font-weight: bold;">/**
+	 * 实现Waitable接口
+	 */</span>
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">final</span> <span style="color: #003399;">Object</span> actionProduced<span style="color: #009900;">&#40;</span><span style="color: #003399;">Object</span> obj<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		<span style="color: #000000; font-weight: bold;">synchronized</span> <span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">this</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+			<span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>finished<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+				<span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>result <span style="color: #339933;">==</span> <span style="color: #000066; font-weight: bold;">null</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+					<span style="color: #000000; font-weight: bold;">return</span> <span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">Integer</span><span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">0</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+				<span style="color: #009900;">&#125;</span> <span style="color: #000000; font-weight: bold;">else</span> <span style="color: #009900;">&#123;</span>
+					<span style="color: #000000; font-weight: bold;">return</span> <span style="color: #009900;">&#40;</span>result<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+				<span style="color: #009900;">&#125;</span>
+			<span style="color: #009900;">&#125;</span> <span style="color: #000000; font-weight: bold;">else</span> <span style="color: #009900;">&#123;</span>
+				<span style="color: #000000; font-weight: bold;">return</span> <span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">null</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+			<span style="color: #009900;">&#125;</span>
+		<span style="color: #009900;">&#125;</span>
+	<span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/8636.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+	</channel>
+</rss>

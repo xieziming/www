@@ -1,0 +1,513 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>UI Automation &#8211; 谢子明</title>
+	<atom:link href="http://www.xieziming.com/tag/ui-automation/feed" rel="self" type="application/rss+xml" />
+	<link>http://www.xieziming.com</link>
+	<description>Suny Xie</description>
+	<lastBuildDate>Mon, 26 Dec 2016 07:34:38 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.7</generator>
+	<item>
+		<title>UI Automation自定义控件处理</title>
+		<link>http://www.xieziming.com/archives/9488.html</link>
+		<comments>http://www.xieziming.com/archives/9488.html#respond</comments>
+		<pubDate>Fri, 07 Aug 2015 09:10:34 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[测试]]></category>
+		<category><![CDATA[Automation]]></category>
+		<category><![CDATA[UI Automation]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=9488</guid>
+		<description><![CDATA[在做Wpf/Winform UI自动化测试的时候，我们往往不得不面对一个非标准的控件，通过常规的方法我们是得不到控件信息的。下面是一个解决方法：
+
+（1）在被测软件该控件类上通过实现接口添加对自动化的支持。
+<code lang="csharp">
+protected override System.Windows.Automation.Peers.AutomationPeer OnCreateAutomationPeer() 
+{ 
+     ImprovedPivotGridAutomationPeer peer = new ImprovedPivotGridAutomationPeer(gridPresenter); 
+     peer.InvalidatePeer(); 
+     return peer; 
+}  
+</code>]]></description>
+				<content:encoded><![CDATA[<p>在做Wpf/Winform UI自动化测试的时候，我们往往不得不面对一个非标准的控件，通过常规的方法我们是得不到控件信息的。下面是一个解决方法：</p>
+<p>（1）在被测软件该控件类上通过实现接口添加对自动化的支持。</p>
+
+<div class="wp_code"><div class="pre"><pre class="csharp" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #0600FF; font-weight: bold;">protected</span> <span style="color: #0600FF; font-weight: bold;">override</span> <span style="color: #000000;">System</span><span style="color: #008000;">.</span><span style="color: #0000FF;">Windows</span><span style="color: #008000;">.</span><span style="color: #0000FF;">Automation</span><span style="color: #008000;">.</span><span style="color: #0000FF;">Peers</span><span style="color: #008000;">.</span><span style="color: #0000FF;">AutomationPeer</span> OnCreateAutomationPeer<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span> 
+<span style="color: #008000;">&#123;</span> 
+     ImprovedPivotGridAutomationPeer peer <span style="color: #008000;">=</span> <span style="color: #008000;">new</span> ImprovedPivotGridAutomationPeer<span style="color: #008000;">&#40;</span>gridPresenter<span style="color: #008000;">&#41;</span><span style="color: #008000;">;</span> 
+     peer<span style="color: #008000;">.</span><span style="color: #0000FF;">InvalidatePeer</span><span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span><span style="color: #008000;">;</span> 
+     <span style="color: #0600FF; font-weight: bold;">return</span> peer<span style="color: #008000;">;</span> 
+<span style="color: #008000;">&#125;</span></pre></div></div>
+
+<p>接口实现：</p>
+
+<div class="wp_code"><div class="pre"><pre class="csharp" style="font-family:'Times New Roman',Garamond, Times;">  <span style="color: #0600FF; font-weight: bold;">public</span> <span style="color: #6666cc; font-weight: bold;">class</span> ImprovedPivotGridAutomationPeer <span style="color: #008000;">:</span> AutomationPeer 
+    <span style="color: #008000;">&#123;</span> 
+        ImprovedGridPresenter gridPresenter<span style="color: #008000;">;</span> 
+        List<span style="color: #008000;">&lt;</span>AutomationPeer<span style="color: #008000;">&gt;</span> children <span style="color: #008000;">=</span> <span style="color: #0600FF; font-weight: bold;">null</span><span style="color: #008000;">;</span> 
+        <span style="color: #0600FF; font-weight: bold;">public</span> ImprovedPivotGridAutomationPeer<span style="color: #008000;">&#40;</span>ImprovedGridPresenter gridPresenter<span style="color: #008000;">&#41;</span> 
+        <span style="color: #008000;">&#123;</span> 
+            <span style="color: #0600FF; font-weight: bold;">this</span><span style="color: #008000;">.</span><span style="color: #0000FF;">gridPresenter</span> <span style="color: #008000;">=</span> gridPresenter<span style="color: #008000;">;</span> 
+        <span style="color: #008000;">&#125;</span> 
+&nbsp;
+        <span style="color: #0600FF; font-weight: bold;">protected</span> <span style="color: #0600FF; font-weight: bold;">override</span> <span style="color: #6666cc; font-weight: bold;">string</span> GetAcceleratorKeyCore<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span> 
+        <span style="color: #008000;">&#123;</span> 
+            <span style="color: #0600FF; font-weight: bold;">return</span> <span style="color: #6666cc; font-weight: bold;">string</span><span style="color: #008000;">.</span><span style="color: #0000FF;">Empty</span><span style="color: #008000;">;</span> 
+        <span style="color: #008000;">&#125;</span> 
+&nbsp;
+        <span style="color: #0600FF; font-weight: bold;">protected</span> <span style="color: #0600FF; font-weight: bold;">override</span> <span style="color: #6666cc; font-weight: bold;">string</span> GetAccessKeyCore<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span> 
+        <span style="color: #008000;">&#123;</span> 
+            <span style="color: #0600FF; font-weight: bold;">return</span> <span style="color: #6666cc; font-weight: bold;">string</span><span style="color: #008000;">.</span><span style="color: #0000FF;">Empty</span><span style="color: #008000;">;</span> 
+        <span style="color: #008000;">&#125;</span> 
+&nbsp;
+        <span style="color: #0600FF; font-weight: bold;">protected</span> <span style="color: #0600FF; font-weight: bold;">override</span> AutomationControlType GetAutomationControlTypeCore<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span> 
+        <span style="color: #008000;">&#123;</span> 
+            <span style="color: #0600FF; font-weight: bold;">return</span> AutomationControlType<span style="color: #008000;">.</span><span style="color: #0000FF;">DataGrid</span><span style="color: #008000;">;</span> 
+        <span style="color: #008000;">&#125;</span> 
+&nbsp;
+        <span style="color: #0600FF; font-weight: bold;">protected</span> <span style="color: #0600FF; font-weight: bold;">override</span> <span style="color: #6666cc; font-weight: bold;">string</span> GetAutomationIdCore<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span> 
+        <span style="color: #008000;">&#123;</span> 
+            <span style="color: #0600FF; font-weight: bold;">return</span> <span style="color: #666666;">&quot;ImprovedPivotGrid&quot;</span><span style="color: #008000;">;</span> 
+        <span style="color: #008000;">&#125;</span> 
+&nbsp;
+        <span style="color: #0600FF; font-weight: bold;">protected</span> <span style="color: #0600FF; font-weight: bold;">override</span> Rect GetBoundingRectangleCore<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span> 
+        <span style="color: #008000;">&#123;</span> 
+            <span style="color: #0600FF; font-weight: bold;">return</span> Rect<span style="color: #008000;">.</span><span style="color: #0000FF;">Empty</span><span style="color: #008000;">;</span> 
+        <span style="color: #008000;">&#125;</span> 
+&nbsp;
+        <span style="color: #0600FF; font-weight: bold;">protected</span> <span style="color: #0600FF; font-weight: bold;">override</span> List<span style="color: #008000;">&lt;</span>AutomationPeer<span style="color: #008000;">&gt;</span> GetChildrenCore<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span> 
+        <span style="color: #008000;">&#123;</span> 
+            children <span style="color: #008000;">=</span> <span style="color: #008000;">new</span> List<span style="color: #008000;">&lt;</span>AutomationPeer<span style="color: #008000;">&gt;</span><span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span><span style="color: #008000;">;</span> 
+            <span style="color: #0600FF; font-weight: bold;">for</span><span style="color: #008000;">&#40;</span><span style="color: #6666cc; font-weight: bold;">int</span> i<span style="color: #008000;">=</span><span style="color: #FF0000;">0</span><span style="color: #008000;">;</span> i<span style="color: #008000;">&lt;</span>gridPresenter<span style="color: #008000;">.</span><span style="color: #0000FF;">GridMetrics</span><span style="color: #008000;">.</span><span style="color: #0000FF;">RowCount</span><span style="color: #008000;">;</span>i<span style="color: #008000;">++</span><span style="color: #008000;">&#41;</span><span style="color: #008000;">&#123;</span> 
+                <span style="color: #0600FF; font-weight: bold;">for</span> <span style="color: #008000;">&#40;</span><span style="color: #6666cc; font-weight: bold;">int</span> j<span style="color: #008000;">=</span><span style="color: #FF0000;">0</span><span style="color: #008000;">;</span> j<span style="color: #008000;">&lt;</span>gridPresenter<span style="color: #008000;">.</span><span style="color: #0000FF;">GridMetrics</span><span style="color: #008000;">.</span><span style="color: #0000FF;">ColumnCount</span><span style="color: #008000;">;</span>j<span style="color: #008000;">++</span><span style="color: #008000;">&#41;</span> 
+                <span style="color: #008000;">&#123;</span> 
+                    <span style="color: #0600FF; font-weight: bold;">try</span> 
+                    <span style="color: #008000;">&#123;</span> 
+                        CellData cellData <span style="color: #008000;">=</span> gridPresenter<span style="color: #008000;">.</span><span style="color: #0000FF;">GetCellData</span><span style="color: #008000;">&#40;</span>j, i<span style="color: #008000;">&#41;</span><span style="color: #008000;">;</span> 
+                        <span style="color: #0600FF; font-weight: bold;">if</span> <span style="color: #008000;">&#40;</span>cellData<span style="color: #008000;">.</span><span style="color: #0000FF;">CellType</span><span style="color: #008000;">.</span><span style="color: #0000FF;">Equals</span><span style="color: #008000;">&#40;</span>CellType<span style="color: #008000;">.</span><span style="color: #0000FF;">RowHeader</span><span style="color: #008000;">&#41;</span> <span style="color: #008000;">||</span> cellData<span style="color: #008000;">.</span><span style="color: #0000FF;">CellType</span><span style="color: #008000;">.</span><span style="color: #0000FF;">Equals</span><span style="color: #008000;">&#40;</span>CellType<span style="color: #008000;">.</span><span style="color: #0000FF;">ColumnHeader</span><span style="color: #008000;">&#41;</span> <span style="color: #008000;">||</span> cellData<span style="color: #008000;">.</span><span style="color: #0000FF;">CellType</span><span style="color: #008000;">.</span><span style="color: #0000FF;">Equals</span><span style="color: #008000;">&#40;</span>CellType<span style="color: #008000;">.</span><span style="color: #0600FF; font-weight: bold;">Value</span><span style="color: #008000;">&#41;</span><span style="color: #008000;">&#41;</span> 
+                        <span style="color: #008000;">&#123;</span> 
+                            children<span style="color: #008000;">.</span><span style="color: #0600FF; font-weight: bold;">Add</span><span style="color: #008000;">&#40;</span><span style="color: #008000;">new</span> ImprovedPivotGridCellAutomationPeer<span style="color: #008000;">&#40;</span>gridPresenter, cellData<span style="color: #008000;">&#41;</span><span style="color: #008000;">&#41;</span><span style="color: #008000;">;</span> 
+                        <span style="color: #008000;">&#125;</span> 
+                    <span style="color: #008000;">&#125;</span> 
+                    <span style="color: #0600FF; font-weight: bold;">catch</span> 
+                    <span style="color: #008000;">&#123;</span> 
+                        <span style="color: #008080; font-style: italic;">//if error </span>
+                    <span style="color: #008000;">&#125;</span> 
+                <span style="color: #008000;">&#125;</span>                        
+            <span style="color: #008000;">&#125;</span> 
+            <span style="color: #0600FF; font-weight: bold;">return</span> children<span style="color: #008000;">;</span> 
+        <span style="color: #008000;">&#125;</span> 
+&nbsp;
+        <span style="color: #0600FF; font-weight: bold;">protected</span> <span style="color: #0600FF; font-weight: bold;">override</span> Point GetClickablePointCore<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span> 
+        <span style="color: #008000;">&#123;</span> 
+            <span style="color: #0600FF; font-weight: bold;">return</span> <span style="color: #008000;">new</span> Point<span style="color: #008000;">&#40;</span><span style="color: #FF0000;">0</span>, <span style="color: #FF0000;">0</span><span style="color: #008000;">&#41;</span><span style="color: #008000;">;</span> 
+        <span style="color: #008000;">&#125;</span> 
+&nbsp;
+        <span style="color: #0600FF; font-weight: bold;">protected</span> <span style="color: #0600FF; font-weight: bold;">override</span> <span style="color: #6666cc; font-weight: bold;">string</span> GetHelpTextCore<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span> 
+        <span style="color: #008000;">&#123;</span> 
+            <span style="color: #0600FF; font-weight: bold;">return</span> <span style="color: #6666cc; font-weight: bold;">string</span><span style="color: #008000;">.</span><span style="color: #0000FF;">Empty</span><span style="color: #008000;">;</span> 
+        <span style="color: #008000;">&#125;</span> 
+&nbsp;
+        <span style="color: #0600FF; font-weight: bold;">protected</span> <span style="color: #0600FF; font-weight: bold;">override</span> <span style="color: #6666cc; font-weight: bold;">string</span> GetItemStatusCore<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span> 
+        <span style="color: #008000;">&#123;</span> 
+            <span style="color: #0600FF; font-weight: bold;">return</span> <span style="color: #6666cc; font-weight: bold;">string</span><span style="color: #008000;">.</span><span style="color: #0000FF;">Empty</span><span style="color: #008000;">;</span> 
+        <span style="color: #008000;">&#125;</span> 
+&nbsp;
+        <span style="color: #0600FF; font-weight: bold;">protected</span> <span style="color: #0600FF; font-weight: bold;">override</span> <span style="color: #6666cc; font-weight: bold;">string</span> GetItemTypeCore<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span> 
+        <span style="color: #008000;">&#123;</span> 
+            <span style="color: #0600FF; font-weight: bold;">return</span> <span style="color: #6666cc; font-weight: bold;">string</span><span style="color: #008000;">.</span><span style="color: #0000FF;">Empty</span><span style="color: #008000;">;</span> 
+        <span style="color: #008000;">&#125;</span> 
+&nbsp;
+        <span style="color: #0600FF; font-weight: bold;">protected</span> <span style="color: #0600FF; font-weight: bold;">override</span> AutomationPeer GetLabeledByCore<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span> 
+        <span style="color: #008000;">&#123;</span> 
+            <span style="color: #0600FF; font-weight: bold;">return</span> <span style="color: #0600FF; font-weight: bold;">this</span><span style="color: #008000;">;</span> 
+        <span style="color: #008000;">&#125;</span> 
+&nbsp;
+        <span style="color: #0600FF; font-weight: bold;">protected</span> <span style="color: #0600FF; font-weight: bold;">override</span> <span style="color: #6666cc; font-weight: bold;">string</span> GetNameCore<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span> 
+        <span style="color: #008000;">&#123;</span> 
+            <span style="color: #0600FF; font-weight: bold;">return</span> <span style="color: #666666;">&quot;ImprovedPivotGrid&quot;</span><span style="color: #008000;">;</span> 
+        <span style="color: #008000;">&#125;</span> 
+&nbsp;
+        <span style="color: #0600FF; font-weight: bold;">protected</span> <span style="color: #0600FF; font-weight: bold;">override</span> <span style="color: #6666cc; font-weight: bold;">string</span> GetClassNameCore<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span> 
+        <span style="color: #008000;">&#123;</span> 
+            <span style="color: #0600FF; font-weight: bold;">return</span> gridPresenter<span style="color: #008000;">.</span><span style="color: #0000FF;">GetType</span><span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span><span style="color: #008000;">.</span><span style="color: #0000FF;">ToString</span><span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span><span style="color: #008000;">;</span> 
+        <span style="color: #008000;">&#125;</span> 
+&nbsp;
+        <span style="color: #0600FF; font-weight: bold;">protected</span> <span style="color: #0600FF; font-weight: bold;">override</span> AutomationOrientation GetOrientationCore<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span> 
+        <span style="color: #008000;">&#123;</span> 
+            <span style="color: #0600FF; font-weight: bold;">return</span> AutomationOrientation<span style="color: #008000;">.</span><span style="color: #0000FF;">None</span><span style="color: #008000;">;</span> 
+        <span style="color: #008000;">&#125;</span> 
+&nbsp;
+        <span style="color: #0600FF; font-weight: bold;">public</span> <span style="color: #0600FF; font-weight: bold;">override</span> <span style="color: #6666cc; font-weight: bold;">object</span> GetPattern<span style="color: #008000;">&#40;</span>PatternInterface patternInterface<span style="color: #008000;">&#41;</span> 
+        <span style="color: #008000;">&#123;</span> 
+            <span style="color: #0600FF; font-weight: bold;">if</span> <span style="color: #008000;">&#40;</span>patternInterface <span style="color: #008000;">==</span> PatternInterface<span style="color: #008000;">.</span><span style="color: #0600FF; font-weight: bold;">Value</span><span style="color: #008000;">&#41;</span> 
+            <span style="color: #008000;">&#123;</span> 
+                <span style="color: #0600FF; font-weight: bold;">return</span> <span style="color: #008000;">new</span> ImprovedPivotGridValuePattern<span style="color: #008000;">&#40;</span>gridPresenter<span style="color: #008000;">&#41;</span><span style="color: #008000;">;</span> 
+            <span style="color: #008000;">&#125;</span> 
+            <span style="color: #0600FF; font-weight: bold;">return</span> <span style="color: #0600FF; font-weight: bold;">null</span><span style="color: #008000;">;</span> 
+        <span style="color: #008000;">&#125;</span> 
+&nbsp;
+        <span style="color: #0600FF; font-weight: bold;">protected</span> <span style="color: #0600FF; font-weight: bold;">override</span> <span style="color: #6666cc; font-weight: bold;">bool</span> HasKeyboardFocusCore<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span> 
+        <span style="color: #008000;">&#123;</span> 
+            <span style="color: #0600FF; font-weight: bold;">return</span> <span style="color: #0600FF; font-weight: bold;">false</span><span style="color: #008000;">;</span> 
+        <span style="color: #008000;">&#125;</span> 
+&nbsp;
+        <span style="color: #0600FF; font-weight: bold;">protected</span> <span style="color: #0600FF; font-weight: bold;">override</span> <span style="color: #6666cc; font-weight: bold;">bool</span> IsContentElementCore<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span> 
+        <span style="color: #008000;">&#123;</span> 
+            <span style="color: #0600FF; font-weight: bold;">return</span> <span style="color: #0600FF; font-weight: bold;">true</span><span style="color: #008000;">;</span> 
+        <span style="color: #008000;">&#125;</span> 
+&nbsp;
+        <span style="color: #0600FF; font-weight: bold;">protected</span> <span style="color: #0600FF; font-weight: bold;">override</span> <span style="color: #6666cc; font-weight: bold;">bool</span> IsControlElementCore<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span> 
+        <span style="color: #008000;">&#123;</span> 
+            <span style="color: #0600FF; font-weight: bold;">return</span> <span style="color: #0600FF; font-weight: bold;">true</span><span style="color: #008000;">;</span> 
+        <span style="color: #008000;">&#125;</span> 
+&nbsp;
+        <span style="color: #0600FF; font-weight: bold;">protected</span> <span style="color: #0600FF; font-weight: bold;">override</span> <span style="color: #6666cc; font-weight: bold;">bool</span> IsEnabledCore<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span> 
+        <span style="color: #008000;">&#123;</span> 
+            <span style="color: #0600FF; font-weight: bold;">return</span> <span style="color: #0600FF; font-weight: bold;">true</span><span style="color: #008000;">;</span> 
+        <span style="color: #008000;">&#125;</span> 
+&nbsp;
+        <span style="color: #0600FF; font-weight: bold;">protected</span> <span style="color: #0600FF; font-weight: bold;">override</span> <span style="color: #6666cc; font-weight: bold;">bool</span> IsKeyboardFocusableCore<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span> 
+        <span style="color: #008000;">&#123;</span> 
+            <span style="color: #0600FF; font-weight: bold;">return</span> <span style="color: #0600FF; font-weight: bold;">false</span><span style="color: #008000;">;</span> 
+        <span style="color: #008000;">&#125;</span> 
+&nbsp;
+        <span style="color: #0600FF; font-weight: bold;">protected</span> <span style="color: #0600FF; font-weight: bold;">override</span> <span style="color: #6666cc; font-weight: bold;">bool</span> IsOffscreenCore<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span> 
+        <span style="color: #008000;">&#123;</span> 
+            <span style="color: #0600FF; font-weight: bold;">return</span> <span style="color: #0600FF; font-weight: bold;">false</span><span style="color: #008000;">;</span> 
+        <span style="color: #008000;">&#125;</span> 
+&nbsp;
+        <span style="color: #0600FF; font-weight: bold;">protected</span> <span style="color: #0600FF; font-weight: bold;">override</span> <span style="color: #6666cc; font-weight: bold;">bool</span> IsPasswordCore<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span> 
+        <span style="color: #008000;">&#123;</span> 
+            <span style="color: #0600FF; font-weight: bold;">return</span> <span style="color: #0600FF; font-weight: bold;">false</span><span style="color: #008000;">;</span> 
+        <span style="color: #008000;">&#125;</span> 
+&nbsp;
+        <span style="color: #0600FF; font-weight: bold;">protected</span> <span style="color: #0600FF; font-weight: bold;">override</span> <span style="color: #6666cc; font-weight: bold;">bool</span> IsRequiredForFormCore<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span> 
+        <span style="color: #008000;">&#123;</span> 
+            <span style="color: #0600FF; font-weight: bold;">return</span> <span style="color: #0600FF; font-weight: bold;">false</span><span style="color: #008000;">;</span> 
+        <span style="color: #008000;">&#125;</span> 
+&nbsp;
+        <span style="color: #0600FF; font-weight: bold;">protected</span> <span style="color: #0600FF; font-weight: bold;">override</span> <span style="color: #6666cc; font-weight: bold;">void</span> SetFocusCore<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span> 
+        <span style="color: #008000;">&#123;</span> 
+&nbsp;
+        <span style="color: #008000;">&#125;</span> 
+    <span style="color: #008000;">&#125;</span> 
+&nbsp;
+    <span style="color: #008000;">&#91;</span>ComVisible<span style="color: #008000;">&#40;</span><span style="color: #0600FF; font-weight: bold;">true</span><span style="color: #008000;">&#41;</span><span style="color: #008000;">&#93;</span> 
+    <span style="color: #0600FF; font-weight: bold;">public</span> <span style="color: #6666cc; font-weight: bold;">class</span> ImprovedPivotGridValuePattern <span style="color: #008000;">:</span> IValueProvider 
+    <span style="color: #008000;">&#123;</span> 
+        ImprovedGridPresenter gridPresenter<span style="color: #008000;">;</span> 
+        <span style="color: #0600FF; font-weight: bold;">public</span> ImprovedPivotGridValuePattern<span style="color: #008000;">&#40;</span>ImprovedGridPresenter gridPresenter<span style="color: #008000;">&#41;</span> 
+        <span style="color: #008000;">&#123;</span> 
+            <span style="color: #0600FF; font-weight: bold;">this</span><span style="color: #008000;">.</span><span style="color: #0000FF;">gridPresenter</span> <span style="color: #008000;">=</span> gridPresenter<span style="color: #008000;">;</span> 
+        <span style="color: #008000;">&#125;</span> 
+        <span style="color: #0600FF; font-weight: bold;">public</span> <span style="color: #6666cc; font-weight: bold;">bool</span> IsReadOnly <span style="color: #008000;">&#123;</span> <span style="color: #0600FF; font-weight: bold;">get</span> <span style="color: #008000;">&#123;</span> <span style="color: #0600FF; font-weight: bold;">return</span> <span style="color: #0600FF; font-weight: bold;">true</span><span style="color: #008000;">;</span> <span style="color: #008000;">&#125;</span> <span style="color: #008000;">&#125;</span> 
+        <span style="color: #0600FF; font-weight: bold;">public</span> <span style="color: #6666cc; font-weight: bold;">string</span> <span style="color: #0600FF; font-weight: bold;">Value</span> 
+        <span style="color: #008000;">&#123;</span> 
+            <span style="color: #0600FF; font-weight: bold;">get</span> 
+            <span style="color: #008000;">&#123;</span> 
+                <span style="color: #0600FF; font-weight: bold;">return</span> gridPresenter<span style="color: #008000;">.</span><span style="color: #0000FF;">GridMetrics</span><span style="color: #008000;">.</span><span style="color: #0000FF;">ColumnCount</span> <span style="color: #008000;">+</span> <span style="color: #666666;">&quot; : &quot;</span> <span style="color: #008000;">+</span> gridPresenter<span style="color: #008000;">.</span><span style="color: #0000FF;">GridMetrics</span><span style="color: #008000;">.</span><span style="color: #0000FF;">ColumnCount</span> <span style="color: #008000;">;</span> 
+            <span style="color: #008000;">&#125;</span> 
+        <span style="color: #008000;">&#125;</span> 
+&nbsp;
+        <span style="color: #0600FF; font-weight: bold;">public</span> <span style="color: #6666cc; font-weight: bold;">void</span> SetValue<span style="color: #008000;">&#40;</span><span style="color: #6666cc; font-weight: bold;">string</span> <span style="color: #0600FF; font-weight: bold;">value</span><span style="color: #008000;">&#41;</span> <span style="color: #008000;">&#123;</span> <span style="color: #0600FF; font-weight: bold;">return</span><span style="color: #008000;">;</span> <span style="color: #008000;">&#125;</span> 
+    <span style="color: #008000;">&#125;</span></pre></div></div>
+
+<p>同时，如果只是想暴露一些application的信息，我们可以通过在某控件上（xaml文件）绑定/添加一个<strong>AutomationProperties.HelpText</strong>属性。该属性不会有任何的UI影响，但却可以通过UI Automation的Property取出。</p>
+<p>例如：<br />
+Main.xaml</p>
+
+<div class="wp_code"><div class="pre"><pre class="csharp" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #008000;">&lt;</span>TextBlock FontSize<span style="color: #008000;">=</span><span style="color: #666666;">&quot;8&quot;</span> Text<span style="color: #008000;">=</span><span style="color: #666666;">&quot;{Binding Type}&quot;</span> AutomationProperties<span style="color: #008000;">.</span><span style="color: #0000FF;">HelpText</span><span style="color: #008000;">=</span><span style="color: #666666;">&quot;{Binding yourWord}&quot;</span><span style="color: #008000;">&gt;</span></pre></div></div>
+
+<p>Main.cs</p>
+
+<div class="wp_code"><div class="pre"><pre class="csharp" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #0600FF; font-weight: bold;">public</span> <span style="color: #6666cc; font-weight: bold;">String</span> myWord
+<span style="color: #008000;">&#123;</span>
+    <span style="color: #0600FF; font-weight: bold;">get</span>
+    <span style="color: #008000;">&#123;</span>
+        <span style="color: #0600FF; font-weight: bold;">return</span> <span style="color: #666666;">&quot;hello world!&quot;</span>
+    <span style="color: #008000;">&#125;</span>
+<span style="color: #008000;">&#125;</span>
+&nbsp;
+然后呢，我们就可以在客户端用HelpText等property取出这些特意暴露出来的值了。</pre></div></div>
+
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/9488.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>UI Automation通过相对位置来进行对象识别</title>
+		<link>http://www.xieziming.com/archives/9487.html</link>
+		<comments>http://www.xieziming.com/archives/9487.html#respond</comments>
+		<pubDate>Sun, 07 Jun 2015 09:08:24 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[测试]]></category>
+		<category><![CDATA[Automation]]></category>
+		<category><![CDATA[UI Automation]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=9487</guid>
+		<description><![CDATA[下面这个类是用来辅助我们通过相对位置关系来找控件。
+
+<code lang="csharp">
+class LocationFinder 
+    { 
+        AutomationElement element; 
+        public LocationFinder(AutomationElement element) 
+        { 
+            this.element = element; 
+        } 
+
+        public AutomationElement getWindow(AutomationElement element) 
+        { 
+            TreeWalker tWalker = TreeWalker.ControlViewWalker; 
+            AutomationElement parentItem = tWalker.GetParent(element); 
+            if (!parentItem.Current.ControlType.Equals(ControlType.Window)) 
+            { 
+                return getWindow(parentItem); 
+            } 
+            return parentItem; 
+        } 
+</code>]]></description>
+				<content:encoded><![CDATA[<p>下面这个类是用来辅助我们通过相对位置关系来找控件。</p>
+
+<div class="wp_code"><div class="pre"><pre class="csharp" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #6666cc; font-weight: bold;">class</span> LocationFinder 
+    <span style="color: #008000;">&#123;</span> 
+        AutomationElement element<span style="color: #008000;">;</span> 
+        <span style="color: #0600FF; font-weight: bold;">public</span> LocationFinder<span style="color: #008000;">&#40;</span>AutomationElement element<span style="color: #008000;">&#41;</span> 
+        <span style="color: #008000;">&#123;</span> 
+            <span style="color: #0600FF; font-weight: bold;">this</span><span style="color: #008000;">.</span><span style="color: #0000FF;">element</span> <span style="color: #008000;">=</span> element<span style="color: #008000;">;</span> 
+        <span style="color: #008000;">&#125;</span> 
+&nbsp;
+        <span style="color: #0600FF; font-weight: bold;">public</span> AutomationElement getWindow<span style="color: #008000;">&#40;</span>AutomationElement element<span style="color: #008000;">&#41;</span> 
+        <span style="color: #008000;">&#123;</span> 
+            TreeWalker tWalker <span style="color: #008000;">=</span> TreeWalker<span style="color: #008000;">.</span><span style="color: #0000FF;">ControlViewWalker</span><span style="color: #008000;">;</span> 
+            AutomationElement parentItem <span style="color: #008000;">=</span> tWalker<span style="color: #008000;">.</span><span style="color: #0000FF;">GetParent</span><span style="color: #008000;">&#40;</span>element<span style="color: #008000;">&#41;</span><span style="color: #008000;">;</span> 
+            <span style="color: #0600FF; font-weight: bold;">if</span> <span style="color: #008000;">&#40;</span><span style="color: #008000;">!</span>parentItem<span style="color: #008000;">.</span><span style="color: #0000FF;">Current</span><span style="color: #008000;">.</span><span style="color: #0000FF;">ControlType</span><span style="color: #008000;">.</span><span style="color: #0000FF;">Equals</span><span style="color: #008000;">&#40;</span>ControlType<span style="color: #008000;">.</span><span style="color: #0000FF;">Window</span><span style="color: #008000;">&#41;</span><span style="color: #008000;">&#41;</span> 
+            <span style="color: #008000;">&#123;</span> 
+                <span style="color: #0600FF; font-weight: bold;">return</span> getWindow<span style="color: #008000;">&#40;</span>parentItem<span style="color: #008000;">&#41;</span><span style="color: #008000;">;</span> 
+            <span style="color: #008000;">&#125;</span> 
+            <span style="color: #0600FF; font-weight: bold;">return</span> parentItem<span style="color: #008000;">;</span> 
+        <span style="color: #008000;">&#125;</span> 
+&nbsp;
+        <span style="color: #0600FF; font-weight: bold;">public</span> AutomationElement getSameXAutomationElement<span style="color: #008000;">&#40;</span>ControlType controlType, LocationDirection direction<span style="color: #008000;">&#41;</span> 
+        <span style="color: #008000;">&#123;</span> 
+            List<span style="color: #008000;">&lt;</span>AutomationElement<span style="color: #008000;">&gt;</span> xelements <span style="color: #008000;">=</span> getSameXAutomationElement<span style="color: #008000;">&#40;</span>controlType<span style="color: #008000;">&#41;</span><span style="color: #008000;">;</span> 
+            <span style="color: #0600FF; font-weight: bold;">foreach</span> <span style="color: #008000;">&#40;</span>AutomationElement xelement <span style="color: #0600FF; font-weight: bold;">in</span> xelements<span style="color: #008000;">&#41;</span> 
+            <span style="color: #008000;">&#123;</span> 
+                <span style="color: #0600FF; font-weight: bold;">if</span> <span style="color: #008000;">&#40;</span>xelement<span style="color: #008000;">.</span><span style="color: #0000FF;">Current</span><span style="color: #008000;">.</span><span style="color: #0000FF;">ControlType</span><span style="color: #008000;">.</span><span style="color: #0000FF;">Equals</span><span style="color: #008000;">&#40;</span>controlType<span style="color: #008000;">&#41;</span><span style="color: #008000;">&#41;</span> 
+                <span style="color: #008000;">&#123;</span> 
+                    <span style="color: #0600FF; font-weight: bold;">if</span> <span style="color: #008000;">&#40;</span><span style="color: #008000;">&#40;</span>xelement<span style="color: #008000;">.</span><span style="color: #0000FF;">Current</span><span style="color: #008000;">.</span><span style="color: #0000FF;">BoundingRectangle</span><span style="color: #008000;">.</span><span style="color: #0000FF;">Top</span> <span style="color: #008000;">-</span> element<span style="color: #008000;">.</span><span style="color: #0000FF;">Current</span><span style="color: #008000;">.</span><span style="color: #0000FF;">BoundingRectangle</span><span style="color: #008000;">.</span><span style="color: #0000FF;">Top</span><span style="color: #008000;">&#41;</span> <span style="color: #008000;">&gt;</span> <span style="color: #FF0000;">2</span> <span style="color: #008000;">&amp;&amp;</span> direction<span style="color: #008000;">.</span><span style="color: #0000FF;">Equals</span><span style="color: #008000;">&#40;</span>LocationDirection<span style="color: #008000;">.</span><span style="color: #0000FF;">UP</span><span style="color: #008000;">&#41;</span><span style="color: #008000;">&#41;</span> <span style="color: #0600FF; font-weight: bold;">return</span> xelement<span style="color: #008000;">;</span> 
+                    <span style="color: #0600FF; font-weight: bold;">if</span> <span style="color: #008000;">&#40;</span><span style="color: #008000;">&#40;</span>element<span style="color: #008000;">.</span><span style="color: #0000FF;">Current</span><span style="color: #008000;">.</span><span style="color: #0000FF;">BoundingRectangle</span><span style="color: #008000;">.</span><span style="color: #0000FF;">Top</span> <span style="color: #008000;">-</span> xelement<span style="color: #008000;">.</span><span style="color: #0000FF;">Current</span><span style="color: #008000;">.</span><span style="color: #0000FF;">BoundingRectangle</span><span style="color: #008000;">.</span><span style="color: #0000FF;">Top</span><span style="color: #008000;">&#41;</span> <span style="color: #008000;">&gt;</span> <span style="color: #FF0000;">2</span> <span style="color: #008000;">&amp;&amp;</span> direction<span style="color: #008000;">.</span><span style="color: #0000FF;">Equals</span><span style="color: #008000;">&#40;</span>LocationDirection<span style="color: #008000;">.</span><span style="color: #0000FF;">DOWN</span><span style="color: #008000;">&#41;</span><span style="color: #008000;">&#41;</span> <span style="color: #0600FF; font-weight: bold;">return</span> xelement<span style="color: #008000;">;</span> 
+                <span style="color: #008000;">&#125;</span> 
+            <span style="color: #008000;">&#125;</span> 
+&nbsp;
+            <span style="color: #0600FF; font-weight: bold;">return</span> <span style="color: #0600FF; font-weight: bold;">null</span><span style="color: #008000;">;</span> 
+        <span style="color: #008000;">&#125;</span> 
+&nbsp;
+        <span style="color: #0600FF; font-weight: bold;">public</span> AutomationElement getSameYAutomationElement<span style="color: #008000;">&#40;</span>ControlType controlType, LocationDirection direction<span style="color: #008000;">&#41;</span> 
+        <span style="color: #008000;">&#123;</span> 
+            List<span style="color: #008000;">&lt;</span>AutomationElement<span style="color: #008000;">&gt;</span> yelements <span style="color: #008000;">=</span> getSameYAutomationElement<span style="color: #008000;">&#40;</span>controlType<span style="color: #008000;">&#41;</span><span style="color: #008000;">;</span> 
+            <span style="color: #0600FF; font-weight: bold;">foreach</span> <span style="color: #008000;">&#40;</span>AutomationElement yelement <span style="color: #0600FF; font-weight: bold;">in</span> yelements<span style="color: #008000;">&#41;</span> 
+            <span style="color: #008000;">&#123;</span> 
+                <span style="color: #0600FF; font-weight: bold;">if</span> <span style="color: #008000;">&#40;</span>yelement<span style="color: #008000;">.</span><span style="color: #0000FF;">Current</span><span style="color: #008000;">.</span><span style="color: #0000FF;">ControlType</span><span style="color: #008000;">.</span><span style="color: #0000FF;">Equals</span><span style="color: #008000;">&#40;</span>controlType<span style="color: #008000;">&#41;</span><span style="color: #008000;">&#41;</span> 
+                <span style="color: #008000;">&#123;</span> 
+                    <span style="color: #0600FF; font-weight: bold;">if</span> <span style="color: #008000;">&#40;</span><span style="color: #008000;">&#40;</span>yelement<span style="color: #008000;">.</span><span style="color: #0000FF;">Current</span><span style="color: #008000;">.</span><span style="color: #0000FF;">BoundingRectangle</span><span style="color: #008000;">.</span><span style="color: #0000FF;">Left</span> <span style="color: #008000;">-</span> element<span style="color: #008000;">.</span><span style="color: #0000FF;">Current</span><span style="color: #008000;">.</span><span style="color: #0000FF;">BoundingRectangle</span><span style="color: #008000;">.</span><span style="color: #0000FF;">Left</span><span style="color: #008000;">&#41;</span> <span style="color: #008000;">&gt;</span> <span style="color: #FF0000;">2</span> <span style="color: #008000;">&amp;&amp;</span> direction<span style="color: #008000;">.</span><span style="color: #0000FF;">Equals</span><span style="color: #008000;">&#40;</span>LocationDirection<span style="color: #008000;">.</span><span style="color: #0000FF;">RIGHT</span><span style="color: #008000;">&#41;</span><span style="color: #008000;">&#41;</span> <span style="color: #0600FF; font-weight: bold;">return</span> yelement<span style="color: #008000;">;</span> 
+                    <span style="color: #0600FF; font-weight: bold;">if</span> <span style="color: #008000;">&#40;</span><span style="color: #008000;">&#40;</span>element<span style="color: #008000;">.</span><span style="color: #0000FF;">Current</span><span style="color: #008000;">.</span><span style="color: #0000FF;">BoundingRectangle</span><span style="color: #008000;">.</span><span style="color: #0000FF;">Left</span> <span style="color: #008000;">-</span> yelement<span style="color: #008000;">.</span><span style="color: #0000FF;">Current</span><span style="color: #008000;">.</span><span style="color: #0000FF;">BoundingRectangle</span><span style="color: #008000;">.</span><span style="color: #0000FF;">Left</span><span style="color: #008000;">&#41;</span> <span style="color: #008000;">&gt;</span> <span style="color: #FF0000;">2</span> <span style="color: #008000;">&amp;&amp;</span> direction<span style="color: #008000;">.</span><span style="color: #0000FF;">Equals</span><span style="color: #008000;">&#40;</span>LocationDirection<span style="color: #008000;">.</span><span style="color: #0000FF;">LEFT</span><span style="color: #008000;">&#41;</span><span style="color: #008000;">&#41;</span> <span style="color: #0600FF; font-weight: bold;">return</span> yelement<span style="color: #008000;">;</span> 
+                <span style="color: #008000;">&#125;</span> 
+            <span style="color: #008000;">&#125;</span> 
+&nbsp;
+            <span style="color: #0600FF; font-weight: bold;">return</span> <span style="color: #0600FF; font-weight: bold;">null</span><span style="color: #008000;">;</span> 
+        <span style="color: #008000;">&#125;</span> 
+&nbsp;
+        <span style="color: #0600FF; font-weight: bold;">public</span> List<span style="color: #008000;">&lt;</span>AutomationElement<span style="color: #008000;">&gt;</span> getSameXAutomationElement<span style="color: #008000;">&#40;</span>ControlType controlType<span style="color: #008000;">&#41;</span> 
+        <span style="color: #008000;">&#123;</span> 
+            List<span style="color: #008000;">&lt;</span>AutomationElement<span style="color: #008000;">&gt;</span> elements <span style="color: #008000;">=</span> <span style="color: #008000;">new</span> List<span style="color: #008000;">&lt;</span>AutomationElement<span style="color: #008000;">&gt;</span><span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span><span style="color: #008000;">;</span> 
+            List<span style="color: #008000;">&lt;</span>AutomationElement<span style="color: #008000;">&gt;</span> xelements <span style="color: #008000;">=</span> getSameXAutomationElement<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span><span style="color: #008000;">;</span> 
+            <span style="color: #0600FF; font-weight: bold;">foreach</span> <span style="color: #008000;">&#40;</span>AutomationElement element <span style="color: #0600FF; font-weight: bold;">in</span> xelements<span style="color: #008000;">&#41;</span> 
+            <span style="color: #008000;">&#123;</span> 
+                <span style="color: #0600FF; font-weight: bold;">if</span> <span style="color: #008000;">&#40;</span><span style="color: #008000;">!</span>element<span style="color: #008000;">.</span><span style="color: #0000FF;">Current</span><span style="color: #008000;">.</span><span style="color: #0000FF;">ControlType</span><span style="color: #008000;">.</span><span style="color: #0000FF;">Equals</span><span style="color: #008000;">&#40;</span>controlType<span style="color: #008000;">&#41;</span><span style="color: #008000;">&#41;</span> 
+                <span style="color: #008000;">&#123;</span> 
+                    elements<span style="color: #008000;">.</span><span style="color: #0600FF; font-weight: bold;">Add</span><span style="color: #008000;">&#40;</span>element<span style="color: #008000;">&#41;</span><span style="color: #008000;">;</span> 
+                <span style="color: #008000;">&#125;</span> 
+            <span style="color: #008000;">&#125;</span> 
+&nbsp;
+            <span style="color: #0600FF; font-weight: bold;">return</span> elements<span style="color: #008000;">;</span> 
+        <span style="color: #008000;">&#125;</span> 
+&nbsp;
+        <span style="color: #0600FF; font-weight: bold;">public</span> List<span style="color: #008000;">&lt;</span>AutomationElement<span style="color: #008000;">&gt;</span> getSameYAutomationElement<span style="color: #008000;">&#40;</span>ControlType controlType<span style="color: #008000;">&#41;</span> 
+        <span style="color: #008000;">&#123;</span> 
+            List<span style="color: #008000;">&lt;</span>AutomationElement<span style="color: #008000;">&gt;</span> elements <span style="color: #008000;">=</span> <span style="color: #008000;">new</span> List<span style="color: #008000;">&lt;</span>AutomationElement<span style="color: #008000;">&gt;</span><span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span><span style="color: #008000;">;</span> 
+            List<span style="color: #008000;">&lt;</span>AutomationElement<span style="color: #008000;">&gt;</span> yelements <span style="color: #008000;">=</span> getSameYAutomationElement<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span><span style="color: #008000;">;</span> 
+            <span style="color: #0600FF; font-weight: bold;">foreach</span> <span style="color: #008000;">&#40;</span>AutomationElement element <span style="color: #0600FF; font-weight: bold;">in</span> yelements<span style="color: #008000;">&#41;</span> 
+            <span style="color: #008000;">&#123;</span> 
+                <span style="color: #0600FF; font-weight: bold;">if</span> <span style="color: #008000;">&#40;</span><span style="color: #008000;">!</span>element<span style="color: #008000;">.</span><span style="color: #0000FF;">Current</span><span style="color: #008000;">.</span><span style="color: #0000FF;">ControlType</span><span style="color: #008000;">.</span><span style="color: #0000FF;">Equals</span><span style="color: #008000;">&#40;</span>controlType<span style="color: #008000;">&#41;</span><span style="color: #008000;">&#41;</span> 
+                <span style="color: #008000;">&#123;</span> 
+                    elements<span style="color: #008000;">.</span><span style="color: #0600FF; font-weight: bold;">Add</span><span style="color: #008000;">&#40;</span>element<span style="color: #008000;">&#41;</span><span style="color: #008000;">;</span> 
+                <span style="color: #008000;">&#125;</span> 
+            <span style="color: #008000;">&#125;</span> 
+&nbsp;
+            <span style="color: #0600FF; font-weight: bold;">return</span> elements<span style="color: #008000;">;</span> 
+        <span style="color: #008000;">&#125;</span> 
+&nbsp;
+        <span style="color: #0600FF; font-weight: bold;">public</span> List<span style="color: #008000;">&lt;</span>AutomationElement<span style="color: #008000;">&gt;</span> getSameXAutomationElement<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span> 
+        <span style="color: #008000;">&#123;</span> 
+            List<span style="color: #008000;">&lt;</span>AutomationElement<span style="color: #008000;">&gt;</span> elements <span style="color: #008000;">=</span> <span style="color: #008000;">new</span> List<span style="color: #008000;">&lt;</span>AutomationElement<span style="color: #008000;">&gt;</span><span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span><span style="color: #008000;">;</span> 
+            AutomationElement window <span style="color: #008000;">=</span> getWindow<span style="color: #008000;">&#40;</span>element<span style="color: #008000;">&#41;</span><span style="color: #008000;">;</span> 
+&nbsp;
+            TreeWalker tWalker <span style="color: #008000;">=</span> TreeWalker<span style="color: #008000;">.</span><span style="color: #0000FF;">ControlViewWalker</span><span style="color: #008000;">;</span> 
+            AutomationElement childElement <span style="color: #008000;">=</span> tWalker<span style="color: #008000;">.</span><span style="color: #0000FF;">GetFirstChild</span><span style="color: #008000;">&#40;</span>window<span style="color: #008000;">&#41;</span><span style="color: #008000;">;</span> 
+&nbsp;
+            <span style="color: #0600FF; font-weight: bold;">while</span> <span style="color: #008000;">&#40;</span>childElement <span style="color: #008000;">!=</span> <span style="color: #0600FF; font-weight: bold;">null</span><span style="color: #008000;">&#41;</span> 
+            <span style="color: #008000;">&#123;</span> 
+                <span style="color: #0600FF; font-weight: bold;">if</span> <span style="color: #008000;">&#40;</span>childElement <span style="color: #008000;">!=</span> element <span style="color: #008000;">&amp;&amp;</span> Math<span style="color: #008000;">.</span><span style="color: #0000FF;">Abs</span><span style="color: #008000;">&#40;</span>childElement<span style="color: #008000;">.</span><span style="color: #0000FF;">Current</span><span style="color: #008000;">.</span><span style="color: #0000FF;">BoundingRectangle</span><span style="color: #008000;">.</span><span style="color: #0000FF;">Top</span> <span style="color: #008000;">-</span> element<span style="color: #008000;">.</span><span style="color: #0000FF;">Current</span><span style="color: #008000;">.</span><span style="color: #0000FF;">BoundingRectangle</span><span style="color: #008000;">.</span><span style="color: #0000FF;">Top</span><span style="color: #008000;">&#41;</span> <span style="color: #008000;">&lt;</span> <span style="color: #FF0000;">5</span><span style="color: #008000;">&#41;</span> 
+                <span style="color: #008000;">&#123;</span> 
+                    elements<span style="color: #008000;">.</span><span style="color: #0600FF; font-weight: bold;">Add</span><span style="color: #008000;">&#40;</span>childElement<span style="color: #008000;">&#41;</span><span style="color: #008000;">;</span> 
+                <span style="color: #008000;">&#125;</span> 
+                childElement <span style="color: #008000;">=</span> tWalker<span style="color: #008000;">.</span><span style="color: #0000FF;">GetNextSibling</span><span style="color: #008000;">&#40;</span>childElement<span style="color: #008000;">&#41;</span><span style="color: #008000;">;</span> 
+            <span style="color: #008000;">&#125;</span> 
+            <span style="color: #0600FF; font-weight: bold;">return</span> elements<span style="color: #008000;">;</span> 
+        <span style="color: #008000;">&#125;</span> 
+&nbsp;
+        <span style="color: #0600FF; font-weight: bold;">public</span> List<span style="color: #008000;">&lt;</span>AutomationElement<span style="color: #008000;">&gt;</span> getSameYAutomationElement<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span> 
+        <span style="color: #008000;">&#123;</span> 
+            List<span style="color: #008000;">&lt;</span>AutomationElement<span style="color: #008000;">&gt;</span> elements <span style="color: #008000;">=</span> <span style="color: #008000;">new</span> List<span style="color: #008000;">&lt;</span>AutomationElement<span style="color: #008000;">&gt;</span><span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span><span style="color: #008000;">;</span> 
+            AutomationElement window <span style="color: #008000;">=</span> getWindow<span style="color: #008000;">&#40;</span>element<span style="color: #008000;">&#41;</span><span style="color: #008000;">;</span> 
+&nbsp;
+            TreeWalker tWalker <span style="color: #008000;">=</span> TreeWalker<span style="color: #008000;">.</span><span style="color: #0000FF;">ControlViewWalker</span><span style="color: #008000;">;</span> 
+            AutomationElement childElement <span style="color: #008000;">=</span> tWalker<span style="color: #008000;">.</span><span style="color: #0000FF;">GetFirstChild</span><span style="color: #008000;">&#40;</span>window<span style="color: #008000;">&#41;</span><span style="color: #008000;">;</span> 
+&nbsp;
+            <span style="color: #0600FF; font-weight: bold;">while</span> <span style="color: #008000;">&#40;</span>childElement <span style="color: #008000;">!=</span> <span style="color: #0600FF; font-weight: bold;">null</span><span style="color: #008000;">&#41;</span> 
+            <span style="color: #008000;">&#123;</span> 
+                <span style="color: #0600FF; font-weight: bold;">if</span> <span style="color: #008000;">&#40;</span>childElement <span style="color: #008000;">!=</span> element <span style="color: #008000;">&amp;&amp;</span> Math<span style="color: #008000;">.</span><span style="color: #0000FF;">Abs</span><span style="color: #008000;">&#40;</span>childElement<span style="color: #008000;">.</span><span style="color: #0000FF;">Current</span><span style="color: #008000;">.</span><span style="color: #0000FF;">BoundingRectangle</span><span style="color: #008000;">.</span><span style="color: #0000FF;">Left</span> <span style="color: #008000;">-</span> element<span style="color: #008000;">.</span><span style="color: #0000FF;">Current</span><span style="color: #008000;">.</span><span style="color: #0000FF;">BoundingRectangle</span><span style="color: #008000;">.</span><span style="color: #0000FF;">Left</span><span style="color: #008000;">&#41;</span> <span style="color: #008000;">&lt;</span> <span style="color: #FF0000;">5</span><span style="color: #008000;">&#41;</span> 
+                <span style="color: #008000;">&#123;</span> 
+                    elements<span style="color: #008000;">.</span><span style="color: #0600FF; font-weight: bold;">Add</span><span style="color: #008000;">&#40;</span>childElement<span style="color: #008000;">&#41;</span><span style="color: #008000;">;</span> 
+                <span style="color: #008000;">&#125;</span> 
+                childElement <span style="color: #008000;">=</span> tWalker<span style="color: #008000;">.</span><span style="color: #0000FF;">GetNextSibling</span><span style="color: #008000;">&#40;</span>childElement<span style="color: #008000;">&#41;</span><span style="color: #008000;">;</span> 
+            <span style="color: #008000;">&#125;</span> 
+            <span style="color: #0600FF; font-weight: bold;">return</span> elements<span style="color: #008000;">;</span> 
+        <span style="color: #008000;">&#125;</span> 
+    <span style="color: #008000;">&#125;</span></pre></div></div>
+
+
+<div class="wp_code"><div class="pre"><pre class="csharp" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #6666cc; font-weight: bold;">enum</span> LocationDirection
+<span style="color: #008000;">&#123;</span>
+    LEFT <span style="color: #008000;">=</span> <span style="color: #FF0000;">0</span>,
+    RIGHT <span style="color: #008000;">=</span> <span style="color: #FF0000;">1</span>,
+    UP <span style="color: #008000;">=</span> <span style="color: #FF0000;">2</span>,
+    DOWN <span style="color: #008000;">=</span> <span style="color: #FF0000;">3</span>
+<span style="color: #008000;">&#125;</span></pre></div></div>
+
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/9487.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>UI Automation对象识别方式</title>
+		<link>http://www.xieziming.com/archives/9468.html</link>
+		<comments>http://www.xieziming.com/archives/9468.html#respond</comments>
+		<pubDate>Thu, 07 May 2015 07:03:48 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[测试]]></category>
+		<category><![CDATA[Automation]]></category>
+		<category><![CDATA[UI Automation]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=9468</guid>
+		<description><![CDATA[UI Automation中查询子元素有两种方式，一种是通过TreeWalker类的GetFirstChild和GetLastChild方法。一种是通过AutomationElement类的FindFirst和FirstAll方法。
+
+在UIA中，程序UI的每一个部分都被认为是一个AutomationElement类，他们是一个树状的结构，Desktop被认为是每个windows based app的UIA树状图的根，从类的定义中，我们也可以看到一个AutomationElement类中有一个static的RootElement属性。
+
+<strong>对象识别：</strong>
+
+<code lang="csharp">
+AutomationnElement desktop = AutomationElement.RootElement;
+PropertyCondition typeCond = new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Window);
+PropertyCondition nameCond = new PropertyCondition(AutomationElement.NameProperty, "Trader Desktop");
+AutomationElement traderDesktop = desktop.findFirst(TreeScope.Children, new AndCondition(nameCond, typeCond));
+AutomationElementCollection traderDesktops = desktop.findAll(TreeScope.Children, new AndCondition(nameCond, typeCond));
+</code>]]></description>
+				<content:encoded><![CDATA[<p>UI Automation中查询子元素有两种方式，一种是通过TreeWalker类的GetFirstChild和GetLastChild方法。一种是通过AutomationElement类的FindFirst和FirstAll方法。</p>
+<p>在UIA中，程序UI的每一个部分都被认为是一个AutomationElement类，他们是一个树状的结构，Desktop被认为是每个windows based app的UIA树状图的根，从类的定义中，我们也可以看到一个AutomationElement类中有一个static的RootElement属性。</p>
+<p><strong>对象识别：</strong></p>
+
+<div class="wp_code"><div class="pre"><pre class="csharp" style="font-family:'Times New Roman',Garamond, Times;">AutomationnElement desktop <span style="color: #008000;">=</span> AutomationElement<span style="color: #008000;">.</span><span style="color: #0000FF;">RootElement</span><span style="color: #008000;">;</span>
+PropertyCondition typeCond <span style="color: #008000;">=</span> <span style="color: #008000;">new</span> PropertyCondition<span style="color: #008000;">&#40;</span>AutomationElement<span style="color: #008000;">.</span><span style="color: #0000FF;">ControlTypeProperty</span>, ControlType<span style="color: #008000;">.</span><span style="color: #0000FF;">Window</span><span style="color: #008000;">&#41;</span><span style="color: #008000;">;</span>
+PropertyCondition nameCond <span style="color: #008000;">=</span> <span style="color: #008000;">new</span> PropertyCondition<span style="color: #008000;">&#40;</span>AutomationElement<span style="color: #008000;">.</span><span style="color: #0000FF;">NameProperty</span>, <span style="color: #666666;">&quot;Trader Desktop&quot;</span><span style="color: #008000;">&#41;</span><span style="color: #008000;">;</span>
+AutomationElement traderDesktop <span style="color: #008000;">=</span> desktop<span style="color: #008000;">.</span><span style="color: #0000FF;">findFirst</span><span style="color: #008000;">&#40;</span>TreeScope<span style="color: #008000;">.</span><span style="color: #0000FF;">Children</span>, <span style="color: #008000;">new</span> AndCondition<span style="color: #008000;">&#40;</span>nameCond, typeCond<span style="color: #008000;">&#41;</span><span style="color: #008000;">&#41;</span><span style="color: #008000;">;</span>
+AutomationElementCollection traderDesktops <span style="color: #008000;">=</span> desktop<span style="color: #008000;">.</span><span style="color: #0000FF;">findAll</span><span style="color: #008000;">&#40;</span>TreeScope<span style="color: #008000;">.</span><span style="color: #0000FF;">Children</span>, <span style="color: #008000;">new</span> AndCondition<span style="color: #008000;">&#40;</span>nameCond, typeCond<span style="color: #008000;">&#41;</span><span style="color: #008000;">&#41;</span><span style="color: #008000;">;</span></pre></div></div>
+
+<p><strong>对象遍历：</strong></p>
+<blockquote><p>
+<strong>ContentViewWalker</strong><br />
+表示一个预定义的 TreeWalker，其中包含目录树中标记为内容控件的元素的视图。Content View则是Control View的一个子集，它只包含能和用户直接交互真实信息的控件，比如接受键盘输入的Textbox，选择不同值的Combobox；而诸如lable等控件则不会包含在其中</p>
+<p><strong>ControlViewWalker</strong><br />
+表示一个预定义的 TreeWalker，其中包含目录树中标记为控件的元素的视图。Control View是Raw View的子集，它最贴近于最终用户所能感知的UI结构，但是它不包含不能和用户相互交互的一些UI，例如listview的header，toolbar等等。</p>
+<p><strong>RawViewWalker</strong><br />
+表示一个预定义的 TreeWalker，其中包含目录树中所有元素的视图。Raw View提供的信息最多，也是其他view的基础，最贴近于程序本身的编程结构。
+</p></blockquote>
+
+<div class="wp_code"><div class="pre"><pre class="csharp" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #0600FF; font-weight: bold;">private</span> <span style="color: #6666cc; font-weight: bold;">void</span> WalkControlElements<span style="color: #008000;">&#40;</span>AutomationElement rootElement, TreeNode treeNode<span style="color: #008000;">&#41;</span> <span style="color: #008000;">&#123;</span> 
+     <span style="color: #008080; font-style: italic;">//TreeWalker.ControlViewWalker, TreeWalker.ContentViewWalker, TreeWalker.RawViewWalker</span>
+     AutomationElement elementNode <span style="color: #008000;">=</span> TreeWalker<span style="color: #008000;">.</span><span style="color: #0000FF;">ControlViewWalker</span><span style="color: #008000;">.</span><span style="color: #0000FF;">GetFirstChild</span><span style="color: #008000;">&#40;</span>rootElement<span style="color: #008000;">&#41;</span>
+     <span style="color: #0600FF; font-weight: bold;">while</span> <span style="color: #008000;">&#40;</span>elementNode <span style="color: #008000;">!=</span> <span style="color: #0600FF; font-weight: bold;">null</span><span style="color: #008000;">&#41;</span> <span style="color: #008000;">&#123;</span> 
+        TreeNode childTreeNode <span style="color: #008000;">=</span> treeNode<span style="color: #008000;">.</span><span style="color: #0000FF;">Nodes</span><span style="color: #008000;">.</span><span style="color: #0600FF; font-weight: bold;">Add</span><span style="color: #008000;">&#40;</span>elementNode<span style="color: #008000;">.</span><span style="color: #0000FF;">Current</span><span style="color: #008000;">.</span><span style="color: #0000FF;">ControlType</span><span style="color: #008000;">.</span><span style="color: #0000FF;">LocalizedControlType</span><span style="color: #008000;">&#41;</span><span style="color: #008000;">;</span>
+        WalkControlElements<span style="color: #008000;">&#40;</span>elementNode, childTreeNode<span style="color: #008000;">&#41;</span><span style="color: #008000;">;</span> 
+        elementNode <span style="color: #008000;">=</span> TreeWalker<span style="color: #008000;">.</span><span style="color: #0000FF;">ControlViewWalker</span><span style="color: #008000;">.</span><span style="color: #0000FF;">GetNextSibling</span><span style="color: #008000;">&#40;</span>elementNode<span style="color: #008000;">&#41;</span><span style="color: #008000;">;</span> 
+     <span style="color: #008000;">&#125;</span> 
+<span style="color: #008000;">&#125;</span></pre></div></div>
+
+<p>为什么有了微软给出的对象识别（过滤）方式，我们还要自己做对象的遍历：</p>
+<blockquote><p>
+微软给出的对象识别（过滤）主要就是利用TreeWalker.ControlViewWalker来遍历所有的标准控件，然后根据过滤条件来筛选。但对于那些非标准控件，一开始就被排除了，这个时候我们就需要使用RawViewWalker.
+</p></blockquote>
+<p>两者之间还是有性能上的区别，在MSDN的TreeWalker类说明中有这么一段话描述：“使用 TreeWalker 在 UI 自动化目录树中导航可能导致进程间调用，并且其效率不如使用 FindAll 或 FindFirst 方法来定位元素”。有效率上的区别，这点很关键，要知道在一个元素非常多的被测试应用程序上，有很大一部分的工作就在于定位元素，即查找元素，如果测试用例有成百上千条的时候，这两种查找元素的方式有一点效率上的差异，通过大数量级的测试用例运行后的累积效应，其测试所用总时间也会差异较大。</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/9468.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>微软UI Automation</title>
+		<link>http://www.xieziming.com/archives/9480.html</link>
+		<comments>http://www.xieziming.com/archives/9480.html#respond</comments>
+		<pubDate>Tue, 07 Apr 2015 08:28:16 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[测试]]></category>
+		<category><![CDATA[Automation]]></category>
+		<category><![CDATA[UI Automation]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=9480</guid>
+		<description><![CDATA[MS UI Automation（Microsoft User Interface Automation：UIA）随.NET Framework一起发布。 什么是MS UI Automation： MS UI Automation是MSAA技术的一个替代品：即让控件和应用程序具有更好的可达性（accessible），它就是几个dll，提供了一套API和Interface及其相应的模式，让软件的开发者遵循该模式去实现相应的interface，从而软件的使用者（不仅仅是客户，还包括例如测试人员想编写一些自动化测试代码来完成程序相关的业务逻辑）能更好的使用该软件。 和原来的MSAA相比较：UIA重新设计了一套架构，无论是对传统的winform，还是新的wpf，定义了一套统一的模型；其API的使用也相对更简单；同时，和.NET Framework一起，也有inspect.exe和UIA Verify的工具来辅助大家来使用UIA。 UIA之架构 MS UIA明确定义了两个role： （1）UIA Provider即软件本身，主要是软件的开发人员依据相应的模式去实现相关的interface。对于标准控件而言，默认是支持UIA的，而对于自定义的控件，需要实现该控件的行为对应于UIA所定义的interface。 （2）UIA Client即自动化脚本和相关的assistive technology applications，从测试人员的角度出发，主要是调用相应的API去实现自动化测试脚本 UIA主要有4个DLL： （1）UIAutomationProvider.dll，定义了各种行为的interface，例如，假设有个自定义的控件，开发人员觉得它需要支持Dock行为，就需要实现IDockProvider接口。 （2）UIAutomaitonClient.dll，定义了各种控件模式，以及一些用来支持更好的定位控件的辅助条件搜索类。 （3）UIAutomationCore.dll则是用来支持UIA provider和client之间的通信的。 （4）UIAutomationClientssideProviders.dll则主要是用来支持传统的winform的标准控件的。]]></description>
+				<content:encoded><![CDATA[<p>MS UI Automation（Microsoft User Interface Automation：UIA）随.NET Framework一起发布。</p>
+<p><strong>什么是MS UI Automation：</strong></p>
+<blockquote><p>
+MS UI Automation是MSAA技术的一个替代品：即让控件和应用程序具有更好的可达性（accessible），它就是几个dll，提供了一套API和Interface及其相应的模式，让软件的开发者遵循该模式去实现相应的interface，从而软件的使用者（不仅仅是客户，还包括例如测试人员想编写一些自动化测试代码来完成程序相关的业务逻辑）能更好的使用该软件。
+</p></blockquote>
+<p>和原来的MSAA相比较：UIA重新设计了一套架构，无论是对传统的winform，还是新的wpf，定义了一套统一的模型；其API的使用也相对更简单；同时，和.NET Framework一起，也有inspect.exe和UIA Verify的工具来辅助大家来使用UIA。</p>
+<p><strong>UIA之架构</strong></p>
+<p>MS UIA明确定义了两个role：</p>
+<blockquote><p>
+（1）UIA Provider即软件本身，主要是软件的开发人员依据相应的模式去实现相关的interface。对于标准控件而言，默认是支持UIA的，而对于自定义的控件，需要实现该控件的行为对应于UIA所定义的interface。</p>
+<p>（2）UIA Client即自动化脚本和相关的assistive technology applications，从测试人员的角度出发，主要是调用相应的API去实现自动化测试脚本
+</p></blockquote>
+<p>UIA主要有4个DLL：</p>
+<blockquote><p>
+（1）UIAutomationProvider.dll，定义了各种行为的interface，例如，假设有个自定义的控件，开发人员觉得它需要支持Dock行为，就需要实现IDockProvider接口。</p>
+<p>（2）UIAutomaitonClient.dll，定义了各种控件模式，以及一些用来支持更好的定位控件的辅助条件搜索类。</p>
+<p>（3）UIAutomationCore.dll则是用来支持UIA provider和client之间的通信的。</p>
+<p>（4）UIAutomationClientssideProviders.dll则主要是用来支持传统的winform的标准控件的。
+</p></blockquote>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/9480.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+	</channel>
+</rss>

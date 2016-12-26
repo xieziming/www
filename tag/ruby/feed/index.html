@@ -1,0 +1,620 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Ruby &#8211; 谢子明</title>
+	<atom:link href="http://www.xieziming.com/tag/ruby/feed" rel="self" type="application/rss+xml" />
+	<link>http://www.xieziming.com</link>
+	<description>Suny Xie</description>
+	<lastBuildDate>Mon, 26 Dec 2016 07:34:38 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.7</generator>
+	<item>
+		<title>Ruby（三）</title>
+		<link>http://www.xieziming.com/archives/4302.html</link>
+		<comments>http://www.xieziming.com/archives/4302.html#respond</comments>
+		<pubDate>Fri, 23 Apr 2010 08:34:21 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[程序]]></category>
+		<category><![CDATA[Ruby]]></category>
+		<category><![CDATA[技术]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=4302</guid>
+		<description><![CDATA[比较运算符
+&#038;&    并且
+< =>    比较（例如：x< => y，如果x大于y返回1，x小于y返回-1，x等于y 返回0）
+!=    不等于
+
+between?方法 是 对象处于或等于指定的2个值之间，则返回true
+
+age=20
+puts "young" between?(18,60)
+young
+
+<strong>变量：</strong>
+局部变量      以小写字母或下划线卡头         var _var
+全局变量      以$开头                       $var
+类变量        类中定义，以@@开头           @@var
+实例变量      对象中定义，以@开头           @var
+常量          以大写字母开头                 Var]]></description>
+				<content:encoded><![CDATA[<p>比较运算符<br />
+&#038;&#038;    并且<br />
+< =>    比较（例如：x< => y，如果x大于y返回1，x小于y返回-1，x等于y 返回0）<br />
+!=    不等于</p>
+<p>between?方法 是 对象处于或等于指定的2个值之间，则返回true</p>
+<p>age=20<br />
+puts &#8220;young&#8221; between?(18,60)<br />
+young</p>
+<p><strong>变量：</strong><br />
+局部变量      以小写字母或下划线卡头         var _var<br />
+全局变量      以$开头                       $var<br />
+类变量        类中定义，以@@开头           @@var<br />
+实例变量      对象中定义，以@开头           @var<br />
+常量          以大写字母开头                 Var</p>
+<p>解释：局部变量也就是基本的变量，在变量定义的相同地方使用。</p>
+<p>类变量就是在类定义中用@@开头的变量。类变量是用于存储类的全局信息，它只属于类，不同与类实例变量（即用@开头定义的变量）每一个类的对象都有一份数据。 类变量是可以被继承的，也就是说如果我们派生一个子类，那么在子类中是可以访问父类的类变量的。类变量在访问前必须赋值。子类和父类共享一份数据，对一个类的修改会反映到另一个类中。</p>
+<p>类的类实例变量是在类的类方法中或方法外边（不能在实例方法中，那是类的实例变量）以@开头定义的变量，这样定义的变量值属于类对象本身，不能够被子类继承。如果要定义需要和子类共享的类全局数据，使用类变量；但是如果要定义仅供类本身使用的类全局数据可以使用类实例变量。还有一点需要注意的是，和类变量不同的是类实例变量不要求访问前必须赋值，不赋值它的值就是nil </p>
+<p><strong>变量内插：</strong><br />
+在双引号内使用“#{变量名}”内插变量。</p>
+
+<div class="wp_code"><div class="pre"><pre class="ruby" style="font-family:'Times New Roman',Garamond, Times;">a　=　<span style="color:#006666;">1</span>   
+<span style="color:#CC0066; font-weight:bold;">puts</span>　a.<span style="color:#9966CC; font-weight:bold;">class</span>　<span style="color:#008000; font-style:italic;">#Fixnum   </span>
+a　=　<span style="color:#996600;">&quot;s&quot;</span>  
+<span style="color:#CC0066; font-weight:bold;">puts</span>　a.<span style="color:#9966CC; font-weight:bold;">class</span>　<span style="color:#008000; font-style:italic;">#String</span></pre></div></div>
+
+
+<div class="wp_code"><div class="pre"><pre class="ruby" style="font-family:'Times New Roman',Garamond, Times;"><span style="color:#ff6633; font-weight:bold;">$Global</span>　=　<span style="color:#996600;">&quot;Word!&quot;</span>  
+<span style="color:#9966CC; font-weight:bold;">class</span>　Class1   
+　@@I　=　<span style="color:#006666;">0</span>   
+　<span style="color:#9966CC; font-weight:bold;">def</span>　initialize<span style="color:#006600; font-weight:bold;">&#40;</span><span style="color:#006600; font-weight:bold;">&#41;</span>   
+　@name　=　<span style="color:#996600;">&quot;Tom!&quot;</span>  
+　<span style="color:#9966CC; font-weight:bold;">end</span>  
+　   
+　<span style="color:#9966CC; font-weight:bold;">def</span>　test<span style="color:#006600; font-weight:bold;">&#40;</span><span style="color:#006600; font-weight:bold;">&#41;</span>   
+　a　=　<span style="color:#006666;">123456</span>   
+　<span style="color:#CC0066; font-weight:bold;">puts</span>　a   
+　<span style="color:#9966CC; font-weight:bold;">end</span>  
+<span style="color:#9966CC; font-weight:bold;">end</span></pre></div></div>
+
+<p><strong>作用域:</strong></p>
+<p>在类或模块内的任意位置都可以访问此类或模块中定义的常量，在这之外，可以通过域作用符(::)访问。</p>
+
+<div class="wp_code"><div class="pre"><pre class="ruby" style="font-family:'Times New Roman',Garamond, Times;"><span style="color:#9966CC; font-weight:bold;">class</span> Demo   
+  NAME=<span style="color:#996600;">&quot;name&quot;</span>  
+  <span style="color:#9966CC; font-weight:bold;">def</span> test   
+    <span style="color:#CC0066; font-weight:bold;">puts</span> NAME     
+  <span style="color:#9966CC; font-weight:bold;">end</span>  
+<span style="color:#9966CC; font-weight:bold;">end</span>  
+<span style="color:#CC0066; font-weight:bold;">puts</span> <span style="color:#6666ff; font-weight:bold;">Demo::NAME</span> <span style="color:#008000; font-style:italic;">#test.rb</span></pre></div></div>
+
+
+<div class="wp_code"><div class="pre"><pre class="ruby" style="font-family:'Times New Roman',Garamond, Times;"><span style="color:#9966CC; font-weight:bold;">class</span> Demo
+  NAME=<span style="color:#996600;">&quot;name&quot;</span>
+  <span style="color:#ff6633; font-weight:bold;">$age</span>=<span style="color:#996600;">&quot;test&quot;</span>
+  <span style="color:#9966CC; font-weight:bold;">def</span> test
+    <span style="color:#CC0066; font-weight:bold;">puts</span> <span style="color:#ff6633; font-weight:bold;">$age</span>  
+  <span style="color:#9966CC; font-weight:bold;">end</span>
+<span style="color:#9966CC; font-weight:bold;">end</span></pre></div></div>
+
+
+<div class="wp_code"><div class="pre"><pre class="ruby" style="font-family:'Times New Roman',Garamond, Times;"><span style="color:#CC0066; font-weight:bold;">require</span> <span style="color:#996600;">&quot;test.rb&quot;</span>  
+<span style="color:#ff6633; font-weight:bold;">$age</span>=<span style="color:#006666;">1</span>   
+<span style="color:#CC0066; font-weight:bold;">puts</span>  <span style="color:#ff6633; font-weight:bold;">$age</span></pre></div></div>
+
+<p>Ruby 程序在执行时，会提供一些环境变量供程序代码读取。 </p>
+<p>$0 : 被执行程序的名字，通常是程序的文件名。<br />
+$* : 程序执行参数。<br />
+__FILE__ : 当前源文件的名字。<br />
+__FILE__ 和 $0 通常组合起来使用，用于判断当前文件是否是直接被执行的主程序文件。</p>
+
+<div class="wp_code"><div class="pre"><pre class="ruby" style="font-family:'Times New Roman',Garamond, Times;"><span style="color:#9966CC; font-weight:bold;">if</span>　<span style="color:#0000FF; font-weight:bold;">__FILE__</span>　==　$0  
+　<span style="color:#CC0066; font-weight:bold;">puts</span>　<span style="color:#996600;">&quot;Main...&quot;</span>  
+<span style="color:#9966CC; font-weight:bold;">end</span></pre></div></div>
+
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/4302.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Ruby（二）</title>
+		<link>http://www.xieziming.com/archives/4300.html</link>
+		<comments>http://www.xieziming.com/archives/4300.html#respond</comments>
+		<pubDate>Fri, 23 Apr 2010 08:20:07 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[程序]]></category>
+		<category><![CDATA[Ruby]]></category>
+		<category><![CDATA[技术]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=4300</guid>
+		<description><![CDATA[<strong>正则表达式:</strong>
+在Ruby中，创建正则表达式的方式是 /pattern/。比如编写一个模式，使之匹配 “hello” 或者“Hi”的字符串。这个正则表达式的写法是
+<code lang="ruby">/hello&#124;Hi/ </code>
+
+在程序中要检查一个字符串是否与指定的正则表达式匹配，采用=~ 匹配运算符
+<code lang="ruby">
+if name=~/Ruby&#124;Rails/
+puts "true"
+end
+</code>
+
+<strong>属性的访问性:</strong>
+ruby并不支持直接访问类中的属性，如果要访问类中的属性，需要先通过attr_reader:属性名（只读），attr_writer:属性名（只写），attr_accessor:属性名（读写）来设定属性的访问权限。ruby在类里没办法定义变量，只能在方法中定义变量。方法和方法之间如果想通信只能通过@变量，也就是实例变量进行通信，ruby通过attr_xxxx可以控制@变量的访问性。 ]]></description>
+				<content:encoded><![CDATA[<p><strong>正则表达式:</strong><br />
+在Ruby中，创建正则表达式的方式是 /pattern/。比如编写一个模式，使之匹配 “hello” 或者“Hi”的字符串。这个正则表达式的写法是</p>
+
+<div class="wp_code"><div class="pre"><pre class="ruby" style="font-family:'Times New Roman',Garamond, Times;"><span style="color:#006600; font-weight:bold;">/</span>hello<span style="color:#006600; font-weight:bold;">|</span>Hi<span style="color:#006600; font-weight:bold;">/</span></pre></div></div>
+
+<p>在程序中要检查一个字符串是否与指定的正则表达式匹配，采用=~ 匹配运算符</p>
+
+<div class="wp_code"><div class="pre"><pre class="ruby" style="font-family:'Times New Roman',Garamond, Times;"><span style="color:#9966CC; font-weight:bold;">if</span> name=~<span style="color:#006600; font-weight:bold;">/</span>Ruby<span style="color:#006600; font-weight:bold;">|</span>Rails<span style="color:#006600; font-weight:bold;">/</span>
+<span style="color:#CC0066; font-weight:bold;">puts</span> <span style="color:#996600;">&quot;true&quot;</span>
+<span style="color:#9966CC; font-weight:bold;">end</span></pre></div></div>
+
+<p><strong>属性的访问性:</strong><br />
+ruby并不支持直接访问类中的属性，如果要访问类中的属性，需要先通过attr_reader:属性名（只读），attr_writer:属性名（只写），attr_accessor:属性名（读写）来设定属性的访问权限。ruby在类里没办法定义变量，只能在方法中定义变量。方法和方法之间如果想通信只能通过@变量，也就是实例变量进行通信，ruby通过attr_xxxx可以控制@变量的访问性。 </p>
+<p><strong>方法的访问性:</strong><br />
+方法的访问性是通过public,private和protected进行限制的。public :方法名1，方法名2&#8230;&#8230;这样的方式进行声明的。属性的访问性可以放在前面，但方法的访问性要放在方法之后，如果放在方法前面会出现方法未定义的报错。除了初始化方法恒化private，其它方法缺省为public</p>
+<p>类方法（静态方法）。 ruby中定义类方法如下（即类名或self）</p>
+
+<div class="wp_code"><div class="pre"><pre class="ruby" style="font-family:'Times New Roman',Garamond, Times;"><span style="color:#9966CC; font-weight:bold;">class</span> HelloWorld
+   <span style="color:#9966CC; font-weight:bold;">def</span> HelloWorld.<span style="color:#9900CC;">hello</span><span style="color:#006600; font-weight:bold;">&#40;</span>name<span style="color:#006600; font-weight:bold;">&#41;</span>
+        <span style="color:#CC0066; font-weight:bold;">print</span> name,<span style="color:#996600;">&quot; said Hello.&quot;</span>
+    <span style="color:#9966CC; font-weight:bold;">end</span>
+<span style="color:#9966CC; font-weight:bold;">end</span>
+HelloWorld.<span style="color:#9900CC;">hello</span><span style="color:#006600; font-weight:bold;">&#40;</span><span style="color:#996600;">&quot;John&quot;</span><span style="color:#006600; font-weight:bold;">&#41;</span></pre></div></div>
+
+
+<div class="wp_code"><div class="pre"><pre class="ruby" style="font-family:'Times New Roman',Garamond, Times;"><span style="color:#9966CC; font-weight:bold;">class</span> HelloWorld
+   <span style="color:#9966CC; font-weight:bold;">def</span> <span style="color:#0000FF; font-weight:bold;">self</span>.<span style="color:#9900CC;">hello</span><span style="color:#006600; font-weight:bold;">&#40;</span>name<span style="color:#006600; font-weight:bold;">&#41;</span>
+        <span style="color:#CC0066; font-weight:bold;">print</span> name,<span style="color:#996600;">&quot; said Hello.&quot;</span>
+    <span style="color:#9966CC; font-weight:bold;">end</span>
+<span style="color:#9966CC; font-weight:bold;">end</span>
+HelloWorld.<span style="color:#9900CC;">hello</span><span style="color:#006600; font-weight:bold;">&#40;</span><span style="color:#996600;">&quot;John&quot;</span><span style="color:#006600; font-weight:bold;">&#41;</span></pre></div></div>
+
+<p>需要注意的是，类方法不能访问实例变量 </p>
+<p>类变量（静态变量），ruby中类变量是通过加@@标识的 </p>
+<p><strong>类常量:</strong><br />
+类中还可以定义常量，还是要求大写字母开头。类中不能定义和方法平缓的变量，但是可以定义和方法平级的常量，常量可以被所有方法调用。类常量的调用方法是类名::常量名 </p>
+<p><strong>模块:</strong><br />
+模块是ruby特有的功能之一。模块和类很像，但和类最大的不同在于模块不能实例化，也不能继承，模块的作用有两个，一个是用于提供命名空间。第二提供Mix-in功能。</p>
+<p>模块的常量和类常用调用方法一样。模块名::常量名。模块的方法调用和类的方法调用不同，可以使用模块::方法名，也可以使用模块.方法名</p>
+<p>模块定义的方法默认是不对外部公开的，（模块内没有public private protect关键字），要将方法对模块外部公开，必须使用module_function</p>
+
+<div class="wp_code"><div class="pre"><pre class="ruby" style="font-family:'Times New Roman',Garamond, Times;"><span style="color:#9966CC; font-weight:bold;">module</span> HelloModule
+   Version = <span style="color:#996600;">&quot;1.0&quot;</span>
+    <span style="color:#9966CC; font-weight:bold;">def</span> hello<span style="color:#006600; font-weight:bold;">&#40;</span>name<span style="color:#006600; font-weight:bold;">&#41;</span>
+       <span style="color:#CC0066; font-weight:bold;">print</span> <span style="color:#996600;">&quot;Hello, &quot;</span>,name,<span style="color:#996600;">&quot;.<span style="color:#000099;">\n</span>&quot;</span>
+     <span style="color:#9966CC; font-weight:bold;">end</span>
+      module_function <span style="color:#ff3333; font-weight:bold;">:hello</span> <span style="color:#008000; font-style:italic;">#注意：冒号后不能有空格</span>
+<span style="color:#9966CC; font-weight:bold;">end</span>
+&nbsp;
+<span style="color:#CC0066; font-weight:bold;">p</span> <span style="color:#6666ff; font-weight:bold;">HelloModule::Version</span>          <span style="color:#008000; font-style:italic;">#=&gt;&quot;1.0&quot;</span>
+HelloModule::hello<span style="color:#006600; font-weight:bold;">&#40;</span><span style="color:#996600;">&quot;Alice&quot;</span><span style="color:#006600; font-weight:bold;">&#41;</span>      <span style="color:#008000; font-style:italic;">#=&gt; hello, Alice.</span>
+<span style="color:#9966CC; font-weight:bold;">include</span> HelloModule
+<span style="color:#CC0066; font-weight:bold;">p</span> Version         <span style="color:#008000; font-style:italic;">#=&gt;&quot;1.0&quot;</span>
+hello<span style="color:#006600; font-weight:bold;">&#40;</span><span style="color:#996600;">&quot;Alice&quot;</span><span style="color:#006600; font-weight:bold;">&#41;</span>    <span style="color:#008000; font-style:italic;">#=&gt;Hello, Alice</span></pre></div></div>
+
+<p><strong>单引号和双引号的区别</strong></p>
+<p>单引号中不能包含变量，双引号中可以包含变量。在ruby中，单引号中的\n这样表示换行之类的转义字符都会无效，直接输出出来。</p>
+<p><strong>使用for</strong><br />
+Ruby的for有两种用法</p>
+
+<div class="wp_code"><div class="pre"><pre class="ruby" style="font-family:'Times New Roman',Garamond, Times;">sum=<span style="color:#006666;">0</span>   
+<span style="color:#9966CC; font-weight:bold;">for</span> i <span style="color:#9966CC; font-weight:bold;">in</span> <span style="color:#006666;">2</span>..<span style="color:#006666;">5</span>   
+sum<span style="color:#006600; font-weight:bold;">+</span>=<span style="color:#006666;">1</span>   
+<span style="color:#9966CC; font-weight:bold;">end</span>  
+<span style="color:#CC0066; font-weight:bold;">puts</span> sum  
+sum=<span style="color:#006666;">0</span>
+<span style="color:#9966CC; font-weight:bold;">for</span> i <span style="color:#9966CC; font-weight:bold;">in</span> <span style="color:#006666;">2</span>..<span style="color:#006666;">5</span>
+  sum<span style="color:#006600; font-weight:bold;">+</span>=<span style="color:#006666;">1</span>
+<span style="color:#9966CC; font-weight:bold;">end</span>
+<span style="color:#CC0066; font-weight:bold;">puts</span> sum</pre></div></div>
+
+
+<div class="wp_code"><div class="pre"><pre class="ruby" style="font-family:'Times New Roman',Garamond, Times;">names = <span style="color:#006600; font-weight:bold;">&#91;</span><span style="color:#996600;">&quot;a&quot;</span>,<span style="color:#996600;">&quot;b&quot;</span>,<span style="color:#996600;">&quot;c&quot;</span><span style="color:#006600; font-weight:bold;">&#93;</span>    
+<span style="color:#9966CC; font-weight:bold;">for</span> name <span style="color:#9966CC; font-weight:bold;">in</span> names   
+<span style="color:#CC0066; font-weight:bold;">puts</span> name     
+<span style="color:#9966CC; font-weight:bold;">end</span>  
+names = <span style="color:#006600; font-weight:bold;">&#91;</span><span style="color:#996600;">&quot;a&quot;</span>,<span style="color:#996600;">&quot;b&quot;</span>,<span style="color:#996600;">&quot;c&quot;</span><span style="color:#006600; font-weight:bold;">&#93;</span>
+<span style="color:#9966CC; font-weight:bold;">for</span> name <span style="color:#9966CC; font-weight:bold;">in</span> names
+ <span style="color:#CC0066; font-weight:bold;">puts</span> name
+<span style="color:#9966CC; font-weight:bold;">end</span></pre></div></div>
+
+<p>注意hash输出结果，将键值都输出</p>
+
+<div class="wp_code"><div class="pre"><pre class="ruby" style="font-family:'Times New Roman',Garamond, Times;">name=<span style="color:#006600; font-weight:bold;">&#123;</span><span style="color:#996600;">&quot;a&quot;</span><span style="color:#006600; font-weight:bold;">=&gt;</span><span style="color:#006666;">1</span>,<span style="color:#996600;">&quot;b&quot;</span><span style="color:#006600; font-weight:bold;">=&gt;</span><span style="color:#006666;">2</span><span style="color:#006600; font-weight:bold;">&#125;</span>   
+<span style="color:#9966CC; font-weight:bold;">for</span> n <span style="color:#9966CC; font-weight:bold;">in</span> name   
+  <span style="color:#CC0066; font-weight:bold;">puts</span> n   
+<span style="color:#9966CC; font-weight:bold;">end</span>  
+name=<span style="color:#006600; font-weight:bold;">&#123;</span><span style="color:#996600;">&quot;a&quot;</span><span style="color:#006600; font-weight:bold;">=&gt;</span><span style="color:#006666;">1</span>,<span style="color:#996600;">&quot;b&quot;</span><span style="color:#006600; font-weight:bold;">=&gt;</span><span style="color:#006666;">2</span><span style="color:#006600; font-weight:bold;">&#125;</span>
+<span style="color:#9966CC; font-weight:bold;">for</span> n <span style="color:#9966CC; font-weight:bold;">in</span> name
+  <span style="color:#CC0066; font-weight:bold;">puts</span> n
+<span style="color:#9966CC; font-weight:bold;">end</span></pre></div></div>
+
+<p><strong>迭代</strong>,其实迭代也是我们熟悉的循环中的一种</p>
+
+<div class="wp_code"><div class="pre"><pre class="ruby" style="font-family:'Times New Roman',Garamond, Times;"><span style="color:#006666;">1</span>.<span style="color:#9900CC;">a</span>=<span style="color:#006600; font-weight:bold;">&#91;</span><span style="color:#996600;">&quot;a&quot;</span>,<span style="color:#996600;">&quot;b&quot;</span><span style="color:#006600; font-weight:bold;">&#93;</span>   
+a.<span style="color:#9900CC;">each</span><span style="color:#006600; font-weight:bold;">&#123;</span>   
+<span style="color:#006600; font-weight:bold;">|</span>n<span style="color:#006600; font-weight:bold;">|</span>   
+<span style="color:#CC0066; font-weight:bold;">puts</span> n   
+<span style="color:#006600; font-weight:bold;">&#125;</span>  
+a=<span style="color:#006600; font-weight:bold;">&#91;</span><span style="color:#996600;">&quot;a&quot;</span>,<span style="color:#996600;">&quot;b&quot;</span><span style="color:#006600; font-weight:bold;">&#93;</span>
+a.<span style="color:#9900CC;">each</span><span style="color:#006600; font-weight:bold;">&#123;</span>
+ <span style="color:#006600; font-weight:bold;">|</span>n<span style="color:#006600; font-weight:bold;">|</span>
+ <span style="color:#CC0066; font-weight:bold;">puts</span> n
+<span style="color:#006600; font-weight:bold;">&#125;</span></pre></div></div>
+
+<p>4: hash算列表 ,ruby的hash格式用=>分隔，在调用hash数据时，ruby只能通过hash[name]调用</p>
+
+<div class="wp_code"><div class="pre"><pre class="ruby" style="font-family:'Times New Roman',Garamond, Times;">b=<span style="color:#006600; font-weight:bold;">&#123;</span><span style="color:#996600;">&quot;a&quot;</span><span style="color:#006600; font-weight:bold;">=&gt;</span><span style="color:#006666;">1</span>,<span style="color:#996600;">&quot;b&quot;</span><span style="color:#006600; font-weight:bold;">=&gt;</span><span style="color:#006666;">2</span><span style="color:#006600; font-weight:bold;">&#125;</span>   
+<span style="color:#CC0066; font-weight:bold;">puts</span> b<span style="color:#006600; font-weight:bold;">&#91;</span><span style="color:#996600;">&quot;a&quot;</span><span style="color:#006600; font-weight:bold;">&#93;</span></pre></div></div>
+
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/4300.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>ROR笔记（二）</title>
+		<link>http://www.xieziming.com/archives/4294.html</link>
+		<comments>http://www.xieziming.com/archives/4294.html#respond</comments>
+		<pubDate>Fri, 23 Apr 2010 07:24:10 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[程序]]></category>
+		<category><![CDATA[Ruby]]></category>
+		<category><![CDATA[技术]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=4294</guid>
+		<description><![CDATA[6：视图模板可以访问控制器中的任何实例变量
+
+7：添加数据库缺失字段 先创建一个迁移任务，取一个一目了然的名字，一般用create来创建表，add来给表增加字段。
+
+ruby script/generate migration add_price # add_price为迁移任务名字
+
+打开这个迁移任务源文件，在up方法内插入字段（向表里添加字段）
+
+add_column:products,:price,:float #向products表插入float类型的字段price
+
+在down方法内插入字段（向表里删除字段） remove_column:products,:price
+
+运行迁移 rake db:migrate
+
+8: 在模型层添加数据验证
+
+validates_presence_of:title #检查 字段为title的值不为空
+
+validates_numericality_of:price #检查字段为price的值为数值
+
+validates_format_of:image_url,:with=>%r{\.(gif&#124;jpg&#124;png)$}i,:message=>"must be a url for a gif ,jpg, or png"
+
+#检查image_url这个字段与with后的正则表达式是否匹配]]></description>
+				<content:encoded><![CDATA[<p>6：视图模板可以访问控制器中的任何实例变量</p>
+<p>7：添加数据库缺失字段 先创建一个迁移任务，取一个一目了然的名字，一般用create来创建表，add来给表增加字段。</p>
+<p>ruby script/generate migration add_price # add_price为迁移任务名字</p>
+<p>打开这个迁移任务源文件，在up方法内插入字段（向表里添加字段）</p>
+<p>add_column:products,:price,:float #向products表插入float类型的字段price</p>
+<p>在down方法内插入字段（向表里删除字段） remove_column:products,:price</p>
+<p>运行迁移 rake db:migrate</p>
+<p>8: 在模型层添加数据验证</p>
+<p>validates_presence_of:title #检查 字段为title的值不为空</p>
+<p>validates_numericality_of:price #检查字段为price的值为数值</p>
+<p>validates_format_of:image_url,:with=&gt;%r{\.(gif|jpg|png)$}i,:message=&gt;&#8221;must be a url for a gif ,jpg, or png&#8221;</p>
+<p>#检查image_url这个字段与with后的正则表达式是否匹配</p>
+<p><strong>SQL语句：</strong></p>
+<p>Active Record是如何处理SQL的，我们来看看find方法的:conditions参数，调用的时候像这样：find(:all,:conditions=>…)，这里的:conditions参数决定了find方法将返回哪些记录，它相当于Sql语句的where部分，例如，要获取所有的名字为Dave，pay_type为po的订单，我们这样写：<br />
+pos = Order.find(:all,:conditions => &#8220;name = &#8216;dave&#8217; and pay_type = &#8216;po'&#8221;) </p>
+<p>find方法将返回所有符合条件的记录，并且都已经被转换成Order类的对象，如果没有符合条件的订单，find方法将返回一个长度为零的数组。</p>
+<p>如果你的条件是预定的，那么上面的写法就很好了，但是如果我们要指定条件中的值呢，我们这样写：</p>
+<p>name = params[:name]<br />
+pos = Order.find(:all,:conditions => &#8220;name = &#8216;#{name}&#8217; and pay_type = &#8216;po'&#8221;)</p>
+<p>但是，这并不是一个好主意，因为如果你的程序要发布在网络上的话，这样给SQL注入攻击留下了方便，更好的办法是，动态的生成SQL，让Active Record来处理它，我们可以在SQL语句中加入占位符，然后这些占位符将会在运行期被替换成指定的值，指定占位符的方法就是在SQL中使用问号，在运行时，第一个问号将被替换为集合的第二个元素的值，以此类推，例如，我们把上面的查询重写一次：</p>
+<p>name = params[:name]<br />
+pos = Order.find(:all,:conditions => [&#8220;name = ? and pay_type = &#8216;po'&#8221;, name])  </p>
+<p>我们也可以使用带名字的占位符，名字前带冒号，例如下面这样：</p>
+
+<div class="wp_code"><div class="pre"><pre class="ruby" style="font-family:'Times New Roman',Garamond, Times;">name = params<span style="color:#006600; font-weight:bold;">&#91;</span><span style="color:#ff3333; font-weight:bold;">:name</span><span style="color:#006600; font-weight:bold;">&#93;</span>
+pay_type = params<span style="color:#006600; font-weight:bold;">&#91;</span><span style="color:#ff3333; font-weight:bold;">:pay_type</span><span style="color:#006600; font-weight:bold;">&#93;</span>
+pos = Order.<span style="color:#9900CC;">find</span><span style="color:#006600; font-weight:bold;">&#40;</span><span style="color:#ff3333; font-weight:bold;">:all</span>,
+<span style="color:#ff3333; font-weight:bold;">:conditions</span> <span style="color:#006600; font-weight:bold;">=&gt;</span> <span style="color:#006600; font-weight:bold;">&#91;</span><span style="color:#996600;">&quot;name = :name and pay_type = :pay_type&quot;</span>,
+<span style="color:#006600; font-weight:bold;">&#123;</span>:pay_type <span style="color:#006600; font-weight:bold;">=&gt;</span> pay_type, <span style="color:#ff3333; font-weight:bold;">:name</span> <span style="color:#006600; font-weight:bold;">=&gt;</span> name<span style="color:#006600; font-weight:bold;">&#125;</span><span style="color:#006600; font-weight:bold;">&#93;</span><span style="color:#006600; font-weight:bold;">&#41;</span></pre></div></div>
+
+<p>我也可以更进一步，因为params是一个hash，我们可以让conditions部分更简单</p>
+
+<div class="wp_code"><div class="pre"><pre class="ruby" style="font-family:'Times New Roman',Garamond, Times;">pos = Order.<span style="color:#9900CC;">find</span><span style="color:#006600; font-weight:bold;">&#40;</span><span style="color:#ff3333; font-weight:bold;">:all</span>,
+<span style="color:#ff3333; font-weight:bold;">:conditions</span> <span style="color:#006600; font-weight:bold;">=&gt;</span> <span style="color:#006600; font-weight:bold;">&#91;</span><span style="color:#996600;">&quot;name = :name and pay_type = :pay_type&quot;</span>, params<span style="color:#006600; font-weight:bold;">&#93;</span><span style="color:#006600; font-weight:bold;">&#41;</span></pre></div></div>
+
+<p>不管使用哪种占位符，Active Record都会很小心地处理SQL中的引号和escape。使用动态SQL，Active Record会保护我们不受SQL注入攻击。</p>
+<p>Find方法详解：</p>
+<p>首先，理解find(:first,…)方法是非常重要的，该方法在同样的conditions设置下，和find(:all,…)方法生成同样的sql语句，不同之处仅在于只返回一条记录。在调用的时候，一种的参数为:first，另一种为:all。</p>
+<p>find方法执行一个select from这样的sql语句，:all标记指定返回表中所有的记录，:first返回第一条记录。但是现在:first还不能保证你得到的就是表中的第一条记录，原因是什么？:conditions参数指定了SQL语句的where部分，可以包含Sql语句或者包含可以替换的参数的名字，值。find方法并不能保证按照特定的顺序返回记录，除非指定查询的排序（order by）部分。:order参数就是用来指定SQL的排序条件的，下面的例子演示了查询名字为Dave的订单，并且按照pay_type,shipped_at字段进行降序排列。</p>
+
+<div class="wp_code"><div class="pre"><pre class="ruby" style="font-family:'Times New Roman',Garamond, Times;">orders = Order.<span style="color:#9900CC;">find</span><span style="color:#006600; font-weight:bold;">&#40;</span><span style="color:#ff3333; font-weight:bold;">:all</span>,
+<span style="color:#ff3333; font-weight:bold;">:conditions</span> <span style="color:#006600; font-weight:bold;">=&gt;</span> <span style="color:#996600;">&quot;name = 'Dave'&quot;</span>,
+<span style="color:#ff3333; font-weight:bold;">:order</span> <span style="color:#006600; font-weight:bold;">=&gt;</span> <span style="color:#996600;">&quot;pay_type, shipped_at DESC&quot;</span><span style="color:#006600; font-weight:bold;">&#41;</span></pre></div></div>
+
+<p>我们还可以设置:limit参数来限制返回的记录数，如果你使用:limit参数，或许还想指定排序条件，下面的例子返回10条记录，并且按照指定条件排序：</p>
+
+<div class="wp_code"><div class="pre"><pre class="ruby" style="font-family:'Times New Roman',Garamond, Times;">orders = Order.<span style="color:#9900CC;">find</span><span style="color:#006600; font-weight:bold;">&#40;</span><span style="color:#ff3333; font-weight:bold;">:all</span>,
+<span style="color:#ff3333; font-weight:bold;">:conditions</span> <span style="color:#006600; font-weight:bold;">=&gt;</span> <span style="color:#996600;">&quot;name = 'Dave'&quot;</span>,
+<span style="color:#ff3333; font-weight:bold;">:order</span> <span style="color:#006600; font-weight:bold;">=&gt;</span> <span style="color:#996600;">&quot;pay_type, shipped_at DESC&quot;</span>,
+<span style="color:#ff3333; font-weight:bold;">:limit</span> <span style="color:#006600; font-weight:bold;">=&gt;</span> <span style="color:#006666;">10</span><span style="color:#006600; font-weight:bold;">&#41;</span></pre></div></div>
+
+<p>参数:offset经常与:limit参数一同出现，用来指定从第一条记录起，返回指定的偏移量，下面代码演示了:offset参数的使用：</p>
+
+<div class="wp_code"><div class="pre"><pre class="ruby" style="font-family:'Times New Roman',Garamond, Times;"><span style="color:#9966CC; font-weight:bold;">def</span> Order.<span style="color:#9900CC;">find_on_page</span><span style="color:#006600; font-weight:bold;">&#40;</span>page_num, page_size<span style="color:#006600; font-weight:bold;">&#41;</span>
+find<span style="color:#006600; font-weight:bold;">&#40;</span><span style="color:#ff3333; font-weight:bold;">:all</span>,
+<span style="color:#ff3333; font-weight:bold;">:order</span> <span style="color:#006600; font-weight:bold;">=&gt;</span> <span style="color:#996600;">&quot;id&quot;</span>,
+<span style="color:#ff3333; font-weight:bold;">:limit</span> <span style="color:#006600; font-weight:bold;">=&gt;</span> page_size,
+<span style="color:#ff3333; font-weight:bold;">:offset</span> <span style="color:#006600; font-weight:bold;">=&gt;</span> page_num<span style="color:#006600; font-weight:bold;">*</span>page_size<span style="color:#006600; font-weight:bold;">&#41;</span>
+<span style="color:#9966CC; font-weight:bold;">end</span></pre></div></div>
+
+<p>从上面的代码可以看到，这样使用find的场景就是分页显示数据，用pagesize指定每页的记录数，然后由pagenum*page_size指定从第几条开始提取数据。</p>
+<p>find方法为我们构建了完整的Sql查询，而方法find_by_sql方法则允许我们对Sql有完整的控制，该方法只有一个参数，就是你想要使用的完整的sql语句，下面是示例代码：</p>
+
+<div class="wp_code"><div class="pre"><pre class="ruby" style="font-family:'Times New Roman',Garamond, Times;">orders = LineItem.<span style="color:#9900CC;">find_by_sql</span><span style="color:#006600; font-weight:bold;">&#40;</span><span style="color:#996600;">&quot;select line_items.* from line_items, orders &quot;</span> <span style="color:#006600; font-weight:bold;">+</span>
+<span style="color:#996600;">&quot; where order_id = orders.id &quot;</span> <span style="color:#006600; font-weight:bold;">+</span>
+<span style="color:#996600;">&quot; and orders.name = 'Dave Thomas' &quot;</span><span style="color:#006600; font-weight:bold;">&#41;</span></pre></div></div>
+
+<p>现在有一个问题了，就是返回的Model对象中都包含有哪些属性呢？我们使用attributes( ), attribute_names( ), and attribute_present?( )方法来确定在Model对象中都包含有哪些属性，第一个返回一个hash，里面是键值对，第二个返回属性名的数组，第三个判断Model对象中是否含有某个属性，例如</p>
+
+<div class="wp_code"><div class="pre"><pre class="ruby" style="font-family:'Times New Roman',Garamond, Times;">orders = Order.<span style="color:#9900CC;">find_by_sql</span><span style="color:#006600; font-weight:bold;">&#40;</span><span style="color:#996600;">&quot;select name, pay_type from orders&quot;</span><span style="color:#006600; font-weight:bold;">&#41;</span>
+first = orders<span style="color:#006600; font-weight:bold;">&#91;</span><span style="color:#006666;">0</span><span style="color:#006600; font-weight:bold;">&#93;</span>
+<span style="color:#CC0066; font-weight:bold;">p</span> first.<span style="color:#9900CC;">attributes</span>
+<span style="color:#CC0066; font-weight:bold;">p</span> first.<span style="color:#9900CC;">attribute_names</span>
+<span style="color:#CC0066; font-weight:bold;">p</span> first.<span style="color:#9900CC;">attribute_present</span>?<span style="color:#006600; font-weight:bold;">&#40;</span><span style="color:#996600;">&quot;address&quot;</span><span style="color:#006600; font-weight:bold;">&#41;</span></pre></div></div>
+
+<p>程序的结果：</p>
+
+<div class="wp_code"><div class="pre"><pre class="ruby" style="font-family:'Times New Roman',Garamond, Times;"><span style="color:#006600; font-weight:bold;">&#123;</span><span style="color:#996600;">&quot;name&quot;</span><span style="color:#006600; font-weight:bold;">=&gt;</span><span style="color:#996600;">&quot;Dave Thomas&quot;</span>, <span style="color:#996600;">&quot;pay_type&quot;</span><span style="color:#006600; font-weight:bold;">=&gt;</span><span style="color:#996600;">&quot;check&quot;</span><span style="color:#006600; font-weight:bold;">&#125;</span>
+<span style="color:#006600; font-weight:bold;">&#91;</span><span style="color:#996600;">&quot;name&quot;</span>, <span style="color:#996600;">&quot;pay_type&quot;</span><span style="color:#006600; font-weight:bold;">&#93;</span>
+<span style="color:#0000FF; font-weight:bold;">false</span></pre></div></div>
+
+<p>find_by_sql方法也可以用来创建包含有派生（derived）（注1）的Model对象，如果你使用了as XXX 这样的sql来给派生字段一个别名，这个别名会作为Model中的属性名，例如：</p>
+
+<div class="wp_code"><div class="pre"><pre class="ruby" style="font-family:'Times New Roman',Garamond, Times;">items = LineItem.<span style="color:#9900CC;">find_by_sql</span><span style="color:#006600; font-weight:bold;">&#40;</span><span style="color:#996600;">&quot;select *, &quot;</span> <span style="color:#006600; font-weight:bold;">+</span>
+<span style="color:#996600;">&quot; quantity*unit_price as total_price, &quot;</span> <span style="color:#006600; font-weight:bold;">+</span>
+<span style="color:#996600;">&quot; products.title as title &quot;</span> <span style="color:#006600; font-weight:bold;">+</span>
+<span style="color:#996600;">&quot; from line_items, products &quot;</span> <span style="color:#006600; font-weight:bold;">+</span>
+<span style="color:#996600;">&quot; where line_items.product_id = products.id &quot;</span><span style="color:#006600; font-weight:bold;">&#41;</span>
+li = items<span style="color:#006600; font-weight:bold;">&#91;</span><span style="color:#006666;">0</span><span style="color:#006600; font-weight:bold;">&#93;</span>
+<span style="color:#CC0066; font-weight:bold;">puts</span> <span style="color:#996600;">&quot;#{li.title}: #{li.quantity}x#{li.unit_price} =&gt; #{li.total_price}&quot;</span></pre></div></div>
+
+<p>在find_by_sql方法中，我们一样可以使用占位符来给Sql语句传递参数，例如：</p>
+<p>Order.find_by_sql([&#8220;select * from orders where amount > ?&#8221;,<br />
+params[:amount]]) </p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/4294.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>ROR笔记（一）</title>
+		<link>http://www.xieziming.com/archives/4276.html</link>
+		<comments>http://www.xieziming.com/archives/4276.html#respond</comments>
+		<pubDate>Fri, 23 Apr 2010 07:05:58 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[程序]]></category>
+		<category><![CDATA[Ruby]]></category>
+		<category><![CDATA[技术]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=4276</guid>
+		<description><![CDATA[<p>1: MVC架构：</p>
+<p>(1): 模型（model）:模型携带者数据，还负责执行施加于这些数据上的业务规则，比如，“对于20元以下的订单不予打折”这一约束就要由模型来确保。也即，模型是数据的容器，也是数据的监护者。</p>
+<p>(2)：视图（view）: 负责生成用户界面，根据模型中的数据生成。</p>
+<p>(3)：控制器（controller）:负责 协调 整个应用程序。</p>
+<p>2: Ruby中ORM映射：表映射到类，记录映射到对象，字段映射到对象的属性，类方法用于执行表级别的操作，实例方法用于执行单条记录的操作。</p>
+<p>3: Rails类对数据库表进行了包装，对于执行单条记录的操作，类的实例方法返回对应的对象，如：</p>
+<code lang="ruby">
+  order =Order.find(1)
+   puts "Order  amount   is  #{order.amount}"
+   #有时类级别的方法返回一组对象 的集合 (遍历)
+   Order.find(:all,:conditions=>"name='zhangsan'").each do &#124;order&#124;
+   puts order.amount
+   end
+</code>]]></description>
+				<content:encoded><![CDATA[<p>1: MVC架构：</p>
+<p>(1): 模型（model）:模型携带者数据，还负责执行施加于这些数据上的业务规则，比如，“对于20元以下的订单不予打折”这一约束就要由模型来确保。也即，模型是数据的容器，也是数据的监护者。</p>
+<p>(2)：视图（view）: 负责生成用户界面，根据模型中的数据生成。</p>
+<p>(3)：控制器（controller）:负责 协调 整个应用程序。</p>
+<p>2: Ruby中ORM映射：表映射到类，记录映射到对象，字段映射到对象的属性，类方法用于执行表级别的操作，实例方法用于执行单条记录的操作。</p>
+<p>3: Rails类对数据库表进行了包装，对于执行单条记录的操作，类的实例方法返回对应的对象，如：</p>
+
+<div class="wp_code"><div class="pre"><pre class="ruby" style="font-family:'Times New Roman',Garamond, Times;">  order =Order.<span style="color:#9900CC;">find</span><span style="color:#006600; font-weight:bold;">&#40;</span><span style="color:#006666;">1</span><span style="color:#006600; font-weight:bold;">&#41;</span>
+   <span style="color:#CC0066; font-weight:bold;">puts</span> <span style="color:#996600;">&quot;Order  amount   is  #{order.amount}&quot;</span>
+   <span style="color:#008000; font-style:italic;">#有时类级别的方法返回一组对象 的集合 (遍历)</span>
+   Order.<span style="color:#9900CC;">find</span><span style="color:#006600; font-weight:bold;">&#40;</span><span style="color:#ff3333; font-weight:bold;">:all</span>,:conditions<span style="color:#006600; font-weight:bold;">=&gt;</span><span style="color:#996600;">&quot;name='zhangsan'&quot;</span><span style="color:#006600; font-weight:bold;">&#41;</span>.<span style="color:#9900CC;">each</span> <span style="color:#9966CC; font-weight:bold;">do</span> <span style="color:#006600; font-weight:bold;">|</span>order<span style="color:#006600; font-weight:bold;">|</span>
+   <span style="color:#CC0066; font-weight:bold;">puts</span> order.<span style="color:#9900CC;">amount</span>
+   <span style="color:#9966CC; font-weight:bold;">end</span></pre></div></div>
+
+<p>4: controller与view对应关系 （两个一一对应）即：浏览器：http://localhost:3000/say/hello/123</p>
+<p>默认路由配置：端口后第一部分（say）是控制器名称，第二部分（hello）是action名称也就是控制器类中的方法名称，第三个是传递的参数（默认id）</p>
+<p>对应关系：</p>
+<p>控制器名称= app/views下的子目录（文件夹）名称</p>
+<p>action名称= app/views下的子目录下的文件名称</p>
+<p>5：< %= %> 符号之间的内容会被 看作Ruby代码执行，执行结果被转换成字符串，并替代符号中内容的位置。</p>
+<p>    < % %>   符号之间的内容会被 看作Ruby代码执行，但执行的结果不替换输出</p>
+<p>   %> 改为 -%> 这里是减号， 会告诉Rails将跟随其后的换行符全部去掉</p>
+<p>   < %= %>  有时生成的字符串会包含< 或&#038; 符号，影响html页面，用辅助方法 h()可以对字符进行转码。 
+
+ActiveRecord从表中取出值，变成类的对象时，会自动将数据库中的类型转换成ruby支持类型。如果你希望得到一个属性的原始值，可以在属性名称后面加_before_type_cast。
+
+account.balance_before_type_cast 
+
+布尔型的数据在转换的时候会有些麻烦，有些数据库是不支持布尔型的，所以我们在工作中，可以使用0,1这样的数字来代表布尔值的真假，而ruby中只有false和nil为假，0其实是为真的。所以在数据库映射到类时，我们要判断某个属性的真假时，记得要加一个?号，这个是rails为解决布尔型问题而设置的。
+
+if user.superuser?
+    doSomeThing
+end 
+
+主键。一般来说，rails都会用id作为每张表的主键，但表并不是由我们自己来建的，可能表会用别的字段作为主键。我们可以用set_primary_key来显示地指定主键字段。
+
+class BadBook < ActiveRecord::Base
+    set_primary_key "isbn"
+end
+
+但需要注意的是，既然指定主键为其它字段，但在访问时，仍然可以通过名为id的属性来设置主键值，也就是说，只要使用ActiveRecord，主键字段在对象中的属性名称就永远都是id。
+
+3：控制器的路径默认是存放在app/controllers根目录下的，但如果我们需要在根目录下再组织一下控制器的路径，那么可以将控制器的声明位于ruby模块之下。例如，我们要将book_controller.rb文件放置于admin目录下，也就是app/controllers/admin/book_controller.rb，那么，我们就应该这样声明： 
+class Admin::BookController < ApplicationController
+..
+end 
+
+rails的生成器很智能，你可以直接使用
+
+ruby script/generate controller Admin::Book action1 action2</p></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/4276.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Ruby异常处理</title>
+		<link>http://www.xieziming.com/archives/4279.html</link>
+		<comments>http://www.xieziming.com/archives/4279.html#respond</comments>
+		<pubDate>Fri, 23 Apr 2010 06:42:44 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[程序]]></category>
+		<category><![CDATA[Ruby]]></category>
+		<category><![CDATA[技术]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=4279</guid>
+		<description><![CDATA[在现实世界中，所有程序都会出错。一个优秀的程序可以预期错误的发生，并且优雅地处理它们。 
+
+一种错误处理的方法是：使用返回码。举个例子，我们在使用open方法打开文件，文件不存在时就会出错。我们可以使用一个特殊的返回码来标识这个错误。 
+
+但这种处理方式的问题是：管理这些错误代码会显得非常复杂。比如，我们调用了open，read并最终调用close方法，每一个方法都会返回不同的错误代码，我们需要在调用的外层次使用复杂难懂的代码来管理和区分这些不同的错误代码。 
+
+异常机制很好地解决了上述错误处理方法的问题：异常把错误信息打包进一个类中，在抛出一个异常之后，异常会自动在调用栈中‘上浮’，直到遇见声明可以处理相应类型异常的代码。 
+
+<strong>其实 begin相当于c#的try， rescue相当于c#的catch， ensure相当于c#的 finaly， raise相当于c#的 throw 。</strong>]]></description>
+				<content:encoded><![CDATA[<p>在现实世界中，所有程序都会出错。一个优秀的程序可以预期错误的发生，并且优雅地处理它们。 </p>
+<p>一种错误处理的方法是：使用返回码。举个例子，我们在使用open方法打开文件，文件不存在时就会出错。我们可以使用一个特殊的返回码来标识这个错误。 </p>
+<p>但这种处理方式的问题是：管理这些错误代码会显得非常复杂。比如，我们调用了open，read并最终调用close方法，每一个方法都会返回不同的错误代码，我们需要在调用的外层次使用复杂难懂的代码来管理和区分这些不同的错误代码。 </p>
+<p>异常机制很好地解决了上述错误处理方法的问题：异常把错误信息打包进一个类中，在抛出一个异常之后，异常会自动在调用栈中‘上浮’，直到遇见声明可以处理相应类型异常的代码。 </p>
+<p>这些错误代码被解释成了有意义的单词，方便我们记忆。如：NameError</p>
+
+<div class="wp_code"><div class="pre"><pre class="ruby" style="font-family:'Times New Roman',Garamond, Times;"><span style="color:#9966CC; font-weight:bold;">begin</span>    
+a    
+<span style="color:#9966CC; font-weight:bold;">rescue</span> <span style="color:#CC00FF; font-weight:bold;">NameError</span>    
+<span style="color:#CC0066; font-weight:bold;">puts</span> <span style="color:#996600;">&quot;error:#{$!}&quot;</span>    
+<span style="color:#CC0066; font-weight:bold;">raise</span>    
+<span style="color:#9966CC; font-weight:bold;">end</span></pre></div></div>
+
+<p>我们用begin，rescue，end把可能抛出异常的代码以及处理异常的代码包围起来，特别是rescue语句声明了它可以处理的异常类型，rescue之后的代码就是处理异常的代码。 </p>
+<p>异常对象被抛出之后，存于一个全局变量：$!中。可以看到异常处理代码最后调用了raise，它代表把同一个异常再次抛出。 </p>
+<p>在一个异常处理块中，可以有多个rescue语句以拥有对不同异常的不同处理，同时一个rescue语句也可以声明捕获多个异常类型。如下面的代码一样：</p>
+
+<div class="wp_code"><div class="pre"><pre class="ruby" style="font-family:'Times New Roman',Garamond, Times;"><span style="color:#9966CC; font-weight:bold;">begin</span>     
+<span style="color:#CC0066; font-weight:bold;">eval</span> <span style="color:#CC0066; font-weight:bold;">string</span>     
+<span style="color:#9966CC; font-weight:bold;">rescue</span> <span style="color:#CC00FF; font-weight:bold;">SyntaxError</span>, <span style="color:#CC00FF; font-weight:bold;">NameError</span> <span style="color:#006600; font-weight:bold;">=&gt;</span> boom     
+<span style="color:#CC0066; font-weight:bold;">print</span> <span style="color:#996600;">&quot;String doesn't compile: &quot;</span> <span style="color:#006600; font-weight:bold;">+</span> boom     
+<span style="color:#9966CC; font-weight:bold;">rescue</span> <span style="color:#CC00FF; font-weight:bold;">StandardError</span> <span style="color:#006600; font-weight:bold;">=&gt;</span> bang     
+<span style="color:#CC0066; font-weight:bold;">print</span> <span style="color:#996600;">&quot;Error running script: &quot;</span> <span style="color:#006600; font-weight:bold;">+</span> bang     
+<span style="color:#9966CC; font-weight:bold;">end</span></pre></div></div>
+
+<p>只要其中匹配一个rescue的错误，处理异常，然后跳出end </p>
+<p>很多时候，无论程序抛异常与否，我们都得保证在最后做一些清理工作。比如一段从文件读取数据的代码，无论读取是否成功，我们都得保证最后关闭这个文件。我们可以通过在任何的退出点关闭文件来解决这个问题，但这样做非常繁琐，也不能保证照顾到了每个退出点。所以，我们需要一种方法来保证。这就是 ensure的作用： </p>
+<p>有时我们会希望围绕问题展开创造性工作.这里,如果文件不存在,我们用标准输入代替:</p>
+
+<div class="wp_code"><div class="pre"><pre class="ruby" style="font-family:'Times New Roman',Garamond, Times;"><span style="color:#9966CC; font-weight:bold;">begin</span>
+  file = <span style="color:#CC0066; font-weight:bold;">open</span><span style="color:#006600; font-weight:bold;">&#40;</span><span style="color:#996600;">&quot;some_file&quot;</span><span style="color:#006600; font-weight:bold;">&#41;</span>
+<span style="color:#9966CC; font-weight:bold;">rescue</span>
+  file = STDIN
+<span style="color:#9966CC; font-weight:bold;">end</span>
+<span style="color:#9966CC; font-weight:bold;">begin</span>
+  <span style="color:#008000; font-style:italic;"># ... process the input ...</span>
+<span style="color:#9966CC; font-weight:bold;">rescue</span>
+  <span style="color:#008000; font-style:italic;"># ... and deal with any other exceptions here.</span>
+<span style="color:#9966CC; font-weight:bold;">end</span></pre></div></div>
+
+<p>retry 用于 rescue 代码表示又重新执行 begin 代码.这让我们可以压缩前面的例子:</p>
+
+<div class="wp_code"><div class="pre"><pre class="ruby" style="font-family:'Times New Roman',Garamond, Times;">fname = <span style="color:#996600;">&quot;some_file&quot;</span>
+<span style="color:#9966CC; font-weight:bold;">begin</span>
+  file = <span style="color:#CC0066; font-weight:bold;">open</span><span style="color:#006600; font-weight:bold;">&#40;</span>fname<span style="color:#006600; font-weight:bold;">&#41;</span>
+  <span style="color:#008000; font-style:italic;"># ... process the input ...</span>
+<span style="color:#9966CC; font-weight:bold;">rescue</span>
+  fname = <span style="color:#996600;">&quot;STDIN&quot;</span>
+  <span style="color:#9966CC; font-weight:bold;">retry</span>
+<span style="color:#9966CC; font-weight:bold;">end</span></pre></div></div>
+
+<p>但这仍有一点瑕疵.一个不存在的文件将导致不停止地 retry.你在使用 retry 做异常处理时应注意到这一点.</p>
+<p>每个Ruby库在遇到错误时都会提交一个异常,你可以在自己的代码里明确地提交异常.用 raise 来提交异常.它带一个参数,也就是描述异常的一个字符串.参数是可选的但不应被省略.之后它可以通过一个特殊的全局变量 $! 访问.</p>
+<p><strong>其实 begin相当于c#的try， rescue相当于c#的catch， ensure相当于c#的 finaly， raise相当于c#的 throw 。</strong></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/4279.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>小试Ruby</title>
+		<link>http://www.xieziming.com/archives/4247.html</link>
+		<comments>http://www.xieziming.com/archives/4247.html#respond</comments>
+		<pubDate>Tue, 20 Apr 2010 12:18:55 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[程序]]></category>
+		<category><![CDATA[Ruby]]></category>
+		<category><![CDATA[技术]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=4247</guid>
+		<description><![CDATA[昨晚终于决定写一阵子的Ruby了，因为要用Watir来做一些web的自动化测试。
+先简单说下环境搭建：
+<strong>Step 1： Ruby下载
+</strong>http://www.ruby-lang.org/en/downloads
+我下载的是“ Ruby 1.8.6 One-Click Installer (Ruby on Windows) ”
+
+<strong>Step 2： Watir下载安装
+</strong>如果网络好的话执行以下两个命令就可以了：
+gem update --system
+gem install watir
+
+<strong>Step 3： 开始使用</strong>
+下面是一个简单的例子，在GOOGLE中搜索ideshot，看搜索结果中是否有Suny Tse。]]></description>
+				<content:encoded><![CDATA[<p>昨晚终于决定写一阵子的Ruby了，因为要用Watir来做一些web的自动化测试。<br />
+先简单说下环境搭建：<br />
+<strong>Step 1： Ruby下载<br />
+</strong>http://www.ruby-lang.org/en/downloads<br />
+我下载的是“ Ruby 1.8.6 One-Click Installer (Ruby on Windows) ”</p>
+<p><strong>Step 2： Watir下载安装<br />
+</strong>如果网络好的话执行以下两个命令就可以了：<br />
+gem update &#8211;system<br />
+gem install watir</p>
+<p><strong>Step 3： 开始使用</strong><br />
+下面是一个简单的例子，在GOOGLE中搜索ideshot，看搜索结果中是否有Suny Tse。</p>
+
+<div class="wp_code"><div class="pre"><pre class="ruby" style="font-family:'Times New Roman',Garamond, Times;"><span style="color:#008000; font-style:italic;"># the Watir controller</span>
+<span style="color:#CC0066; font-weight:bold;">require</span> <span style="color:#996600;">&quot;watir&quot;</span>
+<span style="color:#008000; font-style:italic;"># set a variable</span>
+test_site = <span style="color:#996600;">&quot;http://www.google.com/&quot;</span>
+content = <span style="color:#996600;">&quot;Suny Tse&quot;</span>
+<span style="color:#008000; font-style:italic;">#open the IE browser</span>
+ie = <span style="color:#6666ff; font-weight:bold;">Watir::IE</span>.<span style="color:#9900CC;">new</span>
+<span style="color:#008000; font-style:italic;"># print some comments</span>
+<span style="color:#CC0066; font-weight:bold;">puts</span> <span style="color:#996600;">&quot;Beginning of test: Google search.&quot;</span>
+<span style="color:#CC0066; font-weight:bold;">puts</span> <span style="color:#996600;">&quot; Step 1: go to the test site: &quot;</span> <span style="color:#006600; font-weight:bold;">+</span> test_site
+ie.<span style="color:#9900CC;">goto</span> test_site
+<span style="color:#CC0066; font-weight:bold;">puts</span> <span style="color:#996600;">&quot; Step 2: enter 'watir' in the search text field.&quot;</span>
+ie.<span style="color:#9900CC;">text_field</span><span style="color:#006600; font-weight:bold;">&#40;</span><span style="color:#ff3333; font-weight:bold;">:name</span>, <span style="color:#996600;">&quot;q&quot;</span><span style="color:#006600; font-weight:bold;">&#41;</span>.<span style="color:#9900CC;">set</span> <span style="color:#996600;">&quot;ideashot&quot;</span> <span style="color:#008000; font-style:italic;"># &quot;q&quot; is the name of the search field</span>
+<span style="color:#CC0066; font-weight:bold;">puts</span> <span style="color:#996600;">&quot; Step 3: click the 'Google Search' button.&quot;</span>
+ie.<span style="color:#9900CC;">button</span><span style="color:#006600; font-weight:bold;">&#40;</span><span style="color:#ff3333; font-weight:bold;">:type</span>, <span style="color:#996600;">&quot;submit&quot;</span><span style="color:#006600; font-weight:bold;">&#41;</span>.<span style="color:#9900CC;">click</span> <span style="color:#008000; font-style:italic;"># &quot;submit&quot; is the type of the Search button</span>
+<span style="color:#CC0066; font-weight:bold;">puts</span> <span style="color:#996600;">&quot; Expected Result:&quot;</span>
+<span style="color:#CC0066; font-weight:bold;">puts</span> <span style="color:#996600;">&quot; A Google page with results should be shown. '#{content} ' should be high on the list.&quot;</span>
+<span style="color:#CC0066; font-weight:bold;">puts</span> <span style="color:#996600;">&quot; Actual Result:&quot;</span>
+<span style="color:#9966CC; font-weight:bold;">if</span> ie.<span style="color:#9900CC;">text</span>.<span style="color:#9966CC; font-weight:bold;">include</span>? <span style="color:#996600;">&quot;#{content}&quot;</span>
+<span style="color:#CC0066; font-weight:bold;">puts</span> <span style="color:#996600;">&quot; Test Passed. Found the test string: '#{content} '. Actual Results match Expected Results.&quot;</span>
+<span style="color:#9966CC; font-weight:bold;">else</span>
+<span style="color:#CC0066; font-weight:bold;">puts</span> <span style="color:#996600;">&quot; Test Failed! Could not find: '#{content} '.&quot;</span> 
+<span style="color:#9966CC; font-weight:bold;">end</span>
+<span style="color:#CC0066; font-weight:bold;">puts</span> <span style="color:#996600;">&quot;End of test: Google search.&quot;</span></pre></div></div>
+
+<p>下面这个例子是类似于自动评论机，有loop，以及对弹出框的处理。</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/4247.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+	</channel>
+</rss>

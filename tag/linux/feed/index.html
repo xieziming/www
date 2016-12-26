@@ -1,0 +1,674 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>linux &#8211; 谢子明</title>
+	<atom:link href="http://www.xieziming.com/tag/linux/feed" rel="self" type="application/rss+xml" />
+	<link>http://www.xieziming.com</link>
+	<description>Suny Xie</description>
+	<lastBuildDate>Mon, 26 Dec 2016 07:34:38 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.7</generator>
+	<item>
+		<title>Solaris内存统计</title>
+		<link>http://www.xieziming.com/archives/7693.html</link>
+		<comments>http://www.xieziming.com/archives/7693.html#respond</comments>
+		<pubDate>Fri, 16 Nov 2012 17:01:37 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[技术维基]]></category>
+		<category><![CDATA[linux]]></category>
+		<category><![CDATA[程序]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=7693</guid>
+		<description><![CDATA[首先Solaris上的swap跟普通的Unix/Linux上的swap机制有一点不同，Solaris上的swap用的是一个Virtual Swap Space概念, swap空间再也不是单指硬盘的分区或文件。虚拟Swap空间包含两个部分：部分物理内存和传统上的swap分区。经过适当的配置，可以使系统需要swap空间时，先使用内存部分的swap空间，如果内存部分的swap空间不够，再使用磁盘部分的swap空间。这样，也许你硬盘上的swap空间很少得到使用了，甚至根本不需要swap分区。
+
+<strong>物理内存:</strong>
+<code lang="bash">
+sushi@gbs00827:/xfosUAT/xfos_sushi/thirdparty/suny/NFR_SUNY/core/results/NFR_18_NORMAL_RUN_1>prtconf &#124; head -2 or prtconf -vp &#124;grep Mem
+System Configuration:  Sun Microsystems  i86pc
+Memory size: 73717 Megabytes
+</code>
+
+在Solaris下，swap命令是用来查看当前系统中的swap信息的。-l 参数和-s参数表达的是同样的意思，区别就在于一个查看的是物理的swap space,一个是当前系统的virtual swap space。
+
+<strong>虚拟交换空间:</strong>
+<code lang="bash">
+sushi@gbs00827:/xfosUAT/xfos_sushi/thirdparty/suny/NFR_SUNY/core/results/NFR_18_NORMAL_RUN_1>swap -s
+total: 8376304k bytes allocated + 6829196k reserved = 15205500k used, 60836672k available
+</code>]]></description>
+				<content:encoded><![CDATA[<p>首先Solaris上的swap跟普通的Unix/Linux上的swap机制有一点不同，Solaris上的swap用的是一个Virtual Swap Space概念, swap空间再也不是单指硬盘的分区或文件。虚拟Swap空间包含两个部分：部分物理内存和传统上的swap分区。经过适当的配置，可以使系统需要swap空间时，先使用内存部分的swap空间，如果内存部分的swap空间不够，再使用磁盘部分的swap空间。这样，也许你硬盘上的swap空间很少得到使用了，甚至根本不需要swap分区。</p>
+<p><strong>物理内存:</strong></p>
+
+<div class="wp_code"><div class="pre"><pre class="bash" style="font-family:'Times New Roman',Garamond, Times;">sushi<span style="color: #000000; font-weight: bold;">@</span>gbs00827:<span style="color: #000000; font-weight: bold;">/</span>xfosUAT<span style="color: #000000; font-weight: bold;">/</span>xfos_sushi<span style="color: #000000; font-weight: bold;">/</span>thirdparty<span style="color: #000000; font-weight: bold;">/</span>suny<span style="color: #000000; font-weight: bold;">/</span>NFR_SUNY<span style="color: #000000; font-weight: bold;">/</span>core<span style="color: #000000; font-weight: bold;">/</span>results<span style="color: #000000; font-weight: bold;">/</span>NFR_18_NORMAL_RUN_1<span style="color: #000000; font-weight: bold;">&gt;</span>prtconf <span style="color: #000000; font-weight: bold;">|</span> <span style="color: #c20cb9; font-weight: bold;">head</span> <span style="color: #660033;">-2</span> or prtconf <span style="color: #660033;">-vp</span> <span style="color: #000000; font-weight: bold;">|</span><span style="color: #c20cb9; font-weight: bold;">grep</span> Mem
+System Configuration:  Sun Microsystems  i86pc
+Memory <span style="color: #c20cb9; font-weight: bold;">size</span>: <span style="color: #000000;">73717</span> Megabytes</pre></div></div>
+
+<p>在Solaris下，swap命令是用来查看当前系统中的swap信息的。-l 参数和-s参数表达的是同样的意思，区别就在于一个查看的是物理的swap space,一个是当前系统的virtual swap space。</p>
+<p><strong>虚拟交换空间:</strong></p>
+
+<div class="wp_code"><div class="pre"><pre class="bash" style="font-family:'Times New Roman',Garamond, Times;">sushi<span style="color: #000000; font-weight: bold;">@</span>gbs00827:<span style="color: #000000; font-weight: bold;">/</span>xfosUAT<span style="color: #000000; font-weight: bold;">/</span>xfos_sushi<span style="color: #000000; font-weight: bold;">/</span>thirdparty<span style="color: #000000; font-weight: bold;">/</span>suny<span style="color: #000000; font-weight: bold;">/</span>NFR_SUNY<span style="color: #000000; font-weight: bold;">/</span>core<span style="color: #000000; font-weight: bold;">/</span>results<span style="color: #000000; font-weight: bold;">/</span>NFR_18_NORMAL_RUN_1<span style="color: #000000; font-weight: bold;">&gt;</span>swap <span style="color: #660033;">-s</span>
+total: 8376304k bytes allocated + 6829196k reserved = 15205500k used, 60836672k available</pre></div></div>
+
+<p>虚拟交换空间大小 =  物理磁盘交换空间大小 +  内存中的交换空间大小.</p>
+<p><strong>物理磁盘交换空间:</strong></p>
+
+<div class="wp_code"><div class="pre"><pre class="bash" style="font-family:'Times New Roman',Garamond, Times;">sushi<span style="color: #000000; font-weight: bold;">@</span>gbs00827:<span style="color: #000000; font-weight: bold;">/</span>xfosUAT<span style="color: #000000; font-weight: bold;">/</span>xfos_sushi<span style="color: #000000; font-weight: bold;">/</span>thirdparty<span style="color: #000000; font-weight: bold;">/</span>suny<span style="color: #000000; font-weight: bold;">/</span>NFR_SUNY<span style="color: #000000; font-weight: bold;">/</span>core<span style="color: #000000; font-weight: bold;">/</span>results<span style="color: #000000; font-weight: bold;">/</span>NFR_18_NORMAL_RUN_1<span style="color: #000000; font-weight: bold;">&gt;</span>swap <span style="color: #660033;">-l</span>
+swapfile             dev  swaplo blocks   <span style="color: #c20cb9; font-weight: bold;">free</span>
+<span style="color: #000000; font-weight: bold;">/</span>dev<span style="color: #000000; font-weight: bold;">/</span>md<span style="color: #000000; font-weight: bold;">/</span>dsk<span style="color: #000000; font-weight: bold;">/</span>d1      <span style="color: #000000; font-weight: bold;">**</span>,<span style="color: #000000;">1</span>       <span style="color: #000000;">8</span> <span style="color: #000000;">41945704</span> <span style="color: #000000;">41945704</span>
+&nbsp;
+sushi<span style="color: #000000; font-weight: bold;">@</span>gbs00827:<span style="color: #000000; font-weight: bold;">/</span>xfosUAT<span style="color: #000000; font-weight: bold;">/</span>xfos_sushi<span style="color: #000000; font-weight: bold;">/</span>thirdparty<span style="color: #000000; font-weight: bold;">/</span>suny<span style="color: #000000; font-weight: bold;">/</span>NFR_SUNY<span style="color: #000000; font-weight: bold;">/</span>core<span style="color: #000000; font-weight: bold;">/</span>results<span style="color: #000000; font-weight: bold;">/</span>NFR_18_NORMAL_RUN_1<span style="color: #000000; font-weight: bold;">&gt;</span>top
+<span style="color: #000000;">378</span> processes: <span style="color: #000000;">349</span> sleeping, <span style="color: #000000;">27</span> stopped, <span style="color: #000000;">2</span> on cpu
+CPU states: <span style="color: #000000;">79.5</span><span style="color: #000000; font-weight: bold;">%</span> idle, <span style="color: #000000;">12.3</span><span style="color: #000000; font-weight: bold;">%</span> user,  <span style="color: #000000;">8.2</span><span style="color: #000000; font-weight: bold;">%</span> kernel,  <span style="color: #000000;">0.0</span><span style="color: #000000; font-weight: bold;">%</span> iowait,  <span style="color: #000000;">0.0</span><span style="color: #000000; font-weight: bold;">%</span> swap
+Memory: 72G phys mem, 53G <span style="color: #c20cb9; font-weight: bold;">free</span> mem, 20G total swap, 20G <span style="color: #c20cb9; font-weight: bold;">free</span> swap
+&nbsp;
+   PID USERNAME LWP PRI NICE  SIZE   RES STATE    TIME    CPU COMMAND
+ <span style="color: #000000;">15227</span> sushi    <span style="color: #000000;">999</span>  <span style="color: #000000;">59</span>    <span style="color: #000000;">0</span>  466M  439M <span style="color: #c20cb9; font-weight: bold;">sleep</span>   <span style="color: #000000;">14</span>:07  <span style="color: #000000;">1.00</span><span style="color: #000000; font-weight: bold;">%</span> java</pre></div></div>
+
+<p>这样 41945704KB + 20G = 60G =虚拟交换空间大小</p>
+
+<div class="wp_code"><div class="pre"><pre class="bash" style="font-family:'Times New Roman',Garamond, Times;">sushi<span style="color: #000000; font-weight: bold;">@</span>gbs00827:<span style="color: #000000; font-weight: bold;">/</span>xfosUAT<span style="color: #000000; font-weight: bold;">/</span>xfos_sushi<span style="color: #000000; font-weight: bold;">/</span>thirdparty<span style="color: #000000; font-weight: bold;">/</span>suny<span style="color: #000000; font-weight: bold;">/</span>NFR_SUNY<span style="color: #000000; font-weight: bold;">/</span>core<span style="color: #000000; font-weight: bold;">&gt;</span><span style="color: #c20cb9; font-weight: bold;">vmstat</span> <span style="color: #000000;">2</span>
+ kthr      memory            page            disk          faults      cpu
+ r b <span style="color: #c20cb9; font-weight: bold;">w</span>   swap  <span style="color: #c20cb9; font-weight: bold;">free</span>  re  mf pi po fr de sr m0 m1 <span style="color: #000000; font-weight: bold;">**</span> <span style="color: #c20cb9; font-weight: bold;">m4</span>   <span style="color: #000000; font-weight: bold;">in</span>   sy   cs us sy <span style="color: #c20cb9; font-weight: bold;">id</span>
+ <span style="color: #000000;">3</span> <span style="color: #000000;">0</span> <span style="color: #000000;">0</span> <span style="color: #000000;">56865308</span> <span style="color: #000000;">51170924</span> <span style="color: #000000;">486</span> <span style="color: #000000;">3467</span> <span style="color: #000000;">0</span> <span style="color: #000000;">0</span> <span style="color: #000000;">0</span> <span style="color: #000000;">0</span> <span style="color: #000000;">0</span> <span style="color: #000000;">0</span>  <span style="color: #000000;">0</span>  <span style="color: #000000;">0</span>  <span style="color: #000000;">0</span> <span style="color: #000000;">5150</span> <span style="color: #000000;">19539</span> <span style="color: #000000;">5871</span> <span style="color: #000000;">1</span>  <span style="color: #000000;">1</span> <span style="color: #000000;">98</span>
+ <span style="color: #000000;">0</span> <span style="color: #000000;">0</span> <span style="color: #000000;">0</span> <span style="color: #000000;">56865268</span> <span style="color: #000000;">51173240</span> <span style="color: #000000;">0</span> <span style="color: #000000;">47</span> <span style="color: #000000;">0</span> <span style="color: #000000;">0</span>  <span style="color: #000000;">0</span>  <span style="color: #000000;">0</span>  <span style="color: #000000;">0</span>  <span style="color: #000000;">0</span>  <span style="color: #000000;">0</span>  <span style="color: #000000;">0</span>  <span style="color: #000000;">0</span> <span style="color: #000000;">4959</span> <span style="color: #000000;">4790</span> <span style="color: #000000;">5273</span>  <span style="color: #000000;">0</span>  <span style="color: #000000;">1</span> <span style="color: #000000;">99</span>
+&nbsp;
+sushi<span style="color: #000000; font-weight: bold;">@</span>gbs00827:<span style="color: #000000; font-weight: bold;">/</span>xfosUAT<span style="color: #000000; font-weight: bold;">/</span>xfos_sushi<span style="color: #000000; font-weight: bold;">/</span>thirdparty<span style="color: #000000; font-weight: bold;">/</span>suny<span style="color: #000000; font-weight: bold;">/</span>NFR_SUNY<span style="color: #000000; font-weight: bold;">/</span>core<span style="color: #000000; font-weight: bold;">&gt;</span>top
+<span style="color: #000000;">293</span> processes: <span style="color: #000000;">266</span> sleeping, <span style="color: #000000;">26</span> stopped, <span style="color: #000000;">1</span> on cpu
+CPU states: <span style="color: #000000;">97.7</span><span style="color: #000000; font-weight: bold;">%</span> idle,  <span style="color: #000000;">0.7</span><span style="color: #000000; font-weight: bold;">%</span> user,  <span style="color: #000000;">1.6</span><span style="color: #000000; font-weight: bold;">%</span> kernel,  <span style="color: #000000;">0.0</span><span style="color: #000000; font-weight: bold;">%</span> iowait,  <span style="color: #000000;">0.0</span><span style="color: #000000; font-weight: bold;">%</span> swap
+Memory: 72G phys mem, 49G <span style="color: #c20cb9; font-weight: bold;">free</span> mem, 20G total swap, 20G <span style="color: #c20cb9; font-weight: bold;">free</span> swap</pre></div></div>
+
+<p>vmstat 中的swap是可用虚拟交换空间的意思，它等于虚拟交换空间(可用部分) = 物理磁盘交换空间(可用部分) +  内存中的交换空间(可用部分).</p>
+<p>vmstat中的free是可用的剩余内存的意思, 它的大小等于系统可用物理内存大小.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/7693.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Linux Shell 之Meta</title>
+		<link>http://www.xieziming.com/archives/6921.html</link>
+		<comments>http://www.xieziming.com/archives/6921.html#respond</comments>
+		<pubDate>Sat, 17 Mar 2012 08:39:51 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[程序]]></category>
+		<category><![CDATA[linux]]></category>
+		<category><![CDATA[shell]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=6921</guid>
+		<description><![CDATA[IFS 是用来拆解 command line 的每一个词(word)用的,因为 shell command line是按词来处理的。而 CR 则是用来结束 command line 用的,这也是为何我们敲 <enter> 命令就会跑的原因。
+
+除了 IFS 与 CR ,常用的 meta 还有:
+
+= : 设定变量。
+
+$ : 作变量或运算替换(请不要与 shell prompt 搞混了)。
+
+> :重导向 stdout。
+
+< :重导向 stdin。
+
+&#124;:命令管线。
+
+&#038; :重导向 file descriptor ,或将命令置于背景执行。
+
+( ):将其内的命令置於 nested subshell 执行,或用於运算或命令替换。
+
+{ }:将其内的命令置於 non-named function 中执行,或用在变量替换的界定范围。
+
+; :在前一个命令结束时,而忽略其返回值,继续执行下一个命令。
+
+&#038;& :在前一个命令结束时,若返回值为 true,继续执行下一个命令。</enter></enter>]]></description>
+				<content:encoded><![CDATA[<p>不同的命令可接受的命令行格式或有不同,一般情况下,一个标准的命令行格式为如下所列:</p>
+<p>command-name options argument</p>
+<p>若从技术细节来看,shell 会依据 IFS(Internal Field Seperator) 将 command line所输入的文字给拆解为&#8221;字段&#8221;(word)。然后再针对特殊字符(meta)先作处理,最后再重组整行 command line 。</p>
+<p>其中的 IFS 是 shell 预设使用的栏位分隔符号,可以由一个及多个如下按键组成:</p>
+<blockquote><p>
+* 空白键(White Space)<br />
+* 表格键(Tab)<br />
+* 回车键(Enter)
+</p></blockquote>
+<p><span style="color: #ff00ff;">meta</span></p>
+<p>（1）IFS:由 <space> 或 <tab> 或 <enter> 三者之一组成(我们常用 space )。</p>
+<p>（2）CR:由 </enter><enter> 产生。</p>
+<p>IFS 是用来拆解 command line 的每一个词(word)用的,因为 shell command line是按词来处理的。而 CR 则是用来结束 command line 用的,这也是为何我们敲 </enter><enter> 命令就会跑的原因。</p>
+<p>除了 IFS 与 CR ,常用的 meta 还有:</p>
+<blockquote><p>
+= : 设定变量。</p>
+<p>$ : 作变量或运算替换(请不要与 shell prompt 搞混了)。</p>
+<p>> :重导向 stdout。</p>
+<p>< :重导向 stdin。
+
+|:命令管线。
+
+&#038; :重导向 file descriptor ,或将命令置于背景执行。
+
+( ):将其内的命令置於 nested subshell 执行,或用於运算或命令替换。
+
+{ }:将其内的命令置於 non-named function 中执行,或用在变量替换的界定范围。
+
+; :在前一个命令结束时,而忽略其返回值,继续执行下一个命令。
+
+&#038;&#038; :在前一个命令结束时,若返回值为 true,继续执行下一个命令。
+
+|| :在前一个命令结束时,若返回值为 false,继续执行下一个命令。
+
+!:执行 history 列表中的命令
+</p></blockquote>
+
+<div class="wp_code"><div class="pre"><pre class="bash" style="font-family:'Times New Roman',Garamond, Times;">$ <span style="color: #007800;">A</span>=B C <span style="color: #666666; font-style: italic;"># 空白键未被关掉,作为 IFS 处理。</span>
+$ C: <span style="color: #7a0874; font-weight: bold;">command</span> not found. <span style="color: #7a0874; font-weight: bold;">&#40;</span>FIXME<span style="color: #7a0874; font-weight: bold;">&#41;</span>
+$ <span style="color: #7a0874; font-weight: bold;">echo</span> <span style="color: #007800;">$A</span>
+$ <span style="color: #007800;">A</span>=<span style="color: #ff0000;">&quot;B C&quot;</span>     <span style="color: #666666; font-style: italic;"># 空白键已被关掉,仅作为空白键处理。</span>
+$ <span style="color: #7a0874; font-weight: bold;">echo</span> <span style="color: #007800;">$A</span>
+B C
+&nbsp;
+在第一次设定 A 变量时,由於空白键没被关闭,<span style="color: #7a0874; font-weight: bold;">command</span> line 将被解读为:<span style="color: #007800;">A</span>=B 然后碰到<span style="color: #000000; font-weight: bold;">&lt;</span>ifs<span style="color: #000000; font-weight: bold;">&gt;</span>,再执行 C 命令
+&nbsp;
+在第二次设定 A 变量时,由於空白键被置于双引号中,因此被关闭,不再作为 IFS : <span style="color: #007800;">A</span>=B<span style="color: #000000; font-weight: bold;">&lt;</span>space<span style="color: #000000; font-weight: bold;">&gt;</span>C
+&nbsp;
+事实上,空白键无论在单引号还是在双引号中,均会被关闭。Enter 键亦然:
+<span style="color: #000000; font-weight: bold;">&lt;</span>code <span style="color: #007800;">lang</span>=<span style="color: #ff0000;">&quot;bash&quot;</span><span style="color: #000000; font-weight: bold;">&gt;</span>
+$ <span style="color: #007800;">A</span>=<span style="color: #ff0000;">'B
+&gt;C
+&gt;'</span>
+$ <span style="color: #7a0874; font-weight: bold;">echo</span> <span style="color: #007800;">$A</span>
+B
+C</pre></div></div>
+
+<p>在上例中,由於 <enter> 被置于单引号当中,因此不再作为 CR 字符来处理。</p>
+<p>这里的 </enter><enter> 单纯只是一个断行符号(new-line)而已, 由于command line 并没得到 CR 字符,因此进入第二个 shell prompt (PS2, > 符号表示),command line 并不会结束,一直到第三行,我们输入的 </enter><enter> 并不在单引号里面,因此并没被关闭,此时,command line 碰到 CR 字符,於是结束、交给 shell 来处理。</p>
+<p>上例的 </enter><enter> 要是被置于双引号中的话,也会同样被关闭,用 escape 亦可:</p>
+
+<div class="wp_code"><div class="pre"><pre class="bash" style="font-family:'Times New Roman',Garamond, Times;">$ <span style="color: #007800;">A</span>=B\
+<span style="color: #000000; font-weight: bold;">&gt;</span> C\
+<span style="color: #000000; font-weight: bold;">&gt;</span>
+$ <span style="color: #7a0874; font-weight: bold;">echo</span> <span style="color: #007800;">$A</span>
+B
+C</pre></div></div>
+
+<p>上例中,第一个 </enter><enter> 跟第二个 </enter><enter> 均被 escape 字符关闭了,因此也不作为 CR 来处理,但第三个 </enter><enter> 由于没被跳脱,因此作为 CR 结束 command line。<br />
+</enter></space></ifs></code></p></blockquote>
+<p></enter></tab></space></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/6921.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Shell (四)</title>
+		<link>http://www.xieziming.com/archives/7244.html</link>
+		<comments>http://www.xieziming.com/archives/7244.html#respond</comments>
+		<pubDate>Wed, 02 Jun 2010 09:13:26 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[技术维基]]></category>
+		<category><![CDATA[linux]]></category>
+		<category><![CDATA[shell]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=7244</guid>
+		<description><![CDATA[谈到 I/O redirection ，不妨先让我们认识一下 File Descriptor (FD) 。程序的运算，在大部份情况下都是进行数据(data)的处理， 这些数据从哪读进？又送出到哪里呢？这就是 file descriptor(FD) 的功用了。
+
+在 shell 程序中，最常使用的 FD 大概有三个，分别为：
+
+0: Standard Input (STDIN)
+1: Standard Output (STDOUT)
+2: Standard Error Output (STDERR)
+
+在标准情况下，这些 FD 分别跟如下设备(device)关联：
+
+stdin(0): keyboard
+stdout(1): monitor
+stderr(2): monitor
+
+我们可以用如下下命令测试一下：
+<code lang="shell">
+$ mail -s test root
+this is a test mail.
+please skip.
+^d (同时按 crtl 跟 d 键)
+</code>]]></description>
+				<content:encoded><![CDATA[<p>谈到 I/O redirection ，不妨先让我们认识一下 File Descriptor (FD) 。程序的运算，在大部份情况下都是进行数据(data)的处理， 这些数据从哪读进？又送出到哪里呢？这就是 file descriptor(FD) 的功用了。</p>
+<p>在 shell 程序中，最常使用的 FD 大概有三个，分别为：</p>
+<p>0: Standard Input (STDIN)<br />
+1: Standard Output (STDOUT)<br />
+2: Standard Error Output (STDERR)</p>
+<p>在标准情况下，这些 FD 分别跟如下设备(device)关联：</p>
+<p>stdin(0): keyboard<br />
+stdout(1): monitor<br />
+stderr(2): monitor</p>
+<p>我们可以用如下下命令测试一下：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">$ mail -s test root
+this is a test mail.
+please skip.
+^d (同时按 crtl 跟 d 键)</pre></div></div>
+
+<p>很明显，mail 程序所读进的数据，就是从 stdin 也就是 keyboard 读进的。不过，不见得每个程序的 stdin 都跟 mail 一样从keyboard 读进，因为程序作者可以从档案参数读进 stdin ，如：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">$ cat /etc/passwd</pre></div></div>
+
+<p>但，要是cat 之后没有档案参数则又如何呢？哦，请您自己玩玩看啰&#8230;. ^_^</p>
+<p>若读进的档案参数是不存在的，那我们在 monitor 上就看到了：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">$ ls no.such.file
+ls: no.such.file: No such file or directory</pre></div></div>
+
+<p>若，一个命令同时产生stdout 与 stderr 呢？那还不简单，都送到 monitor 来就好了：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">$ touch my.file
+&nbsp;
+$ ls my.file no.such.file
+ls: no.such.file: No such file or directory
+my.file</pre></div></div>
+
+<p>okay，至此，关于 FD 及其名称、还有相关联的设备，相信你已经没问题了吧？那好，接下来让我们看看如何改变这些 FD 的预设数据信道，我们可用 < 来改变读进的数据信道(stdin)，使之从指定的档案读进。我们可用 > 来改变送出的数据信道(stdout, stderr)，使之输出到指定的档案。<br />
+比方说：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">$ cat &lt; my.file
+#就是从my.file 读进数据
+$ mail -s test root &lt; /etc/passwd
+#则是从/etc/passwd 读进...</pre></div></div>
+
+<p>这样一来，stdin 将不再是从 keyboard 读进，而是从档案读进了&#8230;</p>
+<p>严格来说，< 符号之前需要指定一个 FD 的(之间不能有空白)， 但因为 0 是 < 的默认值，因此 < 与 0< 是一样的，这个好理解吧？
+
+那，要是用两个 << 又是啥呢？这是所谓的 HERE Document ，它可以让我们输入一段文本，直到读到 << 后指定的字符串。
+比方说：
+
+
+
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">$ cat &lt; &lt;FINISH
+first line here
+second line there
+third line nowhere
+FINISH</pre></div></div>
+
+<p>这样的话，cat 会读进 3 行句子，而无需从 keyboard 读进数据且要等 ^d 结束输入。至于 > 又如何呢？</p>
+<p>当你搞懂了 0< 原来就是改变 stdin 的数据输入信道之后，相信要理解如下两个 redirection 就不难了：
+
+
+
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">* 1&gt;
+* 2&gt;</pre></div></div>
+
+<p>前者是改变 stdout 的数据输出信道，后者是改变 stderr 的数据输出信道。两者都是将原本要送出到 monitor 的数据转向输出到指定档案去。由于 1 是 > 的默认值，因此，1> 与 > 是相同的，都是改 stdout 。</p>
+<p>用上次的 ls 例子来说明一下好了：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">$ ls my.file no.such.file 1&gt;file.out
+ls: no.such.file: No such file or directory
+#这样monitor 就只剩下 stderr 而已。因为 stdout 给写进 file.out 去了。
+$ ls my.file no.such.file 2&gt;file.err
+my.file
+#这样monitor 就只剩下 stdout ，因为 stderr 写进了 file.err 。
+$ ls my.file no.such.file 1&gt;file.out 2&gt;file.err
+#这样monitor 就啥也没有，因为 stdout 与 stderr 都给转到档案去了...</pre></div></div>
+
+<p>不过，有些地方还是要注意一下的。首先，是同时写入的问题。比方如下这个例子：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">$ ls my.file no.such.file 1&gt;file.both 2&gt;file.both</pre></div></div>
+
+<p>假如stdout(1) 与 stderr(2) 都同时在写入 file.both 的话， 则是采取“覆盖”方式：后来写入的覆盖前面的。让我们假设一个 stdout 与 stderr 同时写入 file.out 的情形好了：</p>
+<p>* 首先 stdout 写入10个字符<br />
+* 然后 stderr 写入 6 个字符</p>
+<p>那么，这时候原本 stdout 的前面 6 个字符就被 stderr 覆盖掉了。那，如何解决呢？所谓山不转路转、路不转人转嘛，我们可以换一个思维：将 stderr 导进 stdout 或将 stdout 导进 sterr ，而不是大家在抢同一份档案，不就行了。</p>
+<p>* 2>&#038;1 就是将 stderr 并进 stdout 作输出<br />
+* 1>&#038;2 或 >&#038;2 就是将 stdout 并进 stderr 作输出</p>
+<p>于是，前面的错误操作可以改为：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">$ ls my.file no.such.file 1&gt;file.both 2&gt;&amp;1
+#或
+$ ls my.file no.such.file 2&gt;file.both &gt;&amp;2</pre></div></div>
+
+<p>在 Linux 档案系统里，有个设备档位于 /dev/null 。许多人都问过我那是甚么玩意儿？我跟你说好了：那就是&#8221;空&#8221;啦</p>
+<p>这个 null 在 I/O Redirection 中可有用得很呢：</p>
+<p>* 若将 FD1 跟 FD2 转到 /dev/null 去，就可将 stdout 与 stderr 弄不见掉。<br />
+* 若将 FD0 接到 /dev/null 来，那就是读进 nothing 。</p>
+<p>比方说，当我们在执行一个程序时，画面会同时送出 stdout 跟 stderr ， 假如你不想看到 stderr (也不想存到档案去)，那可<br />
+以：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">$ ls my.file no.such.file 2&gt;/dev/null
+my.file
+#若要相反：只想看到stderr 呢？还不简单©u将 stdout 弄到 null 就行：
+$ ls my.file no.such.file &gt;/dev/null
+ls: no.such.file: No such file or directory</pre></div></div>
+
+<p>那接下来，假如单纯只跑程序，不想看到任何输出结果呢？</p>
+<p>除了用 >/dev/null 2>&#038;1 之外，你还可以如此：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">$ ls my.file no.such.file &amp;&gt;/dev/null
+#(提示：将 &amp;&gt; 换成 &gt;&amp; 也行啦~~! )</pre></div></div>
+
+<p>接下来，再让我们看看如下情况：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">$ echo &quot;1&quot; &gt; file.out
+$ cat file.out
+1
+$ echo &quot;2&quot; &gt; file.out
+$ cat file.out
+2</pre></div></div>
+
+<p>看来，我们在重导stdout 或 stderr 进一份档案时，似乎永远只获得最后一次导入的结果。那，之前的内容呢？<br />
+呵~~~ 要解决这个问提很简单啦，将 > 换成 >> 就好：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">$ echo &quot;3&quot; &gt;&gt; file.out
+$ cat file.out
+2
+3</pre></div></div>
+
+<p>如此一来，被重导的目标档案之内容并不会失去，而新的内容则一直增加在最后面去。再来还有一个难题要你去参透的呢：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">$ echo &quot;some text here&quot; &gt; file
+$ cat &lt; file
+some text here
+$ cat &lt; file &gt; file.bak
+$ cat &lt; file.bak
+some text here
+$ cat &lt; file &gt; file
+$ cat &lt; file</pre></div></div>
+
+<p>怎么最后那个 cat 命令看到的 file 竟是空的？要理解这一现像其实不难，这只是 priority 的问题而已：</p>
+<p>* 在 IO Redirection 中，stdout 与 stderr 的管道会先准备好，才会从 stdin 读进资料。也就是说，在上例中，> file 会先将 file 清空，然后才读进 < file ， 但这时候档案已经被清空了，因此就变成读不进任何数据了...
+
+
+
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">$ cat &lt;&gt; file
+$ cat &lt; file &gt;&gt; file</pre></div></div>
+
+<p>* 在 cm1 | cm2 | cm3 &#8230; 这段 pipe line 中，若要将 cm2 的结果存到某一档案呢？<br />
+若你写成 cm1 | cm2 > file | cm3 的话，那你肯定会发现 cm3 的 stdin 是空的(当然啦，你都将水管接到别的水池了)聪明的你或许会如此解决：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">cm1 | cm2 &gt; file ; cm3 &lt; file</pre></div></div>
+
+<p>是的，你的确可以这样做，但最大的坏处是：这样一来，file I/O 会变双倍.在 command 执行的整个过程中，file I/O 是最常见的最大效能杀手。<br />
+凡是有经验的 shell 操作者，都会尽量避免或降低 file I/O 的频率。那，上面问题还有更好方法吗？有的，那就是 tee 命令了。</p>
+<p>*所谓 tee 命令是在不影响原本 I/O 的情况下，将 stdout复制一份到档案去。</p>
+<p>因此，上面的命令行可以如此打：<br />
+</code></p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">cm1 | cm2 | tee file | cm3</pre></div></div>
+
+<p>在预设上，tee 会改写目标档案，若你要改为增加内容的话，那可用 -a 参数达成。</p>
+<p>linux shell 中&#8221;2>&#038;1&#8243;含义:</p>
+<p>对于&#038; 1 更准确的说应该是文件描述符 1,而1 一般代表的就是STDOUT_FILENO,实际上这个操作就是一个dup2(2)调用.他标准输出到all_result ,然后复制标准输出到文件描述符2(STDERR_FILENO),其后果就是文件描述符1和2指向同一个文件表项,也可以说错误的输出被合并了.其中0 表示键盘输入 1表示屏幕输出 2表示错误输出.把标准出错重定向到标准输出,然后扔到/DEV/NULL下面去。通俗的说，就是把所有标准输出和标准出错都扔到垃圾桶里面。</p>
+
+<div class="wp_code"><div class="pre"><pre class="code" style="font-family:'Times New Roman',Garamond, Times;">command &gt;out.file 2&gt;&amp;1 &amp;</pre></div></div>
+
+<p>command >out.file是将command的输出重定向到out.file文件，即输出内容不打印到屏幕上，而是输出到out.file文件中。 2>&#038;1 是将标准出错重定向到标准输出，这里的标准输出已经重定向到了out.file文件，即将标准出错也输出到out.file文件中。最后一个&#038; ， 是让该命令在后台执行。</p>
+<p>试想2>1代表什么，2与>结合代表错误重定向，而1则代表错误重定向到一个文件1，而不代表标准输出；换成2>&#038;1，&#038;与1结合就代表标准输出了，就变成错误重定向到标准输出.</p>
+<p>你可以用:</p>
+<p>ls 2>1测试一下，不会报没有2文件的错误，但会输出一个空的文件1；</p>
+<p>ls xxx 2>1测试，没有xxx这个文件的错误输出到了1中；</p>
+<p>ls xxx 2>&#038;1测试，不会生成1这个文件了，不过错误跑到标准输出了；</p>
+<p>ls xxx >out.txt 2>&#038;1, 实际上可换成 ls xxx 1>out.txt 2>&#038;1；重定向符号>默认是1,错误和输出都传到out.txt了。</p>
+<p>为何2>&#038;1要写在后面？</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">command &gt; file 2&gt;&amp;1</pre></div></div>
+
+<p>首先是command > file将标准输出重定向到file中， 2>&#038;1 是标准错误拷贝了标准输出的行为，也就是同样被重定向到file中，最终结果就是标准输出和错误都被重定向到file中。</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">command 2&gt;&amp;1 &gt;file</pre></div></div>
+
+<p>2>&#038;1 标准错误拷贝了标准输出的行为，但此时标准输出还是在终端。>file 后输出才被重定向到file，但标准错误仍然保持在终端。</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/7244.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Linux Shell 之引号</title>
+		<link>http://www.xieziming.com/archives/6917.html</link>
+		<comments>http://www.xieziming.com/archives/6917.html#respond</comments>
+		<pubDate>Wed, 17 Mar 2010 07:40:35 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[程序]]></category>
+		<category><![CDATA[linux]]></category>
+		<category><![CDATA[shell]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=6917</guid>
+		<description><![CDATA[由单引号括起来的字符都作为普通字符出现。特殊字符用单引号括起来以后，也会失去原有意义，而只作为普通字符解释。例如：
+<code lang="bash">
+$ string=’$PATH’
+$ echo $string
+$PATH
+</code>
+可见$保持了其本身的含义，作为普通字符出现。
+<code lang="bash">
+howard@0[script]$ grep Susan phonebook 
+Susan Goldberg 403-212-4921 
+Susan Topple    212-234-2343 
+</code>
+如果我们想查找的是Susan Goldberg，不能直接使用grep Susan Goldberg phonebook命令，grep会把Goldberg和phonebook当作需要搜索的文件 
+<code lang="bash">
+howard@0[script]$ grep 'Susan Gold' phonebook 
+Susan Goldberg 403-212-4921 
+</code>
+当shell碰到第一个单引号时，它忽略掉其后直到右引号的所有特殊字符。]]></description>
+				<content:encoded><![CDATA[<p>在shell中引号分为三种：单引号，双引号和反引号。</p>
+<p><span style="color: #ff00ff;">* 单引号 ‘</span></p>
+<p>由单引号括起来的字符都作为普通字符出现。特殊字符用单引号括起来以后，也会失去原有意义，而只作为普通字符解释。例如：</p>
+
+<div class="wp_code"><div class="pre"><pre class="bash" style="font-family:'Times New Roman',Garamond, Times;">$ <span style="color: #007800;">string</span>=’<span style="color: #007800;">$PATH</span>’
+$ <span style="color: #7a0874; font-weight: bold;">echo</span> <span style="color: #007800;">$string</span>
+<span style="color: #007800;">$PATH</span></pre></div></div>
+
+<p>可见$保持了其本身的含义，作为普通字符出现。</p>
+
+<div class="wp_code"><div class="pre"><pre class="bash" style="font-family:'Times New Roman',Garamond, Times;">howard<span style="color: #000000; font-weight: bold;">@</span>0<span style="color: #7a0874; font-weight: bold;">&#91;</span>script<span style="color: #7a0874; font-weight: bold;">&#93;</span>$ <span style="color: #c20cb9; font-weight: bold;">grep</span> Susan phonebook 
+Susan Goldberg <span style="color: #000000;">403</span>-<span style="color: #000000;">212</span>-<span style="color: #000000;">4921</span> 
+Susan Topple    <span style="color: #000000;">212</span>-<span style="color: #000000;">234</span>-<span style="color: #000000;">2343</span></pre></div></div>
+
+<p>如果我们想查找的是Susan Goldberg，不能直接使用grep Susan Goldberg phonebook命令，grep会把Goldberg和phonebook当作需要搜索的文件</p>
+
+<div class="wp_code"><div class="pre"><pre class="bash" style="font-family:'Times New Roman',Garamond, Times;">howard<span style="color: #000000; font-weight: bold;">@</span>0<span style="color: #7a0874; font-weight: bold;">&#91;</span>script<span style="color: #7a0874; font-weight: bold;">&#93;</span>$ <span style="color: #c20cb9; font-weight: bold;">grep</span> <span style="color: #ff0000;">'Susan Gold'</span> phonebook 
+Susan Goldberg <span style="color: #000000;">403</span>-<span style="color: #000000;">212</span>-<span style="color: #000000;">4921</span></pre></div></div>
+
+<p>当shell碰到第一个单引号时，它忽略掉其后直到右引号的所有特殊字符。</p>
+<p><span style="color: #ff00ff;">* 双引号 “</span></p>
+<p>由双引号括起来的字符，除$、倒引号(`)和反斜线（\）仍保留其特殊功能外，其余字符均作为普通字符对待。“$”表示变量替换，即用其后指定的变量的值来代替$和变量；倒引号表示命令替换；仅当“\”后面的字符是下述字符之一时，“\”才是转义字符，这些字符是：“$”、“`”、“&#8221;”、“\”或换行符。转义字符告诉Shell不要对其后面的那个字符进行特殊处理，只是当作普通字符。</p>
+
+<div class="wp_code"><div class="pre"><pre class="bash" style="font-family:'Times New Roman',Garamond, Times;">$ <span style="color: #7a0874; font-weight: bold;">echo</span> <span style="color: #ff0000;">&quot;My current dir is <span style="color: #780078;">`pwd`</span> and logname is <span style="color: #007800;">$LOGNAME</span>&quot;</span>
+My current <span style="color: #c20cb9; font-weight: bold;">dir</span> is <span style="color: #000000; font-weight: bold;">/</span>home<span style="color: #000000; font-weight: bold;">/</span>mengqc and <span style="color: #c20cb9; font-weight: bold;">logname</span> is mengqc</pre></div></div>
+
+<p><span style="color: #ff00ff;">* 反引号 `</span></p>
+<p>反引号（`）这个字符所对应的键一般位于键盘的左上角，不要将其同单引号（’）混淆。反引号括起来的字符串被shell解释为命令行，在执行时，shell首先执行该命令行，并以它的标准输出结果取代整个反引号（包括两个反引号）部分。例如：</p>
+
+<div class="wp_code"><div class="pre"><pre class="bash" style="font-family:'Times New Roman',Garamond, Times;">$ <span style="color: #7a0874; font-weight: bold;">pwd</span>
+<span style="color: #000000; font-weight: bold;">/</span>home<span style="color: #000000; font-weight: bold;">/</span>xyz
+&nbsp;
+$ <span style="color: #007800;">string</span>=”current directory is <span style="color: #000000; font-weight: bold;">`</span><span style="color: #7a0874; font-weight: bold;">pwd</span><span style="color: #000000; font-weight: bold;">`</span>”
+$ <span style="color: #7a0874; font-weight: bold;">echo</span> <span style="color: #007800;">$string</span>
+current directour is <span style="color: #000000; font-weight: bold;">/</span>home<span style="color: #000000; font-weight: bold;">/</span>xyz</pre></div></div>
+
+<p>shell执行echo命令时，首先执行`pwd`中的命令pwd，并将输出结果/home/xyz取代`pwd`这部分，最后输出替换后的整个结果。</p>
+<p>利用反引号的这种功能可以进行命令置换，即把反引号括起来的执行结果赋值给指定变量。例如：</p>
+
+<div class="wp_code"><div class="pre"><pre class="bash" style="font-family:'Times New Roman',Garamond, Times;">$ <span style="color: #007800;">today</span>=<span style="color: #000000; font-weight: bold;">`</span><span style="color: #c20cb9; font-weight: bold;">date</span><span style="color: #000000; font-weight: bold;">`</span>
+$ <span style="color: #7a0874; font-weight: bold;">echo</span> Today is <span style="color: #007800;">$today</span>
+Today is Mon Apr <span style="color: #000000;">15</span> <span style="color: #000000;">16</span>:<span style="color: #000000;">20</span>:<span style="color: #000000;">13</span> CST <span style="color: #000000;">1999</span></pre></div></div>
+
+<p>对于bash的来说，命令的解释是从左到右的，首先遇到单引号和双引号，所作的解释是不一样，看这个例子：</p>
+
+<div class="wp_code"><div class="pre"><pre class="bash" style="font-family:'Times New Roman',Garamond, Times;">$ <span style="color: #007800;">a</span>=<span style="color: #000000;">1</span>
+$ <span style="color: #7a0874; font-weight: bold;">echo</span> <span style="color: #ff0000;">&quot;<span style="color: #007800;">$a</span>&quot;</span>
+<span style="color: #000000;">1</span>               <span style="color: #666666; font-style: italic;">#$被bash解释到</span>
+$ <span style="color: #7a0874; font-weight: bold;">echo</span> <span style="color: #ff0000;">&quot;'<span style="color: #007800;">$a</span>'&quot;</span>
+<span style="color: #ff0000;">'1'</span>             <span style="color: #666666; font-style: italic;">#单引号失效</span>
+$ <span style="color: #7a0874; font-weight: bold;">echo</span> <span style="color: #ff0000;">'$a'</span>
+<span style="color: #007800;">$a</span>            
+$ <span style="color: #7a0874; font-weight: bold;">echo</span> <span style="color: #ff0000;">'&quot;$a&quot;'</span>
+<span style="color: #ff0000;">&quot;<span style="color: #007800;">$a</span>&quot;</span>            <span style="color: #666666; font-style: italic;">#双引号失效</span></pre></div></div>
+
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/6917.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>IP负载均衡技术</title>
+		<link>http://www.xieziming.com/archives/2596.html</link>
+		<comments>http://www.xieziming.com/archives/2596.html#respond</comments>
+		<pubDate>Wed, 07 Oct 2009 12:55:52 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[技术维基]]></category>
+		<category><![CDATA[linux]]></category>
+		<category><![CDATA[技术]]></category>
+
+		<guid isPermaLink="false">http://www.ideashot.com/?p=2596</guid>
+		<description><![CDATA[<img src="http://images.xieziming.com/upload/file/linux_3/1.jpg" alt="linux" />]]></description>
+				<content:encoded><![CDATA[<p>在前面文章中，讲述了可伸缩网络服务的几种结构，它们都需要一个前端的负载调度器（或者多个进行主从备份）。我们先分析实现虚拟网络服务的主要技术，指出IP负载均衡技术是在负载调度器的实现技术中效率最高的。在已有的IP负载均衡技术中，主要有通过网络地址转换（Network Address Translation）将一组服务器构成一个高性能的、高可用的虚拟服务器，我们称之为VS/NAT技术（Virtual Server via Network Address Translation）。在分析VS/NAT的缺点和网络服务的非对称性的基础上，我们提出了通过IP隧道实现虚拟服务器的方法VS /TUN（Virtual Server via IP Tunneling），和通过直接路由实现虚拟服务器的方法VS/DR（Virtual Server via Direct Routing），它们可以极大地提高系统的伸缩性。VS/NAT、VS/TUN和VS/DR技术是LVS集群中实现的三种IP负载均衡技术，我们将在文章中详细描述它们的工作原理和各自的优缺点。<br />
+<span id="more-2596"></span><br />
+在以下描述中，我们称客户的socket和服务器的socket之间的数据通讯为连接，无论它们是使用TCP还是UDP协议。下面简述当前用服务器集群实现高可伸缩、高可用网络服务的几种负载调度方法，并列举几个在这方面有代表性的研究项目。</p>
+<p>实现虚拟服务的相关方法</p>
+<p>在网络服务中，一端是客户程序，另一端是服务程序，在中间可能有代理程序。由此看来，可以在不同的层次上实现多台服务器的负载均衡。用集群解决网络服务性能问题的现有方法主要分为以下四类。</p>
+<p>2.1. 基于RR-DNS的解决方法</p>
+<p>NCSA的可伸缩的WEB服务器系统就是最早基于RR-DNS（Round-Robin Domain Name System）的原型系统[1,2]。它的结构和工作流程如下图所示：</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/2596.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>负载均衡技术</title>
+		<link>http://www.xieziming.com/archives/2584.html</link>
+		<pubDate>Fri, 04 Sep 2009 03:20:09 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[技术维基]]></category>
+		<category><![CDATA[linux]]></category>
+
+		<guid isPermaLink="false">http://www.ideashot.com/?p=2584</guid>
+		<description><![CDATA[当前，无论在企业网、园区网还是在广域网如Internet上，业务量的发展都超出了过去最乐观的估计，上网热潮风起云涌，新的应用层出不穷，即使按照当时最优配置建设的网络，也很快会感到吃不消。尤其是各个网络的核心部分，其数据流量和计算强度之大，使得单一设备根本无法承担，而如何在完成同样功能的多个网络设备之间实现合理的业务量分配，使之不致于出现一台设备过忙、而别的设备却未充分发挥处理能力的情况，就成了一个问题，负载均衡机制也因此应运而生。 负载均衡建立在现有网络结构之上，它提供了一种廉价有效的方法扩展服务器带宽和增加吞吐量，加强网络数据处理能力，提高网络的灵活性和可用性。它主要完成以下任务：解决网络拥塞问题，服务就近提供，实现地理位置无关性；为用户提供更好的访问质量；提高服务器响应速度；提高服务器及其他资源的利用效率；避免了网络关键部位出现单点失效。 定义 其实，负载均衡并非传统意义上的“均衡”，一般来说，它只是把有可能拥塞于一个地方的负载交给多个地方分担。如果将其改称为“负载分担”，也许更好懂一些。说得通俗一点，负载均衡在网络中的作用就像轮流值日制度，把任务分给大家来完成，以免让一个人累死累活。不过，这种意义上的均衡一般是静态的，也就是事先确定的“轮值”策略。 与轮流值日制度不同的是，动态负载均衡通过一些工具实时地分析数据包，掌握网络中的数据流量状况，把任务合理分配出去。结构上分为本地负载均衡和地域负载均衡(全局负载均衡)，前一种是指对本地的服务器集群做负载均衡，后一种是指对分别放置在不同的地理位置、在不同的网络及服务器群集之间作负载均衡。 服务器群集中每个服务结点运行一个所需服务器程序的独立拷贝，诸如Web、FTP、Telnet或e-mail服务器程序。对于某些服务（如运行在Web服务器上的那些服务）而言，程序的一个拷贝运行在群集内所有的主机上，而网络负载均衡则将工作负载在这些主机间进行分配。对于其他服务（例如e-mail），只有一台主机处理工作负载，针对这些服务，网络负载均衡允许网络通讯量流到一个主机上，并在该主机发生故障时将通讯量移至其他主机。]]></description>
+				<content:encoded><![CDATA[<p>当前，无论在企业网、园区网还是在广域网如Internet上，业务量的发展都超出了过去最乐观的估计，上网热潮风起云涌，新的应用层出不穷，即使按照当时最优配置建设的网络，也很快会感到吃不消。尤其是各个网络的核心部分，其数据流量和计算强度之大，使得单一设备根本无法承担，而如何在完成同样功能的多个网络设备之间实现合理的业务量分配，使之不致于出现一台设备过忙、而别的设备却未充分发挥处理能力的情况，就成了一个问题，负载均衡机制也因此应运而生。<br />
+<span id="more-2584"></span><br />
+负载均衡建立在现有网络结构之上，它提供了一种廉价有效的方法扩展服务器带宽和增加吞吐量，加强网络数据处理能力，提高网络的灵活性和可用性。它主要完成以下任务：解决网络拥塞问题，服务就近提供，实现地理位置无关性；为用户提供更好的访问质量；提高服务器响应速度；提高服务器及其他资源的利用效率；避免了网络关键部位出现单点失效。</p>
+<p>定义</p>
+<p>其实，负载均衡并非传统意义上的“均衡”，一般来说，它只是把有可能拥塞于一个地方的负载交给多个地方分担。如果将其改称为“负载分担”，也许更好懂一些。说得通俗一点，负载均衡在网络中的作用就像轮流值日制度，把任务分给大家来完成，以免让一个人累死累活。不过，这种意义上的均衡一般是静态的，也就是事先确定的“轮值”策略。</p>
+<p>与轮流值日制度不同的是，动态负载均衡通过一些工具实时地分析数据包，掌握网络中的数据流量状况，把任务合理分配出去。结构上分为本地负载均衡和地域负载均衡(全局负载均衡)，前一种是指对本地的服务器集群做负载均衡，后一种是指对分别放置在不同的地理位置、在不同的网络及服务器群集之间作负载均衡。</p>
+<p>服务器群集中每个服务结点运行一个所需服务器程序的独立拷贝，诸如Web、FTP、Telnet或e-mail服务器程序。对于某些服务（如运行在Web服务器上的那些服务）而言，程序的一个拷贝运行在群集内所有的主机上，而网络负载均衡则将工作负载在这些主机间进行分配。对于其他服务（例如e-mail），只有一台主机处理工作负载，针对这些服务，网络负载均衡允许网络通讯量流到一个主机上，并在该主机发生故障时将通讯量移至其他主机。</p>
+]]></content:encoded>
+			</item>
+		<item>
+		<title>linux 网络命令</title>
+		<link>http://www.xieziming.com/archives/2838.html</link>
+		<comments>http://www.xieziming.com/archives/2838.html#respond</comments>
+		<pubDate>Sat, 20 Jun 2009 09:19:02 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[技术维基]]></category>
+		<category><![CDATA[linux]]></category>
+		<category><![CDATA[技术]]></category>
+
+		<guid isPermaLink="false">http://www.ideashot.com/?p=2838</guid>
+		<description><![CDATA[1)列出的是所有连接
+ netstat -tun
+
+2)列出的是apache所有连接
+ netstat -tun &#124; grep ":80"
+
+3）统计80端口连接数　
+  netstat -nat&#124;grep-i"80"&#124;wc -l
+　
+4）统计httpd协议连接数　
+  ps -ef&#124;grep httpd&#124;wc -l
+　
+5）统计已连接上的，状态为“established'　
+ netstat -na&#124;grep ESTABLISHED&#124;wc -l]]></description>
+				<content:encoded><![CDATA[<p>1)列出的是所有连接<br />
+ netstat -tun</p>
+<p>2)列出的是apache所有连接<br />
+ netstat -tun | grep &#8220;:80&#8243;</p>
+<p>3）统计80端口连接数　<br />
+  netstat -nat|grep-i&#8221;80&#8243;|wc -l<br />
+　<br />
+4）统计httpd协议连接数　<br />
+  ps -ef|grep httpd|wc -l<br />
+　<br />
+5）统计已连接上的，状态为“established&#8217;　<br />
+ netstat -na|grep ESTABLISHED|wc -l<br />
+　<br />
+6）查出哪个IP地址连接最多，将其封了<br />
+netstat -na|grep ESTABLISHED|awk'{print$5}&#8217;|awk-F:'{print$1}&#8217;|sort|uniq-c|sort-r+0n</p>
+<p>netstat -na|grep SYN|awk'{print$5}&#8217;|awk-F:'{print$1}&#8217;|sort|uniq-c|sort-r+0n</p>
+<p>7)查看httpd进程数（即prefork模式下Apache能够处理的并发请求数）：<br />
+ps -ef | grep httpd | wc -l</p>
+<p>8)查看Apache的并发请求数及其TCP连接状态：<br />
+netstat -n | awk &#8216;/^tcp/ {++S[$NF]} END {for(a in S) print a, S[a]}&#8217;<br />
+或者 netstat -n | awk &#8216;/^tcp/ {++state[$NF]} END {for(key in state) print key,&#8221;\t&#8221;,state<font color="#00BB00"><strong></strong></font>}&#8217;</p>
+<p>返回结果示例：<br />
+　　LAST_ACK 5<br />
+　　SYN_RECV 30<br />
+　　ESTABLISHED 1597<br />
+　　FIN_WAIT1 51<br />
+　　FIN_WAIT2 504<br />
+　　TIME_WAIT 1057</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/2838.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>linux学习笔记</title>
+		<link>http://www.xieziming.com/archives/2835.html</link>
+		<comments>http://www.xieziming.com/archives/2835.html#respond</comments>
+		<pubDate>Mon, 20 Apr 2009 09:10:19 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[技术维基]]></category>
+		<category><![CDATA[linux]]></category>
+		<category><![CDATA[技术]]></category>
+
+		<guid isPermaLink="false">http://www.ideashot.com/?p=2835</guid>
+		<description><![CDATA[linux目录架构
+/   根目录
+/bin    常用的命令 binary file 的目錄
+/boot   存放系统启动时必须读取的档案，包括核心 (kernel) 在内
+     /boot/grub/menu.lst   GRUB设置
+     /boot/vmlinuz   内核
+     /boot/initrd     核心解壓縮所需 RAM Disk
+/dev    系统周边设备    
+/etc    系统相关设定文件
+     /etc/DIR_COLORS   设定颜色
+     /etc/HOSTNAME   设定用户的节点名
+     /etc/NETWORKING   只有YES标明网络存在
+     /etc/host.conf 文件说明用户的系统如何查询节点名
+     /etc/hosts 设定用户自已的IP与名字的对应表
+     /etc/hosts.allow 设置允许使用inetd的机器使用
+     /etc/hosts.deny 设置不允许使用inetd的机器使用
+     /etc/hosts.equiv 设置远端机不用密码
+     /etc/inetd.conf 设定系统网络守护进程inetd的配置
+     /etc/gateways 设定路由器
+     /etc/protocols 设定系统支持的协议
+     /etc/named.boot 设定本机为名字服务器的配置文件
+     /etc/sysconfig/network-scripts/ifcfg-eth0   设置IP
+     /etc/resolv.conf    设置DNS ]]></description>
+				<content:encoded><![CDATA[<p>linux目录架构<br />
+/   根目录<br />
+/bin    常用的命令 binary file 的目錄<br />
+/boot   存放系统启动时必须读取的档案，包括核心 (kernel) 在内<br />
+     /boot/grub/menu.lst   GRUB设置<br />
+     /boot/vmlinuz   内核<br />
+     /boot/initrd     核心解壓縮所需 RAM Disk<br />
+/dev    系统周边设备<br />
+/etc    系统相关设定文件<br />
+     /etc/DIR_COLORS   设定颜色<br />
+     /etc/HOSTNAME   设定用户的节点名<br />
+     /etc/NETWORKING   只有YES标明网络存在<br />
+     /etc/host.conf 文件说明用户的系统如何查询节点名<br />
+     /etc/hosts 设定用户自已的IP与名字的对应表<br />
+     /etc/hosts.allow 设置允许使用inetd的机器使用<br />
+     /etc/hosts.deny 设置不允许使用inetd的机器使用<br />
+     /etc/hosts.equiv 设置远端机不用密码<br />
+     /etc/inetd.conf 设定系统网络守护进程inetd的配置<br />
+     /etc/gateways 设定路由器<br />
+     /etc/protocols 设定系统支持的协议<br />
+     /etc/named.boot 设定本机为名字服务器的配置文件<br />
+     /etc/sysconfig/network-scripts/ifcfg-eth0   设置IP<br />
+     /etc/resolv.conf    设置DNS<br />
+     /etc/X11  X Window的配置文件,xorg.conf 或 XF86Config 這兩個 X Server 的設定檔</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/2835.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+	</channel>
+</rss>

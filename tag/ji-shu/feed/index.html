@@ -1,0 +1,1360 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>技术 &#8211; 谢子明</title>
+	<atom:link href="http://www.xieziming.com/tag/ji-shu/feed" rel="self" type="application/rss+xml" />
+	<link>http://www.xieziming.com</link>
+	<description>Suny Xie</description>
+	<lastBuildDate>Mon, 26 Dec 2016 07:34:38 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.7</generator>
+	<item>
+		<title>QTP DataTable</title>
+		<link>http://www.xieziming.com/archives/6406.html</link>
+		<comments>http://www.xieziming.com/archives/6406.html#respond</comments>
+		<pubDate>Tue, 23 Nov 2010 14:29:28 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[测试]]></category>
+		<category><![CDATA[QTP]]></category>
+		<category><![CDATA[技术]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=6406</guid>
+		<description><![CDATA[<code lang="vb">
+DataTable.GetSheet(dtSheet)
+DataTable.GetSheetCount
+DataTable.[GetSheet.]GetRowCount
+DataTable.[GetSheet.]GetParameterCount
+DataTable.GetSheet(sSheetName).GetParameter(“ColumName”).ValueByName(iRowNumber)
+DataTable.[GetSheet.]GetCurrentRow
+DataTable.[GetSheet.]SetCurrentRow(RowNumber)
+DataTable.Value(ParameterID [, SheetID])  or DataTable (ParameterID [, SheetID])
+DataTable.AddSheet(SheetName)
+DataTable.DeleteSheet(SheetName)
+DataTable.Export(filename)
+DataTable.ExportSheet(filename,SheetName)
+DataTable.Import(FileName)
+DataTable.ImportSheet(FileName, SheetSource, SheetDest)
+</code>]]></description>
+				<content:encoded><![CDATA[<p><strong>Global Sheet和Local Sheet：</strong></p>
+<p>1．Global Sheet是一个全局变量。有几行数据，程序就要回放几次（不需要循环语句）<br />
+如果当前的Global Sheet中有3行测试数据。第1次执行使用第一行数据test1，第二次执行使用第二行数据test2，第三次执行使用第三行数据test3，依此可以一直类推下去。</p>
+<p>现在设置了3行测试数据，这些数据不一定是我们每次都需要的，那该怎么办？删除它们？等需要了再添加？那多麻烦。QTP提供了一个很有用的功能，那就是Data Table iterations设置（QTP上方菜单栏→File→Settings→Run）。</p>
+<p>2. Local Sheet是个局部变量，它并不受Data Table iterations控制，无论有多少行数据，它只运行一次（如果Global Sheet没有数据，或只有一行数据，或设置为只运行一次）。</p>
+<p>即使Global Sheet没有数据，仍然可以通过别的方式（代码控制的方式排除在外）去执行Local Sheet下的所有行。在Test Flow里反击Action后可以进入Action的一些相关设置。它和Global的Data Table iterations设置界面相似，在这里选中Run on all rows就可以执行Local Sheet下的所有测试数据了。虽然都是执行所有行数据，不过它们的区别还是很大的。Local Sheet执行了3次自身Action的迭代，而Global Sheet就相当于执行了3次脚本。</p>
+<p>在最后，还总结了一些Global和Local之间的逻辑规则，大致为以下几点：<br />
+　　<br />
+● Global不止一行数据（设置为Run on all rows，以下都是……），Action也设置为Run on all rows（以下都是……）且假设双方都具有3行测试数据，此时Global和Action的每行都要运行且同步运行（即Global在取第2行数据时，Action也对应地取它的第二行数据）。<br />
+　　<br />
+● 当Global不止一行数据且Global的行数大于Action的行数，那么当Action执行到最后一行后，Global以后所执行的行数，Action都用它的最后一行数据去补，比如Action的最后一行测试数据是test3，那么即使Global执行到了100行，也一直对应的是Action中test3的这一行数据。<br />
+　　<br />
+● 引用上面的条件，如果Global的行数小于Action的行数的话，Action就执行不到最后一行了。</p>
+<p><strong>QTP的DataTable操作操作包括：</strong></p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;">DataTable.GetSheet(dtSheet)
+DataTable.GetSheetCount
+DataTable.[GetSheet.]GetRowCount
+DataTable.[GetSheet.]GetParameterCount
+DataTable.GetSheet(sSheetName).GetParameter(“ColumName”).ValueByName(iRowNumber)
+DataTable.[GetSheet].GetCurrentRow
+DataTable.[GetSheet].SetCurrentRow(RowNumber)
+DataTable.[GetSheet].SetNextRow
+DataTable.Value(ParameterID [, SheetID])  <span style="color: #8D38C9; font-weight: bold;">or</span> DataTable (ParameterID [, SheetID])
+DataTable.AddSheet(SheetName)
+DataTable.DeleteSheet(SheetName)
+DataTable.Export(filename)
+DataTable.ExportSheet(filename,SheetName)
+DataTable.Import(FileName)
+DataTable.ImportSheet(FileName, SheetSource, SheetDest)</pre></div></div>
+
+<p>1.得到datatable总行数的命令：<strong>GetRowCount</strong><br />
+描述：返回运行时数据表的第一个工作表（用于测试的全局表或用于业务组件的业务组件表）中最长的列中的总行数。<br />
+语法：DataTable.GetSheet(&#8220;MySheet&#8221;).GetRowCount</p>
+<p>返回值：数字</p>
+<p>示例：以下示例使用 GetRowCount 方法查找 MySheet 运行时数据表中最长的列中的总行数，并将其写入报告。</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;">rowcount = DataTable.GetSheet(<span style="color: #800000;">&quot;MySheet&quot;</span>).GetRowCount
+Reporter.ReportEvent 2, <span style="color: #800000;">&quot;数据工作表中有 &quot;</span> &amp;rowcount, <span style="color: #800000;">&quot;行。&quot;</span></pre></div></div>
+
+<p>2.得到datatable运行时的动态列数：<strong>GetParameterCount</strong><br />
+语法：DTSheet.GetParameterCount</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;">paramcount = DataTable.GetSheet(<span style="color: #800000;">&quot;MySheet&quot;</span>).GetParameterCount</pre></div></div>
+
+<p>3.<strong>GetCurrentRow</strong>方法<br />
+描述：返回运行时数据表的第一个工作表（用于测试的全局表或用于业务组件的业务组件表）中的当前（活动）行。<br />
+语法：DataTable.GetSheet(&#8220;MySheet&#8221;).GetCurrentRow<br />
+返回值：数字<br />
+示例：以下示例使用 GetCurrentRow 方法检索当前在运行时数据表中使用的行，并将其写入报告。</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;">row = DataTable.GetSheet(<span style="color: #800000;">&quot;MySheet&quot;</span>).GetCurrentRow
+Reporter.ReportEvent 1, <span style="color: #800000;">&quot;行号&quot;</span>, row</pre></div></div>
+
+<p>4. 设置当前active的行数（第一行为1）：<strong>SetCurrentRow</strong><br />
+语法：DataTable.GetSheet(&#8220;MySheet&#8221;).SetCurrentRow(RowNumber)</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;">DataTable.SetCurrentRow(tb_i+1)
+DataTable.GetSheet(<span style="color: #800000;">&quot;Action1&quot;</span>).SetCurrentRow(tb_i+1)</pre></div></div>
+
+<p>&#8216;注：你也可以用GetCurrentRow来获取Action1的行，然后再用SetCurrentRow来保持两个Action的当前行一致：</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;">DataTable.SetCurrentRow(tb_i+1)
+CurrRow = DataTable.GetSheet(<span style="color: #800000;">&quot;Action1&quot;</span>).GetCurrentRow
+DataTable.GetSheet(<span style="color: #800000;">&quot;Action2&quot;</span>).SetCurrentRow(CurrRow)</pre></div></div>
+
+<p>5. 指向下一行数据：<strong>SetNextRow</strong></p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #151B8D; font-weight: bold;">Dim</span> i,j
+j = DataTable.GetRowCount
+<span style="color: #8D38C9; font-weight: bold;">For</span> i=1 <span style="color: #8D38C9; font-weight: bold;">to</span> j
+  Window(<span style="color: #800000;">&quot;Windows Internet Explorer&quot;</span>).WinObject(<span style="color: #800000;">&quot;Internet Explorer_Server&quot;</span>).<span style="color: #151B8D; font-weight: bold;">Type</span> DataTable(<span style="color: #800000;">&quot;content2&quot;</span>, dtGlobalSheet)
+  Browser(<span style="color: #800000;">&quot;Browser&quot;</span>).Page(<span style="color: #800000;">&quot;写日志 - XXX&quot;</span>).WebButton(<span style="color: #800000;">&quot;发 表&quot;</span>).Click
+  Datatable.GetSheet(<span style="color: #800000;">&quot;Global&quot;</span>).SetNextRow
+<span style="color: #8D38C9; font-weight: bold;">Next</span></pre></div></div>
+
+<p>6.查询、设置datatable的数值：</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;">DataTable(<span style="color: #800000;">&quot;Col&quot;</span>, <span style="color: #800000;">&quot;Action2&quot;</span>)   <span style="color: #008000;">'就是读取Action2的Col列。
+</span>
+<span style="color: #008000;">'同样，表也可以用数字代替：
+</span>DataTable(1, 2)    <span style="color: #008000;">'这样就是读取第二个Action表的第一列
+</span>
+<span style="color: #008000;">'还有一种写法：
+</span>DataTable(1, <span style="color: #800000;">&quot;Action2&quot;</span>)  <span style="color: #008000;">'这样就是读取Action2的第一列，不管第一列叫什么名字，都能读
+</span>       
+<span style="color: #008000;">'还有一种赋值方法
+</span>aParam2=DataTable(“AccountsNumber”,dtGlobalSheet)
+&nbsp;
+<span style="color: #008000;">'还有一种赋值方法，但是有一个前提就是：必须只能是测试只包含一个操作的情况：
+</span>          
+aParam3=DataTable(“AccountsNumber”,dtLocalSheet)
+&nbsp;
+datatable.value(<span style="color: #800000;">&quot;num&quot;</span>)’只在global形式下的一种省略形式；完整形式是:
+datatable.value(<span style="color: #800000;">&quot;num&quot;</span>,dtlocalsheet)
+&nbsp;
+<span style="color: #008000;">'向某一列的单元格赋值:
+</span>datatable.value(<span style="color: #800000;">&quot;column_name&quot;</span>,dtlocalsheet)=<span style="color: #800000;">&quot;nanjing&quot;</span>
+&nbsp;
+DataTable.Value(<span style="color: #800000;">&quot;Destination&quot;</span>, <span style="color: #800000;">&quot;ActionA&quot;</span>)=<span style="color: #800000;">&quot;New York&quot;</span>            
+DataTable.Value(2,3)=<span style="color: #800000;">&quot;New York&quot;</span>
+DataTable(<span style="color: #800000;">&quot;Destination&quot;</span>, dtlocalSheet)=<span style="color: #800000;">&quot;New York&quot;</span>    
+&nbsp;
+Call_date= DataTable.Value(<span style="color: #800000;">&quot;Date&quot;</span>,<span style="color: #800000;">&quot;add Conference Call&quot;</span>)  '为Call_date赋值</pre></div></div>
+
+<p>7. 取datatable特定行的数据：</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;">DataTable.GetSheet(<span style="color: #800000;">&quot;Action1&quot;</span>).GetParameter(<span style="color: #800000;">&quot;test\&quot;</span>).ValueByRow(4)</pre></div></div>
+
+<p>8  AddSheet 方法<br />
+描述：向运行时数据表中添加指定工作表并返回该工作表，以便可以直接在同一语句中设置新工作表的属性。<br />
+语法：DataTable.AddSheet(SheetName)<br />
+示例：以下示例先使用 AddSheet 方法在运行时数据表中新建工作表&#8221;MySheet&#8221;，然后向新工作表中添加参数。</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #151B8D; font-weight: bold;">Dim</span> Variable
+Variable=DataTable.AddSheet (<span style="color: #800000;">&quot;MySheet&quot;</span>).AddParameter(<span style="color: #800000;">&quot;Time&quot;</span>, <span style="color: #800000;">&quot;8:00&quot;</span>)</pre></div></div>
+
+<p>9  DeleteSheet方法<br />
+描述：从运行时数据表中删除指定工作表。<br />
+语法：DataTable.DeleteSheet SheetID<br />
+示例：以下示例使用 DeleteSheet 方法从运行时数据表中删除工作表&#8221;MySheet&#8221;。</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;">DataTable.DeleteSheet <span style="color: #800000;">&quot;MySheet&quot;</span></pre></div></div>
+
+<p>10  Export方法<br />
+描述：在指定位置保存运行时数据表的副本。<br />
+语法：DataTable.Export(FileName)<br />
+示例：以下示例使用 Export 方法将测试的数据表副本保存在 C:\flights.xls 中。</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;">DataTable.Export (<span style="color: #800000;">&quot;C:\flights.xls&quot;</span>)</pre></div></div>
+
+<p>11 ExportSheet方法<br />
+描述：将运行时数据表的指定工作表导出到指定文件中。如果指定文件不存在，则将创建一个新文件并保存指定工作表。如果当前文件存在，但是该文件不包含具有指定工作表名称的工作表，则将插入该工作表作为文件的最后一个工作表。如果当前文件存在且包含指定工作表，则导出的工作表将覆盖现有工作表。</p>
+<p>语法：DataTable.ExportSheet(FileName, DTSheet)<br />
+DTSheet 变量 要导出的运行时数据表工作表的名称或索引。索引值从 1 开始。 </p>
+<p>示例：以下示例使用 ExportSheet 方法将运行时数据表的第一个工作表保存到 name.xls 文件中。</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;">DataTable.ExportSheet <span style="color: #800000;">&quot;C:\name.xls&quot;</span> ,1
+DataTable.ExportSheet <span style="color: #800000;">&quot;C:\name.xls&quot;</span> , <span style="color: #800000;">&quot; MySheet &quot;</span></pre></div></div>
+
+<p>12 GetSheet方法<br />
+描述 ：返回运行时数据表中的指定工作表。<br />
+语法 ：DataTable.GetSheet(SheetID)<br />
+SheetID 变量 标识要返回的工作表。SheetID 可以是工作表名称或索引。索引值从 1 开始。<br />
+返回值：DTSheet 对象<br />
+示例：以下示例使用 GetSheet 方法返回运行时数据表的&#8221;MySheet&#8221;工作表，以便向其中添加参数。</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;">MyParam=DataTable.GetSheet (<span style="color: #800000;">&quot;MySheet&quot;</span>).AddParameter(<span style="color: #800000;">&quot;Time&quot;</span>, <span style="color: #800000;">&quot;8:00&quot;</span>)</pre></div></div>
+
+<p>您还可以使用该方法向&#8221;MySheet&#8221;本地表中添加参数（注意，不会返回值）。</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;">DataTable.GetSheet (<span style="color: #800000;">&quot;MySheet&quot;</span>).AddParameter <span style="color: #800000;">&quot;Time&quot;</span>, <span style="color: #800000;">&quot;8:00&quot;</span></pre></div></div>
+
+<p>13 GetSheetCount方法<br />
+描述：返回运行时数据表中的总工作表数。<br />
+语法：DataTable.GetSheetCount<br />
+返回值：数字<br />
+示例：以下示例使用 GetSheetCount 方法查找运行时数据表中的总工作表数，并将其写入报告。</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;">sheetcount = DataTable.GetSheetCount
+Reporter.ReportEvent 0, <span style="color: #800000;">&quot;工作表编号&quot;</span>, <span style="color: #800000;">&quot;数据表中有&quot;</span> &amp; sheetcount &amp; <span style="color: #800000;">&quot;个工作表。</span></pre></div></div>
+
+<p>14 Import方法<br />
+描述：将指定的 Microsoft Excel 文件导入运行时数据表。</p>
+<p>注意：导入的表必须与测试或组件匹配。列名必须与测试或组件中的参数匹配，并且工作表名称（用于测试）必须与操作名匹配。如果导入的 Excel 表包含组合框或列表单元格、条件格式或其他特殊单元格格式，则不会导入这些格式，并且单元格在数据表中显示时包含固定值。</p>
+<p>语法：DataTable.Import(FileName)<br />
+FileName 字符串型 要导入的 Excel 表的完整路径。 </p>
+<p>示例：导入的表将替换现有运行时数据表（包括所有数据表）中的所有数据。以下示例使用 Import 方法将 flights.xls 表导入运行时数据表。</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;">DataTable.Import (<span style="color: #800000;">&quot;C:\flights.xls&quot;</span>)</pre></div></div>
+
+<p>15 ImportSheet方法<br />
+描述：将指定文件的工作表导入运行时数据表的指定工作表。导入的工作表中的数据将替换目标工作表中的数据（请参阅 SheetDest 参数）。</p>
+<p>注意：导入的工作表中的列标题必须与工作表导入操作中的数据表参数名匹配。否则，测试或组件可能会失败。导入的工作表会自动采用它所替换的工作表的名称。如果导入的 Excel 工作表包含组合框或列表单元格、条件格式或其他特殊单元格格式，则不会导入这些格式，并且单元格在数据表中显示时包含固定值。</p>
+<p>语法：DataTable.ImportSheet(FileName, SheetSource, SheetDest)</p>
+<p>FileName 字符串型 要从中导入工作表的 Excel 表的完整路径。<br />
+SheetSource 变量 要从文件导入的工作表的名称或索引。索引值从 1 开始。<br />
+SheetDest 变量 数据表中要用 SheetSource 替换的工作表的名称或索引。索引值从 1 开始。 </p>
+<p>示例：以下示例使用 ImportSheet 方法将 name.xls 表的第一个工作表导入测试的运行时数据表中的Action1工作表。</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;">DataTable.ImportSheet <span style="color: #800000;">&quot;C:\name.xls&quot;</span> ,1 ,<span style="color: #800000;">&quot; Action1&quot;</span>
+DataTable.ImportSheet <span style="color: #800000;">&quot;C:\name.xls&quot;</span> ,1 ,<span style="color: #800000;">&quot; Global&quot;</span></pre></div></div>
+
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/6406.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>外部调用QTP</title>
+		<link>http://www.xieziming.com/archives/6398.html</link>
+		<comments>http://www.xieziming.com/archives/6398.html#respond</comments>
+		<pubDate>Mon, 22 Nov 2010 14:24:42 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[测试]]></category>
+		<category><![CDATA[QTP]]></category>
+		<category><![CDATA[技术]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=6398</guid>
+		<description><![CDATA[外部调用QTP:
+<code lang="vb">
+Dim qtApp
+Set qtApp = CreateObject("QuickTest.Application") ' 创建 Application 对象
+qtApp.Launch '启动 QuickTest
+qtApp.Visible = True ' 使其可见
+</code>]]></description>
+				<content:encoded><![CDATA[<p>外部调用QTP:</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #151B8D; font-weight: bold;">Dim</span> qtApp
+<span style="color: #151B8D; font-weight: bold;">Set</span> qtApp = <span style="color: #E56717; font-weight: bold;">CreateObject</span>(<span style="color: #800000;">&quot;QuickTest.Application&quot;</span>) <span style="color: #008000;">' 创建 Application 对象
+</span>qtApp.Launch <span style="color: #008000;">'启动 QuickTest
+</span>qtApp.Visible = <span style="color: #00C2FF; font-weight: bold;">True</span> <span style="color: #008000;">' 使其可见
+</span>qtapp.<span style="color: #151B8D; font-weight: bold;">Open</span> <span style="color: #800000;">&quot;d:\Test&quot;</span> <span style="color: #008000;">'打开相应的QTP测试脚本 
+</span>qtapp.Test.Run <span style="color: #008000;">'运行测试脚本 
+</span>qtapp.Quit <span style="color: #008000;">'退出QTP
+</span><span style="color: #151B8D; font-weight: bold;">Set</span> qtapp=<span style="color: #00C2FF; font-weight: bold;">Nothing</span> '释放</pre></div></div>
+
+<p>1.执行以上代码时，系统多出一个QTAutomationAgent.exe的进程，此进程在运行完以上代码后会自动关闭,但是需要注意的是，当我们在调试代码或者是做非法中止以上代码而为能使以上代码执行到最后完毕的话，此进程不会自动关闭，这样就会导致我们第二次创建AOM对象时报错，因此大家如果在调试此代码时遇到“远程过程调用失败”的类似错误提示，就可以试试kill掉QTAutomationAgent.exe这个进程，然后重新调试下代码就ok了。</p>
+<p>2.如果在QTP直接创建AOM对象是会报错的，因为QTP只允许有一个实例对象，当我们已经开启了一个QTP之后就不可以再创建另外一个QTP了，因此这个时候我们可以直接使用</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #151B8D; font-weight: bold;">Set</span> qtapp = <span style="color: #E56717; font-weight: bold;">GETOBJECT</span>(<span style="color: #800000;">&quot;&quot;</span>,<span style="color: #800000;">&quot;quicktest.application&quot;</span>)
+qtapp.Visible = <span style="color: #00C2FF; font-weight: bold;">false</span></pre></div></div>
+
+<p>来对当前启动的QTP进行操作,当我们添加下图脚本后，我们点击运行后当前QTP就会自动隐藏，运行完后自动恢复可见.</p>
+<p>3.当我们还需要对QTP的设置进行自动化时，由于QTP的设置较多，一个个写的话会很繁琐，因此我们可以先在QTP里设置好，然后直接在QTP的setting和option选项中点击generate scripting进行导出，这样能去我们很多的精力来写代码。</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/6398.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Shell (三)</title>
+		<link>http://www.xieziming.com/archives/7152.html</link>
+		<comments>http://www.xieziming.com/archives/7152.html#respond</comments>
+		<pubDate>Wed, 19 May 2010 15:40:41 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[技术维基]]></category>
+		<category><![CDATA[shell]]></category>
+		<category><![CDATA[技术]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=7152</guid>
+		<description><![CDATA[在bash shell中，$( )与` ` (反引号)都是用来做命令替换用(command substitution)的。所谓的命令替换与我们第五章学过的变量替换差不多，都是用来重组命令行，完成引号里的命令行，然后将其结果替换出来，再重组命令行。
+
+在操作上，用$( )或` `都无所谓，只是我"个人"比较喜欢用$( )，理由是：
+
+1. ` `很容易与' ' (单引号)搞混乱，尤其对初学者来说。有时在一些奇怪的字形显示中，两种符号是一模一样的(直竖两点)。当然了，有经验的朋友还是一眼就能分辩两者。只是，若能更好的避免混乱，又何乐不为呢？
+
+2. 在多层次的复合替换中，` `须要额外的跳脱( \` )处理，而$( )则比较直观。例如：这是错的：]]></description>
+				<content:encoded><![CDATA[<p><strong>$( )与${ }：</strong></p>
+<p>在bash shell中，$( )与` ` (反引号)都是用来做命令替换用(command substitution)的。所谓的命令替换与我们第五章学过的变量替换差不多，都是用来重组命令行，完成引号里的命令行，然后将其结果替换出来，再重组命令行。</p>
+<p>例如：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">$ echo the last sunday is $(date -d &quot;last sunday&quot; +%Y-%m-%d)</pre></div></div>
+
+<p>如此便可方便得到上一星期天的日期了&#8230;上例是在linux下，在FreeBSD下应该用下面的：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">echo the last Sunday is `date ¨Cv Sunday +%Y%m%d`</pre></div></div>
+
+<p>在操作上，用$( )或` `都无所谓，只是我&#8221;个人&#8221;比较喜欢用$( )，理由是：</p>
+<p>1. ` `很容易与&#8217; &#8216; (单引号)搞混乱，尤其对初学者来说。有时在一些奇怪的字形显示中，两种符号是一模一样的(直竖两点)。当然了，有经验的朋友还是一眼就能分辩两者。只是，若能更好的避免混乱，又何乐不为呢？</p>
+<p>2. 在多层次的复合替换中，` `须要额外的跳脱( \` )处理，而$( )则比较直观。例如：这是错的：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">command1 `command2 `command3` `</pre></div></div>
+
+<p>原本的意图是要在command2 `command3`先将command3提换出来给command 2处理，然后再将结果传给command1`command2 &#8230;`来处理。然而，真正的结果在命令行中却是分成了`command2 `与&#8220;两段。</p>
+<p>正确的输入应该如下：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">command1 `command2 \`command3\` `</pre></div></div>
+
+<p>要不然，换成$( )就没问题了：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">command1 $(command2 $(command3))</pre></div></div>
+
+<p>只要你喜欢，做多少层的替换都没问题啦~~~ ^_^不过，$( )并不是没有弊端的&#8230;首先，` `基本上可用在全部的unix shell中使用，若写成shell script，其移植性比较高。而$( )并不见的每一种shell都能使用，我只能跟你说，若你用bash2的话，肯定没问题&#8230;</p>
+<p>接下来，再让我们看${ }吧&#8230;它其实就是用来作变量替换用的啦。一般情况下，$var与${var}并没有啥不一样。但是用${ }会比较精确的界定变量名称的范围，比方说：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">$ A=B
+$ echo $AB</pre></div></div>
+
+<p>原本是打算先将$A的结果替换出来，然后再补一个B字母于其后，但在命令行上，真正的结果却是只会替换变量名称为AB的值出来&#8230;若使用${ }就没问题了：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">$ echo ${A}B
+BB</pre></div></div>
+
+<p>不过，假如你只看到${ }只能用来界定变量名称的话，那你就实在太小看bash了。</p>
+<p>一般而言，A=&#8221;a b c def&#8221;这样的变量只是将$A替换为一个单一的字符串，但是改为A=(a b c def)，则是将$A定义为组数&#8230;</p>
+<p>bash的组数替换方法可参考如下方法：</p>
+<p>${A[@]}或${A· }可得到a b c def (全部组数)</p>
+<p>${A[0]}可得到a (第一个组数)，${A[1]}则为第二个组数&#8230;</p>
+<p>${#A[@]}或${#A· }可得到4 (全部组数数量)</p>
+<p>${#A[0]}可得到1 (即第一个组数(a)的长度)，${#A[3]}可得到3 (第四个组数(def)的长度)</p>
+<p>A[3]=xyz则是将第四个组数重新定义为xyz &#8230;</p>
+<p>诸如此类的&#8230;.</p>
+<p>能够善用bash的$( )与${ }可大大提高及简化shell在变量上的处理能力哦</p>
+<p>最后为大家介绍$(( ))的用途吧：它是用来作整数运算的。</p>
+<p>在bash中，$(( ))的整数运算符号大致有这些：</p>
+<p>+ &#8211; * /：分别为&#8221;加、减、乘、除&#8221;。<br />
+%：余数运算<br />
+&#038; | ^ !：分别为&#8221;AND、OR、XOR、NOT&#8221;运算。<br />
+例：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">$ a=5; b=7; c=2
+$ echo $(( a+b*c ))
+19
+$ echo $(( (a+b)/c ))
+6
+$ echo $(( (a*b)%c))
+1</pre></div></div>
+
+<p>在$(( ))中的变量名称，可于其前面加$符号来替换，也可以不用，如：$(( $a + $b * $c))也可得到19的结果。</p>
+<p>事实上，单纯用(( ))也可重定义变量值，或作testing：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">a=5; ((a++))可将$a重定义为6
+a=5; ((a--))则为a=4
+a=5; b=7; ((a &lt; b))会得到 0 (true)的返回值。</pre></div></div>
+
+<p></code></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/7152.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Shell (二)</title>
+		<link>http://www.xieziming.com/archives/7150.html</link>
+		<comments>http://www.xieziming.com/archives/7150.html#respond</comments>
+		<pubDate>Wed, 19 May 2010 15:35:56 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[技术维基]]></category>
+		<category><![CDATA[shell]]></category>
+		<category><![CDATA[技术]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=7150</guid>
+		<description><![CDATA[先说一下，为何要用( )或{ }好了。许多时候，我们在shell操作上，需要在一定条件下一次执行多个命令，也就是说，要么不执行，要么就全执行，而不是每次依序的判断是否要执行下一个命令。或是，需要从一些命令执行优先次顺中得到豁免，如算术的2*(3+4)那样...
+这时候，我们就可引入"命令群组"(command group)的概念：将多个命令集中处理。
+
+在shell command line中，一般人或许不太计较( )与{ }这两对符号的差异，虽然两者都可将多个命令作群组化处理，但若从技术细节上，却是很不一样的：
+
+( )将command group置于sub-shell去执行，也称nested sub-shell。
+
+{ }则是在同一个shell内完成，也称为non-named command group。
+
+如果你对上一章的fork与source的概念还记得的话，那就不难理解两者的差异了。要是在command group中扯上变量及其它环境的修改，我们可以根据不同的需求来使用( )或{ }。通常而言，若所作的修改是临时的，且不想影响原有或以后的设定，那我们就nested sub-shell，反之，则用non-named command group。是的，光从command line来看，( )与{ }的差别就讲完了，够轻松吧~~~ ^_^
+
+然而，若这两个meta用在其它command meta或领域中(如Regular Expression)，还是有很多差别的。
+
+我这里只想补充一个概念，就是function。所谓的function，就是用一个名字去命名一个 command group，然后再调用这个名字去执行command group。从non-namedcommand group来推断，大概你也可以猜到我要说的是{ }了吧？]]></description>
+				<content:encoded><![CDATA[<p><strong>( ) 与 { }：</strong></p>
+<p>先说一下，为何要用( )或{ }好了。许多时候，我们在shell操作上，需要在一定条件下一次执行多个命令，也就是说，要么不执行，要么就全执行，而不是每次依序的判断是否要执行下一个命令。或是，需要从一些命令执行优先次顺中得到豁免，如算术的2*(3+4)那样&#8230;<br />
+这时候，我们就可引入&#8221;命令群组&#8221;(command group)的概念：将多个命令集中处理。</p>
+<p>在shell command line中，一般人或许不太计较( )与{ }这两对符号的差异，虽然两者都可将多个命令作群组化处理，但若从技术细节上，却是很不一样的：</p>
+<p>( )将command group置于sub-shell去执行，也称nested sub-shell。</p>
+<p>{ }则是在同一个shell内完成，也称为non-named command group。</p>
+<p>如果你对上一章的fork与source的概念还记得的话，那就不难理解两者的差异了。要是在command group中扯上变量及其它环境的修改，我们可以根据不同的需求来使用( )或{ }。通常而言，若所作的修改是临时的，且不想影响原有或以后的设定，那我们就nested sub-shell，反之，则用non-named command group。是的，光从command line来看，( )与{ }的差别就讲完了，够轻松吧~~~ ^_^</p>
+<p>然而，若这两个meta用在其它command meta或领域中(如Regular Expression)，还是有很多差别的。</p>
+<p>我这里只想补充一个概念，就是function。所谓的function，就是用一个名字去命名一个 command group，然后再调用这个名字去执行command group。从non-namedcommand group来推断，大概你也可以猜到我要说的是{ }了吧？</p>
+<p>在bash中，function的定义方式有两种：</p>
+<p>方式一：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">function function_name {
+command1
+command2
+command3
+....
+}</pre></div></div>
+
+<p>方式二：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">fuction_name () {
+command1
+command2
+command3
+....
+}</pre></div></div>
+
+<p>用哪一种方式无所谓，只是若碰到所定义的名称与现有的命令或别名(Alias)冲突的话，方式二或许会失败。但方式二起码可以少打function这一串英文字母，对懒人来说(如我)，又何乐不为呢？&#8230; ^_^</p>
+<p>function在某一程度来说，也可称为&#8221;函式&#8221;，但请不要与传统编程所使用的函式(library)搞混了，毕竟两者差异很大。惟一相同的是，我们都可以随时用&#8221;已定义的名称&#8221;来调用它们&#8230;</p>
+<p>若我们在shell操作中，需要不断的重复执行某些命令，我们首先想到的，或许是将命令写成命令稿(shell script)。不过，我们也可以写成function，然后在command line中打上function_name就可当一舨的script来使用了。只是若你在shell中定义的function，除了可用unset function_name取消外，一旦退出shell，function也跟着取消。然而，在script中使用function却有许多好处，除了可以提高整体script的执行效能外(因为已被加载)，还可以节省许多重复的代码&#8230;</p>
+<p>简单而言，若你会将多个命令写成script以供调用的话，那，你可以将function看成是script中的script &#8230; ^_^</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/7150.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Shell (一)</title>
+		<link>http://www.xieziming.com/archives/7145.html</link>
+		<comments>http://www.xieziming.com/archives/7145.html#respond</comments>
+		<pubDate>Wed, 19 May 2010 14:51:55 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[技术维基]]></category>
+		<category><![CDATA[shell]]></category>
+		<category><![CDATA[技术]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=7145</guid>
+		<description><![CDATA[所谓环境变量其实就是那些会传给子进程的变量。简单而言，"遗传性"就是区分本地变量与环境变量的决定性指标。然而，从遗传的角度来看，我们也不难发现环境变量的另一个重要特征：环境变量只能从父进程到子进程单向继承。换句话说：在子进程中的环境如何变更，均不会影响父进程的环境。
+
+接下来，再让我们了解一下命令脚本(shell script)的概念。所谓的shell script讲起来很简单，就是将你平时在shell prompt后所输入的多行command line依序写入一个文件去而已。其中再加上一些条件判断、互动界面、参数运用、函数调用、等等技巧，得以让script更加"聪明"的执行，但若撇开这些技巧不谈，我们真的可以简单的看成script只不过依次执行预先写好的命令行而已。
+
+再结合以上两个概念(process + script)，那应该就不难理解如下这句话的意思了：正常来说，当我们执行一个shell script时，其实是先产生一个sub-shell的子进程，然后sub-shell再去产生命令行的子进程。然则，那让我们回到本章开始时所提到的例子再从新思考：
+cd /etc/aa/bb/cc可以执行，但是把这条命令写入shell时shell不执行！这是什么原因呀！
+
+答案是这样的：因为，一般我们跑的shell script是用subshell去执行的。
+
+从process的观念来看，是parent process产生一个child process去执行，当child结束后，会返回parent，但parent的环境是不会因child的改变而改变的。所谓的环境元数很多，凡举effective id, variable, workding dir等等...其中的workding dir ($PWD)正是楼主的疑问所在：
+当用subshell来跑script的话，sub shell的$PWD会因为cd而变更，但当返回primary shell时，$PWD是不会变更的。
+
+所谓source就是让script在当前shell内执行、而不是产生一个sub-shell来执行。由于所有执行结果均于当前shell内完成，若script的环境有所改变，当然也会改变当前环境了因此，只要我们要将原本单独输入的script命令行变成source命令的参数，就可轻易解决前例提到的问题了。]]></description>
+				<content:encoded><![CDATA[<p><strong>提问：</strong></p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">cd /etc/aa/bb/cc</pre></div></div>
+
+<p>可以执行，但是把这条命令写入shell时shell不执行！这是什么原因呀！</p>
+<p>先让我们了解一下进程(process)的观念好了。首先，我们所执行的任何程序，都是由父进程(parent process)所产生出来的一个子进程(child process)，子进程在结束后，将返回到父进程去。此一现象在Linux系统中被称为 fork。当子进程被产生的时候，将会从父进程那里获得一定的资源分配、及(更重要的是)继承父进程的环境。</p>
+<p>所谓环境变量其实就是那些会传给子进程的变量。简单而言，&#8221;遗传性&#8221;就是区分本地变量与环境变量的决定性指标。然而，从遗传的角度来看，我们也不难发现环境变量的另一个重要特征：环境变量只能从父进程到子进程单向继承。换句话说：在子进程中的环境如何变更，均不会影响父进程的环境。</p>
+<p>接下来，再让我们了解一下命令脚本(shell script)的概念。所谓的shell script讲起来很简单，就是将你平时在shell prompt后所输入的多行command line依序写入一个文件去而已。其中再加上一些条件判断、互动界面、参数运用、函数调用、等等技巧，得以让script更加&#8221;聪明&#8221;的执行，但若撇开这些技巧不谈，我们真的可以简单的看成script只不过依次执行预先写好的命令行而已。</p>
+<p>再结合以上两个概念(process + script)，那应该就不难理解如下这句话的意思了：正常来说，当我们执行一个shell script时，其实是先产生一个sub-shell的子进程，然后sub-shell再去产生命令行的子进程。然则，那让我们回到本章开始时所提到的例子再从新思考：<br />
+cd /etc/aa/bb/cc可以执行，但是把这条命令写入shell时shell不执行！这是什么原因呀！</p>
+<p>答案是这样的：因为，一般我们跑的shell script是用subshell去执行的。</p>
+<p>从process的观念来看，是parent process产生一个child process去执行，当child结束后，会返回parent，但parent的环境是不会因child的改变而改变的。所谓的环境元数很多，凡举effective id, variable, workding dir等等&#8230;其中的workding dir ($PWD)正是楼主的疑问所在：<br />
+当用subshell来跑script的话，sub shell的$PWD会因为cd而变更，但当返回primary shell时，$PWD是不会变更的。</p>
+<p>所谓source就是让script在当前shell内执行、而不是产生一个sub-shell来执行。由于所有执行结果均于当前shell内完成，若script的环境有所改变，当然也会改变当前环境了因此，只要我们要将原本单独输入的script命令行变成source命令的参数，就可轻易解决前例提到的问题了。</p>
+<p>比方说，原本我们是如此执行 script的：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">./my.script</pre></div></div>
+
+<p>现在改成这样即可：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">source ./my.script</pre></div></div>
+
+<p>或：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">. ./my.script</pre></div></div>
+
+<p>exec也是让script在同一个进程上执行，但是原有进程则被结束了。也就是简而言之：原有进程会否终止，就是exec与source/fork的最大差异了。</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/7145.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Ruby（三）</title>
+		<link>http://www.xieziming.com/archives/4302.html</link>
+		<comments>http://www.xieziming.com/archives/4302.html#respond</comments>
+		<pubDate>Fri, 23 Apr 2010 08:34:21 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[程序]]></category>
+		<category><![CDATA[Ruby]]></category>
+		<category><![CDATA[技术]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=4302</guid>
+		<description><![CDATA[比较运算符
+&#038;&    并且
+< =>    比较（例如：x< => y，如果x大于y返回1，x小于y返回-1，x等于y 返回0）
+!=    不等于
+
+between?方法 是 对象处于或等于指定的2个值之间，则返回true
+
+age=20
+puts "young" between?(18,60)
+young
+
+<strong>变量：</strong>
+局部变量      以小写字母或下划线卡头         var _var
+全局变量      以$开头                       $var
+类变量        类中定义，以@@开头           @@var
+实例变量      对象中定义，以@开头           @var
+常量          以大写字母开头                 Var]]></description>
+				<content:encoded><![CDATA[<p>比较运算符<br />
+&#038;&#038;    并且<br />
+< =>    比较（例如：x< => y，如果x大于y返回1，x小于y返回-1，x等于y 返回0）<br />
+!=    不等于</p>
+<p>between?方法 是 对象处于或等于指定的2个值之间，则返回true</p>
+<p>age=20<br />
+puts &#8220;young&#8221; between?(18,60)<br />
+young</p>
+<p><strong>变量：</strong><br />
+局部变量      以小写字母或下划线卡头         var _var<br />
+全局变量      以$开头                       $var<br />
+类变量        类中定义，以@@开头           @@var<br />
+实例变量      对象中定义，以@开头           @var<br />
+常量          以大写字母开头                 Var</p>
+<p>解释：局部变量也就是基本的变量，在变量定义的相同地方使用。</p>
+<p>类变量就是在类定义中用@@开头的变量。类变量是用于存储类的全局信息，它只属于类，不同与类实例变量（即用@开头定义的变量）每一个类的对象都有一份数据。 类变量是可以被继承的，也就是说如果我们派生一个子类，那么在子类中是可以访问父类的类变量的。类变量在访问前必须赋值。子类和父类共享一份数据，对一个类的修改会反映到另一个类中。</p>
+<p>类的类实例变量是在类的类方法中或方法外边（不能在实例方法中，那是类的实例变量）以@开头定义的变量，这样定义的变量值属于类对象本身，不能够被子类继承。如果要定义需要和子类共享的类全局数据，使用类变量；但是如果要定义仅供类本身使用的类全局数据可以使用类实例变量。还有一点需要注意的是，和类变量不同的是类实例变量不要求访问前必须赋值，不赋值它的值就是nil </p>
+<p><strong>变量内插：</strong><br />
+在双引号内使用“#{变量名}”内插变量。</p>
+
+<div class="wp_code"><div class="pre"><pre class="ruby" style="font-family:'Times New Roman',Garamond, Times;">a　=　<span style="color:#006666;">1</span>   
+<span style="color:#CC0066; font-weight:bold;">puts</span>　a.<span style="color:#9966CC; font-weight:bold;">class</span>　<span style="color:#008000; font-style:italic;">#Fixnum   </span>
+a　=　<span style="color:#996600;">&quot;s&quot;</span>  
+<span style="color:#CC0066; font-weight:bold;">puts</span>　a.<span style="color:#9966CC; font-weight:bold;">class</span>　<span style="color:#008000; font-style:italic;">#String</span></pre></div></div>
+
+
+<div class="wp_code"><div class="pre"><pre class="ruby" style="font-family:'Times New Roman',Garamond, Times;"><span style="color:#ff6633; font-weight:bold;">$Global</span>　=　<span style="color:#996600;">&quot;Word!&quot;</span>  
+<span style="color:#9966CC; font-weight:bold;">class</span>　Class1   
+　@@I　=　<span style="color:#006666;">0</span>   
+　<span style="color:#9966CC; font-weight:bold;">def</span>　initialize<span style="color:#006600; font-weight:bold;">&#40;</span><span style="color:#006600; font-weight:bold;">&#41;</span>   
+　@name　=　<span style="color:#996600;">&quot;Tom!&quot;</span>  
+　<span style="color:#9966CC; font-weight:bold;">end</span>  
+　   
+　<span style="color:#9966CC; font-weight:bold;">def</span>　test<span style="color:#006600; font-weight:bold;">&#40;</span><span style="color:#006600; font-weight:bold;">&#41;</span>   
+　a　=　<span style="color:#006666;">123456</span>   
+　<span style="color:#CC0066; font-weight:bold;">puts</span>　a   
+　<span style="color:#9966CC; font-weight:bold;">end</span>  
+<span style="color:#9966CC; font-weight:bold;">end</span></pre></div></div>
+
+<p><strong>作用域:</strong></p>
+<p>在类或模块内的任意位置都可以访问此类或模块中定义的常量，在这之外，可以通过域作用符(::)访问。</p>
+
+<div class="wp_code"><div class="pre"><pre class="ruby" style="font-family:'Times New Roman',Garamond, Times;"><span style="color:#9966CC; font-weight:bold;">class</span> Demo   
+  NAME=<span style="color:#996600;">&quot;name&quot;</span>  
+  <span style="color:#9966CC; font-weight:bold;">def</span> test   
+    <span style="color:#CC0066; font-weight:bold;">puts</span> NAME     
+  <span style="color:#9966CC; font-weight:bold;">end</span>  
+<span style="color:#9966CC; font-weight:bold;">end</span>  
+<span style="color:#CC0066; font-weight:bold;">puts</span> <span style="color:#6666ff; font-weight:bold;">Demo::NAME</span> <span style="color:#008000; font-style:italic;">#test.rb</span></pre></div></div>
+
+
+<div class="wp_code"><div class="pre"><pre class="ruby" style="font-family:'Times New Roman',Garamond, Times;"><span style="color:#9966CC; font-weight:bold;">class</span> Demo
+  NAME=<span style="color:#996600;">&quot;name&quot;</span>
+  <span style="color:#ff6633; font-weight:bold;">$age</span>=<span style="color:#996600;">&quot;test&quot;</span>
+  <span style="color:#9966CC; font-weight:bold;">def</span> test
+    <span style="color:#CC0066; font-weight:bold;">puts</span> <span style="color:#ff6633; font-weight:bold;">$age</span>  
+  <span style="color:#9966CC; font-weight:bold;">end</span>
+<span style="color:#9966CC; font-weight:bold;">end</span></pre></div></div>
+
+
+<div class="wp_code"><div class="pre"><pre class="ruby" style="font-family:'Times New Roman',Garamond, Times;"><span style="color:#CC0066; font-weight:bold;">require</span> <span style="color:#996600;">&quot;test.rb&quot;</span>  
+<span style="color:#ff6633; font-weight:bold;">$age</span>=<span style="color:#006666;">1</span>   
+<span style="color:#CC0066; font-weight:bold;">puts</span>  <span style="color:#ff6633; font-weight:bold;">$age</span></pre></div></div>
+
+<p>Ruby 程序在执行时，会提供一些环境变量供程序代码读取。 </p>
+<p>$0 : 被执行程序的名字，通常是程序的文件名。<br />
+$* : 程序执行参数。<br />
+__FILE__ : 当前源文件的名字。<br />
+__FILE__ 和 $0 通常组合起来使用，用于判断当前文件是否是直接被执行的主程序文件。</p>
+
+<div class="wp_code"><div class="pre"><pre class="ruby" style="font-family:'Times New Roman',Garamond, Times;"><span style="color:#9966CC; font-weight:bold;">if</span>　<span style="color:#0000FF; font-weight:bold;">__FILE__</span>　==　$0  
+　<span style="color:#CC0066; font-weight:bold;">puts</span>　<span style="color:#996600;">&quot;Main...&quot;</span>  
+<span style="color:#9966CC; font-weight:bold;">end</span></pre></div></div>
+
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/4302.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Ruby（二）</title>
+		<link>http://www.xieziming.com/archives/4300.html</link>
+		<comments>http://www.xieziming.com/archives/4300.html#respond</comments>
+		<pubDate>Fri, 23 Apr 2010 08:20:07 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[程序]]></category>
+		<category><![CDATA[Ruby]]></category>
+		<category><![CDATA[技术]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=4300</guid>
+		<description><![CDATA[<strong>正则表达式:</strong>
+在Ruby中，创建正则表达式的方式是 /pattern/。比如编写一个模式，使之匹配 “hello” 或者“Hi”的字符串。这个正则表达式的写法是
+<code lang="ruby">/hello&#124;Hi/ </code>
+
+在程序中要检查一个字符串是否与指定的正则表达式匹配，采用=~ 匹配运算符
+<code lang="ruby">
+if name=~/Ruby&#124;Rails/
+puts "true"
+end
+</code>
+
+<strong>属性的访问性:</strong>
+ruby并不支持直接访问类中的属性，如果要访问类中的属性，需要先通过attr_reader:属性名（只读），attr_writer:属性名（只写），attr_accessor:属性名（读写）来设定属性的访问权限。ruby在类里没办法定义变量，只能在方法中定义变量。方法和方法之间如果想通信只能通过@变量，也就是实例变量进行通信，ruby通过attr_xxxx可以控制@变量的访问性。 ]]></description>
+				<content:encoded><![CDATA[<p><strong>正则表达式:</strong><br />
+在Ruby中，创建正则表达式的方式是 /pattern/。比如编写一个模式，使之匹配 “hello” 或者“Hi”的字符串。这个正则表达式的写法是</p>
+
+<div class="wp_code"><div class="pre"><pre class="ruby" style="font-family:'Times New Roman',Garamond, Times;"><span style="color:#006600; font-weight:bold;">/</span>hello<span style="color:#006600; font-weight:bold;">|</span>Hi<span style="color:#006600; font-weight:bold;">/</span></pre></div></div>
+
+<p>在程序中要检查一个字符串是否与指定的正则表达式匹配，采用=~ 匹配运算符</p>
+
+<div class="wp_code"><div class="pre"><pre class="ruby" style="font-family:'Times New Roman',Garamond, Times;"><span style="color:#9966CC; font-weight:bold;">if</span> name=~<span style="color:#006600; font-weight:bold;">/</span>Ruby<span style="color:#006600; font-weight:bold;">|</span>Rails<span style="color:#006600; font-weight:bold;">/</span>
+<span style="color:#CC0066; font-weight:bold;">puts</span> <span style="color:#996600;">&quot;true&quot;</span>
+<span style="color:#9966CC; font-weight:bold;">end</span></pre></div></div>
+
+<p><strong>属性的访问性:</strong><br />
+ruby并不支持直接访问类中的属性，如果要访问类中的属性，需要先通过attr_reader:属性名（只读），attr_writer:属性名（只写），attr_accessor:属性名（读写）来设定属性的访问权限。ruby在类里没办法定义变量，只能在方法中定义变量。方法和方法之间如果想通信只能通过@变量，也就是实例变量进行通信，ruby通过attr_xxxx可以控制@变量的访问性。 </p>
+<p><strong>方法的访问性:</strong><br />
+方法的访问性是通过public,private和protected进行限制的。public :方法名1，方法名2&#8230;&#8230;这样的方式进行声明的。属性的访问性可以放在前面，但方法的访问性要放在方法之后，如果放在方法前面会出现方法未定义的报错。除了初始化方法恒化private，其它方法缺省为public</p>
+<p>类方法（静态方法）。 ruby中定义类方法如下（即类名或self）</p>
+
+<div class="wp_code"><div class="pre"><pre class="ruby" style="font-family:'Times New Roman',Garamond, Times;"><span style="color:#9966CC; font-weight:bold;">class</span> HelloWorld
+   <span style="color:#9966CC; font-weight:bold;">def</span> HelloWorld.<span style="color:#9900CC;">hello</span><span style="color:#006600; font-weight:bold;">&#40;</span>name<span style="color:#006600; font-weight:bold;">&#41;</span>
+        <span style="color:#CC0066; font-weight:bold;">print</span> name,<span style="color:#996600;">&quot; said Hello.&quot;</span>
+    <span style="color:#9966CC; font-weight:bold;">end</span>
+<span style="color:#9966CC; font-weight:bold;">end</span>
+HelloWorld.<span style="color:#9900CC;">hello</span><span style="color:#006600; font-weight:bold;">&#40;</span><span style="color:#996600;">&quot;John&quot;</span><span style="color:#006600; font-weight:bold;">&#41;</span></pre></div></div>
+
+
+<div class="wp_code"><div class="pre"><pre class="ruby" style="font-family:'Times New Roman',Garamond, Times;"><span style="color:#9966CC; font-weight:bold;">class</span> HelloWorld
+   <span style="color:#9966CC; font-weight:bold;">def</span> <span style="color:#0000FF; font-weight:bold;">self</span>.<span style="color:#9900CC;">hello</span><span style="color:#006600; font-weight:bold;">&#40;</span>name<span style="color:#006600; font-weight:bold;">&#41;</span>
+        <span style="color:#CC0066; font-weight:bold;">print</span> name,<span style="color:#996600;">&quot; said Hello.&quot;</span>
+    <span style="color:#9966CC; font-weight:bold;">end</span>
+<span style="color:#9966CC; font-weight:bold;">end</span>
+HelloWorld.<span style="color:#9900CC;">hello</span><span style="color:#006600; font-weight:bold;">&#40;</span><span style="color:#996600;">&quot;John&quot;</span><span style="color:#006600; font-weight:bold;">&#41;</span></pre></div></div>
+
+<p>需要注意的是，类方法不能访问实例变量 </p>
+<p>类变量（静态变量），ruby中类变量是通过加@@标识的 </p>
+<p><strong>类常量:</strong><br />
+类中还可以定义常量，还是要求大写字母开头。类中不能定义和方法平缓的变量，但是可以定义和方法平级的常量，常量可以被所有方法调用。类常量的调用方法是类名::常量名 </p>
+<p><strong>模块:</strong><br />
+模块是ruby特有的功能之一。模块和类很像，但和类最大的不同在于模块不能实例化，也不能继承，模块的作用有两个，一个是用于提供命名空间。第二提供Mix-in功能。</p>
+<p>模块的常量和类常用调用方法一样。模块名::常量名。模块的方法调用和类的方法调用不同，可以使用模块::方法名，也可以使用模块.方法名</p>
+<p>模块定义的方法默认是不对外部公开的，（模块内没有public private protect关键字），要将方法对模块外部公开，必须使用module_function</p>
+
+<div class="wp_code"><div class="pre"><pre class="ruby" style="font-family:'Times New Roman',Garamond, Times;"><span style="color:#9966CC; font-weight:bold;">module</span> HelloModule
+   Version = <span style="color:#996600;">&quot;1.0&quot;</span>
+    <span style="color:#9966CC; font-weight:bold;">def</span> hello<span style="color:#006600; font-weight:bold;">&#40;</span>name<span style="color:#006600; font-weight:bold;">&#41;</span>
+       <span style="color:#CC0066; font-weight:bold;">print</span> <span style="color:#996600;">&quot;Hello, &quot;</span>,name,<span style="color:#996600;">&quot;.<span style="color:#000099;">\n</span>&quot;</span>
+     <span style="color:#9966CC; font-weight:bold;">end</span>
+      module_function <span style="color:#ff3333; font-weight:bold;">:hello</span> <span style="color:#008000; font-style:italic;">#注意：冒号后不能有空格</span>
+<span style="color:#9966CC; font-weight:bold;">end</span>
+&nbsp;
+<span style="color:#CC0066; font-weight:bold;">p</span> <span style="color:#6666ff; font-weight:bold;">HelloModule::Version</span>          <span style="color:#008000; font-style:italic;">#=&gt;&quot;1.0&quot;</span>
+HelloModule::hello<span style="color:#006600; font-weight:bold;">&#40;</span><span style="color:#996600;">&quot;Alice&quot;</span><span style="color:#006600; font-weight:bold;">&#41;</span>      <span style="color:#008000; font-style:italic;">#=&gt; hello, Alice.</span>
+<span style="color:#9966CC; font-weight:bold;">include</span> HelloModule
+<span style="color:#CC0066; font-weight:bold;">p</span> Version         <span style="color:#008000; font-style:italic;">#=&gt;&quot;1.0&quot;</span>
+hello<span style="color:#006600; font-weight:bold;">&#40;</span><span style="color:#996600;">&quot;Alice&quot;</span><span style="color:#006600; font-weight:bold;">&#41;</span>    <span style="color:#008000; font-style:italic;">#=&gt;Hello, Alice</span></pre></div></div>
+
+<p><strong>单引号和双引号的区别</strong></p>
+<p>单引号中不能包含变量，双引号中可以包含变量。在ruby中，单引号中的\n这样表示换行之类的转义字符都会无效，直接输出出来。</p>
+<p><strong>使用for</strong><br />
+Ruby的for有两种用法</p>
+
+<div class="wp_code"><div class="pre"><pre class="ruby" style="font-family:'Times New Roman',Garamond, Times;">sum=<span style="color:#006666;">0</span>   
+<span style="color:#9966CC; font-weight:bold;">for</span> i <span style="color:#9966CC; font-weight:bold;">in</span> <span style="color:#006666;">2</span>..<span style="color:#006666;">5</span>   
+sum<span style="color:#006600; font-weight:bold;">+</span>=<span style="color:#006666;">1</span>   
+<span style="color:#9966CC; font-weight:bold;">end</span>  
+<span style="color:#CC0066; font-weight:bold;">puts</span> sum  
+sum=<span style="color:#006666;">0</span>
+<span style="color:#9966CC; font-weight:bold;">for</span> i <span style="color:#9966CC; font-weight:bold;">in</span> <span style="color:#006666;">2</span>..<span style="color:#006666;">5</span>
+  sum<span style="color:#006600; font-weight:bold;">+</span>=<span style="color:#006666;">1</span>
+<span style="color:#9966CC; font-weight:bold;">end</span>
+<span style="color:#CC0066; font-weight:bold;">puts</span> sum</pre></div></div>
+
+
+<div class="wp_code"><div class="pre"><pre class="ruby" style="font-family:'Times New Roman',Garamond, Times;">names = <span style="color:#006600; font-weight:bold;">&#91;</span><span style="color:#996600;">&quot;a&quot;</span>,<span style="color:#996600;">&quot;b&quot;</span>,<span style="color:#996600;">&quot;c&quot;</span><span style="color:#006600; font-weight:bold;">&#93;</span>    
+<span style="color:#9966CC; font-weight:bold;">for</span> name <span style="color:#9966CC; font-weight:bold;">in</span> names   
+<span style="color:#CC0066; font-weight:bold;">puts</span> name     
+<span style="color:#9966CC; font-weight:bold;">end</span>  
+names = <span style="color:#006600; font-weight:bold;">&#91;</span><span style="color:#996600;">&quot;a&quot;</span>,<span style="color:#996600;">&quot;b&quot;</span>,<span style="color:#996600;">&quot;c&quot;</span><span style="color:#006600; font-weight:bold;">&#93;</span>
+<span style="color:#9966CC; font-weight:bold;">for</span> name <span style="color:#9966CC; font-weight:bold;">in</span> names
+ <span style="color:#CC0066; font-weight:bold;">puts</span> name
+<span style="color:#9966CC; font-weight:bold;">end</span></pre></div></div>
+
+<p>注意hash输出结果，将键值都输出</p>
+
+<div class="wp_code"><div class="pre"><pre class="ruby" style="font-family:'Times New Roman',Garamond, Times;">name=<span style="color:#006600; font-weight:bold;">&#123;</span><span style="color:#996600;">&quot;a&quot;</span><span style="color:#006600; font-weight:bold;">=&gt;</span><span style="color:#006666;">1</span>,<span style="color:#996600;">&quot;b&quot;</span><span style="color:#006600; font-weight:bold;">=&gt;</span><span style="color:#006666;">2</span><span style="color:#006600; font-weight:bold;">&#125;</span>   
+<span style="color:#9966CC; font-weight:bold;">for</span> n <span style="color:#9966CC; font-weight:bold;">in</span> name   
+  <span style="color:#CC0066; font-weight:bold;">puts</span> n   
+<span style="color:#9966CC; font-weight:bold;">end</span>  
+name=<span style="color:#006600; font-weight:bold;">&#123;</span><span style="color:#996600;">&quot;a&quot;</span><span style="color:#006600; font-weight:bold;">=&gt;</span><span style="color:#006666;">1</span>,<span style="color:#996600;">&quot;b&quot;</span><span style="color:#006600; font-weight:bold;">=&gt;</span><span style="color:#006666;">2</span><span style="color:#006600; font-weight:bold;">&#125;</span>
+<span style="color:#9966CC; font-weight:bold;">for</span> n <span style="color:#9966CC; font-weight:bold;">in</span> name
+  <span style="color:#CC0066; font-weight:bold;">puts</span> n
+<span style="color:#9966CC; font-weight:bold;">end</span></pre></div></div>
+
+<p><strong>迭代</strong>,其实迭代也是我们熟悉的循环中的一种</p>
+
+<div class="wp_code"><div class="pre"><pre class="ruby" style="font-family:'Times New Roman',Garamond, Times;"><span style="color:#006666;">1</span>.<span style="color:#9900CC;">a</span>=<span style="color:#006600; font-weight:bold;">&#91;</span><span style="color:#996600;">&quot;a&quot;</span>,<span style="color:#996600;">&quot;b&quot;</span><span style="color:#006600; font-weight:bold;">&#93;</span>   
+a.<span style="color:#9900CC;">each</span><span style="color:#006600; font-weight:bold;">&#123;</span>   
+<span style="color:#006600; font-weight:bold;">|</span>n<span style="color:#006600; font-weight:bold;">|</span>   
+<span style="color:#CC0066; font-weight:bold;">puts</span> n   
+<span style="color:#006600; font-weight:bold;">&#125;</span>  
+a=<span style="color:#006600; font-weight:bold;">&#91;</span><span style="color:#996600;">&quot;a&quot;</span>,<span style="color:#996600;">&quot;b&quot;</span><span style="color:#006600; font-weight:bold;">&#93;</span>
+a.<span style="color:#9900CC;">each</span><span style="color:#006600; font-weight:bold;">&#123;</span>
+ <span style="color:#006600; font-weight:bold;">|</span>n<span style="color:#006600; font-weight:bold;">|</span>
+ <span style="color:#CC0066; font-weight:bold;">puts</span> n
+<span style="color:#006600; font-weight:bold;">&#125;</span></pre></div></div>
+
+<p>4: hash算列表 ,ruby的hash格式用=>分隔，在调用hash数据时，ruby只能通过hash[name]调用</p>
+
+<div class="wp_code"><div class="pre"><pre class="ruby" style="font-family:'Times New Roman',Garamond, Times;">b=<span style="color:#006600; font-weight:bold;">&#123;</span><span style="color:#996600;">&quot;a&quot;</span><span style="color:#006600; font-weight:bold;">=&gt;</span><span style="color:#006666;">1</span>,<span style="color:#996600;">&quot;b&quot;</span><span style="color:#006600; font-weight:bold;">=&gt;</span><span style="color:#006666;">2</span><span style="color:#006600; font-weight:bold;">&#125;</span>   
+<span style="color:#CC0066; font-weight:bold;">puts</span> b<span style="color:#006600; font-weight:bold;">&#91;</span><span style="color:#996600;">&quot;a&quot;</span><span style="color:#006600; font-weight:bold;">&#93;</span></pre></div></div>
+
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/4300.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>ROR笔记（二）</title>
+		<link>http://www.xieziming.com/archives/4294.html</link>
+		<comments>http://www.xieziming.com/archives/4294.html#respond</comments>
+		<pubDate>Fri, 23 Apr 2010 07:24:10 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[程序]]></category>
+		<category><![CDATA[Ruby]]></category>
+		<category><![CDATA[技术]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=4294</guid>
+		<description><![CDATA[6：视图模板可以访问控制器中的任何实例变量
+
+7：添加数据库缺失字段 先创建一个迁移任务，取一个一目了然的名字，一般用create来创建表，add来给表增加字段。
+
+ruby script/generate migration add_price # add_price为迁移任务名字
+
+打开这个迁移任务源文件，在up方法内插入字段（向表里添加字段）
+
+add_column:products,:price,:float #向products表插入float类型的字段price
+
+在down方法内插入字段（向表里删除字段） remove_column:products,:price
+
+运行迁移 rake db:migrate
+
+8: 在模型层添加数据验证
+
+validates_presence_of:title #检查 字段为title的值不为空
+
+validates_numericality_of:price #检查字段为price的值为数值
+
+validates_format_of:image_url,:with=>%r{\.(gif&#124;jpg&#124;png)$}i,:message=>"must be a url for a gif ,jpg, or png"
+
+#检查image_url这个字段与with后的正则表达式是否匹配]]></description>
+				<content:encoded><![CDATA[<p>6：视图模板可以访问控制器中的任何实例变量</p>
+<p>7：添加数据库缺失字段 先创建一个迁移任务，取一个一目了然的名字，一般用create来创建表，add来给表增加字段。</p>
+<p>ruby script/generate migration add_price # add_price为迁移任务名字</p>
+<p>打开这个迁移任务源文件，在up方法内插入字段（向表里添加字段）</p>
+<p>add_column:products,:price,:float #向products表插入float类型的字段price</p>
+<p>在down方法内插入字段（向表里删除字段） remove_column:products,:price</p>
+<p>运行迁移 rake db:migrate</p>
+<p>8: 在模型层添加数据验证</p>
+<p>validates_presence_of:title #检查 字段为title的值不为空</p>
+<p>validates_numericality_of:price #检查字段为price的值为数值</p>
+<p>validates_format_of:image_url,:with=&gt;%r{\.(gif|jpg|png)$}i,:message=&gt;&#8221;must be a url for a gif ,jpg, or png&#8221;</p>
+<p>#检查image_url这个字段与with后的正则表达式是否匹配</p>
+<p><strong>SQL语句：</strong></p>
+<p>Active Record是如何处理SQL的，我们来看看find方法的:conditions参数，调用的时候像这样：find(:all,:conditions=>…)，这里的:conditions参数决定了find方法将返回哪些记录，它相当于Sql语句的where部分，例如，要获取所有的名字为Dave，pay_type为po的订单，我们这样写：<br />
+pos = Order.find(:all,:conditions => &#8220;name = &#8216;dave&#8217; and pay_type = &#8216;po'&#8221;) </p>
+<p>find方法将返回所有符合条件的记录，并且都已经被转换成Order类的对象，如果没有符合条件的订单，find方法将返回一个长度为零的数组。</p>
+<p>如果你的条件是预定的，那么上面的写法就很好了，但是如果我们要指定条件中的值呢，我们这样写：</p>
+<p>name = params[:name]<br />
+pos = Order.find(:all,:conditions => &#8220;name = &#8216;#{name}&#8217; and pay_type = &#8216;po'&#8221;)</p>
+<p>但是，这并不是一个好主意，因为如果你的程序要发布在网络上的话，这样给SQL注入攻击留下了方便，更好的办法是，动态的生成SQL，让Active Record来处理它，我们可以在SQL语句中加入占位符，然后这些占位符将会在运行期被替换成指定的值，指定占位符的方法就是在SQL中使用问号，在运行时，第一个问号将被替换为集合的第二个元素的值，以此类推，例如，我们把上面的查询重写一次：</p>
+<p>name = params[:name]<br />
+pos = Order.find(:all,:conditions => [&#8220;name = ? and pay_type = &#8216;po'&#8221;, name])  </p>
+<p>我们也可以使用带名字的占位符，名字前带冒号，例如下面这样：</p>
+
+<div class="wp_code"><div class="pre"><pre class="ruby" style="font-family:'Times New Roman',Garamond, Times;">name = params<span style="color:#006600; font-weight:bold;">&#91;</span><span style="color:#ff3333; font-weight:bold;">:name</span><span style="color:#006600; font-weight:bold;">&#93;</span>
+pay_type = params<span style="color:#006600; font-weight:bold;">&#91;</span><span style="color:#ff3333; font-weight:bold;">:pay_type</span><span style="color:#006600; font-weight:bold;">&#93;</span>
+pos = Order.<span style="color:#9900CC;">find</span><span style="color:#006600; font-weight:bold;">&#40;</span><span style="color:#ff3333; font-weight:bold;">:all</span>,
+<span style="color:#ff3333; font-weight:bold;">:conditions</span> <span style="color:#006600; font-weight:bold;">=&gt;</span> <span style="color:#006600; font-weight:bold;">&#91;</span><span style="color:#996600;">&quot;name = :name and pay_type = :pay_type&quot;</span>,
+<span style="color:#006600; font-weight:bold;">&#123;</span>:pay_type <span style="color:#006600; font-weight:bold;">=&gt;</span> pay_type, <span style="color:#ff3333; font-weight:bold;">:name</span> <span style="color:#006600; font-weight:bold;">=&gt;</span> name<span style="color:#006600; font-weight:bold;">&#125;</span><span style="color:#006600; font-weight:bold;">&#93;</span><span style="color:#006600; font-weight:bold;">&#41;</span></pre></div></div>
+
+<p>我也可以更进一步，因为params是一个hash，我们可以让conditions部分更简单</p>
+
+<div class="wp_code"><div class="pre"><pre class="ruby" style="font-family:'Times New Roman',Garamond, Times;">pos = Order.<span style="color:#9900CC;">find</span><span style="color:#006600; font-weight:bold;">&#40;</span><span style="color:#ff3333; font-weight:bold;">:all</span>,
+<span style="color:#ff3333; font-weight:bold;">:conditions</span> <span style="color:#006600; font-weight:bold;">=&gt;</span> <span style="color:#006600; font-weight:bold;">&#91;</span><span style="color:#996600;">&quot;name = :name and pay_type = :pay_type&quot;</span>, params<span style="color:#006600; font-weight:bold;">&#93;</span><span style="color:#006600; font-weight:bold;">&#41;</span></pre></div></div>
+
+<p>不管使用哪种占位符，Active Record都会很小心地处理SQL中的引号和escape。使用动态SQL，Active Record会保护我们不受SQL注入攻击。</p>
+<p>Find方法详解：</p>
+<p>首先，理解find(:first,…)方法是非常重要的，该方法在同样的conditions设置下，和find(:all,…)方法生成同样的sql语句，不同之处仅在于只返回一条记录。在调用的时候，一种的参数为:first，另一种为:all。</p>
+<p>find方法执行一个select from这样的sql语句，:all标记指定返回表中所有的记录，:first返回第一条记录。但是现在:first还不能保证你得到的就是表中的第一条记录，原因是什么？:conditions参数指定了SQL语句的where部分，可以包含Sql语句或者包含可以替换的参数的名字，值。find方法并不能保证按照特定的顺序返回记录，除非指定查询的排序（order by）部分。:order参数就是用来指定SQL的排序条件的，下面的例子演示了查询名字为Dave的订单，并且按照pay_type,shipped_at字段进行降序排列。</p>
+
+<div class="wp_code"><div class="pre"><pre class="ruby" style="font-family:'Times New Roman',Garamond, Times;">orders = Order.<span style="color:#9900CC;">find</span><span style="color:#006600; font-weight:bold;">&#40;</span><span style="color:#ff3333; font-weight:bold;">:all</span>,
+<span style="color:#ff3333; font-weight:bold;">:conditions</span> <span style="color:#006600; font-weight:bold;">=&gt;</span> <span style="color:#996600;">&quot;name = 'Dave'&quot;</span>,
+<span style="color:#ff3333; font-weight:bold;">:order</span> <span style="color:#006600; font-weight:bold;">=&gt;</span> <span style="color:#996600;">&quot;pay_type, shipped_at DESC&quot;</span><span style="color:#006600; font-weight:bold;">&#41;</span></pre></div></div>
+
+<p>我们还可以设置:limit参数来限制返回的记录数，如果你使用:limit参数，或许还想指定排序条件，下面的例子返回10条记录，并且按照指定条件排序：</p>
+
+<div class="wp_code"><div class="pre"><pre class="ruby" style="font-family:'Times New Roman',Garamond, Times;">orders = Order.<span style="color:#9900CC;">find</span><span style="color:#006600; font-weight:bold;">&#40;</span><span style="color:#ff3333; font-weight:bold;">:all</span>,
+<span style="color:#ff3333; font-weight:bold;">:conditions</span> <span style="color:#006600; font-weight:bold;">=&gt;</span> <span style="color:#996600;">&quot;name = 'Dave'&quot;</span>,
+<span style="color:#ff3333; font-weight:bold;">:order</span> <span style="color:#006600; font-weight:bold;">=&gt;</span> <span style="color:#996600;">&quot;pay_type, shipped_at DESC&quot;</span>,
+<span style="color:#ff3333; font-weight:bold;">:limit</span> <span style="color:#006600; font-weight:bold;">=&gt;</span> <span style="color:#006666;">10</span><span style="color:#006600; font-weight:bold;">&#41;</span></pre></div></div>
+
+<p>参数:offset经常与:limit参数一同出现，用来指定从第一条记录起，返回指定的偏移量，下面代码演示了:offset参数的使用：</p>
+
+<div class="wp_code"><div class="pre"><pre class="ruby" style="font-family:'Times New Roman',Garamond, Times;"><span style="color:#9966CC; font-weight:bold;">def</span> Order.<span style="color:#9900CC;">find_on_page</span><span style="color:#006600; font-weight:bold;">&#40;</span>page_num, page_size<span style="color:#006600; font-weight:bold;">&#41;</span>
+find<span style="color:#006600; font-weight:bold;">&#40;</span><span style="color:#ff3333; font-weight:bold;">:all</span>,
+<span style="color:#ff3333; font-weight:bold;">:order</span> <span style="color:#006600; font-weight:bold;">=&gt;</span> <span style="color:#996600;">&quot;id&quot;</span>,
+<span style="color:#ff3333; font-weight:bold;">:limit</span> <span style="color:#006600; font-weight:bold;">=&gt;</span> page_size,
+<span style="color:#ff3333; font-weight:bold;">:offset</span> <span style="color:#006600; font-weight:bold;">=&gt;</span> page_num<span style="color:#006600; font-weight:bold;">*</span>page_size<span style="color:#006600; font-weight:bold;">&#41;</span>
+<span style="color:#9966CC; font-weight:bold;">end</span></pre></div></div>
+
+<p>从上面的代码可以看到，这样使用find的场景就是分页显示数据，用pagesize指定每页的记录数，然后由pagenum*page_size指定从第几条开始提取数据。</p>
+<p>find方法为我们构建了完整的Sql查询，而方法find_by_sql方法则允许我们对Sql有完整的控制，该方法只有一个参数，就是你想要使用的完整的sql语句，下面是示例代码：</p>
+
+<div class="wp_code"><div class="pre"><pre class="ruby" style="font-family:'Times New Roman',Garamond, Times;">orders = LineItem.<span style="color:#9900CC;">find_by_sql</span><span style="color:#006600; font-weight:bold;">&#40;</span><span style="color:#996600;">&quot;select line_items.* from line_items, orders &quot;</span> <span style="color:#006600; font-weight:bold;">+</span>
+<span style="color:#996600;">&quot; where order_id = orders.id &quot;</span> <span style="color:#006600; font-weight:bold;">+</span>
+<span style="color:#996600;">&quot; and orders.name = 'Dave Thomas' &quot;</span><span style="color:#006600; font-weight:bold;">&#41;</span></pre></div></div>
+
+<p>现在有一个问题了，就是返回的Model对象中都包含有哪些属性呢？我们使用attributes( ), attribute_names( ), and attribute_present?( )方法来确定在Model对象中都包含有哪些属性，第一个返回一个hash，里面是键值对，第二个返回属性名的数组，第三个判断Model对象中是否含有某个属性，例如</p>
+
+<div class="wp_code"><div class="pre"><pre class="ruby" style="font-family:'Times New Roman',Garamond, Times;">orders = Order.<span style="color:#9900CC;">find_by_sql</span><span style="color:#006600; font-weight:bold;">&#40;</span><span style="color:#996600;">&quot;select name, pay_type from orders&quot;</span><span style="color:#006600; font-weight:bold;">&#41;</span>
+first = orders<span style="color:#006600; font-weight:bold;">&#91;</span><span style="color:#006666;">0</span><span style="color:#006600; font-weight:bold;">&#93;</span>
+<span style="color:#CC0066; font-weight:bold;">p</span> first.<span style="color:#9900CC;">attributes</span>
+<span style="color:#CC0066; font-weight:bold;">p</span> first.<span style="color:#9900CC;">attribute_names</span>
+<span style="color:#CC0066; font-weight:bold;">p</span> first.<span style="color:#9900CC;">attribute_present</span>?<span style="color:#006600; font-weight:bold;">&#40;</span><span style="color:#996600;">&quot;address&quot;</span><span style="color:#006600; font-weight:bold;">&#41;</span></pre></div></div>
+
+<p>程序的结果：</p>
+
+<div class="wp_code"><div class="pre"><pre class="ruby" style="font-family:'Times New Roman',Garamond, Times;"><span style="color:#006600; font-weight:bold;">&#123;</span><span style="color:#996600;">&quot;name&quot;</span><span style="color:#006600; font-weight:bold;">=&gt;</span><span style="color:#996600;">&quot;Dave Thomas&quot;</span>, <span style="color:#996600;">&quot;pay_type&quot;</span><span style="color:#006600; font-weight:bold;">=&gt;</span><span style="color:#996600;">&quot;check&quot;</span><span style="color:#006600; font-weight:bold;">&#125;</span>
+<span style="color:#006600; font-weight:bold;">&#91;</span><span style="color:#996600;">&quot;name&quot;</span>, <span style="color:#996600;">&quot;pay_type&quot;</span><span style="color:#006600; font-weight:bold;">&#93;</span>
+<span style="color:#0000FF; font-weight:bold;">false</span></pre></div></div>
+
+<p>find_by_sql方法也可以用来创建包含有派生（derived）（注1）的Model对象，如果你使用了as XXX 这样的sql来给派生字段一个别名，这个别名会作为Model中的属性名，例如：</p>
+
+<div class="wp_code"><div class="pre"><pre class="ruby" style="font-family:'Times New Roman',Garamond, Times;">items = LineItem.<span style="color:#9900CC;">find_by_sql</span><span style="color:#006600; font-weight:bold;">&#40;</span><span style="color:#996600;">&quot;select *, &quot;</span> <span style="color:#006600; font-weight:bold;">+</span>
+<span style="color:#996600;">&quot; quantity*unit_price as total_price, &quot;</span> <span style="color:#006600; font-weight:bold;">+</span>
+<span style="color:#996600;">&quot; products.title as title &quot;</span> <span style="color:#006600; font-weight:bold;">+</span>
+<span style="color:#996600;">&quot; from line_items, products &quot;</span> <span style="color:#006600; font-weight:bold;">+</span>
+<span style="color:#996600;">&quot; where line_items.product_id = products.id &quot;</span><span style="color:#006600; font-weight:bold;">&#41;</span>
+li = items<span style="color:#006600; font-weight:bold;">&#91;</span><span style="color:#006666;">0</span><span style="color:#006600; font-weight:bold;">&#93;</span>
+<span style="color:#CC0066; font-weight:bold;">puts</span> <span style="color:#996600;">&quot;#{li.title}: #{li.quantity}x#{li.unit_price} =&gt; #{li.total_price}&quot;</span></pre></div></div>
+
+<p>在find_by_sql方法中，我们一样可以使用占位符来给Sql语句传递参数，例如：</p>
+<p>Order.find_by_sql([&#8220;select * from orders where amount > ?&#8221;,<br />
+params[:amount]]) </p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/4294.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>ROR笔记（一）</title>
+		<link>http://www.xieziming.com/archives/4276.html</link>
+		<comments>http://www.xieziming.com/archives/4276.html#respond</comments>
+		<pubDate>Fri, 23 Apr 2010 07:05:58 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[程序]]></category>
+		<category><![CDATA[Ruby]]></category>
+		<category><![CDATA[技术]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=4276</guid>
+		<description><![CDATA[<p>1: MVC架构：</p>
+<p>(1): 模型（model）:模型携带者数据，还负责执行施加于这些数据上的业务规则，比如，“对于20元以下的订单不予打折”这一约束就要由模型来确保。也即，模型是数据的容器，也是数据的监护者。</p>
+<p>(2)：视图（view）: 负责生成用户界面，根据模型中的数据生成。</p>
+<p>(3)：控制器（controller）:负责 协调 整个应用程序。</p>
+<p>2: Ruby中ORM映射：表映射到类，记录映射到对象，字段映射到对象的属性，类方法用于执行表级别的操作，实例方法用于执行单条记录的操作。</p>
+<p>3: Rails类对数据库表进行了包装，对于执行单条记录的操作，类的实例方法返回对应的对象，如：</p>
+<code lang="ruby">
+  order =Order.find(1)
+   puts "Order  amount   is  #{order.amount}"
+   #有时类级别的方法返回一组对象 的集合 (遍历)
+   Order.find(:all,:conditions=>"name='zhangsan'").each do &#124;order&#124;
+   puts order.amount
+   end
+</code>]]></description>
+				<content:encoded><![CDATA[<p>1: MVC架构：</p>
+<p>(1): 模型（model）:模型携带者数据，还负责执行施加于这些数据上的业务规则，比如，“对于20元以下的订单不予打折”这一约束就要由模型来确保。也即，模型是数据的容器，也是数据的监护者。</p>
+<p>(2)：视图（view）: 负责生成用户界面，根据模型中的数据生成。</p>
+<p>(3)：控制器（controller）:负责 协调 整个应用程序。</p>
+<p>2: Ruby中ORM映射：表映射到类，记录映射到对象，字段映射到对象的属性，类方法用于执行表级别的操作，实例方法用于执行单条记录的操作。</p>
+<p>3: Rails类对数据库表进行了包装，对于执行单条记录的操作，类的实例方法返回对应的对象，如：</p>
+
+<div class="wp_code"><div class="pre"><pre class="ruby" style="font-family:'Times New Roman',Garamond, Times;">  order =Order.<span style="color:#9900CC;">find</span><span style="color:#006600; font-weight:bold;">&#40;</span><span style="color:#006666;">1</span><span style="color:#006600; font-weight:bold;">&#41;</span>
+   <span style="color:#CC0066; font-weight:bold;">puts</span> <span style="color:#996600;">&quot;Order  amount   is  #{order.amount}&quot;</span>
+   <span style="color:#008000; font-style:italic;">#有时类级别的方法返回一组对象 的集合 (遍历)</span>
+   Order.<span style="color:#9900CC;">find</span><span style="color:#006600; font-weight:bold;">&#40;</span><span style="color:#ff3333; font-weight:bold;">:all</span>,:conditions<span style="color:#006600; font-weight:bold;">=&gt;</span><span style="color:#996600;">&quot;name='zhangsan'&quot;</span><span style="color:#006600; font-weight:bold;">&#41;</span>.<span style="color:#9900CC;">each</span> <span style="color:#9966CC; font-weight:bold;">do</span> <span style="color:#006600; font-weight:bold;">|</span>order<span style="color:#006600; font-weight:bold;">|</span>
+   <span style="color:#CC0066; font-weight:bold;">puts</span> order.<span style="color:#9900CC;">amount</span>
+   <span style="color:#9966CC; font-weight:bold;">end</span></pre></div></div>
+
+<p>4: controller与view对应关系 （两个一一对应）即：浏览器：http://localhost:3000/say/hello/123</p>
+<p>默认路由配置：端口后第一部分（say）是控制器名称，第二部分（hello）是action名称也就是控制器类中的方法名称，第三个是传递的参数（默认id）</p>
+<p>对应关系：</p>
+<p>控制器名称= app/views下的子目录（文件夹）名称</p>
+<p>action名称= app/views下的子目录下的文件名称</p>
+<p>5：< %= %> 符号之间的内容会被 看作Ruby代码执行，执行结果被转换成字符串，并替代符号中内容的位置。</p>
+<p>    < % %>   符号之间的内容会被 看作Ruby代码执行，但执行的结果不替换输出</p>
+<p>   %> 改为 -%> 这里是减号， 会告诉Rails将跟随其后的换行符全部去掉</p>
+<p>   < %= %>  有时生成的字符串会包含< 或&#038; 符号，影响html页面，用辅助方法 h()可以对字符进行转码。 
+
+ActiveRecord从表中取出值，变成类的对象时，会自动将数据库中的类型转换成ruby支持类型。如果你希望得到一个属性的原始值，可以在属性名称后面加_before_type_cast。
+
+account.balance_before_type_cast 
+
+布尔型的数据在转换的时候会有些麻烦，有些数据库是不支持布尔型的，所以我们在工作中，可以使用0,1这样的数字来代表布尔值的真假，而ruby中只有false和nil为假，0其实是为真的。所以在数据库映射到类时，我们要判断某个属性的真假时，记得要加一个?号，这个是rails为解决布尔型问题而设置的。
+
+if user.superuser?
+    doSomeThing
+end 
+
+主键。一般来说，rails都会用id作为每张表的主键，但表并不是由我们自己来建的，可能表会用别的字段作为主键。我们可以用set_primary_key来显示地指定主键字段。
+
+class BadBook < ActiveRecord::Base
+    set_primary_key "isbn"
+end
+
+但需要注意的是，既然指定主键为其它字段，但在访问时，仍然可以通过名为id的属性来设置主键值，也就是说，只要使用ActiveRecord，主键字段在对象中的属性名称就永远都是id。
+
+3：控制器的路径默认是存放在app/controllers根目录下的，但如果我们需要在根目录下再组织一下控制器的路径，那么可以将控制器的声明位于ruby模块之下。例如，我们要将book_controller.rb文件放置于admin目录下，也就是app/controllers/admin/book_controller.rb，那么，我们就应该这样声明： 
+class Admin::BookController < ApplicationController
+..
+end 
+
+rails的生成器很智能，你可以直接使用
+
+ruby script/generate controller Admin::Book action1 action2</p></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/4276.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Ruby异常处理</title>
+		<link>http://www.xieziming.com/archives/4279.html</link>
+		<comments>http://www.xieziming.com/archives/4279.html#respond</comments>
+		<pubDate>Fri, 23 Apr 2010 06:42:44 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[程序]]></category>
+		<category><![CDATA[Ruby]]></category>
+		<category><![CDATA[技术]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=4279</guid>
+		<description><![CDATA[在现实世界中，所有程序都会出错。一个优秀的程序可以预期错误的发生，并且优雅地处理它们。 
+
+一种错误处理的方法是：使用返回码。举个例子，我们在使用open方法打开文件，文件不存在时就会出错。我们可以使用一个特殊的返回码来标识这个错误。 
+
+但这种处理方式的问题是：管理这些错误代码会显得非常复杂。比如，我们调用了open，read并最终调用close方法，每一个方法都会返回不同的错误代码，我们需要在调用的外层次使用复杂难懂的代码来管理和区分这些不同的错误代码。 
+
+异常机制很好地解决了上述错误处理方法的问题：异常把错误信息打包进一个类中，在抛出一个异常之后，异常会自动在调用栈中‘上浮’，直到遇见声明可以处理相应类型异常的代码。 
+
+<strong>其实 begin相当于c#的try， rescue相当于c#的catch， ensure相当于c#的 finaly， raise相当于c#的 throw 。</strong>]]></description>
+				<content:encoded><![CDATA[<p>在现实世界中，所有程序都会出错。一个优秀的程序可以预期错误的发生，并且优雅地处理它们。 </p>
+<p>一种错误处理的方法是：使用返回码。举个例子，我们在使用open方法打开文件，文件不存在时就会出错。我们可以使用一个特殊的返回码来标识这个错误。 </p>
+<p>但这种处理方式的问题是：管理这些错误代码会显得非常复杂。比如，我们调用了open，read并最终调用close方法，每一个方法都会返回不同的错误代码，我们需要在调用的外层次使用复杂难懂的代码来管理和区分这些不同的错误代码。 </p>
+<p>异常机制很好地解决了上述错误处理方法的问题：异常把错误信息打包进一个类中，在抛出一个异常之后，异常会自动在调用栈中‘上浮’，直到遇见声明可以处理相应类型异常的代码。 </p>
+<p>这些错误代码被解释成了有意义的单词，方便我们记忆。如：NameError</p>
+
+<div class="wp_code"><div class="pre"><pre class="ruby" style="font-family:'Times New Roman',Garamond, Times;"><span style="color:#9966CC; font-weight:bold;">begin</span>    
+a    
+<span style="color:#9966CC; font-weight:bold;">rescue</span> <span style="color:#CC00FF; font-weight:bold;">NameError</span>    
+<span style="color:#CC0066; font-weight:bold;">puts</span> <span style="color:#996600;">&quot;error:#{$!}&quot;</span>    
+<span style="color:#CC0066; font-weight:bold;">raise</span>    
+<span style="color:#9966CC; font-weight:bold;">end</span></pre></div></div>
+
+<p>我们用begin，rescue，end把可能抛出异常的代码以及处理异常的代码包围起来，特别是rescue语句声明了它可以处理的异常类型，rescue之后的代码就是处理异常的代码。 </p>
+<p>异常对象被抛出之后，存于一个全局变量：$!中。可以看到异常处理代码最后调用了raise，它代表把同一个异常再次抛出。 </p>
+<p>在一个异常处理块中，可以有多个rescue语句以拥有对不同异常的不同处理，同时一个rescue语句也可以声明捕获多个异常类型。如下面的代码一样：</p>
+
+<div class="wp_code"><div class="pre"><pre class="ruby" style="font-family:'Times New Roman',Garamond, Times;"><span style="color:#9966CC; font-weight:bold;">begin</span>     
+<span style="color:#CC0066; font-weight:bold;">eval</span> <span style="color:#CC0066; font-weight:bold;">string</span>     
+<span style="color:#9966CC; font-weight:bold;">rescue</span> <span style="color:#CC00FF; font-weight:bold;">SyntaxError</span>, <span style="color:#CC00FF; font-weight:bold;">NameError</span> <span style="color:#006600; font-weight:bold;">=&gt;</span> boom     
+<span style="color:#CC0066; font-weight:bold;">print</span> <span style="color:#996600;">&quot;String doesn't compile: &quot;</span> <span style="color:#006600; font-weight:bold;">+</span> boom     
+<span style="color:#9966CC; font-weight:bold;">rescue</span> <span style="color:#CC00FF; font-weight:bold;">StandardError</span> <span style="color:#006600; font-weight:bold;">=&gt;</span> bang     
+<span style="color:#CC0066; font-weight:bold;">print</span> <span style="color:#996600;">&quot;Error running script: &quot;</span> <span style="color:#006600; font-weight:bold;">+</span> bang     
+<span style="color:#9966CC; font-weight:bold;">end</span></pre></div></div>
+
+<p>只要其中匹配一个rescue的错误，处理异常，然后跳出end </p>
+<p>很多时候，无论程序抛异常与否，我们都得保证在最后做一些清理工作。比如一段从文件读取数据的代码，无论读取是否成功，我们都得保证最后关闭这个文件。我们可以通过在任何的退出点关闭文件来解决这个问题，但这样做非常繁琐，也不能保证照顾到了每个退出点。所以，我们需要一种方法来保证。这就是 ensure的作用： </p>
+<p>有时我们会希望围绕问题展开创造性工作.这里,如果文件不存在,我们用标准输入代替:</p>
+
+<div class="wp_code"><div class="pre"><pre class="ruby" style="font-family:'Times New Roman',Garamond, Times;"><span style="color:#9966CC; font-weight:bold;">begin</span>
+  file = <span style="color:#CC0066; font-weight:bold;">open</span><span style="color:#006600; font-weight:bold;">&#40;</span><span style="color:#996600;">&quot;some_file&quot;</span><span style="color:#006600; font-weight:bold;">&#41;</span>
+<span style="color:#9966CC; font-weight:bold;">rescue</span>
+  file = STDIN
+<span style="color:#9966CC; font-weight:bold;">end</span>
+<span style="color:#9966CC; font-weight:bold;">begin</span>
+  <span style="color:#008000; font-style:italic;"># ... process the input ...</span>
+<span style="color:#9966CC; font-weight:bold;">rescue</span>
+  <span style="color:#008000; font-style:italic;"># ... and deal with any other exceptions here.</span>
+<span style="color:#9966CC; font-weight:bold;">end</span></pre></div></div>
+
+<p>retry 用于 rescue 代码表示又重新执行 begin 代码.这让我们可以压缩前面的例子:</p>
+
+<div class="wp_code"><div class="pre"><pre class="ruby" style="font-family:'Times New Roman',Garamond, Times;">fname = <span style="color:#996600;">&quot;some_file&quot;</span>
+<span style="color:#9966CC; font-weight:bold;">begin</span>
+  file = <span style="color:#CC0066; font-weight:bold;">open</span><span style="color:#006600; font-weight:bold;">&#40;</span>fname<span style="color:#006600; font-weight:bold;">&#41;</span>
+  <span style="color:#008000; font-style:italic;"># ... process the input ...</span>
+<span style="color:#9966CC; font-weight:bold;">rescue</span>
+  fname = <span style="color:#996600;">&quot;STDIN&quot;</span>
+  <span style="color:#9966CC; font-weight:bold;">retry</span>
+<span style="color:#9966CC; font-weight:bold;">end</span></pre></div></div>
+
+<p>但这仍有一点瑕疵.一个不存在的文件将导致不停止地 retry.你在使用 retry 做异常处理时应注意到这一点.</p>
+<p>每个Ruby库在遇到错误时都会提交一个异常,你可以在自己的代码里明确地提交异常.用 raise 来提交异常.它带一个参数,也就是描述异常的一个字符串.参数是可选的但不应被省略.之后它可以通过一个特殊的全局变量 $! 访问.</p>
+<p><strong>其实 begin相当于c#的try， rescue相当于c#的catch， ensure相当于c#的 finaly， raise相当于c#的 throw 。</strong></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/4279.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>小试Ruby</title>
+		<link>http://www.xieziming.com/archives/4247.html</link>
+		<comments>http://www.xieziming.com/archives/4247.html#respond</comments>
+		<pubDate>Tue, 20 Apr 2010 12:18:55 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[程序]]></category>
+		<category><![CDATA[Ruby]]></category>
+		<category><![CDATA[技术]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=4247</guid>
+		<description><![CDATA[昨晚终于决定写一阵子的Ruby了，因为要用Watir来做一些web的自动化测试。
+先简单说下环境搭建：
+<strong>Step 1： Ruby下载
+</strong>http://www.ruby-lang.org/en/downloads
+我下载的是“ Ruby 1.8.6 One-Click Installer (Ruby on Windows) ”
+
+<strong>Step 2： Watir下载安装
+</strong>如果网络好的话执行以下两个命令就可以了：
+gem update --system
+gem install watir
+
+<strong>Step 3： 开始使用</strong>
+下面是一个简单的例子，在GOOGLE中搜索ideshot，看搜索结果中是否有Suny Tse。]]></description>
+				<content:encoded><![CDATA[<p>昨晚终于决定写一阵子的Ruby了，因为要用Watir来做一些web的自动化测试。<br />
+先简单说下环境搭建：<br />
+<strong>Step 1： Ruby下载<br />
+</strong>http://www.ruby-lang.org/en/downloads<br />
+我下载的是“ Ruby 1.8.6 One-Click Installer (Ruby on Windows) ”</p>
+<p><strong>Step 2： Watir下载安装<br />
+</strong>如果网络好的话执行以下两个命令就可以了：<br />
+gem update &#8211;system<br />
+gem install watir</p>
+<p><strong>Step 3： 开始使用</strong><br />
+下面是一个简单的例子，在GOOGLE中搜索ideshot，看搜索结果中是否有Suny Tse。</p>
+
+<div class="wp_code"><div class="pre"><pre class="ruby" style="font-family:'Times New Roman',Garamond, Times;"><span style="color:#008000; font-style:italic;"># the Watir controller</span>
+<span style="color:#CC0066; font-weight:bold;">require</span> <span style="color:#996600;">&quot;watir&quot;</span>
+<span style="color:#008000; font-style:italic;"># set a variable</span>
+test_site = <span style="color:#996600;">&quot;http://www.google.com/&quot;</span>
+content = <span style="color:#996600;">&quot;Suny Tse&quot;</span>
+<span style="color:#008000; font-style:italic;">#open the IE browser</span>
+ie = <span style="color:#6666ff; font-weight:bold;">Watir::IE</span>.<span style="color:#9900CC;">new</span>
+<span style="color:#008000; font-style:italic;"># print some comments</span>
+<span style="color:#CC0066; font-weight:bold;">puts</span> <span style="color:#996600;">&quot;Beginning of test: Google search.&quot;</span>
+<span style="color:#CC0066; font-weight:bold;">puts</span> <span style="color:#996600;">&quot; Step 1: go to the test site: &quot;</span> <span style="color:#006600; font-weight:bold;">+</span> test_site
+ie.<span style="color:#9900CC;">goto</span> test_site
+<span style="color:#CC0066; font-weight:bold;">puts</span> <span style="color:#996600;">&quot; Step 2: enter 'watir' in the search text field.&quot;</span>
+ie.<span style="color:#9900CC;">text_field</span><span style="color:#006600; font-weight:bold;">&#40;</span><span style="color:#ff3333; font-weight:bold;">:name</span>, <span style="color:#996600;">&quot;q&quot;</span><span style="color:#006600; font-weight:bold;">&#41;</span>.<span style="color:#9900CC;">set</span> <span style="color:#996600;">&quot;ideashot&quot;</span> <span style="color:#008000; font-style:italic;"># &quot;q&quot; is the name of the search field</span>
+<span style="color:#CC0066; font-weight:bold;">puts</span> <span style="color:#996600;">&quot; Step 3: click the 'Google Search' button.&quot;</span>
+ie.<span style="color:#9900CC;">button</span><span style="color:#006600; font-weight:bold;">&#40;</span><span style="color:#ff3333; font-weight:bold;">:type</span>, <span style="color:#996600;">&quot;submit&quot;</span><span style="color:#006600; font-weight:bold;">&#41;</span>.<span style="color:#9900CC;">click</span> <span style="color:#008000; font-style:italic;"># &quot;submit&quot; is the type of the Search button</span>
+<span style="color:#CC0066; font-weight:bold;">puts</span> <span style="color:#996600;">&quot; Expected Result:&quot;</span>
+<span style="color:#CC0066; font-weight:bold;">puts</span> <span style="color:#996600;">&quot; A Google page with results should be shown. '#{content} ' should be high on the list.&quot;</span>
+<span style="color:#CC0066; font-weight:bold;">puts</span> <span style="color:#996600;">&quot; Actual Result:&quot;</span>
+<span style="color:#9966CC; font-weight:bold;">if</span> ie.<span style="color:#9900CC;">text</span>.<span style="color:#9966CC; font-weight:bold;">include</span>? <span style="color:#996600;">&quot;#{content}&quot;</span>
+<span style="color:#CC0066; font-weight:bold;">puts</span> <span style="color:#996600;">&quot; Test Passed. Found the test string: '#{content} '. Actual Results match Expected Results.&quot;</span>
+<span style="color:#9966CC; font-weight:bold;">else</span>
+<span style="color:#CC0066; font-weight:bold;">puts</span> <span style="color:#996600;">&quot; Test Failed! Could not find: '#{content} '.&quot;</span> 
+<span style="color:#9966CC; font-weight:bold;">end</span>
+<span style="color:#CC0066; font-weight:bold;">puts</span> <span style="color:#996600;">&quot;End of test: Google search.&quot;</span></pre></div></div>
+
+<p>下面这个例子是类似于自动评论机，有loop，以及对弹出框的处理。</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/4247.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>令人费解的workflow</title>
+		<link>http://www.xieziming.com/archives/3993.html</link>
+		<comments>http://www.xieziming.com/archives/3993.html#respond</comments>
+		<pubDate>Tue, 02 Mar 2010 13:54:25 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[测试]]></category>
+		<category><![CDATA[技术]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=3993</guid>
+		<description><![CDATA[<img class="aligncenter" src="http://images.xieziming.com/upload/2010/nontopic/03/1.jpg" alt="ideashot" />]]></description>
+				<content:encoded><![CDATA[<p style="text-align: center;"><img class="aligncenter" src="http://images.xieziming.com/upload/2010/nontopic/03/1.jpg" alt="ideashot" /></p>
+<p>Mantis Bug Tracker官方的workflow真是让人难以接受，尤其是其关于Confirm和Acknowledge状态的解释！ </p>
+<p style="text-align: center;"><img class="aligncenter" src="http://images.xieziming.com/upload/2010/nontopic/03/2.jpg" alt="ideashot" /></p>
+<p>这是我在寒假整理出来的一个workflow，哎～真搞不懂那帮人怎么想的&#8230;</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/3993.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Mantis Bug Tracker</title>
+		<link>http://www.xieziming.com/archives/3772.html</link>
+		<comments>http://www.xieziming.com/archives/3772.html#respond</comments>
+		<pubDate>Tue, 09 Feb 2010 01:49:48 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[测试]]></category>
+		<category><![CDATA[技术]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=3772</guid>
+		<description><![CDATA[<img src="http://images.xieziming.com/upload/2010/nontopic/02/16.jpg" alt="ideashot" />]]></description>
+				<content:encoded><![CDATA[<p><img src="http://images.xieziming.com/upload/2010/nontopic/02/14.jpg" alt="ideashot" /></p>
+<p>Mantis Bug Tracker, 开源的缺陷管理工具，试了一下还不错，顺便修正了下界面。</p>
+<p><img src="http://images.xieziming.com/upload/2010/nontopic/02/15.jpg" alt="ideashot" /></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/3772.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>软件回归测试</title>
+		<link>http://www.xieziming.com/archives/2779.html</link>
+		<comments>http://www.xieziming.com/archives/2779.html#respond</comments>
+		<pubDate>Sun, 11 Oct 2009 10:34:45 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[测试]]></category>
+		<category><![CDATA[技术]]></category>
+
+		<guid isPermaLink="false">http://www.ideashot.com/?p=2779</guid>
+		<description><![CDATA[摘要：本文描述了软件回归测试的概念和进行回归测试的基本步骤，介绍了可用于回归测试的测试用例库的维护方法，给出了几种可以可保证回归测试效率和有效性的回归测试策略，总结了回归测试时应该注意的一些实际问题。
+
+关键词：回归测试；测试用例；基线测试用例库
+
+Software Regression Testing and It’s Practice
+
+Abstract：The article present the conception of regression testing and the step of executing this testing. Introduce how to maintenance the test case library which used in regression testing ,and provide the method of ensure regression testing’s validity. Finally, it gives some problem must be careful in the period of regression testing.
+
+Keywords：regression testing；test case；baseline test case library
+
+作者简介：李丹（1978-），女，江苏如东人，信息产业部电子第五研究所助理工程师，从事软件可靠性研究及测试工作。]]></description>
+				<content:encoded><![CDATA[<p>摘要：本文描述了软件回归测试的概念和进行回归测试的基本步骤，介绍了可用于回归测试的测试用例库的维护方法，给出了几种可以可保证回归测试效率和有效性的回归测试策略，总结了回归测试时应该注意的一些实际问题。</p>
+<p>关键词：回归测试；测试用例；基线测试用例库</p>
+<p>Software Regression Testing and It’s Practice</p>
+<p>Abstract：The article present the conception of regression testing and the step of executing this testing. Introduce how to maintenance the test case library which used in regression testing ,and provide the method of ensure regression testing’s validity. Finally, it gives some problem must be careful in the period of regression testing.<br />
+<span id="more-2779"></span><br />
+Keywords：regression testing；test case；baseline test case library</p>
+<p>作者简介：李丹（1978-），女，江苏如东人，信息产业部电子第五研究所助理工程师，从事软件可靠性研究及测试工作。</p>
+<p>一、 概述</p>
+<p>在软件生命周期中的任何一个阶段，只要软件发生了改变，就可能给该软件带来问题。软件的改变可能是源于发现了错误并做了修改，也有可能是因为在集成或维护阶段加入了新的模块。当软件中所含错误被发现时，如果错误跟踪与管理系统不够完善，就可能会遗漏对这些错误的修改；而开发者对错误理解的不够透彻，也可能导致所做的修改只修正了错误的外在表现，而没有修复错误本身，从而造成修改失败；修改还有可能产生副作用从而导致软件未被修改的部分产生新的问题，使本来工作正常的功能产生错误。同样，在有新代码加入软件的时候，除了新加入的代码中有可能含有错误外，新代码还有可能对原有的代码带来影响。因此，每当软件发生变化时，我们就必须重新测试现有的功能，以便确定修改是否达到了预期的目的，检查修改是否损害了原有的正常功能。同时，还需要补充新的测试用例来测试新的或被修改了的功能。为了验证修改的正确性及其影响就需要进行回归测试。</p>
+<p>回归测试在软件生命周期中扮演着重要的角色，因忽视回归测试而造成严重后果的例子不计其数，导致阿里亚娜5型火箭发射失败的软件缺陷就是由于复用的代码没有经过充分的回归测试造成的。</p>
+<p>回归测试作为软件生命周期的一个组成部分，在整个软件测试过程中占有很大的工作量比重，软件开发的各个阶段都会进行多次回归测试。在渐进和快速迭代开发中，新版本的连续发布使回归测试进行的更加频繁，而在极端编程方法中，更是要求每天都进行若干次回归测试。因此，通过选择正确的回归测试策略来改进回归测试的效率和有效性是非常有意义的。</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/2779.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>单元测试全攻略</title>
+		<link>http://www.xieziming.com/archives/2783.html</link>
+		<comments>http://www.xieziming.com/archives/2783.html#respond</comments>
+		<pubDate>Sat, 10 Oct 2009 11:13:45 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[测试]]></category>
+		<category><![CDATA[技术]]></category>
+
+		<guid isPermaLink="false">http://www.ideashot.com/?p=2783</guid>
+		<description><![CDATA[工厂在组装一台电视机之前，会对每个元件都进行测试，这，就是单元测试。
+
+其实我们每天都在做单元测试。你写了一个函数，除了极简单的外，总是要执行一下，看看功能是否正常，有时还要想办法输出些数据，如弹出信息窗口什么的，这，也是单元测试，这种单元测试称为临时单元测试。只进行了临时单元测试的软件，针对代码的测试很不完整，代码覆盖率要超过70%都很困难，未覆盖的代码可能遗留大量的细小的错误，这些错误还会互相影响，当BUG暴露出来的时候难于调试，大幅度提高后期测试和维护成本，也降低了开发商的竞争力。可以说，进行充分的单元测试，是提高软件质量，降低开发成本的必由之路。
+
+<!--more-->
+
+对于程序员来说，如果养成了对自己写的代码进行单元测试的习惯，不但可以写出高质量的代码，而且还能提高编程水平。
+
+要进行充分的单元测试，应专门编写测试代码，并与产品代码隔离。老纳认为，比较简单的办法是为产品工程建立对应的测试工程，为每个类建立对应的测试类，为每个函数（很简单的除外）建立测试函数。首先就几个概念谈谈老纳的看法。]]></description>
+				<content:encoded><![CDATA[<p>一　单元测试概述</p>
+<p>工厂在组装一台电视机之前，会对每个元件都进行测试，这，就是单元测试。</p>
+<p>其实我们每天都在做单元测试。你写了一个函数，除了极简单的外，总是要执行一下，看看功能是否正常，有时还要想办法输出些数据，如弹出信息窗口什么的，这，也是单元测试，这种单元测试称为临时单元测试。只进行了临时单元测试的软件，针对代码的测试很不完整，代码覆盖率要超过70%都很困难，未覆盖的代码可能遗留大量的细小的错误，这些错误还会互相影响，当BUG暴露出来的时候难于调试，大幅度提高后期测试和维护成本，也降低了开发商的竞争力。可以说，进行充分的单元测试，是提高软件质量，降低开发成本的必由之路。<br />
+<span id="more-2783"></span><br />
+对于程序员来说，如果养成了对自己写的代码进行单元测试的习惯，不但可以写出高质量的代码，而且还能提高编程水平。</p>
+<p>要进行充分的单元测试，应专门编写测试代码，并与产品代码隔离。老纳认为，比较简单的办法是为产品工程建立对应的测试工程，为每个类建立对应的测试类，为每个函数（很简单的除外）建立测试函数。首先就几个概念谈谈老纳的看法。</p>
+<p>一般认为，在结构化程序时代，单元测试所说的单元是指函数，在当今的面向对象时代，单元测试所说的单元是指类。以老纳的实践来看，以类作为测试单位，复杂度高，可操作性较差，因此仍然主张以函数作为单元测试的测试单位，但可以用一个测试类来组织某个类的所有测试函数。单元测试不应过分强调面向对象，因为局部代码依然是结构化的。单元测试的工作量较大，简单实用高效才是硬道理。</p>
+<p>有一种看法是，只测试类的接口(公有函数)，不测试其他函数，从面向对象角度来看，确实有其道理，但是，测试的目的是找错并最终排错，因此，只要是包含错误的可能性较大的函数都要测试，跟函数是否私有没有关系。对于C++来说，可以用一种简单的方法区隔需测试的函数：简单的函数如数据读写函数的实现在头文件中编写(inline函数)，所有在源文件编写实现的函数都要进行测试(构造函数和析构函数除外)。</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/2783.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>IP负载均衡技术</title>
+		<link>http://www.xieziming.com/archives/2596.html</link>
+		<comments>http://www.xieziming.com/archives/2596.html#respond</comments>
+		<pubDate>Wed, 07 Oct 2009 12:55:52 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[技术维基]]></category>
+		<category><![CDATA[linux]]></category>
+		<category><![CDATA[技术]]></category>
+
+		<guid isPermaLink="false">http://www.ideashot.com/?p=2596</guid>
+		<description><![CDATA[<img src="http://images.xieziming.com/upload/file/linux_3/1.jpg" alt="linux" />]]></description>
+				<content:encoded><![CDATA[<p>在前面文章中，讲述了可伸缩网络服务的几种结构，它们都需要一个前端的负载调度器（或者多个进行主从备份）。我们先分析实现虚拟网络服务的主要技术，指出IP负载均衡技术是在负载调度器的实现技术中效率最高的。在已有的IP负载均衡技术中，主要有通过网络地址转换（Network Address Translation）将一组服务器构成一个高性能的、高可用的虚拟服务器，我们称之为VS/NAT技术（Virtual Server via Network Address Translation）。在分析VS/NAT的缺点和网络服务的非对称性的基础上，我们提出了通过IP隧道实现虚拟服务器的方法VS /TUN（Virtual Server via IP Tunneling），和通过直接路由实现虚拟服务器的方法VS/DR（Virtual Server via Direct Routing），它们可以极大地提高系统的伸缩性。VS/NAT、VS/TUN和VS/DR技术是LVS集群中实现的三种IP负载均衡技术，我们将在文章中详细描述它们的工作原理和各自的优缺点。<br />
+<span id="more-2596"></span><br />
+在以下描述中，我们称客户的socket和服务器的socket之间的数据通讯为连接，无论它们是使用TCP还是UDP协议。下面简述当前用服务器集群实现高可伸缩、高可用网络服务的几种负载调度方法，并列举几个在这方面有代表性的研究项目。</p>
+<p>实现虚拟服务的相关方法</p>
+<p>在网络服务中，一端是客户程序，另一端是服务程序，在中间可能有代理程序。由此看来，可以在不同的层次上实现多台服务器的负载均衡。用集群解决网络服务性能问题的现有方法主要分为以下四类。</p>
+<p>2.1. 基于RR-DNS的解决方法</p>
+<p>NCSA的可伸缩的WEB服务器系统就是最早基于RR-DNS（Round-Robin Domain Name System）的原型系统[1,2]。它的结构和工作流程如下图所示：</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/2596.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>软件测试要素</title>
+		<link>http://www.xieziming.com/archives/2787.html</link>
+		<comments>http://www.xieziming.com/archives/2787.html#respond</comments>
+		<pubDate>Sat, 03 Oct 2009 11:23:24 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[测试]]></category>
+		<category><![CDATA[技术]]></category>
+
+		<guid isPermaLink="false">http://www.ideashot.com/?p=2787</guid>
+		<description><![CDATA[本文档主要介绍了单元测试环境配置测试、代码测试、UI测试需要注意的地方。
+
+一、单元测试环境配置测试
+
+1) 网络连接是否正常
+
+2) 网络流量负担是否过重
+
+3) 软件测试平台是否可选
+
+4) 是否在不同的软件测试平台进行软件测试
+
+5) 所选软件测试平台的版本（包括 Service Pack ）是否正确
+
+6) 所选软件测试平台的参数设置是否正确
+
+7) 所选软件测试平台上正在运行的其它程序是否会影响测试结果]]></description>
+				<content:encoded><![CDATA[<p>本文档主要介绍了单元测试环境配置测试、代码测试、UI测试需要注意的地方。</p>
+<p>一、单元测试环境配置测试</p>
+<p>1) 网络连接是否正常</p>
+<p>2) 网络流量负担是否过重</p>
+<p>3) 软件测试平台是否可选</p>
+<p>4) 是否在不同的软件测试平台进行软件测试<br />
+<span id="more-2787"></span><br />
+5) 所选软件测试平台的版本（包括 Service Pack ）是否正确</p>
+<p>6) 所选软件测试平台的参数设置是否正确</p>
+<p>7) 所选软件测试平台上正在运行的其它程序是否会影响测试结果</p>
+<p>8) 画面的分辨率和色彩设定是否正确</p>
+<p>9) 对硬件测试平台的要求和支持程度</p>
+<p>二、代码测试</p>
+<p>A 静态测试</p>
+<p>1) 同一程序内的代码书写是否为同一风格</p>
+<p>2) 代码布局是否合理、美观</p>
+<p>3) 程序中函数、子程序块分界是否明显</p>
+<p>4) 注释是否符合既定格式</p>
+<p>5) 注释是否正确反映代码的功能</p>
+<p>6) 变量定义是否正确（长度、类型、存储类型）</p>
+<p>7) 子程序（函数和方法）接受的参数类型、大小、次序是否和调用模块相匹配合</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/2787.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>DAS、NAS与SAN</title>
+		<link>http://www.xieziming.com/archives/2529.html</link>
+		<comments>http://www.xieziming.com/archives/2529.html#comments</comments>
+		<pubDate>Fri, 25 Sep 2009 07:12:01 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[技术维基]]></category>
+		<category><![CDATA[技术]]></category>
+
+		<guid isPermaLink="false">http://www.ideashot.com/?p=2529</guid>
+		<description><![CDATA[<img src="http://images.xieziming.com/upload/file/storage/1.jpg" alt="图片载入中" />]]></description>
+				<content:encoded><![CDATA[<p>目前磁盘存储市场上，存储分类根据服务器类型分为：封闭系统的存储和开放系统的存储，封闭系统主要指大型机，AS400等服务器，开放系统指基于包括Windows、UNIX、Linux等操作系统的服务器；开放系统的存储分为：内置存储和外挂存储；开放系统的外挂存储根据连接的方式分为：直连式存储（Direct-Attached Storage，简称DAS）和网络化存储（Fabric-Attached Storage，简称FAS）；开放系统的网络化存储根据传输协议又分为：网络接入存储（Network-Attached Storage，简称NAS）和存储区域网络（Storage Area Network，简称SAN）。由于目前绝大部分用户采用的是开放系统，其外挂存储占有目前磁盘存储市场的70%以上<br />
+<span id="more-2529"></span><br />
+开放系统的直连式存储（Direct-Attached Storage，简称DAS）已经有近四十年的使用历史，随着用户数据的不断增长，尤其是数百GB以上时，其在备份、恢复、扩展、灾备等方面的问题变得日益困扰系统管理员。</p>
+<p>主要问题和不足为：<br />
+直连式存储依赖服务器主机操作系统进行数据的IO读写和存储维护管理，数据备份和恢复要求占用服务器主机资源（包括CPU、系统IO等），数据流需要回流主机再到服务器连接着的磁带机（库），数据备份通常占用服务器主机资源20-30%，因此许多企业用户的日常数据备份常常在深夜或业务系统不繁忙时进行，以免影响正常业务系统的运行。直连式存储的数据量越大，备份和恢复的时间就越长，对服务器硬件的依赖性和影响就越大。</p>
+<p>直连式存储与服务器主机之间的连接通道通常采用SCSI连接，带宽为10MB/s、20MB/s、40MB/s、80MB/s等，随着服务器CPU的处理能力越来越强，存储硬盘空间越来越大，阵列的硬盘数量越来越多，SCSI通道将会成为IO瓶颈；服务器主机SCSI ID资源有限，能够建立的SCSI通道连接有限。</p>
+<p>无论直连式存储还是服务器主机的扩展，从一台服务器扩展为多台服务器组成的群集(Cluster)，或存储阵列容量的扩展，都会造成业务系统的停机，从而给企业带来经济损失，对于银行、电信、传媒等行业7×24小时服务的关键业务系统，这是不可接受的。并且直连式存储或服务器主机的升级扩展，只能由原设备厂商提供，往往受原设备厂商限制。</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/2529.html/feed</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+		<item>
+		<title>ECC协议簇学习</title>
+		<link>http://www.xieziming.com/archives/2310.html</link>
+		<comments>http://www.xieziming.com/archives/2310.html#respond</comments>
+		<pubDate>Sun, 23 Aug 2009 07:44:12 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[技术维基]]></category>
+		<category><![CDATA[技术]]></category>
+		<category><![CDATA[通讯]]></category>
+
+		<guid isPermaLink="false">http://www.ideashot.com/?p=2310</guid>
+		<description><![CDATA[<img src="http://images.xieziming.com/upload/2009/09/1/2.jpg" alt="ECC学习" />]]></description>
+				<content:encoded><![CDATA[<p>中兴传输设备ECC协议簇学习<br />
+<span id="more-2310"></span><br />
+<img src="http://images.xieziming.com/upload/2009/09/1/1.jpg" alt="ECC学习" /></p>
+<p><img src="http://images.xieziming.com/upload/2009/09/1/2.jpg" alt="ECC学习" /></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/2310.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>linux 网络命令</title>
+		<link>http://www.xieziming.com/archives/2838.html</link>
+		<comments>http://www.xieziming.com/archives/2838.html#respond</comments>
+		<pubDate>Sat, 20 Jun 2009 09:19:02 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[技术维基]]></category>
+		<category><![CDATA[linux]]></category>
+		<category><![CDATA[技术]]></category>
+
+		<guid isPermaLink="false">http://www.ideashot.com/?p=2838</guid>
+		<description><![CDATA[1)列出的是所有连接
+ netstat -tun
+
+2)列出的是apache所有连接
+ netstat -tun &#124; grep ":80"
+
+3）统计80端口连接数　
+  netstat -nat&#124;grep-i"80"&#124;wc -l
+　
+4）统计httpd协议连接数　
+  ps -ef&#124;grep httpd&#124;wc -l
+　
+5）统计已连接上的，状态为“established'　
+ netstat -na&#124;grep ESTABLISHED&#124;wc -l]]></description>
+				<content:encoded><![CDATA[<p>1)列出的是所有连接<br />
+ netstat -tun</p>
+<p>2)列出的是apache所有连接<br />
+ netstat -tun | grep &#8220;:80&#8243;</p>
+<p>3）统计80端口连接数　<br />
+  netstat -nat|grep-i&#8221;80&#8243;|wc -l<br />
+　<br />
+4）统计httpd协议连接数　<br />
+  ps -ef|grep httpd|wc -l<br />
+　<br />
+5）统计已连接上的，状态为“established&#8217;　<br />
+ netstat -na|grep ESTABLISHED|wc -l<br />
+　<br />
+6）查出哪个IP地址连接最多，将其封了<br />
+netstat -na|grep ESTABLISHED|awk'{print$5}&#8217;|awk-F:'{print$1}&#8217;|sort|uniq-c|sort-r+0n</p>
+<p>netstat -na|grep SYN|awk'{print$5}&#8217;|awk-F:'{print$1}&#8217;|sort|uniq-c|sort-r+0n</p>
+<p>7)查看httpd进程数（即prefork模式下Apache能够处理的并发请求数）：<br />
+ps -ef | grep httpd | wc -l</p>
+<p>8)查看Apache的并发请求数及其TCP连接状态：<br />
+netstat -n | awk &#8216;/^tcp/ {++S[$NF]} END {for(a in S) print a, S[a]}&#8217;<br />
+或者 netstat -n | awk &#8216;/^tcp/ {++state[$NF]} END {for(key in state) print key,&#8221;\t&#8221;,state<font color="#00BB00"><strong></strong></font>}&#8217;</p>
+<p>返回结果示例：<br />
+　　LAST_ACK 5<br />
+　　SYN_RECV 30<br />
+　　ESTABLISHED 1597<br />
+　　FIN_WAIT1 51<br />
+　　FIN_WAIT2 504<br />
+　　TIME_WAIT 1057</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/2838.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+	</channel>
+</rss>

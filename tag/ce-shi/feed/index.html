@@ -1,0 +1,1526 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>测试 &#8211; 谢子明</title>
+	<atom:link href="http://www.xieziming.com/tag/ce-shi/feed" rel="self" type="application/rss+xml" />
+	<link>http://www.xieziming.com</link>
+	<description>Suny Xie</description>
+	<lastBuildDate>Mon, 26 Dec 2016 07:34:38 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.7</generator>
+	<item>
+		<title>当我们谈论自动化测试</title>
+		<link>http://www.xieziming.com/archives/7801.html</link>
+		<comments>http://www.xieziming.com/archives/7801.html#respond</comments>
+		<pubDate>Fri, 21 Dec 2012 13:04:18 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[测试]]></category>
+		<category><![CDATA[Automation]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=7801</guid>
+		<description><![CDATA[Cockburn在《敏捷软件开发》中提到“沟通的成功依赖于发送者和接收者有可以引用的共同体验”，因此当我们提到自动化测试时，就一定需要有共同的词汇表。首先，什么是自动化测试？<strong>对一些人来说，一提到自动化测试，第一个闪过脑海的念头就是QTP、WebDriver等自动化测试工具，以及依据这些工具建立的针对功能或是UI的自动化测试测试脚本，但其实这些只是自动化测试中的一小部分而已，在我看来，所有“使用机器的能力”对测试进行部分或全部自动化的操作都应该被叫做“自动化测试”。无论是针对代码中的类或是方法建立的单元测试，还是针对产品建立的需要人工参与的diff的方式，都是自动化测试的具体方法。</strong>对测试来说，自动化测试不是一个存在的目标，而仅仅是一种用以达成测试目标的手段。我们希望从自动化测试中得到什么？自动化测试覆盖率？自动化测试覆盖率是用来衡量自动化测试所占比例的一种手段，但这仍然不是我们在项目中开展自动化测试的目标。我们在项目中开展自动化测试，目标只能是“通过自动化测试提高测试或是产品的质量”。因此，在谈论自动化测试时，可以被称为目标的，只能是下面这几项：
+
+（1）在保证相同的测试覆盖率的情况下，减少人力资源的投入;
+（2）在相同人力资源投入的情况下，增加了测试覆盖率;
+（3）让测试的执行向上游移动，帮助开发者更早的发现产品中的问题，从而降低修复成本。]]></description>
+				<content:encoded><![CDATA[<p>Cockburn在《敏捷软件开发》中提到“沟通的成功依赖于发送者和接收者有可以引用的共同体验”，因此当我们提到自动化测试时，就一定需要有共同的词汇表。首先，什么是自动化测试？</p>
+<p><strong>对一些人来说，一提到自动化测试，第一个闪过脑海的念头就是QTP、WebDriver等自动化测试工具，以及依据这些工具建立的针对功能或是UI的自动化测试测试脚本，但其实这些只是自动化测试中的一小部分而已，在我看来，所有“使用机器的能力”对测试进行部分或全部自动化的操作都应该被叫做“自动化测试”。无论是针对代码中的类或是方法建立的单元测试，还是针对产品建立的需要人工参与的diff的方式，都是自动化测试的具体方法。</strong></p>
+<p>对测试来说，自动化测试不是一个存在的目标，而仅仅是一种用以达成测试目标的手段。我们希望从自动化测试中得到什么？自动化测试覆盖率？自动化测试覆盖率是用来衡量自动化测试所占比例的一种手段，但这仍然不是我们在项目中开展自动化测试的目标。我们在项目中开展自动化测试，目标只能是“通过自动化测试提高测试或是产品的质量”。因此，在谈论自动化测试时，可以被称为目标的，只能是下面这几项：</p>
+<p>（1）在保证相同的测试覆盖率的情况下，减少人力资源的投入;<br />
+（2）在相同人力资源投入的情况下，增加了测试覆盖率;<br />
+（3）让测试的执行向上游移动，帮助开发者更早的发现产品中的问题，从而降低修复成本。</p>
+<p>有了目标，剩下来的就是怎么做的问题。“减少人力资源的投入”是一个最容易被直观理解的自动化测试目标，因此，不少团队的做法就是“用自动化测试替代手工测试”，将原先需要手工执行的测试用例变成UI自动化测试用例，改由自动化测试工具来执行脚本。<strong>不能说，这种方式没有效果，但由于自动化测试在识别缺陷方面的有效性远远低于手工测试（从UI测试的角度来说，一个非“预期”产生的缺陷很难被自动化测试发现，而手工测试则能轻松的发现这个缺陷），而且由于UI本身的变化性，要想达到和手工测试相同的覆盖率，单纯的UI自动化测试往往很难证明自己的投资回报。</strong></p>
+<p>“增加测试覆盖率”是自动化测试可以产生收益的另一个方面。容易想到的例子是性能测试和模糊测试（Fuzz testing）。依靠机器的能力，模拟大量用户的并发，以及依靠机器的能力，<strong>基于规则产生大量随机数据并发送给服务器，用于检测服务器可能的安全性问题</strong>，在这些领域，自动化测试能带来明显的收益。但，当我说到“增加测试覆盖率”时，我所想要谈论的<strong>不仅仅</strong>是性能测试或是模糊测试这一类的针对应用某个质量属性的验证。</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/7801.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>软件测试理念（三）</title>
+		<link>http://www.xieziming.com/archives/7808.html</link>
+		<comments>http://www.xieziming.com/archives/7808.html#respond</comments>
+		<pubDate>Wed, 28 Nov 2012 14:01:10 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[测试]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=7808</guid>
+		<description><![CDATA[Q: 如何做一名优秀的软件测试工程师？他至少具备哪些技术能力？
+
+A: 软件测试工程师首先是一个软件工程师，也就是说他必须具备软件工程师的基本技术能力，比如对计算机结构系统（硬件，操作系统，内存，网络等）基本了解，再有就是算法数据结构，以及开发编程能力，最后就是对所工作领域的技术掌握。有了这些基本技术后，下面要掌握一些测试技术，比如黑盒白盒、等价类、边界值、功能测试、性能压力测试和安全性测试等。除了必须懂得技术硬技能外，要想成为一名优秀的软件测试工程师还必须有很强的软技能，这包括对产品质量的热情和沟通协调能力等。其中对产品质量的热情和专注尤为重要，因为兴趣是最好的老师，只有对所做的工作充满热情，你才会从平庸变成卓越。
+
+Q: 怎么才能进行有效地探索性测试？另外很多优秀的软件测试工程师都能敏锐地嗅到bug，你认为如何训练这方面能力？</strong>
+
+A: 探索性测试不仅需要对产品熟悉，还需要掌握开发产品采用的技术，最后就是自己经验的积累，这三者缺少一个都很容易把探索性测试变成漫无目的的测试。因为探索性测试是边运行测试、边了解产品和边设计新的测试。它根据当前测试步骤产生的结果，加以分析判断，然后使用策略决定下一步会最有可能发现产品中的bug。我曾写过一篇介绍探索性测试的文章，那里面用猜数字的游戏来解释探索性测试，猜数字的第二步也就是根据第一步猜的结果，来决定猜下一个数字所使用的策略非常重要。<strong>没有好的策略就会变成乱猜</strong>，而策略就需要你对游戏的规则、数字的特征以及二叉树查找等知识的积累和掌握。]]></description>
+				<content:encoded><![CDATA[<p>Q: 如何做一名优秀的软件测试工程师？他至少具备哪些技术能力？</p>
+<p>A: 软件测试工程师首先是一个软件工程师，也就是说他必须具备软件工程师的基本技术能力，比如对计算机结构系统（硬件，操作系统，内存，网络等）基本了解，再有就是算法数据结构，以及开发编程能力，最后就是对所工作领域的技术掌握。有了这些基本技术后，下面要掌握一些测试技术，比如黑盒白盒、等价类、边界值、功能测试、性能压力测试和安全性测试等。除了必须懂得技术硬技能外，要想成为一名优秀的软件测试工程师还必须有很强的软技能，这包括对产品质量的热情和沟通协调能力等。其中对产品质量的热情和专注尤为重要，因为兴趣是最好的老师，只有对所做的工作充满热情，你才会从平庸变成卓越。</p>
+<p>Q: 怎么才能进行有效地探索性测试？另外很多优秀的软件测试工程师都能敏锐地嗅到bug，你认为如何训练这方面能力？</strong></p>
+<p>A: 探索性测试不仅需要对产品熟悉，还需要掌握开发产品采用的技术，最后就是自己经验的积累，这三者缺少一个都很容易把探索性测试变成漫无目的的测试。因为探索性测试是边运行测试、边了解产品和边设计新的测试。它根据当前测试步骤产生的结果，加以分析判断，然后使用策略决定下一步会最有可能发现产品中的bug。我曾写过一篇介绍探索性测试的文章，那里面用猜数字的游戏来解释探索性测试，猜数字的第二步也就是根据第一步猜的结果，来决定猜下一个数字所使用的策略非常重要。<strong>没有好的策略就会变成乱猜</strong>，而策略就需要你对游戏的规则、数字的特征以及二叉树查找等知识的积累和掌握。</p>
+<p>其实对bug的敏感度也是建立在以上三个方面的能力：产品、技术和经验。另外分享一个小技巧，测试人员可以经常把以前的bug拿过来分析和学习，比如当时是如何发现的？找出共性特征，及时做总结，时间长了自然就会提高发现bug的能力。在我带的一个团队中就经常让团队的人找一个自认为最好的bug，轮流在团队会议上和大家分享他发现该bug的过程，从而给团队其他人以启发和学习。</p>
+<p>Q: 可以说微软、谷歌、亚马逊等公司代表着测试软件发展方向，他们是如何做软件测试的？他们在软件质量控制理念和实践方面，哪些地方值得我们借鉴？</p>
+<p>A: 有很多因素决定一个公司如何做软件测试，其中最为重要的就是产品的特点，换句话说就是什么样的产品决定什么样的测试策略。即使在同一个公司，不同的产品也不是使用一成不变的测试方式。微软是传统桌面型产品的代表，由于桌面型产品的特点，使得微软在软件开发过程中做大量的测试，来保证软件发布时候的高质量。而对于谷歌亚马逊等互联网公司，他们的产品以网站和服务为主，于是他们采用不同的测试策略来保证网站和服务的高可用性。虽然不同公司团队具体测试实践或手段有所不同，但仔细分析他们在软件质量控制理念上有很多共性值得我们去借鉴，比如强调把质量提前，开发对代码质量负责，整个团队对产品质量负责，产品质量是从一开始就建立起来的而不是后天测试出来的等。</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/7808.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>WebDriver（一）</title>
+		<link>http://www.xieziming.com/archives/7661.html</link>
+		<comments>http://www.xieziming.com/archives/7661.html#comments</comments>
+		<pubDate>Tue, 13 Nov 2012 16:19:21 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[测试]]></category>
+		<category><![CDATA[Selenium]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=7661</guid>
+		<description><![CDATA[WebDriver与之前Selenium的JS注入实现不同，直接利用了浏览器native support来操作浏览器。所以对于不同平台，不同的浏览器，必须依赖一个特定的浏览器的native component来实现把WebDriver API的调用转化为浏览器的native invoke。
+
+在我们new一个WebDriver的过程中，Selenium首先会确认浏览器的native component是否存在可用而且版本匹配。接着就在目标浏览器里启动一整套Web Service，这套Web Service使用了Selenium自己设计定义的协议，名字叫做<strong>The WebDriver Wire Protocol</strong>。这套协议非常之强大，几乎可以操作浏览器做任何事情，包括打开、关闭、最大化、最小化、元素定位、元素点击、上传文件等等等等。
+
+WebDriver Wire协议是通用的，也就是说不管是FirefoxDriver还是ChromeDriver，启动之后都会在某一个端口启动基于这套协议的Web Service。例如FirefoxDriver初始化成功之后，默认会从http://localhost:7055开始，而ChromeDriver则大概是http://localhost:46350之类的。接下来，我们调用WebDriver的任何API，都需要借助一个<strong>ComandExecutor</strong>发送一个命令，实际上是一个HTTP request给46350端口上的Web Service。在我们的HTTP request的body中，会以WebDriver Wire协议规定的<strong>JSON</strong>格式的字符串来告诉Selenium我们希望浏览器接下来做什么事情。
+
+不同浏览器的WebDriver子类，都需要依赖特定的浏览器原生组件，例如Firefox就需要一个add-on名字叫webdriver.xpi。而IE的话就需要用到一个dll文件来转化Web Service的命令为浏览器native的调用。]]></description>
+				<content:encoded><![CDATA[<p>WebDriver与之前Selenium的JS注入实现不同，直接利用了浏览器native support来操作浏览器。所以对于不同平台，不同的浏览器，必须依赖一个特定的浏览器的native component来实现把WebDriver API的调用转化为浏览器的native invoke。</p>
+<p>在我们new一个WebDriver的过程中，Selenium首先会确认浏览器的native component是否存在可用而且版本匹配。接着就在目标浏览器里启动一整套Web Service，这套Web Service使用了Selenium自己设计定义的协议，名字叫做<strong>The WebDriver Wire Protocol</strong>。这套协议非常之强大，几乎可以操作浏览器做任何事情，包括打开、关闭、最大化、最小化、元素定位、元素点击、上传文件等等等等。</p>
+<p>WebDriver Wire协议是通用的，也就是说不管是FirefoxDriver还是ChromeDriver，启动之后都会在某一个端口启动基于这套协议的Web Service。例如FirefoxDriver初始化成功之后，默认会从http://localhost:7055开始，而ChromeDriver则大概是http://localhost:46350之类的。接下来，我们调用WebDriver的任何API，都需要借助一个<strong>ComandExecutor</strong>发送一个命令，实际上是一个HTTP request给46350端口上的Web Service。在我们的HTTP request的body中，会以WebDriver Wire协议规定的<strong>JSON</strong>格式的字符串来告诉Selenium我们希望浏览器接下来做什么事情。</p>
+<p>不同浏览器的WebDriver子类，都需要依赖特定的浏览器原生组件，例如Firefox就需要一个add-on名字叫webdriver.xpi。而IE的话就需要用到一个dll文件来转化Web Service的命令为浏览器native的调用。</p>
+<p>关于WebDriver Wire协议的细节，比如希望了解这套Web Service能够做哪些事情，可以阅读Selenium官方的协议文档， 在Selenium的源码中，我们可以找到一个HttpCommandExecutor这个类，里面维护了一个Map<String, CommandInfo>，它负责将一个个代表命令的简单字符串key，转化为相应的URL，因为REST的理念是将所有的操作视作一个个状态，每一个状态对应一个URI。所以当我们以特定的URL发送HTTP request给这个RESTful web service之后，它就能解析出需要执行的操作。截取一段源码如下：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;">nameToUrl <span style="color: #339933;">=</span> ImmutableMap.<span style="color: #339933;">&lt;</span>String, CommandInfo<span style="color: #339933;">&gt;</span>builder<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>  
+        .<span style="color: #006633;">put</span><span style="color: #009900;">&#40;</span>NEW_SESSION, post<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;/session&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>  
+        .<span style="color: #006633;">put</span><span style="color: #009900;">&#40;</span>QUIT, delete<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;/session/:sessionId&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>  
+        .<span style="color: #006633;">put</span><span style="color: #009900;">&#40;</span>GET_CURRENT_WINDOW_HANDLE, get<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;/session/:sessionId/window_handle&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>  
+        .<span style="color: #006633;">put</span><span style="color: #009900;">&#40;</span>GET_WINDOW_HANDLES, get<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;/session/:sessionId/window_handles&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>  
+        .<span style="color: #006633;">put</span><span style="color: #009900;">&#40;</span>GET, post<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;/session/:sessionId/url&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>  
+&nbsp;
+         <span style="color: #666666; font-style: italic;">// The Alert API is still experimental and should not be used.  </span>
+        .<span style="color: #006633;">put</span><span style="color: #009900;">&#40;</span>GET_ALERT, get<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;/session/:sessionId/alert&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>  
+        .<span style="color: #006633;">put</span><span style="color: #009900;">&#40;</span>DISMISS_ALERT, post<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;/session/:sessionId/dismiss_alert&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>  
+        .<span style="color: #006633;">put</span><span style="color: #009900;">&#40;</span>ACCEPT_ALERT, post<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;/session/:sessionId/accept_alert&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>  
+        .<span style="color: #006633;">put</span><span style="color: #009900;">&#40;</span>GET_ALERT_TEXT, get<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;/session/:sessionId/alert_text&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>  
+        .<span style="color: #006633;">put</span><span style="color: #009900;">&#40;</span>SET_ALERT_VALUE, post<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;/session/:sessionId/alert_text&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span></pre></div></div>
+
+<p>可以看到实际发送的URL都是相对路径，后缀多以/session/:sessionId开头，这也意味着WebDriver每次启动浏览器都会分配一个独立的sessionId，多线程并行的时候彼此之间不会有冲突和干扰。例如我们最常用的一个WebDriver的API，getWebElement在这里就会转化为/session/:sessionId/element这个URL，然后在发出的HTTP request body内再附上具体的参数比如by ID还是CSS还是Xpath，各自的值又是什么。收到并执行了这个操作之后，也会回复一个HTTP response。内容也是JSON，会返回找到的WebElement的各种细节，比如text、CSS selector、tag name、class name等等。</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/7661.html/feed</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+		<item>
+		<title>RESTful</title>
+		<link>http://www.xieziming.com/archives/7666.html</link>
+		<comments>http://www.xieziming.com/archives/7666.html#respond</comments>
+		<pubDate>Sat, 10 Nov 2012 16:23:20 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[测试]]></category>
+		<category><![CDATA[程序]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=7666</guid>
+		<description><![CDATA[<strong>资源（Resources）</strong>
+
+所谓"资源"，就是网络上的一个实体，或者说是网络上的一个具体信息。它可以是一段文本、一张图片、一首歌曲、一种服务，总之就是一个具体的实在。你可以用一个URI（统一资源定位符）指向它，每种资源对应一个特定的URI。要获取这个资源，访问它的URI就可以，因此URI就成了每一个资源的地址或独一无二的识别符。
+
+<strong>表现层（Representation）</strong>
+"资源"是一种信息实体，它可以有多种外在表现形式。我们把"资源"具体呈现出来的形式，叫做它的"表现层"（Representation）。比如，文本可以用txt格式表现，也可以用HTML格式、XML格式、JSON格式表现，甚至可以采用二进制格式；图片可以用JPG格式表现，也可以用PNG格式表现。
+
+URI只代表资源的实体，不代表它的形式。严格地说，有些网址最后的".html"后缀名是不必要的，因为这个后缀名表示格式，属于"表现层"范畴，而URI应该只代表"资源"的位置。它的具体表现形式，应该在HTTP请求的头信息中用Accept和Content-Type字段指定，这两个字段才是对"表现层"的描述。
+
+<strong>状态转化（State Transfer）</strong>
+互联网通信协议HTTP协议，是一个无状态协议。这意味着，所有的状态都保存在服务器端。因此，如果客户端想要操作服务器，必须通过某种手段，让服务器端发生"状态转化"（State Transfer）。而这种转化是建立在表现层之上的，所以就是"表现层状态转化"。
+
+客户端用到的手段，只能是HTTP协议。具体来说，就是HTTP协议里面，四个表示操作方式的动词：GET、POST、PUT、DELETE。它们分别对应四种基本操作：GET用来获取资源，POST用来新建资源（也可以用于更新资源），PUT用来更新资源，DELETE用来删除资源。]]></description>
+				<content:encoded><![CDATA[<p>要理解RESTful架构，最好的方法就是去理解Representational State Transfer这个词组到底是什么意思，它的每一个词代表了什么涵义。如果你把这个名称搞懂了，也就不难体会REST是一种什么样的设计。</p>
+<p><strong>资源（Resources）</strong></p>
+<p>所谓&#8221;资源&#8221;，就是网络上的一个实体，或者说是网络上的一个具体信息。它可以是一段文本、一张图片、一首歌曲、一种服务，总之就是一个具体的实在。你可以用一个URI（统一资源定位符）指向它，每种资源对应一个特定的URI。要获取这个资源，访问它的URI就可以，因此URI就成了每一个资源的地址或独一无二的识别符。</p>
+<p><strong>表现层（Representation）</strong><br />
+&#8220;资源&#8221;是一种信息实体，它可以有多种外在表现形式。我们把&#8221;资源&#8221;具体呈现出来的形式，叫做它的&#8221;表现层&#8221;（Representation）。比如，文本可以用txt格式表现，也可以用HTML格式、XML格式、JSON格式表现，甚至可以采用二进制格式；图片可以用JPG格式表现，也可以用PNG格式表现。</p>
+<p>URI只代表资源的实体，不代表它的形式。严格地说，有些网址最后的&#8221;.html&#8221;后缀名是不必要的，因为这个后缀名表示格式，属于&#8221;表现层&#8221;范畴，而URI应该只代表&#8221;资源&#8221;的位置。它的具体表现形式，应该在HTTP请求的头信息中用Accept和Content-Type字段指定，这两个字段才是对&#8221;表现层&#8221;的描述。</p>
+<p><strong>状态转化（State Transfer）</strong><br />
+互联网通信协议HTTP协议，是一个无状态协议。这意味着，所有的状态都保存在服务器端。因此，如果客户端想要操作服务器，必须通过某种手段，让服务器端发生&#8221;状态转化&#8221;（State Transfer）。而这种转化是建立在表现层之上的，所以就是&#8221;表现层状态转化&#8221;。</p>
+<p>客户端用到的手段，只能是HTTP协议。具体来说，就是HTTP协议里面，四个表示操作方式的动词：GET、POST、PUT、DELETE。它们分别对应四种基本操作：GET用来获取资源，POST用来新建资源（也可以用于更新资源），PUT用来更新资源，DELETE用来删除资源。</p>
+<p>说了这么多，到底为什么要用REST这种设计风格呢，好处如下：</p>
+<p>（1）可以充分利用缓存cache来提高响应速度<br />
+（2）通讯本身的无状态可以让不同的服务器处理所有类型的请求，提供了服务器的扩展性<br />
+（3）浏览器就可以充当客户端，简化软件需求</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/7666.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>遍历windows窗口控件</title>
+		<link>http://www.xieziming.com/archives/7620.html</link>
+		<comments>http://www.xieziming.com/archives/7620.html#respond</comments>
+		<pubDate>Sat, 10 Nov 2012 16:05:29 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[测试]]></category>
+		<category><![CDATA[程序]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=7620</guid>
+		<description><![CDATA[<strong>FindWindowEx ：</strong>
+<code lang="cpp">
+HWND FindWindowEx(
+　　HWND hwndParent, // handle to parent window
+　　HWND hwndChildAfter, // handle to child window
+　　LPCTSTR lpszClass, // class name
+　　LPCTSTR lpszWindow // window name
+　　);
+</code>
+参数：
+（1）hwndParent：要查找子窗口的父窗口句柄。如果hwndParent为NULL，则函数以桌面窗口为父窗口，查找桌面窗口的所有子窗口。如果hwndParent是HWND_MESSAGE，函数仅查找所有消息窗口。
+
+（2）hwndChildAfter ：子窗口句柄。查找从在Z序中的下一个子窗口开始。子窗口必须为hwndParent窗口的直接子窗口而非后代窗口。如果HwndChildAfter为NULL，查找从hwndParent的第一个子窗口开始。如果hwndParent 和 hwndChildAfter同时为NULL，则函数查找所有的顶层窗口及消息窗口。
+
+（3）lpszClass：指向一个指定了类名的空结束字符串，或一个标识类名字符串的成员的指针。如果该参数为一个成员，则它必须为前次调用theGlobaIAddAtom函数产生的全局成员。该成员为16位，必须位于lpClassName的低16位，高位必须为0。]]></description>
+				<content:encoded><![CDATA[<p>我们要做的事有两个：<br />
+（1）遍历/查找 windows 窗口<br />
+（2）遍历windows窗口里的所有控件</p>
+<p><strong>FindWindowEx ：</strong></p>
+
+<div class="wp_code"><div class="pre"><pre class="cpp" style="font-family:'Times New Roman',Garamond, Times;">HWND FindWindowEx<span style="color: #008000;">&#40;</span>
+　　HWND hwndParent, <span style="color: #666666;">// handle to parent window</span>
+　　HWND hwndChildAfter, <span style="color: #666666;">// handle to child window</span>
+　　LPCTSTR lpszClass, <span style="color: #666666;">// class name</span>
+　　LPCTSTR lpszWindow <span style="color: #666666;">// window name</span>
+　　<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span></pre></div></div>
+
+<p>参数：<br />
+（1）hwndParent：要查找子窗口的父窗口句柄。如果hwndParent为NULL，则函数以桌面窗口为父窗口，查找桌面窗口的所有子窗口。如果hwndParent是HWND_MESSAGE，函数仅查找所有消息窗口。</p>
+<p>（2）hwndChildAfter ：子窗口句柄。查找从在Z序中的下一个子窗口开始。子窗口必须为hwndParent窗口的直接子窗口而非后代窗口。如果HwndChildAfter为NULL，查找从hwndParent的第一个子窗口开始。如果hwndParent 和 hwndChildAfter同时为NULL，则函数查找所有的顶层窗口及消息窗口。</p>
+<p>（3）lpszClass：指向一个指定了类名的空结束字符串，或一个标识类名字符串的成员的指针。如果该参数为一个成员，则它必须为前次调用theGlobaIAddAtom函数产生的全局成员。该成员为16位，必须位于lpClassName的低16位，高位必须为0。</p>
+<p>（4）lpszWindow：指向一个指定了窗口名（窗口标题）的空结束字符串。如果该参数为 NULL，则为所有窗口全匹配。</p>
+<p><strong>FindWindow ：</strong></p>
+
+<div class="wp_code"><div class="pre"><pre class="cpp" style="font-family:'Times New Roman',Garamond, Times;">HWND FindWindow<span style="color: #008000;">&#40;</span>
+　　LPCSTR lpClassName,
+　　LPCSTR lpWindowName
+　　<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span></pre></div></div>
+
+<p>参数：<br />
+（1）lpClassName ： 指向一个以null结尾的、用来指定类名的字符串或一个可以确定类名字符串的原子。如果这个参数是一个原子，那么它必须是一个在调用此函数前已经通过GlobalAddAtom函数创建好的全局原子。这个原子（一个16bit的值），必须被放置在lpClassName的低位字节中，lpClassName的高位字节置零。如果该参数为null时，将会寻找任何与lpWindowName参数匹配的窗口。<br />
+　　<br />
+（2）lpWindowName ： 指向一个以null结尾的、用来指定窗口名（即窗口标题）的字符串。如果此参数为NULL，则匹配所有窗口名。</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/7620.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>QTP插件拓展（C#）</title>
+		<link>http://www.xieziming.com/archives/7614.html</link>
+		<comments>http://www.xieziming.com/archives/7614.html#respond</comments>
+		<pubDate>Sat, 10 Nov 2012 15:01:17 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[测试]]></category>
+		<category><![CDATA[QTP]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=7614</guid>
+		<description><![CDATA[QTP能录制那些不被直接支持的.NET控件，但是以低级鼠标和键盘操作，例如“Drag”、“Drop”，这样的脚本的可理解性、可维护性都很差，并且由于位置受分辨率等因素的影响，容易导致回放脚本时失败。
+<font color="#00BB00"><strong>安装Custom Server模板</strong></font>
+通过安装QTP的.NET插件提供的Custom Server C#项目模板到Visual Studio.NET中，利用Visual Studio.NET开发工具来建立Custom Server项目，适用.NET插件的扩展模块。在QTP安装目录中的“\bin\Custom ”目录下，可以找到名为“InstWizard.msi”的安装文件，用于安装Custom Server模板。安装完成后，打开Visual Studio.NET 2005，可以发现在C#项目中多了一个名为“QuickTest CustomServer”的模板。
+<font color="#00BB00"><strong>建立.NET控件的测试扩展项目</strong></font>
+安装好CustomServer项目模板后，就可以开始创建CustomServer项目，编写QTP的.NET插件扩展程序。
+（1）选择“QuickTest CustomServer”，输入项目名和存储位置后，单击“确定”按钮。
+（2）在“Server class name”中输入“TrackBarCustomerServer”，选中“Customize Record process”和“Customize Run process”，接受其他的默认设置，然后单击“Next”按钮。
+（3）在“Customized Control type”中输入“System.Windows.Forms.TrackBar”，然后单击“Finish”按钮，完成设置。这样就创建了一个基本的CustomServer项目框架。
+<font color="#00BB00"><strong>创建CustomServer项目</strong></font>
+（1）实现控件录制逻辑
+创建了基本的项目框架后，还需要实现控件的录制逻辑。在“TrackBarCustomerServer”类中，添加如下方法。
+<code lang="java">
+public void OnValueChanged(object sender, EventArgs e){
+       System.Windows.Forms.TrackBar trackBar = (System.Windows.Forms. TrackBar) sender;
+       // 获取新的值
+       int newValue = trackBar.Value;
+       // 把SetValue 命令录制到测试脚本中
+       RecordFunction("SetValue", RecordingMode.RECORD_SEND_LINE, newValue);
+}
+</code>]]></description>
+				<content:encoded><![CDATA[<p>QTP能录制那些不被直接支持的.NET控件，但是以低级鼠标和键盘操作，例如“Drag”、“Drop”，这样的脚本的可理解性、可维护性都很差，并且由于位置受分辨率等因素的影响，容易导致回放脚本时失败。</p>
+<p><font color="#00BB00"><strong>安装Custom Server模板</strong></font></p>
+<p>通过安装QTP的.NET插件提供的Custom Server C#项目模板到Visual Studio.NET中，利用Visual Studio.NET开发工具来建立Custom Server项目，适用.NET插件的扩展模块。在QTP安装目录中的“\bin\Custom ”目录下，可以找到名为“InstWizard.msi”的安装文件，用于安装Custom Server模板。安装完成后，打开Visual Studio.NET 2005，可以发现在C#项目中多了一个名为“QuickTest CustomServer”的模板。</p>
+<p><font color="#00BB00"><strong>建立.NET控件的测试扩展项目</strong></font></p>
+<p>安装好CustomServer项目模板后，就可以开始创建CustomServer项目，编写QTP的.NET插件扩展程序。<br />
+（1）选择“QuickTest CustomServer”，输入项目名和存储位置后，单击“确定”按钮。<br />
+（2）在“Server class name”中输入“TrackBarCustomerServer”，选中“Customize Record process”和“Customize Run process”，接受其他的默认设置，然后单击“Next”按钮。<br />
+（3）在“Customized Control type”中输入“System.Windows.Forms.TrackBar”，然后单击“Finish”按钮，完成设置。这样就创建了一个基本的CustomServer项目框架。</p>
+<p><font color="#00BB00"><strong>创建CustomServer项目</strong></font></p>
+<p>（1）实现控件录制逻辑<br />
+创建了基本的项目框架后，还需要实现控件的录制逻辑。在“TrackBarCustomerServer”类中，添加如下方法。</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> OnValueChanged<span style="color: #009900;">&#40;</span>object sender, EventArgs e<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+       <span style="color: #003399;">System</span>.<span style="color: #006633;">Windows</span>.<span style="color: #006633;">Forms</span>.<span style="color: #006633;">TrackBar</span> trackBar <span style="color: #339933;">=</span> <span style="color: #009900;">&#40;</span><span style="color: #003399;">System</span>.<span style="color: #006633;">Windows</span>.<span style="color: #006633;">Forms</span>. <span style="color: #006633;">TrackBar</span><span style="color: #009900;">&#41;</span> sender<span style="color: #339933;">;</span>
+       <span style="color: #666666; font-style: italic;">// 获取新的值</span>
+       <span style="color: #000066; font-weight: bold;">int</span> newValue <span style="color: #339933;">=</span> trackBar.<span style="color: #006633;">Value</span><span style="color: #339933;">;</span>
+       <span style="color: #666666; font-style: italic;">// 把SetValue 命令录制到测试脚本中</span>
+       RecordFunction<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;SetValue&quot;</span>, RecordingMode.<span style="color: #006633;">RECORD_SEND_LINE</span>, newValue<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>该方法用于在TrackBar控件的ValueChanged事件发生时，获取TrackBar控件的新值，然后，调用RecordFunction方法的SetValue命令，设置TrackBar控件的新值。</p>
+<p>RecordFunction是QTP的.NET插件扩展API提供的一个方法，用于往测试脚本中写入一行。其使用方法如下：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> RecordFunction<span style="color: #009900;">&#40;</span>
+       string strFunc, <span style="color: #666666; font-style: italic;">// 回放脚本时，测试对象执行的方法</span>
+       RecordingMode eMode, <span style="color: #666666; font-style: italic;">// RecordingMode枚举中的一个</span>
+       params object<span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> parameters <span style="color: #666666; font-style: italic;">// 要写入的变量值</span>
+<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre></div></div>
+
+<p>（2）注册TrackBar控件的事件处理器<br />
+在InitEventListener方法中，添加如下代码，用于注册TrackBar控件的OnValueChanged事件处理器：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">public</span> override <span style="color: #000066; font-weight: bold;">void</span> InitEventListener<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+       <span style="color: #666666; font-style: italic;">// 为OnValueChanged新建一个事件处理器</span>
+       <span style="color: #003399;">Delegate</span> e <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">System</span>.<span style="color: #006633;">EventHandler</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">this</span>.<span style="color: #006633;">OnValueChanged</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+       <span style="color: #666666; font-style: italic;">// 添加处理器</span>
+       AddHandler<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;ValueChanged&quot;</span>, e<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>（3）实现控件的运行逻辑<br />
+还要实现控件的测试运行逻辑，在测试运行时，告诉QTP按指定的行为操作控件。因此，需要编写TrackBar控件的SetValue方法。在ITrackBarCustomerServerReplay接口中，添加SetValue方法，如下所示：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">interface</span> ITrackBarCustomerServerReplay<span style="color: #009900;">&#123;</span>
+       <span style="color: #666666; font-style: italic;">// 在ITrackBarCustomerServerReplay接口中添加SetValue方法</span>
+       <span style="color: #000066; font-weight: bold;">void</span> SetValue<span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">int</span> newValue<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>然后在TrackBarCustomerServer类中添加SetValue方法的实现，如下代码所示：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> SetValue<span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">int</span> newValue<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+       <span style="color: #003399;">System</span>.<span style="color: #006633;">Windows</span>.<span style="color: #006633;">Forms</span>.<span style="color: #006633;">TrackBar</span> trackBar <span style="color: #339933;">=</span> <span style="color: #009900;">&#40;</span><span style="color: #003399;">System</span>.<span style="color: #006633;">Windows</span>.<span style="color: #006633;">Forms</span>. <span style="color: #006633;">TrackBar</span><span style="color: #009900;">&#41;</span> SourceControl<span style="color: #339933;">;</span>
+       <span style="color: #666666; font-style: italic;">// 改变trackBar控件的值</span>
+       trackBar.<span style="color: #006633;">Value</span> <span style="color: #339933;">=</span> newValue<span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>（4）对QTP进行配置<br />
+在完成上面的代码编写后，编译整个项目，然后，就可以通过配置项目中的“Configuration.XML”文件，以便在QTP的录制和测试运行TrackBar控件的过程中使用这个Custom Server的逻辑。<br />
+（4.1）双击打开Configuration.XML文件。<br />
+XML文件内容大致如下所示：</p>
+
+<div class="wp_code"><div class="pre"><pre class="xml" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #808080; font-style: italic;">&lt;!-- Merge this XML content into file &quot;&lt;QuickTest Professional&gt;\dat\ SwfConfig.xml&quot;. --&gt;</span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;control</span> <span style="color: #000066;">Type</span>=<span style="color: #ff0000;">&quot;System.Windows.Forms.TrackBar&quot;</span> <span style="color: #000000; font-weight: bold;">&gt;</span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;customrecord<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;component<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;context<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>AUT<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/context<span style="color: #000000; font-weight: bold;">&gt;</span></span><span style="color: #000000; font-weight: bold;">&lt;dllname<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>D:\QTP\MyWork\QuickTestCustomServer1\QuickTestCustomServer1\Bin\ QuickTestCustomServer1.dll<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/dllname<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;typename<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>QuickTestCustomServer1.TrackBarCustomerServer <span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/typename<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/component<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/customrecord<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;customreplay<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;component<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;context<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>AUT<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/context<span style="color: #000000; font-weight: bold;">&gt;</span></span><span style="color: #000000; font-weight: bold;">&lt;dllname<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>D:\QTP\MyWork\QuickTestCustomServer1\QuickTestCustomServer1\Bin\ QuickTestCustomServer1.dll<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/dllname<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;typename<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>QuickTestCustomServer1.TrackBarCustomerServer <span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/typename<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/component<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/customreplay<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/control<span style="color: #000000; font-weight: bold;">&gt;</span></span></span></pre></div></div>
+
+<p>（4.2）把其中的“&lt;Control&gt;”到“&lt;/Control&gt;”的这段内容复制，然后，打开&lt; QTP安装目录 &gt;\dat 中的SwfConfig.xml文件，把刚才复制的内容替换SwfConfig.xml文件中的“&lt;Controls&gt;”到“&lt;/Controls&gt;”段内的内容。粘贴后，SwfConfig.xml文件的内容如下所示：</p>
+
+<div class="wp_code"><div class="pre"><pre class="xml" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #009900;">&lt; ?xml <span style="color: #000066;">version</span>=<span style="color: #ff0000;">&quot;1.0&quot;</span> <span style="color: #000066;">encoding</span>=<span style="color: #ff0000;">&quot;UTF-8&quot;</span><span style="color: #000000; font-weight: bold;">?&gt;</span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;controls<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;control</span> <span style="color: #000066;">Type</span>=<span style="color: #ff0000;">&quot;System.Windows.Forms.TrackBar&quot;</span> <span style="color: #000000; font-weight: bold;">&gt;</span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;customrecord<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;component<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;context<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>AUT<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/context<span style="color: #000000; font-weight: bold;">&gt;</span></span><span style="color: #000000; font-weight: bold;">&lt;dllname<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>D:\QTP\MyWork\QuickTestCustomServer1\QuickTestCustomServer1\Bin\ QuickTestCustomServer1.dll<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/dllname<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;typename<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>QuickTestCustomServer1.TrackBarCustomerServer <span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/typename<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/component<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/customrecord<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;customreplay<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;component<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;context<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>AUT<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/context<span style="color: #000000; font-weight: bold;">&gt;</span></span><span style="color: #000000; font-weight: bold;">&lt;dllname<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>D:\QTP\MyWork\QuickTestCustomServer1\QuickTestCustomServer1\Bin\ QuickTestCustomServer1.dll<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/dllname<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;typename<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>QuickTestCustomServer1.TrackBarCustomerServer <span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/typename<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/component<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/customreplay<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/control<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/controls<span style="color: #000000; font-weight: bold;">&gt;</span></span></span></pre></div></div>
+
+<p>（4.3）确保<dllname>元素中包含了正确的Custom Server编译的DLL的正确路径，然后保存SwfConfig.xml文件。</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/7614.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>QTP调用外部函数</title>
+		<link>http://www.xieziming.com/archives/7729.html</link>
+		<comments>http://www.xieziming.com/archives/7729.html#respond</comments>
+		<pubDate>Sat, 10 Nov 2012 14:31:50 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[测试]]></category>
+		<category><![CDATA[QTP]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=7729</guid>
+		<description><![CDATA[QTP主要提供了3种DLL的调用方式，这3种调用方式分别为Extern、CreateObject和DotNetFactory。这3种调用方式都分别对应着不同类型的DLL。
+
+首先Extern所调用的DLL为WIN32 API - DLL，Createobject所调用的是ActiveX类型的DLL，这类DLL其实应用的最多，AOM \ EOM等都是此类型的DLL，最后一种.NET Factory是直接调用.Net framework 或者.NET自定义的DLL。
+
+<strong>Extern：</strong>
+(1)例子一：
+<code lang="vb">
+'#######启动浏览器######## 
+systemutil.Run "iexplore.exe"
+
+'#######创建API  Extern对象########## 
+Extern.Declare micHWnd, "GetForegroundWindow", "user32.dll", "GetForegroundWindow"
+
+'######使用WIN32 API获取窗口的句柄###### 
+hwnd = Extern.GetForegroundWindow()
+
+'########通过获取的句柄控制浏览器窗口并跳转百度##### 
+Browser("hwnd:=" &#038; hwnd).Navigate "http://www.baidu.com"
+</code>]]></description>
+				<content:encoded><![CDATA[<p>QTP主要提供了3种DLL的调用方式，这3种调用方式分别为Extern、CreateObject和DotNetFactory。这3种调用方式都分别对应着不同类型的DLL。</p>
+<p>首先Extern所调用的DLL为WIN32 API &#8211; DLL，Createobject所调用的是ActiveX类型的DLL，这类DLL其实应用的最多，AOM \ EOM等都是此类型的DLL，最后一种.NET Factory是直接调用.Net framework 或者.NET自定义的DLL。</p>
+<p><strong>Extern：</strong><br />
+例子一：</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #008000;">'#######启动浏览器######## 
+</span>systemutil.Run <span style="color: #800000;">&quot;iexplore.exe&quot;</span>
+&nbsp;
+<span style="color: #008000;">'#######创建API  Extern对象########## 
+</span>Extern.<span style="color: #151B8D; font-weight: bold;">Declare</span> micHWnd, <span style="color: #800000;">&quot;GetForegroundWindow&quot;</span>, <span style="color: #800000;">&quot;user32.dll&quot;</span>, <span style="color: #800000;">&quot;GetForegroundWindow&quot;</span>
+&nbsp;
+<span style="color: #008000;">'######使用WIN32 API获取窗口的句柄###### 
+</span>hwnd = Extern.GetForegroundWindow()
+&nbsp;
+<span style="color: #008000;">'########通过获取的句柄控制浏览器窗口并跳转百度##### 
+</span>Browser(<span style="color: #800000;">&quot;hwnd:=&quot;</span> &amp; hwnd).Navigate <span style="color: #800000;">&quot;http://www.baidu.com&quot;</span></pre></div></div>
+
+<p>例子二：</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;">Const SW_MINIMIZE = 6
+<span style="color: #008000;">'声明user32.dll中的ShowWindow方法
+</span>Extern.<span style="color: #151B8D; font-weight: bold;">Declare</span> micLong,<span style="color: #800000;">&quot;ShowWindow&quot;</span>,<span style="color: #800000;">&quot;user32.dll&quot;</span>,<span style="color: #800000;">&quot;ShowWindow&quot;</span>,micLong,micLong
+&nbsp;
+<span style="color: #008000;">'高亮QTP窗口对象
+</span>Window(<span style="color: #800000;">&quot;text:=QuickTest.*&quot;</span>).highlight
+&nbsp;
+<span style="color: #008000;">'获取QTP自身的窗口对象的句柄属性
+</span>ohwnd = Window(<span style="color: #800000;">&quot;text:=QuickTest.*&quot;</span>).GetROProperty(<span style="color: #800000;">&quot;HWND&quot;</span>)
+&nbsp;
+<span style="color: #008000;">'调用ShowWindow方法 并加入最小化窗口参数
+</span>Extern.ShowWindow ohwnd,SW_MINIMIZE
+&nbsp;
+<span style="color: #008000;">'等待两秒钟
+</span>wait 2</pre></div></div>
+
+<p>注：QTP本身并没有加入反HOOK注入，因此，同样可以把QTP自身程序窗口加入到对象库中并对其进行一些操作。以上脚本就是直接通过Window(&#8220;text:=QuickTest.*&#8221;)获取到QTP对象窗口的，获取到之后即可方便做操作。</p>
+<p><strong>Createobject：</strong></p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #151B8D; font-weight: bold;">Set</span> oIE = <span style="color: #E56717; font-weight: bold;">CreateObject</span>(<span style="color: #800000;">&quot;InternetExplorer.Application&quot;</span>)
+oIE.Visible = <span style="color: #00C2FF; font-weight: bold;">True</span>  <span style="color: #008000;">'设置可见
+</span>oIE.Navigate <span style="color: #800000;">&quot;http://www.baidu.com&quot;</span>  '跳转URL</pre></div></div>
+
+<p><strong>DotNetFactory：</strong></p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #151B8D; font-weight: bold;">Set</span> var_CreateInstance = DotNetFactory.CreateInstance（<span style="color: #800000;">&quot;System.Windows.Forms.Form&quot;</span>， <span style="color: #800000;">&quot;System.Windows.Forms&quot;</span>）
+var_CreateInstance.Show</pre></div></div>
+
+<p>下面我说一下如何用DotNetFactory调用我们自己开发的。net类库。</p>
+<p>首先用Visual Studio 2003或者2005创建一个新项目：类库，我用的是C#.新建一个类，假设命名空间是Test.myTest，类名是QTPTest。我们再新建一个公共方法：　public string DoAction（）假设编译后产生的文件是d：\mtTest.dll.下面我们在QTP里面写脚本：</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #151B8D; font-weight: bold;">Set</span> obj = DotNetFactory.CreateInstance（<span style="color: #800000;">&quot;Test.myTest.QTPTest&quot;</span>， <span style="color: #800000;">&quot;d：\mtTest.dll&quot;</span>）
+obj.DoAction</pre></div></div>
+
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/7729.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>控制window程序</title>
+		<link>http://www.xieziming.com/archives/7626.html</link>
+		<comments>http://www.xieziming.com/archives/7626.html#respond</comments>
+		<pubDate>Fri, 09 Nov 2012 16:38:34 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[测试]]></category>
+		<category><![CDATA[程序]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=7626</guid>
+		<description><![CDATA[获取进程管理器中被选中进程的名字 ：
+<code lang="cpp">
+int APIENTRY WinMain(HINSTANCE hInstance,HINSTANCE hPrevInstance,LPSTR lpCmdLine,int nCmdShow){
+	HWND hwnd;
+	int iItem=0;
+	LVITEM lvitem, *plvitem;
+	char ItemBuf[512],*pItem;
+	DWORD PID;
+	HANDLE hProcess;
+	hwnd=FindWindow("#32770","Windows 任务管理器");
+	hwnd=FindWindowEx(hwnd,0,"#32770",0);
+	hwnd=FindWindowEx(hwnd,0,"SysListView32",0);
+	if (!hwnd)
+		MessageBox(NULL,"[Windows 任务管理器] 尚未启动！","错误！",NULL);
+	else{
+		iItem=SendMessage(hwnd,LVM_GETNEXTITEM,-1,LVNI_SELECTED);
+		if (iItem==-1)
+			MessageBox(NULL,"没有指定目标进程 ！","错误！",NULL);
+		else{
+			GetWindowThreadProcessId(hwnd, &#038;PID);
+			hProcess=OpenProcess(PROCESS_ALL_ACCESS,false,PID);
+			if (!hProcess)
+				MessageBox(NULL,"获取进程句柄操作失败！","错误！",NULL);
+			else{
+				plvitem=(LVITEM*)VirtualAllocEx(hProcess, NULL, sizeof(LVITEM), MEM_COMMIT, PAGE_READWRITE);
+				pItem=(char*)VirtualAllocEx(hProcess, NULL, 512, MEM_COMMIT, PAGE_READWRITE);
+				if ((!plvitem)&#124;&#124;(!pItem))
+					MessageBox(NULL,"无法分配内存！","错误！",NULL);
+				else{
+					lvitem.cchTextMax=512;
+					lvitem.iSubItem=0; //ProcessName
+					lvitem.pszText=pItem;
+					WriteProcessMemory(hProcess, plvitem, &#038;lvitem, sizeof(LVITEM), NULL);
+					SendMessage(hwnd, LVM_GETITEMTEXT, (WPARAM)iItem, (LPARAM)plvitem);
+					ReadProcessMemory(hProcess, pItem, ItemBuf, 512, NULL);	
+					MessageBox(NULL,ItemBuf,"ItemBuf",NULL);
+				}
+			}
+		}
+	}
+	//释放内存
+	CloseHandle(hwnd);
+	CloseHandle(hProcess);
+	VirtualFreeEx(hProcess, plvitem, 0, MEM_RELEASE);
+	VirtualFreeEx(hProcess, pItem, 0, MEM_RELEASE);
+	return 0;
+}
+</code>]]></description>
+				<content:encoded><![CDATA[<p>获取进程管理器中被选中进程的名字 ：</p>
+
+<div class="wp_code"><div class="pre"><pre class="cpp" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #0000ff;">int</span> APIENTRY WinMain<span style="color: #008000;">&#40;</span>HINSTANCE hInstance,HINSTANCE hPrevInstance,LPSTR lpCmdLine,<span style="color: #0000ff;">int</span> nCmdShow<span style="color: #008000;">&#41;</span><span style="color: #008000;">&#123;</span>
+	HWND hwnd<span style="color: #008080;">;</span>
+	<span style="color: #0000ff;">int</span> iItem<span style="color: #000080;">=</span><span style="color: #0000dd;">0</span><span style="color: #008080;">;</span>
+	LVITEM lvitem, <span style="color: #000040;">*</span>plvitem<span style="color: #008080;">;</span>
+	<span style="color: #0000ff;">char</span> ItemBuf<span style="color: #008000;">&#91;</span><span style="color: #0000dd;">512</span><span style="color: #008000;">&#93;</span>,<span style="color: #000040;">*</span>pItem<span style="color: #008080;">;</span>
+	DWORD PID<span style="color: #008080;">;</span>
+	HANDLE hProcess<span style="color: #008080;">;</span>
+	hwnd<span style="color: #000080;">=</span>FindWindow<span style="color: #008000;">&#40;</span><span style="color: #FF0000;">&quot;#32770&quot;</span>,<span style="color: #FF0000;">&quot;Windows 任务管理器&quot;</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+	hwnd<span style="color: #000080;">=</span>FindWindowEx<span style="color: #008000;">&#40;</span>hwnd,<span style="color: #0000dd;">0</span>,<span style="color: #FF0000;">&quot;#32770&quot;</span>,<span style="color: #0000dd;">0</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+	hwnd<span style="color: #000080;">=</span>FindWindowEx<span style="color: #008000;">&#40;</span>hwnd,<span style="color: #0000dd;">0</span>,<span style="color: #FF0000;">&quot;SysListView32&quot;</span>,<span style="color: #0000dd;">0</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+	<span style="color: #0000ff;">if</span> <span style="color: #008000;">&#40;</span><span style="color: #000040;">!</span>hwnd<span style="color: #008000;">&#41;</span>
+		MessageBox<span style="color: #008000;">&#40;</span><span style="color: #0000ff;">NULL</span>,<span style="color: #FF0000;">&quot;[Windows 任务管理器] 尚未启动！&quot;</span>,<span style="color: #FF0000;">&quot;错误！&quot;</span>,<span style="color: #0000ff;">NULL</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+	<span style="color: #0000ff;">else</span><span style="color: #008000;">&#123;</span>
+		iItem<span style="color: #000080;">=</span>SendMessage<span style="color: #008000;">&#40;</span>hwnd,LVM_GETNEXTITEM,<span style="color: #000040;">-</span><span style="color: #0000dd;">1</span>,LVNI_SELECTED<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+		<span style="color: #0000ff;">if</span> <span style="color: #008000;">&#40;</span>iItem<span style="color: #000080;">==</span><span style="color: #000040;">-</span><span style="color: #0000dd;">1</span><span style="color: #008000;">&#41;</span>
+			MessageBox<span style="color: #008000;">&#40;</span><span style="color: #0000ff;">NULL</span>,<span style="color: #FF0000;">&quot;没有指定目标进程 ！&quot;</span>,<span style="color: #FF0000;">&quot;错误！&quot;</span>,<span style="color: #0000ff;">NULL</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+		<span style="color: #0000ff;">else</span><span style="color: #008000;">&#123;</span>
+			GetWindowThreadProcessId<span style="color: #008000;">&#40;</span>hwnd, <span style="color: #000040;">&amp;</span>PID<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+			hProcess<span style="color: #000080;">=</span>OpenProcess<span style="color: #008000;">&#40;</span>PROCESS_ALL_ACCESS,<span style="color: #0000ff;">false</span>,PID<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+			<span style="color: #0000ff;">if</span> <span style="color: #008000;">&#40;</span><span style="color: #000040;">!</span>hProcess<span style="color: #008000;">&#41;</span>
+				MessageBox<span style="color: #008000;">&#40;</span><span style="color: #0000ff;">NULL</span>,<span style="color: #FF0000;">&quot;获取进程句柄操作失败！&quot;</span>,<span style="color: #FF0000;">&quot;错误！&quot;</span>,<span style="color: #0000ff;">NULL</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+			<span style="color: #0000ff;">else</span><span style="color: #008000;">&#123;</span>
+				plvitem<span style="color: #000080;">=</span><span style="color: #008000;">&#40;</span>LVITEM<span style="color: #000040;">*</span><span style="color: #008000;">&#41;</span>VirtualAllocEx<span style="color: #008000;">&#40;</span>hProcess, <span style="color: #0000ff;">NULL</span>, <span style="color: #0000dd;">sizeof</span><span style="color: #008000;">&#40;</span>LVITEM<span style="color: #008000;">&#41;</span>, MEM_COMMIT, PAGE_READWRITE<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+				pItem<span style="color: #000080;">=</span><span style="color: #008000;">&#40;</span><span style="color: #0000ff;">char</span><span style="color: #000040;">*</span><span style="color: #008000;">&#41;</span>VirtualAllocEx<span style="color: #008000;">&#40;</span>hProcess, <span style="color: #0000ff;">NULL</span>, <span style="color: #0000dd;">512</span>, MEM_COMMIT, PAGE_READWRITE<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+				<span style="color: #0000ff;">if</span> <span style="color: #008000;">&#40;</span><span style="color: #008000;">&#40;</span><span style="color: #000040;">!</span>plvitem<span style="color: #008000;">&#41;</span><span style="color: #000040;">||</span><span style="color: #008000;">&#40;</span><span style="color: #000040;">!</span>pItem<span style="color: #008000;">&#41;</span><span style="color: #008000;">&#41;</span>
+					MessageBox<span style="color: #008000;">&#40;</span><span style="color: #0000ff;">NULL</span>,<span style="color: #FF0000;">&quot;无法分配内存！&quot;</span>,<span style="color: #FF0000;">&quot;错误！&quot;</span>,<span style="color: #0000ff;">NULL</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+				<span style="color: #0000ff;">else</span><span style="color: #008000;">&#123;</span>
+					lvitem.<span style="color: #007788;">cchTextMax</span><span style="color: #000080;">=</span><span style="color: #0000dd;">512</span><span style="color: #008080;">;</span>
+					lvitem.<span style="color: #007788;">iSubItem</span><span style="color: #000080;">=</span><span style="color: #0000dd;">0</span><span style="color: #008080;">;</span> <span style="color: #666666;">//ProcessName</span>
+					lvitem.<span style="color: #007788;">pszText</span><span style="color: #000080;">=</span>pItem<span style="color: #008080;">;</span>
+					WriteProcessMemory<span style="color: #008000;">&#40;</span>hProcess, plvitem, <span style="color: #000040;">&amp;</span>lvitem, <span style="color: #0000dd;">sizeof</span><span style="color: #008000;">&#40;</span>LVITEM<span style="color: #008000;">&#41;</span>, <span style="color: #0000ff;">NULL</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+					SendMessage<span style="color: #008000;">&#40;</span>hwnd, LVM_GETITEMTEXT, <span style="color: #008000;">&#40;</span>WPARAM<span style="color: #008000;">&#41;</span>iItem, <span style="color: #008000;">&#40;</span>LPARAM<span style="color: #008000;">&#41;</span>plvitem<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+					ReadProcessMemory<span style="color: #008000;">&#40;</span>hProcess, pItem, ItemBuf, <span style="color: #0000dd;">512</span>, <span style="color: #0000ff;">NULL</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>	
+					MessageBox<span style="color: #008000;">&#40;</span><span style="color: #0000ff;">NULL</span>,ItemBuf,<span style="color: #FF0000;">&quot;ItemBuf&quot;</span>,<span style="color: #0000ff;">NULL</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+				<span style="color: #008000;">&#125;</span>
+			<span style="color: #008000;">&#125;</span>
+		<span style="color: #008000;">&#125;</span>
+	<span style="color: #008000;">&#125;</span>
+	<span style="color: #666666;">//释放内存</span>
+	CloseHandle<span style="color: #008000;">&#40;</span>hwnd<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+	CloseHandle<span style="color: #008000;">&#40;</span>hProcess<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+	VirtualFreeEx<span style="color: #008000;">&#40;</span>hProcess, plvitem, <span style="color: #0000dd;">0</span>, MEM_RELEASE<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+	VirtualFreeEx<span style="color: #008000;">&#40;</span>hProcess, pItem, <span style="color: #0000dd;">0</span>, MEM_RELEASE<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+	<span style="color: #0000ff;">return</span> <span style="color: #0000dd;">0</span><span style="color: #008080;">;</span>
+<span style="color: #008000;">&#125;</span></pre></div></div>
+
+<p>更改进程管理器中的值</p>
+
+<div class="wp_code"><div class="pre"><pre class="cpp" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #0000ff;">int</span> APIENTRY WinMain<span style="color: #008000;">&#40;</span>HINSTANCE hInstance,HINSTANCE hPrevInstance,LPSTR lpCmdLine,<span style="color: #0000ff;">int</span> nCmdShow<span style="color: #008000;">&#41;</span><span style="color: #008000;">&#123;</span>
+	HWND hwnd<span style="color: #008080;">;</span>
+	<span style="color: #0000ff;">int</span> iItem<span style="color: #000080;">=</span><span style="color: #0000dd;">0</span><span style="color: #008080;">;</span>
+	LVITEM lvitem, <span style="color: #000040;">*</span>plvitem<span style="color: #008080;">;</span>
+	DWORD PID<span style="color: #008080;">;</span>
+	HANDLE hProcess<span style="color: #008080;">;</span>
+	<span style="color: #0000ff;">char</span> <span style="color: #000040;">*</span>p_MyItemText<span style="color: #008080;">;</span><span style="color: #666666;">//目标程序中用来存放TEXT的地址</span>
+	<span style="color: #666666;">//The pszText member is the pointer to a null-terminated</span>
+	<span style="color: #666666;">// string containing the new text; it can also be NULL.</span>
+	<span style="color: #666666;">//以上信息是从API手册中获得的，故在本例中字符串长度不能&gt;=12，</span>
+	<span style="color: #666666;">//以确保字符串后有NULL。</span>
+	<span style="color: #0000ff;">char</span> str_MyItemText<span style="color: #008000;">&#91;</span><span style="color: #0000dd;">12</span><span style="color: #008000;">&#93;</span><span style="color: #000080;">=</span><span style="color: #008000;">&#123;</span><span style="color: #0000dd;">0</span><span style="color: #008000;">&#125;</span><span style="color: #008080;">;</span>
+	<span style="color: #0000dd;">strcpy</span><span style="color: #008000;">&#40;</span>str_MyItemText,<span style="color: #FF0000;">&quot;天津 赵春生&quot;</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+	hwnd<span style="color: #000080;">=</span>FindWindow<span style="color: #008000;">&#40;</span><span style="color: #FF0000;">&quot;#32770&quot;</span>,<span style="color: #FF0000;">&quot;Windows 任务管理器&quot;</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+	hwnd<span style="color: #000080;">=</span>FindWindowEx<span style="color: #008000;">&#40;</span>hwnd,<span style="color: #0000dd;">0</span>,<span style="color: #FF0000;">&quot;#32770&quot;</span>,<span style="color: #0000dd;">0</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+	hwnd<span style="color: #000080;">=</span>FindWindowEx<span style="color: #008000;">&#40;</span>hwnd,<span style="color: #0000dd;">0</span>,<span style="color: #FF0000;">&quot;SysListView32&quot;</span>,<span style="color: #0000dd;">0</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+	<span style="color: #0000ff;">if</span> <span style="color: #008000;">&#40;</span><span style="color: #000040;">!</span>hwnd<span style="color: #008000;">&#41;</span>
+		MessageBox<span style="color: #008000;">&#40;</span><span style="color: #0000ff;">NULL</span>,<span style="color: #FF0000;">&quot;[Windows 任务管理器] 尚未启动！&quot;</span>,<span style="color: #FF0000;">&quot;错误！&quot;</span>,<span style="color: #0000ff;">NULL</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+	<span style="color: #0000ff;">else</span><span style="color: #008000;">&#123;</span>
+		GetWindowThreadProcessId<span style="color: #008000;">&#40;</span>hwnd, <span style="color: #000040;">&amp;</span>PID<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+		hProcess<span style="color: #000080;">=</span>OpenProcess<span style="color: #008000;">&#40;</span>PROCESS_ALL_ACCESS,<span style="color: #0000ff;">false</span>,PID<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+		<span style="color: #0000ff;">if</span> <span style="color: #008000;">&#40;</span><span style="color: #000040;">!</span>hProcess<span style="color: #008000;">&#41;</span>
+			MessageBox<span style="color: #008000;">&#40;</span><span style="color: #0000ff;">NULL</span>,<span style="color: #FF0000;">&quot;获取进程句柄操作失败！&quot;</span>,<span style="color: #FF0000;">&quot;错误！&quot;</span>,<span style="color: #0000ff;">NULL</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+		<span style="color: #0000ff;">else</span><span style="color: #008000;">&#123;</span>
+			plvitem<span style="color: #000080;">=</span><span style="color: #008000;">&#40;</span>LVITEM<span style="color: #000040;">*</span><span style="color: #008000;">&#41;</span>VirtualAllocEx<span style="color: #008000;">&#40;</span>hProcess, <span style="color: #0000ff;">NULL</span>, <span style="color: #0000dd;">sizeof</span><span style="color: #008000;">&#40;</span>LVITEM<span style="color: #008000;">&#41;</span>, MEM_COMMIT, PAGE_READWRITE<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+			p_MyItemText<span style="color: #000080;">=</span><span style="color: #008000;">&#40;</span><span style="color: #0000ff;">char</span><span style="color: #000040;">*</span><span style="color: #008000;">&#41;</span>VirtualAllocEx<span style="color: #008000;">&#40;</span>hProcess, <span style="color: #0000ff;">NULL</span>, <span style="color: #0000dd;">12</span>, MEM_COMMIT, PAGE_READWRITE<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+			<span style="color: #0000ff;">if</span> <span style="color: #008000;">&#40;</span><span style="color: #008000;">&#40;</span><span style="color: #000040;">!</span>plvitem<span style="color: #008000;">&#41;</span><span style="color: #000040;">||</span><span style="color: #008000;">&#40;</span><span style="color: #000040;">!</span>p_MyItemText<span style="color: #008000;">&#41;</span><span style="color: #008000;">&#41;</span>
+				MessageBox<span style="color: #008000;">&#40;</span><span style="color: #0000ff;">NULL</span>,<span style="color: #FF0000;">&quot;无法分配内存！&quot;</span>,<span style="color: #FF0000;">&quot;错误！&quot;</span>,<span style="color: #0000ff;">NULL</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+			<span style="color: #0000ff;">else</span><span style="color: #008000;">&#123;</span>
+				MessageBox<span style="color: #008000;">&#40;</span><span style="color: #0000ff;">NULL</span>,<span style="color: #FF0000;">&quot;本演示程序将更改TaskManager中第6个项目中第1列的内容。&quot;</span>,<span style="color: #FF0000;">&quot;提示&quot;</span>,<span style="color: #0000ff;">NULL</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+				iItem<span style="color: #000080;">=</span><span style="color: #0000dd;">5</span><span style="color: #008080;">;</span><span style="color: #666666;">//5在这里是第六个（从零开始）</span>
+				lvitem.<span style="color: #007788;">iSubItem</span><span style="color: #000080;">=</span><span style="color: #0000dd;">0</span><span style="color: #008080;">;</span><span style="color: #666666;">//同上</span>
+				lvitem.<span style="color: #007788;">pszText</span><span style="color: #000080;">=</span>p_MyItemText<span style="color: #008080;">;</span>
+				WriteProcessMemory<span style="color: #008000;">&#40;</span>hProcess, p_MyItemText, <span style="color: #000040;">&amp;</span>str_MyItemText, <span style="color: #0000dd;">12</span>, <span style="color: #0000ff;">NULL</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+				WriteProcessMemory<span style="color: #008000;">&#40;</span>hProcess, plvitem, <span style="color: #000040;">&amp;</span>lvitem, <span style="color: #0000dd;">sizeof</span><span style="color: #008000;">&#40;</span>LVITEM<span style="color: #008000;">&#41;</span>, <span style="color: #0000ff;">NULL</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+				<span style="color: #666666;">//向目标程序发送LVM_SETITEMTEXT消息</span>
+				SendMessage<span style="color: #008000;">&#40;</span>hwnd, LVM_SETITEMTEXT, <span style="color: #008000;">&#40;</span>WPARAM<span style="color: #008000;">&#41;</span>iItem, <span style="color: #008000;">&#40;</span>LPARAM<span style="color: #008000;">&#41;</span>plvitem<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+			<span style="color: #008000;">&#125;</span>
+		<span style="color: #008000;">&#125;</span>
+	<span style="color: #008000;">&#125;</span>
+	<span style="color: #666666;">//释放内存</span>
+	CloseHandle<span style="color: #008000;">&#40;</span>hwnd<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+	CloseHandle<span style="color: #008000;">&#40;</span>hProcess<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+	VirtualFreeEx<span style="color: #008000;">&#40;</span>hProcess, plvitem, <span style="color: #0000dd;">0</span>, MEM_RELEASE<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+	VirtualFreeEx<span style="color: #008000;">&#40;</span>hProcess, p_MyItemText, <span style="color: #0000dd;">0</span>, MEM_RELEASE<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+&nbsp;
+	<span style="color: #0000ff;">return</span> <span style="color: #0000dd;">0</span><span style="color: #008080;">;</span>
+<span style="color: #008000;">&#125;</span></pre></div></div>
+
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/7626.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>QTP Action 参数传递</title>
+		<link>http://www.xieziming.com/archives/7382.html</link>
+		<comments>http://www.xieziming.com/archives/7382.html#respond</comments>
+		<pubDate>Mon, 17 Sep 2012 14:29:49 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[测试]]></category>
+		<category><![CDATA[QTP]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=7382</guid>
+		<description><![CDATA[以QTP的Flight为例子讲下Action参数传递。
+<code lang="vb">
+SystemUtil.Run "C:\Program Files\Mercury\QuickTest Professional\samples\flight\app\flight4a.exe","","C:\Program Files\Mercury\QuickTest Professional\samples\flight\app\","open"
+Dialog("Login").WinEdit("Agent Name:").Set Parameter("InAction1")
+wait 5
+Dialog("Login").WinEdit("Agent Name:").Type  micTab
+Dialog("Login").WinEdit("Password:").SetSecure "4649c633ffc8803c10097292953c6334fde3e923"
+Dialog("Login").WinEdit("Password:").Type  micReturn
+Window("Flight Reservation").Close
+Parameter("OutAction1") = True
+</code>
+然后，鼠标选中Keyword View中的Action1，点右键---Action Property，在Parameters的Tab标签下，分别加入：输入参数 InAction1 ，类型String；输出参数 OutAction1，类型 Boolean。]]></description>
+				<content:encoded><![CDATA[<p>以QTP的Flight为例子讲下Top Level的Action参数传递。</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;">SystemUtil.Run <span style="color: #800000;">&quot;C:\Program Files\Mercury\QuickTest Professional\samples\flight\app\flight4a.exe&quot;</span>,<span style="color: #800000;">&quot;&quot;</span>,<span style="color: #800000;">&quot;C:\Program Files\Mercury\QuickTest Professional\samples\flight\app\&quot;</span>,<span style="color: #800000;">&quot;open&quot;</span>
+Dialog(<span style="color: #800000;">&quot;Login&quot;</span>).WinEdit(<span style="color: #800000;">&quot;Agent Name:&quot;</span>).<span style="color: #151B8D; font-weight: bold;">Set</span> Parameter(<span style="color: #800000;">&quot;InAction1&quot;</span>)
+wait 5
+Dialog(<span style="color: #800000;">&quot;Login&quot;</span>).WinEdit(<span style="color: #800000;">&quot;Agent Name:&quot;</span>).<span style="color: #151B8D; font-weight: bold;">Type</span>  micTab
+Dialog(<span style="color: #800000;">&quot;Login&quot;</span>).WinEdit(<span style="color: #800000;">&quot;Password:&quot;</span>).SetSecure <span style="color: #800000;">&quot;4649c633ffc8803c10097292953c6334fde3e923&quot;</span>
+Dialog(<span style="color: #800000;">&quot;Login&quot;</span>).WinEdit(<span style="color: #800000;">&quot;Password:&quot;</span>).<span style="color: #151B8D; font-weight: bold;">Type</span>  micReturn
+Window(<span style="color: #800000;">&quot;Flight Reservation&quot;</span>).<span style="color: #8D38C9; font-weight: bold;">Close</span>
+Parameter(<span style="color: #800000;">&quot;OutAction1&quot;</span>) = <span style="color: #00C2FF; font-weight: bold;">True</span></pre></div></div>
+
+<p>然后，鼠标选中Keyword View中的Action1，点右键&#8212;Action Property，在Parameters的Tab标签下，分别加入：输入参数 InAction1 ，类型String；输出参数 OutAction1，类型 Boolean。</p>
+<p>再然后，在QTP的菜单File&#8212;>>Settings的Parameters的Tab标签下，分别加入：输入参数 InParam1 ，类型String；输出参数 OutParam1，类型 Boolean。</p>
+<p>接着，鼠标还是选中Keyword View中的Action1，点右键，这次点“Action Call Properties”，在Parameter Values里进行参数化传递设置，把InParam1的值传递给InAction1，把OutAction1的值传递给OutParam1。</p>
+<p>以上设置完毕后，点“保存”，保存到C:\下，存为Test1好了。</p>
+<p>最后，在你的硬盘上新建一个vbs文件，文件内容如下：</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #151B8D; font-weight: bold;">Dim</span> qtApp ,pDefColl,pDef ,rtParams,rtParam 
+<span style="color: #151B8D; font-weight: bold;">Set</span> qtApp = <span style="color: #E56717; font-weight: bold;">CreateObject</span>(<span style="color: #800000;">&quot;QuickTest.Application&quot;</span>) 
+qtApp.Launch 
+qtApp.Visible = <span style="color: #00C2FF; font-weight: bold;">True</span> 
+qtApp.<span style="color: #151B8D; font-weight: bold;">Open</span> <span style="color: #800000;">&quot;C:\Test1&quot;</span> 
+<span style="color: #151B8D; font-weight: bold;">Set</span> pDefColl = qtApp.Test.ParameterDefinitions 
+<span style="color: #008000;">'cnt = pDefColl.Count 
+</span><span style="color: #008000;">'Indx = 1 
+</span><span style="color: #008000;">'While Indx &lt; = cnt 
+</span>    <span style="color: #008000;">'Set pDef = pDefColl.Item(Indx) 
+</span>    <span style="color: #008000;">'Indx = Indx + 1 
+</span><span style="color: #008000;">'Wend 
+</span><span style="color: #151B8D; font-weight: bold;">Set</span> rtParams = pDefColl.GetParameters() 
+<span style="color: #151B8D; font-weight: bold;">Set</span> rtParam = rtParams.Item(<span style="color: #800000;">&quot;InParam1&quot;</span>) 
+rtParam.Value = <span style="color: #800000;">&quot;songfun&quot;</span> 
+qtApp.Test.Run , <span style="color: #00C2FF; font-weight: bold;">True</span>, rtParams
+MsgBox rtParams.Item(<span style="color: #800000;">&quot;OutParam1&quot;</span>).Value</pre></div></div>
+
+<p>做完这步之后，保存这个vbs文件，双击执行这个vbs文件，你会发现它自动启动了QTP，而且进行了自动测试，最后还取到了运行成功与否的布尔值。</p>
+<p>它的参数的整个传递过程是：</p>
+<p>外部vbs文件 传参数给QuickTest的Test的输入参数InParam1，然后InParam1传参数到InAction1去驱动了Action1的测试，然后通过这个Action1得出了OutAction1的值，然后通过OutAction1传给OutParam1，最后再传回到vbs文件中。示例用MsgBox来打出重新传回到vbs文件中的字符串。</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/7382.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>QTP控制Java程序原理</title>
+		<link>http://www.xieziming.com/archives/7366.html</link>
+		<comments>http://www.xieziming.com/archives/7366.html#respond</comments>
+		<pubDate>Sun, 16 Sep 2012 13:41:43 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[测试]]></category>
+		<category><![CDATA[java]]></category>
+		<category><![CDATA[QTP]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=7366</guid>
+		<description><![CDATA[首先，添加如下环境变量：
+<code lang="java">
+_JAVA_OPTIONS：
+-Xrunjvmhook -Xbootclasspath/a:C:\PROGRA~1\HP\QUICKT~1\bin\JAVA_S~1\classes;C:\PROGRA~1\HP\QUICKT~1\bin\JAVA_S~1\classes\jasmine.jar
+
+JAVA_TOOL_OPTIONS：
+-agentlib:jvmhook
+</code>
+此时再起的JVM的时候会有如下log出现：
+<code lang="java">
+Picked up JAVA_TOOL_OPTIONS: -agentlib:jvmhook
+Picked up _JAVA_OPTIONS: -Xrunjvmhook -Xbootclasspath/a:\PROGRA~1\HP\QUICKT~1\bin\JAVA_S~1\classes;D:\PROGRA~1\HP\QUICKT~1\bin\JAVA_S~1\classes\jasmine.jar
+Loading HP QuickTest Professional Java Support (version 10.0.2297.0) (SUN 1.5.0_09)
+</code>]]></description>
+				<content:encoded><![CDATA[<p>首先，添加如下环境变量：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;">_JAVA_OPTIONS：
+<span style="color: #339933;">-</span>Xrunjvmhook <span style="color: #339933;">-</span>Xbootclasspath<span style="color: #339933;">/</span>a<span style="color: #339933;">:</span>C<span style="color: #339933;">:</span>\PROGRA~<span style="color: #cc66cc;">1</span>\HP\QUICKT~<span style="color: #cc66cc;">1</span>\bin\JAVA_S~<span style="color: #cc66cc;">1</span>\classes<span style="color: #339933;">;</span>C<span style="color: #339933;">:</span>\PROGRA~<span style="color: #cc66cc;">1</span>\HP\QUICKT~<span style="color: #cc66cc;">1</span>\bin\JAVA_S~<span style="color: #cc66cc;">1</span>\classes\jasmine.<span style="color: #006633;">jar</span>
+&nbsp;
+JAVA_TOOL_OPTIONS：
+<span style="color: #339933;">-</span>agentlib<span style="color: #339933;">:</span>jvmhook</pre></div></div>
+
+<p>此时再起JVM的时候会有如下log出现：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;">Picked up JAVA_TOOL_OPTIONS<span style="color: #339933;">:</span> <span style="color: #339933;">-</span>agentlib<span style="color: #339933;">:</span>jvmhook
+Picked up _JAVA_OPTIONS<span style="color: #339933;">:</span> <span style="color: #339933;">-</span>Xrunjvmhook <span style="color: #339933;">-</span>Xbootclasspath<span style="color: #339933;">/</span>a<span style="color: #339933;">:</span>\PROGRA~<span style="color: #cc66cc;">1</span>\HP\QUICKT~<span style="color: #cc66cc;">1</span>\bin\JAVA_S~<span style="color: #cc66cc;">1</span>\classes<span style="color: #339933;">;</span>D<span style="color: #339933;">:</span>\PROGRA~<span style="color: #cc66cc;">1</span>\HP\QUICKT~<span style="color: #cc66cc;">1</span>\bin\JAVA_S~<span style="color: #cc66cc;">1</span>\classes\jasmine.<span style="color: #006633;">jar</span>
+Loading HP QuickTest Professional Java Support <span style="color: #009900;">&#40;</span>version 10.0.2297.0<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#40;</span>SUN 1.5.0_09<span style="color: #009900;">&#41;</span></pre></div></div>
+
+<p>接下来呢就要利用Java的JVMTI技术来实现对Java程序的控制了。大体的意思就是JVM提供了一些接口,你可以向JVM注册你感兴趣的事件,比如我们这里感兴趣的是JVM加载类的时候,我们希望有途径把我们自己的代码有选择的注入到类里.在JVMTI中,这个事件就是JVMTI_EVENT_CLASS_FILE_LOAD_HOOK .当JVM加载类的时候,会调用我们注册的回调函数,而我们就可以在这个函数里做自己想做的事。</p>
+<p>要实现这个目的,就要实现一个动态库,也就是JVMTI中的agent,在这个动态库中,有两个函数是必须的: Agent_OnLoad和Agent_OnUnload,他们是JVM与代理交互的接口.当一个代理被JVM加载后,首先调用Agent_OnLoad 这个方法;同样的,代理被JVM卸载后马上会调用Agent_OnUnload.我们就在Agent_OnLoad这个方法里注册感兴趣的事件,之后 JVM就会在&#8221;有事&#8221;的时候通知我们.要使用agent,就要在启动JVM的时候告诉他要用到那个agent:</p>
+<p>java -agentlib:<agentlibname><br />
+这个agentLibName就是有我实现的动态库的名字,因系统而定,在Windows是jvmhook.dll,</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #008000; font-style: italic; font-weight: bold;">/** Will return all methods of a give class */</span>
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">native</span> <span style="color: #003399;">Object</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> getAllObjects<span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">Class</span> clazz<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">//native方法，获取当前Object用，定义在jvmhook.dll里。</span>
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">native</span> <span style="color: #003399;">String</span> getMethodName<span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">long</span> methodId<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">//native方法，定义在jvmhook.dll里。</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">//下面是Jboss-Profiler的部分实现代码</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #003399;">Object</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> getAllObjects<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span> clazz<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+        <span style="color: #003399;">ArrayList</span> list <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">ArrayList</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        <span style="color: #000000; font-weight: bold;">Class</span> <span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> classes <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">this</span>.<span style="color: #006633;">getLoadedClasses</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        <span style="color: #000000; font-weight: bold;">for</span> <span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">int</span> i<span style="color: #339933;">=</span><span style="color: #cc66cc;">0</span><span style="color: #339933;">;</span>i<span style="color: #339933;">&lt;</span>classes .<span style="color: #006633;">length</span><span style="color: #339933;">;</span>i<span style="color: #339933;">++</span><span style="color: #009900;">&#41;</span>
+        <span style="color: #009900;">&#123;</span>
+            <span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>classes<span style="color: #009900;">&#91;</span>i<span style="color: #009900;">&#93;</span>.<span style="color: #006633;">getName</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>.<span style="color: #006633;">equals</span><span style="color: #009900;">&#40;</span>clazz<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>
+            <span style="color: #009900;">&#123;</span>
+                <span style="color: #003399;">Object</span> objs<span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">this</span>.<span style="color: #006633;">getAllObjects</span><span style="color: #009900;">&#40;</span>classes<span style="color: #009900;">&#91;</span>i<span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+                <span style="color: #000000; font-weight: bold;">for</span> <span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">int</span> count<span style="color: #339933;">=</span><span style="color: #cc66cc;">0</span><span style="color: #339933;">;</span>count<span style="color: #339933;">&lt;</span>objs.<span style="color: #006633;">length</span><span style="color: #339933;">;</span>count<span style="color: #339933;">++</span><span style="color: #009900;">&#41;</span>
+                <span style="color: #009900;">&#123;</span>
+                    list.<span style="color: #006633;">add</span><span style="color: #009900;">&#40;</span>objs<span style="color: #009900;">&#91;</span>count<span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+                <span style="color: #009900;">&#125;</span>
+            <span style="color: #009900;">&#125;</span>
+        <span style="color: #009900;">&#125;</span>
+        <span style="color: #000000; font-weight: bold;">return</span> list.<span style="color: #006633;">toArray</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #003399;">Field</span> getObjectField<span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">Class</span> clazz, <span style="color: #000066; font-weight: bold;">int</span> fieldId<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+      <span style="color: #003399;">ArrayList</span> list <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">ArrayList</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+      list.<span style="color: #006633;">add</span><span style="color: #009900;">&#40;</span>clazz<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+      <span style="color: #000000; font-weight: bold;">while</span> <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span>clazz <span style="color: #339933;">=</span> clazz.<span style="color: #006633;">getSuperclass</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">!=</span><span style="color: #000066; font-weight: bold;">null</span><span style="color: #009900;">&#41;</span>
+      <span style="color: #009900;">&#123;</span>
+            list.<span style="color: #006633;">add</span><span style="color: #009900;">&#40;</span>clazz<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+      <span style="color: #009900;">&#125;</span>
+&nbsp;
+      <span style="color: #000000; font-weight: bold;">for</span> <span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">int</span> i<span style="color: #339933;">=</span>list.<span style="color: #006633;">size</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">-</span><span style="color: #cc66cc;">1</span><span style="color: #339933;">;</span>i<span style="color: #339933;">&gt;=</span><span style="color: #cc66cc;">0</span><span style="color: #339933;">;</span>i<span style="color: #339933;">--</span><span style="color: #009900;">&#41;</span>
+      <span style="color: #009900;">&#123;</span>
+            <span style="color: #003399;">Field</span> fields<span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">Class</span><span style="color: #009900;">&#41;</span>list.<span style="color: #006633;">get</span><span style="color: #009900;">&#40;</span>i<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>.<span style="color: #006633;">getDeclaredFields</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+            <span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>fieldId<span style="color: #339933;">&lt;</span>fields .<span style="color: #006633;">length</span><span style="color: #009900;">&#41;</span>
+            <span style="color: #009900;">&#123;</span>
+                  <span style="color: #000000; font-weight: bold;">return</span> fields<span style="color: #009900;">&#91;</span>fieldId<span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+            <span style="color: #009900;">&#125;</span>
+            fieldId <span style="color: #339933;">-=</span> fields.<span style="color: #006633;">length</span><span style="color: #339933;">;</span>
+      <span style="color: #009900;">&#125;</span>
+      <span style="color: #000000; font-weight: bold;">return</span> <span style="color: #000066; font-weight: bold;">null</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span></pre></div></div>
+
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/7366.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>LoadRunner测试结果分析</title>
+		<link>http://www.xieziming.com/archives/7655.html</link>
+		<comments>http://www.xieziming.com/archives/7655.html#respond</comments>
+		<pubDate>Wed, 12 Sep 2012 15:06:47 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[测试]]></category>
+		<category><![CDATA[LoadRunner]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=7655</guid>
+		<description><![CDATA[虚拟用户会在渐增的场景中被增加，不像上图中所有用户同时被加载，在虚拟用户的数量在压力测试计划中到达一个高度之后，会保持这些用户运行一段时间，再使用户数递减，<strong>递减的速度要比递增的快，因为移除用户对服务器几乎没有任何不利影响</strong>。 
+
+无论什么时候，在测试中出现问题，你都应该知道当前场景中的用户数量。压力测试的目的是诊断程序在虚拟压力下出现的问题，所以，当虚拟用户的数量达到某个值时，如果数据在减少，这可以说明程序的不稳定。突发的数据向相反方向的延伸都意味着运行的虚拟用户在增加中 。
+
+每秒点击率的增涨表明服务器负荷的增加，所以<strong>将每秒点击率与事务响应时间和吞吐量对比，可以让你对服务器在压力下的执行有更多理解</strong>。当一个网站服务器正在活动中，每秒点击率将会时常镜像成功的HTTP响应信号的总数。
+
+Throughput是基于字节/秒来传输的，它描述通过网络服务器传输的数据在网络上任意事件发生时的传输量。完美的吞吐量应该是随着每秒点击率的增加而增加，这种增加是建立在带宽足够处理用户提出的所有请求的基础上的。 ]]></description>
+				<content:encoded><![CDATA[<p>虚拟用户会在渐增的场景中被增加，不像上图中所有用户同时被加载，在虚拟用户的数量在压力测试计划中到达一个高度之后，会保持这些用户运行一段时间，再使用户数递减，<strong>递减的速度要比递增的快，因为移除用户对服务器几乎没有任何不利影响</strong>。 </p>
+<p>无论什么时候，在测试中现问题，你都应该知道当前场景中的用户数量。压力测试的目的是诊断程序在虚拟压力下出现的问题，所以，当虚拟用户的数量达到某个值时，如果数据在减少，这可以说明程序的不稳定。突发的数据向相反方向的延伸都意味着运行的虚拟用户在增加中 。</p>
+<p>每秒点击率的增涨表明服务器负荷的增加，所以<strong>将每秒点击率与事务响应时间和吞吐量对比，可以让你对服务器在压力下的执行有更多理解</strong>。当一个网站服务器正在活动中，每秒点击率将会时常镜像成功的HTTP响应信号的总数。</p>
+<p>Throughput是基于字节/秒来传输的，它描述通过网络服务器传输的数据在网络上任意事件发生时的传输量。完美的吞吐量应该是随着每秒点击率的增加而增加，这种增加是建立在带宽足够处理用户提出的所有请求的基础上的。 </p>
+<p>在比较吞吐量和每秒的点击率中你可以获得服务器在执行过程中的信息。如果服务器如预期的一样在执行，那么吞吐量会随着它每秒的点击量的增加而增加。这是期望实现的情况，因为点击增加一次就会需要服务器发送更多的返回信息给用户。无论如何，<strong>如果点击的次数增加而吞吐量恒定或减少，就说明服务器无法执行增加的请求（每秒点击率），结果就是事务反应时间的增加</strong>。</p>
+<p>如果一台服务器的业务量低于最大负载量，则每秒点击率通常会映射吞吐量。更多用户将会引起每秒点击率的增长，并且当服务器不再处理大量的请求的时候，吞吐量将会减少。  </p>
+<p>平均事务处理时间图表显示了平均每个事务的结束的反应时间。<strong>反应时间是从客户端请求到服务器响应的全部时间</strong>。通常的响应时间会与当前在测试场景中运行的Vusers的数量一致。 </p>
+<p>响应时间增加的最通常的原因是运行的用户增加，因为随着用户进入测试场景的增加，服务器的工作量也会增加。服务器会花时间去响应一个增加的负载，于是平均响应时间就会增长。</p>
+<p>在规定时间内测试场景中的每秒事务数与运行的虚拟用户数相一致，并且随着虚拟用户的增加，每秒事务数也会增加。如果随着虚拟用户的增加，每秒事务数会减少，这时场景中很可能出现了问题。你应该先<strong>对比运行的虚拟用户数量与每秒事务图，以核实一次虚拟用户的增加是否导致每秒点击率、事务响应时间和吞吐量的增加</strong>，将这些统计数据放到一起会帮助你找出问题发生的主要原因 。</p>
+<p><strong>平缓的加载使你可以侦测到当虚拟用户数量达到多少时，事务响应时间会出现不好的变化</strong>。通过对比测试时间表与事务响应时间图表，你可以确定响应时间的一个峰值与虚拟用户的增长是否相对应，否则你只能在其它地方找到问题出现的原因。</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/7655.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>QTP自动化框架建设</title>
+		<link>http://www.xieziming.com/archives/8475.html</link>
+		<comments>http://www.xieziming.com/archives/8475.html#respond</comments>
+		<pubDate>Sat, 24 Mar 2012 04:24:40 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[测试]]></category>
+		<category><![CDATA[Automation]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=8475</guid>
+		<description><![CDATA[其实自动化测试框架就是一种规范的集合体，在自动化测试团队开发过程中，经常会遇到很多这样和那样的问题，例如：
+
+（1）测试脚本不统一，出现很多重复脚本；
+（2）在对象库中含有很多重复对象，导致对象混乱；
+（3）测试脚本全部为Hard Code，没有实现部分可配置，导致维护成本过大。
+
+以上这些只是一些比较常见的问题，其实在自动化测试过程当中遇到的问题还远远不止这些，那么要解决这些问题，就必须要为其定义适合项目的规范。例如，脚本不统一，可以对每个脚本写法定义严格的规范，定制共享函数库；对象库重复混乱，可以使用共享对象库来解决；测试脚本全部为Hard Code，则可以把部分的关键字进行分离。
+
+下面我主要通过三个方面来阐述我的一点框架测试建议。
+
+<font color="#00BB00"><strong>1. 测试数据</strong></font>
+对于规模不大的自动化测试，我建议采用Excel来组织你的测试数据。当然，我们还是要采取分层的方式，有一张总表以及具体的细表。每条test data都有它自己的工作流。工作方式类似的如下方式：
+
+QTP载入Excel数据文件，通过遍历总表所有行来执行所有的test cases。在这个大循环内，通过总表的索引取出细表的数据，然后以列名为key存放在VBS里的字典里，在脚本中用的时候直接TestDataDictionary.Item("Column_Name")取出即可。
+
+<font color="#00BB00"><strong>2. 工作流</strong></font>
+建议采用XML来组织你的workflow，下面是个简单的例子：
+<code lang="xml">
+<flow_forA>
+<function> function_step1</function>
+<function> function_step2</function>
+<function> function_step3</function>
+</flow_forA>
+</code>
+比如我们在测试数据中给该test cases定的工作流是flow_forA，则QTP在执行的时候会去work flows里找到名字叫flow_forA的节点，并遍历执行它的子节点函数来完成这个工作流。]]></description>
+				<content:encoded><![CDATA[<p>其实自动化测试框架就是一种规范的集合体，在自动化测试团队开发过程中，经常会遇到很多这样和那样的问题，例如：</p>
+<p>（1）测试脚本不统一，出现很多重复脚本；<br />
+（2）在对象库中含有很多重复对象，导致对象混乱；<br />
+（3）测试脚本全部为Hard Code，没有实现部分可配置，导致维护成本过大。</p>
+<p>以上这些只是一些比较常见的问题，其实在自动化测试过程当中遇到的问题还远远不止这些，那么要解决这些问题，就必须要为其定义适合项目的规范。例如，脚本不统一，可以对每个脚本写法定义严格的规范，定制共享函数库；对象库重复混乱，可以使用共享对象库来解决；测试脚本全部为Hard Code，则可以把部分的关键字进行分离。</p>
+<p>下面我主要通过三个方面来阐述我的一点框架测试建议。</p>
+<p><font color="#00BB00"><strong>1. 测试数据</strong></font><br />
+对于规模不大的自动化测试，我建议采用Excel来组织你的测试数据。当然，我们还是要采取分层的方式，有一张总表以及具体的细表。每条test data都有它自己的工作流。工作方式类似的如下方式：</p>
+<p>QTP载入Excel数据文件，通过遍历总表所有行来执行所有的test cases。在这个大循环内，通过总表的索引取出细表的数据，然后以列名为key存放在VBS里的字典里，在脚本中用的时候直接TestDataDictionary.Item(&#8220;Column_Name&#8221;)取出即可。</p>
+<p><font color="#00BB00"><strong>2. 工作流</strong></font><br />
+建议采用XML来组织你的workflow，下面是个简单的例子：</p>
+
+<div class="wp_code"><div class="pre"><pre class="xml" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;flow_forA<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+     <span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;function<span style="color: #000000; font-weight: bold;">&gt;</span></span></span> function_step1<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/function<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+     <span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;function<span style="color: #000000; font-weight: bold;">&gt;</span></span></span> function_step2<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/function<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+     <span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;function<span style="color: #000000; font-weight: bold;">&gt;</span></span></span> function_step3<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/function<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/flow_forA<span style="color: #000000; font-weight: bold;">&gt;</span></span></span></pre></div></div>
+
+<p>比如我们在测试数据中给该test cases定的工作流是flow_forA，则QTP在执行的时候会去work flows里找到名字叫flow_forA的节点，并遍历执行它的子节点函数来完成这个工作流。每个函数都有一个返回值来表示执行结果，当其中某个结果为fail的时候，QTP应该退出执行。</p>
+<p><font color="#00BB00"><strong>3. 多进程</strong></font></p>
+<p>QTP有两个不好的地方，一个是它的脚本执行/对象识别速度过慢。另一个是它的独占性，一台PC只能有一个QTP实例。第一个缺点我们还能通过优化对象识别方法来克服，而第二个我们就无能为力了。。。。</p>
+<p>这样一来，为了加快测试执行，我们通常需要同时在几台PC上运行QTP。那怎么来分配我们的test cases给QTP以及收集测试结果呢？</p>
+<p>最原始的方法可能是给每台PC分配独有的test cases，最后把这些PC上的运行结果收集在一起。这样做有几个缺点：（1）PC使用率不够高。因为分配到的test cases数量和运行时间的差异，总有些PC会在其他PC还在运行时结束，这就造成了测试资源的闲置。（2）需要额外的精力来收集各PC的运行结果。（3）当某些PC意外停止运行的时候（QTP错误，PC死机等），分配给它的test cases就无法被执行了。</p>
+<p>基于上述考虑，我建议使用shared folder或者数据库来同步各PC.每台PC都有完整的test cases列表，在loop这个列表时去取该test case当时的状态，是还没被执行，正在被执行还是已经执行完毕了。同时，在运行这个test case的时候更新它的状态。下面以share folder方式为例子来具体讲下。</p>
+<p>（1）每台PC的测试脚本以及测试数据都是一样的，都配置了test cases status的shared folder路径。比如\\testing_pc\test_case_status<br />
+（2）各PC载入完整的测试数据（测试用例列表），在Loop这个列表的时候，去shared folder查询当前要执行的test case的状态，如果没有任何信息，说明还没被执行过，这时创建一个文件来更新该test case的状态，比如创建\\testing_pc\test_case_status\\testcase_A.lock。如果该test case是lock状态说明正在被执行，于是放弃执行，转至下一个test case。<br />
+（3）当某test case执行完毕或者错误退出时，删除lock状态。</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/8475.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Application Monitor</title>
+		<link>http://www.xieziming.com/archives/6661.html</link>
+		<comments>http://www.xieziming.com/archives/6661.html#respond</comments>
+		<pubDate>Wed, 11 May 2011 11:57:15 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[测试]]></category>
+		<category><![CDATA[java]]></category>
+		<category><![CDATA[QTP]]></category>
+		<category><![CDATA[程序]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=6661</guid>
+		<description><![CDATA[<code lang="java">
+import java.awt.AWTException;  
+import java.awt.Image;  
+import java.awt.MenuItem;  
+import java.awt.PopupMenu;  
+import java.awt.SystemTray;  
+import java.awt.Toolkit;  
+import java.awt.TrayIcon;  
+import java.awt.event.ActionEvent;  
+import java.awt.event.ActionListener;  
+  
+import javax.swing.JDialog;
+import javax.swing.JFrame;  
+import javax.swing.JOptionPane;
+  
+  
+public class Launcher{  
+      
+    public Launcher() {  
+         this.setTray();  
+         QTPMonitor qtpm= new QTPMonitor();
+         qtpm.start();
+    }  
+</code>]]></description>
+				<content:encoded><![CDATA[<p>These monitor program includes 3 class files as follows:</p>
+<p><strong>Launcher.java</strong></p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">java.awt.AWTException</span><span style="color: #339933;">;</span>  
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">java.awt.Image</span><span style="color: #339933;">;</span>  
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">java.awt.MenuItem</span><span style="color: #339933;">;</span>  
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">java.awt.PopupMenu</span><span style="color: #339933;">;</span>  
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">java.awt.SystemTray</span><span style="color: #339933;">;</span>  
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">java.awt.Toolkit</span><span style="color: #339933;">;</span>  
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">java.awt.TrayIcon</span><span style="color: #339933;">;</span>  
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">java.awt.event.ActionEvent</span><span style="color: #339933;">;</span>  
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">java.awt.event.ActionListener</span><span style="color: #339933;">;</span>  
+&nbsp;
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">javax.swing.JDialog</span><span style="color: #339933;">;</span>
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">javax.swing.JFrame</span><span style="color: #339933;">;</span>  
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">javax.swing.JOptionPane</span><span style="color: #339933;">;</span>
+&nbsp;
+&nbsp;
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> Launcher<span style="color: #009900;">&#123;</span>  
+&nbsp;
+    <span style="color: #000000; font-weight: bold;">public</span> Launcher<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>  
+         <span style="color: #000000; font-weight: bold;">this</span>.<span style="color: #006633;">setTray</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+         QTPMonitor qtpm<span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> QTPMonitor<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+         qtpm.<span style="color: #006633;">start</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>  
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> setTray<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>  
+&nbsp;
+        <span style="color: #000000; font-weight: bold;">if</span><span style="color: #009900;">&#40;</span>SystemTray.<span style="color: #006633;">isSupported</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+            <span style="color: #003399;">PopupMenu</span> popMenu <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">PopupMenu</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+            <span style="color: #003399;">MenuItem</span> itemAbout <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">MenuItem</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;About&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+            itemAbout.<span style="color: #006633;">addActionListener</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">ActionListener</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>  
+                <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> actionPerformed<span style="color: #009900;">&#40;</span><span style="color: #003399;">ActionEvent</span> e<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>  
+                	<span style="color: #003399;">Object</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> options <span style="color: #339933;">=</span> <span style="color: #009900;">&#123;</span><span style="color: #0000ff;">&quot;I SEE&quot;</span><span style="color: #009900;">&#125;</span><span style="color: #339933;">;</span>
+                	<span style="color: #003399;">JOptionPane</span>.<span style="color: #006633;">showOptionDialog</span><span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">null</span>, <span style="color: #0000ff;">&quot;SUNY Z M XIE, XFOS, GBM_ITT&quot;</span>, <span style="color: #0000ff;">&quot;About QTP Monitor&quot;</span>,<span style="color: #003399;">JOptionPane</span>.<span style="color: #006633;">YES_OPTION</span>, <span style="color: #003399;">JOptionPane</span>.<span style="color: #006633;">INFORMATION_MESSAGE</span>, <span style="color: #000066; font-weight: bold;">null</span>, options, options<span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">0</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+                <span style="color: #009900;">&#125;</span>                 
+            <span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+&nbsp;
+            <span style="color: #003399;">MenuItem</span> itmExit <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">MenuItem</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;Stop &amp; Exit&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+            itmExit.<span style="color: #006633;">addActionListener</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">ActionListener</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>  
+                <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> actionPerformed<span style="color: #009900;">&#40;</span><span style="color: #003399;">ActionEvent</span> e<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>  
+                	<span style="color: #003399;">System</span>.<span style="color: #006633;">exit</span><span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">0</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+                <span style="color: #009900;">&#125;</span>  
+            <span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+            popMenu.<span style="color: #006633;">add</span><span style="color: #009900;">&#40;</span>itemAbout<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> 
+            popMenu.<span style="color: #006633;">add</span><span style="color: #009900;">&#40;</span>itmExit<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+&nbsp;
+            SystemTray tray <span style="color: #339933;">=</span> SystemTray.<span style="color: #006633;">getSystemTray</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+            <span style="color: #003399;">Image</span> image <span style="color: #339933;">=</span> <span style="color: #003399;">Toolkit</span>.<span style="color: #006633;">getDefaultToolkit</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>.<span style="color: #006633;">getImage</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;trayIconImage/sina.jpg&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+&nbsp;
+            <span style="color: #003399;">String</span> text <span style="color: #339933;">=</span> <span style="color: #0000ff;">&quot;QTP Monitor&quot;</span><span style="color: #339933;">;</span>  
+            TrayIcon trayIcon <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> TrayIcon<span style="color: #009900;">&#40;</span>image,text,popMenu<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+            <span style="color: #000000; font-weight: bold;">try</span> <span style="color: #009900;">&#123;</span>  
+                tray.<span style="color: #006633;">add</span><span style="color: #009900;">&#40;</span>trayIcon<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+            <span style="color: #009900;">&#125;</span> <span style="color: #000000; font-weight: bold;">catch</span> <span style="color: #009900;">&#40;</span><span style="color: #003399;">AWTException</span> e1<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>  
+                e1.<span style="color: #006633;">printStackTrace</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+            <span style="color: #009900;">&#125;</span>  
+        <span style="color: #009900;">&#125;</span>  
+    <span style="color: #009900;">&#125;</span>  
+&nbsp;
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> showSetting<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+    	<span style="color: #003399;">JDialog</span> JDG_about <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">JDialog</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    	JDG_about.<span style="color: #006633;">setTitle</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;About QTP Monitor&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    	JDG_about.<span style="color: #006633;">setSize</span><span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">200</span>,<span style="color: #cc66cc;">100</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+    	JDG_about.<span style="color: #006633;">setDefaultCloseOperation</span><span style="color: #009900;">&#40;</span><span style="color: #003399;">JDialog</span>.<span style="color: #006633;">DISPOSE_ON_CLOSE</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    	<span style="color: #003399;">Toolkit</span> tk <span style="color: #339933;">=</span> <span style="color: #003399;">Toolkit</span>.<span style="color: #006633;">getDefaultToolkit</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    	JDG_about.<span style="color: #006633;">setLocation</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span>tk.<span style="color: #006633;">getScreenSize</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>.<span style="color: #006633;">height</span> <span style="color: #339933;">-</span>JDG_about.<span style="color: #006633;">HEIGHT</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">/</span><span style="color: #cc66cc;">2</span>, <span style="color: #009900;">&#40;</span>tk.<span style="color: #006633;">getScreenSize</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>.<span style="color: #006633;">width</span> <span style="color: #339933;">-</span> JDG_about.<span style="color: #006633;">WIDTH</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">/</span><span style="color: #cc66cc;">2</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+      	JDG_about.<span style="color: #006633;">setVisible</span><span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">true</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+    <span style="color: #009900;">&#125;</span>
+&nbsp;
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000066; font-weight: bold;">void</span> main<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> args<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>  
+        <span style="color: #000000; font-weight: bold;">new</span> Launcher<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+    <span style="color: #009900;">&#125;</span>  
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/6661.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Selenium Core</title>
+		<link>http://www.xieziming.com/archives/6830.html</link>
+		<comments>http://www.xieziming.com/archives/6830.html#respond</comments>
+		<pubDate>Fri, 11 Mar 2011 14:21:03 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[测试]]></category>
+		<category><![CDATA[Selenium]]></category>
+		<category><![CDATA[Summary]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=6830</guid>
+		<description><![CDATA[Selenium是ThroughtWorks公司的一个强大的开源Web功能测试工具系列，这个系列现在主要包括以下4款：
+
+<strong>Selenium Core</strong>：支持DHTML的测试案例（效果类似数据驱动测试），它由一些纯js代码组成， 可以运行在windows/linux的不同browser上。它是Selenium IDE和Selenium RC的引擎。
+
+<strong>Selenium IDE</strong>：支持并且只支持Firefox浏览器，属于Firefox的一个插件，支持的浏览器太少，而依附于Firefox 也不便于日后开展自动化测试，但是，它的录制快捷好用！并且有代码转换功能，可以把Selenium 语言测试用例转为C#,Java，PHP,Ruby，Prel,Groovy,Python等语言的测试案例。
+
+<strong>Selenium RC</strong>：Selenium Remote Control。
+
+<strong>Selenium Grid</strong>：允许同时并行地、在不同的环境上运行多个测试任务，能极大加快Web应用的功能测试。
+
+<strong>Selenium Core HTA</strong>：Selenium Core HTA其实是Selenium Core的额外模式，你只要Selenium Core配置稍加修改，即为HTA模式，Selenium Core HTA可以在IE最高安全等级（特权）下工作，这意味着它仅能在IE下工作，由于限制较大，下面将排除对Selenium Core HTA的讨论。]]></description>
+				<content:encoded><![CDATA[<p>Selenium是ThroughtWorks公司的一个强大的开源Web功能测试工具系列，这个系列现在主要包括以下4款：</p>
+<p><strong>Selenium Core</strong>：支持DHTML的测试案例（效果类似数据驱动测试），它由一些纯js代码组成， 可以运行在windows/linux的不同browser上。它是Selenium IDE和Selenium RC的引擎。</p>
+<p><strong>Selenium IDE</strong>：支持并且只支持Firefox浏览器，属于Firefox的一个插件，支持的浏览器太少，而依附于Firefox 也不便于日后开展自动化测试，但是，它的录制快捷好用！并且有代码转换功能，可以把Selenium 语言测试用例转为C#,Java，PHP,Ruby，Prel,Groovy,Python等语言的测试案例。</p>
+<p><strong>Selenium RC</strong>：Selenium Remote Control。</p>
+<p><strong>Selenium Grid</strong>：允许同时并行地、在不同的环境上运行多个测试任务，能极大加快Web应用的功能测试。</p>
+<p><strong>Selenium Core HTA</strong>：Selenium Core HTA其实是Selenium Core的额外模式，你只要Selenium Core配置稍加修改，即为HTA模式，Selenium Core HTA可以在IE最高安全等级（特权）下工作，这意味着它仅能在IE下工作，由于限制较大，下面将排除对Selenium Core HTA的讨论。<br />
+===== 浏览器支持 =====</p>
+<p>(1).Selenium IDE仅可以在Firefox中工作。<br />
+　　<br />
+(2).Selenium Remote Control支持很多浏览器，包括最常用的：firefox，ie，safari等N款浏览器。<br />
+　　<br />
+(3).Selenium Core支持的浏览器是最广的，这点和它的实现有关。作为IDE和RC的引擎，Selenium Core几乎可以在任何浏览器中工作。<br />
+　　<br />
+<strong>需要远程安装：是否需要在被测网站的服务端安装？</strong><br />
+　　<br />
+这里只有Selenium Core需要，这是出于同源策略的原因。这也是Selenium Core一个很大的限制，试问，如果你要测试Google.com，还得在google的服务器上装一个Selenium Core，那是多搞笑的一件事。<br />
+　　<br />
+而Selenium IDE和Selenium Core HTA不会被同源策略所限制，因为他们对浏览器扩展了。<br />
+　　<br />
+Selenium RC提供一个代码服务器来保证Selenium JS文件看似来自相同的远程服务器，从而符合同源策略；代理服务器欺骗浏览器，让它认为这里的确有像http://www.google.com/selenium/这样的目录。</p>
+<p>===== Selenium RC(Remote Control) =====</p>
+<p>Selenium RC(Remote Control)是一个基于java编写的开源测试工具，允许使用多种语言编写自动化的WEB UI测试用例。这个工具提供一个Selenium Server可以启动，停止和控制绝大多数主流浏览器，这个服务器使用AJAX直接和浏览器进行交互，可以使用HTTP GET/POST请求向Selenium Server发送命令。 </p>
+<p>Selenium-RC安装包包含两部分：Selenium-server、Selenium-client-driver（各语言版本分别对应一个 client-driver.jar），server为测试服务器，client-driver为测试用例的API（编写测试用例的使用用到）。 </p>
+<p>==== 启动Server：====</p>
+<p>启动命令java -jar Selenium-server.jar 可以带参数启动，如java -jar selenium-server.jar -interactive为以交互模式启动，这里自己可以将启动操作制作成简单的.bat或.sh脚本，如bat脚本(此脚本与selenium- server.jar在同一级目录下)。</p>
+<p>==== 开发运行测试用例： ====</p>
+<p>1. 解压Selenium-RC压缩包，取出selenium-java-client-driver.jar </p>
+<p>2. 打开Java IDE(Eclipse, NetBeans, IntelliJ, Netweaver, etc.) </p>
+<p>3. 新建一个project </p>
+<p>4. 将selenium-java-client-driver.jar导入此project的classpath </p>
+<p>5. 将Selenium-IDE录制好的html脚本转换成java文件，导入新建的project（可能需要稍作修改，如添加assert判断用例是否测试通过），或直接使用selenium-java-client API编写测试用例。本工具同时支持Junit和TestNg测试框架。 </p>
+<p>6. 启动Selenium Server </p>
+<p>7. 在Java IDE 或命令行执行编写好的测试用例</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/6830.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Selenium之WebDriver</title>
+		<link>http://www.xieziming.com/archives/6832.html</link>
+		<comments>http://www.xieziming.com/archives/6832.html#respond</comments>
+		<pubDate>Sat, 12 Feb 2011 08:15:10 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[测试]]></category>
+		<category><![CDATA[Selenium]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=6832</guid>
+		<description><![CDATA[<em><strong>（1）页面导航</strong></em>：
+<code lang="java">
+driver.get( "http://www.google.com" );
+</code>
+完全装载页面后将控制返回给测试脚本。注意：当页面又很多AJAX调用时，该接口无法确认页面是否完全装载，这是需要使用"waits"。
+
+<em><strong>（2）与页面交互</strong></em>
+<code lang="java">
+<input type= "text" name= "passwd" id= "passwd-id" />
+//找到输入框元素
+WebElement element;
+element = driver.findElement(By.id( "passwd-id" ));
+element = driver.findElement(By.name( "passwd" ));
+element = driver.findElement(By.xpath( "//input[@id=’passwd-id’]" ));
+//XPATH返回第一个匹配到的元素，如果没有匹配到，抛出NoSuchElementException
+
+//在输入框中输入内容
+element.sendKeys( "some text" );
+element.sendKeys( " and some" , Keys.ARROW_DOWN); （按向下箭头）
+//任何页面元素都可以调用sendKeys，例如可以测试一些快捷方式键，键盘的每次输入都是附加在文本串的后面
+
+//清除输入框内容
+element.clear(); 
+
+//获取输入框的文本内容：
+element.getText(); 
+</code>]]></description>
+				<content:encoded><![CDATA[<p><strong>===== Selenium 2 背景 =====</strong></p>
+<p>Selenium 1是一款流行和完善的测试框架，支持众多浏览器（因其JavaScript实现），允许用户通过许多编程语言（从Java/C#到PHP、Erlang……）​。WebDriver弥补了Selenium 1的缺点​，跳出了Javascript的沙箱（嵌入到被测Web应用中），针对各个浏览器而开发，提供快速、轻量级的浏览器模拟器​。与浏览器的紧密集成支持创建更高级的测试，避免了JavaScript安全模型导致的限制。除了来自浏览器厂商的支持，WebDriver还利用操作系统级的调用模拟用户输入。</p>
+<p><strong>===== WebDriver的几个实现 =====</strong></p>
+<p><span style="color: #800080;"><strong>HtmlUnit Driver</strong></span> &#8211; &#8211; &#8211; -&gt; org.openqa.selenium.htmlunit.HtmlUnitDriver<br />
+<span style="color: #800080;"><strong>Firefox Driver</strong></span> &#8211; &#8211; &#8211; -&gt; org.openqa.selenium.firefox.FirefoxDriver<br />
+<span style="color: #800080;"><strong>Internet Explorer Driver</strong></span> &#8211; &#8211; &#8211; -&gt; org.openqa.selenium.ie.InternetExplorerDriver<br />
+<span style="color: #800080;"><strong>Chrome Driver</strong></span> &#8211; &#8211; &#8211; -&gt; org.openqa.selenium.chrome.ChromeDriver</p>
+<p><strong>ps：</strong><br />
+（1）HtmlUnit Driver是纯java的驱动器，全部在内存中运行，不会实际打开浏览器，但其速度很快。<br />
+（2）Firefox Driver：速度慢。</p>
+<p>===== <strong>WebDriver常用的函数接口 =====</strong></p>
+<p>以HtmlUnitDriver为例：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;">WebDriver driver <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> HtmlUnitDriver<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+WebDriver driver <span style="color: #339933;">=</span> newFirefoxDriver<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> 
+WebDriver driver <span style="color: #339933;">=</span> newInternetExplorerDriver <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre></div></div>
+
+<p><em><strong>（1）页面导航</strong></em>：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;">driver.<span style="color: #006633;">get</span><span style="color: #009900;">&#40;</span> <span style="color: #0000ff;">&quot;http://www.google.com&quot;</span> <span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre></div></div>
+
+<p>完全装载页面后将控制返回给测试脚本。注意：当页面又很多AJAX调用时，该接口无法确认页面是否完全装载，这时需要使用&#8221;waits&#8221;。</p>
+<p><em><strong>（2）与页面交互</strong></em></p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #339933;">&lt;</span>input type<span style="color: #339933;">=</span> <span style="color: #0000ff;">&quot;text&quot;</span> name<span style="color: #339933;">=</span> <span style="color: #0000ff;">&quot;passwd&quot;</span> id<span style="color: #339933;">=</span> <span style="color: #0000ff;">&quot;passwd-id&quot;</span> <span style="color: #339933;">/&gt;</span>
+<span style="color: #666666; font-style: italic;">//找到输入框元素</span>
+WebElement element<span style="color: #339933;">;</span>
+element <span style="color: #339933;">=</span> driver.<span style="color: #006633;">findElement</span><span style="color: #009900;">&#40;</span>By.<span style="color: #006633;">id</span><span style="color: #009900;">&#40;</span> <span style="color: #0000ff;">&quot;passwd-id&quot;</span> <span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+element <span style="color: #339933;">=</span> driver.<span style="color: #006633;">findElement</span><span style="color: #009900;">&#40;</span>By.<span style="color: #006633;">name</span><span style="color: #009900;">&#40;</span> <span style="color: #0000ff;">&quot;passwd&quot;</span> <span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+element <span style="color: #339933;">=</span> driver.<span style="color: #006633;">findElement</span><span style="color: #009900;">&#40;</span>By.<span style="color: #006633;">xpath</span><span style="color: #009900;">&#40;</span> <span style="color: #0000ff;">&quot;//input[@id=’passwd-id’]&quot;</span> <span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #666666; font-style: italic;">//XPATH返回第一个匹配到的元素，如果没有匹配到，抛出NoSuchElementException</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">//在输入框中输入内容</span>
+element.<span style="color: #006633;">sendKeys</span><span style="color: #009900;">&#40;</span> <span style="color: #0000ff;">&quot;some text&quot;</span> <span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+element.<span style="color: #006633;">sendKeys</span><span style="color: #009900;">&#40;</span> <span style="color: #0000ff;">&quot; and some&quot;</span> , Keys.<span style="color: #006633;">ARROW_DOWN</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> （按向下箭头）
+<span style="color: #666666; font-style: italic;">//任何页面元素都可以调用sendKeys，例如可以测试一些快捷方式键，键盘的每次输入都是附加在文本串的后面</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">//清除输入框内容</span>
+element.<span style="color: #006633;">clear</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> 
+&nbsp;
+<span style="color: #666666; font-style: italic;">//获取输入框的文本内容：</span>
+element.<span style="color: #006633;">getText</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">//? element.getAttribute(&quot;value&quot;);</span></pre></div></div>
+
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/6832.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>测试工程师如何和开发工程师交流</title>
+		<link>http://www.xieziming.com/archives/6826.html</link>
+		<comments>http://www.xieziming.com/archives/6826.html#respond</comments>
+		<pubDate>Fri, 11 Feb 2011 12:50:05 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[测试]]></category>
+		<category><![CDATA[Summary]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=6826</guid>
+		<description><![CDATA[1、要耐心和细心细心是测试工程师的一个基本素质，测试工程师是对质量负责的人，涉及到质量问题，就不能含糊，因此一定要细心，细心对待每一个可能的BUG、细心对待每一段被你检查的代码，细心对待每一个你撰写的BUG报告，细心对待你发出的每一封邮件。细心是一种态度，你的态度迟早会感染和你合作的开发人员，而这往往是合作愉快的基础。至于说到耐心，在我的工作经历中，不厌其烦地向开发人员解释一个BUG，让他认识到BUG的重要性是经常的事情，其实想想也很正常，对任何人来说，被人指出自己的缺点和不足都不是让人舒服的事情，因此，一点不耐烦的情绪就可能引起对方很大的反感，给自己的工作带来不必要的麻烦。 
+
+2、要懂得尊重对方开发是一件需要全面和综合考虑的工作，开发工作中，由于各种原因导致程序中出现问题是很正常的现象，作为测试工程师，发现了这些问题并不值得你夸耀，也不能说明你比开发工程师聪明。一个好的测试工程师一定是懂得尊重开发工程师的人，尊重对方的技术水平，尊重对方的代码。我接触过的开发人员都是挺和善的，一般来说，对他们最大的尊重就是承认他的专业水平，承认他的代码。对他们来说，代码就像是自己的孩子一样：）因此，记得在合适的时候表达你对他的尊重，赞扬一下他代码的精妙之处。 
+
+3、要能设身处地为对方着想开发工程师一般都处在较大的工作压力下，他的上司直接考核他们的指标很大程度上是已完成的代码，所以在工作任务紧张的时候，对于测试工程师报上来的BUG会拖延解决甚至是推脱，给测试工程师的感觉就是很不合作。那么在这个时候，就需要设身处地的为对方着想了，每个人都会为自己的工作在内心排定优先级，如果他认为解决你发现的BUG不是重要的事情，那么最大的可能就是你并没有向他解释清楚这个BUG的严重程度。发现BUG是我们的责任，敦促BUG得到解决是我们更重要的责任，因此，我们可以心平气和地和开发人员坐下来讨论一下BUG的严重程度，和他一起排定BUG的优先级别并确定解决的时间。 
+
+4、要有原则不要忘记，测试工程师需要对产品的质量负责，在这一点上一定要有原则。测试工程师可以和开发工程师建立良好的个人关系，但在具体的事情上，一定要按照公司的相关流程来处理。当然，在坚持原则的同时，可以采用一些委婉的表达方式，可以在允许的情况下尽量体谅开发工程师，但请记住，一个有原则的测试工程师才能真正帮助开发工程师，才能赢得开发工程师的尊重。 ]]></description>
+				<content:encoded><![CDATA[<p>作为测试工程师，在日常工作中接触最多的当然是团队中的开发工程师，如何和开发工程师进行有效的交流是测试工程师面对的重要问题。 </p>
+<p>一般来说，在一个团队中，总是有开发人员喜欢和不喜欢的测试工程师，这两者之间的工作效率和效果都有很大的差异。当然，不能武断地说测试人员不喜欢的测试工程师就一定是效率低下的测试工程师，或者说是不合格的测试工程师，但一般来说，那些容易得到开发人员认可的工程师在测试时总能够更好地发现缺陷和敦促开发人员解决缺陷。 测试工程师和开发工程师承担的是开发工作的两个不同方面，说得极端一点，一个是创建，一个是破坏，虽然两者的最终目的都是一样的，但在达成目标的方式上却有很大的差异。因此，在为同一个目标奋斗的过程中，发生冲突也是难免的，但通过下面的一些建议，换个视角看看开发人员的生活和工作，可能很多的冲突就能化解于无形了。 </p>
+<p>Cem Kaner在《Testing Computer Software》书中有一段话: “The best tester is not the one who finds the most bugs or who embarrasses the most developers. The best tester is the one who gets the most bugs fixed.” （最好的测试人员不是发现最多BUG或是使得最多开发人员不自在的人，而是能够[说服开发人员]修正最多BUG的人），建议大家好好理解这句话。 </p>
+<p>至于我个人，是从开发工程师转为测试工程师的，对于开发工程师的处境和想法也曾有过切身的体会，或许是这个原因，让我在和开发工程师交流的过程中还算是比较顺利，和他们相处得也还不错。在我的测试经历中，也接触过相当多的开发工程师，这里我把和开发人员交流的经验归结为“五要四不要”： </p>
+<p>【五要】 </p>
+<p>1、要耐心和细心细心是测试工程师的一个基本素质，测试工程师是对质量负责的人，涉及到质量问题，就不能含糊，因此一定要细心，细心对待每一个可能的BUG、细心对待每一段被你检查的代码，细心对待每一个你撰写的BUG报告，细心对待你发出的每一封邮件。细心是一种态度，你的态度迟早会感染和你合作的开发人员，而这往往是合作愉快的基础。至于说到耐心，在我的工作经历中，不厌其烦地向开发人员解释一个BUG，让他认识到BUG的重要性是经常的事情，其实想想也很正常，对任何人来说，被人指出自己的缺点和不足都不是让人舒服的事情，因此，一点不耐烦的情绪就可能引起对方很大的反感，给自己的工作带来不必要的麻烦。 </p>
+<p>2、要懂得尊重对方开发是一件需要全面和综合考虑的工作，开发工作中，由于各种原因导致程序中出现问题是很正常的现象，作为测试工程师，发现了这些问题并不值得你夸耀，也不能说明你比开发工程师聪明。一个好的测试工程师一定是懂得尊重开发工程师的人，尊重对方的技术水平，尊重对方的代码。我接触过的开发人员都是挺和善的，一般来说，对他们最大的尊重就是承认他的专业水平，承认他的代码。对他们来说，代码就像是自己的孩子一样：）因此，记得在合适的时候表达你对他的尊重，赞扬一下他代码的精妙之处。 </p>
+<p>3、要能设身处地为对方着想开发工程师一般都处在较大的工作压力下，他的上司直接考核他们的指标很大程度上是已完成的代码，所以在工作任务紧张的时候，对于测试工程师报上来的BUG会拖延解决甚至是推脱，给测试工程师的感觉就是很不合作。那么在这个时候，就需要设身处地的为对方着想了，每个人都会为自己的工作在内心排定优先级，如果他认为解决你发现的BUG不是重要的事情，那么最大的可能就是你并没有向他解释清楚这个BUG的严重程度。发现BUG是我们的责任，敦促BUG得到解决是我们更重要的责任，因此，我们可以心平气和地和开发人员坐下来讨论一下BUG的严重程度，和他一起排定BUG的优先级别并确定解决的时间。 </p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/6826.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>QTP 同步等待</title>
+		<link>http://www.xieziming.com/archives/6678.html</link>
+		<comments>http://www.xieziming.com/archives/6678.html#respond</comments>
+		<pubDate>Sun, 26 Dec 2010 15:33:01 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[测试]]></category>
+		<category><![CDATA[QTP]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=6678</guid>
+		<description><![CDATA[<strong>1. 对象的默认等待时间</strong>
+
+QTP识别对象时，会有一个默认的等待时间，可以在File-->Settings-->Run-->Object synchronization中设置，默认时间是20秒，也就是说当执行到第2步时，网页还没有完全打开，这样的话QTP找不到第2步中需要的对象，那 么它会在20秒内不断的尝试查找对象，如果百度这个网页在20秒之内完全打开，那么这个方法就可行（网页全部打开的话，第2步所需的对象就会被找到），如 果超过20秒还不行的话，请参考下面几种方式。
+
+<strong>2. 使用.Sync方法(只能在Web中使用)</strong>
+<code lang="php">
+　　Browser("Browser").Navigatehttp://www.baidu.com
+　　Browser("Browser").Page("百度").Sync
+　　Browser("百度一下，你就知道").Page("百度一下，你就知道").WebEdit("wd").Set "Avepoint"
+</code>
+
+第2句的意思就是等待百度这个页面完全打开，才继续执行下面操作。
+
+<strong>3. QTP系统自带的同步点功能</strong>
+
+还是上面的例子，在录制状态下，选择Insert-->Synchronization Point，选择要同步的对象，设置要同步的属性，我们可以对对象的Enable，visible一类表示状态的属性做同步点，生成如下脚本
+<code lang="php">
+　　Browser("百度一下，你就知道").Page("百度一下，你就知道").WebEdit("wd").WaitProperty "visible", True, 100000
+</code>]]></description>
+				<content:encoded><![CDATA[<p><strong>1. 对象的默认等待时间</strong></p>
+<p>QTP识别对象时，会有一个默认的等待时间，可以在File&#8211;>Settings&#8211;>Run&#8211;>Object synchronization中设置，默认时间是20秒，也就是说当执行到第2步时，网页还没有完全打开，这样的话QTP找不到第2步中需要的对象，那 么它会在20秒内不断的尝试查找对象，如果百度这个网页在20秒之内完全打开，那么这个方法就可行（网页全部打开的话，第2步所需的对象就会被找到），如 果超过20秒还不行的话，请参考下面几种方式。</p>
+<p><strong>2. 使用.Sync方法(只能在Web中使用)</strong></p>
+
+<div class="wp_code"><div class="pre"><pre class="php" style="font-family:'Times New Roman',Garamond, Times;">　　Browser<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;Browser&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">.</span>Navigatehttp<span style="color: #339933;">:</span><span style="color: #666666; font-style: italic;">//www.baidu.com</span>
+　　Browser<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;Browser&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">.</span>Page<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;百度&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">.</span>Sync
+　　Browser<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;百度一下，你就知道&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">.</span>Page<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;百度一下，你就知道&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">.</span>WebEdit<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;wd&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">.</span>Set <span style="color: #0000ff;">&quot;Avepoint&quot;</span></pre></div></div>
+
+<p>第2句的意思就是等待百度这个页面完全打开，才继续执行下面操作。</p>
+<p><strong>3. QTP系统自带的同步点功能</strong></p>
+<p>还是上面的例子，在录制状态下，选择Insert&#8211;>Synchronization Point，选择要同步的对象，设置要同步的属性，我们可以对对象的Enable，visible一类表示状态的属性做同步点，生成如下脚本</p>
+
+<div class="wp_code"><div class="pre"><pre class="php" style="font-family:'Times New Roman',Garamond, Times;">　　Browser<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;百度一下，你就知道&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">.</span>Page<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;百度一下，你就知道&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">.</span>WebEdit<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;wd&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">.</span>WaitProperty <span style="color: #0000ff;">&quot;visible&quot;</span><span style="color: #339933;">,</span> <span style="color: #009900; font-weight: bold;">True</span><span style="color: #339933;">,</span> <span style="color: #cc66cc;">100000</span></pre></div></div>
+
+<p>这句话的意思就是在100秒的时间内，等待WebEdit这个对象的visible属性，只要它的visible属性变为true，那么就执行 下面操作，最后的100000单位是毫秒，如果在100000毫秒（100秒）后还没有等到visible = true，直接执行下面操作。</p>
+<p><strong>4. 利用VBS语句</strong></p>
+
+<div class="wp_code"><div class="pre"><pre class="php" style="font-family:'Times New Roman',Garamond, Times;">　　<span style="color: #b1b100;">Do</span> until Browser<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;百度一下，你就知道&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">.</span>Page<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;百度一下，你就知道&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">.</span>WebEdit<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;wd&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">.</span>Exist<span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">5</span><span style="color: #009900;">&#41;</span>
+　　    Wait<span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">1</span><span style="color: #009900;">&#41;</span>
+　　Loop</pre></div></div>
+
+<p>判断WebEdite这个对象是否出现，如果没有出现，执行Wait(1)，如果出现，跳出循环。</p>
+<p><strong>5. 死等大法</strong></p>
+<p>就是用Wait()语句设置等待时间，死等，比如Wait(10)，就是脚本停止10秒，任何操作都不做，10秒之后继续往下执行操作。</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/6678.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>LoadRunner 例子</title>
+		<link>http://www.xieziming.com/archives/6668.html</link>
+		<comments>http://www.xieziming.com/archives/6668.html#respond</comments>
+		<pubDate>Thu, 16 Dec 2010 14:30:29 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[测试]]></category>
+		<category><![CDATA[LoadRunner]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=6668</guid>
+		<description><![CDATA[<code lang="c">
+web_reg_save_param("active_url","LB=bugtracker/verify.php?","RB=", "search=body",LAST);
+
+web_submit_form("signup.php", 
+		"Snapshot=t3.inf", 
+		ITEMDATA, 
+		"Name=username", "Value={username}", ENDITEM, 
+		"Name=email", "Value={mail}", ENDITEM, 
+		LAST);
+
+lr_think_time(1);
+
+lr_message("the url is %s",lr_eval_string("{active_url}"));
+	 
+web_link("http://168.33.114.120/bugtracker/verify.php?{active_url}", 
+		 "Text=http://168.33.114.120/bugtracker/verify.php?{active_url}", 
+		 "Snapshot=t2.inf", 
+		 LAST);
+</code>]]></description>
+				<content:encoded><![CDATA[
+<div class="wp_code"><div class="pre"><pre class="c" style="font-family:'Times New Roman',Garamond, Times;">vuser_init<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+        web_url<span style="color: #009900;">&#40;</span><span style="color: #ff0000;">&quot;bugtracker&quot;</span><span style="color: #339933;">,</span> 
+		<span style="color: #ff0000;">&quot;URL=http://168.33.114.120/bugtracker&quot;</span><span style="color: #339933;">,</span> 
+		<span style="color: #ff0000;">&quot;Resource=0&quot;</span><span style="color: #339933;">,</span> 
+		<span style="color: #ff0000;">&quot;RecContentType=text/html&quot;</span><span style="color: #339933;">,</span> 
+		<span style="color: #ff0000;">&quot;Referer=&quot;</span><span style="color: #339933;">,</span> 
+		<span style="color: #ff0000;">&quot;Snapshot=t1.inf&quot;</span><span style="color: #339933;">,</span> 
+		<span style="color: #ff0000;">&quot;Mode=HTML&quot;</span><span style="color: #339933;">,</span> 
+		LAST<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+	web_link<span style="color: #009900;">&#40;</span><span style="color: #ff0000;">&quot;注册一个新帐号&quot;</span><span style="color: #339933;">,</span> 
+		<span style="color: #ff0000;">&quot;Text=注册一个新帐号&quot;</span><span style="color: #339933;">,</span> 
+		<span style="color: #ff0000;">&quot;Snapshot=t2.inf&quot;</span><span style="color: #339933;">,</span> 
+		LAST<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+	lr_think_time<span style="color: #009900;">&#40;</span><span style="color: #0000dd;">12</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        web_reg_save_param<span style="color: #009900;">&#40;</span><span style="color: #ff0000;">&quot;active_url&quot;</span><span style="color: #339933;">,</span><span style="color: #ff0000;">&quot;LB=bugtracker/verify.php?&quot;</span><span style="color: #339933;">,</span><span style="color: #ff0000;">&quot;RB=&quot;</span><span style="color: #339933;">,</span> <span style="color: #ff0000;">&quot;search=body&quot;</span><span style="color: #339933;">,</span>LAST<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        <span style="color: #666666; font-style: italic;">//注册函数，这个一定要放在下面的提交操作之前！</span>
+&nbsp;
+	web_submit_form<span style="color: #009900;">&#40;</span><span style="color: #ff0000;">&quot;signup.php&quot;</span><span style="color: #339933;">,</span> 
+		<span style="color: #ff0000;">&quot;Snapshot=t3.inf&quot;</span><span style="color: #339933;">,</span> 
+		ITEMDATA<span style="color: #339933;">,</span> 
+		<span style="color: #ff0000;">&quot;Name=username&quot;</span><span style="color: #339933;">,</span> <span style="color: #ff0000;">&quot;Value={username}&quot;</span><span style="color: #339933;">,</span> ENDITEM<span style="color: #339933;">,</span> 
+		<span style="color: #ff0000;">&quot;Name=email&quot;</span><span style="color: #339933;">,</span> <span style="color: #ff0000;">&quot;Value={mail}&quot;</span><span style="color: #339933;">,</span> ENDITEM<span style="color: #339933;">,</span> 
+		LAST<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+		lr_think_time<span style="color: #009900;">&#40;</span><span style="color: #0000dd;">3</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		lr_message<span style="color: #009900;">&#40;</span><span style="color: #ff0000;">&quot;the url is %s&quot;</span><span style="color: #339933;">,</span>lr_eval_string<span style="color: #009900;">&#40;</span><span style="color: #ff0000;">&quot;{active_url}&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+                <span style="color: #666666; font-style: italic;">//由上面的关联函数得到注册时返回的激活链接</span>
+	 	web_link<span style="color: #009900;">&#40;</span><span style="color: #ff0000;">&quot;http://168.33.114.120/bugtracker/verify.php?{active_url}&quot;</span><span style="color: #339933;">,</span> 
+		<span style="color: #ff0000;">&quot;Text=http://168.33.114.120/bugtracker/verify.php?{active_url}&quot;</span><span style="color: #339933;">,</span> 
+		<span style="color: #ff0000;">&quot;Snapshot=t2.inf&quot;</span><span style="color: #339933;">,</span> 
+		LAST<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+	lr_think_time<span style="color: #009900;">&#40;</span><span style="color: #0000dd;">3</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        <span style="color: #666666; font-style: italic;">//点击激活链接进入资料更新界面，更新密码！</span>
+	web_submit_form<span style="color: #009900;">&#40;</span><span style="color: #ff0000;">&quot;account_update.php&quot;</span><span style="color: #339933;">,</span> 
+		<span style="color: #ff0000;">&quot;Snapshot=t5.inf&quot;</span><span style="color: #339933;">,</span> 
+		ITEMDATA<span style="color: #339933;">,</span> 
+		<span style="color: #ff0000;">&quot;Name=password&quot;</span><span style="color: #339933;">,</span> <span style="color: #ff0000;">&quot;Value={username}&quot;</span><span style="color: #339933;">,</span> ENDITEM<span style="color: #339933;">,</span> 
+		<span style="color: #ff0000;">&quot;Name=password_confirm&quot;</span><span style="color: #339933;">,</span> <span style="color: #ff0000;">&quot;Value={username}&quot;</span><span style="color: #339933;">,</span> ENDITEM<span style="color: #339933;">,</span> 
+		<span style="color: #ff0000;">&quot;Name=email&quot;</span><span style="color: #339933;">,</span> <span style="color: #ff0000;">&quot;Value={mail}&quot;</span><span style="color: #339933;">,</span> ENDITEM<span style="color: #339933;">,</span> 
+		<span style="color: #ff0000;">&quot;Name=realname&quot;</span><span style="color: #339933;">,</span> <span style="color: #ff0000;">&quot;Value=&quot;</span><span style="color: #339933;">,</span> ENDITEM<span style="color: #339933;">,</span> 
+		LAST<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+	<span style="color: #b1b100;">return</span> <span style="color: #0000dd;">0</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/6668.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>QTP DataTable</title>
+		<link>http://www.xieziming.com/archives/6406.html</link>
+		<comments>http://www.xieziming.com/archives/6406.html#respond</comments>
+		<pubDate>Tue, 23 Nov 2010 14:29:28 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[测试]]></category>
+		<category><![CDATA[QTP]]></category>
+		<category><![CDATA[技术]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=6406</guid>
+		<description><![CDATA[<code lang="vb">
+DataTable.GetSheet(dtSheet)
+DataTable.GetSheetCount
+DataTable.[GetSheet.]GetRowCount
+DataTable.[GetSheet.]GetParameterCount
+DataTable.GetSheet(sSheetName).GetParameter(“ColumName”).ValueByName(iRowNumber)
+DataTable.[GetSheet.]GetCurrentRow
+DataTable.[GetSheet.]SetCurrentRow(RowNumber)
+DataTable.Value(ParameterID [, SheetID])  or DataTable (ParameterID [, SheetID])
+DataTable.AddSheet(SheetName)
+DataTable.DeleteSheet(SheetName)
+DataTable.Export(filename)
+DataTable.ExportSheet(filename,SheetName)
+DataTable.Import(FileName)
+DataTable.ImportSheet(FileName, SheetSource, SheetDest)
+</code>]]></description>
+				<content:encoded><![CDATA[<p><strong>Global Sheet和Local Sheet：</strong></p>
+<p>1．Global Sheet是一个全局变量。有几行数据，程序就要回放几次（不需要循环语句）<br />
+如果当前的Global Sheet中有3行测试数据。第1次执行使用第一行数据test1，第二次执行使用第二行数据test2，第三次执行使用第三行数据test3，依此可以一直类推下去。</p>
+<p>现在设置了3行测试数据，这些数据不一定是我们每次都需要的，那该怎么办？删除它们？等需要了再添加？那多麻烦。QTP提供了一个很有用的功能，那就是Data Table iterations设置（QTP上方菜单栏→File→Settings→Run）。</p>
+<p>2. Local Sheet是个局部变量，它并不受Data Table iterations控制，无论有多少行数据，它只运行一次（如果Global Sheet没有数据，或只有一行数据，或设置为只运行一次）。</p>
+<p>即使Global Sheet没有数据，仍然可以通过别的方式（代码控制的方式排除在外）去执行Local Sheet下的所有行。在Test Flow里反击Action后可以进入Action的一些相关设置。它和Global的Data Table iterations设置界面相似，在这里选中Run on all rows就可以执行Local Sheet下的所有测试数据了。虽然都是执行所有行数据，不过它们的区别还是很大的。Local Sheet执行了3次自身Action的迭代，而Global Sheet就相当于执行了3次脚本。</p>
+<p>在最后，还总结了一些Global和Local之间的逻辑规则，大致为以下几点：<br />
+　　<br />
+● Global不止一行数据（设置为Run on all rows，以下都是……），Action也设置为Run on all rows（以下都是……）且假设双方都具有3行测试数据，此时Global和Action的每行都要运行且同步运行（即Global在取第2行数据时，Action也对应地取它的第二行数据）。<br />
+　　<br />
+● 当Global不止一行数据且Global的行数大于Action的行数，那么当Action执行到最后一行后，Global以后所执行的行数，Action都用它的最后一行数据去补，比如Action的最后一行测试数据是test3，那么即使Global执行到了100行，也一直对应的是Action中test3的这一行数据。<br />
+　　<br />
+● 引用上面的条件，如果Global的行数小于Action的行数的话，Action就执行不到最后一行了。</p>
+<p><strong>QTP的DataTable操作操作包括：</strong></p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;">DataTable.GetSheet(dtSheet)
+DataTable.GetSheetCount
+DataTable.[GetSheet.]GetRowCount
+DataTable.[GetSheet.]GetParameterCount
+DataTable.GetSheet(sSheetName).GetParameter(“ColumName”).ValueByName(iRowNumber)
+DataTable.[GetSheet].GetCurrentRow
+DataTable.[GetSheet].SetCurrentRow(RowNumber)
+DataTable.[GetSheet].SetNextRow
+DataTable.Value(ParameterID [, SheetID])  <span style="color: #8D38C9; font-weight: bold;">or</span> DataTable (ParameterID [, SheetID])
+DataTable.AddSheet(SheetName)
+DataTable.DeleteSheet(SheetName)
+DataTable.Export(filename)
+DataTable.ExportSheet(filename,SheetName)
+DataTable.Import(FileName)
+DataTable.ImportSheet(FileName, SheetSource, SheetDest)</pre></div></div>
+
+<p>1.得到datatable总行数的命令：<strong>GetRowCount</strong><br />
+描述：返回运行时数据表的第一个工作表（用于测试的全局表或用于业务组件的业务组件表）中最长的列中的总行数。<br />
+语法：DataTable.GetSheet(&#8220;MySheet&#8221;).GetRowCount</p>
+<p>返回值：数字</p>
+<p>示例：以下示例使用 GetRowCount 方法查找 MySheet 运行时数据表中最长的列中的总行数，并将其写入报告。</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;">rowcount = DataTable.GetSheet(<span style="color: #800000;">&quot;MySheet&quot;</span>).GetRowCount
+Reporter.ReportEvent 2, <span style="color: #800000;">&quot;数据工作表中有 &quot;</span> &amp;rowcount, <span style="color: #800000;">&quot;行。&quot;</span></pre></div></div>
+
+<p>2.得到datatable运行时的动态列数：<strong>GetParameterCount</strong><br />
+语法：DTSheet.GetParameterCount</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;">paramcount = DataTable.GetSheet(<span style="color: #800000;">&quot;MySheet&quot;</span>).GetParameterCount</pre></div></div>
+
+<p>3.<strong>GetCurrentRow</strong>方法<br />
+描述：返回运行时数据表的第一个工作表（用于测试的全局表或用于业务组件的业务组件表）中的当前（活动）行。<br />
+语法：DataTable.GetSheet(&#8220;MySheet&#8221;).GetCurrentRow<br />
+返回值：数字<br />
+示例：以下示例使用 GetCurrentRow 方法检索当前在运行时数据表中使用的行，并将其写入报告。</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;">row = DataTable.GetSheet(<span style="color: #800000;">&quot;MySheet&quot;</span>).GetCurrentRow
+Reporter.ReportEvent 1, <span style="color: #800000;">&quot;行号&quot;</span>, row</pre></div></div>
+
+<p>4. 设置当前active的行数（第一行为1）：<strong>SetCurrentRow</strong><br />
+语法：DataTable.GetSheet(&#8220;MySheet&#8221;).SetCurrentRow(RowNumber)</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;">DataTable.SetCurrentRow(tb_i+1)
+DataTable.GetSheet(<span style="color: #800000;">&quot;Action1&quot;</span>).SetCurrentRow(tb_i+1)</pre></div></div>
+
+<p>&#8216;注：你也可以用GetCurrentRow来获取Action1的行，然后再用SetCurrentRow来保持两个Action的当前行一致：</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;">DataTable.SetCurrentRow(tb_i+1)
+CurrRow = DataTable.GetSheet(<span style="color: #800000;">&quot;Action1&quot;</span>).GetCurrentRow
+DataTable.GetSheet(<span style="color: #800000;">&quot;Action2&quot;</span>).SetCurrentRow(CurrRow)</pre></div></div>
+
+<p>5. 指向下一行数据：<strong>SetNextRow</strong></p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #151B8D; font-weight: bold;">Dim</span> i,j
+j = DataTable.GetRowCount
+<span style="color: #8D38C9; font-weight: bold;">For</span> i=1 <span style="color: #8D38C9; font-weight: bold;">to</span> j
+  Window(<span style="color: #800000;">&quot;Windows Internet Explorer&quot;</span>).WinObject(<span style="color: #800000;">&quot;Internet Explorer_Server&quot;</span>).<span style="color: #151B8D; font-weight: bold;">Type</span> DataTable(<span style="color: #800000;">&quot;content2&quot;</span>, dtGlobalSheet)
+  Browser(<span style="color: #800000;">&quot;Browser&quot;</span>).Page(<span style="color: #800000;">&quot;写日志 - XXX&quot;</span>).WebButton(<span style="color: #800000;">&quot;发 表&quot;</span>).Click
+  Datatable.GetSheet(<span style="color: #800000;">&quot;Global&quot;</span>).SetNextRow
+<span style="color: #8D38C9; font-weight: bold;">Next</span></pre></div></div>
+
+<p>6.查询、设置datatable的数值：</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;">DataTable(<span style="color: #800000;">&quot;Col&quot;</span>, <span style="color: #800000;">&quot;Action2&quot;</span>)   <span style="color: #008000;">'就是读取Action2的Col列。
+</span>
+<span style="color: #008000;">'同样，表也可以用数字代替：
+</span>DataTable(1, 2)    <span style="color: #008000;">'这样就是读取第二个Action表的第一列
+</span>
+<span style="color: #008000;">'还有一种写法：
+</span>DataTable(1, <span style="color: #800000;">&quot;Action2&quot;</span>)  <span style="color: #008000;">'这样就是读取Action2的第一列，不管第一列叫什么名字，都能读
+</span>       
+<span style="color: #008000;">'还有一种赋值方法
+</span>aParam2=DataTable(“AccountsNumber”,dtGlobalSheet)
+&nbsp;
+<span style="color: #008000;">'还有一种赋值方法，但是有一个前提就是：必须只能是测试只包含一个操作的情况：
+</span>          
+aParam3=DataTable(“AccountsNumber”,dtLocalSheet)
+&nbsp;
+datatable.value(<span style="color: #800000;">&quot;num&quot;</span>)’只在global形式下的一种省略形式；完整形式是:
+datatable.value(<span style="color: #800000;">&quot;num&quot;</span>,dtlocalsheet)
+&nbsp;
+<span style="color: #008000;">'向某一列的单元格赋值:
+</span>datatable.value(<span style="color: #800000;">&quot;column_name&quot;</span>,dtlocalsheet)=<span style="color: #800000;">&quot;nanjing&quot;</span>
+&nbsp;
+DataTable.Value(<span style="color: #800000;">&quot;Destination&quot;</span>, <span style="color: #800000;">&quot;ActionA&quot;</span>)=<span style="color: #800000;">&quot;New York&quot;</span>            
+DataTable.Value(2,3)=<span style="color: #800000;">&quot;New York&quot;</span>
+DataTable(<span style="color: #800000;">&quot;Destination&quot;</span>, dtlocalSheet)=<span style="color: #800000;">&quot;New York&quot;</span>    
+&nbsp;
+Call_date= DataTable.Value(<span style="color: #800000;">&quot;Date&quot;</span>,<span style="color: #800000;">&quot;add Conference Call&quot;</span>)  '为Call_date赋值</pre></div></div>
+
+<p>7. 取datatable特定行的数据：</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;">DataTable.GetSheet(<span style="color: #800000;">&quot;Action1&quot;</span>).GetParameter(<span style="color: #800000;">&quot;test\&quot;</span>).ValueByRow(4)</pre></div></div>
+
+<p>8  AddSheet 方法<br />
+描述：向运行时数据表中添加指定工作表并返回该工作表，以便可以直接在同一语句中设置新工作表的属性。<br />
+语法：DataTable.AddSheet(SheetName)<br />
+示例：以下示例先使用 AddSheet 方法在运行时数据表中新建工作表&#8221;MySheet&#8221;，然后向新工作表中添加参数。</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #151B8D; font-weight: bold;">Dim</span> Variable
+Variable=DataTable.AddSheet (<span style="color: #800000;">&quot;MySheet&quot;</span>).AddParameter(<span style="color: #800000;">&quot;Time&quot;</span>, <span style="color: #800000;">&quot;8:00&quot;</span>)</pre></div></div>
+
+<p>9  DeleteSheet方法<br />
+描述：从运行时数据表中删除指定工作表。<br />
+语法：DataTable.DeleteSheet SheetID<br />
+示例：以下示例使用 DeleteSheet 方法从运行时数据表中删除工作表&#8221;MySheet&#8221;。</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;">DataTable.DeleteSheet <span style="color: #800000;">&quot;MySheet&quot;</span></pre></div></div>
+
+<p>10  Export方法<br />
+描述：在指定位置保存运行时数据表的副本。<br />
+语法：DataTable.Export(FileName)<br />
+示例：以下示例使用 Export 方法将测试的数据表副本保存在 C:\flights.xls 中。</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;">DataTable.Export (<span style="color: #800000;">&quot;C:\flights.xls&quot;</span>)</pre></div></div>
+
+<p>11 ExportSheet方法<br />
+描述：将运行时数据表的指定工作表导出到指定文件中。如果指定文件不存在，则将创建一个新文件并保存指定工作表。如果当前文件存在，但是该文件不包含具有指定工作表名称的工作表，则将插入该工作表作为文件的最后一个工作表。如果当前文件存在且包含指定工作表，则导出的工作表将覆盖现有工作表。</p>
+<p>语法：DataTable.ExportSheet(FileName, DTSheet)<br />
+DTSheet 变量 要导出的运行时数据表工作表的名称或索引。索引值从 1 开始。 </p>
+<p>示例：以下示例使用 ExportSheet 方法将运行时数据表的第一个工作表保存到 name.xls 文件中。</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;">DataTable.ExportSheet <span style="color: #800000;">&quot;C:\name.xls&quot;</span> ,1
+DataTable.ExportSheet <span style="color: #800000;">&quot;C:\name.xls&quot;</span> , <span style="color: #800000;">&quot; MySheet &quot;</span></pre></div></div>
+
+<p>12 GetSheet方法<br />
+描述 ：返回运行时数据表中的指定工作表。<br />
+语法 ：DataTable.GetSheet(SheetID)<br />
+SheetID 变量 标识要返回的工作表。SheetID 可以是工作表名称或索引。索引值从 1 开始。<br />
+返回值：DTSheet 对象<br />
+示例：以下示例使用 GetSheet 方法返回运行时数据表的&#8221;MySheet&#8221;工作表，以便向其中添加参数。</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;">MyParam=DataTable.GetSheet (<span style="color: #800000;">&quot;MySheet&quot;</span>).AddParameter(<span style="color: #800000;">&quot;Time&quot;</span>, <span style="color: #800000;">&quot;8:00&quot;</span>)</pre></div></div>
+
+<p>您还可以使用该方法向&#8221;MySheet&#8221;本地表中添加参数（注意，不会返回值）。</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;">DataTable.GetSheet (<span style="color: #800000;">&quot;MySheet&quot;</span>).AddParameter <span style="color: #800000;">&quot;Time&quot;</span>, <span style="color: #800000;">&quot;8:00&quot;</span></pre></div></div>
+
+<p>13 GetSheetCount方法<br />
+描述：返回运行时数据表中的总工作表数。<br />
+语法：DataTable.GetSheetCount<br />
+返回值：数字<br />
+示例：以下示例使用 GetSheetCount 方法查找运行时数据表中的总工作表数，并将其写入报告。</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;">sheetcount = DataTable.GetSheetCount
+Reporter.ReportEvent 0, <span style="color: #800000;">&quot;工作表编号&quot;</span>, <span style="color: #800000;">&quot;数据表中有&quot;</span> &amp; sheetcount &amp; <span style="color: #800000;">&quot;个工作表。</span></pre></div></div>
+
+<p>14 Import方法<br />
+描述：将指定的 Microsoft Excel 文件导入运行时数据表。</p>
+<p>注意：导入的表必须与测试或组件匹配。列名必须与测试或组件中的参数匹配，并且工作表名称（用于测试）必须与操作名匹配。如果导入的 Excel 表包含组合框或列表单元格、条件格式或其他特殊单元格格式，则不会导入这些格式，并且单元格在数据表中显示时包含固定值。</p>
+<p>语法：DataTable.Import(FileName)<br />
+FileName 字符串型 要导入的 Excel 表的完整路径。 </p>
+<p>示例：导入的表将替换现有运行时数据表（包括所有数据表）中的所有数据。以下示例使用 Import 方法将 flights.xls 表导入运行时数据表。</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;">DataTable.Import (<span style="color: #800000;">&quot;C:\flights.xls&quot;</span>)</pre></div></div>
+
+<p>15 ImportSheet方法<br />
+描述：将指定文件的工作表导入运行时数据表的指定工作表。导入的工作表中的数据将替换目标工作表中的数据（请参阅 SheetDest 参数）。</p>
+<p>注意：导入的工作表中的列标题必须与工作表导入操作中的数据表参数名匹配。否则，测试或组件可能会失败。导入的工作表会自动采用它所替换的工作表的名称。如果导入的 Excel 工作表包含组合框或列表单元格、条件格式或其他特殊单元格格式，则不会导入这些格式，并且单元格在数据表中显示时包含固定值。</p>
+<p>语法：DataTable.ImportSheet(FileName, SheetSource, SheetDest)</p>
+<p>FileName 字符串型 要从中导入工作表的 Excel 表的完整路径。<br />
+SheetSource 变量 要从文件导入的工作表的名称或索引。索引值从 1 开始。<br />
+SheetDest 变量 数据表中要用 SheetSource 替换的工作表的名称或索引。索引值从 1 开始。 </p>
+<p>示例：以下示例使用 ImportSheet 方法将 name.xls 表的第一个工作表导入测试的运行时数据表中的Action1工作表。</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;">DataTable.ImportSheet <span style="color: #800000;">&quot;C:\name.xls&quot;</span> ,1 ,<span style="color: #800000;">&quot; Action1&quot;</span>
+DataTable.ImportSheet <span style="color: #800000;">&quot;C:\name.xls&quot;</span> ,1 ,<span style="color: #800000;">&quot; Global&quot;</span></pre></div></div>
+
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/6406.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>外部调用QTP</title>
+		<link>http://www.xieziming.com/archives/6398.html</link>
+		<comments>http://www.xieziming.com/archives/6398.html#respond</comments>
+		<pubDate>Mon, 22 Nov 2010 14:24:42 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[测试]]></category>
+		<category><![CDATA[QTP]]></category>
+		<category><![CDATA[技术]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=6398</guid>
+		<description><![CDATA[外部调用QTP:
+<code lang="vb">
+Dim qtApp
+Set qtApp = CreateObject("QuickTest.Application") ' 创建 Application 对象
+qtApp.Launch '启动 QuickTest
+qtApp.Visible = True ' 使其可见
+</code>]]></description>
+				<content:encoded><![CDATA[<p>外部调用QTP:</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #151B8D; font-weight: bold;">Dim</span> qtApp
+<span style="color: #151B8D; font-weight: bold;">Set</span> qtApp = <span style="color: #E56717; font-weight: bold;">CreateObject</span>(<span style="color: #800000;">&quot;QuickTest.Application&quot;</span>) <span style="color: #008000;">' 创建 Application 对象
+</span>qtApp.Launch <span style="color: #008000;">'启动 QuickTest
+</span>qtApp.Visible = <span style="color: #00C2FF; font-weight: bold;">True</span> <span style="color: #008000;">' 使其可见
+</span>qtapp.<span style="color: #151B8D; font-weight: bold;">Open</span> <span style="color: #800000;">&quot;d:\Test&quot;</span> <span style="color: #008000;">'打开相应的QTP测试脚本 
+</span>qtapp.Test.Run <span style="color: #008000;">'运行测试脚本 
+</span>qtapp.Quit <span style="color: #008000;">'退出QTP
+</span><span style="color: #151B8D; font-weight: bold;">Set</span> qtapp=<span style="color: #00C2FF; font-weight: bold;">Nothing</span> '释放</pre></div></div>
+
+<p>1.执行以上代码时，系统多出一个QTAutomationAgent.exe的进程，此进程在运行完以上代码后会自动关闭,但是需要注意的是，当我们在调试代码或者是做非法中止以上代码而为能使以上代码执行到最后完毕的话，此进程不会自动关闭，这样就会导致我们第二次创建AOM对象时报错，因此大家如果在调试此代码时遇到“远程过程调用失败”的类似错误提示，就可以试试kill掉QTAutomationAgent.exe这个进程，然后重新调试下代码就ok了。</p>
+<p>2.如果在QTP直接创建AOM对象是会报错的，因为QTP只允许有一个实例对象，当我们已经开启了一个QTP之后就不可以再创建另外一个QTP了，因此这个时候我们可以直接使用</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #151B8D; font-weight: bold;">Set</span> qtapp = <span style="color: #E56717; font-weight: bold;">GETOBJECT</span>(<span style="color: #800000;">&quot;&quot;</span>,<span style="color: #800000;">&quot;quicktest.application&quot;</span>)
+qtapp.Visible = <span style="color: #00C2FF; font-weight: bold;">false</span></pre></div></div>
+
+<p>来对当前启动的QTP进行操作,当我们添加下图脚本后，我们点击运行后当前QTP就会自动隐藏，运行完后自动恢复可见.</p>
+<p>3.当我们还需要对QTP的设置进行自动化时，由于QTP的设置较多，一个个写的话会很繁琐，因此我们可以先在QTP里设置好，然后直接在QTP的setting和option选项中点击generate scripting进行导出，这样能去我们很多的精力来写代码。</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/6398.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+	</channel>
+</rss>

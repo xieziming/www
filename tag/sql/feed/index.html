@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>SQL &#8211; 谢子明</title>
+	<atom:link href="http://www.xieziming.com/tag/sql/feed" rel="self" type="application/rss+xml" />
+	<link>http://www.xieziming.com</link>
+	<description>Suny Xie</description>
+	<lastBuildDate>Mon, 26 Dec 2016 07:34:38 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.7</generator>
+	<item>
+		<title>WordPress SQL</title>
+		<link>http://www.xieziming.com/archives/3735.html</link>
+		<comments>http://www.xieziming.com/archives/3735.html#respond</comments>
+		<pubDate>Sun, 05 Apr 2009 12:53:17 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[开源]]></category>
+		<category><![CDATA[SQL]]></category>
+		<category><![CDATA[wordpress]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=3735</guid>
+		<description><![CDATA[<strong>1 变更Siteurl &#038; Homeurl</strong>
+WordPress将站点URL的绝对路径和本地URL保存在数据库中。因此，如果你将WordPress站点从本地主机转到你的服务器，你的站点不会加载网络，因为你的绝对路径URL仍然指向你的本地主机。你需要改变站点URL和本地URL，网站才能运作。
+解决办法:
+UPDATE wp_options SET option_value = replace(option_value, 'http://www.oldsiteurl.com', 'http://www.newsiteurl.com') WHERE option_name = 'home' OR option_name = 'siteurl';
+
+<strong>2 变更 GUID</strong>
+当你将博客从本地主机转移到你的服务器之后，或者从一个域名转到另一个新的域名，你需要在wp_posts表格修复GUID 字段的URL。因为如果输入错误，GUID可以将文章或者页面转到正确的文章绝对路径。
+解决方案:
+UPDATE wp_posts SET guid = REPLACE (guid, 'http://www.oldsiteurl.com', 'http://www.newsiteurl.com');]]></description>
+				<content:encoded><![CDATA[<p><strong>1 变更Siteurl &#038; Homeurl</strong><br />
+WordPress将站点URL的绝对路径和本地URL保存在数据库中。因此，如果你将WordPress站点从本地主机转到你的服务器，你的站点不会加载网络，因为你的绝对路径URL仍然指向你的本地主机。你需要改变站点URL和本地URL，网站才能运作。<br />
+解决办法:<br />
+UPDATE wp_options SET option_value = replace(option_value, &#8216;http://www.oldsiteurl.com&#8217;, &#8216;http://www.newsiteurl.com&#8217;)</p>
+<p><strong>2 变更 GUID</strong><br />
+当你将博客从本地主机转移到你的服务器之后，或者从一个域名转到另一个新的域名，你需要在wp_posts表格修复GUID 字段的URL。因为如果输入错误，GUID可以将文章或者页面转到正确的文章绝对路径。<br />
+解决方案:<br />
+UPDATE wp_posts SET guid = REPLACE (guid, &#8216;http://www.oldsiteurl.com&#8217;, &#8216;http://www.newsiteurl.com&#8217;);</p>
+<p><strong>3 更改内容中的URL</strong><br />
+WordPress保存在数据库中的URL链接使用绝对路径而非相对路径。在每个发布文章的记录中，它保存的是旧的URL引用旧的资源。因此，如果你需要将这些URL转的新的域名位置，就可以使用下面的方法。<br />
+解决方法:<br />
+UPDATE wp_posts SET post_content = REPLACE (post_content, &#8216;http://www.oldsiteurl.com&#8217;, &#8216;http://www.newsiteurl.com&#8217;);</p>
+<p><strong>4 只改变图像路径</strong><br />
+如果你使用亚马逊云计算服务CloudFront 作为内容交付网络 (CDN) 从服务器端卸载图片，在创建完CNAME记录后，你可以使用下面的查询语句来改变WordPress中的图形路径以下载所有的图形。<br />
+解决方法:<br />
+以下为引用的内容：<br />
+UPDATE wp_posts SET post_content = REPLACE (post_content, &#8216;src=&#8221;http://www.oldsiteurl.com&#8217;, &#8216;src=&#8221;http://yourcdn.newsiteurl.com&#8217;);</p>
+<p>你还需要用下面的查询更新图片附件的GUID:<br />
+UPDATE wp_posts SET  guid = REPLACE (guid, &#8216;http://www.oldsiteurl.com&#8217;, &#8216;http://yourcdn.newsiteurl.com&#8217;) WHERE post_type = &#8216;attachment&#8217;;</p>
+<p><strong>5 更新文章Meta标签</strong><br />
+更新文章Meta标签的方法与更新文章内容中URL方法几乎一致。如果你给每篇文章保存了额外的URL数据，你可以使用下面的查询来更改。<br />
+解决办法<br />
+UPDATE wp_postmeta SET meta_value = REPLACE (meta_value, &#8216;http://www.oldsiteurl.com&#8217;, &#8216;http://www.newsiteurl.com&#8217;);</p>
+<p><strong>6 更改默认的&#8221;Admin&#8221; 用户名</strong><br />
+安装WordPress后，会默认创建一个 “admin” 的账户名。这一点只要有使用WordPress的用户都知道。不过，这可能会带来一个安全问题，因为黑客很容易侵入并控制你的WordPress管理面板。如果你可以对这个默认的 “Admin” 用户名进行修改将会提高WordPress管理面板的安全性。<br />
+解决方法:<br />
+UPDATE wp_users SET user_login = &#8216;Your New Username&#8217; WHERE user_login = &#8216;Admin&#8217;;</p>
+<p><strong>7 重设密码</strong><br />
+想重设WordPress的密码，但是却由于各种各样的原因却无法使用重设密码这个选项？<br />
+解决方法:<br />
+UPDATE wp_users SET user_pass = MD5( &#8216;new_password&#8217; ) WHERE user_login = &#8216;your-username&#8217;;</p>
+<p><strong>8 将所有的B作者的文章归入A作者</strong><br />
+如果你想将所有的B作者下的文章转移到A作者名下，一篇一篇移动起来将会非常耗时。使用下面的SQL查询，你可以轻松地访问所有的记录将B作者的文章转到A作者下。 首先你需要进入WordPress管理面板的作者和用户页面获得作者的ID。点击作者名查看个人资料，在地址栏，查找&#8221;user_id&#8221;。得到的就是我们需要的作者ID信息。<br />
+解决方法：<br />
+UPDATE wp_posts SET post_author = &#8216;new-author-id&#8217; WHERE post_author = &#8216;old-author-id&#8217;;</p>
+<p><strong>9 删除草稿</strong><br />
+在WordPress中编辑一篇文章时，系统会保存多份修订的副本。由于过多的修订记录会加重数据库的负担造成了资源的浪费。并且，随着时间的推移，当你的文章条目达到上千条是，你的数据库就会变得越来越庞大。这样就会增加了循环迭代、数据检索影响页面的加载时间。<br />
+解决方法:<br />
+以下为引用的内容：<br />
+DELETE a,b,c FROM wp_posts a<br />
+LEFT JOIN wp_term_relationships b ON (a.ID = b.object_id)<br />
+LEFT JOIN wp_postmeta c ON (a.ID = c.post_id)<br />
+WHERE a.post_type = &#8216;revision&#8217;<br />
+注意: 注意，此方法将删除所有的文章的所有修订版，包括相关的meta数据。</p>
+<p><strong>10 删除文章Meta标签</strong><br />
+在WordPress的使用中，安装或删除插件是非常经常的。有些插件利用post meta 来存储插件相关的数据。就算你删除了这些插件，这些不必要的数据仍然保留在post_meta表格里。 你可以使用下面的语句来清除不需要的post meta 值。这将有助于加快你的数据库运行速度，减小数据。<br />
+解决方案:<br />
+DELETE FROM wp_postmeta WHERE meta_key = &#8216;your-meta-key&#8217;;</p>
+<p><strong>11 导出所有的评论邮件地址</strong><br />
+经过一点时间，你的博客可能收到了非常多评论。这些评论里包含了评论者留下的邮件地址。你可以取回这些邮件地址列入你的邮件列表中。.<br />
+解决方法:<br />
+SELECT DISTINCT comment_author_email FROM wp_comments;<br />
+获得结果后，在查询结果的操作中，选择导出导出 所有的邮件。</p>
+<p><strong>12 删除所有的Pingback</strong><br />
+热门文章会获得非常多的pingback。这样，你的数据库就变大，为了减小数据库，你可以尝试将所有这些pingbacks删除。<br />
+解决方法:<br />
+DELETE FROM wp_comments WHERE comment_type = &#8216;pingback&#8217;;</p>
+<p><strong>13 删除所有的垃圾评论</strong><br />
+如果碰到非常多垃圾评论，一个个删除的话讲会非常头疼。而是用下面的SQL 查询，就算你要删除五百多条垃圾评论也变得轻而易举了。<br />
+解决方法:<br />
+DELETE FROM wp_comments WHERE comment_approved = &#8216;spam&#8217;;<br />
+0 = Comment Awaiting Moderation<br />
+1 = Approved Comment<br />
+spam = Comment marked as Spam</p>
+<p><strong>14 确定未使用的标签</strong><br />
+在WordPress数据库中，如果你使用一个查询语句手动来删除旧的文章，旧的标签却仍然会保留并在你的标签云/列表中出现。你可以使用下面的方法识别未使用的标签并将它删除。<br />
+解决方法:<br />
+SELECT * FROM wp_terms wt<br />
+INNER JOIN wp_term_taxonomy wtt ON wt.term_id=wtt.term_id<br />
+INNER JOIN wp_term_relationships wtr ON wtr.term_taxonomy_id=wtt.term_taxonomy_id<br />
+LEFT JOIN wp_posts wp ON wp.ID=wtr.object_id<br />
+WHERE taxonomy=&#8217;post_tag&#8217;<br />
+AND ID IS null<br />
+AND NOT EXISTS(SELECT * From wp_terms wt2<br />
+INNER JOIN wp_term_taxonomy wtt2 ON wt2.term_id=wtt2.term_id WHERE wtt2.parent=wt.term_id) ORDER BY name;</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/3735.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+	</channel>
+</rss>

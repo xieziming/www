@@ -1,0 +1,2988 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>技术维基 &#8211; 谢子明</title>
+	<atom:link href="http://www.xieziming.com/topic/ji-shu-wei-ji/feed" rel="self" type="application/rss+xml" />
+	<link>http://www.xieziming.com</link>
+	<description>Suny Xie</description>
+	<lastBuildDate>Mon, 26 Dec 2016 07:34:38 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.7</generator>
+	<item>
+		<title>Solaris内存统计</title>
+		<link>http://www.xieziming.com/archives/7693.html</link>
+		<comments>http://www.xieziming.com/archives/7693.html#respond</comments>
+		<pubDate>Fri, 16 Nov 2012 17:01:37 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[技术维基]]></category>
+		<category><![CDATA[linux]]></category>
+		<category><![CDATA[程序]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=7693</guid>
+		<description><![CDATA[首先Solaris上的swap跟普通的Unix/Linux上的swap机制有一点不同，Solaris上的swap用的是一个Virtual Swap Space概念, swap空间再也不是单指硬盘的分区或文件。虚拟Swap空间包含两个部分：部分物理内存和传统上的swap分区。经过适当的配置，可以使系统需要swap空间时，先使用内存部分的swap空间，如果内存部分的swap空间不够，再使用磁盘部分的swap空间。这样，也许你硬盘上的swap空间很少得到使用了，甚至根本不需要swap分区。
+
+<strong>物理内存:</strong>
+<code lang="bash">
+sushi@gbs00827:/xfosUAT/xfos_sushi/thirdparty/suny/NFR_SUNY/core/results/NFR_18_NORMAL_RUN_1>prtconf &#124; head -2 or prtconf -vp &#124;grep Mem
+System Configuration:  Sun Microsystems  i86pc
+Memory size: 73717 Megabytes
+</code>
+
+在Solaris下，swap命令是用来查看当前系统中的swap信息的。-l 参数和-s参数表达的是同样的意思，区别就在于一个查看的是物理的swap space,一个是当前系统的virtual swap space。
+
+<strong>虚拟交换空间:</strong>
+<code lang="bash">
+sushi@gbs00827:/xfosUAT/xfos_sushi/thirdparty/suny/NFR_SUNY/core/results/NFR_18_NORMAL_RUN_1>swap -s
+total: 8376304k bytes allocated + 6829196k reserved = 15205500k used, 60836672k available
+</code>]]></description>
+				<content:encoded><![CDATA[<p>首先Solaris上的swap跟普通的Unix/Linux上的swap机制有一点不同，Solaris上的swap用的是一个Virtual Swap Space概念, swap空间再也不是单指硬盘的分区或文件。虚拟Swap空间包含两个部分：部分物理内存和传统上的swap分区。经过适当的配置，可以使系统需要swap空间时，先使用内存部分的swap空间，如果内存部分的swap空间不够，再使用磁盘部分的swap空间。这样，也许你硬盘上的swap空间很少得到使用了，甚至根本不需要swap分区。</p>
+<p><strong>物理内存:</strong></p>
+
+<div class="wp_code"><div class="pre"><pre class="bash" style="font-family:'Times New Roman',Garamond, Times;">sushi<span style="color: #000000; font-weight: bold;">@</span>gbs00827:<span style="color: #000000; font-weight: bold;">/</span>xfosUAT<span style="color: #000000; font-weight: bold;">/</span>xfos_sushi<span style="color: #000000; font-weight: bold;">/</span>thirdparty<span style="color: #000000; font-weight: bold;">/</span>suny<span style="color: #000000; font-weight: bold;">/</span>NFR_SUNY<span style="color: #000000; font-weight: bold;">/</span>core<span style="color: #000000; font-weight: bold;">/</span>results<span style="color: #000000; font-weight: bold;">/</span>NFR_18_NORMAL_RUN_1<span style="color: #000000; font-weight: bold;">&gt;</span>prtconf <span style="color: #000000; font-weight: bold;">|</span> <span style="color: #c20cb9; font-weight: bold;">head</span> <span style="color: #660033;">-2</span> or prtconf <span style="color: #660033;">-vp</span> <span style="color: #000000; font-weight: bold;">|</span><span style="color: #c20cb9; font-weight: bold;">grep</span> Mem
+System Configuration:  Sun Microsystems  i86pc
+Memory <span style="color: #c20cb9; font-weight: bold;">size</span>: <span style="color: #000000;">73717</span> Megabytes</pre></div></div>
+
+<p>在Solaris下，swap命令是用来查看当前系统中的swap信息的。-l 参数和-s参数表达的是同样的意思，区别就在于一个查看的是物理的swap space,一个是当前系统的virtual swap space。</p>
+<p><strong>虚拟交换空间:</strong></p>
+
+<div class="wp_code"><div class="pre"><pre class="bash" style="font-family:'Times New Roman',Garamond, Times;">sushi<span style="color: #000000; font-weight: bold;">@</span>gbs00827:<span style="color: #000000; font-weight: bold;">/</span>xfosUAT<span style="color: #000000; font-weight: bold;">/</span>xfos_sushi<span style="color: #000000; font-weight: bold;">/</span>thirdparty<span style="color: #000000; font-weight: bold;">/</span>suny<span style="color: #000000; font-weight: bold;">/</span>NFR_SUNY<span style="color: #000000; font-weight: bold;">/</span>core<span style="color: #000000; font-weight: bold;">/</span>results<span style="color: #000000; font-weight: bold;">/</span>NFR_18_NORMAL_RUN_1<span style="color: #000000; font-weight: bold;">&gt;</span>swap <span style="color: #660033;">-s</span>
+total: 8376304k bytes allocated + 6829196k reserved = 15205500k used, 60836672k available</pre></div></div>
+
+<p>虚拟交换空间大小 =  物理磁盘交换空间大小 +  内存中的交换空间大小.</p>
+<p><strong>物理磁盘交换空间:</strong></p>
+
+<div class="wp_code"><div class="pre"><pre class="bash" style="font-family:'Times New Roman',Garamond, Times;">sushi<span style="color: #000000; font-weight: bold;">@</span>gbs00827:<span style="color: #000000; font-weight: bold;">/</span>xfosUAT<span style="color: #000000; font-weight: bold;">/</span>xfos_sushi<span style="color: #000000; font-weight: bold;">/</span>thirdparty<span style="color: #000000; font-weight: bold;">/</span>suny<span style="color: #000000; font-weight: bold;">/</span>NFR_SUNY<span style="color: #000000; font-weight: bold;">/</span>core<span style="color: #000000; font-weight: bold;">/</span>results<span style="color: #000000; font-weight: bold;">/</span>NFR_18_NORMAL_RUN_1<span style="color: #000000; font-weight: bold;">&gt;</span>swap <span style="color: #660033;">-l</span>
+swapfile             dev  swaplo blocks   <span style="color: #c20cb9; font-weight: bold;">free</span>
+<span style="color: #000000; font-weight: bold;">/</span>dev<span style="color: #000000; font-weight: bold;">/</span>md<span style="color: #000000; font-weight: bold;">/</span>dsk<span style="color: #000000; font-weight: bold;">/</span>d1      <span style="color: #000000; font-weight: bold;">**</span>,<span style="color: #000000;">1</span>       <span style="color: #000000;">8</span> <span style="color: #000000;">41945704</span> <span style="color: #000000;">41945704</span>
+&nbsp;
+sushi<span style="color: #000000; font-weight: bold;">@</span>gbs00827:<span style="color: #000000; font-weight: bold;">/</span>xfosUAT<span style="color: #000000; font-weight: bold;">/</span>xfos_sushi<span style="color: #000000; font-weight: bold;">/</span>thirdparty<span style="color: #000000; font-weight: bold;">/</span>suny<span style="color: #000000; font-weight: bold;">/</span>NFR_SUNY<span style="color: #000000; font-weight: bold;">/</span>core<span style="color: #000000; font-weight: bold;">/</span>results<span style="color: #000000; font-weight: bold;">/</span>NFR_18_NORMAL_RUN_1<span style="color: #000000; font-weight: bold;">&gt;</span>top
+<span style="color: #000000;">378</span> processes: <span style="color: #000000;">349</span> sleeping, <span style="color: #000000;">27</span> stopped, <span style="color: #000000;">2</span> on cpu
+CPU states: <span style="color: #000000;">79.5</span><span style="color: #000000; font-weight: bold;">%</span> idle, <span style="color: #000000;">12.3</span><span style="color: #000000; font-weight: bold;">%</span> user,  <span style="color: #000000;">8.2</span><span style="color: #000000; font-weight: bold;">%</span> kernel,  <span style="color: #000000;">0.0</span><span style="color: #000000; font-weight: bold;">%</span> iowait,  <span style="color: #000000;">0.0</span><span style="color: #000000; font-weight: bold;">%</span> swap
+Memory: 72G phys mem, 53G <span style="color: #c20cb9; font-weight: bold;">free</span> mem, 20G total swap, 20G <span style="color: #c20cb9; font-weight: bold;">free</span> swap
+&nbsp;
+   PID USERNAME LWP PRI NICE  SIZE   RES STATE    TIME    CPU COMMAND
+ <span style="color: #000000;">15227</span> sushi    <span style="color: #000000;">999</span>  <span style="color: #000000;">59</span>    <span style="color: #000000;">0</span>  466M  439M <span style="color: #c20cb9; font-weight: bold;">sleep</span>   <span style="color: #000000;">14</span>:07  <span style="color: #000000;">1.00</span><span style="color: #000000; font-weight: bold;">%</span> java</pre></div></div>
+
+<p>这样 41945704KB + 20G = 60G =虚拟交换空间大小</p>
+
+<div class="wp_code"><div class="pre"><pre class="bash" style="font-family:'Times New Roman',Garamond, Times;">sushi<span style="color: #000000; font-weight: bold;">@</span>gbs00827:<span style="color: #000000; font-weight: bold;">/</span>xfosUAT<span style="color: #000000; font-weight: bold;">/</span>xfos_sushi<span style="color: #000000; font-weight: bold;">/</span>thirdparty<span style="color: #000000; font-weight: bold;">/</span>suny<span style="color: #000000; font-weight: bold;">/</span>NFR_SUNY<span style="color: #000000; font-weight: bold;">/</span>core<span style="color: #000000; font-weight: bold;">&gt;</span><span style="color: #c20cb9; font-weight: bold;">vmstat</span> <span style="color: #000000;">2</span>
+ kthr      memory            page            disk          faults      cpu
+ r b <span style="color: #c20cb9; font-weight: bold;">w</span>   swap  <span style="color: #c20cb9; font-weight: bold;">free</span>  re  mf pi po fr de sr m0 m1 <span style="color: #000000; font-weight: bold;">**</span> <span style="color: #c20cb9; font-weight: bold;">m4</span>   <span style="color: #000000; font-weight: bold;">in</span>   sy   cs us sy <span style="color: #c20cb9; font-weight: bold;">id</span>
+ <span style="color: #000000;">3</span> <span style="color: #000000;">0</span> <span style="color: #000000;">0</span> <span style="color: #000000;">56865308</span> <span style="color: #000000;">51170924</span> <span style="color: #000000;">486</span> <span style="color: #000000;">3467</span> <span style="color: #000000;">0</span> <span style="color: #000000;">0</span> <span style="color: #000000;">0</span> <span style="color: #000000;">0</span> <span style="color: #000000;">0</span> <span style="color: #000000;">0</span>  <span style="color: #000000;">0</span>  <span style="color: #000000;">0</span>  <span style="color: #000000;">0</span> <span style="color: #000000;">5150</span> <span style="color: #000000;">19539</span> <span style="color: #000000;">5871</span> <span style="color: #000000;">1</span>  <span style="color: #000000;">1</span> <span style="color: #000000;">98</span>
+ <span style="color: #000000;">0</span> <span style="color: #000000;">0</span> <span style="color: #000000;">0</span> <span style="color: #000000;">56865268</span> <span style="color: #000000;">51173240</span> <span style="color: #000000;">0</span> <span style="color: #000000;">47</span> <span style="color: #000000;">0</span> <span style="color: #000000;">0</span>  <span style="color: #000000;">0</span>  <span style="color: #000000;">0</span>  <span style="color: #000000;">0</span>  <span style="color: #000000;">0</span>  <span style="color: #000000;">0</span>  <span style="color: #000000;">0</span>  <span style="color: #000000;">0</span> <span style="color: #000000;">4959</span> <span style="color: #000000;">4790</span> <span style="color: #000000;">5273</span>  <span style="color: #000000;">0</span>  <span style="color: #000000;">1</span> <span style="color: #000000;">99</span>
+&nbsp;
+sushi<span style="color: #000000; font-weight: bold;">@</span>gbs00827:<span style="color: #000000; font-weight: bold;">/</span>xfosUAT<span style="color: #000000; font-weight: bold;">/</span>xfos_sushi<span style="color: #000000; font-weight: bold;">/</span>thirdparty<span style="color: #000000; font-weight: bold;">/</span>suny<span style="color: #000000; font-weight: bold;">/</span>NFR_SUNY<span style="color: #000000; font-weight: bold;">/</span>core<span style="color: #000000; font-weight: bold;">&gt;</span>top
+<span style="color: #000000;">293</span> processes: <span style="color: #000000;">266</span> sleeping, <span style="color: #000000;">26</span> stopped, <span style="color: #000000;">1</span> on cpu
+CPU states: <span style="color: #000000;">97.7</span><span style="color: #000000; font-weight: bold;">%</span> idle,  <span style="color: #000000;">0.7</span><span style="color: #000000; font-weight: bold;">%</span> user,  <span style="color: #000000;">1.6</span><span style="color: #000000; font-weight: bold;">%</span> kernel,  <span style="color: #000000;">0.0</span><span style="color: #000000; font-weight: bold;">%</span> iowait,  <span style="color: #000000;">0.0</span><span style="color: #000000; font-weight: bold;">%</span> swap
+Memory: 72G phys mem, 49G <span style="color: #c20cb9; font-weight: bold;">free</span> mem, 20G total swap, 20G <span style="color: #c20cb9; font-weight: bold;">free</span> swap</pre></div></div>
+
+<p>vmstat 中的swap是可用虚拟交换空间的意思，它等于虚拟交换空间(可用部分) = 物理磁盘交换空间(可用部分) +  内存中的交换空间(可用部分).</p>
+<p>vmstat中的free是可用的剩余内存的意思, 它的大小等于系统可用物理内存大小.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/7693.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>IE插件</title>
+		<link>http://www.xieziming.com/archives/7464.html</link>
+		<comments>http://www.xieziming.com/archives/7464.html#respond</comments>
+		<pubDate>Sun, 07 Oct 2012 03:49:52 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[技术维基]]></category>
+		<category><![CDATA[程序]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=7464</guid>
+		<description><![CDATA[插件是一种遵循一定规范的应用程序接口编写出来的程序。很多软件都有插件，例如在IE中，安装相关的插件后，WEB浏览器能够直接调用插件程序，用于处理特定类型的文件。 IE浏览器常见的插件例如：Flash插件、RealPlayer插件、MMS插件、MIDI五线谱插件、ActiveX插件等等。
+
+顺便说一下插件和组件的区别是，插件是属于程序接口的程序，组件在ASP中就是控件、对象，ASP/IIS的标准安装提供了11个可安装组件。ASP的FSO组件，它就是最常用的Scripting.FileSystemObject对象。
+
+根据插件在浏览器中的加载位置,可以分为工具条(Toolbar)、浏览器辅助(BHO)、搜索挂接(URL SEARCHHOOK)、下载ActiveX(ACTIVEX)。
+
+<strong>(1)下载ActiveX(ACTIVEX):</strong>
+ActiveX插件也叫做OLE控件或OCX控件,它是一些软件组件或对象,可以将其插入到WEB网页或其它应用程序中.在因特网上,ActiveX插件软件的特点是:一般软件需要用户单独下载然后执行安装,而ActiveX插件是当用户浏览到特定的网页时,IE浏览器即可自动下载并提示用户安装.
+
+ActiveX插件安装的前提是必须先下载,然后经过认证,最终用户确认同意方能安装,因此嵌有ActiveX脚本程序的页面可能会变得非常慢,甚至导致浏览器瞬间失去响应.
+
+<strong>(2)浏览器辅助(BHO)</strong>
+BHO全称Browser Helper Object, 是一种随因特网浏览器(如IE)每次启动而自动执行的小程序.通常情况下,一个BHO文件是由其它软件安装到用户的系统中的.例如一些带有下载功能的广告软件,它可能会安装一个BHO文件从而追踪用户在上网冲浪遇到的众多网页广告.
+
+通常的BHO会帮助用户更方便地浏览因特网或调用上网辅助功能,也有一部分BHO被人称为广告软件(Adware)或间谍软件(Spyware),它们监视用户的上网行为并把记录的相关数据报告给BHO的创建者.BHO也可能会与其它运行中的程序发生冲突,从而导致诸如各种页面错误,运行时间错误等等现象,通常阻止了正常浏览的进行.]]></description>
+				<content:encoded><![CDATA[<p>插件是一种遵循一定规范的应用程序接口编写出来的程序。很多软件都有插件，例如在IE中，安装相关的插件后，WEB浏览器能够直接调用插件程序，用于处理特定类型的文件。 IE浏览器常见的插件例如：Flash插件、RealPlayer插件、MMS插件、MIDI五线谱插件、ActiveX插件等等。</p>
+<p>顺便说一下插件和组件的区别是，插件是属于程序接口的程序，组件在ASP中就是控件、对象，ASP/IIS的标准安装提供了11个可安装组件。ASP的FSO组件，它就是最常用的Scripting.FileSystemObject对象。</p>
+<p>根据插件在浏览器中的加载位置,可以分为工具条(Toolbar)、浏览器辅助(BHO)、搜索挂接(URL SEARCHHOOK)、下载ActiveX(ACTIVEX)。</p>
+<p><strong>(1)下载ActiveX(ACTIVEX):</strong><br />
+ActiveX插件也叫做OLE控件或OCX控件,它是一些软件组件或对象,可以将其插入到WEB网页或其它应用程序中.在因特网上,ActiveX插件软件的特点是:一般软件需要用户单独下载然后执行安装,而ActiveX插件是当用户浏览到特定的网页时,IE浏览器即可自动下载并提示用户安装.</p>
+<p>ActiveX插件安装的前提是必须先下载,然后经过认证,最终用户确认同意方能安装,因此嵌有ActiveX脚本程序的页面可能会变得非常慢,甚至导致浏览器瞬间失去响应.</p>
+<p><strong>(2)浏览器辅助(BHO)</strong><br />
+BHO全称Browser Helper Object, 是一种随因特网浏览器(如IE)每次启动而自动执行的小程序.通常情况下,一个BHO文件是由其它软件安装到用户的系统中的.例如一些带有下载功能的广告软件,它可能会安装一个BHO文件从而追踪用户在上网冲浪遇到的众多网页广告.</p>
+<p>通常的BHO会帮助用户更方便地浏览因特网或调用上网辅助功能,也有一部分BHO被人称为广告软件(Adware)或间谍软件(Spyware),它们监视用户的上网行为并把记录的相关数据报告给BHO的创建者.BHO也可能会与其它运行中的程序发生冲突,从而导致诸如各种页面错误,运行时间错误等等现象,通常阻止了正常浏览的进行.</p>
+<p><strong>(3)搜索挂接(URL SEARCHHOOK)</strong><br />
+用户在地址栏中输入非标准的网址,如英文字符或者中文的时候,当地址栏无法对输入字符串解释成功时,浏览器会自动打开一个以用户输入的字符串为搜索词的结果页面,帮助用户找到需要的内容.URLSearchhook对象就是完成搜索功能的插件.它通常是由第三方公司或者个人开发,通过插件的方式安装到浏览器上, 目的是为了帮助用户更好的使用互联网.例如用户在地址栏中输入&#8221;手机&#8221;,就可以直接看到手机搜索结果.也有一些企业或者个人为了达到提高网站访问或其它商业目的,在用户不知情的情况下修改IE浏览器的URLSearchhook.</p>
+<p><strong>(4)工具条(Toolbar)</strong><br />
+工具条,通常指加载在浏览器的辅助工具.它位于浏览器标准工具条的下方,在IE工具栏空白处点击右键,可以查看所有已经安装的工具条,通过勾选显示或者隐藏已安装的工具条。</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/7464.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Java中int和Integer的区别</title>
+		<link>http://www.xieziming.com/archives/7253.html</link>
+		<comments>http://www.xieziming.com/archives/7253.html#respond</comments>
+		<pubDate>Fri, 01 Jul 2011 10:11:44 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[技术维基]]></category>
+		<category><![CDATA[java]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=7253</guid>
+		<description><![CDATA[<strong>Java的简单数据讲解列表如下</strong>：
+
+int：int为整数类型，在存储的时候，用4个字节存储，范围为-2,147,483,648到2,147,483,647，在变量初始化的时候，int类型的默认值为0。
+
+short：short也属于整数类型，在存储的时候，用2个字节存储，范围为-32,768到32,767，在变量初始化的时候，short类型的默认值为0，一般情况下，因为Java本身转型的原因，可以直接写为0。
+
+long：long也属于整数类型，在存储的时候，用8个字节存储，范围为-9,223,372,036,854,775,808到9,223,372,036, 854,775,807，在变量初始化的时候，long类型的默认值为0L或0l，也可直接写为0。
+
+byte：byte同样属于整数类型，在存储的时候，用1个字节来存储，范围为-128到127，在变量初始化的时候，byte类型的默认值也为0。
+
+float：float属于实数类型，在存储的时候，用4个字节来存储，范围为32位IEEEE 754单精度范围，在变量初始化的时候，float的默认值为0.0f或0.0F，在初始化的时候可以写0.0。
+
+double：double同样属于实数类型，在存储的时候，用8个字节来存储，范围为**位IEEE 754双精度范围，在变量初始化的时候，double的默认值为0.0。
+
+char：char属于字符类型，在存储的时候用2个字节来存储，因为Java本身的字符集不是用ASCII码来进行存储，是使用的16位Unicode字符集，它的字符范围即是Unicode的字符范围，在变量初始化的时候，char类型的默认值为'u0000'。]]></description>
+				<content:encoded><![CDATA[<p><strong>基本类型</strong>，或者叫做内置类型，是JAVA中不同于类的特殊类型。</p>
+<p>Java中的简单类型从概念上分为四种：实数、整数、字符、布尔值。但是有一点需要说明的是，Java里面只有八种原始类型，其列表如下：</p>
+<blockquote><p>实数：double、float<br />
+整数：byte、short、int、long<br />
+字符：char<br />
+布尔值：boolean</p></blockquote>
+<p><strong>复杂类型</strong>和基本类型的内存模型本质上是不一样的，简单数据类型的存储原理是这样的：所有的简单数据类型不存在“引用”的概念，简单数据类型都是直接存储在内存中的内存栈上的，数据本身的值就是存储在栈空间里面，而Java语言里面只有这八种数据类型是这种存储模型；而其他的只要是继承于Object类的复杂数据类型都是按照Java里面存储对象的内存模型来进行数据存储的，使用Java内存堆和内存栈来进行这种类型的数据存储，简单地讲，“引用”是存储在有序的内存栈上的，而对象本身的值存储在内存堆上的。</p>
+<p><strong>Java的简单数据讲解列表如下</strong>：</p>
+<p>int：int为整数类型，在存储的时候，用4个字节存储，范围为-2,147,483,648到2,147,483,647，在变量初始化的时候，int类型的默认值为0。</p>
+<p>short：short也属于整数类型，在存储的时候，用2个字节存储，范围为-32,768到32,767，在变量初始化的时候，short类型的默认值为0，一般情况下，因为Java本身转型的原因，可以直接写为0。</p>
+<p>long：long也属于整数类型，在存储的时候，用8个字节存储，范围为-9,223,372,036,854,775,808到9,223,372,036, 854,775,807，在变量初始化的时候，long类型的默认值为0L或0l，也可直接写为0。</p>
+<p>byte：byte同样属于整数类型，在存储的时候，用1个字节来存储，范围为-128到127，在变量初始化的时候，byte类型的默认值也为0。</p>
+<p>float：float属于实数类型，在存储的时候，用4个字节来存储，范围为32位IEEEE 754单精度范围，在变量初始化的时候，float的默认值为0.0f或0.0F，在初始化的时候可以写0.0。</p>
+<p>double：double同样属于实数类型，在存储的时候，用8个字节来存储，范围为**位IEEE 754双精度范围，在变量初始化的时候，double的默认值为0.0。</p>
+<p>char：char属于字符类型，在存储的时候用2个字节来存储，因为Java本身的字符集不是用ASCII码来进行存储，是使用的16位Unicode字符集，它的字符范围即是Unicode的字符范围，在变量初始化的时候，char类型的默认值为&#8217;u0000&#8217;。</p>
+<p>boolean：boolean属于布尔类型，在存储的时候不使用字节，仅仅使用1位来存储，范围仅仅为0和1，其字面量为true和false，而boolean变量在初始化的时候变量的默认值为false。</p>
+<p>Integer是int的封装类，里面有很多进行处理的静态方法。Integer是对象而int不是，内存的分配位置也不一样。Integer的属性和其他类一样的！在方法里都是引用传递，而原始类型是值传递！jdk1.5以后可以从int自动装箱Integer类。</p>
+<p>int是为了兼容以前的编程语言使用的基本类型，目的是让程序效率更高，以为它是直接分配到栈上的。所以它不是对象，不能有类似 int.operation()的操作。</p>
+<p>Integer是java中一切都是对象这个大前提下的int的包装类型，可以使用方法，是个对象，是用new分配到堆上的。jdk1.5后，引入了类似c#中的自动装、拆箱，使得Integer i = 1；这样的表达直接可行。</p>
+<p>int是一种基本数据类型，而Integer是相应于int的类类型，称为对象包装。  </p>
+<p>实现这种对象包装的目的主要是因为类能够提供必要的方法，用于实现基本数据类型的数值与可打印字符串之间的转换，以及一些其他的实用程序方法；<br />
+另外，有些数据结构库类只能操作对象，而不支持基本数据类型的变量，包装类提供一种便利的方式，能够把基本数据类型转换成等价的对象，从而可以利用数据结构库类进行处理。   </p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/7253.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Shell (四)</title>
+		<link>http://www.xieziming.com/archives/7244.html</link>
+		<comments>http://www.xieziming.com/archives/7244.html#respond</comments>
+		<pubDate>Wed, 02 Jun 2010 09:13:26 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[技术维基]]></category>
+		<category><![CDATA[linux]]></category>
+		<category><![CDATA[shell]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=7244</guid>
+		<description><![CDATA[谈到 I/O redirection ，不妨先让我们认识一下 File Descriptor (FD) 。程序的运算，在大部份情况下都是进行数据(data)的处理， 这些数据从哪读进？又送出到哪里呢？这就是 file descriptor(FD) 的功用了。
+
+在 shell 程序中，最常使用的 FD 大概有三个，分别为：
+
+0: Standard Input (STDIN)
+1: Standard Output (STDOUT)
+2: Standard Error Output (STDERR)
+
+在标准情况下，这些 FD 分别跟如下设备(device)关联：
+
+stdin(0): keyboard
+stdout(1): monitor
+stderr(2): monitor
+
+我们可以用如下下命令测试一下：
+<code lang="shell">
+$ mail -s test root
+this is a test mail.
+please skip.
+^d (同时按 crtl 跟 d 键)
+</code>]]></description>
+				<content:encoded><![CDATA[<p>谈到 I/O redirection ，不妨先让我们认识一下 File Descriptor (FD) 。程序的运算，在大部份情况下都是进行数据(data)的处理， 这些数据从哪读进？又送出到哪里呢？这就是 file descriptor(FD) 的功用了。</p>
+<p>在 shell 程序中，最常使用的 FD 大概有三个，分别为：</p>
+<p>0: Standard Input (STDIN)<br />
+1: Standard Output (STDOUT)<br />
+2: Standard Error Output (STDERR)</p>
+<p>在标准情况下，这些 FD 分别跟如下设备(device)关联：</p>
+<p>stdin(0): keyboard<br />
+stdout(1): monitor<br />
+stderr(2): monitor</p>
+<p>我们可以用如下下命令测试一下：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">$ mail -s test root
+this is a test mail.
+please skip.
+^d (同时按 crtl 跟 d 键)</pre></div></div>
+
+<p>很明显，mail 程序所读进的数据，就是从 stdin 也就是 keyboard 读进的。不过，不见得每个程序的 stdin 都跟 mail 一样从keyboard 读进，因为程序作者可以从档案参数读进 stdin ，如：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">$ cat /etc/passwd</pre></div></div>
+
+<p>但，要是cat 之后没有档案参数则又如何呢？哦，请您自己玩玩看啰&#8230;. ^_^</p>
+<p>若读进的档案参数是不存在的，那我们在 monitor 上就看到了：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">$ ls no.such.file
+ls: no.such.file: No such file or directory</pre></div></div>
+
+<p>若，一个命令同时产生stdout 与 stderr 呢？那还不简单，都送到 monitor 来就好了：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">$ touch my.file
+&nbsp;
+$ ls my.file no.such.file
+ls: no.such.file: No such file or directory
+my.file</pre></div></div>
+
+<p>okay，至此，关于 FD 及其名称、还有相关联的设备，相信你已经没问题了吧？那好，接下来让我们看看如何改变这些 FD 的预设数据信道，我们可用 < 来改变读进的数据信道(stdin)，使之从指定的档案读进。我们可用 > 来改变送出的数据信道(stdout, stderr)，使之输出到指定的档案。<br />
+比方说：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">$ cat &lt; my.file
+#就是从my.file 读进数据
+$ mail -s test root &lt; /etc/passwd
+#则是从/etc/passwd 读进...</pre></div></div>
+
+<p>这样一来，stdin 将不再是从 keyboard 读进，而是从档案读进了&#8230;</p>
+<p>严格来说，< 符号之前需要指定一个 FD 的(之间不能有空白)， 但因为 0 是 < 的默认值，因此 < 与 0< 是一样的，这个好理解吧？
+
+那，要是用两个 << 又是啥呢？这是所谓的 HERE Document ，它可以让我们输入一段文本，直到读到 << 后指定的字符串。
+比方说：
+
+
+
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">$ cat &lt; &lt;FINISH
+first line here
+second line there
+third line nowhere
+FINISH</pre></div></div>
+
+<p>这样的话，cat 会读进 3 行句子，而无需从 keyboard 读进数据且要等 ^d 结束输入。至于 > 又如何呢？</p>
+<p>当你搞懂了 0< 原来就是改变 stdin 的数据输入信道之后，相信要理解如下两个 redirection 就不难了：
+
+
+
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">* 1&gt;
+* 2&gt;</pre></div></div>
+
+<p>前者是改变 stdout 的数据输出信道，后者是改变 stderr 的数据输出信道。两者都是将原本要送出到 monitor 的数据转向输出到指定档案去。由于 1 是 > 的默认值，因此，1> 与 > 是相同的，都是改 stdout 。</p>
+<p>用上次的 ls 例子来说明一下好了：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">$ ls my.file no.such.file 1&gt;file.out
+ls: no.such.file: No such file or directory
+#这样monitor 就只剩下 stderr 而已。因为 stdout 给写进 file.out 去了。
+$ ls my.file no.such.file 2&gt;file.err
+my.file
+#这样monitor 就只剩下 stdout ，因为 stderr 写进了 file.err 。
+$ ls my.file no.such.file 1&gt;file.out 2&gt;file.err
+#这样monitor 就啥也没有，因为 stdout 与 stderr 都给转到档案去了...</pre></div></div>
+
+<p>不过，有些地方还是要注意一下的。首先，是同时写入的问题。比方如下这个例子：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">$ ls my.file no.such.file 1&gt;file.both 2&gt;file.both</pre></div></div>
+
+<p>假如stdout(1) 与 stderr(2) 都同时在写入 file.both 的话， 则是采取“覆盖”方式：后来写入的覆盖前面的。让我们假设一个 stdout 与 stderr 同时写入 file.out 的情形好了：</p>
+<p>* 首先 stdout 写入10个字符<br />
+* 然后 stderr 写入 6 个字符</p>
+<p>那么，这时候原本 stdout 的前面 6 个字符就被 stderr 覆盖掉了。那，如何解决呢？所谓山不转路转、路不转人转嘛，我们可以换一个思维：将 stderr 导进 stdout 或将 stdout 导进 sterr ，而不是大家在抢同一份档案，不就行了。</p>
+<p>* 2>&#038;1 就是将 stderr 并进 stdout 作输出<br />
+* 1>&#038;2 或 >&#038;2 就是将 stdout 并进 stderr 作输出</p>
+<p>于是，前面的错误操作可以改为：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">$ ls my.file no.such.file 1&gt;file.both 2&gt;&amp;1
+#或
+$ ls my.file no.such.file 2&gt;file.both &gt;&amp;2</pre></div></div>
+
+<p>在 Linux 档案系统里，有个设备档位于 /dev/null 。许多人都问过我那是甚么玩意儿？我跟你说好了：那就是&#8221;空&#8221;啦</p>
+<p>这个 null 在 I/O Redirection 中可有用得很呢：</p>
+<p>* 若将 FD1 跟 FD2 转到 /dev/null 去，就可将 stdout 与 stderr 弄不见掉。<br />
+* 若将 FD0 接到 /dev/null 来，那就是读进 nothing 。</p>
+<p>比方说，当我们在执行一个程序时，画面会同时送出 stdout 跟 stderr ， 假如你不想看到 stderr (也不想存到档案去)，那可<br />
+以：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">$ ls my.file no.such.file 2&gt;/dev/null
+my.file
+#若要相反：只想看到stderr 呢？还不简单©u将 stdout 弄到 null 就行：
+$ ls my.file no.such.file &gt;/dev/null
+ls: no.such.file: No such file or directory</pre></div></div>
+
+<p>那接下来，假如单纯只跑程序，不想看到任何输出结果呢？</p>
+<p>除了用 >/dev/null 2>&#038;1 之外，你还可以如此：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">$ ls my.file no.such.file &amp;&gt;/dev/null
+#(提示：将 &amp;&gt; 换成 &gt;&amp; 也行啦~~! )</pre></div></div>
+
+<p>接下来，再让我们看看如下情况：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">$ echo &quot;1&quot; &gt; file.out
+$ cat file.out
+1
+$ echo &quot;2&quot; &gt; file.out
+$ cat file.out
+2</pre></div></div>
+
+<p>看来，我们在重导stdout 或 stderr 进一份档案时，似乎永远只获得最后一次导入的结果。那，之前的内容呢？<br />
+呵~~~ 要解决这个问提很简单啦，将 > 换成 >> 就好：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">$ echo &quot;3&quot; &gt;&gt; file.out
+$ cat file.out
+2
+3</pre></div></div>
+
+<p>如此一来，被重导的目标档案之内容并不会失去，而新的内容则一直增加在最后面去。再来还有一个难题要你去参透的呢：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">$ echo &quot;some text here&quot; &gt; file
+$ cat &lt; file
+some text here
+$ cat &lt; file &gt; file.bak
+$ cat &lt; file.bak
+some text here
+$ cat &lt; file &gt; file
+$ cat &lt; file</pre></div></div>
+
+<p>怎么最后那个 cat 命令看到的 file 竟是空的？要理解这一现像其实不难，这只是 priority 的问题而已：</p>
+<p>* 在 IO Redirection 中，stdout 与 stderr 的管道会先准备好，才会从 stdin 读进资料。也就是说，在上例中，> file 会先将 file 清空，然后才读进 < file ， 但这时候档案已经被清空了，因此就变成读不进任何数据了...
+
+
+
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">$ cat &lt;&gt; file
+$ cat &lt; file &gt;&gt; file</pre></div></div>
+
+<p>* 在 cm1 | cm2 | cm3 &#8230; 这段 pipe line 中，若要将 cm2 的结果存到某一档案呢？<br />
+若你写成 cm1 | cm2 > file | cm3 的话，那你肯定会发现 cm3 的 stdin 是空的(当然啦，你都将水管接到别的水池了)聪明的你或许会如此解决：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">cm1 | cm2 &gt; file ; cm3 &lt; file</pre></div></div>
+
+<p>是的，你的确可以这样做，但最大的坏处是：这样一来，file I/O 会变双倍.在 command 执行的整个过程中，file I/O 是最常见的最大效能杀手。<br />
+凡是有经验的 shell 操作者，都会尽量避免或降低 file I/O 的频率。那，上面问题还有更好方法吗？有的，那就是 tee 命令了。</p>
+<p>*所谓 tee 命令是在不影响原本 I/O 的情况下，将 stdout复制一份到档案去。</p>
+<p>因此，上面的命令行可以如此打：<br />
+</code></p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">cm1 | cm2 | tee file | cm3</pre></div></div>
+
+<p>在预设上，tee 会改写目标档案，若你要改为增加内容的话，那可用 -a 参数达成。</p>
+<p>linux shell 中&#8221;2>&#038;1&#8243;含义:</p>
+<p>对于&#038; 1 更准确的说应该是文件描述符 1,而1 一般代表的就是STDOUT_FILENO,实际上这个操作就是一个dup2(2)调用.他标准输出到all_result ,然后复制标准输出到文件描述符2(STDERR_FILENO),其后果就是文件描述符1和2指向同一个文件表项,也可以说错误的输出被合并了.其中0 表示键盘输入 1表示屏幕输出 2表示错误输出.把标准出错重定向到标准输出,然后扔到/DEV/NULL下面去。通俗的说，就是把所有标准输出和标准出错都扔到垃圾桶里面。</p>
+
+<div class="wp_code"><div class="pre"><pre class="code" style="font-family:'Times New Roman',Garamond, Times;">command &gt;out.file 2&gt;&amp;1 &amp;</pre></div></div>
+
+<p>command >out.file是将command的输出重定向到out.file文件，即输出内容不打印到屏幕上，而是输出到out.file文件中。 2>&#038;1 是将标准出错重定向到标准输出，这里的标准输出已经重定向到了out.file文件，即将标准出错也输出到out.file文件中。最后一个&#038; ， 是让该命令在后台执行。</p>
+<p>试想2>1代表什么，2与>结合代表错误重定向，而1则代表错误重定向到一个文件1，而不代表标准输出；换成2>&#038;1，&#038;与1结合就代表标准输出了，就变成错误重定向到标准输出.</p>
+<p>你可以用:</p>
+<p>ls 2>1测试一下，不会报没有2文件的错误，但会输出一个空的文件1；</p>
+<p>ls xxx 2>1测试，没有xxx这个文件的错误输出到了1中；</p>
+<p>ls xxx 2>&#038;1测试，不会生成1这个文件了，不过错误跑到标准输出了；</p>
+<p>ls xxx >out.txt 2>&#038;1, 实际上可换成 ls xxx 1>out.txt 2>&#038;1；重定向符号>默认是1,错误和输出都传到out.txt了。</p>
+<p>为何2>&#038;1要写在后面？</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">command &gt; file 2&gt;&amp;1</pre></div></div>
+
+<p>首先是command > file将标准输出重定向到file中， 2>&#038;1 是标准错误拷贝了标准输出的行为，也就是同样被重定向到file中，最终结果就是标准输出和错误都被重定向到file中。</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">command 2&gt;&amp;1 &gt;file</pre></div></div>
+
+<p>2>&#038;1 标准错误拷贝了标准输出的行为，但此时标准输出还是在终端。>file 后输出才被重定向到file，但标准错误仍然保持在终端。</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/7244.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>链接器和装入器</title>
+		<link>http://www.xieziming.com/archives/7170.html</link>
+		<comments>http://www.xieziming.com/archives/7170.html#respond</comments>
+		<pubDate>Tue, 25 May 2010 14:39:49 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[技术维基]]></category>
+		<category><![CDATA[程序]]></category>
+		<category><![CDATA[网摘]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=7170</guid>
+		<description><![CDATA[<strong>1．静态链接、静态装入</strong>
+
+这种方法最早被采用，其特点是简单，不需要操作系统提供任何额外的支持。像C这样的编程语言从很早开始就已经支持分别编译了，程序的不同模块可以并行开发，然后独立编译为相应的目标文件。在得到了所有的目标文件后，静态链接、静态装入的做法是将所有目标文件链接成一个可执行映象，随后在创建进程时将该可执行映象一次全部装入内存。
+
+举个简单的例子，假设我们开发了两个程序Prog1和Prog2，Prog1由main1.c、utilities.c以及errhdl1.c三部分组成，分别对应程序的主框架、一些公用的辅助函数（其作用相当于库）以及错误处理部分，这三部分代码编译后分别得到各自对应的目标文件main1.o、utilities.o以及errhdl1.o。同样，Prog2由main2.c、utilities.c以及errhdl2.c三部分组成，三部分代码编译后分别得到各自对应的目标文件main2.o、utilities.o以及errhdl2.o。值得注意的是，这里Prog1和Prog2使用了相同的公用辅助函数utilities.o。当我们采用静态链接、静态装入的方法，可以看到，首先就硬盘的使用来讲，虽然两个程序共享使用了utilities，但这并没有在硬盘保存的可执行程序映象上体现出来。相反，utilities.o被链接进了每一个用到它的程序的可执行映象。内存的使用也是如此，操作系统在创建进程时将程序的可执行映象一次全部装入内存，之后进程才能开始运行。如前所述，采用这种方法使得操作系统的实现变得非常简单，但其缺点也是显而易见的。首先，既然两个程序使用的是相同的utilities.o，那么我们只要在硬盘上保存utilities.o的一份拷贝应该就足够了；另外，假如程序在运行过程中没有出现任何错误，那么错误处理部分的代码就不应该被装入内存。因此静态链接、静态装入的方法不但浪费了硬盘空间，同时也浪费了内存空间。由于早期系统的内存资源十分宝贵，所以后者对早期的系统来讲更加致命。]]></description>
+				<content:encoded><![CDATA[<p><strong>链接器和装入器的基本工作原理</strong></p>
+<p>一个程序要想在内存中运行，除了编译之外还要经过链接和装入这两个步骤。从程序员的角度来看，引入这两个步骤带来的好处就是可以直接在程序中使用printf和errno这种有意义的函数名和变量名，而不用明确指明printf和errno在标准C库中的地址。当然，为了将程序员从早期直接使用地址编程的梦魇中解救出来，编译器和汇编器在这当中做出了革命性的贡献。编译器和汇编器的出现使得程序员可以在程序中使用更具意义的符号来为函数和变量命名，这样使得程序在正确性和可读性等方面都得到了极大的提高。但是随着C语言这种支持分别编译的程序设计语言的流行，一个完整的程序往往被分割为若干个独立的部分并行开发，而各个模块间通过函数接口或全局变量进行通讯。这就带来了一个问题，编译器只能在一个模块内部完成符号名到地址的转换工作，不同模块间的符号解析由谁来做呢？比如前面所举的例子，调用printf的用户程序和实现了printf的标准C库显然就是两个不同的模块。实际上，这个工作是由链接器来完成的。</p>
+<p>为了解决不同模块间的链接问题，链接器主要有两个工作要做――符号解析和重定位：</p>
+<p><strong>符号解析：</strong>当一个模块使用了在该模块中没有定义过的函数或全局变量时，编译器生成的符号表会标记出所有这样的函数或全局变量，而链接器的责任就是要到别的模块中去查找它们的定义，如果没有找到合适的定义或者找到的合适的定义不唯一，符号解析都无法正常完成。</p>
+<p><strong>重定位：</strong>编译器在编译生成目标文件时，通常都使用从零开始的相对地址。然而，在链接过程中，链接器将从一个指定的地址开始，根据输入的目标文件的顺序以段为单位将它们一个接一个的拼装起来。除了目标文件的拼装之外，在重定位的过程中还完成了两个任务：一是生成最终的符号表；二是对代码段中的某些位置进行修改，所有需要修改的位置都由编译器生成的重定位表指出。</p>
+<p>举个简单的例子，上面的概念对读者来说就一目了然了。假如我们有一个程序由两部分构成，m.c中的main函数调用f.c中实现的函数sum：</p>
+
+<div class="wp_code"><div class="pre"><pre class="c" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #808080; font-style: italic;">/* m.c */</span>
+<span style="color: #993333;">int</span> i <span style="color: #339933;">=</span> <span style="color: #0000dd;">1</span><span style="color: #339933;">;</span>
+<span style="color: #993333;">int</span> j <span style="color: #339933;">=</span> <span style="color: #0000dd;">2</span><span style="color: #339933;">;</span>
+<span style="color: #000000; font-weight: bold;">extern</span> <span style="color: #993333;">int</span> sum<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #993333;">void</span> main<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#123;</span>
+        <span style="color: #993333;">int</span> s<span style="color: #339933;">;</span>
+        s <span style="color: #339933;">=</span> sum<span style="color: #009900;">&#40;</span>i<span style="color: #339933;">,</span> j<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #808080; font-style: italic;">/* f.c */</span>
+<span style="color: #993333;">int</span> sum<span style="color: #009900;">&#40;</span><span style="color: #993333;">int</span> i<span style="color: #339933;">,</span> <span style="color: #993333;">int</span> j<span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#123;</span>
+        <span style="color: #b1b100;">return</span> i <span style="color: #339933;">+</span> j<span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>在Linux用gcc分别将两段源程序编译成目标文件：</p>
+
+<div class="wp_code"><div class="pre"><pre class="c" style="font-family:'Times New Roman',Garamond, Times;">$ gcc <span style="color: #339933;">-</span>c m.<span style="color: #202020;">c</span>
+$ gcc <span style="color: #339933;">-</span>c f.<span style="color: #202020;">c</span></pre></div></div>
+
+<p>我们通过objdump来看看在编译过程中生成的符号表和重定位表：</p>
+
+<div class="wp_code"><div class="pre"><pre class="c" style="font-family:'Times New Roman',Garamond, Times;">$ objdump <span style="color: #339933;">-</span>x m.<span style="color: #202020;">o</span>
+……
+SYMBOL TABLE<span style="color: #339933;">:</span>
+……
+<span style="color: #208080;">00000000</span> g		O .<span style="color: #202020;">data</span>  <span style="color: #208080;">00000004</span> i
+<span style="color: #208080;">00000004</span> g		O .<span style="color: #202020;">data</span>  <span style="color: #208080;">00000004</span> j
+<span style="color: #208080;">00000000</span> g		F .<span style="color: #202020;">text</span>  <span style="color: #208080;">00000021</span> main
+<span style="color: #208080;">00000000</span>         <span style="color: #339933;">*</span>UND<span style="color: #339933;">*</span>  <span style="color: #208080;">00000000</span> sum
+RELOCATION RECORDS FOR <span style="color: #009900;">&#91;</span>.<span style="color: #202020;">text</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">:</span>
+OFFSET   TYPE              VALUE
+<span style="color: #208080;">00000007</span> R_386_32          j
+0000000d R_386_32          i
+<span style="color: #208080;">00000013</span> R_386_PC32        sum</pre></div></div>
+
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/7170.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Shell (三)</title>
+		<link>http://www.xieziming.com/archives/7152.html</link>
+		<comments>http://www.xieziming.com/archives/7152.html#respond</comments>
+		<pubDate>Wed, 19 May 2010 15:40:41 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[技术维基]]></category>
+		<category><![CDATA[shell]]></category>
+		<category><![CDATA[技术]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=7152</guid>
+		<description><![CDATA[在bash shell中，$( )与` ` (反引号)都是用来做命令替换用(command substitution)的。所谓的命令替换与我们第五章学过的变量替换差不多，都是用来重组命令行，完成引号里的命令行，然后将其结果替换出来，再重组命令行。
+
+在操作上，用$( )或` `都无所谓，只是我"个人"比较喜欢用$( )，理由是：
+
+1. ` `很容易与' ' (单引号)搞混乱，尤其对初学者来说。有时在一些奇怪的字形显示中，两种符号是一模一样的(直竖两点)。当然了，有经验的朋友还是一眼就能分辩两者。只是，若能更好的避免混乱，又何乐不为呢？
+
+2. 在多层次的复合替换中，` `须要额外的跳脱( \` )处理，而$( )则比较直观。例如：这是错的：]]></description>
+				<content:encoded><![CDATA[<p><strong>$( )与${ }：</strong></p>
+<p>在bash shell中，$( )与` ` (反引号)都是用来做命令替换用(command substitution)的。所谓的命令替换与我们第五章学过的变量替换差不多，都是用来重组命令行，完成引号里的命令行，然后将其结果替换出来，再重组命令行。</p>
+<p>例如：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">$ echo the last sunday is $(date -d &quot;last sunday&quot; +%Y-%m-%d)</pre></div></div>
+
+<p>如此便可方便得到上一星期天的日期了&#8230;上例是在linux下，在FreeBSD下应该用下面的：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">echo the last Sunday is `date ¨Cv Sunday +%Y%m%d`</pre></div></div>
+
+<p>在操作上，用$( )或` `都无所谓，只是我&#8221;个人&#8221;比较喜欢用$( )，理由是：</p>
+<p>1. ` `很容易与&#8217; &#8216; (单引号)搞混乱，尤其对初学者来说。有时在一些奇怪的字形显示中，两种符号是一模一样的(直竖两点)。当然了，有经验的朋友还是一眼就能分辩两者。只是，若能更好的避免混乱，又何乐不为呢？</p>
+<p>2. 在多层次的复合替换中，` `须要额外的跳脱( \` )处理，而$( )则比较直观。例如：这是错的：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">command1 `command2 `command3` `</pre></div></div>
+
+<p>原本的意图是要在command2 `command3`先将command3提换出来给command 2处理，然后再将结果传给command1`command2 &#8230;`来处理。然而，真正的结果在命令行中却是分成了`command2 `与&#8220;两段。</p>
+<p>正确的输入应该如下：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">command1 `command2 \`command3\` `</pre></div></div>
+
+<p>要不然，换成$( )就没问题了：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">command1 $(command2 $(command3))</pre></div></div>
+
+<p>只要你喜欢，做多少层的替换都没问题啦~~~ ^_^不过，$( )并不是没有弊端的&#8230;首先，` `基本上可用在全部的unix shell中使用，若写成shell script，其移植性比较高。而$( )并不见的每一种shell都能使用，我只能跟你说，若你用bash2的话，肯定没问题&#8230;</p>
+<p>接下来，再让我们看${ }吧&#8230;它其实就是用来作变量替换用的啦。一般情况下，$var与${var}并没有啥不一样。但是用${ }会比较精确的界定变量名称的范围，比方说：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">$ A=B
+$ echo $AB</pre></div></div>
+
+<p>原本是打算先将$A的结果替换出来，然后再补一个B字母于其后，但在命令行上，真正的结果却是只会替换变量名称为AB的值出来&#8230;若使用${ }就没问题了：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">$ echo ${A}B
+BB</pre></div></div>
+
+<p>不过，假如你只看到${ }只能用来界定变量名称的话，那你就实在太小看bash了。</p>
+<p>一般而言，A=&#8221;a b c def&#8221;这样的变量只是将$A替换为一个单一的字符串，但是改为A=(a b c def)，则是将$A定义为组数&#8230;</p>
+<p>bash的组数替换方法可参考如下方法：</p>
+<p>${A[@]}或${A· }可得到a b c def (全部组数)</p>
+<p>${A[0]}可得到a (第一个组数)，${A[1]}则为第二个组数&#8230;</p>
+<p>${#A[@]}或${#A· }可得到4 (全部组数数量)</p>
+<p>${#A[0]}可得到1 (即第一个组数(a)的长度)，${#A[3]}可得到3 (第四个组数(def)的长度)</p>
+<p>A[3]=xyz则是将第四个组数重新定义为xyz &#8230;</p>
+<p>诸如此类的&#8230;.</p>
+<p>能够善用bash的$( )与${ }可大大提高及简化shell在变量上的处理能力哦</p>
+<p>最后为大家介绍$(( ))的用途吧：它是用来作整数运算的。</p>
+<p>在bash中，$(( ))的整数运算符号大致有这些：</p>
+<p>+ &#8211; * /：分别为&#8221;加、减、乘、除&#8221;。<br />
+%：余数运算<br />
+&#038; | ^ !：分别为&#8221;AND、OR、XOR、NOT&#8221;运算。<br />
+例：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">$ a=5; b=7; c=2
+$ echo $(( a+b*c ))
+19
+$ echo $(( (a+b)/c ))
+6
+$ echo $(( (a*b)%c))
+1</pre></div></div>
+
+<p>在$(( ))中的变量名称，可于其前面加$符号来替换，也可以不用，如：$(( $a + $b * $c))也可得到19的结果。</p>
+<p>事实上，单纯用(( ))也可重定义变量值，或作testing：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">a=5; ((a++))可将$a重定义为6
+a=5; ((a--))则为a=4
+a=5; b=7; ((a &lt; b))会得到 0 (true)的返回值。</pre></div></div>
+
+<p></code></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/7152.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Shell (二)</title>
+		<link>http://www.xieziming.com/archives/7150.html</link>
+		<comments>http://www.xieziming.com/archives/7150.html#respond</comments>
+		<pubDate>Wed, 19 May 2010 15:35:56 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[技术维基]]></category>
+		<category><![CDATA[shell]]></category>
+		<category><![CDATA[技术]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=7150</guid>
+		<description><![CDATA[先说一下，为何要用( )或{ }好了。许多时候，我们在shell操作上，需要在一定条件下一次执行多个命令，也就是说，要么不执行，要么就全执行，而不是每次依序的判断是否要执行下一个命令。或是，需要从一些命令执行优先次顺中得到豁免，如算术的2*(3+4)那样...
+这时候，我们就可引入"命令群组"(command group)的概念：将多个命令集中处理。
+
+在shell command line中，一般人或许不太计较( )与{ }这两对符号的差异，虽然两者都可将多个命令作群组化处理，但若从技术细节上，却是很不一样的：
+
+( )将command group置于sub-shell去执行，也称nested sub-shell。
+
+{ }则是在同一个shell内完成，也称为non-named command group。
+
+如果你对上一章的fork与source的概念还记得的话，那就不难理解两者的差异了。要是在command group中扯上变量及其它环境的修改，我们可以根据不同的需求来使用( )或{ }。通常而言，若所作的修改是临时的，且不想影响原有或以后的设定，那我们就nested sub-shell，反之，则用non-named command group。是的，光从command line来看，( )与{ }的差别就讲完了，够轻松吧~~~ ^_^
+
+然而，若这两个meta用在其它command meta或领域中(如Regular Expression)，还是有很多差别的。
+
+我这里只想补充一个概念，就是function。所谓的function，就是用一个名字去命名一个 command group，然后再调用这个名字去执行command group。从non-namedcommand group来推断，大概你也可以猜到我要说的是{ }了吧？]]></description>
+				<content:encoded><![CDATA[<p><strong>( ) 与 { }：</strong></p>
+<p>先说一下，为何要用( )或{ }好了。许多时候，我们在shell操作上，需要在一定条件下一次执行多个命令，也就是说，要么不执行，要么就全执行，而不是每次依序的判断是否要执行下一个命令。或是，需要从一些命令执行优先次顺中得到豁免，如算术的2*(3+4)那样&#8230;<br />
+这时候，我们就可引入&#8221;命令群组&#8221;(command group)的概念：将多个命令集中处理。</p>
+<p>在shell command line中，一般人或许不太计较( )与{ }这两对符号的差异，虽然两者都可将多个命令作群组化处理，但若从技术细节上，却是很不一样的：</p>
+<p>( )将command group置于sub-shell去执行，也称nested sub-shell。</p>
+<p>{ }则是在同一个shell内完成，也称为non-named command group。</p>
+<p>如果你对上一章的fork与source的概念还记得的话，那就不难理解两者的差异了。要是在command group中扯上变量及其它环境的修改，我们可以根据不同的需求来使用( )或{ }。通常而言，若所作的修改是临时的，且不想影响原有或以后的设定，那我们就nested sub-shell，反之，则用non-named command group。是的，光从command line来看，( )与{ }的差别就讲完了，够轻松吧~~~ ^_^</p>
+<p>然而，若这两个meta用在其它command meta或领域中(如Regular Expression)，还是有很多差别的。</p>
+<p>我这里只想补充一个概念，就是function。所谓的function，就是用一个名字去命名一个 command group，然后再调用这个名字去执行command group。从non-namedcommand group来推断，大概你也可以猜到我要说的是{ }了吧？</p>
+<p>在bash中，function的定义方式有两种：</p>
+<p>方式一：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">function function_name {
+command1
+command2
+command3
+....
+}</pre></div></div>
+
+<p>方式二：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">fuction_name () {
+command1
+command2
+command3
+....
+}</pre></div></div>
+
+<p>用哪一种方式无所谓，只是若碰到所定义的名称与现有的命令或别名(Alias)冲突的话，方式二或许会失败。但方式二起码可以少打function这一串英文字母，对懒人来说(如我)，又何乐不为呢？&#8230; ^_^</p>
+<p>function在某一程度来说，也可称为&#8221;函式&#8221;，但请不要与传统编程所使用的函式(library)搞混了，毕竟两者差异很大。惟一相同的是，我们都可以随时用&#8221;已定义的名称&#8221;来调用它们&#8230;</p>
+<p>若我们在shell操作中，需要不断的重复执行某些命令，我们首先想到的，或许是将命令写成命令稿(shell script)。不过，我们也可以写成function，然后在command line中打上function_name就可当一舨的script来使用了。只是若你在shell中定义的function，除了可用unset function_name取消外，一旦退出shell，function也跟着取消。然而，在script中使用function却有许多好处，除了可以提高整体script的执行效能外(因为已被加载)，还可以节省许多重复的代码&#8230;</p>
+<p>简单而言，若你会将多个命令写成script以供调用的话，那，你可以将function看成是script中的script &#8230; ^_^</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/7150.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Shell (一)</title>
+		<link>http://www.xieziming.com/archives/7145.html</link>
+		<comments>http://www.xieziming.com/archives/7145.html#respond</comments>
+		<pubDate>Wed, 19 May 2010 14:51:55 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[技术维基]]></category>
+		<category><![CDATA[shell]]></category>
+		<category><![CDATA[技术]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=7145</guid>
+		<description><![CDATA[所谓环境变量其实就是那些会传给子进程的变量。简单而言，"遗传性"就是区分本地变量与环境变量的决定性指标。然而，从遗传的角度来看，我们也不难发现环境变量的另一个重要特征：环境变量只能从父进程到子进程单向继承。换句话说：在子进程中的环境如何变更，均不会影响父进程的环境。
+
+接下来，再让我们了解一下命令脚本(shell script)的概念。所谓的shell script讲起来很简单，就是将你平时在shell prompt后所输入的多行command line依序写入一个文件去而已。其中再加上一些条件判断、互动界面、参数运用、函数调用、等等技巧，得以让script更加"聪明"的执行，但若撇开这些技巧不谈，我们真的可以简单的看成script只不过依次执行预先写好的命令行而已。
+
+再结合以上两个概念(process + script)，那应该就不难理解如下这句话的意思了：正常来说，当我们执行一个shell script时，其实是先产生一个sub-shell的子进程，然后sub-shell再去产生命令行的子进程。然则，那让我们回到本章开始时所提到的例子再从新思考：
+cd /etc/aa/bb/cc可以执行，但是把这条命令写入shell时shell不执行！这是什么原因呀！
+
+答案是这样的：因为，一般我们跑的shell script是用subshell去执行的。
+
+从process的观念来看，是parent process产生一个child process去执行，当child结束后，会返回parent，但parent的环境是不会因child的改变而改变的。所谓的环境元数很多，凡举effective id, variable, workding dir等等...其中的workding dir ($PWD)正是楼主的疑问所在：
+当用subshell来跑script的话，sub shell的$PWD会因为cd而变更，但当返回primary shell时，$PWD是不会变更的。
+
+所谓source就是让script在当前shell内执行、而不是产生一个sub-shell来执行。由于所有执行结果均于当前shell内完成，若script的环境有所改变，当然也会改变当前环境了因此，只要我们要将原本单独输入的script命令行变成source命令的参数，就可轻易解决前例提到的问题了。]]></description>
+				<content:encoded><![CDATA[<p><strong>提问：</strong></p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">cd /etc/aa/bb/cc</pre></div></div>
+
+<p>可以执行，但是把这条命令写入shell时shell不执行！这是什么原因呀！</p>
+<p>先让我们了解一下进程(process)的观念好了。首先，我们所执行的任何程序，都是由父进程(parent process)所产生出来的一个子进程(child process)，子进程在结束后，将返回到父进程去。此一现象在Linux系统中被称为 fork。当子进程被产生的时候，将会从父进程那里获得一定的资源分配、及(更重要的是)继承父进程的环境。</p>
+<p>所谓环境变量其实就是那些会传给子进程的变量。简单而言，&#8221;遗传性&#8221;就是区分本地变量与环境变量的决定性指标。然而，从遗传的角度来看，我们也不难发现环境变量的另一个重要特征：环境变量只能从父进程到子进程单向继承。换句话说：在子进程中的环境如何变更，均不会影响父进程的环境。</p>
+<p>接下来，再让我们了解一下命令脚本(shell script)的概念。所谓的shell script讲起来很简单，就是将你平时在shell prompt后所输入的多行command line依序写入一个文件去而已。其中再加上一些条件判断、互动界面、参数运用、函数调用、等等技巧，得以让script更加&#8221;聪明&#8221;的执行，但若撇开这些技巧不谈，我们真的可以简单的看成script只不过依次执行预先写好的命令行而已。</p>
+<p>再结合以上两个概念(process + script)，那应该就不难理解如下这句话的意思了：正常来说，当我们执行一个shell script时，其实是先产生一个sub-shell的子进程，然后sub-shell再去产生命令行的子进程。然则，那让我们回到本章开始时所提到的例子再从新思考：<br />
+cd /etc/aa/bb/cc可以执行，但是把这条命令写入shell时shell不执行！这是什么原因呀！</p>
+<p>答案是这样的：因为，一般我们跑的shell script是用subshell去执行的。</p>
+<p>从process的观念来看，是parent process产生一个child process去执行，当child结束后，会返回parent，但parent的环境是不会因child的改变而改变的。所谓的环境元数很多，凡举effective id, variable, workding dir等等&#8230;其中的workding dir ($PWD)正是楼主的疑问所在：<br />
+当用subshell来跑script的话，sub shell的$PWD会因为cd而变更，但当返回primary shell时，$PWD是不会变更的。</p>
+<p>所谓source就是让script在当前shell内执行、而不是产生一个sub-shell来执行。由于所有执行结果均于当前shell内完成，若script的环境有所改变，当然也会改变当前环境了因此，只要我们要将原本单独输入的script命令行变成source命令的参数，就可轻易解决前例提到的问题了。</p>
+<p>比方说，原本我们是如此执行 script的：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">./my.script</pre></div></div>
+
+<p>现在改成这样即可：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">source ./my.script</pre></div></div>
+
+<p>或：</p>
+
+<div class="wp_code"><div class="pre"><pre class="shell" style="font-family:'Times New Roman',Garamond, Times;">. ./my.script</pre></div></div>
+
+<p>exec也是让script在同一个进程上执行，但是原有进程则被结束了。也就是简而言之：原有进程会否终止，就是exec与source/fork的最大差异了。</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/7145.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Java基础面试题</title>
+		<link>http://www.xieziming.com/archives/6967.html</link>
+		<comments>http://www.xieziming.com/archives/6967.html#respond</comments>
+		<pubDate>Thu, 25 Mar 2010 03:06:08 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[技术维基]]></category>
+		<category><![CDATA[java]]></category>
+		<category><![CDATA[面试]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=6967</guid>
+		<description><![CDATA[<span style="color: #800080;">String是最基本的数据类型吗？</span>
+<blockquote>基本数据类型包括byte、int、char、long、float、double、boolean和short。
+java.lang.String类是final类型的，因此不可以继承这个类、不能修改这个类。为了提高效率节省空间，我们应该用StringBuffer类</blockquote>
+<span style="color: #800080;">int 和 Integer 有什么区别？</span>
+Java 提供两种不同的类型：引用类型和原始类型（或内置类型）。Int是java的原始数据类型，Integer是java为int提供的封装类。Java为每个原始类型提供了封装类。
+
+<span style="color: #800080;">String 和StringBuffer的区别？</span>
+<blockquote>JAVA平台提供了两个类：String和StringBuffer，它们可以储存和操作字符串，即包含多个字符的字符数据。这个String类提供了数值不可改变的字符串。而这个StringBuffer类提供的字符串进行修改。当你知道字符数据要改变的时候你就可以使用StringBuffer。典型地，你可以使用StringBuffers来动态构造字符数据。</blockquote>
+
+<span style="color: #800080;">运行时异常与一般异常有何异同？</span>
+<blockquote>异常表示程序运行过程中可能出现的非正常状态，运行时异常表示虚拟机的通常操作中可能遇到的异常，是一种常见运行错误。java编译器要求方法必须声明抛出可能发生的非运行时异常，但是并不要求必须声明抛出未被捕获的运行时异常。</blockquote>
+
+<span style="color: #800080;">Servlet的生命周期，以及Servlet和CGI的区别？</span>
+<blockquote>Servlet被服务器实例化后，容器运行其init方法，请求到达时运行其service方法，service方法自动派遣运行与请求对应的doXXX方法（doGet，doPost）等，当服务器决定将实例销毁的时候调用其destroy方法。
+与cgi的区别在于servlet处于服务器进程中，它通过多线程方式运行其service方法，一个实例可以服务于多个请求，并且其实例一般不会销毁，而CGI对每个请求都产生新的进程，服务完成后就销毁，所以效率上低于servlet。</blockquote>
+
+<span style="color: #800080;">ArrayList,Vector, LinkedList的存储性能和特性？</span>
+<blockquote>ArrayList和Vector都是使用数组方式存储数据，此数组元素数大于实际存储的数据以便增加和插入元素，它们都允许直接按序号索引元素，但是插入元素要涉及数组元素移动等内存操作，所以索引数据快而插入数据慢，Vector由于使用了synchronized方法（线程安全），通常性能上较ArrayList差，而LinkedList使用双向链表实现存储，按序号索引数据需要进行前向或后向遍历，但是插入数据时只需要记录本项的前后项即可，所以插入速度较快。</blockquote>]]></description>
+				<content:encoded><![CDATA[<p><span style="color: #800080;">String是最基本的数据类型吗？</span></p>
+<blockquote><p>基本数据类型包括byte、int、char、long、float、double、boolean和short。<br />
+java.lang.String类是final类型的，因此不可以继承这个类、不能修改这个类。为了提高效率节省空间，我们应该用StringBuffer类</p></blockquote>
+<p><span style="color: #800080;">int 和 Integer 有什么区别？</span><br />
+Java 提供两种不同的类型：引用类型和原始类型（或内置类型）。Int是java的原始数据类型，Integer是java为int提供的封装类。Java为每个原始类型提供了封装类。</p>
+<p><span style="color: #800080;">String 和StringBuffer的区别？</span></p>
+<blockquote><p>JAVA平台提供了两个类：String和StringBuffer，它们可以储存和操作字符串，即包含多个字符的字符数据。这个String类提供了数值不可改变的字符串。而这个StringBuffer类提供的字符串进行修改。当你知道字符数据要改变的时候你就可以使用StringBuffer。典型地，你可以使用StringBuffers来动态构造字符数据。</p></blockquote>
+<p><span style="color: #800080;">运行时异常与一般异常有何异同？</span></p>
+<blockquote><p>异常表示程序运行过程中可能出现的非正常状态，运行时异常表示虚拟机的通常操作中可能遇到的异常，是一种常见运行错误。java编译器要求方法必须声明抛出可能发生的非运行时异常，但是并不要求必须声明抛出未被捕获的运行时异常。</p></blockquote>
+<p><span style="color: #800080;">Servlet的生命周期，以及Servlet和CGI的区别？</span></p>
+<blockquote><p>Servlet被服务器实例化后，容器运行其init方法，请求到达时运行其service方法，service方法自动派遣运行与请求对应的doXXX方法（doGet，doPost）等，当服务器决定将实例销毁的时候调用其destroy方法。<br />
+与cgi的区别在于servlet处于服务器进程中，它通过多线程方式运行其service方法，一个实例可以服务于多个请求，并且其实例一般不会销毁，而CGI对每个请求都产生新的进程，服务完成后就销毁，所以效率上低于servlet。</p></blockquote>
+<p><span style="color: #800080;">ArrayList,Vector, LinkedList的存储性能和特性？</span></p>
+<blockquote><p>ArrayList和Vector都是使用数组方式存储数据，此数组元素数大于实际存储的数据以便增加和插入元素，它们都允许直接按序号索引元素，但是插入元素要涉及数组元素移动等内存操作，所以索引数据快而插入数据慢，Vector由于使用了synchronized方法（线程安全），通常性能上较ArrayList差，而LinkedList使用双向链表实现存储，按序号索引数据需要进行前向或后向遍历，但是插入数据时只需要记录本项的前后项即可，所以插入速度较快。</p></blockquote>
+<p><span style="color: #800080;">EJB是基于哪些技术实现的？并说出SessionBean和EntityBean的区别，StatefulBean和StatelessBean的区别。</span></p>
+<blockquote><p>EJB包括Session Bean、Entity Bean、Message Driven Bean，基于JNDI、RMI、JAT等技术实现。<br />
+SessionBean在J2EE应用程序中被用来完成一些服务器端的业务操作，例如访问数据库、调用其他EJB组件。EntityBean被用来代表应用系统中用到的数据。<br />
+对于客户机，SessionBean是一种非持久性对象，它实现某些在服务器上运行的业务逻辑。<br />
+对于客户机，EntityBean是一种持久性对象，它代表一个存储在持久性存储器中的实体的对象视图，或是一个由现有企业应用程序实现的实体。<br />
+Session Bean 还可以再细分为 Stateful Session Bean 与 Stateless Session Bean ，这两种的 Session Bean都可以将系统逻辑放在 method之中执行，不同的是 Stateful Session Bean 可以记录呼叫者的状态，因此通常来说，一个使用者会有一个相对应的 Stateful Session Bean 的实体。Stateless Session Bean 虽然也是逻辑组件，但是他却不负责记录使用者状态，也就是说当使用者呼叫 Stateless Session Bean 的时候，EJB Container 并不会找寻特定的 Stateless Session Bean 的实体来执行这个 method。换言之，很可能数个使用者在执行某个 Stateless Session Bean 的 methods 时，会是同一个 Bean 的 Instance 在执行。从内存方面来看， Stateful Session Bean 与 Stateless Session Bean 比较， Stateful Session Bean 会消耗 J2EE Server 较多的内存，然而 Stateful Session Bean 的优势却在于他可以维持使用者的状态。</p></blockquote>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/6967.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>程序员图书推荐</title>
+		<link>http://www.xieziming.com/archives/6962.html</link>
+		<comments>http://www.xieziming.com/archives/6962.html#respond</comments>
+		<pubDate>Wed, 24 Mar 2010 05:14:55 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[技术维基]]></category>
+		<category><![CDATA[Summary]]></category>
+		<category><![CDATA[推荐]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=6962</guid>
+		<description><![CDATA[“如果能时光倒流，回到过去，作为一个开发人员，你可以告诉自己在职业生涯初期应该读一本，你会选择哪本书呢？我希望这个书单列表内容丰富，可以涵盖很多东西。”
+
+<span style="color: #800080;">1. 《代码大全》</span>
+
+“优秀的编程实践的百科全书，《代码大全》注重个人技术，其中所有东西加起来，就是我们本能所说的“编写整洁的代码”。这本书有50页在谈论代码布局。”
+
+对于新手来说，这本书中的观念有点高阶了。到你准备阅读此书时，你应该已经知道并实践过书中99%的观念。
+
+<span style="color: #800080;">2. 《程序员修炼之道》</span>
+
+对于那些已经学习过编程机制的程序员来说，这是一本卓越的书。或许他们还是在校生，但对要自己做什么，还感觉不是很安全。就像草图和架构之间的差别。虽然你在学校课堂上学到的是画图，你也可以画的很漂亮，但如果你觉得你不太知道从哪儿下手，如果某人要你独自画一个P2P的音乐交换网络图，那这本书就适合你了。—— Joel
+
+<span style="color: #800080;">3. 《计算机程序的构造和解释》</span>
+
+《代码大全》、《重构》和《设计模式》这些经典书会教给你高效的工作习惯和交易细节。其他像《人件集》、《计算机编程心理学》和《人月神话》这些书会深入软件开发的心理层面。其他书籍则处理算法。这些书都有自己所属的位置。
+
+然而《计算机程序的构造和解释》与这些不同。这是一本会启发你的书，它会燃起你编写出色程序的热情；它还将教会你认识并欣赏美；它会让你有种敬畏，让你难以抑制地渴望学习更多的东西。其他书或许会让你成为一位更出色的程序员，但此书将一定会让你成为一名程序员。
+
+同时，你将会学到其他东西，函数式编程（第三章）、惰性计算、元编程、虚拟机、解释器和编译器。
+
+一些人认为此书不适合新手。个人认为，虽然我并不完全认同要有一些编程经验才能读此书，但我还是一定推荐给初学者。毕竟这本书是写给著名的6.001，是麻省理工学院的入门编程课程。此书或许需要多做努力（尤其你在做练习的时候，你也应当如此），但这个价是对得起这本书的。]]></description>
+				<content:encoded><![CDATA[<p>“如果能时光倒流，回到过去，作为一个开发人员，你可以告诉自己在职业生涯初期应该读一本，你会选择哪本书呢？我希望这个书单列表内容丰富，可以涵盖很多东西。”</p>
+<p><span style="color: #800080;">1. 《代码大全》</span></p>
+<p>“优秀的编程实践的百科全书，《代码大全》注重个人技术，其中所有东西加起来，就是我们本能所说的“编写整洁的代码”。这本书有50页在谈论代码布局。”</p>
+<p>对于新手来说，这本书中的观念有点高阶了。到你准备阅读此书时，你应该已经知道并实践过书中99%的观念。</p>
+<p><span style="color: #800080;">2. 《程序员修炼之道》</span></p>
+<p>对于那些已经学习过编程机制的程序员来说，这是一本卓越的书。或许他们还是在校生，但对要自己做什么，还感觉不是很安全。就像草图和架构之间的差别。虽然你在学校课堂上学到的是画图，你也可以画的很漂亮，但如果你觉得你不太知道从哪儿下手，如果某人要你独自画一个P2P的音乐交换网络图，那这本书就适合你了。—— Joel</p>
+<p><span style="color: #800080;">3. 《计算机程序的构造和解释》</span></p>
+<p>《代码大全》、《重构》和《设计模式》这些经典书会教给你高效的工作习惯和交易细节。其他像《人件集》、《计算机编程心理学》和《人月神话》这些书会深入软件开发的心理层面。其他书籍则处理算法。这些书都有自己所属的位置。</p>
+<p>然而《计算机程序的构造和解释》与这些不同。这是一本会启发你的书，它会燃起你编写出色程序的热情；它还将教会你认识并欣赏美；它会让你有种敬畏，让你难以抑制地渴望学习更多的东西。其他书或许会让你成为一位更出色的程序员，但此书将一定会让你成为一名程序员。</p>
+<p>同时，你将会学到其他东西，函数式编程（第三章）、惰性计算、元编程、虚拟机、解释器和编译器。</p>
+<p>一些人认为此书不适合新手。个人认为，虽然我并不完全认同要有一些编程经验才能读此书，但我还是一定推荐给初学者。毕竟这本书是写给著名的6.001，是麻省理工学院的入门编程课程。此书或许需要多做努力（尤其你在做练习的时候，你也应当如此），但这个价是对得起这本书的。</p>
+<p><span style="color: #800080;">4. 《C程序设计语言》</span></p>
+<p>这本书简洁易读，会教给你三件事：C 编程语言；如何像程序员一样思考；底层计算模型。（这对理解“底层”非常重要）—— Nathan</p>
+<p><span style="color: #800080;">5. 《算法导论》</span></p>
+<p>《代码大全》教你如何正确编程；《人月神话》教你如何正确管理；《设计模式》教你如何正确设计……</p>
+<p>在我看来，代码只是一个工具，并非精髓。开发软件的主要部分是创建新算法或重新实现现有算法。其他部分则像重新组装乐高砖块或创建“管理”层。我依然梦想这样的工作，我的大部分时间（&gt;50%）是在写算法，其他“管理”细节则留给其他人…… —— Ran Biron</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/6962.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>网站配色表</title>
+		<link>http://www.xieziming.com/archives/5528.html</link>
+		<comments>http://www.xieziming.com/archives/5528.html#respond</comments>
+		<pubDate>Tue, 23 Feb 2010 09:07:26 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[技术维基]]></category>
+		<category><![CDATA[API]]></category>
+		<category><![CDATA[程序]]></category>
+
+		<guid isPermaLink="false">http://www.xieziming.com/?p=5528</guid>
+		<description><![CDATA[<table cellspacing="2" width="550" align="center">
+<tbody>
+<tr>
+<td width="60" height="30" bgcolor="#ffffff"></td>
+<td width="60">#FFFFFF</td>
+<td width="60" height="30" bgcolor="#fffff0"></td>
+<td width="60">#FFFFF0</td>
+<td width="60" height="30" bgcolor="#ffffe0"></td>
+<td width="60">#FFFFE0</td>
+<td width="60" height="30" bgcolor="#ffff00"></td>
+<td width="60">#FFFF00</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#fffafa"></td>
+<td width="60">#FFFAFA</td>
+<td width="60" height="30" bgcolor="#fffaf0"></td>
+<td width="60">#FFFAF0</td>
+<td width="60" height="30" bgcolor="#fffacd"></td>
+<td width="60">#FFFACD</td>
+<td width="60" height="30" bgcolor="#fff8dc"></td>
+<td width="60">#FFF8DC</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#fff68f"></td>
+<td width="60">#FFF68F</td>
+<td width="60" height="30" bgcolor="#fff5ee"></td>
+<td width="60">#FFF5EE</td>
+<td width="60" height="30" bgcolor="#fff0f5"></td>
+<td width="60">#FFF0F5</td>
+<td width="60" height="30" bgcolor="#ffefdb"></td>
+<td width="60">#FFEFDB</td>
+</tr>
+</tbody>
+</table>]]></description>
+				<content:encoded><![CDATA[<table cellspacing="2" width="640" align="center">
+<tbody>
+<tr>
+<td width="60" height="30" bgcolor="#ffffff"></td>
+<td width="60">#FFFFFF</td>
+<td width="60" height="30" bgcolor="#fffff0"></td>
+<td width="60">#FFFFF0</td>
+<td width="60" height="30" bgcolor="#ffffe0"></td>
+<td width="60">#FFFFE0</td>
+<td width="60" height="30" bgcolor="#ffff00"></td>
+<td width="60">#FFFF00</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#fffafa"></td>
+<td width="60">#FFFAFA</td>
+<td width="60" height="30" bgcolor="#fffaf0"></td>
+<td width="60">#FFFAF0</td>
+<td width="60" height="30" bgcolor="#fffacd"></td>
+<td width="60">#FFFACD</td>
+<td width="60" height="30" bgcolor="#fff8dc"></td>
+<td width="60">#FFF8DC</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#fff68f"></td>
+<td width="60">#FFF68F</td>
+<td width="60" height="30" bgcolor="#fff5ee"></td>
+<td width="60">#FFF5EE</td>
+<td width="60" height="30" bgcolor="#fff0f5"></td>
+<td width="60">#FFF0F5</td>
+<td width="60" height="30" bgcolor="#ffefdb"></td>
+<td width="60">#FFEFDB</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#ffefd5"></td>
+<td width="60">#FFEFD5</td>
+<td width="60" height="30" bgcolor="#ffec8b"></td>
+<td width="60">#FFEC8B</td>
+<td width="60" height="30" bgcolor="#ffebcd"></td>
+<td width="60">#FFEBCD</td>
+<td width="60" height="30" bgcolor="#ffe7ba"></td>
+<td width="60">#FFE7BA</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#ffe4e1"></td>
+<td width="60">#FFE4E1</td>
+<td width="60" height="30" bgcolor="#ffe4c4"></td>
+<td width="60">#FFE4C4</td>
+<td width="60" height="30" bgcolor="#ffe4b5"></td>
+<td width="60">#FFE4B5</td>
+<td width="60" height="30" bgcolor="#ffe1ff"></td>
+<td width="60">#FFE1FF</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#ffdead"></td>
+<td width="60">#FFDEAD</td>
+<td width="60" height="30" bgcolor="#ffdab9"></td>
+<td width="60">#FFDAB9</td>
+<td width="60" height="30" bgcolor="#ffd700"></td>
+<td width="60">#FFD700</td>
+<td width="60" height="30" bgcolor="#ffd39b"></td>
+<td width="60">#FFD39B</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#ffc1c1"></td>
+<td width="60">#FFC1C1</td>
+<td width="60" height="30" bgcolor="#ffc125"></td>
+<td width="60">#FFC125</td>
+<td width="60" height="30" bgcolor="#ffc0cb"></td>
+<td width="60">#FFC0CB</td>
+<td width="60" height="30" bgcolor="#ffbbff"></td>
+<td width="60">#FFBBFF</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#ffb90f"></td>
+<td width="60">#FFB90F</td>
+<td width="60" height="30" bgcolor="#ffb6c1"></td>
+<td width="60">#FFB6C1</td>
+<td width="60" height="30" bgcolor="#ffb5c5"></td>
+<td width="60">#FFB5C5</td>
+<td width="60" height="30" bgcolor="#ffaeb9"></td>
+<td width="60">#FFAEB9</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#ffa54f"></td>
+<td width="60">#FFA54F</td>
+<td width="60" height="30" bgcolor="#ffa500"></td>
+<td width="60">#FFA500</td>
+<td width="60" height="30" bgcolor="#ffa07a"></td>
+<td width="60">#FFA07A</td>
+<td width="60" height="30" bgcolor="#ff8c69"></td>
+<td width="60">#FF8C69</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#ff8c00"></td>
+<td width="60">#FF8C00</td>
+<td width="60" height="30" bgcolor="#ff83fa"></td>
+<td width="60">#FF83FA</td>
+<td width="60" height="30" bgcolor="#ff82ab"></td>
+<td width="60">#FF82AB</td>
+<td width="60" height="30" bgcolor="#ff8247"></td>
+<td width="60">#FF8247</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#ff7f50"></td>
+<td width="60">#FF7F50</td>
+<td width="60" height="30" bgcolor="#ff7f24"></td>
+<td width="60">#FF7F24</td>
+<td width="60" height="30" bgcolor="#ff7f00"></td>
+<td width="60">#FF7F00</td>
+<td width="60" height="30" bgcolor="#ff7256"></td>
+<td width="60">#FF7256</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#ff6eb4"></td>
+<td width="60">#FF6EB4</td>
+<td width="60" height="30" bgcolor="#ff6a6a"></td>
+<td width="60">#FF6A6A</td>
+<td width="60" height="30" bgcolor="#ff69b4"></td>
+<td width="60">#FF69B4</td>
+<td width="60" height="30" bgcolor="#ff6347"></td>
+<td width="60">#FF6347</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#ff4500"></td>
+<td width="60">#FF4500</td>
+<td width="60" height="30" bgcolor="#ff4040"></td>
+<td width="60">#FF4040</td>
+<td width="60" height="30" bgcolor="#ff3e96"></td>
+<td width="60">#FF3E96</td>
+<td width="60" height="30" bgcolor="#ff34b3"></td>
+<td width="60">#FF34B3</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#ff3030"></td>
+<td width="60">#FF3030</td>
+<td width="60" height="30" bgcolor="#ff1493"></td>
+<td width="60">#FF1493</td>
+<td width="60" height="30" bgcolor="#ff00ff"></td>
+<td width="60">#FF00FF</td>
+<td width="60" height="30" bgcolor="#ff0000"></td>
+<td width="60">#FF0000</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#fdf5e6"></td>
+<td width="60">#FDF5E6</td>
+<td width="60" height="30" bgcolor="#fcfcfc"></td>
+<td width="60">#FCFCFC</td>
+<td width="60" height="30" bgcolor="#fafafa"></td>
+<td width="60">#FAFAFA</td>
+<td width="60" height="30" bgcolor="#fafad2"></td>
+<td width="60">#FAFAD2</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#faf0e6"></td>
+<td width="60">#FAF0E6</td>
+<td width="60" height="30" bgcolor="#faebd7"></td>
+<td width="60">#FAEBD7</td>
+<td width="60" height="30" bgcolor="#fa8072"></td>
+<td width="60">#FA8072</td>
+<td width="60" height="30" bgcolor="#f8f8ff"></td>
+<td width="60">#F8F8FF</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#f7f7f7"></td>
+<td width="60">#F7F7F7</td>
+<td width="60" height="30" bgcolor="#f5fffa"></td>
+<td width="60">#F5FFFA</td>
+<td width="60" height="30" bgcolor="#f5f5f5"></td>
+<td width="60">#F5F5F5</td>
+<td width="60" height="30" bgcolor="#f5f5dc"></td>
+<td width="60">#F5F5DC</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#f5deb3"></td>
+<td width="60">#F5DEB3</td>
+<td width="60" height="30" bgcolor="#f4f4f4"></td>
+<td width="60">#F4F4F4</td>
+<td width="60" height="30" bgcolor="#f4a460"></td>
+<td width="60">#F4A460</td>
+<td width="60" height="30" bgcolor="#f2f2f2"></td>
+<td width="60">#F2F2F2</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#f0ffff"></td>
+<td width="60">#F0FFFF</td>
+<td width="60" height="30" bgcolor="#f0fff0"></td>
+<td width="60">#F0FFF0</td>
+<td width="60" height="30" bgcolor="#f0f8ff"></td>
+<td width="60">#F0F8FF</td>
+<td width="60" height="30" bgcolor="#f0f0f0"></td>
+<td width="60">#F0F0F0</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#f0e68c"></td>
+<td width="60">#F0E68C</td>
+<td width="60" height="30" bgcolor="#f08080"></td>
+<td width="60">#F08080</td>
+<td width="60" height="30" bgcolor="#eeeee0"></td>
+<td width="60">#EEEEE0</td>
+<td width="60" height="30" bgcolor="#eeeed1"></td>
+<td width="60">#EEEED1</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#eeee00"></td>
+<td width="60">#EEEE00</td>
+<td width="60" height="30" bgcolor="#eee9e9"></td>
+<td width="60">#EEE9E9</td>
+<td width="60" height="30" bgcolor="#eee9bf"></td>
+<td width="60">#EEE9BF</td>
+<td width="60" height="30" bgcolor="#eee8cd"></td>
+<td width="60">#EEE8CD</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#eee8aa"></td>
+<td width="60">#EEE8AA</td>
+<td width="60" height="30" bgcolor="#eee685"></td>
+<td width="60">#EEE685</td>
+<td width="60" height="30" bgcolor="#eee5de"></td>
+<td width="60">#EEE5DE</td>
+<td width="60" height="30" bgcolor="#eee0e5"></td>
+<td width="60">#EEE0E5</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#eedfcc"></td>
+<td width="60">#EEDFCC</td>
+<td width="60" height="30" bgcolor="#eedc82"></td>
+<td width="60">#EEDC82</td>
+<td width="60" height="30" bgcolor="#eed8ae"></td>
+<td width="60">#EED8AE</td>
+<td width="60" height="30" bgcolor="#eed5d2"></td>
+<td width="60">#EED5D2</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#eed5b7"></td>
+<td width="60">#EED5B7</td>
+<td width="60" height="30" bgcolor="#eed2ee"></td>
+<td width="60">#EED2EE</td>
+<td width="60" height="30" bgcolor="#eecfa1"></td>
+<td width="60">#EECFA1</td>
+<td width="60" height="30" bgcolor="#eecbad"></td>
+<td width="60">#EECBAD</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#eec900"></td>
+<td width="60">#EEC900</td>
+<td width="60" height="30" bgcolor="#eec591"></td>
+<td width="60">#EEC591</td>
+<td width="60" height="30" bgcolor="#eeb4b4"></td>
+<td width="60">#EEB4B4</td>
+<td width="60" height="30" bgcolor="#eeb422"></td>
+<td width="60">#EEB422</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#eeaeee"></td>
+<td width="60">#EEAEEE</td>
+<td width="60" height="30" bgcolor="#eead0e"></td>
+<td width="60">#EEAD0E</td>
+<td width="60" height="30" bgcolor="#eea9b8"></td>
+<td width="60">#EEA9B8</td>
+<td width="60" height="30" bgcolor="#eea2ad"></td>
+<td width="60">#EEA2AD</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#ee9a49"></td>
+<td width="60">#EE9A49</td>
+<td width="60" height="30" bgcolor="#ee9a00"></td>
+<td width="60">#EE9A00</td>
+<td width="60" height="30" bgcolor="#ee9572"></td>
+<td width="60">#EE9572</td>
+<td width="60" height="30" bgcolor="#ee82ee"></td>
+<td width="60">#EE82EE</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#ee8262"></td>
+<td width="60">#EE8262</td>
+<td width="60" height="30" bgcolor="#ee7ae9"></td>
+<td width="60">#EE7AE9</td>
+<td width="60" height="30" bgcolor="#ee799f"></td>
+<td width="60">#EE799F</td>
+<td width="60" height="30" bgcolor="#ee7942"></td>
+<td width="60">#EE7942</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#ee6021"></td>
+<td width="60">#EE6021</td>
+<td width="60" height="30" bgcolor="#ee6000"></td>
+<td width="60">#EE6000</td>
+<td width="60" height="30" bgcolor="#ee6aa7"></td>
+<td width="60">#EE6AA7</td>
+<td width="60" height="30" bgcolor="#ee6a50"></td>
+<td width="60">#EE6A50</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#ee6363"></td>
+<td width="60">#EE6363</td>
+<td width="60" height="30" bgcolor="#ee5c42"></td>
+<td width="60">#EE5C42</td>
+<td width="60" height="30" bgcolor="#ee4000"></td>
+<td width="60">#EE4000</td>
+<td width="60" height="30" bgcolor="#ee3b3b"></td>
+<td width="60">#EE3B3B</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#ee3a8c"></td>
+<td width="60">#EE3A8C</td>
+<td width="60" height="30" bgcolor="#ee30a7"></td>
+<td width="60">#EE30A7</td>
+<td width="60" height="30" bgcolor="#ee2c2c"></td>
+<td width="60">#EE2C2C</td>
+<td width="60" height="30" bgcolor="#ee1289"></td>
+<td width="60">#EE1289</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#ee00ee"></td>
+<td width="60">#EE00EE</td>
+<td width="60" height="30" bgcolor="#ee0000"></td>
+<td width="60">#EE0000</td>
+<td width="60" height="30" bgcolor="#ededed"></td>
+<td width="60">#EDEDED</td>
+<td width="60" height="30" bgcolor="#ebebeb"></td>
+<td width="60">#EBEBEB</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#eaeaea"></td>
+<td width="60">#EAEAEA</td>
+<td width="60" height="30" bgcolor="#e9967a"></td>
+<td width="60">#E9967A</td>
+<td width="60" height="30" bgcolor="#e8e8e8"></td>
+<td width="60">#E8E8E8</td>
+<td width="60" height="30" bgcolor="#e6e6fa"></td>
+<td width="60">#E6E6FA</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#e5e5e5"></td>
+<td width="60">#E5E5E5</td>
+<td width="60" height="30" bgcolor="#e3e3e3"></td>
+<td width="60">#E3E3E3</td>
+<td width="60" height="30" bgcolor="#e0ffff"></td>
+<td width="60">#E0FFFF</td>
+<td width="60" height="30" bgcolor="#e0eeee"></td>
+<td width="60">#E0EEEE</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#e0eee0"></td>
+<td width="60">#E0EEE0</td>
+<td width="60" height="30" bgcolor="#e0e0e0"></td>
+<td width="60">#E0E0E0</td>
+<td width="60" height="30" bgcolor="#e066ff"></td>
+<td width="60">#E066FF</td>
+<td width="60" height="30" bgcolor="#dedede"></td>
+<td width="60">#DEDEDE</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#deb887"></td>
+<td width="60">#DEB887</td>
+<td width="60" height="30" bgcolor="#dda0dd"></td>
+<td width="60">#DDA0DD</td>
+<td width="60" height="30" bgcolor="#dcdcdc"></td>
+<td width="60">#DCDCDC</td>
+<td width="60" height="30" bgcolor="#dc143c"></td>
+<td width="60">#DC143C</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#dbdbdb"></td>
+<td width="60">#DBDBDB</td>
+<td width="60" height="30" bgcolor="#db7093"></td>
+<td width="60">#DB7093</td>
+<td width="60" height="30" bgcolor="#daa520"></td>
+<td width="60">#DAA520</td>
+<td width="60" height="30" bgcolor="#da70d6"></td>
+<td width="60">#DA70D6</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#d9d9d9"></td>
+<td width="60">#D9D9D9</td>
+<td width="60" height="30" bgcolor="#d8bfd8"></td>
+<td width="60">#D8BFD8</td>
+<td width="60" height="30" bgcolor="#d6d6d6"></td>
+<td width="60">#D6D6D6</td>
+<td width="60" height="30" bgcolor="#d4d4d4"></td>
+<td width="60">#D4D4D4</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#d3d3d3"></td>
+<td width="60">#D3D3D3</td>
+<td width="60" height="30" bgcolor="#d2b48c"></td>
+<td width="60">#D2B48C</td>
+<td width="60" height="30" bgcolor="#d2691e"></td>
+<td width="60">#D2691E</td>
+<td width="60" height="30" bgcolor="#d1eeee"></td>
+<td width="60">#D1EEEE</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#d1d1d1"></td>
+<td width="60">#D1D1D1</td>
+<td width="60" height="30" bgcolor="#d15fee"></td>
+<td width="60">#D15FEE</td>
+<td width="60" height="30" bgcolor="#d02090"></td>
+<td width="60">#D02090</td>
+<td width="60" height="30" bgcolor="#cfcfcf"></td>
+<td width="60">#CFCFCF</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#cdcdc1"></td>
+<td width="60">#CDCDC1</td>
+<td width="60" height="30" bgcolor="#cdcdb4"></td>
+<td width="60">#CDCDB4</td>
+<td width="60" height="30" bgcolor="#cdcd00"></td>
+<td width="60">#CDCD00</td>
+<td width="60" height="30" bgcolor="#cdc9c9"></td>
+<td width="60">#CDC9C9</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#cdc9a5"></td>
+<td width="60">#CDC9A5</td>
+<td width="60" height="30" bgcolor="#cdc8b1"></td>
+<td width="60">#CDC8B1</td>
+<td width="60" height="30" bgcolor="#cdc673"></td>
+<td width="60">#CDC673</td>
+<td width="60" height="30" bgcolor="#cdc5bf"></td>
+<td width="60">#CDC5BF</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#cdc1c5"></td>
+<td width="60">#CDC1C5</td>
+<td width="60" height="30" bgcolor="#cdc0b0"></td>
+<td width="60">#CDC0B0</td>
+<td width="60" height="30" bgcolor="#cdbe70"></td>
+<td width="60">#CDBE70</td>
+<td width="60" height="30" bgcolor="#cdba96"></td>
+<td width="60">#CDBA96</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#cdb7b5"></td>
+<td width="60">#CDB7B5</td>
+<td width="60" height="30" bgcolor="#cdb79e"></td>
+<td width="60">#CDB79E</td>
+<td width="60" height="30" bgcolor="#cdb5cd"></td>
+<td width="60">#CDB5CD</td>
+<td width="60" height="30" bgcolor="#cdb38b"></td>
+<td width="60">#CDB38B</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#cdaf95"></td>
+<td width="60">#CDAF95</td>
+<td width="60" height="30" bgcolor="#cdad00"></td>
+<td width="60">#CDAD00</td>
+<td width="60" height="30" bgcolor="#cdaa7d"></td>
+<td width="60">#CDAA7D</td>
+<td width="60" height="30" bgcolor="#cd9b9b"></td>
+<td width="60">#CD9B9B</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#cd9b1d"></td>
+<td width="60">#CD9B1D</td>
+<td width="60" height="30" bgcolor="#cd96cd"></td>
+<td width="60">#CD96CD</td>
+<td width="60" height="30" bgcolor="#cd950c"></td>
+<td width="60">#CD950C</td>
+<td width="60" height="30" bgcolor="#cd919e"></td>
+<td width="60">#CD919E</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#cd8c95"></td>
+<td width="60">#CD8C95</td>
+<td width="60" height="30" bgcolor="#cd853f"></td>
+<td width="60">#CD853F</td>
+<td width="60" height="30" bgcolor="#cd8500"></td>
+<td width="60">#CD8500</td>
+<td width="60" height="30" bgcolor="#cd8162"></td>
+<td width="60">#CD8162</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#cd7054"></td>
+<td width="60">#CD7054</td>
+<td width="60" height="30" bgcolor="#cd69c9"></td>
+<td width="60">#CD69C9</td>
+<td width="60" height="30" bgcolor="#cd6889"></td>
+<td width="60">#CD6889</td>
+<td width="60" height="30" bgcolor="#cd6839"></td>
+<td width="60">#CD6839</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#cd661d"></td>
+<td width="60">#CD661D</td>
+<td width="60" height="30" bgcolor="#cd6600"></td>
+<td width="60">#CD6600</td>
+<td width="60" height="30" bgcolor="#cd6090"></td>
+<td width="60">#CD6090</td>
+<td width="60" height="30" bgcolor="#cd5c5c"></td>
+<td width="60">#CD5C5C</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#cd5b45"></td>
+<td width="60">#CD5B45</td>
+<td width="60" height="30" bgcolor="#cd5555"></td>
+<td width="60">#CD5555</td>
+<td width="60" height="30" bgcolor="#cd4f39"></td>
+<td width="60">#CD4F39</td>
+<td width="60" height="30" bgcolor="#cd3700"></td>
+<td width="60">#CD3700</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#cd3333"></td>
+<td width="60">#CD3333</td>
+<td width="60" height="30" bgcolor="#cd3278"></td>
+<td width="60">#CD3278</td>
+<td width="60" height="30" bgcolor="#cd2990"></td>
+<td width="60">#CD2990</td>
+<td width="60" height="30" bgcolor="#cd2626"></td>
+<td width="60">#CD2626</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#cd1060"></td>
+<td width="60">#CD1060</td>
+<td width="60" height="30" bgcolor="#cd00cd"></td>
+<td width="60">#CD00CD</td>
+<td width="60" height="30" bgcolor="#cd0000"></td>
+<td width="60">#CD0000</td>
+<td width="60" height="30" bgcolor="#cccccc"></td>
+<td width="60">#CCCCCC</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#caff70"></td>
+<td width="60">#CAFF70</td>
+<td width="60" height="30" bgcolor="#cae1ff"></td>
+<td width="60">#CAE1FF</td>
+<td width="60" height="30" bgcolor="#c9c9c9"></td>
+<td width="60">#C9C9C9</td>
+<td width="60" height="30" bgcolor="#c7c7c7"></td>
+<td width="60">#C7C7C7</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#c71585"></td>
+<td width="60">#C71585</td>
+<td width="60" height="30" bgcolor="#c6e2ff"></td>
+<td width="60">#C6E2FF</td>
+<td width="60" height="30" bgcolor="#c67171"></td>
+<td width="60">#C67171</td>
+<td width="60" height="30" bgcolor="#c5c1aa"></td>
+<td width="60">#C5C1AA</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#c4c4c4"></td>
+<td width="60">#C4C4C4</td>
+<td width="60" height="30" bgcolor="#c2c2c2"></td>
+<td width="60">#C2C2C2</td>
+<td width="60" height="30" bgcolor="#c1ffc1"></td>
+<td width="60">#C1FFC1</td>
+<td width="60" height="30" bgcolor="#c1cdcd"></td>
+<td width="60">#C1CDCD</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#c1cdc1"></td>
+<td width="60">#C1CDC1</td>
+<td width="60" height="30" bgcolor="#c1c1c1"></td>
+<td width="60">#C1C1C1</td>
+<td width="60" height="30" bgcolor="#c0ff3e"></td>
+<td width="60">#C0FF3E</td>
+<td width="60" height="30" bgcolor="#bfefff"></td>
+<td width="60">#BFEFFF</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#bfbfbf"></td>
+<td width="60">#BFBFBF</td>
+<td width="60" height="30" bgcolor="#bf3eff"></td>
+<td width="60">#BF3EFF</td>
+<td width="60" height="30" bgcolor="#bebebe"></td>
+<td width="60">#BEBEBE</td>
+<td width="60" height="30" bgcolor="#bdbdbd"></td>
+<td width="60">#BDBDBD</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#bdb60b"></td>
+<td width="60">#BDB60B</td>
+<td width="60" height="30" bgcolor="#bcee68"></td>
+<td width="60">#BCEE68</td>
+<td width="60" height="30" bgcolor="#bcd2ee"></td>
+<td width="60">#BCD2EE</td>
+<td width="60" height="30" bgcolor="#bc8f8f"></td>
+<td width="60">#BC8F8F</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#bbffff"></td>
+<td width="60">#BBFFFF</td>
+<td width="60" height="30" bgcolor="#bababa"></td>
+<td width="60">#BABABA</td>
+<td width="60" height="30" bgcolor="#ba55d3"></td>
+<td width="60">#BA55D3</td>
+<td width="60" height="30" bgcolor="#b9d3ee"></td>
+<td width="60">#B9D3EE</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#b8b8b8"></td>
+<td width="60">#B8B8B8</td>
+<td width="60" height="30" bgcolor="#b8860b"></td>
+<td width="60">#B8860B</td>
+<td width="60" height="30" bgcolor="#b7b7b7"></td>
+<td width="60">#B7B7B7</td>
+<td width="60" height="30" bgcolor="#b5b5b5"></td>
+<td width="60">#B5B5B5</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#b4eeb4"></td>
+<td width="60">#B4EEB4</td>
+<td width="60" height="30" bgcolor="#b4cdcd"></td>
+<td width="60">#B4CDCD</td>
+<td width="60" height="30" bgcolor="#b452cd"></td>
+<td width="60">#B452CD</td>
+<td width="60" height="30" bgcolor="#b3ee3a"></td>
+<td width="60">#B3EE3A</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#b3b3b3"></td>
+<td width="60">#B3B3B3</td>
+<td width="60" height="30" bgcolor="#b2dfee"></td>
+<td width="60">#B2DFEE</td>
+<td width="60" height="30" bgcolor="#b23aee"></td>
+<td width="60">#B23AEE</td>
+<td width="60" height="30" bgcolor="#b22222"></td>
+<td width="60">#B22222</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#b0e2ff"></td>
+<td width="60">#B0E2FF</td>
+<td width="60" height="30" bgcolor="#b0e0e6"></td>
+<td width="60">#B0E0E6</td>
+<td width="60" height="30" bgcolor="#b0c4de"></td>
+<td width="60">#B0C4DE</td>
+<td width="60" height="30" bgcolor="#b0b0b0"></td>
+<td width="60">#B0B0B0</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#b03060"></td>
+<td width="60">#B03060</td>
+<td width="60" height="30" bgcolor="#aeeeee"></td>
+<td width="60">#AEEEEE</td>
+<td width="60" height="30" bgcolor="#adff2f"></td>
+<td width="60">#ADFF2F</td>
+<td width="60" height="30" bgcolor="#add8e6"></td>
+<td width="60">#ADD8E6</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#adadad"></td>
+<td width="60">#ADADAD</td>
+<td width="60" height="30" bgcolor="#ababab"></td>
+<td width="60">#ABABAB</td>
+<td width="60" height="30" bgcolor="#ab82ff"></td>
+<td width="60">#AB82FF</td>
+<td width="60" height="30" bgcolor="#aaaaaa"></td>
+<td width="60">#AAAAAA</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#a9a9a9"></td>
+<td width="60">#A9A9A9</td>
+<td width="60" height="30" bgcolor="#a8a8a8"></td>
+<td width="60">#A8A8A8</td>
+<td width="60" height="30" bgcolor="#a6a6a6"></td>
+<td width="60">#A6A6A6</td>
+<td width="60" height="30" bgcolor="#a52a2a"></td>
+<td width="60">#A52A2A</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#a4d3ee"></td>
+<td width="60">#A4D3EE</td>
+<td width="60" height="30" bgcolor="#a3a3a3"></td>
+<td width="60">#A3A3A3</td>
+<td width="60" height="30" bgcolor="#a2cd5a"></td>
+<td width="60">#A2CD5A</td>
+<td width="60" height="30" bgcolor="#a2b5cd"></td>
+<td width="60">#A2B5CD</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#a1a1a1"></td>
+<td width="60">#A1A1A1</td>
+<td width="60" height="30" bgcolor="#a0522d"></td>
+<td width="60">#A0522D</td>
+<td width="60" height="30" bgcolor="#a020f0"></td>
+<td width="60">#A020F0</td>
+<td width="60" height="30" bgcolor="#9fb6cd"></td>
+<td width="60">#9FB6CD</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#9f79ee"></td>
+<td width="60">#9F79EE</td>
+<td width="60" height="30" bgcolor="#9e9e9e"></td>
+<td width="60">#9E9E9E</td>
+<td width="60" height="30" bgcolor="#9c9c9c"></td>
+<td width="60">#9C9C9C</td>
+<td width="60" height="30" bgcolor="#9bcd9b"></td>
+<td width="60">#9BCD9B</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#9b30ff"></td>
+<td width="60">#9B30FF</td>
+<td width="60" height="30" bgcolor="#9aff9a"></td>
+<td width="60">#9AFF9A</td>
+<td width="60" height="30" bgcolor="#9acd32"></td>
+<td width="60">#9ACD32</td>
+<td width="60" height="30" bgcolor="#9ac0cd"></td>
+<td width="60">#9AC0CD</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#9a32cd"></td>
+<td width="60">#9A32CD</td>
+<td width="60" height="30" bgcolor="#999999"></td>
+<td width="60">#999999</td>
+<td width="60" height="30" bgcolor="#9932cc"></td>
+<td width="60">#9932CC</td>
+<td width="60" height="30" bgcolor="#98fb98"></td>
+<td width="60">#98FB98</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#98f5ff"></td>
+<td width="60">#98F5FF</td>
+<td width="60" height="30" bgcolor="#97ffff"></td>
+<td width="60">#97FFFF</td>
+<td width="60" height="30" bgcolor="#96cdcd"></td>
+<td width="60">#96CDCD</td>
+<td width="60" height="30" bgcolor="#969696"></td>
+<td width="60">#969696</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#949494"></td>
+<td width="60">#949494</td>
+<td width="60" height="30" bgcolor="#9400d3"></td>
+<td width="60">#9400D3</td>
+<td width="60" height="30" bgcolor="#9370db"></td>
+<td width="60">#9370DB</td>
+<td width="60" height="30" bgcolor="#919191"></td>
+<td width="60">#919191</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#912cee"></td>
+<td width="60">#912CEE</td>
+<td width="60" height="30" bgcolor="#90ee90"></td>
+<td width="60">#90EE90</td>
+<td width="60" height="30" bgcolor="#8fbc8f"></td>
+<td width="60">#8FBC8F</td>
+<td width="60" height="30" bgcolor="#8f8f8f"></td>
+<td width="60">#8F8F8F</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#8ee5ee"></td>
+<td width="60">#8EE5EE</td>
+<td width="60" height="30" bgcolor="#8e8e8e"></td>
+<td width="60">#8E8E8E</td>
+<td width="60" height="30" bgcolor="#8e8e38"></td>
+<td width="60">#8E8E38</td>
+<td width="60" height="30" bgcolor="#8e388e"></td>
+<td width="60">#8E388E</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#8deeee"></td>
+<td width="60">#8DEEEE</td>
+<td width="60" height="30" bgcolor="#8db6cd"></td>
+<td width="60">#8DB6CD</td>
+<td width="60" height="30" bgcolor="#8c8c8c"></td>
+<td width="60">#8C8C8C</td>
+<td width="60" height="30" bgcolor="#8b8b83"></td>
+<td width="60">#8B8B83</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#8b8b7a"></td>
+<td width="60">#8B8B7A</td>
+<td width="60" height="30" bgcolor="#8b8b00"></td>
+<td width="60">#8B8B00</td>
+<td width="60" height="30" bgcolor="#8b8989"></td>
+<td width="60">#8B8989</td>
+<td width="60" height="30" bgcolor="#8b8970"></td>
+<td width="60">#8B8970</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#8b8878"></td>
+<td width="60">#8B8878</td>
+<td width="60" height="30" bgcolor="#8b8682"></td>
+<td width="60">#8B8682</td>
+<td width="60" height="30" bgcolor="#8b864e"></td>
+<td width="60">#8B864E</td>
+<td width="60" height="30" bgcolor="#8b8386"></td>
+<td width="60">#8B8386</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#8b8378"></td>
+<td width="60">#8B8378</td>
+<td width="60" height="30" bgcolor="#8b814c"></td>
+<td width="60">#8B814C</td>
+<td width="60" height="30" bgcolor="#8b7e66"></td>
+<td width="60">#8B7E66</td>
+<td width="60" height="30" bgcolor="#8b7d7b"></td>
+<td width="60">#8B7D7B</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#8b7d6b"></td>
+<td width="60">#8B7D6B</td>
+<td width="60" height="30" bgcolor="#8b7b8b"></td>
+<td width="60">#8B7B8B</td>
+<td width="60" height="30" bgcolor="#8b795e"></td>
+<td width="60">#8B795E</td>
+<td width="60" height="30" bgcolor="#8b7605"></td>
+<td width="60">#8B7605</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#8b6000"></td>
+<td width="60">#8B6000</td>
+<td width="60" height="30" bgcolor="#8b7355"></td>
+<td width="60">#8B7355</td>
+<td width="60" height="30" bgcolor="#8b6969"></td>
+<td width="60">#8B6969</td>
+<td width="60" height="30" bgcolor="#8b6914"></td>
+<td width="60">#8B6914</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#8b668b"></td>
+<td width="60">#8B668B</td>
+<td width="60" height="30" bgcolor="#8b6508"></td>
+<td width="60">#8B6508</td>
+<td width="60" height="30" bgcolor="#8b636c"></td>
+<td width="60">#8B636C</td>
+<td width="60" height="30" bgcolor="#8b5f65"></td>
+<td width="60">#8B5F65</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#8b5a2b"></td>
+<td width="60">#8B5A2B</td>
+<td width="60" height="30" bgcolor="#8b5a00"></td>
+<td width="60">#8B5A00</td>
+<td width="60" height="30" bgcolor="#8b5742"></td>
+<td width="60">#8B5742</td>
+<td width="60" height="30" bgcolor="#8b4c39"></td>
+<td width="60">#8B4C39</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#8b4789"></td>
+<td width="60">#8B4789</td>
+<td width="60" height="30" bgcolor="#8b460d"></td>
+<td width="60">#8B460D</td>
+<td width="60" height="30" bgcolor="#8b4726"></td>
+<td width="60">#8B4726</td>
+<td width="60" height="30" bgcolor="#8b4513"></td>
+<td width="60">#8B4513</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#8b4500"></td>
+<td width="60">#8B4500</td>
+<td width="60" height="30" bgcolor="#8b3e2f"></td>
+<td width="60">#8B3E2F</td>
+<td width="60" height="30" bgcolor="#8b3a62"></td>
+<td width="60">#8B3A62</td>
+<td width="60" height="30" bgcolor="#8b3a3a"></td>
+<td width="60">#8B3A3A</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#8b3626"></td>
+<td width="60">#8B3626</td>
+<td width="60" height="30" bgcolor="#8b2500"></td>
+<td width="60">#8B2500</td>
+<td width="60" height="30" bgcolor="#8b2323"></td>
+<td width="60">#8B2323</td>
+<td width="60" height="30" bgcolor="#8b2252"></td>
+<td width="60">#8B2252</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#8b1c62"></td>
+<td width="60">#8B1C62</td>
+<td width="60" height="30" bgcolor="#8b1a1a"></td>
+<td width="60">#8B1A1A</td>
+<td width="60" height="30" bgcolor="#8b0a50"></td>
+<td width="60">#8B0A50</td>
+<td width="60" height="30" bgcolor="#8b008b"></td>
+<td width="60">#8B008B</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#8b0000"></td>
+<td width="60">#8B0000</td>
+<td width="60" height="30" bgcolor="#8a8a8a"></td>
+<td width="60">#8A8A8A</td>
+<td width="60" height="30" bgcolor="#8a2be2"></td>
+<td width="60">#8A2BE2</td>
+<td width="60" height="30" bgcolor="#8968cd"></td>
+<td width="60">#8968CD</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#87ceff"></td>
+<td width="60">#87CEFF</td>
+<td width="60" height="30" bgcolor="#87cefa"></td>
+<td width="60">#87CEFA</td>
+<td width="60" height="30" bgcolor="#87ceeb"></td>
+<td width="60">#87CEEB</td>
+<td width="60" height="30" bgcolor="#878787"></td>
+<td width="60">#878787</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#858585"></td>
+<td width="60">#858585</td>
+<td width="60" height="30" bgcolor="#848484"></td>
+<td width="60">#848484</td>
+<td width="60" height="30" bgcolor="#8470ff"></td>
+<td width="60">#8470FF</td>
+<td width="60" height="30" bgcolor="#838b8b"></td>
+<td width="60">#838B8B</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#838b83"></td>
+<td width="60">#838B83</td>
+<td width="60" height="30" bgcolor="#836fff"></td>
+<td width="60">#836FFF</td>
+<td width="60" height="30" bgcolor="#828282"></td>
+<td width="60">#828282</td>
+<td width="60" height="30" bgcolor="#7fffd4"></td>
+<td width="60">#7FFFD4</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#7fff00"></td>
+<td width="60">#7FFF00</td>
+<td width="60" height="30" bgcolor="#7f7f7f"></td>
+<td width="60">#7F7F7F</td>
+<td width="60" height="30" bgcolor="#7ec0ee"></td>
+<td width="60">#7EC0EE</td>
+<td width="60" height="30" bgcolor="#7d9ec0"></td>
+<td width="60">#7D9EC0</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#7d7d7d"></td>
+<td width="60">#7D7D7D</td>
+<td width="60" height="30" bgcolor="#7d26cd"></td>
+<td width="60">#7D26CD</td>
+<td width="60" height="30" bgcolor="#7cfc00"></td>
+<td width="60">#7CFC00</td>
+<td width="60" height="30" bgcolor="#7ccd7c"></td>
+<td width="60">#7CCD7C</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#7b68ee"></td>
+<td width="60">#7B68EE</td>
+<td width="60" height="30" bgcolor="#7ac5cd"></td>
+<td width="60">#7AC5CD</td>
+<td width="60" height="30" bgcolor="#7a8b8b"></td>
+<td width="60">#7A8B8B</td>
+<td width="60" height="30" bgcolor="#7a7a7a"></td>
+<td width="60">#7A7A7A</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#7a67ee"></td>
+<td width="60">#7A67EE</td>
+<td width="60" height="30" bgcolor="#7a378b"></td>
+<td width="60">#7A378B</td>
+<td width="60" height="30" bgcolor="#79cdcd"></td>
+<td width="60">#79CDCD</td>
+<td width="60" height="30" bgcolor="#787878"></td>
+<td width="60">#787878</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#778899"></td>
+<td width="60">#778899</td>
+<td width="60" height="30" bgcolor="#60eec6"></td>
+<td width="60">#60EEC6</td>
+<td width="60" height="30" bgcolor="#60ee00"></td>
+<td width="60">#60EE00</td>
+<td width="60" height="30" bgcolor="#606060"></td>
+<td width="60">#606060</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#737373"></td>
+<td width="60">#737373</td>
+<td width="60" height="30" bgcolor="#71c671"></td>
+<td width="60">#71C671</td>
+<td width="60" height="30" bgcolor="#7171c6"></td>
+<td width="60">#7171C6</td>
+<td width="60" height="30" bgcolor="#708090"></td>
+<td width="60">#708090</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#707070"></td>
+<td width="60">#707070</td>
+<td width="60" height="30" bgcolor="#6e8b3d"></td>
+<td width="60">#6E8B3D</td>
+<td width="60" height="30" bgcolor="#6e7b8b"></td>
+<td width="60">#6E7B8B</td>
+<td width="60" height="30" bgcolor="#6e6e6e"></td>
+<td width="60">#6E6E6E</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#6ca6cd"></td>
+<td width="60">#6CA6CD</td>
+<td width="60" height="30" bgcolor="#6c7b8b"></td>
+<td width="60">#6C7B8B</td>
+<td width="60" height="30" bgcolor="#6b8e23"></td>
+<td width="60">#6B8E23</td>
+<td width="60" height="30" bgcolor="#6b6b6b"></td>
+<td width="60">#6B6B6B</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#6a5acd"></td>
+<td width="60">#6A5ACD</td>
+<td width="60" height="30" bgcolor="#698b69"></td>
+<td width="60">#698B69</td>
+<td width="60" height="30" bgcolor="#698b22"></td>
+<td width="60">#698B22</td>
+<td width="60" height="30" bgcolor="#696969"></td>
+<td width="60">#696969</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#6959cd"></td>
+<td width="60">#6959CD</td>
+<td width="60" height="30" bgcolor="#68838b"></td>
+<td width="60">#68838B</td>
+<td width="60" height="30" bgcolor="#68228b"></td>
+<td width="60">#68228B</td>
+<td width="60" height="30" bgcolor="#66cdaa"></td>
+<td width="60">#66CDAA</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#66cd00"></td>
+<td width="60">#66CD00</td>
+<td width="60" height="30" bgcolor="#668b8b"></td>
+<td width="60">#668B8B</td>
+<td width="60" height="30" bgcolor="#666666"></td>
+<td width="60">#666666</td>
+<td width="60" height="30" bgcolor="#6495ed"></td>
+<td width="60">#6495ED</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#63b8ff"></td>
+<td width="60">#63B8FF</td>
+<td width="60" height="30" bgcolor="#636363"></td>
+<td width="60">#636363</td>
+<td width="60" height="30" bgcolor="#616161"></td>
+<td width="60">#616161</td>
+<td width="60" height="30" bgcolor="#607b8b"></td>
+<td width="60">#607B8B</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#5f9ea0"></td>
+<td width="60">#5F9EA0</td>
+<td width="60" height="30" bgcolor="#5e5e5e"></td>
+<td width="60">#5E5E5E</td>
+<td width="60" height="30" bgcolor="#5d478b"></td>
+<td width="60">#5D478B</td>
+<td width="60" height="30" bgcolor="#5cacee"></td>
+<td width="60">#5CACEE</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#5c5c5c"></td>
+<td width="60">#5C5C5C</td>
+<td width="60" height="30" bgcolor="#5b5b5b"></td>
+<td width="60">#5B5B5B</td>
+<td width="60" height="30" bgcolor="#595959"></td>
+<td width="60">#595959</td>
+<td width="60" height="30" bgcolor="#560607"></td>
+<td width="60">#560607</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#556b2f"></td>
+<td width="60">#556B2F</td>
+<td width="60" height="30" bgcolor="#555555"></td>
+<td width="60">#555555</td>
+<td width="60" height="30" bgcolor="#551a8b"></td>
+<td width="60">#551A8B</td>
+<td width="60" height="30" bgcolor="#54ff9f"></td>
+<td width="60">#54FF9F</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#548b54"></td>
+<td width="60">#548B54</td>
+<td width="60" height="30" bgcolor="#545454"></td>
+<td width="60">#545454</td>
+<td width="60" height="30" bgcolor="#53868b"></td>
+<td width="60">#53868B</td>
+<td width="60" height="30" bgcolor="#528b8b"></td>
+<td width="60">#528B8B</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#525252"></td>
+<td width="60">#525252</td>
+<td width="60" height="30" bgcolor="#515151"></td>
+<td width="60">#515151</td>
+<td width="60" height="30" bgcolor="#4f94cd"></td>
+<td width="60">#4F94CD</td>
+<td width="60" height="30" bgcolor="#4f4f4f"></td>
+<td width="60">#4F4F4F</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#4eee94"></td>
+<td width="60">#4EEE94</td>
+<td width="60" height="30" bgcolor="#4d4d4d"></td>
+<td width="60">#4D4D4D</td>
+<td width="60" height="30" bgcolor="#4b0082"></td>
+<td width="60">#4B0082</td>
+<td width="60" height="30" bgcolor="#4a708b"></td>
+<td width="60">#4A708B</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#4a4a4a"></td>
+<td width="60">#4A4A4A</td>
+<td width="60" height="30" bgcolor="#48d1cc"></td>
+<td width="60">#48D1CC</td>
+<td width="60" height="30" bgcolor="#4860ff"></td>
+<td width="60">#4860FF</td>
+<td width="60" height="30" bgcolor="#483d8b"></td>
+<td width="60">#483D8B</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#474747"></td>
+<td width="60">#474747</td>
+<td width="60" height="30" bgcolor="#473c8b"></td>
+<td width="60">#473C8B</td>
+<td width="60" height="30" bgcolor="#4682b4"></td>
+<td width="60">#4682B4</td>
+<td width="60" height="30" bgcolor="#458b74"></td>
+<td width="60">#458B74</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#458b00"></td>
+<td width="60">#458B00</td>
+<td width="60" height="30" bgcolor="#454545"></td>
+<td width="60">#454545</td>
+<td width="60" height="30" bgcolor="#43cd80"></td>
+<td width="60">#43CD80</td>
+<td width="60" height="30" bgcolor="#436eee"></td>
+<td width="60">#436EEE</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#424242"></td>
+<td width="60">#424242</td>
+<td width="60" height="30" bgcolor="#4169e1"></td>
+<td width="60">#4169E1</td>
+<td width="60" height="30" bgcolor="#40e0d0"></td>
+<td width="60">#40E0D0</td>
+<td width="60" height="30" bgcolor="#404040"></td>
+<td width="60">#404040</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#3d3d3d"></td>
+<td width="60">#3D3D3D</td>
+<td width="60" height="30" bgcolor="#3cb371"></td>
+<td width="60">#3CB371</td>
+<td width="60" height="30" bgcolor="#3b3b3b"></td>
+<td width="60">#3B3B3B</td>
+<td width="60" height="30" bgcolor="#3a5fcd"></td>
+<td width="60">#3A5FCD</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#388e8e"></td>
+<td width="60">#388E8E</td>
+<td width="60" height="30" bgcolor="#383838"></td>
+<td width="60">#383838</td>
+<td width="60" height="30" bgcolor="#36648b"></td>
+<td width="60">#36648B</td>
+<td width="60" height="30" bgcolor="#363636"></td>
+<td width="60">#363636</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#333333"></td>
+<td width="60">#333333</td>
+<td width="60" height="30" bgcolor="#32cd32"></td>
+<td width="60">#32CD32</td>
+<td width="60" height="30" bgcolor="#303030"></td>
+<td width="60">#303030</td>
+<td width="60" height="30" bgcolor="#2f4f4f"></td>
+<td width="60">#2F4F4F</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#2e8b57"></td>
+<td width="60">#2E8B57</td>
+<td width="60" height="30" bgcolor="#2e2e2e"></td>
+<td width="60">#2E2E2E</td>
+<td width="60" height="30" bgcolor="#2b2b2b"></td>
+<td width="60">#2B2B2B</td>
+<td width="60" height="30" bgcolor="#292929"></td>
+<td width="60">#292929</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#282828"></td>
+<td width="60">#282828</td>
+<td width="60" height="30" bgcolor="#27408b"></td>
+<td width="60">#27408B</td>
+<td width="60" height="30" bgcolor="#262626"></td>
+<td width="60">#262626</td>
+<td width="60" height="30" bgcolor="#242424"></td>
+<td width="60">#242424</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#228b22"></td>
+<td width="60">#228B22</td>
+<td width="60" height="30" bgcolor="#218868"></td>
+<td width="60">#218868</td>
+<td width="60" height="30" bgcolor="#212121"></td>
+<td width="60">#212121</td>
+<td width="60" height="30" bgcolor="#20b2aa"></td>
+<td width="60">#20B2AA</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#1f1f1f"></td>
+<td width="60">#1F1F1F</td>
+<td width="60" height="30" bgcolor="#1e90ff"></td>
+<td width="60">#1E90FF</td>
+<td width="60" height="30" bgcolor="#1e1e1e"></td>
+<td width="60">#1E1E1E</td>
+<td width="60" height="30" bgcolor="#1c86ee"></td>
+<td width="60">#1C86EE</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#1c1c1c"></td>
+<td width="60">#1C1C1C</td>
+<td width="60" height="30" bgcolor="#1a1a1a"></td>
+<td width="60">#1A1A1A</td>
+<td width="60" height="30" bgcolor="#191970"></td>
+<td width="60">#191970</td>
+<td width="60" height="30" bgcolor="#1874cd"></td>
+<td width="60">#1874CD</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#171717"></td>
+<td width="60">#171717</td>
+<td width="60" height="30" bgcolor="#141414"></td>
+<td width="60">#141414</td>
+<td width="60" height="30" bgcolor="#121212"></td>
+<td width="60">#121212</td>
+<td width="60" height="30" bgcolor="#104e8b"></td>
+<td width="60">#104E8B</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#0f0f0f"></td>
+<td width="60">#0F0F0F</td>
+<td width="60" height="30" bgcolor="#0d0d0d"></td>
+<td width="60">#0D0D0D</td>
+<td width="60" height="30" bgcolor="#0a0a0a"></td>
+<td width="60">#0A0A0A</td>
+<td width="60" height="30" bgcolor="#080808"></td>
+<td width="60">#080808</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#050505"></td>
+<td width="60">#050505</td>
+<td width="60" height="30" bgcolor="#030303"></td>
+<td width="60">#030303</td>
+<td width="60" height="30" bgcolor="#00ffff"></td>
+<td width="60">#00FFFF</td>
+<td width="60" height="30" bgcolor="#00ff7f"></td>
+<td width="60">#00FF7F</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#00ff00"></td>
+<td width="60">#00FF00</td>
+<td width="60" height="30" bgcolor="#00fa9a"></td>
+<td width="60">#00FA9A</td>
+<td width="60" height="30" bgcolor="#00f5ff"></td>
+<td width="60">#00F5FF</td>
+<td width="60" height="30" bgcolor="#00eeee"></td>
+<td width="60">#00EEEE</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#00ee60"></td>
+<td width="60">#00EE60</td>
+<td width="60" height="30" bgcolor="#00ee00"></td>
+<td width="60">#00EE00</td>
+<td width="60" height="30" bgcolor="#00e5ee"></td>
+<td width="60">#00E5EE</td>
+<td width="60" height="30" bgcolor="#00ced1"></td>
+<td width="60">#00CED1</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#00cdcd"></td>
+<td width="60">#00CDCD</td>
+<td width="60" height="30" bgcolor="#00cd66"></td>
+<td width="60">#00CD66</td>
+<td width="60" height="30" bgcolor="#00cd00"></td>
+<td width="60">#00CD00</td>
+<td width="60" height="30" bgcolor="#00c5cd"></td>
+<td width="60">#00C5CD</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#00bfff"></td>
+<td width="60">#00BFFF</td>
+<td width="60" height="30" bgcolor="#00b2ee"></td>
+<td width="60">#00B2EE</td>
+<td width="60" height="30" bgcolor="#009acd"></td>
+<td width="60">#009ACD</td>
+<td width="60" height="30" bgcolor="#008b8b"></td>
+<td width="60">#008B8B</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#008b45"></td>
+<td width="60">#008B45</td>
+<td width="60" height="30" bgcolor="#008b00"></td>
+<td width="60">#008B00</td>
+<td width="60" height="30" bgcolor="#00868b"></td>
+<td width="60">#00868B</td>
+<td width="60" height="30" bgcolor="#00688b"></td>
+<td width="60">#00688B</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#006400"></td>
+<td width="60">#006400</td>
+<td width="60" height="30" bgcolor="#0000ff"></td>
+<td width="60">#0000FF</td>
+<td width="60" height="30" bgcolor="#0000ee"></td>
+<td width="60">#0000EE</td>
+<td width="60" height="30" bgcolor="#0000cd"></td>
+<td width="60">#0000CD</td>
+</tr>
+<tr>
+<td width="60" height="30" bgcolor="#0000aa"></td>
+<td width="60">#0000AA</td>
+<td width="60" height="30" bgcolor="#00008b"></td>
+<td width="60">#00008B</td>
+<td width="60" height="30" bgcolor="#000080"></td>
+<td width="60">#000080</td>
+<td width="60" height="30" bgcolor="#000000"></td>
+<td width="60">#000000</td>
+</tr>
+</tbody>
+</table>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/5528.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>COM/LPT</title>
+		<link>http://www.xieziming.com/archives/2907.html</link>
+		<comments>http://www.xieziming.com/archives/2907.html#respond</comments>
+		<pubDate>Tue, 20 Oct 2009 14:48:49 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[技术维基]]></category>
+		<category><![CDATA[程序]]></category>
+		<category><![CDATA[通讯]]></category>
+
+		<guid isPermaLink="false">http://www.ideashot.com/?p=2907</guid>
+		<description><![CDATA[串口叫做串行接口，现在的PC 机一般有两个串行口COM 1 和COM 2 。串行口不同于并行口之处在于它的数据和控制信息是一位接一位地传送出去的。虽然这样速度会慢一些，但传送距离较并行口更长，因此若要进行较长距离的通信时，应使用串行口。通常COM 1 使用的是9 针D 形连接器，也称之为RS-232接口，而COM 2 有的使用的是老式的DB25 针连接器，也称之为RS-422接口，不过目前已经很少使用。
+
+并口又称为并行接口。目前，并行接口主要作为打印机端口，采用的是25 针D 形接头。所谓“并行”，是指8 位数据同时通过并行线进行传送，这样数据传送速度大大提高，但并行传送的线路长度受到限制，因为长度增加，干扰就会增加，数据也就容易出错。目前计算机基本上都配有并口。 ]]></description>
+				<content:encoded><![CDATA[<p>在一些特定的场合下，我们想在两台PC之间进行通讯，以此来实现文件数据传输及软硬件资源共享。其前提是既没有网络环境，也没有Modem，甚至两台电脑连网卡也没装；当然PC间的距离很近（最长不超过20米）。这种想法能实现吗？</p>
+<p>答案是肯定的，而且不止一种。我们可以考虑通过并口或Com串口对两台PC直连实现点对点通讯。这里的关键是解决通讯线问题。一台普通PC，多数都具有两个9芯或25芯串口（COM1，COM2）和一个25芯并口的标配。以下分别介绍串行和并行通讯电缆的制作原理及方法（数字表示接头的引脚号，这些引脚号码在串并口上都有标注），需要补充的是，有经验的DIY总是善于“废旧利用”，比如设法利用废旧鼠标的通讯线以及闲置的旧打印电缆；并准备1个万用表用于测试制作的通讯电缆是否正确可靠。</p>
+<p>串口叫做串行接口，现在的PC 机一般有两个串行口COM 1 和COM 2 。串行口不同于并行口之处在于它的数据和控制信息是一位接一位地传送出去的。虽然这样速度会慢一些，但传送距离较并行口更长，因此若要进行较长距离的通信时，应使用串行口。通常COM 1 使用的是9 针D 形连接器，也称之为RS-232接口，而COM 2 有的使用的是老式的DB25 针连接器，也称之为RS-422接口，不过目前已经很少使用。</p>
+<p>并口又称为并行接口。目前，并行接口主要作为打印机端口，采用的是25 针D 形接头。所谓“并行”，是指8 位数据同时通过并行线进行传送，这样数据传送速度大大提高，但并行传送的线路长度受到限制，因为长度增加，干扰就会增加，数据也就容易出错。目前计算机基本上都配有并口。</p>
+<p>（一）串行通讯电缆的制作</p>
+<p>无论是9孔插头，还是25孔插头，其串行通讯电缆连接时都要遵循下列对接关系：</p>
+<p>SG←→SG　TXD←→RXD　RXD←→TXD　RTS←→CTS<br />
+CTS←→RTS　DTR←→DSR　DSR←→DTR</p>
+<p>根据上述对接关系，就可以非常方便地连接串行通讯电缆。这里顺便介绍一下上述各引脚所代表的含义：</p>
+<p>SG英文全称为Signal Ground/Common Return，表示信号地；<br />
+TXD指Transmitted Data，表示数据发送；<br />
+RXD指Received Data，表示接收数据；<br />
+RTS指Request To Send，表示发送请求；<br />
+CTS指Clear To Send，表示清除请求；<br />
+DTR指Data Terminal Ready，表示数据终端准备就绪；<br />
+DSR指Data Signal Rate Selector，表示数据置位准备就绪。</p>
+<p>在制作9芯串口连线时，需要2个9孔插头和1.5米长的至少7芯的扁平电缆，引脚连线如下所示。</p>
+<p>9孔插头－9孔插头引脚连线为：2-3、3-2、4-6、5-5、6-4、7-8、8-7。<br />
+9孔插头－25孔插头引脚连线为：2-2、3-3、4-6、5-7、6-20、7-5、8-4。<br />
+25孔插头－25孔插头引脚连线为：2-3、3-2、4-5、5-4、6-20、7-7、20-6。</p>
+<p>（二）并行通讯电缆的制作</p>
+<p>计算机上的并行口(LPT口)为25芯接口，需要选用2个25针插头来进行连接。并口速度比用串口要快得多，在通讯量较大的情况下应优先考虑并口方式。双机并口连接方式为：</p>
+<p>2-15、3-13、4-12、5-10、6-11、10-5、11-6、12-4、13-3、15-2、25-25。<br />
+<strong>并口针脚功能一览表</strong></p>
+<table>
+<thead>
+<tr>
+<td>
+针脚
+</td>
+<td>
+功能
+</td>
+<td>
+针脚
+</td>
+<td>
+功能
+</td>
+</tr>
+</thead>
+<tr>
+<td>
+1
+</td>
+<td>
+选通端，低电平有效
+</td>
+<td>
+10
+</td>
+<td>
+确认，低电平有效
+</td>
+</tr>
+<tr>
+<td>
+2
+</td>
+<td>
+数据通道0
+</td>
+<td>
+11
+</td>
+<td>
+忙
+</td>
+</tr>
+<tr>
+<td>
+3
+</td>
+<td>
+数据通道1
+</td>
+<td>
+12
+</td>
+<td>
+缺纸
+</td>
+</tr>
+<tr>
+<td>
+4
+</td>
+<td>
+数据通道2
+</td>
+<td>
+13
+</td>
+<td>
+选择
+</td>
+</tr>
+<tr>
+<td>
+5
+</td>
+<td>
+数据通道3
+</td>
+<td>
+14
+</td>
+<td>
+自动换行，低电平有效
+</td>
+</tr>
+<tr>
+<td>
+6
+</td>
+<td>
+数据通道4
+</td>
+<td>
+15
+</td>
+<td>
+错误，低电平有效
+</td>
+</tr>
+<tr>
+<td>
+7
+</td>
+<td>
+数据通道5
+</td>
+<td>
+16
+</td>
+<td>
+初始化，低电平有效
+</td>
+</tr>
+<tr>
+<td>
+8
+</td>
+<td>
+数据通道6
+</td>
+<td>
+17
+</td>
+<td>
+选择输入，低电平有效
+</td>
+</tr>
+<tr>
+<td>
+9
+</td>
+<td>
+数据通道7
+</td>
+<td width="119">
+18到25
+</td>
+<td width="165">
+地线
+</td>
+</tr>
+</table>
+<p><strong>25针串口功能一览表</strong></p>
+<table>
+<thead>
+<tr>
+<td>
+针脚
+</td>
+<td>
+功能
+</td>
+<td>
+针脚
+</td>
+<td>
+功能
+</td>
+</tr>
+</thead>
+<tr>
+<td>
+1
+</td>
+<td>
+空
+</td>
+<td>
+11
+</td>
+<td>
+空
+</td>
+</tr>
+<tr>
+<td>
+2
+</td>
+<td>
+发送数据
+</td>
+<td>
+12到17
+</td>
+<td>
+空
+</td>
+</tr>
+<tr>
+<td>
+3
+</td>
+<td>
+接收数据
+</td>
+<td>
+18
+</td>
+<td>
+空
+</td>
+</tr>
+<tr>
+<td>
+4
+</td>
+<td>
+发送请求
+</td>
+<td>
+19
+</td>
+<td>
+空
+</td>
+</tr>
+<tr>
+<td>
+5
+</td>
+<td>
+发送清除
+</td>
+<td>
+20
+</td>
+<td>
+数据终端准备完成
+</td>
+</tr>
+<tr>
+<td>
+6
+</td>
+<td>
+数据准备完成
+</td>
+<td>
+21
+</td>
+<td>
+空
+</td>
+</tr>
+<tr>
+<td>
+7
+</td>
+<td>
+信号地线
+</td>
+<td>
+22
+</td>
+<td>
+振铃指示
+</td>
+</tr>
+<tr>
+<td>
+8
+</td>
+<td>
+载波检测
+</td>
+<td>
+23到24
+</td>
+<td>
+空
+</td>
+</tr>
+<tr>
+<td>
+9
+</td>
+<td>
+空
+</td>
+<td>
+25
+</td>
+<td>
+空
+</td>
+</tr>
+<tr>
+<td>
+10
+</td>
+<td>
+空
+</td>
+<td></td>
+<td></td>
+</tr>
+</table>
+<p><strong>9针串口功能一览表</strong></p>
+<table>
+<thead>
+<tr>
+<td>
+针脚
+</td>
+<td>
+功能
+</td>
+<td>
+针脚
+</td>
+<td>
+功能
+</td>
+</tr>
+</thead>
+<tr>
+<td>
+1
+</td>
+<td>
+载波检测
+</td>
+<td>
+6
+</td>
+<td>
+数据准备完成
+</td>
+</tr>
+<tr>
+<td>
+2
+</td>
+<td>
+接收数据
+</td>
+<td>
+7
+</td>
+<td>
+发送请求
+</td>
+</tr>
+<tr>
+<td>
+3
+</td>
+<td>
+发送数据
+</td>
+<td>
+8
+</td>
+<td>
+发送清除
+</td>
+</tr>
+<tr>
+<td>
+4
+</td>
+<td>
+数据终端准备完成
+</td>
+<td>
+9
+</td>
+<td>
+振铃指示
+</td>
+</tr>
+<tr>
+<td>
+5
+</td>
+<td>
+信号地线
+</td>
+<td></td>
+<td></td>
+</tr>
+</table>
+<p><strong>联机线的连接方法</strong><br />
+联机线主要用于直接把两台电脑连接，分为串口（com1,com2）联机线和并口（lpt1）联机线。比较早一点的AT架构的电脑的串口有为9针，和25 针两种，现在的ATX架构的电脑两个串口全部是9针。打印机的接口也是25针的但功能、外观上与AT架构的25针串口不一样。于是联机线就分为4种（9针 对9针串口联机线，9针对25针串口联机线，25针对25针串口联机线，25针对25针并口联机线）其中3种串口连接，一种并口连接。并口联机线和串口联 机线最大的差别就是速度，前者明显快于后者。这些直接电缆连接线的两个头完全相同可以互换的连线方法如下表:<br />
+首先我们必须准备2个连接头，以及大约1.5米的联机线，联机线应该选用带屏蔽的多芯线，把多余未用的芯全部接在接头的金属壳（地线）作为屏蔽用。</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/2907.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>IP负载均衡技术</title>
+		<link>http://www.xieziming.com/archives/2596.html</link>
+		<comments>http://www.xieziming.com/archives/2596.html#respond</comments>
+		<pubDate>Wed, 07 Oct 2009 12:55:52 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[技术维基]]></category>
+		<category><![CDATA[linux]]></category>
+		<category><![CDATA[技术]]></category>
+
+		<guid isPermaLink="false">http://www.ideashot.com/?p=2596</guid>
+		<description><![CDATA[<img src="http://images.xieziming.com/upload/file/linux_3/1.jpg" alt="linux" />]]></description>
+				<content:encoded><![CDATA[<p>在前面文章中，讲述了可伸缩网络服务的几种结构，它们都需要一个前端的负载调度器（或者多个进行主从备份）。我们先分析实现虚拟网络服务的主要技术，指出IP负载均衡技术是在负载调度器的实现技术中效率最高的。在已有的IP负载均衡技术中，主要有通过网络地址转换（Network Address Translation）将一组服务器构成一个高性能的、高可用的虚拟服务器，我们称之为VS/NAT技术（Virtual Server via Network Address Translation）。在分析VS/NAT的缺点和网络服务的非对称性的基础上，我们提出了通过IP隧道实现虚拟服务器的方法VS /TUN（Virtual Server via IP Tunneling），和通过直接路由实现虚拟服务器的方法VS/DR（Virtual Server via Direct Routing），它们可以极大地提高系统的伸缩性。VS/NAT、VS/TUN和VS/DR技术是LVS集群中实现的三种IP负载均衡技术，我们将在文章中详细描述它们的工作原理和各自的优缺点。<br />
+<span id="more-2596"></span><br />
+在以下描述中，我们称客户的socket和服务器的socket之间的数据通讯为连接，无论它们是使用TCP还是UDP协议。下面简述当前用服务器集群实现高可伸缩、高可用网络服务的几种负载调度方法，并列举几个在这方面有代表性的研究项目。</p>
+<p>实现虚拟服务的相关方法</p>
+<p>在网络服务中，一端是客户程序，另一端是服务程序，在中间可能有代理程序。由此看来，可以在不同的层次上实现多台服务器的负载均衡。用集群解决网络服务性能问题的现有方法主要分为以下四类。</p>
+<p>2.1. 基于RR-DNS的解决方法</p>
+<p>NCSA的可伸缩的WEB服务器系统就是最早基于RR-DNS（Round-Robin Domain Name System）的原型系统[1,2]。它的结构和工作流程如下图所示：</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/2596.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>DAS、NAS与SAN</title>
+		<link>http://www.xieziming.com/archives/2529.html</link>
+		<comments>http://www.xieziming.com/archives/2529.html#comments</comments>
+		<pubDate>Fri, 25 Sep 2009 07:12:01 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[技术维基]]></category>
+		<category><![CDATA[技术]]></category>
+
+		<guid isPermaLink="false">http://www.ideashot.com/?p=2529</guid>
+		<description><![CDATA[<img src="http://images.xieziming.com/upload/file/storage/1.jpg" alt="图片载入中" />]]></description>
+				<content:encoded><![CDATA[<p>目前磁盘存储市场上，存储分类根据服务器类型分为：封闭系统的存储和开放系统的存储，封闭系统主要指大型机，AS400等服务器，开放系统指基于包括Windows、UNIX、Linux等操作系统的服务器；开放系统的存储分为：内置存储和外挂存储；开放系统的外挂存储根据连接的方式分为：直连式存储（Direct-Attached Storage，简称DAS）和网络化存储（Fabric-Attached Storage，简称FAS）；开放系统的网络化存储根据传输协议又分为：网络接入存储（Network-Attached Storage，简称NAS）和存储区域网络（Storage Area Network，简称SAN）。由于目前绝大部分用户采用的是开放系统，其外挂存储占有目前磁盘存储市场的70%以上<br />
+<span id="more-2529"></span><br />
+开放系统的直连式存储（Direct-Attached Storage，简称DAS）已经有近四十年的使用历史，随着用户数据的不断增长，尤其是数百GB以上时，其在备份、恢复、扩展、灾备等方面的问题变得日益困扰系统管理员。</p>
+<p>主要问题和不足为：<br />
+直连式存储依赖服务器主机操作系统进行数据的IO读写和存储维护管理，数据备份和恢复要求占用服务器主机资源（包括CPU、系统IO等），数据流需要回流主机再到服务器连接着的磁带机（库），数据备份通常占用服务器主机资源20-30%，因此许多企业用户的日常数据备份常常在深夜或业务系统不繁忙时进行，以免影响正常业务系统的运行。直连式存储的数据量越大，备份和恢复的时间就越长，对服务器硬件的依赖性和影响就越大。</p>
+<p>直连式存储与服务器主机之间的连接通道通常采用SCSI连接，带宽为10MB/s、20MB/s、40MB/s、80MB/s等，随着服务器CPU的处理能力越来越强，存储硬盘空间越来越大，阵列的硬盘数量越来越多，SCSI通道将会成为IO瓶颈；服务器主机SCSI ID资源有限，能够建立的SCSI通道连接有限。</p>
+<p>无论直连式存储还是服务器主机的扩展，从一台服务器扩展为多台服务器组成的群集(Cluster)，或存储阵列容量的扩展，都会造成业务系统的停机，从而给企业带来经济损失，对于银行、电信、传媒等行业7×24小时服务的关键业务系统，这是不可接受的。并且直连式存储或服务器主机的升级扩展，只能由原设备厂商提供，往往受原设备厂商限制。</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/2529.html/feed</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+		<item>
+		<title>mysql负载均衡配置</title>
+		<link>http://www.xieziming.com/archives/2438.html</link>
+		<comments>http://www.xieziming.com/archives/2438.html#respond</comments>
+		<pubDate>Mon, 07 Sep 2009 16:13:43 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[技术维基]]></category>
+		<category><![CDATA[程序]]></category>
+
+		<guid isPermaLink="false">http://www.ideashot.com/?p=2438</guid>
+		<description><![CDATA[一、介绍
+========
+这篇文档旨在介绍如何安装配置基于2台服务器的MySQL集群。并且实现任意一台服务器出现问题或宕机时MySQL依然能够继续运行。
+
+注意！
+虽然这是基于2台服务器的MySQL集群，但也必须有额外的第三台服务器作为管理节点，但这台服务器可以在集群启动完成后关闭。同时需要注意的是并不推荐在集群启动完成后关闭作为管理节点的服务器。尽管理论上可以建立基于只有2台服务器的MySQL集群，但是这样的架构，一旦一台服务器宕机之后集群就无法继续正常工作了，这样也就失去了集群的意义了。出于这个原因，就需要有第三台服务器作为管理节点运行。
+
+另外，可能很多朋友都没有3台服务器的实际环境，可以考虑在VMWare或其他虚拟机中进行实验。
+
+下面假设这3台服务的情况：
+
+Server1: mysql1.vmtest.net 192.168.0.1
+Server2: mysql2.vmtest.net 192.168.0.2
+Server3: mysql3.vmtest.net 192.168.0.3]]></description>
+				<content:encoded><![CDATA[<p>一、介绍<br />
+========<br />
+这篇文档旨在介绍如何安装配置基于2台服务器的MySQL集群。并且实现任意一台服务器出现问题或宕机时MySQL依然能够继续运行。</p>
+<p>注意！<br />
+虽然这是基于2台服务器的MySQL集群，但也必须有额外的第三台服务器作为管理节点，但这台服务器可以在集群启动完成后关闭。同时需要注意的是并不推荐在集群启动完成后关闭作为管理节点的服务器。尽管理论上可以建立基于只有2台服务器的MySQL集群，但是这样的架构，一旦一台服务器宕机之后集群就无法继续正常工作了，这样也就失去了集群的意义了。出于这个原因，就需要有第三台服务器作为管理节点运行。<br />
+<span id="more-2438"></span><br />
+另外，可能很多朋友都没有3台服务器的实际环境，可以考虑在VMWare或其他虚拟机中进行实验。</p>
+<p>下面假设这3台服务的情况：</p>
+<p>Server1: mysql1.vmtest.net 192.168.0.1<br />
+Server2: mysql2.vmtest.net 192.168.0.2<br />
+Server3: mysql3.vmtest.net 192.168.0.3</p>
+<p>Servers1和Server2作为实际配置MySQL集群的服务器。对于作为管理节点的Server3则要求较低，只需对Server3的系统进行很小的调整并且无需安装MySQL，Server3可以使用一台配置较低的计算机并且可以在Server3同时运行其他服务。</p>
+<p>二、在Server1和Server2上安装MySQL<br />
+=================================<br />
+从http://www.mysql.com上下载mysql-max-4.1.9-pc-linux-gnu-i686.tar.gz<br />
+注意：必须是max版本的MySQL，Standard版本不支持集群部署！</p>
+<p>以下步骤需要在Server1和Server2上各做一次<br />
+# mv mysql-max-4.1.9-pc-linux-gnu-i686.tar.gz /usr/local/<br />
+# cd /usr/local/<br />
+# groupadd mysql<br />
+# useradd -g mysql mysql<br />
+# tar -zxvf mysql-max-4.1.9-pc-linux-gnu-i686.tar.gz<br />
+# rm -f mysql-max-4.1.9-pc-linux-gnu-i686.tar.gz<br />
+# mv mysql-max-4.1.9-pc-linux-gnu-i686 mysql<br />
+# cd mysql<br />
+# scripts/mysql_install_db &#8211;user=mysql<br />
+# chown -R root .<br />
+# chown -R mysql data<br />
+# chgrp -R mysql .<br />
+# cp support-files/mysql.server /etc/rc.d/init.d/mysqld<br />
+# chmod +x /etc/rc.d/init.d/mysqld<br />
+# chkconfig &#8211;add mysqld</p>
+<p>此时不要启动MySQL！</p>
+<p>三、安装并配置管理节点服务器(Server3)<br />
+=====================================<br />
+作为管理节点服务器，Server3需要ndb_mgm和ndb_mgmd两个文件：</p>
+<p>从http://www.mysql.com上下载mysql-max-4.1.9-pc-linux-gnu-i686.tar.gz</p>
+<p># mkdir /usr/src/mysql-mgm<br />
+# cd /usr/src/mysql-mgm<br />
+# tar -zxvf mysql-max-4.1.9-pc-linux-gnu-i686.tar.gz<br />
+# rm mysql-max-4.1.9-pc-linux-gnu-i686.tar.gz<br />
+# cd mysql-max-4.1.9-pc-linux-gnu-i686<br />
+# mv bin/ndb_mgm .<br />
+# mv bin/ndb_mgmd .<br />
+# chmod +x ndb_mg*<br />
+# mv ndb_mg* /usr/bin/<br />
+# cd<br />
+# rm -rf /usr/src/mysql-mgm</p>
+<p>现在开始为这台管理节点服务器建立配置文件：</p>
+<p># mkdir /var/lib/mysql-cluster<br />
+# cd /var/lib/mysql-cluster<br />
+# vi config.ini</p>
+<p>在config.ini中添加如下内容：</p>
+<p>[NDBD DEFAULT]<br />
+NoOfReplicas=2<br />
+[MYSQLD DEFAULT]<br />
+[NDB_MGMD DEFAULT]<br />
+[TCP DEFAULT]<br />
+# Managment Server<br />
+[NDB_MGMD]<br />
+HostName=192.168.0.3 #管理节点服务器Server3的IP地址<br />
+# Storage Engines<br />
+[NDBD]<br />
+HostName=192.168.0.1 #MySQL集群Server1的IP地址<br />
+DataDir= /var/lib/mysql-cluster<br />
+[NDBD]<br />
+HostName=192.168.0.2 #MySQL集群Server2的IP地址<br />
+DataDir=/var/lib/mysql-cluster<br />
+# 以下2个[MYSQLD]可以填写Server1和Server2的主机名。<br />
+# 但为了能够更快的更换集群中的服务器，推荐留空，否则更换服务器后必须对这个配置进行更改。<br />
+[MYSQLD]<br />
+[MYSQLD]</p>
+<p>保存退出后，启动管理节点服务器Server3：<br />
+# ndb_mgmd</p>
+<p>启动管理节点后应该注意，这只是管理节点服务，并不是管理终端。因而你看不到任何关于启动后的输出信息。</p>
+<p>四、配置集群服务器并启动MySQL<br />
+=============================<br />
+在Server1和Server2中都需要进行如下改动：</p>
+<p># vi /etc/my.cnf</p>
+<p>[mysqld]<br />
+ndbcluster<br />
+ndb-connectstring=192.168.0.3 #Server3的IP地址<br />
+[mysql_cluster]<br />
+ndb-connectstring=192.168.0.3 #Server3的IP地址</p>
+<p>保存退出后，建立数据目录并启动MySQL：</p>
+<p># mkdir /var/lib/mysql-cluster<br />
+# cd /var/lib/mysql-cluster<br />
+# /usr/local/mysql/bin/ndbd &#8211;initial<br />
+# /etc/rc.d/init.d/mysqld start</p>
+<p>可以把/usr/local/mysql/bin/ndbd加到/etc/rc.local中实现开机启动。<br />
+注意：只有在第一次启动ndbd时或者对Server3的config.ini进行改动后才需要使用&#8211;initial参数！</p>
+<p>五、检查工作状态<br />
+================<br />
+回到管理节点服务器Server3上，并启动管理终端：</p>
+<p># /usr/bin/ndb_mgm<br />
+键入show命令查看当前工作状态：（下面是一个状态输出示例）</p>
+<p>[root@mysql3 root]# /usr/bin/ndb_mgm<br />
+&#8212; NDB Cluster &#8212; Management Client &#8212;<br />
+ndb_mgm> show<br />
+Connected to Management Server at: localhost:1186<br />
+Cluster Configuration<br />
+&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;<br />
+[ndbd(NDB)] 2 node(s)<br />
+id=2 @192.168.0.1 (Version: 4.1.9, Nodegroup: 0, Master)<br />
+id=3 @192.168.0.2 (Version: 4.1.9, Nodegroup: 0)</p>
+<p>[ndb_mgmd(MGM)] 1 node(s)<br />
+id=1 @192.168.0.3 (Version: 4.1.9)</p>
+<p>[mysqld(API)] 2 node(s)<br />
+id=4 (Version: 4.1.9)<br />
+id=5 (Version: 4.1.9)</p>
+<p>ndb_mgm></p>
+<p>如果上面没有问题，现在开始测试MySQL：<br />
+注意，这篇文档对于MySQL并没有设置root密码，推荐你自己设置Server1和Server2的MySQL root密码。</p>
+<p>在Server1中：</p>
+<p># /usr/local/mysql/bin/mysql -u root -p<br />
+> use test;<br />
+> CREATE TABLE ctest (i INT) ENGINE=NDBCLUSTER;<br />
+> INSERT INTO ctest () VALUES (1);<br />
+> SELECT * FROM ctest;</p>
+<p>应该可以看到1 row returned信息（返回数值1）。</p>
+<p>如果上述正常，则换到Server2上重复上面的测试，观察效果。如果成功，则在Server2中执行INSERT再换回到Server1观察是否工作正常。<br />
+如果都没有问题，那么恭喜成功！</p>
+<p>六、破坏性测试<br />
+==============<br />
+将Server1或Server2的网线拔掉，观察另外一台集群服务器工作是否正常（可以使用SELECT查询测试）。测试完毕后，重新插入网线即可。</p>
+<p>如果你接触不到物理服务器，也就是说不能拔掉网线，那也可以这样测试：<br />
+在Server1或Server2上：</p>
+<p># ps aux | grep ndbd<br />
+将会看到所有ndbd进程信息：</p>
+<p>root 5578 0.0 0.3 6220 1964 ? S 03:14 0:00 ndbd<br />
+root 5579 0.0 20.4 492072 102828 ? R 03:14 0:04 ndbd<br />
+root 23532 0.0 0.1 3680 684 pts/1 S 07:59 0:00 grep ndbd</p>
+<p>然后杀掉一个ndbd进程以达到破坏MySQL集群服务器的目的：</p>
+<p># kill -9 5578 5579</p>
+<p>之后在另一台集群服务器上使用SELECT查询测试。并且在管理节点服务器的管理终端中执行show命令会看到被破坏的那台服务器的状态。<br />
+测试完成后，只需要重新启动被破坏服务器的ndbd进程即可：</p>
+<p># ndbd<br />
+注意！前面说过了，此时是不用加&#8211;inital参数的！</p>
+<p>至此，MySQL集群就配置完成了！</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/2438.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>程序员须知（二）</title>
+		<link>http://www.xieziming.com/archives/2475.html</link>
+		<comments>http://www.xieziming.com/archives/2475.html#respond</comments>
+		<pubDate>Sat, 05 Sep 2009 10:22:34 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[技术维基]]></category>
+		<category><![CDATA[程序]]></category>
+
+		<guid isPermaLink="false">http://www.ideashot.com/?p=2475</guid>
+		<description><![CDATA[1. 什么是“引用”？申明和使用“引用”要注意哪些问题？
+
+答：引用就是某个目标变量的“别名”(alias)，对应用的操作与对变量直接操作效果完全相同。申明一个引用的时候，切记要对其进行初始化。引用声明完毕后，相当于目标变量名有两个名称，即该目标原名称和引用名，不能再把该引用名作为其他变量名的别名。声明一个引用，不是新定义了一个变量，它只表示该引用名是目标变量名的一个别名，它本身不是一种数据类型，因此引用本身不占存储单元，系统也不给引用分配存储单元。不能建立数组的引用。
+
+2. 将“引用”作为函数参数有哪些特点？
+
+（1）传递引用给函数与传递指针的效果是一样的。这时，被调函数的形参就成为原来主调函数中的实参变量或对象的一个别名来使用，所以在被调函数中对形参变量的操作就是对其相应的目标对象（在主调函数中）的操作。
+
+（2）使用引用传递函数的参数，在内存中并没有产生实参的副本，它是直接对实参操作；而使用一般变量传递函数的参数，当发生函数调用时，需要给形参分配存储单元，形参变量是实参变量的副本；如果传递的是对象，还将调用拷贝构造函数。因此，当参数传递的数据较大时，用引用比用一般变量传递参数的效率和所占空间都好。
+
+（3）使用指针作为函数的参数虽然也能达到与使用引用的效果，但是，在被调函数中同样要给形参分配存储单元，且需要重复使用"*指针变量名"的形式进行运算，这很容易产生错误且程序的阅读性较差；另一方面，在主调函数的调用点处，必须用变量的地址作为实参。而引用更容易使用，更清晰。]]></description>
+				<content:encoded><![CDATA[<p>1. 什么是“引用”？申明和使用“引用”要注意哪些问题？</p>
+<p>答：引用就是某个目标变量的“别名”(alias)，对应用的操作与对变量直接操作效果完全相同。申明一个引用的时候，切记要对其进行初始化。引用声明完毕后，相当于目标变量名有两个名称，即该目标原名称和引用名，不能再把该引用名作为其他变量名的别名。声明一个引用，不是新定义了一个变量，它只表示该引用名是目标变量名的一个别名，它本身不是一种数据类型，因此引用本身不占存储单元，系统也不给引用分配存储单元。不能建立数组的引用。<br />
+<span id="more-2475"></span><br />
+2. 将“引用”作为函数参数有哪些特点？</p>
+<p>（1）传递引用给函数与传递指针的效果是一样的。这时，被调函数的形参就成为原来主调函数中的实参变量或对象的一个别名来使用，所以在被调函数中对形参变量的操作就是对其相应的目标对象（在主调函数中）的操作。</p>
+<p>（2）使用引用传递函数的参数，在内存中并没有产生实参的副本，它是直接对实参操作；而使用一般变量传递函数的参数，当发生函数调用时，需要给形参分配存储单元，形参变量是实参变量的副本；如果传递的是对象，还将调用拷贝构造函数。因此，当参数传递的数据较大时，用引用比用一般变量传递参数的效率和所占空间都好。</p>
+<p>（3）使用指针作为函数的参数虽然也能达到与使用引用的效果，但是，在被调函数中同样要给形参分配存储单元，且需要重复使用&#8221;*指针变量名&#8221;的形式进行运算，这很容易产生错误且程序的阅读性较差；另一方面，在主调函数的调用点处，必须用变量的地址作为实参。而引用更容易使用，更清晰。</p>
+<p>3. 在什么时候需要使用“常引用”？　</p>
+<p>如果既要利用引用提高程序的效率，又要保护传递给函数的数据不在函数中被改变，就应使用常引用。常引用声明方式：const 类型标识符 &#038;引用名=目标变量名；</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/2475.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>负载均衡技术</title>
+		<link>http://www.xieziming.com/archives/2584.html</link>
+		<pubDate>Fri, 04 Sep 2009 03:20:09 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[技术维基]]></category>
+		<category><![CDATA[linux]]></category>
+
+		<guid isPermaLink="false">http://www.ideashot.com/?p=2584</guid>
+		<description><![CDATA[当前，无论在企业网、园区网还是在广域网如Internet上，业务量的发展都超出了过去最乐观的估计，上网热潮风起云涌，新的应用层出不穷，即使按照当时最优配置建设的网络，也很快会感到吃不消。尤其是各个网络的核心部分，其数据流量和计算强度之大，使得单一设备根本无法承担，而如何在完成同样功能的多个网络设备之间实现合理的业务量分配，使之不致于出现一台设备过忙、而别的设备却未充分发挥处理能力的情况，就成了一个问题，负载均衡机制也因此应运而生。 负载均衡建立在现有网络结构之上，它提供了一种廉价有效的方法扩展服务器带宽和增加吞吐量，加强网络数据处理能力，提高网络的灵活性和可用性。它主要完成以下任务：解决网络拥塞问题，服务就近提供，实现地理位置无关性；为用户提供更好的访问质量；提高服务器响应速度；提高服务器及其他资源的利用效率；避免了网络关键部位出现单点失效。 定义 其实，负载均衡并非传统意义上的“均衡”，一般来说，它只是把有可能拥塞于一个地方的负载交给多个地方分担。如果将其改称为“负载分担”，也许更好懂一些。说得通俗一点，负载均衡在网络中的作用就像轮流值日制度，把任务分给大家来完成，以免让一个人累死累活。不过，这种意义上的均衡一般是静态的，也就是事先确定的“轮值”策略。 与轮流值日制度不同的是，动态负载均衡通过一些工具实时地分析数据包，掌握网络中的数据流量状况，把任务合理分配出去。结构上分为本地负载均衡和地域负载均衡(全局负载均衡)，前一种是指对本地的服务器集群做负载均衡，后一种是指对分别放置在不同的地理位置、在不同的网络及服务器群集之间作负载均衡。 服务器群集中每个服务结点运行一个所需服务器程序的独立拷贝，诸如Web、FTP、Telnet或e-mail服务器程序。对于某些服务（如运行在Web服务器上的那些服务）而言，程序的一个拷贝运行在群集内所有的主机上，而网络负载均衡则将工作负载在这些主机间进行分配。对于其他服务（例如e-mail），只有一台主机处理工作负载，针对这些服务，网络负载均衡允许网络通讯量流到一个主机上，并在该主机发生故障时将通讯量移至其他主机。]]></description>
+				<content:encoded><![CDATA[<p>当前，无论在企业网、园区网还是在广域网如Internet上，业务量的发展都超出了过去最乐观的估计，上网热潮风起云涌，新的应用层出不穷，即使按照当时最优配置建设的网络，也很快会感到吃不消。尤其是各个网络的核心部分，其数据流量和计算强度之大，使得单一设备根本无法承担，而如何在完成同样功能的多个网络设备之间实现合理的业务量分配，使之不致于出现一台设备过忙、而别的设备却未充分发挥处理能力的情况，就成了一个问题，负载均衡机制也因此应运而生。<br />
+<span id="more-2584"></span><br />
+负载均衡建立在现有网络结构之上，它提供了一种廉价有效的方法扩展服务器带宽和增加吞吐量，加强网络数据处理能力，提高网络的灵活性和可用性。它主要完成以下任务：解决网络拥塞问题，服务就近提供，实现地理位置无关性；为用户提供更好的访问质量；提高服务器响应速度；提高服务器及其他资源的利用效率；避免了网络关键部位出现单点失效。</p>
+<p>定义</p>
+<p>其实，负载均衡并非传统意义上的“均衡”，一般来说，它只是把有可能拥塞于一个地方的负载交给多个地方分担。如果将其改称为“负载分担”，也许更好懂一些。说得通俗一点，负载均衡在网络中的作用就像轮流值日制度，把任务分给大家来完成，以免让一个人累死累活。不过，这种意义上的均衡一般是静态的，也就是事先确定的“轮值”策略。</p>
+<p>与轮流值日制度不同的是，动态负载均衡通过一些工具实时地分析数据包，掌握网络中的数据流量状况，把任务合理分配出去。结构上分为本地负载均衡和地域负载均衡(全局负载均衡)，前一种是指对本地的服务器集群做负载均衡，后一种是指对分别放置在不同的地理位置、在不同的网络及服务器群集之间作负载均衡。</p>
+<p>服务器群集中每个服务结点运行一个所需服务器程序的独立拷贝，诸如Web、FTP、Telnet或e-mail服务器程序。对于某些服务（如运行在Web服务器上的那些服务）而言，程序的一个拷贝运行在群集内所有的主机上，而网络负载均衡则将工作负载在这些主机间进行分配。对于其他服务（例如e-mail），只有一台主机处理工作负载，针对这些服务，网络负载均衡允许网络通讯量流到一个主机上，并在该主机发生故障时将通讯量移至其他主机。</p>
+]]></content:encoded>
+			</item>
+		<item>
+		<title>ECC协议簇学习</title>
+		<link>http://www.xieziming.com/archives/2310.html</link>
+		<comments>http://www.xieziming.com/archives/2310.html#respond</comments>
+		<pubDate>Sun, 23 Aug 2009 07:44:12 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[技术维基]]></category>
+		<category><![CDATA[技术]]></category>
+		<category><![CDATA[通讯]]></category>
+
+		<guid isPermaLink="false">http://www.ideashot.com/?p=2310</guid>
+		<description><![CDATA[<img src="http://images.xieziming.com/upload/2009/09/1/2.jpg" alt="ECC学习" />]]></description>
+				<content:encoded><![CDATA[<p>中兴传输设备ECC协议簇学习<br />
+<span id="more-2310"></span><br />
+<img src="http://images.xieziming.com/upload/2009/09/1/1.jpg" alt="ECC学习" /></p>
+<p><img src="http://images.xieziming.com/upload/2009/09/1/2.jpg" alt="ECC学习" /></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/2310.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>软件项目开发流程</title>
+		<link>http://www.xieziming.com/archives/2220.html</link>
+		<comments>http://www.xieziming.com/archives/2220.html#respond</comments>
+		<pubDate>Thu, 20 Aug 2009 15:02:18 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[技术维基]]></category>
+		<category><![CDATA[程序]]></category>
+
+		<guid isPermaLink="false">http://www.ideashot.com/?p=2220</guid>
+		<description><![CDATA[软件设计思路和方法的一般过程，包括设计软件的功能和实现的算法和方法、软件的总体结构设计和模块设计、编程和调试、程序联调和测试以及编写、提交程序。 
+
+1 相关系统分析员和用户初步了解需求，然后用WORD列出要开发的系统的大功能模块，每个大功能模块有哪些小功能模块，对于有些需求比较明确相关的界面时，在这一步里面可以初步定义好少量的界面。 
+
+2 系统分析员深入了解和分析需求，根据自己的经验和需求用WORD或相关的工具再做出一份文档系统的功能需求文档。这次的文档会清楚例用系统大致的大功能模块，大功能模块有哪些小功能模块，并且还例出相关的界面和界面功能。 
+　　
+3 系统分析员和用户再次确认需求。 
+　　
+4 系统分析员根据确认的需求文档所例用的界面和功能需求，用迭代的方式对每个界面或功能做系统的概要设计。 
+　　
+5 系统分析员把写好的概要设计文档给程序员，程序员根据所例出的功能一个一个的编写。]]></description>
+				<content:encoded><![CDATA[<p>软件设计思路和方法的一般过程，包括设计软件的功能和实现的算法和方法、软件的总体结构设计和模块设计、编程和调试、程序联调和测试以及编写、提交程序。 </p>
+<p>1 相关系统分析员和用户初步了解需求，然后用WORD列出要开发的系统的大功能模块，每个大功能模块有哪些小功能模块，对于有些需求比较明确相关的界面时，在这一步里面可以初步定义好少量的界面。 </p>
+<p>2 系统分析员深入了解和分析需求，根据自己的经验和需求用WORD或相关的工具再做出一份文档系统的功能需求文档。这次的文档会清楚例用系统大致的大功能模块，大功能模块有哪些小功能模块，并且还例出相关的界面和界面功能。<br />
+<span id="more-2220"></span>　　<br />
+3 系统分析员和用户再次确认需求。<br />
+　　<br />
+4 系统分析员根据确认的需求文档所例用的界面和功能需求，用迭代的方式对每个界面或功能做系统的概要设计。<br />
+　　<br />
+5 系统分析员把写好的概要设计文档给程序员，程序员根据所例出的功能一个一个的编写。<br />
+　　<br />
+6 测试编写好的系统。交给用户使用，用户使用后一个一个的确认每个功能，然后验收。<br />
+　　<br />
+举个例子来看： </p>
+<p>1 某公司想找人订做一套人事管理软件,从某种渠道上得知我们有提供这种服务，所以联系上了我们。<br />
+　　<br />
+2 我们会派专门的软件工程师到他们那里去了解我们要设计一个什么的东西给他们用，然后回来做个方案给他们，其中方案的内容包括：我们开发出来的软件大概的界面是怎样？方便什么人使用？什么人可以使用什么功能？方便到什么程度？大概的硬件要求是怎样等？<br />
+　　<br />
+3 他们看了方案后，确定他们就是要做一套这样的软件，我就开始开发这套软件。<br />
+　　<br />
+4 我们把开发出来的软件交用他们使用，其中在使用的过程中哪里使用不方便或哪里达不到要求，我们会第第一时间修改这些功能，直到他们要求的所有功能都能很完美的解决掉。</p>
+<p>1.需求分析：通过对客户业务的了解和与客户对流程的讨论对需求进行基本建 模，最 终形成需求规格说明书。</p>
+<p>2.总体设计：通过分析需求信息，对系统的外部条件及内部业务需求进行抽象建模，最终形成概要设计说明文档。</p>
+<p>3.详细设计：此部分在对需求和概要设计的基础上进行系统的详细设计（也包含部分代码说明）。 </p>
+<p>4.开发编程：对系统进行代码编写。</p>
+<p>5.测试分析与系统整合：对所有功能模块进行模拟数据测试及其它相关性测试并整合所有模块功能。</p>
+<p>6.现场支持：系统上线试运行进行现场问题记录、解答。</p>
+<p> 7.系统运行支持：系统正式推产后，对系统进行必要的维护和BUG修改</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/2220.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>软件面试题目</title>
+		<link>http://www.xieziming.com/archives/2223.html</link>
+		<comments>http://www.xieziming.com/archives/2223.html#respond</comments>
+		<pubDate>Tue, 18 Aug 2009 15:07:17 +0000</pubDate>
+		<dc:creator><![CDATA[Suny Tse]]></dc:creator>
+				<category><![CDATA[技术维基]]></category>
+		<category><![CDATA[程序]]></category>
+
+		<guid isPermaLink="false">http://www.ideashot.com/?p=2223</guid>
+		<description><![CDATA[1.写一个函数，完成内存之间的拷贝。
+<code>
+void* mymemcpy( void *dest, const void *src, size_t count )
+{
+    char* pdest = static_cast<char *>( dest );
+    const char* psrc = static_cast<const char*>( src );
+    if( pdest>psrc &#038;& pdest<psrc +cout )
+    {
+        for( size_t i=count-1; i!=-1; --I )
+                pdest[i] = psrc[i];
+    }
+    else
+    {
+        for( size_t i=0; i<count; ++I )
+            pdest[i] = psrc[i];
+    }
+    return dest;
+}</code></psrc></const></char></code>]]></description>
+				<content:encoded><![CDATA[<p>1.写一个函数，完成内存之间的拷贝。</p>
+
+<div class="wp_code"><div class="pre"><pre class="c" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #993333;">void</span><span style="color: #339933;">*</span> mymemcpy<span style="color: #009900;">&#40;</span> <span style="color: #993333;">void</span> <span style="color: #339933;">*</span>dest<span style="color: #339933;">,</span> <span style="color: #993333;">const</span> <span style="color: #993333;">void</span> <span style="color: #339933;">*</span>src<span style="color: #339933;">,</span> size_t count <span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#123;</span>
+    <span style="color: #993333;">char</span><span style="color: #339933;">*</span> pdest <span style="color: #339933;">=</span> static_cast<span style="color: #339933;">&lt;</span>char <span style="color: #339933;">*&gt;</span><span style="color: #009900;">&#40;</span> dest <span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #993333;">const</span> <span style="color: #993333;">char</span><span style="color: #339933;">*</span> psrc <span style="color: #339933;">=</span> static_cast<span style="color: #339933;">&lt;</span>const <span style="color: #993333;">char</span><span style="color: #339933;">*&gt;</span><span style="color: #009900;">&#40;</span> src <span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #b1b100;">if</span><span style="color: #009900;">&#40;</span> pdest<span style="color: #339933;">&gt;</span>psrc <span style="color: #339933;">&amp;&amp;</span> pdest<span style="color: #339933;">&lt;</span>psrc <span style="color: #339933;">+</span><span style="color: #000066;">cout</span> <span style="color: #009900;">&#41;</span>
+    <span style="color: #009900;">&#123;</span>
+        <span style="color: #b1b100;">for</span><span style="color: #009900;">&#40;</span> size_t i<span style="color: #339933;">=</span>count<span style="color: #339933;">-</span><span style="color: #0000dd;">1</span><span style="color: #339933;">;</span> i<span style="color: #339933;">!=-</span><span style="color: #0000dd;">1</span><span style="color: #339933;">;</span> <span style="color: #339933;">--</span>I <span style="color: #009900;">&#41;</span>
+                pdest<span style="color: #009900;">&#91;</span>i<span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> psrc<span style="color: #009900;">&#91;</span>i<span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+    <span style="color: #b1b100;">else</span>
+    <span style="color: #009900;">&#123;</span>
+        <span style="color: #b1b100;">for</span><span style="color: #009900;">&#40;</span> size_t i<span style="color: #339933;">=</span><span style="color: #0000dd;">0</span><span style="color: #339933;">;</span> i<span style="color: #339933;">&lt;</span>count<span style="color: #339933;">;</span> <span style="color: #339933;">++</span>I <span style="color: #009900;">&#41;</span>
+            pdest<span style="color: #009900;">&#91;</span>i<span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> psrc<span style="color: #009900;">&#91;</span>i<span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+    <span style="color: #b1b100;">return</span> dest<span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>2.写一个函数找出一个整数数组中，第二大的数</p>
+
+<div class="wp_code"><div class="pre"><pre class="c" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #993333;">const</span> <span style="color: #993333;">int</span> MINNUMBER <span style="color: #339933;">=</span> <span style="color: #339933;">-</span><span style="color: #0000dd;">32767</span> <span style="color: #339933;">;</span>
+<span style="color: #993333;">int</span> find_sec_max<span style="color: #009900;">&#40;</span> <span style="color: #993333;">int</span> data<span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">,</span> <span style="color: #993333;">int</span> count<span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#123;</span>
+   <span style="color: #993333;">int</span> maxnumber <span style="color: #339933;">=</span> data<span style="color: #009900;">&#91;</span><span style="color: #0000dd;">0</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">;</span>
+   <span style="color: #993333;">int</span> sec_max <span style="color: #339933;">=</span> MINNUMBER <span style="color: #339933;">;</span>
+   <span style="color: #b1b100;">for</span> <span style="color: #009900;">&#40;</span> <span style="color: #993333;">int</span> i <span style="color: #339933;">=</span> <span style="color: #0000dd;">1</span> <span style="color: #339933;">;</span> i <span style="color: #339933;">&lt;</span> count <span style="color: #339933;">;</span> i<span style="color: #339933;">++</span><span style="color: #009900;">&#41;</span>
+   <span style="color: #009900;">&#123;</span>
+      <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span> data<span style="color: #009900;">&#91;</span>i<span style="color: #009900;">&#93;</span> <span style="color: #339933;">&gt;</span> maxnumber <span style="color: #009900;">&#41;</span>
+      <span style="color: #009900;">&#123;</span>
+         sec_max <span style="color: #339933;">=</span> maxnumber <span style="color: #339933;">;</span>
+         maxnumber <span style="color: #339933;">=</span> data<span style="color: #009900;">&#91;</span>i<span style="color: #009900;">&#93;</span> <span style="color: #339933;">;</span>
+      <span style="color: #009900;">&#125;</span>
+      <span style="color: #b1b100;">else</span>
+      <span style="color: #009900;">&#123;</span>
+         <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span> data<span style="color: #009900;">&#91;</span>i<span style="color: #009900;">&#93;</span> <span style="color: #339933;">&gt;</span> sec_max <span style="color: #009900;">&#41;</span>
+            sec_max <span style="color: #339933;">=</span> data<span style="color: #009900;">&#91;</span>i<span style="color: #009900;">&#93;</span> <span style="color: #339933;">;</span>
+      <span style="color: #009900;">&#125;</span>
+   <span style="color: #009900;">&#125;</span>
+   <span style="color: #b1b100;">return</span> sec_max <span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+]]></content:encoded>
+			<wfw:commentRss>http://www.xieziming.com/archives/2223.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+	</channel>
+</rss>
