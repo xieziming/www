@@ -1,0 +1,416 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head profile="http://gmpg.org/xfn/11">
+<title>  链接器和装入器 &raquo; 谢子明</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="description" content="链接器和装入器  " />
+<meta name="keywords" content="谢子明" />
+<link rel="stylesheet" href="http://www.xieziming.com/wp-content/themes/ziming/style.css" type="text/css" media="screen" />
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://www.xieziming.com/feed" />
+<link rel="alternate" type="application/rss+xml" href="http://www.xieziming.com/comments/feed" title="谢子明 Comments RSS feed" />
+<link rel="shortcut icon" href="http://www.xieziming.com/wp-content/themes/ziming/favicon.ico">
+<link rel="Bookmark" href="http://www.xieziming.com/wp-content/themes/ziming/favicon.ico">
+<link rel="pingback" href="http://www.xieziming.com/xmlrpc.php" />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="谢子明 &raquo; 链接器和装入器 Comments Feed" href="http://www.xieziming.com/archives/7170.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/xieziming.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.7"}};
+			!function(a,b,c){function d(a){var b,c,d,e,f=String.fromCharCode;if(!k||!k.fillText)return!1;switch(k.clearRect(0,0,j.width,j.height),k.textBaseline="top",k.font="600 32px Arial",a){case"flag":return k.fillText(f(55356,56826,55356,56819),0,0),!(j.toDataURL().length<3e3)&&(k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,65039,8205,55356,57096),0,0),b=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,55356,57096),0,0),c=j.toDataURL(),b!==c);case"emoji4":return k.fillText(f(55357,56425,55356,57341,8205,55357,56507),0,0),d=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55357,56425,55356,57341,55357,56507),0,0),e=j.toDataURL(),d!==e}return!1}function e(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i,j=b.createElement("canvas"),k=j.getContext&&j.getContext("2d");for(i=Array("flag","emoji4"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<script type='text/javascript' src='http://www.xieziming.com/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='http://www.xieziming.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<link rel='https://api.w.org/' href='http://www.xieziming.com/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.xieziming.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.xieziming.com/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='隐藏在甜品里的惊喜' href='http://www.xieziming.com/archives/4443.html' />
+<link rel='next' title='三月咖啡五月香' href='http://www.xieziming.com/archives/4566.html' />
+<meta name="generator" content="WordPress 4.7" />
+<link rel="canonical" href="http://www.xieziming.com/archives/7170.html" />
+<link rel='shortlink' href='http://www.xieziming.com/?p=7170' />
+<link rel="alternate" type="application/json+oembed" href="http://www.xieziming.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fxieziming.com%2Farchives%2F7170.html" />
+<link rel="alternate" type="text/xml+oembed" href="http://www.xieziming.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fxieziming.com%2Farchives%2F7170.html&#038;format=xml" />
+ 	<link rel="stylesheet" href="http://www.xieziming.com/wp-content/plugins/live-calendar/live-calendar.css" type="text/css" media="screen" /> 
+<link rel="stylesheet" href="http://www.xieziming.com/wp-content/plugins/wp-code/wp-code.css" type="text/css" media="screen" />
+
+<link rel="stylesheet" href="http://www.xieziming.com/wp-content/plugins/zoom-highslide/highslide.css" type="text/css" media="screen" />
+<script type="text/javascript" src="http://www.xieziming.com/wp-content/plugins/zoom-highslide/js/highslide-full.packed.js"></script>
+<script type="text/javascript">
+	hs.graphicsDir = 'http://www.xieziming.com/wp-content/plugins/zoom-highslide/graphics/';
+	hs.align = 'center';
+	hs.transitions = ['expand', 'crossfade'];
+	hs.outlineType = 'rounded-white';
+  hs.wrapperClassName = 'controls-in-heading';
+	hs.showCredits=false;
+	hs.fadeInOut = true;
+	hs.dimmingOpacity = 0.8;
+
+	// Add the controlbar
+	if (hs.addSlideshow) hs.addSlideshow({
+		//slideshowGroup: 'group1',
+		interval: 4000,
+		repeat: false,
+		useControls: true,
+		fixedControls: false,
+		overlayOptions: {
+			opacity: 1,
+			position: 'top center',
+			hideOnMouseOut: true
+		}
+	});
+</script>
+
+<script type="text/javascript">
+	var widthRestriction = 668; 
+	var heightRestriction = 1000; 
+</script>
+<script type="text/javascript" src="http://www.xieziming.com/wp-content/plugins/zoom-highslide/js/zoom.js"></script>
+	
+<!--script src="http://www.xieziming.com/wp-content/themes/ziming/js/mouse.js" type="text/javascript"></script--> 
+</head>
+<body class="normalbg">
+<div id="container">
+	<div id="head">
+		<div id="nav">
+			<ul>
+				<li class="first"><a href="http://www.xieziming.com" title="首页">首页</a></li>
+				<li class="page_item page-item-2"><a href="http://www.xieziming.com/recent" title="最近">最近</a></li>
+				<li class="page_item page-item-3"><a href="http://www.xieziming.com/photo" title="Photo">映象</a></li>
+				<li class="page_item page-item-4"><a href="http://www.xieziming.com/food" title="Food">美食</a></li>
+				<li class="page_item page-item-5"><a href="http://www.xieziming.com/topic" title="关键字">话题</a></li>
+				<li class="page_item page-item-6"><a href="http://www.xieziming.com/travel" title="Travel">旅行</a></li>
+				<li class="page_item page-item-7"><a href="http://www.xieziming.com/literature" title="Literature">文艺</a></li>
+				<li class="page_item page-item-8"><a href="http://www.xieziming.com/wiki" title="技术维基">维基</a></li>
+				<li class="page_item page-item-9"><a href="http://www.xieziming.com/calendar" title="Calendar">点滴</a></li>
+			</ul>
+		</div><!-- /nav -->		
+	</div><!-- /head -->
+<div id="main" class="altmainbg">
+
+<script type="text/javascript">
+function show_page(id,count,source){
+	for (var i=1;i<=count;i++){
+		if(id != i){
+				jQuery("#part_"+i).hide();
+				document.getElementById("li_"+i).style.fontWeight = "normal";
+				document.getElementById("li_"+i).style.fontSize = "18px";
+		}
+	}
+	jQuery("#part_"+id).show();
+	document.getElementById("li_"+id).style.fontWeight = "bold";
+	document.getElementById("li_"+id).style.fontSize = "30px";
+	jQuery('body,html').animate({scrollTop:0},1000);
+        return false;
+}
+</script>
+<div id="content">
+
+	<div class="post" id="post-7170">
+		<h2 class="title">链接器和装入器</h2>
+		<p class="postmetadata">
+			<span class="date">25 May 2010</span>
+			<span class="category">Categoried in <a href="http://www.xieziming.com/topic/ji-shu-wei-ji" rel="category tag">技术维基</a></span>
+			<span class="comments">0</span>
+			<span class="view">Preview : 119 , Read : 878 </span>
+			<span class="mail">Index : 2602 </span>
+		</p>
+		<div class="entry">				
+<div id="part_1"><p><strong>链接器和装入器的基本工作原理</strong></p>
+<p>一个程序要想在内存中运行，除了编译之外还要经过链接和装入这两个步骤。从程序员的角度来看，引入这两个步骤带来的好处就是可以直接在程序中使用printf和errno这种有意义的函数名和变量名，而不用明确指明printf和errno在标准C库中的地址。当然，为了将程序员从早期直接使用地址编程的梦魇中解救出来，编译器和汇编器在这当中做出了革命性的贡献。编译器和汇编器的出现使得程序员可以在程序中使用更具意义的符号来为函数和变量命名，这样使得程序在正确性和可读性等方面都得到了极大的提高。但是随着C语言这种支持分别编译的程序设计语言的流行，一个完整的程序往往被分割为若干个独立的部分并行开发，而各个模块间通过函数接口或全局变量进行通讯。这就带来了一个问题，编译器只能在一个模块内部完成符号名到地址的转换工作，不同模块间的符号解析由谁来做呢？比如前面所举的例子，调用printf的用户程序和实现了printf的标准C库显然就是两个不同的模块。实际上，这个工作是由链接器来完成的。</p>
+<p>为了解决不同模块间的链接问题，链接器主要有两个工作要做――符号解析和重定位：</p>
+<p><strong>符号解析：</strong>当一个模块使用了在该模块中没有定义过的函数或全局变量时，编译器生成的符号表会标记出所有这样的函数或全局变量，而链接器的责任就是要到别的模块中去查找它们的定义，如果没有找到合适的定义或者找到的合适的定义不唯一，符号解析都无法正常完成。</p>
+<p><strong>重定位：</strong>编译器在编译生成目标文件时，通常都使用从零开始的相对地址。然而，在链接过程中，链接器将从一个指定的地址开始，根据输入的目标文件的顺序以段为单位将它们一个接一个的拼装起来。除了目标文件的拼装之外，在重定位的过程中还完成了两个任务：一是生成最终的符号表；二是对代码段中的某些位置进行修改，所有需要修改的位置都由编译器生成的重定位表指出。</p>
+<p>举个简单的例子，上面的概念对读者来说就一目了然了。假如我们有一个程序由两部分构成，m.c中的main函数调用f.c中实现的函数sum：</p>
+
+<div class="wp_code"><div class="pre"><pre class="c" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #808080; font-style: italic;">/* m.c */</span>
+<span style="color: #993333;">int</span> i <span style="color: #339933;">=</span> <span style="color: #0000dd;">1</span><span style="color: #339933;">;</span>
+<span style="color: #993333;">int</span> j <span style="color: #339933;">=</span> <span style="color: #0000dd;">2</span><span style="color: #339933;">;</span>
+<span style="color: #000000; font-weight: bold;">extern</span> <span style="color: #993333;">int</span> sum<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #993333;">void</span> main<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#123;</span>
+        <span style="color: #993333;">int</span> s<span style="color: #339933;">;</span>
+        s <span style="color: #339933;">=</span> sum<span style="color: #009900;">&#40;</span>i<span style="color: #339933;">,</span> j<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #808080; font-style: italic;">/* f.c */</span>
+<span style="color: #993333;">int</span> sum<span style="color: #009900;">&#40;</span><span style="color: #993333;">int</span> i<span style="color: #339933;">,</span> <span style="color: #993333;">int</span> j<span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#123;</span>
+        <span style="color: #b1b100;">return</span> i <span style="color: #339933;">+</span> j<span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>在Linux用gcc分别将两段源程序编译成目标文件：</p>
+
+<div class="wp_code"><div class="pre"><pre class="c" style="font-family:'Times New Roman',Garamond, Times;">$ gcc <span style="color: #339933;">-</span>c m.<span style="color: #202020;">c</span>
+$ gcc <span style="color: #339933;">-</span>c f.<span style="color: #202020;">c</span></pre></div></div>
+
+<p>我们通过objdump来看看在编译过程中生成的符号表和重定位表：</p>
+
+<div class="wp_code"><div class="pre"><pre class="c" style="font-family:'Times New Roman',Garamond, Times;">$ objdump <span style="color: #339933;">-</span>x m.<span style="color: #202020;">o</span>
+……
+SYMBOL TABLE<span style="color: #339933;">:</span>
+……
+<span style="color: #208080;">00000000</span> g		O .<span style="color: #202020;">data</span>  <span style="color: #208080;">00000004</span> i
+<span style="color: #208080;">00000004</span> g		O .<span style="color: #202020;">data</span>  <span style="color: #208080;">00000004</span> j
+<span style="color: #208080;">00000000</span> g		F .<span style="color: #202020;">text</span>  <span style="color: #208080;">00000021</span> main
+<span style="color: #208080;">00000000</span>         <span style="color: #339933;">*</span>UND<span style="color: #339933;">*</span>  <span style="color: #208080;">00000000</span> sum
+RELOCATION RECORDS FOR <span style="color: #009900;">&#91;</span>.<span style="color: #202020;">text</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">:</span>
+OFFSET   TYPE              VALUE
+<span style="color: #208080;">00000007</span> R_386_32          j
+0000000d R_386_32          i
+<span style="color: #208080;">00000013</span> R_386_PC32        sum</pre></div></div>
+
+</div><div id="part_2" style="display:none;"><p>首先，我们注意到符号表里面的sum被标记为UND（undefined），也就是在m.o中没有定义，所以将来要通过ld（Linux下的链接器）的符号解析功能到别的模块中去查找是否存在函数sum的定义。另外，在重定位表中有三条记录，指出了在重定位过程中代码段中三处需要修改的位置，分别位于7、d和13。下面以一种更加直观的方式来看一下这三个位置：</p>
+
+<div class="wp_code"><div class="pre"><pre class="c" style="font-family:'Times New Roman',Garamond, Times;">$ objdump <span style="color: #339933;">-</span>dx m.<span style="color: #202020;">o</span>
+Disassembly of section .<span style="color: #202020;">text</span><span style="color: #339933;">:</span>
+<span style="color: #208080;">00000000</span> <span style="color: #339933;">&lt;</span>main<span style="color: #339933;">&gt;:</span>
+   <span style="color: #0000dd;">0</span><span style="color: #339933;">:</span>   <span style="color: #0000dd;">55</span>						push   <span style="color: #339933;">%</span>ebp
+   <span style="color: #0000dd;">1</span><span style="color: #339933;">:</span>   <span style="color: #0000dd;">89</span> e5						mov    <span style="color: #339933;">%</span>esp<span style="color: #339933;">,%</span>ebp
+   <span style="color: #0000dd;">3</span><span style="color: #339933;">:</span>   <span style="color: #0000dd;">83</span> ec <span style="color: #208080;">04</span>					sub    $<span style="color: #208080;">0x4</span><span style="color: #339933;">,%</span>esp
+   <span style="color: #0000dd;">6</span><span style="color: #339933;">:</span>   a1 <span style="color: #208080;">00</span> <span style="color: #208080;">00</span> <span style="color: #208080;">00</span> <span style="color: #208080;">00</span>				mov    <span style="color: #208080;">0x0</span><span style="color: #339933;">,%</span>eax
+<span style="color: #0000dd;">7</span><span style="color: #339933;">:</span> R_386_32     j
+   b<span style="color: #339933;">:</span>   <span style="color: #0000dd;">50</span>						push   <span style="color: #339933;">%</span>eax
+   c<span style="color: #339933;">:</span>   a1 <span style="color: #208080;">00</span> <span style="color: #208080;">00</span> <span style="color: #208080;">00</span> <span style="color: #208080;">00</span>				mov    <span style="color: #208080;">0x0</span><span style="color: #339933;">,%</span>eax
+d<span style="color: #339933;">:</span> R_386_32     i
+  <span style="color: #0000dd;">11</span><span style="color: #339933;">:</span>   <span style="color: #0000dd;">50</span>						push   <span style="color: #339933;">%</span>eax
+  <span style="color: #0000dd;">12</span><span style="color: #339933;">:</span>   e8 fc ff ff ff				call   <span style="color: #0000dd;">13</span> <span style="color: #339933;">&lt;/</span>main<span style="color: #339933;">&gt;&lt;</span>main <span style="color: #339933;">+</span><span style="color: #208080;">0x13</span><span style="color: #339933;">&gt;</span>
+<span style="color: #0000dd;">13</span><span style="color: #339933;">:</span> R_386_PC32  sum
+  <span style="color: #0000dd;">17</span><span style="color: #339933;">:</span>   <span style="color: #0000dd;">83</span> c4 <span style="color:#800080;">08</span>					add    $<span style="color: #208080;">0x8</span><span style="color: #339933;">,%</span>esp
+  1a<span style="color: #339933;">:</span>   <span style="color: #0000dd;">89</span> c0						mov    <span style="color: #339933;">%</span>eax<span style="color: #339933;">,%</span>eax
+  1c<span style="color: #339933;">:</span>   <span style="color: #0000dd;">89</span> <span style="color: #0000dd;">45</span> fc					mov    <span style="color: #339933;">%</span>eax<span style="color: #339933;">,</span><span style="color: #208080;">0xfffffffc</span><span style="color: #009900;">&#40;</span><span style="color: #339933;">%</span>ebp<span style="color: #009900;">&#41;</span>
+  <span style="color:#800080;">1f</span><span style="color: #339933;">:</span>   c9						leave
+  <span style="color: #0000dd;">20</span><span style="color: #339933;">:</span>   c3						ret
+<span style="color: #339933;">&lt;/</span>main<span style="color: #339933;">&gt;</span></pre></div></div>
+
+<p>以sum为例，对函数sum的调用是通过call指令实现的，使用IP相对寻址方式。可以看到，在目标文件m.o中，call指令位于从零开始的相对地址12的位置，这里存放的e8是call的操作码，而从13开始的4个字节存放着sum相对call的下一条指令add的偏移。显然，在链接之前这个偏移量是不知道的，所以将来要来修改13这里的代码。那现在这里为什么存放着0xfffffffc（注意Intel的CPU使用little endian的编址方式）呢？这大概是出于安全的考虑，因为0xfffffffc正是－4的补码表示（读者可以在gdb中使用p /x -4查看），而call指令本身占用了5个字节，因此无论如何call指令中的偏移量不可能是－4。我们再看看重定位之后call指令中的这个偏移量被修改成了什么：</p>
+
+<div class="wp_code"><div class="pre"><pre class="c" style="font-family:'Times New Roman',Garamond, Times;">$ gcc m.<span style="color: #202020;">o</span> f.<span style="color: #202020;">o</span>
+$ objdump <span style="color: #339933;">-</span>dj .<span style="color: #202020;">text</span> a.<span style="color: #202020;">out</span> <span style="color: #339933;">|</span> less
+Disassembly of section .<span style="color: #202020;">text</span><span style="color: #339933;">:</span>
+……
+080482c4 <span style="color: #339933;">&lt;</span>main<span style="color: #339933;">&gt;:</span>
+……
+80482d6<span style="color: #339933;">:</span>       e8 0d <span style="color: #208080;">00</span> <span style="color: #208080;">00</span> <span style="color: #208080;">00</span>		call   <span style="color:#800080;">80482e8</span> <span style="color: #339933;">&lt;</span>sum<span style="color: #339933;">&gt;</span>
+80482db<span style="color: #339933;">:</span>       <span style="color: #0000dd;">83</span> c4 <span style="color:#800080;">08</span>				add    $<span style="color: #208080;">0x8</span><span style="color: #339933;">,%</span>esp
+……
+<span style="color:#800080;">080482e8</span> <span style="color: #339933;">&lt;/</span>sum<span style="color: #339933;">&gt;&lt;</span>sum<span style="color: #339933;">&gt;:</span>
+……
+<span style="color: #339933;">&lt;/</span>sum<span style="color: #339933;">&gt;&lt;/</span>main<span style="color: #339933;">&gt;</span></pre></div></div>
+
+<p>可以看到经过重定位之后，call指令中的偏移量修改成0x0000000d了，简单的计算告诉我们：0x080482e8－0x80482db=0xd。这样，经过重定位之后最终的可执行程序就生成了。</p>
+<p>可执行程序生成后，下一步就是将其装入内存运行。Linux下的编译器（C语言）是cc1，汇编器是as，链接器是ld，但是并没有一个实际的程序对应装入器这个概念。实际上，将可执行程序装入内存运行的功能是由execve(2)这一系统调用实现的。简单来讲，程序的装入主要包含以下几个步骤：<br />
+1)读入可执行文件的头部信息以确定其文件格式及地址空间的大小；<br />
+2)以段的形式划分地址空间；<br />
+3)将可执行程序读入地址空间中的各个段，建立虚实地址间的映射关系；<br />
+4)将bbs段清零；<br />
+5)创建堆栈段；<br />
+6)建立程序参数、环境变量等程序运行过程中所需的信息；<br />
+7)启动运行。</p>
+</div><div id="part_3" style="display:none;"><p><strong>链接和装入技术的发展史</strong></p>
+<p>一个程序要想装入内存运行必然要先经过编译、链接和装入这三个阶段，虽然是这样一个大家听起来耳熟能详的概念，在操作系统发展的过程中却已经经历了多次重大变革。简单来讲，可以将其划分为以下三个阶段：</p>
+<p><strong>1．静态链接、静态装入</strong></p>
+<p>这种方法最早被采用，其特点是简单，不需要操作系统提供任何额外的支持。像C这样的编程语言从很早开始就已经支持分别编译了，程序的不同模块可以并行开发，然后独立编译为相应的目标文件。在得到了所有的目标文件后，静态链接、静态装入的做法是将所有目标文件链接成一个可执行映象，随后在创建进程时将该可执行映象一次全部装入内存。</p>
+<p>举个简单的例子，假设我们开发了两个程序Prog1和Prog2，Prog1由main1.c、utilities.c以及errhdl1.c三部分组成，分别对应程序的主框架、一些公用的辅助函数（其作用相当于库）以及错误处理部分，这三部分代码编译后分别得到各自对应的目标文件main1.o、utilities.o以及errhdl1.o。同样，Prog2由main2.c、utilities.c以及errhdl2.c三部分组成，三部分代码编译后分别得到各自对应的目标文件main2.o、utilities.o以及errhdl2.o。值得注意的是，这里Prog1和Prog2使用了相同的公用辅助函数utilities.o。当我们采用静态链接、静态装入的方法，可以看到，首先就硬盘的使用来讲，虽然两个程序共享使用了utilities，但这并没有在硬盘保存的可执行程序映象上体现出来。相反，utilities.o被链接进了每一个用到它的程序的可执行映象。内存的使用也是如此，操作系统在创建进程时将程序的可执行映象一次全部装入内存，之后进程才能开始运行。如前所述，采用这种方法使得操作系统的实现变得非常简单，但其缺点也是显而易见的。首先，既然两个程序使用的是相同的utilities.o，那么我们只要在硬盘上保存utilities.o的一份拷贝应该就足够了；另外，假如程序在运行过程中没有出现任何错误，那么错误处理部分的代码就不应该被装入内存。因此静态链接、静态装入的方法不但浪费了硬盘空间，同时也浪费了内存空间。由于早期系统的内存资源十分宝贵，所以后者对早期的系统来讲更加致命。</p>
+<p><strong>2．静态链接、动态装入</strong></p>
+<p>既然采用静态链接、静态装入的方法弊大于利，我们来看看人们是如何解决这一问题的。由于内存紧张的问题在早期的系统中显得更加突出，因此人们首先想到的是要解决内存使用效率不高这一问题，于是便提出了动态装入的思想。其想法是非常简单的，即一个函数只有当它被调用时，其所在的模块才会被装入内存。所有的模块都以一种可重定位的装入格式存放在磁盘上。首先，主程序被装入内存并开始运行。当一个模块需要调用另一个模块中的函数时，首先要检查含有被调用函数的模块是否已装入内存。如果该模块尚未被装入内存，那么将由负责重定位的链接装入器将该模块装入内存，同时更新此程序的地址表以反应这一变化。之后，控制便转移到了新装入的模块中被调用的函数那里。</p>
+<p>动态装入的优点在于永远不会装入一个使用不到的模块。如果程序中存在着大量像出错处理函数这种用于处理小概率事件的代码，使用这种方法无疑是卓有成效的。在这种情况下，即使整个程序可能很大，但是实际用到（因此被装入到内存中）的部分实际上可能非常小。<br />
+仍然以上面提到的两个程序Prog1和Prog2为例，假如Prog1运行过程中出现了错误而Prog2在运行过程中没有出现任何错误。当我们采用静态链接、动态装入的方法，同时运行这两个程序,可以看到，当程序中存在着大量像错误处理这样使用概率很小的模块时，采用静态链接、动态装入的方法在内存的使用效率上就体现出了相当大的优势。到此为止，人们已经向理想的目标迈进了一部，但是问题还没有完全解决――内存的使用效率提高了，硬盘呢？</p>
+<p><strong>3．动态链接、动态装入</strong></p>
+<p>采用静态链接、动态装入的方法后看似只剩下硬盘空间使用效率不高的问题了，实际上内存使用效率不高的问题仍然没有完全解决。图2中，既然两个程序用到的是相同的utilities.o，那么理想的情况是系统中只保存一份utilities.o的拷贝，无论是在内存中还是在硬盘上，于是人们想到了动态链接。<br />
+在使用动态链接时，需要在程序映象中每个调用库函数的地方打一个桩（stub）。stub是一小段代码，用于定位已装入内存的相应的库；如果所需的库还不在内存中，stub将指出如何将该函数所在的库装入内存。</p>
+<p>当执行到这样一个stub时，首先检查所需的函数是否已位于内存中。如果所需函数尚不在内存中，则首先需要将其装入。不论怎样，stub最终将被调用函数的地址替换掉。这样，在下次运行同一个代码段时，同样的库函数就能直接得以运行，从而省掉了动态链接的额外开销。由此，用到同一个库的所有进程在运行时使用的都是这个库的同一份拷贝。</p>
+<p>下面我们就来看看上面提到的两个程序Prog1和Prog2在采用动态链接、动态装入的方法，同时运行这两个程序时内存和硬盘的使用情况。仍然假设Prog1运行过程中出现了错误而Prog2在运行过程中没有出现任何错误。同时运行Prog1和Prog2时，无论是硬盘还是内存中都只存在一份utilities.o的拷贝。内存中，两个进程通过将地址映射到相同的utilities.o实现对其的共享。动态链接的这一特性对于库的升级（比如错误的修正）是至关重要的。当一个库升级到一个新版本时，所有用到这个库的程序将自动使用新的版本。如果不使用动态链接技术，那么所有这些程序都需要被重新链接才能得以访问新版的库。为了避免程序意外使用到一些不兼容的新版的库，通常在程序和库中都包含各自的版本信息。内存中可能会同时存在着一个库的几个版本，但是每个程序可以通过版本信息来决定它到底应该使用哪一个。如果对库只做了微小的改动，库的版本号将保持不变；如果改动较大，则相应递增版本号。因此，如果新版库中含有与早期不兼容的改动，只有那些使用新版库进行编译的程序才会受到影响，而在新版库安装之前进行过链接的程序将继续使用以前的库。这样的系统被称作共享库系统。</p>
+</div><div id="part_4" style="display:none;"><p><strong>Linux下动态链接的实现</strong></p>
+<p>如今我们在Linux下编程用到的库（像libc、QT等等）大多都同时提供了动态链接库和静态链接库两个版本的库，而gcc在编译链接时如果不加-static选项则默认使用系统中的动态链接库。对于动态链接库的原理大多数的书本上只是进行了泛泛的介绍，在此笔者将通过在实际系统中反汇编出的代码向读者展示这一技术在Linux下的实现。</p>
+<p>下面是个最简单的C程序hello.c：</p>
+
+<div class="wp_code"><div class="pre"><pre class="c" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #339933;">#include &lt;stdio .h&gt;</span>
+<span style="color: #993333;">int</span> main<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#123;</span>
+    <span style="color: #000066;">printf</span><span style="color: #009900;">&#40;</span><span style="color: #ff0000;">&quot;Hello, world<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #b1b100;">return</span> <span style="color: #0000dd;">0</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span>
+<span style="color: #339933;">&lt;/</span>stdio<span style="color: #339933;">&gt;</span></pre></div></div>
+
+<p>在Linux下我们可以使用gcc将其编译成可执行文件a.out：</p>
+
+<div class="wp_code"><div class="pre"><pre class="c" style="font-family:'Times New Roman',Garamond, Times;">$ gcc hello.<span style="color: #202020;">c</span></pre></div></div>
+
+<p>程序里用到了printf，它位于标准C库中，如果在用gcc编译时不加-static的话，默认是使用libc.so，也就是动态链接的标准C库。在gdb中可以看到编译后printf对应如下代码 ：</p>
+
+<div class="wp_code"><div class="pre"><pre class="c" style="font-family:'Times New Roman',Garamond, Times;">$ gdb <span style="color: #339933;">-</span>q a.<span style="color: #202020;">out</span>
+<span style="color: #009900;">&#40;</span>gdb<span style="color: #009900;">&#41;</span> disassemble <span style="color: #000066;">printf</span>
+Dump of assembler code <span style="color: #b1b100;">for</span> <span style="color: #000000; font-weight: bold;">function</span> <span style="color: #000066;">printf</span><span style="color: #339933;">:</span>
+<span style="color: #208080;">0x8048310</span> <span style="color: #339933;">&lt;</span>printf<span style="color: #339933;">&gt;:</span>     jmp    <span style="color: #339933;">*</span><span style="color: #208080;">0x80495a4</span>
+<span style="color: #208080;">0x8048316</span> <span style="color: #339933;">&lt;/</span>printf<span style="color: #339933;">&gt;&lt;</span>printf <span style="color: #339933;">+</span><span style="color: #0000dd;">6</span><span style="color: #339933;">&gt;:</span>   push   $<span style="color: #208080;">0x18</span>
+<span style="color: #208080;">0x804831b</span> <span style="color: #339933;">&lt;/</span>printf<span style="color: #339933;">&gt;&lt;</span>printf <span style="color: #339933;">+</span><span style="color: #0000dd;">11</span><span style="color: #339933;">&gt;:</span>  jmp    <span style="color: #208080;">0x80482d0</span> <span style="color: #339933;">&lt;</span>_init <span style="color: #339933;">+</span><span style="color: #0000dd;">48</span><span style="color: #339933;">&gt;</span>
+<span style="color: #339933;">&lt;/</span>_init<span style="color: #339933;">&gt;&lt;/</span>printf<span style="color: #339933;">&gt;</span></pre></div></div>
+
+<p>这也就是通常在书本上以及前面提到的打桩（stub）过程，显然这并不是真正的printf函数。这段stub代码的作用在于到libc.so中去查找真正的printf。</p>
+
+<div class="wp_code"><div class="pre"><pre class="c" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #009900;">&#40;</span>gdb<span style="color: #009900;">&#41;</span> x <span style="color: #339933;">/</span>w <span style="color: #208080;">0x80495a4</span>
+<span style="color: #208080;">0x80495a4</span> <span style="color: #339933;">&lt;</span>_global_offset_table_ <span style="color: #339933;">+</span><span style="color: #0000dd;">24</span><span style="color: #339933;">&gt;:</span>   <span style="color: #208080;">0x08048316</span>
+<span style="color: #339933;">&lt;/</span>_global_offset_table_<span style="color: #339933;">&gt;</span></pre></div></div>
+
+<p>可以看到0x80495a4处存放的0x08048316正是pushl $0x18这条指令的地址，所以第一条jmp指令没有起到任何作用，其作用就像空操作指令nop一样。当然这是在我们第一次调用printf时，其真正的作用是在今后再次调用printf时体现出来的。第二条jmp指令的目的地址是plt，也就是procedure linkage table，其内容可以通过objdump命令查看，我们感兴趣的就是下面这两条对程序的控制流有影响的指令：</p>
+
+<div class="wp_code"><div class="pre"><pre class="c" style="font-family:'Times New Roman',Garamond, Times;">$ objdump <span style="color: #339933;">-</span>dx a.<span style="color: #202020;">out</span>
+……
+080482d0 <span style="color: #339933;">&gt;</span>.<span style="color: #202020;">plt</span><span style="color: #339933;">&gt;:</span>
+ 80482d0<span style="color: #339933;">:</span>       ff <span style="color: #0000dd;">35</span> <span style="color: #0000dd;">90</span> <span style="color: #0000dd;">95</span> <span style="color: #208080;">04</span> <span style="color:#800080;">08</span>       pushl  <span style="color: #208080;">0x8049590</span>
+ 80482d6<span style="color: #339933;">:</span>       ff <span style="color: #0000dd;">25</span> <span style="color: #0000dd;">94</span> <span style="color: #0000dd;">95</span> <span style="color: #208080;">04</span> <span style="color:#800080;">08</span>       jmp    <span style="color: #339933;">*</span><span style="color: #208080;">0x8049594</span>
+……</pre></div></div>
+
+</div><div id="part_5" style="display:none;"><p>第一条push指令将got（global offset table）中与printf相关的表项地址压入堆栈，之后jmp到内存单元0x8049594中所存放的地址0x4000a960处。这里需要注意的一点是，在查看got之前必须先将程序a.out启动运行，否则通过gdb中的x命令在0x8049594处看到的结果是不正确的。</p>
+
+<div class="wp_code"><div class="pre"><pre class="c" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #009900;">&#40;</span>gdb<span style="color: #009900;">&#41;</span> b main
+Breakpoint <span style="color: #0000dd;">1</span> at <span style="color: #208080;">0x8048406</span>
+<span style="color: #009900;">&#40;</span>gdb<span style="color: #009900;">&#41;</span> r
+Starting program<span style="color: #339933;">:</span> a.<span style="color: #202020;">out</span>
+Breakpoint <span style="color: #0000dd;">1</span><span style="color: #339933;">,</span> <span style="color: #208080;">0x08048406</span> in main <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#40;</span>gdb<span style="color: #009900;">&#41;</span> x <span style="color: #339933;">/</span>w <span style="color: #208080;">0x8049594</span>
+<span style="color: #208080;">0x8049594</span> <span style="color: #339933;">&lt;</span>_global_offset_table_ <span style="color: #339933;">+</span><span style="color: #0000dd;">8</span><span style="color: #339933;">&gt;:</span>    <span style="color: #208080;">0x4000a960</span>
+<span style="color: #009900;">&#40;</span>gdb<span style="color: #009900;">&#41;</span> disassemble <span style="color: #208080;">0x4000a960</span>
+Dump of assembler code <span style="color: #b1b100;">for</span> <span style="color: #000000; font-weight: bold;">function</span> _dl_runtime_resolve<span style="color: #339933;">:</span>
+<span style="color: #208080;">0x4000a960</span> <span style="color: #339933;">&lt;</span>_dl_runtime_resolve<span style="color: #339933;">&gt;:</span>       pushl  <span style="color: #339933;">%</span>eax
+<span style="color: #208080;">0x4000a961</span> <span style="color: #339933;">&lt;/</span>_dl_runtime_resolve<span style="color: #339933;">&gt;&lt;</span>_dl_runtime_resolve <span style="color: #339933;">+</span><span style="color: #0000dd;">1</span><span style="color: #339933;">&gt;:</span>     pushl  <span style="color: #339933;">%</span>ecx
+<span style="color: #208080;">0x4000a962</span> <span style="color: #339933;">&lt;/</span>_dl_runtime_resolve<span style="color: #339933;">&gt;&lt;</span>_dl_runtime_resolve <span style="color: #339933;">+</span><span style="color: #0000dd;">2</span><span style="color: #339933;">&gt;:</span>     pushl  <span style="color: #339933;">%</span>edx
+<span style="color: #208080;">0x4000a963</span> <span style="color: #339933;">&lt;/</span>_dl_runtime_resolve<span style="color: #339933;">&gt;&lt;</span>_dl_runtime_resolve <span style="color: #339933;">+</span><span style="color: #0000dd;">3</span><span style="color: #339933;">&gt;:</span>     movl   <span style="color: #208080;">0x10</span><span style="color: #009900;">&#40;</span><span style="color: #339933;">%</span>esp<span style="color: #339933;">,</span><span style="color: #0000dd;">1</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,%</span>edx
+<span style="color: #208080;">0x4000a967</span> <span style="color: #339933;">&lt;/</span>_dl_runtime_resolve<span style="color: #339933;">&gt;&lt;</span>_dl_runtime_resolve <span style="color: #339933;">+</span><span style="color: #0000dd;">7</span><span style="color: #339933;">&gt;:</span>     movl   <span style="color: #208080;">0xc</span><span style="color: #009900;">&#40;</span><span style="color: #339933;">%</span>esp<span style="color: #339933;">,</span><span style="color: #0000dd;">1</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,%</span>eax
+<span style="color: #208080;">0x4000a96b</span> <span style="color: #339933;">&lt;/</span>_dl_runtime_resolve<span style="color: #339933;">&gt;&lt;</span>_dl_runtime_resolve <span style="color: #339933;">+</span><span style="color: #0000dd;">11</span><span style="color: #339933;">&gt;:</span>    call   <span style="color: #208080;">0x4000a740</span> <span style="color: #339933;">&lt;</span>fixup<span style="color: #339933;">&gt;</span>
+<span style="color: #208080;">0x4000a970</span> <span style="color: #339933;">&lt;</span>_dl_runtime_resolve <span style="color: #339933;">+</span><span style="color: #0000dd;">16</span><span style="color: #339933;">&gt;:</span>    popl   <span style="color: #339933;">%</span>edx
+<span style="color: #208080;">0x4000a971</span> <span style="color: #339933;">&lt;/</span>_dl_runtime_resolve<span style="color: #339933;">&gt;&lt;</span>_dl_runtime_resolve <span style="color: #339933;">+</span><span style="color: #0000dd;">17</span><span style="color: #339933;">&gt;:</span>    popl   <span style="color: #339933;">%</span>ecx
+<span style="color: #208080;">0x4000a972</span> <span style="color: #339933;">&lt;/</span>_dl_runtime_resolve<span style="color: #339933;">&gt;&lt;</span>_dl_runtime_resolve <span style="color: #339933;">+</span><span style="color: #0000dd;">18</span><span style="color: #339933;">&gt;:</span>    xchgl  <span style="color: #339933;">%</span>eax<span style="color: #339933;">,</span><span style="color: #009900;">&#40;</span><span style="color: #339933;">%</span>esp<span style="color: #339933;">,</span><span style="color: #0000dd;">1</span><span style="color: #009900;">&#41;</span>
+<span style="color: #208080;">0x4000a975</span> <span style="color: #339933;">&lt;/</span>_dl_runtime_resolve<span style="color: #339933;">&gt;&lt;</span>_dl_runtime_resolve <span style="color: #339933;">+</span><span style="color: #0000dd;">21</span><span style="color: #339933;">&gt;:</span>    ret    $<span style="color: #208080;">0x8</span>
+<span style="color: #208080;">0x4000a978</span> <span style="color: #339933;">&lt;/</span>_dl_runtime_resolve<span style="color: #339933;">&gt;&lt;</span>_dl_runtime_resolve <span style="color: #339933;">+</span><span style="color: #0000dd;">24</span><span style="color: #339933;">&gt;:</span>    nop
+<span style="color: #208080;">0x4000a979</span> <span style="color: #339933;">&lt;/</span>_dl_runtime_resolve<span style="color: #339933;">&gt;&lt;</span>_dl_runtime_resolve <span style="color: #339933;">+</span><span style="color: #0000dd;">25</span><span style="color: #339933;">&gt;:</span>    leal   <span style="color: #208080;">0x0</span><span style="color: #009900;">&#40;</span><span style="color: #339933;">%</span>esi<span style="color: #339933;">,</span><span style="color: #0000dd;">1</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,%</span>esi
+End of assembler dump.
+<span style="color: #339933;">&lt;/</span>_dl_runtime_resolve<span style="color: #339933;">&gt;&lt;/</span>fixup<span style="color: #339933;">&gt;&lt;/</span>_dl_runtime_resolve<span style="color: #339933;">&gt;&lt;/</span>_global_offset_table_<span style="color: #339933;">&gt;</span></pre></div></div>
+
+<p>将0x18存入edx，0x8049590存入eax，有了这两个参数，fixup就可以找到printf在libc.so中的地址。当fixup返回时，该地址已经保存在了eax中。xchg指令执行完之后堆栈中的内容如下：</p>
+<p>最妙的要数接下来的ret指令的用法，这里ret实际上被当成了call来使用。ret $0x8之后控制便转移到了真正的printf函数那里，并且清掉了堆栈上的0x18和0x8049584这两个已经没用的参数。</p>
+<p>而这正是我们所期望的结果。应该说这里ret的用法与Linux内核启动后通过iret指令实现由内核态切换到用户态的做法有着异曲同工之妙。很多人都听说过中断指令int可以实现用户态到内核态这种优先级由低到高的切换，在接受完系统服务后iret指令负责将优先级重新降至用户态的优先级。然而系统启动时首先是处于内核态高优先级的，Intel i386并没有单独提供一条特殊的指令用于在系统启动完成后降低优先级以运行用户程序。其实这个问题很简单，只要反用iret就可以了，就像这里将ret当作call使用一样。另外，fixup函数执行完还有一个副作用，就是在got中与printf相关的表项（也就是地址为0x80495a4的内存单元）中填上查找到的printf函数在动态链接库中的地址。这样当我们再次调用printf函数时，其地址就可以直接从got中得到，从而省去了通过fixup查找的过程。也就是说got在这里起到了cache的作用。</p>
+</div><div id="paginate"><label id="li_1" onclick="javascript:show_page(1,5,this);" style="font-size:30px;font-weight:bold" onmouseover="this.style.cursor='pointer'">1</label><label id="li_2" onclick="javascript:show_page(2,5,this);"  onmouseover="this.style.cursor='pointer'">2</label><label id="li_3" onclick="javascript:show_page(3,5,this);"  onmouseover="this.style.cursor='pointer'">3</label><label id="li_4" onclick="javascript:show_page(4,5,this);"  onmouseover="this.style.cursor='pointer'">4</label><label id="li_5" onclick="javascript:show_page(5,5,this);"  onmouseover="this.style.cursor='pointer'">5</label></div> 
+			<div align="center">1 month ago, this page was being read. </div>
+			<p class="tags"><a href="http://www.xieziming.com/tag/cheng-xu" rel="tag">程序</a>, <a href="http://www.xieziming.com/tag/wang-zhai" rel="tag">网摘</a><br /></p>  
+    </div><!-- /entry -->                                   
+		<div class="postbottom"></div>		                              
+		</div><!-- /post -->	
+
+<div class="postrelated">
+			<table width="100%" >				
+
+					<tr><td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/7666.html" rel="bookmark" title="RESTful">RESTful</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/6805.html" rel="bookmark" title="Java垃圾回收算法">Java垃...</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/2216.html" rel="bookmark" title="Java程序员面试宝典">Java程序员面...</a></td>
+
+				<td align="right" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7451.html" rel="bookmark" title="Javascript之DOM">Javascri...</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/78.html" rel="bookmark" title="VC + Matlab + 数据库">VC + Matl...</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/7437.html" rel="bookmark" title="Equals与Hashcode">Equals与Hashc...</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7464.html" rel="bookmark" title="IE插件">IE插件</a></td>
+
+				<td align="right" class="dashedline_related"><a href="http://www.xieziming.com/archives/2225.html" rel="bookmark" title="函数传递参数的理解">函数传递参...</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/7693.html" rel="bookmark" title="Solaris内存统计">Solari...</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7125.html" rel="bookmark" title="自动控制理论（一）">自动控制理论...</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/8783.html" rel="bookmark" title="Restful之参数获取">Restfu...</a></td>
+
+				<td align="right" class="dashedline_related">★<a href="http://www.xieziming.com/archives/2445.html" rel="bookmark" title="J2EE回忆">J2EE回忆</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7636.html" rel="bookmark" title="控制Windows窗体(C#)">控制Windows窗体(...</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/2438.html" rel="bookmark" title="mysql负载均衡配置">mysql...</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/6695.html" rel="bookmark" title="PHP通过字符串调用函数">PHP通过字符串调用...</a></td>
+
+				<td align="right" class="dashedline_related"><a href="http://www.xieziming.com/archives/4743.html" rel="bookmark" title="为博客添加flash批量上传功能">为博客添加flash批量...</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/7620.html" rel="bookmark" title="遍历windows窗口控件">遍历window...</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7446.html" rel="bookmark" title="DOM">DOM</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/7140.html" rel="bookmark" title="漫谈工业过程控制系统">漫谈工业过程控制系统</a></td>
+
+				<td align="right" class="dashedline_related">★<a href="http://www.xieziming.com/archives/5958.html" rel="bookmark" title="12星座最配与最不配">12星座最配与最不配</a></td></tr>
+
+		</table>
+</div>
+
+		<div id="comments">
+
+<!-- START COMMENT FORMS -->
+
+
+		</div><!--/comments-->		
+
+</div><!-- /content -->
+<div id="sidebar">			
+			<a class="subscribe" href="http://www.xieziming.com/feed" title="Posts RSS">Subscribe</a>			
+			<div id="search">	
+	<form name="searchform" id="searchform" method="get" action="http://www.xieziming.com/index.php">
+		<input class="text" type="text" name="s" id="s" value=""/>
+		<input class="submit" type="image" src="http://www.xieziming.com/wp-content/themes/ziming/img/submit.jpg" value="search" />
+	</form>	
+</div><!-- /search -->			
+			<div id="widgets">			
+			<div class="widget"><h3>Calendar</h3>
+<table id="wp-calendar">
+  									<caption>December 2016</caption>
+  									<thead>
+                    <tr><th scope="col" title="S">S</th><th scope="col" title="M">M</th><th scope="col" title="T">T</th><th scope="col" title="W">W</th><th scope="col" title="T">T</th><th scope="col" title="F">F</th><th scope="col" title="S">S</th></tr></thead><tbody><tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>1</td><td>2</td><td>3</td></tr><tr><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td></tr><tr><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td></tr><tr><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">18<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">《血战钢锯岭》</span><br/><span class="time" style="color:#000000; " > Time : 21:18 - 23:28</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">晚上和小锅去看，蛮感人的。吃完去沙湾吃猪杂粥，应该是我在那吃到的最新鲜的一次了。</p></span></a></span></td><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">19<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">CentOS</span><br/><span class="time" style="color:#000000; " > Time : 14:11 - 18:11</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">终于有点时间来把那盒子的win7转成CentOS来做server。配置vsftp花了我太多的时间。。。</p></span></a></span></td><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td></tr><tr><td>25</td><td>26</td><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td></tr><tr><td colspan="3" id="prev"><a href="http://www.xieziming.com/archives/7170.html?month=nov&yr=2016">&laquo; Prev</a></td><td colspan="4" id="next"><a href="http://www.xieziming.com/archives/7170.html?month=jan&yr=2017">Next &raquo;</a></td></tr></tbody></table>
+<div class="widgetbottom"></div></div><!--/widget-->				
+					      		<div class="widget">
+ 							<h3>Recent Posts</h3>
+							<ul>
+           				<li><a href="http://www.xieziming.com/archives/9579.html" class="dashedline" title="闽南 · 泉州">闽南 &middot; 泉州</a></li><li><a href="http://www.xieziming.com/archives/9578.html" class="dashedline" title="顺化 · HUE">顺化 &middot; HUE</a></li><li><a href="http://www.xieziming.com/archives/9577.html" class="dashedline" title="会安 · 春卷">会安 &middot; 春卷</a></li><li><a href="http://www.xieziming.com/archives/9576.html" class="dashedline" title="会安 · 夜灯">会安 &middot; 夜灯</a></li><li><a href="http://www.xieziming.com/archives/9575.html" class="dashedline" title="会安古镇">会安古镇</a></li><li><a href="http://www.xieziming.com/archives/9573.html" class="dashedline" title="岘港">岘港</a></li><li><a href="http://www.xieziming.com/archives/9535.html" class="dashedline" title="罗马">罗马</a></li><li><a href="http://www.xieziming.com/archives/9534.html" class="dashedline" title="卢浮宫">卢浮宫</a></li>						
+							</ul>
+      				<div class="widgetbottom"></div>
+	    		</div>
+	    			        
+        	      		<div class="widget">
+ 							<h3>Rand Posts</h3>
+							<ul>
+      						<li><a href="http://www.xieziming.com/archives/8921.html" class="dashedline" title="印尼日惹（一）">印尼日惹（一）</a></li><li><a href="http://www.xieziming.com/archives/175.html" class="dashedline" title="感冒中...">感冒中...</a></li><li><a href="http://www.xieziming.com/archives/7508.html" class="dashedline" title="Java类的生存周期">Java类的生存周期</a></li><li><a href="http://www.xieziming.com/archives/8665.html" class="dashedline" title="JavaOne Conference">JavaOne Confe...</a></li><li><a href="http://www.xieziming.com/archives/1321.html" class="dashedline" title="人文（三）杂谈">人文（三）杂谈</a></li><li><a href="http://www.xieziming.com/archives/4151.html" class="dashedline" title="乌镇夜景">乌镇夜景</a></li><li><a href="http://www.xieziming.com/archives/269.html" class="dashedline" title="无序和有序">无序和有序</a></li><li><a href="http://www.xieziming.com/archives/8980.html" class="dashedline" title="那天下午">那天下午</a></li>	
+							</ul>
+        			<div class="widgetbottom"></div>
+					</div>                 
+          	                       
+			</div><!-- /widgets -->			                       
+</div><!-- /sidebar --></div><!-- /main -->
+<div id="footer">
+<p align="left">© <a href="http://www.miitbeian.gov.cn" target="_blank"> 明 · 明 · 童 · 鞋</a></p>
+<!--74 queries in 2.598 seconds.-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?c2e18b43ec905e3c4ea82c1b57537223";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</div><!-- /footer -->
+</div><!-- /container -->
+<script type='text/javascript' src='http://www.xieziming.com/wp-includes/js/wp-embed.min.js?ver=4.7'></script>
+</body>
+</html>

@@ -1,0 +1,710 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head profile="http://gmpg.org/xfn/11">
+<title>  C/C++经典排序算法 &raquo; 谢子明</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="description" content="C/C++经典排序算法  " />
+<meta name="keywords" content="谢子明" />
+<link rel="stylesheet" href="http://www.xieziming.com/wp-content/themes/ziming/style.css" type="text/css" media="screen" />
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://www.xieziming.com/feed" />
+<link rel="alternate" type="application/rss+xml" href="http://www.xieziming.com/comments/feed" title="谢子明 Comments RSS feed" />
+<link rel="shortcut icon" href="http://www.xieziming.com/wp-content/themes/ziming/favicon.ico">
+<link rel="Bookmark" href="http://www.xieziming.com/wp-content/themes/ziming/favicon.ico">
+<link rel="pingback" href="http://www.xieziming.com/xmlrpc.php" />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="谢子明 &raquo; C/C++经典排序算法 Comments Feed" href="http://www.xieziming.com/archives/3114.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/xieziming.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.7"}};
+			!function(a,b,c){function d(a){var b,c,d,e,f=String.fromCharCode;if(!k||!k.fillText)return!1;switch(k.clearRect(0,0,j.width,j.height),k.textBaseline="top",k.font="600 32px Arial",a){case"flag":return k.fillText(f(55356,56826,55356,56819),0,0),!(j.toDataURL().length<3e3)&&(k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,65039,8205,55356,57096),0,0),b=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,55356,57096),0,0),c=j.toDataURL(),b!==c);case"emoji4":return k.fillText(f(55357,56425,55356,57341,8205,55357,56507),0,0),d=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55357,56425,55356,57341,55357,56507),0,0),e=j.toDataURL(),d!==e}return!1}function e(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i,j=b.createElement("canvas"),k=j.getContext&&j.getContext("2d");for(i=Array("flag","emoji4"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<script type='text/javascript' src='http://www.xieziming.com/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='http://www.xieziming.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<link rel='https://api.w.org/' href='http://www.xieziming.com/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.xieziming.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.xieziming.com/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='鸟儿的食色印象NO.2' href='http://www.xieziming.com/archives/810.html' />
+<link rel='next' title='上班嘞&#8230;' href='http://www.xieziming.com/archives/379.html' />
+<meta name="generator" content="WordPress 4.7" />
+<link rel="canonical" href="http://www.xieziming.com/archives/3114.html" />
+<link rel='shortlink' href='http://www.xieziming.com/?p=3114' />
+<link rel="alternate" type="application/json+oembed" href="http://www.xieziming.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fxieziming.com%2Farchives%2F3114.html" />
+<link rel="alternate" type="text/xml+oembed" href="http://www.xieziming.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fxieziming.com%2Farchives%2F3114.html&#038;format=xml" />
+ 	<link rel="stylesheet" href="http://www.xieziming.com/wp-content/plugins/live-calendar/live-calendar.css" type="text/css" media="screen" /> 
+<link rel="stylesheet" href="http://www.xieziming.com/wp-content/plugins/wp-code/wp-code.css" type="text/css" media="screen" />
+
+<link rel="stylesheet" href="http://www.xieziming.com/wp-content/plugins/zoom-highslide/highslide.css" type="text/css" media="screen" />
+<script type="text/javascript" src="http://www.xieziming.com/wp-content/plugins/zoom-highslide/js/highslide-full.packed.js"></script>
+<script type="text/javascript">
+	hs.graphicsDir = 'http://www.xieziming.com/wp-content/plugins/zoom-highslide/graphics/';
+	hs.align = 'center';
+	hs.transitions = ['expand', 'crossfade'];
+	hs.outlineType = 'rounded-white';
+  hs.wrapperClassName = 'controls-in-heading';
+	hs.showCredits=false;
+	hs.fadeInOut = true;
+	hs.dimmingOpacity = 0.8;
+
+	// Add the controlbar
+	if (hs.addSlideshow) hs.addSlideshow({
+		//slideshowGroup: 'group1',
+		interval: 4000,
+		repeat: false,
+		useControls: true,
+		fixedControls: false,
+		overlayOptions: {
+			opacity: 1,
+			position: 'top center',
+			hideOnMouseOut: true
+		}
+	});
+</script>
+
+<script type="text/javascript">
+	var widthRestriction = 668; 
+	var heightRestriction = 1000; 
+</script>
+<script type="text/javascript" src="http://www.xieziming.com/wp-content/plugins/zoom-highslide/js/zoom.js"></script>
+	
+<!--script src="http://www.xieziming.com/wp-content/themes/ziming/js/mouse.js" type="text/javascript"></script--> 
+</head>
+<body class="normalbg">
+<div id="container">
+	<div id="head">
+		<div id="nav">
+			<ul>
+				<li class="first"><a href="http://www.xieziming.com" title="首页">首页</a></li>
+				<li class="page_item page-item-2"><a href="http://www.xieziming.com/recent" title="最近">最近</a></li>
+				<li class="page_item page-item-3"><a href="http://www.xieziming.com/photo" title="Photo">映象</a></li>
+				<li class="page_item page-item-4"><a href="http://www.xieziming.com/food" title="Food">美食</a></li>
+				<li class="page_item page-item-5"><a href="http://www.xieziming.com/topic" title="关键字">话题</a></li>
+				<li class="page_item page-item-6"><a href="http://www.xieziming.com/travel" title="Travel">旅行</a></li>
+				<li class="page_item page-item-7"><a href="http://www.xieziming.com/literature" title="Literature">文艺</a></li>
+				<li class="page_item page-item-8"><a href="http://www.xieziming.com/wiki" title="技术维基">维基</a></li>
+				<li class="page_item page-item-9"><a href="http://www.xieziming.com/calendar" title="Calendar">点滴</a></li>
+			</ul>
+		</div><!-- /nav -->		
+	</div><!-- /head -->
+<div id="main" class="altmainbg">
+
+<script type="text/javascript">
+function show_page(id,count,source){
+	for (var i=1;i<=count;i++){
+		if(id != i){
+				jQuery("#part_"+i).hide();
+				document.getElementById("li_"+i).style.fontWeight = "normal";
+				document.getElementById("li_"+i).style.fontSize = "18px";
+		}
+	}
+	jQuery("#part_"+id).show();
+	document.getElementById("li_"+id).style.fontWeight = "bold";
+	document.getElementById("li_"+id).style.fontSize = "30px";
+	jQuery('body,html').animate({scrollTop:0},1000);
+        return false;
+}
+</script>
+<div id="content">
+
+	<div class="post" id="post-3114">
+		<h2 class="title">C/C++经典排序算法</h2>
+		<p class="postmetadata">
+			<span class="date">04 January 2009</span>
+			<span class="category">Categoried in <a href="http://www.xieziming.com/topic/coding" rel="category tag">程序</a></span>
+			<span class="comments">0</span>
+			<span class="view">Preview : 78 , Read : 871 </span>
+			<span class="mail">Index : 1597 </span>
+		</p>
+		<div class="entry">				
+<div id="part_1"><p>一、简单排序算法<br />
+由于程序比较简单，所以没有加什么注释。所有的程序都给出了完整的运行代码，并在我的VC环境<br />
+下运行通过。因为没有涉及MFC和WINDOWS的内容，所以在BORLAND C++的平台上应该也不会有什么<br />
+问题的。在代码的后面给出了运行过程示意，希望对理解有帮助。<br />
+1.冒泡法：<br />
+这是最原始，也是众所周知的最慢的算法了。他的名字的由来因为它的工作看来象是冒泡：</p>
+
+<div class="wp_code"><div class="pre"><pre class="c" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #339933;">#include &lt;iostream .h&gt;</span>
+<span style="color: #993333;">void</span> BubbleSort<span style="color: #009900;">&#40;</span><span style="color: #993333;">int</span><span style="color: #339933;">*</span> pData<span style="color: #339933;">,</span><span style="color: #993333;">int</span> Count<span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#123;</span>
+    <span style="color: #993333;">int</span> iTemp<span style="color: #339933;">;</span>
+    <span style="color: #b1b100;">for</span><span style="color: #009900;">&#40;</span><span style="color: #993333;">int</span> i<span style="color: #339933;">=</span><span style="color: #0000dd;">1</span><span style="color: #339933;">;</span>i<span style="color: #339933;">&lt;</span>count <span style="color: #339933;">;</span>i<span style="color: #339933;">++</span><span style="color: #009900;">&#41;</span>
+    <span style="color: #009900;">&#123;</span>
+        <span style="color: #b1b100;">for</span><span style="color: #009900;">&#40;</span><span style="color: #993333;">int</span> j<span style="color: #339933;">=</span>Count<span style="color: #339933;">-</span><span style="color: #0000dd;">1</span><span style="color: #339933;">;</span>j<span style="color: #339933;">&gt;=</span>i<span style="color: #339933;">;</span>j<span style="color: #339933;">--</span><span style="color: #009900;">&#41;</span>
+        <span style="color: #009900;">&#123;</span>
+            <span style="color: #b1b100;">if</span><span style="color: #009900;">&#40;</span>pData<span style="color: #009900;">&#91;</span>j<span style="color: #009900;">&#93;</span><span style="color: #339933;">&lt;</span>pdata <span style="color: #009900;">&#91;</span>j<span style="color: #339933;">-</span><span style="color: #0000dd;">1</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span>
+            <span style="color: #009900;">&#123;</span>
+                iTemp <span style="color: #339933;">=</span> pData<span style="color: #009900;">&#91;</span>j<span style="color: #339933;">-</span><span style="color: #0000dd;">1</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+                pData<span style="color: #009900;">&#91;</span>j<span style="color: #339933;">-</span><span style="color: #0000dd;">1</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> pData<span style="color: #009900;">&#91;</span>j<span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+                pData<span style="color: #009900;">&#91;</span>j<span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> iTemp<span style="color: #339933;">;</span>
+            <span style="color: #009900;">&#125;</span>
+        <span style="color: #009900;">&#125;</span>
+    <span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span>
+<span style="color: #993333;">void</span> main<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#123;</span>
+    <span style="color: #993333;">int</span> data<span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> <span style="color: #009900;">&#123;</span><span style="color: #0000dd;">10</span><span style="color: #339933;">,</span><span style="color: #0000dd;">9</span><span style="color: #339933;">,</span><span style="color: #0000dd;">8</span><span style="color: #339933;">,</span><span style="color: #0000dd;">7</span><span style="color: #339933;">,</span><span style="color: #0000dd;">6</span><span style="color: #339933;">,</span><span style="color: #0000dd;">5</span><span style="color: #339933;">,</span><span style="color: #0000dd;">4</span><span style="color: #009900;">&#125;</span><span style="color: #339933;">;</span>
+    BubbleSort<span style="color: #009900;">&#40;</span>data<span style="color: #339933;">,</span><span style="color: #0000dd;">7</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #b1b100;">for</span> <span style="color: #009900;">&#40;</span><span style="color: #993333;">int</span> i<span style="color: #339933;">=</span><span style="color: #0000dd;">0</span><span style="color: #339933;">;</span>i<span style="color: #339933;">&amp;</span>lt<span style="color: #339933;">;</span><span style="color: #0000dd;">7</span><span style="color: #339933;">;</span>i<span style="color: #339933;">++</span><span style="color: #009900;">&#41;</span>
+        cout<span style="color: #339933;">&lt;&lt;</span>data<span style="color: #009900;">&#91;</span>i<span style="color: #009900;">&#93;</span><span style="color: #339933;">&lt;&lt;</span><span style="color: #ff0000;">&quot; &quot;</span><span style="color: #339933;">;</span>
+    cout<span style="color: #339933;">&lt;&lt;</span><span style="color: #ff0000;">&quot;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>倒序(最糟情况)<br />
+第一轮：10,9,8,7->10,9,7,8->10,7,9,8->7,10,9,8(交换3次)<br />
+第二轮：7,10,9,8->7,10,8,9->7,8,10,9(交换2次)<br />
+第一轮：7,8,10,9->7,8,9,10(交换1次)<br />
+循环次数：6次<br />
+交换次数：6次<br />
+其他：<br />
+第一轮：8,10,7,9->8,10,7,9->8,7,10,9->7,8,10,9(交换2次)<br />
+第二轮：7,8,10,9->7,8,10,9->7,8,10,9(交换0次)<br />
+第一轮：7,8,10,9->7,8,9,10(交换1次)<br />
+循环次数：6次<br />
+交换次数：3次<br />
+上面我们给出了程序段，现在我们分析它：这里，影响我们算法性能的主要部分是循环和交换，<br />
+显然，次数越多，性能就越差。从上面的程序我们可以看出循环的次数是固定的，为1+2+&#8230;+n-1。<br />
+写成公式就是1/2*(n-1)*n。<br />
+现在注意，我们给出O方法的定义：<br />
+    若存在一常量K和起点n0，使当n>=n0时，有f(n)< =K*g(n),则f(n) = O(g(n))。（呵呵，不要说没
+学好数学呀，对于编程数学是非常重要的！！！）
+现在我们来看1/2*(n-1)*n，当K=1/2，n0=1，g(n)=n*n时，1/2*(n-1)*n<=1/2*n*n=K*g(n)。所以f(n)
+=O(g(n))=O(n*n)。所以我们程序循环的复杂度为O(n*n)。
+   再看交换。从程序后面所跟的表可以看到，两种情况的循环相同，交换不同。其实交换本身同数据源的有序程度有极大的关系，当数据处于倒序的情况时，交换次数同循环一样（每次循环判断都会交换），复杂度为O(n*n)。当数据为正序，将不会有交换。复杂度为O(0)。乱序时处于中间状态。正是由于这样的原因，我们通常都是通过循环次数来对比算法。
+</p>
+</div><div id="part_2" style="display:none;"><p>2.交换法：<br />
+交换法的程序最清晰简单，每次用当前的元素一一的同其后的元素比较并交换。</p>
+
+<div class="wp_code"><div class="pre"><pre class="c" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #339933;">#include &lt;iostream .h&gt;</span>
+<span style="color: #993333;">void</span> ExchangeSort<span style="color: #009900;">&#40;</span><span style="color: #993333;">int</span><span style="color: #339933;">*</span> pData<span style="color: #339933;">,</span><span style="color: #993333;">int</span> Count<span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#123;</span>
+    <span style="color: #993333;">int</span> iTemp<span style="color: #339933;">;</span>
+    <span style="color: #b1b100;">for</span><span style="color: #009900;">&#40;</span><span style="color: #993333;">int</span> i<span style="color: #339933;">=</span><span style="color: #0000dd;">0</span><span style="color: #339933;">;</span>i<span style="color: #339933;">&lt;</span>count <span style="color: #339933;">-</span><span style="color: #0000dd;">1</span><span style="color: #339933;">;</span>i<span style="color: #339933;">++</span><span style="color: #009900;">&#41;</span>
+    <span style="color: #009900;">&#123;</span>
+        <span style="color: #b1b100;">for</span><span style="color: #009900;">&#40;</span><span style="color: #993333;">int</span> j<span style="color: #339933;">=</span>i<span style="color: #339933;">+</span><span style="color: #0000dd;">1</span><span style="color: #339933;">;</span>j<span style="color: #339933;">&lt;</span>Count<span style="color: #339933;">;</span>j<span style="color: #339933;">++</span><span style="color: #009900;">&#41;</span>
+        <span style="color: #009900;">&#123;</span>
+            <span style="color: #b1b100;">if</span><span style="color: #009900;">&#40;</span>pData<span style="color: #009900;">&#91;</span>j<span style="color: #009900;">&#93;</span><span style="color: #339933;">&lt;</span>pData<span style="color: #009900;">&#91;</span>i<span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span>
+            <span style="color: #009900;">&#123;</span>
+                iTemp <span style="color: #339933;">=</span> pData<span style="color: #009900;">&#91;</span>i<span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+                pData<span style="color: #009900;">&#91;</span>i<span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> pData<span style="color: #009900;">&#91;</span>j<span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+                pData<span style="color: #009900;">&#91;</span>j<span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> iTemp<span style="color: #339933;">;</span>
+            <span style="color: #009900;">&#125;</span>
+        <span style="color: #009900;">&#125;</span>
+    <span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span>
+<span style="color: #993333;">void</span> main<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#123;</span>
+    <span style="color: #993333;">int</span> data<span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> <span style="color: #009900;">&#123;</span><span style="color: #0000dd;">10</span><span style="color: #339933;">,</span><span style="color: #0000dd;">9</span><span style="color: #339933;">,</span><span style="color: #0000dd;">8</span><span style="color: #339933;">,</span><span style="color: #0000dd;">7</span><span style="color: #339933;">,</span><span style="color: #0000dd;">6</span><span style="color: #339933;">,</span><span style="color: #0000dd;">5</span><span style="color: #339933;">,</span><span style="color: #0000dd;">4</span><span style="color: #009900;">&#125;</span><span style="color: #339933;">;</span>
+    ExchangeSort<span style="color: #009900;">&#40;</span>data<span style="color: #339933;">,</span><span style="color: #0000dd;">7</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #b1b100;">for</span> <span style="color: #009900;">&#40;</span><span style="color: #993333;">int</span> i<span style="color: #339933;">=</span><span style="color: #0000dd;">0</span><span style="color: #339933;">;</span>i<span style="color: #339933;">&amp;</span>lt<span style="color: #339933;">;</span><span style="color: #0000dd;">7</span><span style="color: #339933;">;</span>i<span style="color: #339933;">++</span><span style="color: #009900;">&#41;</span>
+        cout<span style="color: #339933;">&lt;&lt;</span>data<span style="color: #009900;">&#91;</span>i<span style="color: #009900;">&#93;</span><span style="color: #339933;">&lt;&lt;</span><span style="color: #ff0000;">&quot; &quot;</span><span style="color: #339933;">;</span>
+    cout<span style="color: #339933;">&lt;&lt;</span><span style="color: #ff0000;">&quot;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>倒序(最糟情况)<br />
+第一轮：10,9,8,7->9,10,8,7->8,10,9,7->7,10,9,8(交换3次)<br />
+第二轮：7,10,9,8->7,9,10,8->7,8,10,9(交换2次)<br />
+第一轮：7,8,10,9->7,8,9,10(交换1次)<br />
+循环次数：6次<br />
+交换次数：6次<br />
+其他：<br />
+第一轮：8,10,7,9->8,10,7,9->7,10,8,9->7,10,8,9(交换1次)<br />
+第二轮：7,10,8,9->7,8,10,9->7,8,10,9(交换1次)<br />
+第一轮：7,8,10,9->7,8,9,10(交换1次)<br />
+循环次数：6次<br />
+交换次数：3次<br />
+从运行的表格来看，交换几乎和冒泡一样糟。事实确实如此。循环次数和冒泡一样也是1/2*(n-1)*n，所以算法的复杂度仍然是O(n*n)。由于我们无法给出所有的情况，所以只能直接告诉大家他们在交换上面也是一样的糟糕（在某些情况下稍好，在某些情况下稍差）。</p>
+</div><div id="part_3" style="display:none;"><p>3.选择法：<br />
+现在我们终于可以看到一点希望：选择法，这种方法提高了一点性能（某些情况下）这种方法类似我们人为的排序习惯：从数据中选择最小的同第一个值交换，在从省下的部分中选择最小的与第二个交换，这样往复下去。</p>
+
+<div class="wp_code"><div class="pre"><pre class="c" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #339933;">#include &lt;iostream .h&gt;</span>
+<span style="color: #993333;">void</span> SelectSort<span style="color: #009900;">&#40;</span><span style="color: #993333;">int</span><span style="color: #339933;">*</span> pData<span style="color: #339933;">,</span><span style="color: #993333;">int</span> Count<span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#123;</span>
+    <span style="color: #993333;">int</span> iTemp<span style="color: #339933;">;</span>
+    <span style="color: #993333;">int</span> iPos<span style="color: #339933;">;</span>
+    <span style="color: #b1b100;">for</span><span style="color: #009900;">&#40;</span><span style="color: #993333;">int</span> i<span style="color: #339933;">=</span><span style="color: #0000dd;">0</span><span style="color: #339933;">;</span>i<span style="color: #339933;">&lt;</span>count <span style="color: #339933;">-</span><span style="color: #0000dd;">1</span><span style="color: #339933;">;</span>i<span style="color: #339933;">++</span><span style="color: #009900;">&#41;</span>
+    <span style="color: #009900;">&#123;</span>
+        iTemp <span style="color: #339933;">=</span> pData<span style="color: #009900;">&#91;</span>i<span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+        iPos <span style="color: #339933;">=</span> i<span style="color: #339933;">;</span>
+        <span style="color: #b1b100;">for</span><span style="color: #009900;">&#40;</span><span style="color: #993333;">int</span> j<span style="color: #339933;">=</span>i<span style="color: #339933;">+</span><span style="color: #0000dd;">1</span><span style="color: #339933;">;</span>j<span style="color: #339933;">&lt;</span>Count<span style="color: #339933;">;</span>j<span style="color: #339933;">++</span><span style="color: #009900;">&#41;</span>
+        <span style="color: #009900;">&#123;</span>
+            <span style="color: #b1b100;">if</span><span style="color: #009900;">&#40;</span>pData<span style="color: #009900;">&#91;</span>j<span style="color: #009900;">&#93;</span><span style="color: #339933;">&lt;</span>iTemp<span style="color: #009900;">&#41;</span>
+            <span style="color: #009900;">&#123;</span>
+                iTemp <span style="color: #339933;">=</span> pData<span style="color: #009900;">&#91;</span>j<span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+                iPos <span style="color: #339933;">=</span> j<span style="color: #339933;">;</span>
+            <span style="color: #009900;">&#125;</span>
+        <span style="color: #009900;">&#125;</span>
+        pData<span style="color: #009900;">&#91;</span>iPos<span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> pData<span style="color: #009900;">&#91;</span>i<span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+        pData<span style="color: #009900;">&#91;</span>i<span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> iTemp<span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span>
+<span style="color: #993333;">void</span> main<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#123;</span>
+    <span style="color: #993333;">int</span> data<span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> <span style="color: #009900;">&#123;</span><span style="color: #0000dd;">10</span><span style="color: #339933;">,</span><span style="color: #0000dd;">9</span><span style="color: #339933;">,</span><span style="color: #0000dd;">8</span><span style="color: #339933;">,</span><span style="color: #0000dd;">7</span><span style="color: #339933;">,</span><span style="color: #0000dd;">6</span><span style="color: #339933;">,</span><span style="color: #0000dd;">5</span><span style="color: #339933;">,</span><span style="color: #0000dd;">4</span><span style="color: #009900;">&#125;</span><span style="color: #339933;">;</span>
+    SelectSort<span style="color: #009900;">&#40;</span>data<span style="color: #339933;">,</span><span style="color: #0000dd;">7</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #b1b100;">for</span> <span style="color: #009900;">&#40;</span><span style="color: #993333;">int</span> i<span style="color: #339933;">=</span><span style="color: #0000dd;">0</span><span style="color: #339933;">;</span>i<span style="color: #339933;">&amp;</span>lt<span style="color: #339933;">;</span><span style="color: #0000dd;">7</span><span style="color: #339933;">;</span>i<span style="color: #339933;">++</span><span style="color: #009900;">&#41;</span>
+        cout<span style="color: #339933;">&lt;&lt;</span>data<span style="color: #009900;">&#91;</span>i<span style="color: #009900;">&#93;</span><span style="color: #339933;">&lt;&lt;</span><span style="color: #ff0000;">&quot; &quot;</span><span style="color: #339933;">;</span>
+    cout<span style="color: #339933;">&lt;&lt;</span><span style="color: #ff0000;">&quot;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>倒序(最糟情况)<br />
+第一轮：10,9,8,7->(iTemp=9)10,9,8,7->(iTemp=8)10,9,8,7->(iTemp=7)7,9,8,10(交换1次)<br />
+第二轮：7,9,8,10->7,9,8,10(iTemp=8)->(iTemp=8)7,8,9,10(交换1次)<br />
+第一轮：7,8,9,10->(iTemp=9)7,8,9,10(交换0次)<br />
+循环次数：6次<br />
+交换次数：2次<br />
+其他：<br />
+第一轮：8,10,7,9->(iTemp=8)8,10,7,9->(iTemp=7)8,10,7,9->(iTemp=7)7,10,8,9(交换1次)<br />
+第二轮：7,10,8,9->(iTemp=8)7,10,8,9->(iTemp=8)7,8,10,9(交换1次)<br />
+第一轮：7,8,10,9->(iTemp=9)7,8,9,10(交换1次)<br />
+循环次数：6次<br />
+交换次数：3次<br />
+遗憾的是算法需要的循环次数依然是1/2*(n-1)*n。所以算法复杂度为O(n*n)。我们来看他的交换。由于每次外层循环只产生一次交换（只有一个最小值）。所以f(n)< =n所以我们有f(n)=O(n)。所以，在数据较乱的时候，可以减少一定的交换次数。 
+</p>
+</div><div id="part_4" style="display:none;"><p>
+4.插入法：<br />
+插入法较为复杂，它的基本工作原理是抽出牌，在前面的牌中寻找相应的位置插入，然后继续下一张</p>
+
+<div class="wp_code"><div class="pre"><pre class="c" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #339933;">#include &lt;iostream .h&gt;</span>
+<span style="color: #993333;">void</span> InsertSort<span style="color: #009900;">&#40;</span><span style="color: #993333;">int</span><span style="color: #339933;">*</span> pData<span style="color: #339933;">,</span><span style="color: #993333;">int</span> Count<span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#123;</span>
+    <span style="color: #993333;">int</span> iTemp<span style="color: #339933;">;</span>
+    <span style="color: #993333;">int</span> iPos<span style="color: #339933;">;</span>
+    <span style="color: #b1b100;">for</span><span style="color: #009900;">&#40;</span><span style="color: #993333;">int</span> i<span style="color: #339933;">=</span><span style="color: #0000dd;">1</span><span style="color: #339933;">;</span>i<span style="color: #339933;">&lt;</span>count <span style="color: #339933;">;</span>i<span style="color: #339933;">++</span><span style="color: #009900;">&#41;</span>
+    <span style="color: #009900;">&#123;</span>
+        iTemp <span style="color: #339933;">=</span> pData<span style="color: #009900;">&#91;</span>i<span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+        iPos <span style="color: #339933;">=</span> i<span style="color: #339933;">-</span><span style="color: #0000dd;">1</span><span style="color: #339933;">;</span>
+        <span style="color: #b1b100;">while</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span>iPos<span style="color: #339933;">&gt;=</span><span style="color: #0000dd;">0</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">&amp;&amp;</span> <span style="color: #009900;">&#40;</span>iTemp<span style="color: #339933;">&lt;</span>pdata <span style="color: #009900;">&#91;</span>iPos<span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>
+        <span style="color: #009900;">&#123;</span>
+            pData<span style="color: #009900;">&#91;</span>iPos<span style="color: #339933;">+</span><span style="color: #0000dd;">1</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> pData<span style="color: #009900;">&#91;</span>iPos<span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+            iPos<span style="color: #339933;">--;</span>
+        <span style="color: #009900;">&#125;</span>
+        pData<span style="color: #009900;">&#91;</span>iPos<span style="color: #339933;">+</span><span style="color: #0000dd;">1</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> iTemp<span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span>
+<span style="color: #993333;">void</span> main<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#123;</span>
+    <span style="color: #993333;">int</span> data<span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> <span style="color: #009900;">&#123;</span><span style="color: #0000dd;">10</span><span style="color: #339933;">,</span><span style="color: #0000dd;">9</span><span style="color: #339933;">,</span><span style="color: #0000dd;">8</span><span style="color: #339933;">,</span><span style="color: #0000dd;">7</span><span style="color: #339933;">,</span><span style="color: #0000dd;">6</span><span style="color: #339933;">,</span><span style="color: #0000dd;">5</span><span style="color: #339933;">,</span><span style="color: #0000dd;">4</span><span style="color: #009900;">&#125;</span><span style="color: #339933;">;</span>
+    InsertSort<span style="color: #009900;">&#40;</span>data<span style="color: #339933;">,</span><span style="color: #0000dd;">7</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #b1b100;">for</span> <span style="color: #009900;">&#40;</span><span style="color: #993333;">int</span> i<span style="color: #339933;">=</span><span style="color: #0000dd;">0</span><span style="color: #339933;">;</span>i<span style="color: #339933;">&amp;</span>lt<span style="color: #339933;">;</span><span style="color: #0000dd;">7</span><span style="color: #339933;">;</span>i<span style="color: #339933;">++</span><span style="color: #009900;">&#41;</span>
+        cout<span style="color: #339933;">&lt;&lt;</span>data<span style="color: #009900;">&#91;</span>i<span style="color: #009900;">&#93;</span><span style="color: #339933;">&lt;&lt;</span><span style="color: #ff0000;">&quot; &quot;</span><span style="color: #339933;">;</span>
+    cout<span style="color: #339933;">&lt;&lt;</span><span style="color: #ff0000;">&quot;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>倒序(最糟情况)<br />
+第一轮：10,9,8,7->9,10,8,7(交换1次)(循环1次)<br />
+第二轮：9,10,8,7->8,9,10,7(交换1次)(循环2次)<br />
+第一轮：8,9,10,7->7,8,9,10(交换1次)(循环3次)<br />
+循环次数：6次<br />
+交换次数：3次<br />
+其他：<br />
+第一轮：8,10,7,9->8,10,7,9(交换0次)(循环1次)<br />
+第二轮：8,10,7,9->7,8,10,9(交换1次)(循环2次)<br />
+第一轮：7,8,10,9->7,8,9,10(交换1次)(循环1次)<br />
+循环次数：4次<br />
+交换次数：2次<br />
+上面结尾的行为分析事实上造成了一种假象，让我们认为这种算法是简单算法中最好的，其实不是，<br />
+因为其循环次数虽然并不固定，我们仍可以使用O方法。从上面的结果可以看出，循环的次数f(n)< =
+1/2*n*(n-1)<=1/2*n*n。所以其复杂度仍为O(n*n)（这里说明一下，其实如果不是为了展示这些简单
+排序的不同，交换次数仍然可以这样推导）。现在看交换，从外观上看，交换次数是O(n)（推导类似
+选择法），但我们每次要进行与内层循环相同次数的‘=’操作。正常的一次交换我们需要三次‘=’
+而这里显然多了一些，所以我们浪费了时间。
+最终，我个人认为，在简单排序算法中，选择法是最好的。
+</p>
+</div><div id="part_5" style="display:none;"><p>二、高级排序算法：<br />
+高级排序算法中我们将只介绍这一种，同时也是目前我所知道（我看过的资料中）的最快的。<br />
+它的工作看起来仍然象一个二叉树。首先我们选择一个中间值middle程序中我们使用数组中间值，然后<br />
+把比它小的放在左边，大的放在右边（具体的实现是从两边找，找到一对后交换）。然后对两边分别使<br />
+用这个过程（最容易的方法——递归）。<br />
+1.快速排序：</p>
+
+<div class="wp_code"><div class="pre"><pre class="c" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #339933;">#include &lt;iostream .h&gt;</span>
+<span style="color: #993333;">void</span> run<span style="color: #009900;">&#40;</span><span style="color: #993333;">int</span><span style="color: #339933;">*</span> pData<span style="color: #339933;">,</span><span style="color: #993333;">int</span> left<span style="color: #339933;">,</span><span style="color: #993333;">int</span> right<span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#123;</span>
+    <span style="color: #993333;">int</span> i<span style="color: #339933;">,</span>j<span style="color: #339933;">;</span>
+    <span style="color: #993333;">int</span> middle<span style="color: #339933;">,</span>iTemp<span style="color: #339933;">;</span>
+    i <span style="color: #339933;">=</span> left<span style="color: #339933;">;</span>
+    j <span style="color: #339933;">=</span> right<span style="color: #339933;">;</span>
+    middle <span style="color: #339933;">=</span> pData<span style="color: #009900;">&#91;</span><span style="color: #009900;">&#40;</span>left<span style="color: #339933;">+</span>right<span style="color: #009900;">&#41;</span><span style="color: #339933;">/</span><span style="color: #0000dd;">2</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">//求中间值</span>
+    <span style="color: #b1b100;">do</span><span style="color: #009900;">&#123;</span>
+        <span style="color: #b1b100;">while</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span>pData<span style="color: #009900;">&#91;</span>i<span style="color: #009900;">&#93;</span><span style="color: #339933;">&lt;</span>middle <span style="color: #009900;">&#41;</span> <span style="color: #339933;">&amp;&amp;</span> <span style="color: #009900;">&#40;</span>i<span style="color: #339933;">&lt;</span>right<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #666666; font-style: italic;">//从左扫描大于中值的数</span>
+            i<span style="color: #339933;">++;</span>          
+        <span style="color: #b1b100;">while</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span>pData<span style="color: #009900;">&#91;</span>j<span style="color: #009900;">&#93;</span><span style="color: #339933;">&gt;</span>middle<span style="color: #009900;">&#41;</span> <span style="color: #339933;">&amp;&amp;</span> <span style="color: #009900;">&#40;</span>j<span style="color: #339933;">&gt;</span>left<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #666666; font-style: italic;">//从右扫描大于中值的数</span>
+            j<span style="color: #339933;">--;</span>
+        <span style="color: #b1b100;">if</span><span style="color: #009900;">&#40;</span>i<span style="color: #339933;">&lt;</span> <span style="color: #339933;">=</span>j<span style="color: #009900;">&#41;</span><span style="color: #666666; font-style: italic;">//找到了一对值</span>
+        <span style="color: #009900;">&#123;</span>
+            <span style="color: #666666; font-style: italic;">//交换</span>
+            iTemp <span style="color: #339933;">=</span> pData<span style="color: #009900;">&#91;</span>i<span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+            pData<span style="color: #009900;">&#91;</span>i<span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> pData<span style="color: #009900;">&#91;</span>j<span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+            pData<span style="color: #009900;">&#91;</span>j<span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> iTemp<span style="color: #339933;">;</span>
+            i<span style="color: #339933;">++;</span>
+            j<span style="color: #339933;">--;</span>
+        <span style="color: #009900;">&#125;</span>
+    <span style="color: #009900;">&#125;</span><span style="color: #b1b100;">while</span><span style="color: #009900;">&#40;</span>i<span style="color: #339933;">&lt;=</span>j<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><span style="color: #666666; font-style: italic;">//如果两边扫描的下标交错，就停止（完成一次）</span>
+    <span style="color: #666666; font-style: italic;">//当左边部分有值(left&lt;j)，递归左半边</span>
+    <span style="color: #b1b100;">if</span><span style="color: #009900;">&#40;</span>left<span style="color: #339933;">&lt;</span>j<span style="color: #009900;">&#41;</span>
+        run<span style="color: #009900;">&#40;</span>pData<span style="color: #339933;">,</span>left<span style="color: #339933;">,</span>j<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #666666; font-style: italic;">//当右边部分有值(right&gt;i)，递归右半边</span>
+    <span style="color: #b1b100;">if</span><span style="color: #009900;">&#40;</span>right<span style="color: #339933;">&gt;</span>i<span style="color: #009900;">&#41;</span>
+        run<span style="color: #009900;">&#40;</span>pData<span style="color: #339933;">,</span>i<span style="color: #339933;">,</span>right<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span>
+<span style="color: #993333;">void</span> QuickSort<span style="color: #009900;">&#40;</span><span style="color: #993333;">int</span><span style="color: #339933;">*</span> pData<span style="color: #339933;">,</span><span style="color: #993333;">int</span> Count<span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#123;</span>
+    run<span style="color: #009900;">&#40;</span>pData<span style="color: #339933;">,</span><span style="color: #0000dd;">0</span><span style="color: #339933;">,</span>Count<span style="color: #339933;">-</span><span style="color: #0000dd;">1</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span>
+<span style="color: #993333;">void</span> main<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#123;</span>
+    <span style="color: #993333;">int</span> data<span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> <span style="color: #009900;">&#123;</span><span style="color: #0000dd;">10</span><span style="color: #339933;">,</span><span style="color: #0000dd;">9</span><span style="color: #339933;">,</span><span style="color: #0000dd;">8</span><span style="color: #339933;">,</span><span style="color: #0000dd;">7</span><span style="color: #339933;">,</span><span style="color: #0000dd;">6</span><span style="color: #339933;">,</span><span style="color: #0000dd;">5</span><span style="color: #339933;">,</span><span style="color: #0000dd;">4</span><span style="color: #009900;">&#125;</span><span style="color: #339933;">;</span>
+    QuickSort<span style="color: #009900;">&#40;</span>data<span style="color: #339933;">,</span><span style="color: #0000dd;">7</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #b1b100;">for</span> <span style="color: #009900;">&#40;</span><span style="color: #993333;">int</span> i<span style="color: #339933;">=</span><span style="color: #0000dd;">0</span><span style="color: #339933;">;</span>i<span style="color: #339933;">&amp;</span>lt<span style="color: #339933;">;</span><span style="color: #0000dd;">7</span><span style="color: #339933;">;</span>i<span style="color: #339933;">++</span><span style="color: #009900;">&#41;</span>
+        cout<span style="color: #339933;">&lt;</span> <span style="color: #339933;">&lt;</span>data<span style="color: #009900;">&#91;</span>i<span style="color: #009900;">&#93;</span><span style="color: #339933;">&lt;&lt;</span><span style="color: #ff0000;">&quot; &quot;</span><span style="color: #339933;">;</span>
+    cout<span style="color: #339933;">&lt;&lt;</span><span style="color: #ff0000;">&quot;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>这里我没有给出行为的分析，因为这个很简单，我们直接来分析算法：首先我们考虑最理想的情况<br />
+1.数组的大小是2的幂，这样分下去始终可以被2整除。假设为2的k次方，即k=log2(n)。<br />
+2.每次我们选择的值刚好是中间值，这样，数组才可以被等分。<br />
+第一层递归，循环n次，第二层循环2*(n/2)&#8230;&#8230;<br />
+所以共有n+2(n/2)+4(n/4)+&#8230;+n*(n/n) = n+n+n+&#8230;+n=k*n=log2(n)*n<br />
+所以算法复杂度为O(log2(n)*n)<br />
+其他的情况只会比这种情况差，最差的情况是每次选择到的middle都是最小值或最大值，那么他将变<br />
+成交换法（由于使用了递归，情况更糟）。但是你认为这种情况发生的几率有多大？？呵呵，你完全<br />
+不必担心这个问题。实践证明，大多数的情况，快速排序总是最好的。<br />
+如果你担心这个问题，你可以使用堆排序，这是一种稳定的O(log2(n)*n)算法，但是通常情况下速度要慢于快速排序（因为要重组堆）。 </p>
+</div><div id="part_6" style="display:none;"><p>三、其他排序<br />
+1.双向冒泡：<br />
+通常的冒泡是单向的，而这里是双向的，也就是说还要进行反向的工作。<br />
+代码看起来复杂，仔细理一下就明白了，是一个来回震荡的方式。<br />
+写这段代码的作者认为这样可以在冒泡的基础上减少一些交换（我不这么认为，也许我错了）。<br />
+反正我认为这是一段有趣的代码，值得一看。</p>
+
+<div class="wp_code"><div class="pre"><pre class="c" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #339933;">#include &lt;iostream .h&gt;</span>
+<span style="color: #993333;">void</span> Bubble2Sort<span style="color: #009900;">&#40;</span><span style="color: #993333;">int</span><span style="color: #339933;">*</span> pData<span style="color: #339933;">,</span><span style="color: #993333;">int</span> Count<span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#123;</span>
+    <span style="color: #993333;">int</span> iTemp<span style="color: #339933;">;</span>
+    <span style="color: #993333;">int</span> left <span style="color: #339933;">=</span> <span style="color: #0000dd;">1</span><span style="color: #339933;">;</span>
+    <span style="color: #993333;">int</span> right <span style="color: #339933;">=</span>Count <span style="color: #339933;">-</span><span style="color: #0000dd;">1</span><span style="color: #339933;">;</span>
+    <span style="color: #993333;">int</span> t<span style="color: #339933;">;</span>
+    <span style="color: #b1b100;">do</span>
+    <span style="color: #009900;">&#123;</span>
+        <span style="color: #666666; font-style: italic;">//正向的部分</span>
+        <span style="color: #b1b100;">for</span><span style="color: #009900;">&#40;</span><span style="color: #993333;">int</span> i<span style="color: #339933;">=</span>right<span style="color: #339933;">;</span>i<span style="color: #339933;">&gt;=</span>left<span style="color: #339933;">;</span>i<span style="color: #339933;">--</span><span style="color: #009900;">&#41;</span>
+        <span style="color: #009900;">&#123;</span>
+            <span style="color: #b1b100;">if</span><span style="color: #009900;">&#40;</span>pData<span style="color: #009900;">&#91;</span>i<span style="color: #009900;">&#93;</span><span style="color: #339933;">&lt;</span>pdata <span style="color: #009900;">&#91;</span>i<span style="color: #339933;">-</span><span style="color: #0000dd;">1</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span>
+            <span style="color: #009900;">&#123;</span>
+                iTemp <span style="color: #339933;">=</span> pData<span style="color: #009900;">&#91;</span>i<span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+                pData<span style="color: #009900;">&#91;</span>i<span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> pData<span style="color: #009900;">&#91;</span>i<span style="color: #339933;">-</span><span style="color: #0000dd;">1</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+                pData<span style="color: #009900;">&#91;</span>i<span style="color: #339933;">-</span><span style="color: #0000dd;">1</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> iTemp<span style="color: #339933;">;</span>
+                t <span style="color: #339933;">=</span> i<span style="color: #339933;">;</span>
+            <span style="color: #009900;">&#125;</span>
+        <span style="color: #009900;">&#125;</span>
+        left <span style="color: #339933;">=</span> t<span style="color: #339933;">+</span><span style="color: #0000dd;">1</span><span style="color: #339933;">;</span>
+        <span style="color: #666666; font-style: italic;">//反向的部分</span>
+        <span style="color: #b1b100;">for</span><span style="color: #009900;">&#40;</span>i<span style="color: #339933;">=</span>left<span style="color: #339933;">;</span>i<span style="color: #339933;">&lt;</span>right<span style="color: #339933;">+</span><span style="color: #0000dd;">1</span><span style="color: #339933;">;</span>i<span style="color: #339933;">++</span><span style="color: #009900;">&#41;</span>
+        <span style="color: #009900;">&#123;</span>
+            <span style="color: #b1b100;">if</span><span style="color: #009900;">&#40;</span>pData<span style="color: #009900;">&#91;</span>i<span style="color: #009900;">&#93;</span><span style="color: #339933;">&lt;</span>pData<span style="color: #009900;">&#91;</span>i<span style="color: #339933;">-</span><span style="color: #0000dd;">1</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span>
+            <span style="color: #009900;">&#123;</span>
+                iTemp <span style="color: #339933;">=</span> pData<span style="color: #009900;">&#91;</span>i<span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+                pData<span style="color: #009900;">&#91;</span>i<span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> pData<span style="color: #009900;">&#91;</span>i<span style="color: #339933;">-</span><span style="color: #0000dd;">1</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+                pData<span style="color: #009900;">&#91;</span>i<span style="color: #339933;">-</span><span style="color: #0000dd;">1</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> iTemp<span style="color: #339933;">;</span>
+                t <span style="color: #339933;">=</span> i<span style="color: #339933;">;</span>
+            <span style="color: #009900;">&#125;</span>
+        <span style="color: #009900;">&#125;</span>
+        right <span style="color: #339933;">=</span> t<span style="color: #339933;">-</span><span style="color: #0000dd;">1</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span><span style="color: #b1b100;">while</span><span style="color: #009900;">&#40;</span>left<span style="color: #339933;">&lt;=</span>right<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span>
+<span style="color: #993333;">void</span> main<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#123;</span>
+    <span style="color: #993333;">int</span> data<span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> <span style="color: #009900;">&#123;</span><span style="color: #0000dd;">10</span><span style="color: #339933;">,</span><span style="color: #0000dd;">9</span><span style="color: #339933;">,</span><span style="color: #0000dd;">8</span><span style="color: #339933;">,</span><span style="color: #0000dd;">7</span><span style="color: #339933;">,</span><span style="color: #0000dd;">6</span><span style="color: #339933;">,</span><span style="color: #0000dd;">5</span><span style="color: #339933;">,</span><span style="color: #0000dd;">4</span><span style="color: #009900;">&#125;</span><span style="color: #339933;">;</span>
+    Bubble2Sort<span style="color: #009900;">&#40;</span>data<span style="color: #339933;">,</span><span style="color: #0000dd;">7</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #b1b100;">for</span> <span style="color: #009900;">&#40;</span><span style="color: #993333;">int</span> i<span style="color: #339933;">=</span><span style="color: #0000dd;">0</span><span style="color: #339933;">;</span>i<span style="color: #339933;">&amp;</span>lt<span style="color: #339933;">;</span><span style="color: #0000dd;">7</span><span style="color: #339933;">;</span>i<span style="color: #339933;">++</span><span style="color: #009900;">&#41;</span>
+        cout<span style="color: #339933;">&lt;&lt;</span>data<span style="color: #009900;">&#91;</span>i<span style="color: #009900;">&#93;</span><span style="color: #339933;">&lt;&lt;</span><span style="color: #ff0000;">&quot; &quot;</span><span style="color: #339933;">;</span>
+    cout<span style="color: #339933;">&lt;&lt;</span><span style="color: #ff0000;">&quot;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+</div><div id="part_7" style="display:none;"><p>2.SHELL排序<br />
+这个排序非常复杂，看了程序就知道了。<br />
+首先需要一个递减的步长，这里我们使用的是9、5、3、1（最后的步长必须是1）。<br />
+工作原理是首先对相隔9-1个元素的所有内容排序，然后再使用同样的方法对相隔5-1个元素的排序<br />
+以次类推。</p>
+
+<div class="wp_code"><div class="pre"><pre class="c" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #339933;">#include &lt;iostream .h&gt;</span>
+<span style="color: #993333;">void</span> ShellSort<span style="color: #009900;">&#40;</span><span style="color: #993333;">int</span><span style="color: #339933;">*</span> pData<span style="color: #339933;">,</span><span style="color: #993333;">int</span> Count<span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#123;</span>
+    <span style="color: #993333;">int</span> step<span style="color: #009900;">&#91;</span><span style="color: #0000dd;">4</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+    step<span style="color: #009900;">&#91;</span><span style="color: #0000dd;">0</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> <span style="color: #0000dd;">9</span><span style="color: #339933;">;</span>
+    step<span style="color: #009900;">&#91;</span><span style="color: #0000dd;">1</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> <span style="color: #0000dd;">5</span><span style="color: #339933;">;</span>
+    step<span style="color: #009900;">&#91;</span><span style="color: #0000dd;">2</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> <span style="color: #0000dd;">3</span><span style="color: #339933;">;</span>
+    step<span style="color: #009900;">&#91;</span><span style="color: #0000dd;">3</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> <span style="color: #0000dd;">1</span><span style="color: #339933;">;</span>
+    <span style="color: #993333;">int</span> iTemp<span style="color: #339933;">;</span>
+    <span style="color: #993333;">int</span> k<span style="color: #339933;">,</span>s<span style="color: #339933;">,</span>w<span style="color: #339933;">;</span>
+    <span style="color: #b1b100;">for</span><span style="color: #009900;">&#40;</span><span style="color: #993333;">int</span> i<span style="color: #339933;">=</span><span style="color: #0000dd;">0</span><span style="color: #339933;">;</span>i<span style="color: #339933;">&amp;</span>lt<span style="color: #339933;">;</span><span style="color: #0000dd;">4</span><span style="color: #339933;">;</span>i<span style="color: #339933;">++</span><span style="color: #009900;">&#41;</span>
+    <span style="color: #009900;">&#123;</span>
+        k <span style="color: #339933;">=</span> step<span style="color: #009900;">&#91;</span>i<span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+        s <span style="color: #339933;">=</span> <span style="color: #339933;">-</span>k<span style="color: #339933;">;</span>
+        <span style="color: #b1b100;">for</span><span style="color: #009900;">&#40;</span><span style="color: #993333;">int</span> j<span style="color: #339933;">=</span>k<span style="color: #339933;">;</span>j<span style="color: #339933;">&lt;</span>count <span style="color: #339933;">;</span>j<span style="color: #339933;">++</span><span style="color: #009900;">&#41;</span>
+        <span style="color: #009900;">&#123;</span>
+            iTemp <span style="color: #339933;">=</span> pData<span style="color: #009900;">&#91;</span>j<span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+            w <span style="color: #339933;">=</span> j<span style="color: #339933;">-</span>k<span style="color: #339933;">;</span><span style="color: #666666; font-style: italic;">//求上step个元素的下标</span>
+            <span style="color: #b1b100;">if</span><span style="color: #009900;">&#40;</span>s <span style="color: #339933;">==</span><span style="color: #0000dd;">0</span><span style="color: #009900;">&#41;</span>
+            <span style="color: #009900;">&#123;</span>
+                s <span style="color: #339933;">=</span> <span style="color: #339933;">-</span>k<span style="color: #339933;">;</span>
+                s<span style="color: #339933;">++;</span>
+                pData<span style="color: #009900;">&#91;</span>s<span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> iTemp<span style="color: #339933;">;</span>
+            <span style="color: #009900;">&#125;</span>
+            <span style="color: #b1b100;">while</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span>iTemp<span style="color: #339933;">&lt;</span>pData<span style="color: #009900;">&#91;</span>w<span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">&amp;&amp;</span> <span style="color: #009900;">&#40;</span>w<span style="color: #339933;">&gt;=</span><span style="color: #0000dd;">0</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">&amp;&amp;</span> <span style="color: #009900;">&#40;</span>w<span style="color: #339933;">&lt;</span> <span style="color: #339933;">=</span>Count<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>
+            <span style="color: #009900;">&#123;</span>
+                pData<span style="color: #009900;">&#91;</span>w<span style="color: #339933;">+</span>k<span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> pData<span style="color: #009900;">&#91;</span>w<span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+                w <span style="color: #339933;">=</span> w<span style="color: #339933;">-</span>k<span style="color: #339933;">;</span>
+            <span style="color: #009900;">&#125;</span>
+            pData<span style="color: #009900;">&#91;</span>w<span style="color: #339933;">+</span>k<span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> iTemp<span style="color: #339933;">;</span>
+        <span style="color: #009900;">&#125;</span>
+    <span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span>
+<span style="color: #993333;">void</span> main<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#123;</span>
+    <span style="color: #993333;">int</span> data<span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> <span style="color: #009900;">&#123;</span><span style="color: #0000dd;">10</span><span style="color: #339933;">,</span><span style="color: #0000dd;">9</span><span style="color: #339933;">,</span><span style="color: #0000dd;">8</span><span style="color: #339933;">,</span><span style="color: #0000dd;">7</span><span style="color: #339933;">,</span><span style="color: #0000dd;">6</span><span style="color: #339933;">,</span><span style="color: #0000dd;">5</span><span style="color: #339933;">,</span><span style="color: #0000dd;">4</span><span style="color: #339933;">,</span><span style="color: #0000dd;">3</span><span style="color: #339933;">,</span><span style="color: #0000dd;">2</span><span style="color: #339933;">,</span><span style="color: #0000dd;">1</span><span style="color: #339933;">,-</span><span style="color: #0000dd;">10</span><span style="color: #339933;">,-</span><span style="color: #0000dd;">1</span><span style="color: #009900;">&#125;</span><span style="color: #339933;">;</span>
+    ShellSort<span style="color: #009900;">&#40;</span>data<span style="color: #339933;">,</span><span style="color: #0000dd;">12</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #b1b100;">for</span> <span style="color: #009900;">&#40;</span><span style="color: #993333;">int</span> i<span style="color: #339933;">=</span><span style="color: #0000dd;">0</span><span style="color: #339933;">;</span>i<span style="color: #339933;">&amp;</span>lt<span style="color: #339933;">;</span><span style="color: #0000dd;">12</span><span style="color: #339933;">;</span>i<span style="color: #339933;">++</span><span style="color: #009900;">&#41;</span>
+        cout<span style="color: #339933;">&lt;&lt;</span>data<span style="color: #009900;">&#91;</span>i<span style="color: #009900;">&#93;</span><span style="color: #339933;">&lt;&lt;</span><span style="color: #ff0000;">&quot; &quot;</span><span style="color: #339933;">;</span>
+    cout<span style="color: #339933;">&lt;&lt;</span><span style="color: #ff0000;">&quot;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>呵呵，程序看起来有些头疼。不过也不是很难，把s==0的块去掉就轻松多了，这里是避免使用0步长造成程序异常而写的代码。这个代码我认为很值得一看。这个算法的得名是因为其发明者的名字D.L.SHELL。依照参考资料上的说法：“由于复杂的数学原因避免使用2的幂次步长，它能降低算法效率。”另外算法的复杂度为n的1.2次幂。同样因为非常复杂并“超出本书讨论范围”的原因（我也不知道过程），我们只有结果了。 </p>
+</div><div id="part_8" style="display:none;"><p>四、基于模板的通用排序：<br />
+这个程序我想就没有分析的必要了，大家看一下就可以了。不明白可以在论坛上问。<br />
+MyData.h文件<br />
+///////////////////////////////////////////////////////<br />
+class CMyData<br />
+{<br />
+public:<br />
+    CMyData(int Index,char* strData);<br />
+    CMyData();<br />
+    virtual ~CMyData();    int m_iIndex;<br />
+    int GetDataSize(){ return m_iDataSize; };<br />
+    const char* GetData(){ return m_strDatamember; };<br />
+    //这里重载了操作符：<br />
+    CMyData&#038; operator =(CMyData &#038;SrcData);<br />
+    bool operator < (CMyData&#038; data );
+    bool operator >(CMyData&#038; data );<br />
+private:<br />
+    char* m_strDatamember;<br />
+    int m_iDataSize;<br />
+};<br />
+////////////////////////////////////////////////////////<br />
+MyData.cpp文件<br />
+////////////////////////////////////////////////////////<br />
+CMyData::CMyData():<br />
+m_iIndex(0),<br />
+m_iDataSize(0),<br />
+m_strDatamember(NULL)<br />
+{<br />
+}<br />
+CMyData::~CMyData()<br />
+{<br />
+    if(m_strDatamember != NULL)<br />
+        delete[] m_strDatamember;<br />
+    m_strDatamember = NULL;<br />
+}<br />
+CMyData::CMyData(int Index,char* strData):<br />
+m_iIndex(Index),<br />
+m_iDataSize(0),<br />
+m_strDatamember(NULL)<br />
+{<br />
+    m_iDataSize = strlen(strData);<br />
+    m_strDatamember = new char[m_iDataSize+1];<br />
+    strcpy(m_strDatamember,strData);<br />
+}<br />
+CMyData&#038; CMyData::operator =(CMyData &#038;SrcData)<br />
+{<br />
+    m_iIndex = SrcData.m_iIndex;<br />
+    m_iDataSize = SrcData.GetDataSize();<br />
+    m_strDatamember = new char[m_iDataSize+1];<br />
+    strcpy(m_strDatamember,SrcData.GetData());<br />
+    return *this;<br />
+}<br />
+bool CMyData::operator < (CMyData&#038; data )
+{
+    return m_iIndex<data.m_iIndex;
+}
+bool CMyData::operator >(CMyData&#038; data )<br />
+{<br />
+    return m_iIndex>data.m_iIndex;<br />
+}</p>
+</div><div id="part_9" style="display:none;"><p>//主程序部分<br />
+#include <iostream .h><br />
+#include &#8220;MyData.h&#8221;<br />
+template <class T><br />
+void run(T* pData,int left,int right)<br />
+{<br />
+    int i,j;<br />
+    T middle,iTemp;<br />
+    i = left;<br />
+    j = right;<br />
+    //下面的比较都调用我们重载的操作符函数<br />
+    middle = pData[(left+right)/2]; //求中间值<br />
+    do{<br />
+        while((pData[i]<middle ) &#038;&#038; (i<right))//从左扫描大于中值的数
+            i++;          
+        while((pData[j]>middle) &#038;&#038; (j>left))//从右扫描大于中值的数<br />
+            j&#8211;;<br />
+        if(i< =j)//找到了一对值
+        {
+            //交换
+            iTemp = pData[i];
+            pData[i] = pData[j];
+            pData[j] = iTemp;
+            i++;
+            j--;
+        }
+    }while(i<=j);//如果两边扫描的下标交错，就停止（完成一次）
+    //当左边部分有值(left<j)，递归左半边
+    if(left<j)
+        run(pData,left,j);
+    //当右边部分有值(right>i)，递归右半边<br />
+    if(right>i)<br />
+        run(pData,i,right);<br />
+}<br />
+template <class T><br />
+void QuickSort(T* pData,int Count)<br />
+{<br />
+    run(pData,0,Count-1);<br />
+}<br />
+void main()<br />
+{<br />
+    CMyData data[] = {<br />
+        CMyData(8,&#8221;xulion&#8221;),<br />
+        CMyData(7,&#8221;sanzoo&#8221;),<br />
+        CMyData(6,&#8221;wangjun&#8221;),<br />
+        CMyData(5,&#8221;VCKBASE&#8221;),<br />
+        CMyData(4,&#8221;jacky2000&#8243;),<br />
+        CMyData(3,&#8221;cwally&#8221;),<br />
+        CMyData(2,&#8221;VCUSER&#8221;),<br />
+        CMyData(1,&#8221;isdong&#8221;)<br />
+    };<br />
+    QuickSort(data,8);<br />
+    for (int i=0;i&lt;8;i++)<br />
+        cout< <data[i].m_iIndex<<" "<<data[i].GetData()<<"\n";
+    cout<<"\n"; </class></class></middle></class></iostream></count></iostream></code></pdata></iostream></code></middle></iostream></code></pdata></count></iostream></code></count></iostream></code></count></iostream></code></pdata></count></iostream></code></p>
+</div><div id="paginate"><label id="li_1" onclick="javascript:show_page(1,9,this);" style="font-size:30px;font-weight:bold" onmouseover="this.style.cursor='pointer'">1</label><label id="li_2" onclick="javascript:show_page(2,9,this);"  onmouseover="this.style.cursor='pointer'">2</label><label id="li_3" onclick="javascript:show_page(3,9,this);"  onmouseover="this.style.cursor='pointer'">3</label><label id="li_4" onclick="javascript:show_page(4,9,this);"  onmouseover="this.style.cursor='pointer'">4</label><label id="li_5" onclick="javascript:show_page(5,9,this);"  onmouseover="this.style.cursor='pointer'">5</label><label id="li_6" onclick="javascript:show_page(6,9,this);"  onmouseover="this.style.cursor='pointer'">6</label><label id="li_7" onclick="javascript:show_page(7,9,this);"  onmouseover="this.style.cursor='pointer'">7</label><label id="li_8" onclick="javascript:show_page(8,9,this);"  onmouseover="this.style.cursor='pointer'">8</label><label id="li_9" onclick="javascript:show_page(9,9,this);"  onmouseover="this.style.cursor='pointer'">9</label></div> 
+			<div align="center">1 month ago, this page was being read. </div>
+			<p class="tags"><a href="http://www.xieziming.com/tag/cheng-xu" rel="tag">程序</a><br /></p>  
+    </div><!-- /entry -->                                   
+		<div class="postbottom"></div>		                              
+		</div><!-- /post -->	
+
+<div class="postrelated">
+			<table width="100%" >				
+
+					<tr><td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/2220.html" rel="bookmark" title="软件项目开发流程">软件项目开发流程</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/2464.html" rel="bookmark" title="J2EE入门例子">J2EE入...</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/7437.html" rel="bookmark" title="Equals与Hashcode">Equals与...</a></td>
+
+				<td align="right" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7620.html" rel="bookmark" title="遍历windows窗口控件">遍历win...</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7626.html" rel="bookmark" title="控制window程序">控制window程序</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/6695.html" rel="bookmark" title="PHP通过字符串调用函数">PHP通过字符...</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7170.html" rel="bookmark" title="链接器和装入器">链接器和装...</a></td>
+
+				<td align="right" class="dashedline_related"><a href="http://www.xieziming.com/archives/2445.html" rel="bookmark" title="J2EE回忆">J2EE回忆</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/7666.html" rel="bookmark" title="RESTful">RESTful</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/6805.html" rel="bookmark" title="Java垃圾回收算法">Java垃圾回...</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/2225.html" rel="bookmark" title="函数传递参数的理解">函数传递参数...</a></td>
+
+				<td align="right" class="dashedline_related">★<a href="http://www.xieziming.com/archives/2216.html" rel="bookmark" title="Java程序员面试宝典">Java程序员面试宝典</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7636.html" rel="bookmark" title="控制Windows窗体(C#)">控制Windows窗体...</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/2468.html" rel="bookmark" title="九个数据结构例子">九个数据结构例...</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/6661.html" rel="bookmark" title="Application Monitor">Applicatio...</a></td>
+
+				<td align="right" class="dashedline_related"><a href="http://www.xieziming.com/archives/7446.html" rel="bookmark" title="DOM">DOM</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/2438.html" rel="bookmark" title="mysql负载均衡配置">mysql负载均...</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/4743.html" rel="bookmark" title="为博客添加flash批量上传功能">为博客添加f...</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/2223.html" rel="bookmark" title="软件面试题目">软件面试题目</a></td>
+
+				<td align="right" class="dashedline_related">★<a href="http://www.xieziming.com/archives/2907.html" rel="bookmark" title="COM/LPT">COM/LPT</a></td></tr>
+
+		</table>
+</div>
+
+		<div id="comments">
+
+<!-- START COMMENT FORMS -->
+
+
+		</div><!--/comments-->		
+
+</div><!-- /content -->
+<div id="sidebar">			
+			<a class="subscribe" href="http://www.xieziming.com/feed" title="Posts RSS">Subscribe</a>			
+			<div id="search">	
+	<form name="searchform" id="searchform" method="get" action="http://www.xieziming.com/index.php">
+		<input class="text" type="text" name="s" id="s" value=""/>
+		<input class="submit" type="image" src="http://www.xieziming.com/wp-content/themes/ziming/img/submit.jpg" value="search" />
+	</form>	
+</div><!-- /search -->			
+			<div id="widgets">			
+			<div class="widget"><h3>Calendar</h3>
+<table id="wp-calendar">
+  									<caption>December 2016</caption>
+  									<thead>
+                    <tr><th scope="col" title="S">S</th><th scope="col" title="M">M</th><th scope="col" title="T">T</th><th scope="col" title="W">W</th><th scope="col" title="T">T</th><th scope="col" title="F">F</th><th scope="col" title="S">S</th></tr></thead><tbody><tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>1</td><td>2</td><td>3</td></tr><tr><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td></tr><tr><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td></tr><tr><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">18<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">《血战钢锯岭》</span><br/><span class="time" style="color:#000000; " > Time : 21:18 - 23:28</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">晚上和小锅去看，蛮感人的。吃完去沙湾吃猪杂粥，应该是我在那吃到的最新鲜的一次了。</p></span></a></span></td><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">19<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">CentOS</span><br/><span class="time" style="color:#000000; " > Time : 14:11 - 18:11</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">终于有点时间来把那盒子的win7转成CentOS来做server。配置vsftp花了我太多的时间。。。</p></span></a></span></td><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td></tr><tr><td>25</td><td>26</td><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td></tr><tr><td colspan="3" id="prev"><a href="http://www.xieziming.com/archives/3114.html?month=nov&yr=2016">&laquo; Prev</a></td><td colspan="4" id="next"><a href="http://www.xieziming.com/archives/3114.html?month=jan&yr=2017">Next &raquo;</a></td></tr></tbody></table>
+<div class="widgetbottom"></div></div><!--/widget-->				
+					      		<div class="widget">
+ 							<h3>Recent Posts</h3>
+							<ul>
+           				<li><a href="http://www.xieziming.com/archives/9579.html" class="dashedline" title="闽南 · 泉州">闽南 &middot; 泉州</a></li><li><a href="http://www.xieziming.com/archives/9578.html" class="dashedline" title="顺化 · HUE">顺化 &middot; HUE</a></li><li><a href="http://www.xieziming.com/archives/9577.html" class="dashedline" title="会安 · 春卷">会安 &middot; 春卷</a></li><li><a href="http://www.xieziming.com/archives/9576.html" class="dashedline" title="会安 · 夜灯">会安 &middot; 夜灯</a></li><li><a href="http://www.xieziming.com/archives/9575.html" class="dashedline" title="会安古镇">会安古镇</a></li><li><a href="http://www.xieziming.com/archives/9573.html" class="dashedline" title="岘港">岘港</a></li><li><a href="http://www.xieziming.com/archives/9535.html" class="dashedline" title="罗马">罗马</a></li><li><a href="http://www.xieziming.com/archives/9534.html" class="dashedline" title="卢浮宫">卢浮宫</a></li>						
+							</ul>
+      				<div class="widgetbottom"></div>
+	    		</div>
+	    			        
+        	      		<div class="widget">
+ 							<h3>Rand Posts</h3>
+							<ul>
+      						<li><a href="http://www.xieziming.com/archives/6967.html" class="dashedline" title="Java基础面试题">Java基础面试题</a></li><li><a href="http://www.xieziming.com/archives/9051.html" class="dashedline" title="和顺 · 宁静">和顺 &middot; 宁静</a></li><li><a href="http://www.xieziming.com/archives/4743.html" class="dashedline" title="为博客添加flash批量上传功能">为博客添加flash批量...</a></li><li><a href="http://www.xieziming.com/archives/19.html" class="dashedline" title="你们穿这么漂亮干嘛!">你们穿这么漂亮干嘛!</a></li><li><a href="http://www.xieziming.com/archives/3566.html" class="dashedline" title="这一个让人安睡的下午">这一个让人安睡的下午</a></li><li><a href="http://www.xieziming.com/archives/218.html" class="dashedline" title="每天都要阳光灿烂地生活">每天都要阳光灿烂地生活</a></li><li><a href="http://www.xieziming.com/archives/5495.html" class="dashedline" title="亚龙湾（二）">亚龙湾（二）</a></li><li><a href="http://www.xieziming.com/archives/275.html" class="dashedline" title="sx10与fz28比较">sx10与fz28比较</a></li>	
+							</ul>
+        			<div class="widgetbottom"></div>
+					</div>                 
+          	                       
+			</div><!-- /widgets -->			                       
+</div><!-- /sidebar --></div><!-- /main -->
+<div id="footer">
+<p align="left">© <a href="http://www.miitbeian.gov.cn" target="_blank"> 明 · 明 · 童 · 鞋</a></p>
+<!--74 queries in 2.495 seconds.-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?c2e18b43ec905e3c4ea82c1b57537223";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</div><!-- /footer -->
+</div><!-- /container -->
+<script type='text/javascript' src='http://www.xieziming.com/wp-includes/js/wp-embed.min.js?ver=4.7'></script>
+</body>
+</html>

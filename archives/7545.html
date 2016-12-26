@@ -1,0 +1,360 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head profile="http://gmpg.org/xfn/11">
+<title>  Java集合类 &raquo; 谢子明</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="description" content="Java集合类  " />
+<meta name="keywords" content="谢子明" />
+<link rel="stylesheet" href="http://www.xieziming.com/wp-content/themes/ziming/style.css" type="text/css" media="screen" />
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://www.xieziming.com/feed" />
+<link rel="alternate" type="application/rss+xml" href="http://www.xieziming.com/comments/feed" title="谢子明 Comments RSS feed" />
+<link rel="shortcut icon" href="http://www.xieziming.com/wp-content/themes/ziming/favicon.ico">
+<link rel="Bookmark" href="http://www.xieziming.com/wp-content/themes/ziming/favicon.ico">
+<link rel="pingback" href="http://www.xieziming.com/xmlrpc.php" />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="谢子明 &raquo; Java集合类 Comments Feed" href="http://www.xieziming.com/archives/7545.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/xieziming.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.7"}};
+			!function(a,b,c){function d(a){var b,c,d,e,f=String.fromCharCode;if(!k||!k.fillText)return!1;switch(k.clearRect(0,0,j.width,j.height),k.textBaseline="top",k.font="600 32px Arial",a){case"flag":return k.fillText(f(55356,56826,55356,56819),0,0),!(j.toDataURL().length<3e3)&&(k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,65039,8205,55356,57096),0,0),b=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,55356,57096),0,0),c=j.toDataURL(),b!==c);case"emoji4":return k.fillText(f(55357,56425,55356,57341,8205,55357,56507),0,0),d=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55357,56425,55356,57341,55357,56507),0,0),e=j.toDataURL(),d!==e}return!1}function e(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i,j=b.createElement("canvas"),k=j.getContext&&j.getContext("2d");for(i=Array("flag","emoji4"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<script type='text/javascript' src='http://www.xieziming.com/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='http://www.xieziming.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<link rel='https://api.w.org/' href='http://www.xieziming.com/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.xieziming.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.xieziming.com/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='员村' href='http://www.xieziming.com/archives/7556.html' />
+<link rel='next' title='午餐' href='http://www.xieziming.com/archives/7573.html' />
+<meta name="generator" content="WordPress 4.7" />
+<link rel="canonical" href="http://www.xieziming.com/archives/7545.html" />
+<link rel='shortlink' href='http://www.xieziming.com/?p=7545' />
+<link rel="alternate" type="application/json+oembed" href="http://www.xieziming.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fxieziming.com%2Farchives%2F7545.html" />
+<link rel="alternate" type="text/xml+oembed" href="http://www.xieziming.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fxieziming.com%2Farchives%2F7545.html&#038;format=xml" />
+ 	<link rel="stylesheet" href="http://www.xieziming.com/wp-content/plugins/live-calendar/live-calendar.css" type="text/css" media="screen" /> 
+<link rel="stylesheet" href="http://www.xieziming.com/wp-content/plugins/wp-code/wp-code.css" type="text/css" media="screen" />
+
+<link rel="stylesheet" href="http://www.xieziming.com/wp-content/plugins/zoom-highslide/highslide.css" type="text/css" media="screen" />
+<script type="text/javascript" src="http://www.xieziming.com/wp-content/plugins/zoom-highslide/js/highslide-full.packed.js"></script>
+<script type="text/javascript">
+	hs.graphicsDir = 'http://www.xieziming.com/wp-content/plugins/zoom-highslide/graphics/';
+	hs.align = 'center';
+	hs.transitions = ['expand', 'crossfade'];
+	hs.outlineType = 'rounded-white';
+  hs.wrapperClassName = 'controls-in-heading';
+	hs.showCredits=false;
+	hs.fadeInOut = true;
+	hs.dimmingOpacity = 0.8;
+
+	// Add the controlbar
+	if (hs.addSlideshow) hs.addSlideshow({
+		//slideshowGroup: 'group1',
+		interval: 4000,
+		repeat: false,
+		useControls: true,
+		fixedControls: false,
+		overlayOptions: {
+			opacity: 1,
+			position: 'top center',
+			hideOnMouseOut: true
+		}
+	});
+</script>
+
+<script type="text/javascript">
+	var widthRestriction = 668; 
+	var heightRestriction = 1000; 
+</script>
+<script type="text/javascript" src="http://www.xieziming.com/wp-content/plugins/zoom-highslide/js/zoom.js"></script>
+	
+<!--script src="http://www.xieziming.com/wp-content/themes/ziming/js/mouse.js" type="text/javascript"></script--> 
+</head>
+<body class="normalbg">
+<div id="container">
+	<div id="head">
+		<div id="nav">
+			<ul>
+				<li class="first"><a href="http://www.xieziming.com" title="首页">首页</a></li>
+				<li class="page_item page-item-2"><a href="http://www.xieziming.com/recent" title="最近">最近</a></li>
+				<li class="page_item page-item-3"><a href="http://www.xieziming.com/photo" title="Photo">映象</a></li>
+				<li class="page_item page-item-4"><a href="http://www.xieziming.com/food" title="Food">美食</a></li>
+				<li class="page_item page-item-5"><a href="http://www.xieziming.com/topic" title="关键字">话题</a></li>
+				<li class="page_item page-item-6"><a href="http://www.xieziming.com/travel" title="Travel">旅行</a></li>
+				<li class="page_item page-item-7"><a href="http://www.xieziming.com/literature" title="Literature">文艺</a></li>
+				<li class="page_item page-item-8"><a href="http://www.xieziming.com/wiki" title="技术维基">维基</a></li>
+				<li class="page_item page-item-9"><a href="http://www.xieziming.com/calendar" title="Calendar">点滴</a></li>
+			</ul>
+		</div><!-- /nav -->		
+	</div><!-- /head -->
+<div id="main" class="altmainbg">
+
+<script type="text/javascript">
+function show_page(id,count,source){
+	for (var i=1;i<=count;i++){
+		if(id != i){
+				jQuery("#part_"+i).hide();
+				document.getElementById("li_"+i).style.fontWeight = "normal";
+				document.getElementById("li_"+i).style.fontSize = "18px";
+		}
+	}
+	jQuery("#part_"+id).show();
+	document.getElementById("li_"+id).style.fontWeight = "bold";
+	document.getElementById("li_"+id).style.fontSize = "30px";
+	jQuery('body,html').animate({scrollTop:0},1000);
+        return false;
+}
+</script>
+<div id="content">
+
+	<div class="post" id="post-7545">
+		<h2 class="title">Java集合类</h2>
+		<p class="postmetadata">
+			<span class="date">21 October 2012</span>
+			<span class="category">Categoried in <a href="http://www.xieziming.com/topic/coding" rel="category tag">程序</a></span>
+			<span class="comments">0</span>
+			<span class="view">Preview : 4266 , Read : 745 </span>
+			<span class="mail">Index : 8972 </span>
+		</p>
+		<div class="entry">				
+<div id="part_1"><p>Java集合类主要负责保存、盛装其他数据，因此集合类也称容器类。java集合类分为：set、list、map、queue四大体系。其中set代表无序、不可重复的集合；list代表有序、可重复的集合。map代表具有映射关系的集合；queue代表队列集合。</p>
+<p>Java集合类主要由两个接口派生：Collection和Map，是集合框架的根接口。</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #003399;">Collection</span> 
+├<span style="color: #003399;">List</span> 
+│├<span style="color: #003399;">LinkedList</span> 
+│├<span style="color: #003399;">ArrayList</span> 
+│└<span style="color: #003399;">Vector</span> 
+│　└<span style="color: #003399;">Stack</span> 
+│
+├Queue
+│├Dueue
+│　└ArrayDueue
+│　└<span style="color: #003399;">LinkedList</span>
+│
+└<span style="color: #003399;">Set</span> 
+&nbsp;
+<span style="color: #003399;">Map</span> 
+├<span style="color: #003399;">Hashtable</span> 
+├<span style="color: #003399;">HashMap</span> 
+├<span style="color: #003399;">WeakHashMap</span>
+└<span style="color: #003399;">TreeMap</span></pre></div></div>
+
+<p><strong>Collection接口</strong><br />
+Collection是最基本的集合接口，一个Collection代表一组Object，即Collection的元素（Elements）。一些 Collection允许相同的元素而另一些不行。一些能排序而另一些不行。Java SDK不提供直接继承自Collection的类，Java SDK提供的类都是继承自Collection的“子接口”如List和Set。<br />
+　　　　<br />
+如何遍历Collection中的每一个元素？不论Collection的实际类型如何，它都支持一个iterator()的方法，该方法返回一个迭代子，使用该迭代子即可逐一访问Collection中每一个元素。典型的用法如下：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #003399;">Iterator</span> it <span style="color: #339933;">=</span> collection.<span style="color: #006633;">iterator</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">// 获得一个迭代子 </span>
+<span style="color: #000000; font-weight: bold;">while</span><span style="color: #009900;">&#40;</span>it.<span style="color: #006633;">hasNext</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span> 
+　　<span style="color: #003399;">Object</span> obj <span style="color: #339933;">=</span> it.<span style="color: #006633;">next</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">// 得到下一个元素 </span>
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>由Collection接口派生的两个接口是List和Set。 </p>
+</div><div id="part_2" style="display:none;"><p><strong>Queue接口</strong><br />
+Queue用于模拟队列的数据结构。LinkedList（既实现Queue接口也实现List接口）和ArrayDueue是其两个比较常用的实现类。</p>
+<p><strong>List接口</strong><br />
+List集合代表一个有序集合。集合中的每个元素都有其对应的顺序索引。Arraylist和vector是list接口的两个典型实现。他们之间的显著区别就是：vector是线性安全的，而arraylist不是。它们两个都是基于数组实现的list类。List还有一个基于链表实现的<strong>LinkedList</strong>类。当插入、删除元素的速度非常快。这个类比较特殊，功能也特别多，即实现了List接口，也实现了Dueue接口(双向队列)。可以当成双向队列使用，也可以当成栈使用。</p>
+<p>实现List接口的常用类有LinkedList，ArrayList，Vector和Stack。 </p>
+<p><strong>LinkedList类</strong><br />
+LinkedList实现了List接口，允许null元素。此外LinkedList提供额外的get，remove，add方法。这些操作使LinkedList可被用作堆栈（stack），队列（queue）或双向队列（deque）。 </p>
+<p>注意LinkedList没有同步方法。如果多个线程同时访问一个List，则必须自己实现访问同步。一种解决方法是在创建List时构造一个同步的List：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #003399;">List</span> list <span style="color: #339933;">=</span> <span style="color: #003399;">Collections</span>.<span style="color: #006633;">synchronizedList</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">LinkedList</span><span style="color: #009900;">&#40;</span>...<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre></div></div>
+
+<p><strong>ArrayList类</strong><br />
+ArrayList实现了可变大小的数组。它允许所有元素，包括null。ArrayList没有同步。size，isEmpty，get，set方法运行时间为常数。但是add方法开销为分摊的常数，添加n个元素需要O(n)的时间。其他的方法运行时间为线性。 </p>
+<p>每个ArrayList实例都有一个容量（Capacity），即用于存储元素的数组的大小。这个容量可随着不断添加新元素而自动增加，但是增长算法并没有定义。当需要插入大量元素时，在插入前可以调用ensureCapacity方法来增加ArrayList的容量以提高插入效率。 </p>
+<p>和LinkedList一样，ArrayList也是非同步的（unsynchronized）。 </p>
+<p>Java的基础面试题喜欢问ArrayList和LinkedList的区 别，在什么场景下用。大家都会说LinkedList随机增删多的场景比较合适，而ArrayList的随机访问多的场景比较合适。</p>
+<p><strong>Vector类</strong><br />
+Vector非常类似ArrayList，但是Vector是同步的。由Vector创建的Iterator，虽然和 ArrayList创建的Iterator是同一接口，但是，因为Vector是同步的，当一个Iterator被创建而且正在被使用，另一个线程改变了 Vector的状态（例如，添加或删除了一些元素），这时调用Iterator的方法时将抛出 ConcurrentModificationException，因此必须捕获该异常。 </p>
+<p><strong>Stack 类</strong><br />
+Stack继承自Vector，实现一个后进先出的堆栈。Stack提供5个额外的方法使得Vector得以被当作堆栈使用。基本的push和pop 方法，还有peek方法得到栈顶的元素，empty方法测试堆栈是否为空，search方法检测一个元素在堆栈中的位置。Stack刚创建后是空栈。 </p>
+<p><del datetime="2012-10-21T02:24:33+00:00">Vector类是Java 1.0/1.1 提供的类，现在和ArrayList差不多，能不用就不用吧！</del></p>
+<p><strong>Set接口</strong><br />
+Set是一种不包含重复的元素的Collection，即任意的两个元素e1和e2都有e1.equals(e2)=false，Set最多有一个null元素。Set判断两个对象是否相同是根据equals方法。如果两个对象用equals方法返回的是true，Set不会接受这两个对象。</p>
+<p>HashSet是set接口的典型实现，HashSet按hash算法来存储集合中的元素。因此具有很好的存储和查找性能。</p>
+<p>请注意：必须小心操作可变对象（Mutable Object）。如果一个Set中的可变元素改变了自身状态导致Object.equals(Object)=true将导致一些问题。 </p>
+</div><div id="part_3" style="display:none;"><p><strong>Map接口</strong><br />
+Map用于保存具有映射关系的数据。Map接口有如下几个常用的实现类：HashMap、HashTable、TreeMap。</p>
+<p>TreeMap是基于红黑树对TreeMap中所有key进行排序。</p>
+<p>HashMap和HashTable主要区别有两点：1、Hashtable是线性安全的，因此性能差些。2、HashMap可以使用null作为key或者value。</p>
+<p>请注意，Map没有继承Collection接口，Map提供key到value的映射。一个Map中不能包含相同的key，每个key只能映射一个 value。Map接口提供3种集合的视图，Map的内容可以被当作一组key集合，一组value集合，或者一组key-value映射。 </p>
+<p><strong>Hashtable类</strong><br />
+Hashtable继承Map接口，实现一个key-value映射的哈希表。任何非空（non-null）的对象都可作为key或者value。 添加数据使用put(key, value)，取出数据使用get(key)，这两个基本操作的时间开销为常数。 </p>
+<p>Hashtable通过initial capacity和load factor两个参数调整性能。通常缺省的load factor 0.75较好地实现了时间和空间的均衡。增大load factor可以节省空间但相应的查找时间将增大，这会影响像get和put这样的操作。 </p>
+<p>使用Hashtable的简单示例如下，将1，2，3放到Hashtable中，他们的key分别是”one”，”two”，”three”：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #003399;">Hashtable</span> numbers <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">Hashtable</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> 
+numbers.<span style="color: #006633;">put</span><span style="color: #009900;">&#40;</span>“one”, <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">Integer</span><span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">1</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> 
+numbers.<span style="color: #006633;">put</span><span style="color: #009900;">&#40;</span>“two”, <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">Integer</span><span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">2</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> 
+numbers.<span style="color: #006633;">put</span><span style="color: #009900;">&#40;</span>“three”, <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">Integer</span><span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">3</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre></div></div>
+
+<p>要取出一个数，比如2，用相应的key：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #003399;">Integer</span> n <span style="color: #339933;">=</span> <span style="color: #009900;">&#40;</span><span style="color: #003399;">Integer</span><span style="color: #009900;">&#41;</span>numbers.<span style="color: #006633;">get</span><span style="color: #009900;">&#40;</span>“two”<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> 
+<span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span>“two <span style="color: #339933;">=</span> ” <span style="color: #339933;">+</span> n<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre></div></div>
+
+<p>由于作为key的对象将通过计算其散列函数来确定与之对应的value的位置，因此任何作为key的对象都必须实现hashCode和equals方法。<br />
+　<br />
+Hashtable是同步的。 </p>
+<p><strong>HashMap类 </strong><br />
+HashMap和Hashtable类似，不同之处在于HashMap是非同步的，并且允许null，即null value和null key。</p>
+<p><strong>WeakHashMap类</strong><br />
+WeakHashMap是一种改进的HashMap，它对key实行“弱引用”，如果一个key不再被外部所引用，那么该key可以被GC回收。</p>
+</div><div id="part_4" style="display:none;"><p><strong>总结</strong><br />
+（1）如果涉及到堆栈，队列等操作，应该考虑用List，对于需要快速插入，删除元素，应该使用LinkedList，如果需要快速随机访问元素，应该使用ArrayList。 </p>
+<p>（2）如果程序在单线程环境中，或者访问仅仅在一个线程中进行，考虑非同步的类，其效率较高，如果多个线程可能同时操作一个类，应该使用同步的类。<br />
+　　<br />
+（3）要特别注意对哈希表的操作，作为key的对象要正确复写equals和hashCode方法。<br />
+　　<br />
+（4）尽量返回接口而非实际的类型，如返回List而非ArrayList，这样如果以后需要将ArrayList换成LinkedList时，客户端代码不用改变。这就是针对抽象编程。 </p>
+<p><strong>Set与Map 的关系</strong><br />
+Map集合中所有key集中起来，就组成了一个set集合。所以Map集合提供Set<k> keySet()方法返回所有key组成的set集合。由此可见，Map集合中的所有key具有set集合的特征，只要Map所有的key集中起来，它就是一个Set集合，这就实现了Map到Set的转换。同时，如果把Map中的元素看成key-value的set集合，也可以实现从Set到Map之间的转换。HashSet和HashMap分别作为它们的实现类。两者之间也挺相似的。HashSet的实现就是封装了HashMap对象来存储元素。它们的本质是一样的。类似于HashSet和HashMap的关系，其实TreeMap和TreeSet本质也差不多，TreeSet底层也是依赖TreeMap实现。</p>
+<p><strong>Map与List 的关系</strong><br />
+把Map的key-value分开来看，从另一个角度看，就可以把Map与List统一起来。</p>
+<p>Map集合是一个关联数组，key可以组成Set集合，Map中的value可以重复，所以这些value可以组成一个List集合。但是需要注意的是，实质Map的values方法并未返回一个List集合。而是返回一个不存储元素的Collection集合（实际上它不是Set也不是List，是HashMap的一个私有内部类，实现了Collection，并没有公开的接口），可用Iterator遍历。换一种角度来看对List集合，它也包含了两组值，其中一组就是虚拟的int类型的索引，另一组就是list集合元素，从这个意思上看，List就相当于所有key都是int型的Map。</p>
+</div><div id="part_5" style="display:none;"><p><strong>Vector和ArrayList 的区别</strong></p>
+<p>（1）vector是线程同步的，所以它也是线程安全的，而arraylist是线程异步的，是不安全的。如果不考虑到线程的安全因素，一般用arraylist效率比较高。<br />
+（2）如果集合中的元素的数目大于目前集合数组的长度时，vector增长率为目前数组长度的100%,而arraylist增长率为目前数组长度的50%.如过在集合中使用数据量比较大的数据，用vector有一定的优势。<br />
+（3）如果查找一个指定位置的数据，vector和arraylist使用的时间是相同的，都是0(1),这个时候使用vector和arraylist都可以。而如果移动一个指定位置的数据花费的时间为0(n-i)n为总长度，这个时候就应该考虑到使用linklist,因为它移动一个指定位置的数据所花费的时间为0(1),而查询一个指定位置的数据时花费的时间为0(i)。<br />
+（4）ArrayList 和Vector是采用数组方式存储数据，此数组元素数大于实际存储的数据以便增加和插入元素，都允许直接序号索引元素，但是插入数据要设计到数组元素移动等内存操作，所以索引数据快插入数据慢，Vector由于使用了synchronized方法（线程安全）所以性能上比ArrayList要差，LinkedList使用双向链表实现存储，按序号索引数据需要进行向前或向后遍历，但是插入数据时只需要记录本项的前后项即可，所以插入数度较快！ </p>
+<p><strong>Arraylist和Linkedlist 的区别</strong></p>
+<p>（1）ArrayList是一种顺序存储的线性表，其底层是采用数组实现的，而LinkedList是链式存储的线性表。其本质就是一个双向链表。<br />
+（2）对于随机访问get和set，ArrayList觉得优于LinkedList，因为LinkedList要移动指针。<br />
+（3）对于新增和删除操作add和remove，LinedList比较占优势，因为ArrayList要移动数据。<br />
+这一点要看实际情况的。若只对单条数据插入或删除，ArrayList的速度反而优于LinkedList。但若是批量随机的插入删除数据，LinkedList的速度大大优于ArrayList. 因为ArrayList每插入一条数据，要移动插入点及之后的所有数据。 </p>
+<p><strong>HashMap与TreeMap 的区别</strong><br />
+（1）HashMap通过hashcode对其内容进行快速查找，而TreeMap中所有的元素都保持着某种固定的顺序，如果你需要得到一个有序的结果你就应该使用TreeMap（HashMap中元素的排列顺序是不固定的）。HashMap中元素的排列顺序是不固定的）。 </p>
+<p>（2）在Map 中插入、删除和定位元素，HashMap 是最好的选择。但如果您要按自然顺序或自定义顺序遍历键，那么TreeMap会更好。使用HashMap要求添加的键类明确定义了hashCode()和 equals()的实现。</p>
+<p> 结过研究，我还发现了一点，二树map一样，但顺序不一样，导致hashCode()不一样。<br />
+ 同样做测试：<br />
+ 在hashMap中，同样的值的map,顺序不同，equals时，false;<br />
+ 而在treeMap中，同样的值的map,顺序不同,equals时，true，说明，treeMap在equals()时是整理了顺序了的。 </p>
+<p><strong>hashtable与hashmap 的区别</strong></p>
+<p>（1）历史原因:Hashtable是基于陈旧的Dictionary类的，HashMap是Java 1.2引进的Map接口的一个实现<br />
+（2）同步性:Hashtable是线程安全的，也就是说是同步的，而HashMap是线程序不安全的，不是同步的<br />
+（3）值：只有HashMap可以让你将空值作为一个表的条目的key或value</k></p>
+</div><div id="paginate"><label id="li_1" onclick="javascript:show_page(1,5,this);" style="font-size:30px;font-weight:bold" onmouseover="this.style.cursor='pointer'">1</label><label id="li_2" onclick="javascript:show_page(2,5,this);"  onmouseover="this.style.cursor='pointer'">2</label><label id="li_3" onclick="javascript:show_page(3,5,this);"  onmouseover="this.style.cursor='pointer'">3</label><label id="li_4" onclick="javascript:show_page(4,5,this);"  onmouseover="this.style.cursor='pointer'">4</label><label id="li_5" onclick="javascript:show_page(5,5,this);"  onmouseover="this.style.cursor='pointer'">5</label></div> 
+			<div align="center">1 month ago, this page was being read. </div>
+			<p class="tags"><a href="http://www.xieziming.com/tag/java" rel="tag">java</a><br /></p>  
+    </div><!-- /entry -->                                   
+		<div class="postbottom"></div>		                              
+		</div><!-- /post -->	
+
+<div class="postrelated">
+			<table width="100%" >				
+
+					<tr><td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/7527.html" rel="bookmark" title="Java自动装箱">Java自...</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7364.html" rel="bookmark" title="Java启动参数">Java启动参数</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/7486.html" rel="bookmark" title="Java堆栈">Java堆栈</a></td>
+
+				<td align="right" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7397.html" rel="bookmark" title="Java QA">Java ...</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/2464.html" rel="bookmark" title="J2EE入门例子">J2EE入门例子</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/7473.html" rel="bookmark" title="Java静态工厂模式">Java静态工厂模式</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/6795.html" rel="bookmark" title="Java 多线程">Java 多线程</a></td>
+
+				<td align="right" class="dashedline_related"><a href="http://www.xieziming.com/archives/7499.html" rel="bookmark" title="Java代理机制">Java代理机制</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/8807.html" rel="bookmark" title="制作Java Applet签名">制作Java Appl...</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/8804.html" rel="bookmark" title="Java源码加/解密">Java源码加/解...</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/7366.html" rel="bookmark" title="QTP控制Java程序原理">QTP控制Java程...</a></td>
+
+				<td align="right" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7515.html" rel="bookmark" title="Java装饰模式">Java装饰模式</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/8811.html" rel="bookmark" title="Java源码混淆">Java源...</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/7481.html" rel="bookmark" title="Java单例模式">Java单...</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/2445.html" rel="bookmark" title="J2EE回忆">J2EE回忆</a></td>
+
+				<td align="right" class="dashedline_related"><a href="http://www.xieziming.com/archives/7605.html" rel="bookmark" title="质疑和反驳">质疑和反驳</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/8494.html" rel="bookmark" title="Java内存管理之字符串">Java内存管理之字符串</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7253.html" rel="bookmark" title="Java中int和Integer的区别">Java中i...</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/7508.html" rel="bookmark" title="Java类的生存周期">Java类的生...</a></td>
+
+				<td align="right" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7496.html" rel="bookmark" title="Java反射机制">Java反射机制</a></td></tr>
+
+		</table>
+</div>
+
+		<div id="comments">
+
+<!-- START COMMENT FORMS -->
+
+
+		</div><!--/comments-->		
+
+</div><!-- /content -->
+<div id="sidebar">			
+			<a class="subscribe" href="http://www.xieziming.com/feed" title="Posts RSS">Subscribe</a>			
+			<div id="search">	
+	<form name="searchform" id="searchform" method="get" action="http://www.xieziming.com/index.php">
+		<input class="text" type="text" name="s" id="s" value=""/>
+		<input class="submit" type="image" src="http://www.xieziming.com/wp-content/themes/ziming/img/submit.jpg" value="search" />
+	</form>	
+</div><!-- /search -->			
+			<div id="widgets">			
+			<div class="widget"><h3>Calendar</h3>
+<table id="wp-calendar">
+  									<caption>December 2016</caption>
+  									<thead>
+                    <tr><th scope="col" title="S">S</th><th scope="col" title="M">M</th><th scope="col" title="T">T</th><th scope="col" title="W">W</th><th scope="col" title="T">T</th><th scope="col" title="F">F</th><th scope="col" title="S">S</th></tr></thead><tbody><tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>1</td><td>2</td><td>3</td></tr><tr><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td></tr><tr><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td></tr><tr><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">18<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">《血战钢锯岭》</span><br/><span class="time" style="color:#000000; " > Time : 21:18 - 23:28</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">晚上和小锅去看，蛮感人的。吃完去沙湾吃猪杂粥，应该是我在那吃到的最新鲜的一次了。</p></span></a></span></td><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">19<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">CentOS</span><br/><span class="time" style="color:#000000; " > Time : 14:11 - 18:11</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">终于有点时间来把那盒子的win7转成CentOS来做server。配置vsftp花了我太多的时间。。。</p></span></a></span></td><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td></tr><tr><td>25</td><td>26</td><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td></tr><tr><td colspan="3" id="prev"><a href="http://www.xieziming.com/archives/7545.html?month=nov&yr=2016">&laquo; Prev</a></td><td colspan="4" id="next"><a href="http://www.xieziming.com/archives/7545.html?month=jan&yr=2017">Next &raquo;</a></td></tr></tbody></table>
+<div class="widgetbottom"></div></div><!--/widget-->				
+					      		<div class="widget">
+ 							<h3>Recent Posts</h3>
+							<ul>
+           				<li><a href="http://www.xieziming.com/archives/9579.html" class="dashedline" title="闽南 · 泉州">闽南 &middot; 泉州</a></li><li><a href="http://www.xieziming.com/archives/9578.html" class="dashedline" title="顺化 · HUE">顺化 &middot; HUE</a></li><li><a href="http://www.xieziming.com/archives/9577.html" class="dashedline" title="会安 · 春卷">会安 &middot; 春卷</a></li><li><a href="http://www.xieziming.com/archives/9576.html" class="dashedline" title="会安 · 夜灯">会安 &middot; 夜灯</a></li><li><a href="http://www.xieziming.com/archives/9575.html" class="dashedline" title="会安古镇">会安古镇</a></li><li><a href="http://www.xieziming.com/archives/9573.html" class="dashedline" title="岘港">岘港</a></li><li><a href="http://www.xieziming.com/archives/9535.html" class="dashedline" title="罗马">罗马</a></li><li><a href="http://www.xieziming.com/archives/9534.html" class="dashedline" title="卢浮宫">卢浮宫</a></li>						
+							</ul>
+      				<div class="widgetbottom"></div>
+	    		</div>
+	    			        
+        	      		<div class="widget">
+ 							<h3>Rand Posts</h3>
+							<ul>
+      						<li><a href="http://www.xieziming.com/archives/1149.html" class="dashedline" title="泼水节（二）">泼水节（二）</a></li><li><a href="http://www.xieziming.com/archives/7397.html" class="dashedline" title="Java QA">Java QA</a></li><li><a href="http://www.xieziming.com/archives/6071.html" class="dashedline" title="茶卡盐湖">茶卡盐湖</a></li><li><a href="http://www.xieziming.com/archives/9327.html" class="dashedline" title="首尔街头">首尔街头</a></li><li><a href="http://www.xieziming.com/archives/8950.html" class="dashedline" title="手机里的缅甸（一）">手机里的缅甸（一）</a></li><li><a href="http://www.xieziming.com/archives/2779.html" class="dashedline" title="软件回归测试">软件回归测试</a></li><li><a href="http://www.xieziming.com/archives/8863.html" class="dashedline" title="王家大院（二）">王家大院（二）</a></li><li><a href="http://www.xieziming.com/archives/9358.html" class="dashedline" title="悉尼歌剧院（二）">悉尼歌剧院（二）</a></li>	
+							</ul>
+        			<div class="widgetbottom"></div>
+					</div>                 
+          	                       
+			</div><!-- /widgets -->			                       
+</div><!-- /sidebar --></div><!-- /main -->
+<div id="footer">
+<p align="left">© <a href="http://www.miitbeian.gov.cn" target="_blank"> 明 · 明 · 童 · 鞋</a></p>
+<!--74 queries in 3.287 seconds.-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?c2e18b43ec905e3c4ea82c1b57537223";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</div><!-- /footer -->
+</div><!-- /container -->
+<script type='text/javascript' src='http://www.xieziming.com/wp-includes/js/wp-embed.min.js?ver=4.7'></script>
+</body>
+</html>

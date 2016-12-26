@@ -1,0 +1,564 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head profile="http://gmpg.org/xfn/11">
+<title>  软件面试题目 &raquo; 谢子明</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="description" content="软件面试题目  " />
+<meta name="keywords" content="谢子明" />
+<link rel="stylesheet" href="http://www.xieziming.com/wp-content/themes/ziming/style.css" type="text/css" media="screen" />
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://www.xieziming.com/feed" />
+<link rel="alternate" type="application/rss+xml" href="http://www.xieziming.com/comments/feed" title="谢子明 Comments RSS feed" />
+<link rel="shortcut icon" href="http://www.xieziming.com/wp-content/themes/ziming/favicon.ico">
+<link rel="Bookmark" href="http://www.xieziming.com/wp-content/themes/ziming/favicon.ico">
+<link rel="pingback" href="http://www.xieziming.com/xmlrpc.php" />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="谢子明 &raquo; 软件面试题目 Comments Feed" href="http://www.xieziming.com/archives/2223.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/xieziming.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.7"}};
+			!function(a,b,c){function d(a){var b,c,d,e,f=String.fromCharCode;if(!k||!k.fillText)return!1;switch(k.clearRect(0,0,j.width,j.height),k.textBaseline="top",k.font="600 32px Arial",a){case"flag":return k.fillText(f(55356,56826,55356,56819),0,0),!(j.toDataURL().length<3e3)&&(k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,65039,8205,55356,57096),0,0),b=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,55356,57096),0,0),c=j.toDataURL(),b!==c);case"emoji4":return k.fillText(f(55357,56425,55356,57341,8205,55357,56507),0,0),d=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55357,56425,55356,57341,55357,56507),0,0),e=j.toDataURL(),d!==e}return!1}function e(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i,j=b.createElement("canvas"),k=j.getContext&&j.getContext("2d");for(i=Array("flag","emoji4"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<script type='text/javascript' src='http://www.xieziming.com/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='http://www.xieziming.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<link rel='https://api.w.org/' href='http://www.xieziming.com/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.xieziming.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.xieziming.com/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='晨晨的小糖水' href='http://www.xieziming.com/archives/2156.html' />
+<link rel='next' title='你又想起某个夏天' href='http://www.xieziming.com/archives/3267.html' />
+<meta name="generator" content="WordPress 4.7" />
+<link rel="canonical" href="http://www.xieziming.com/archives/2223.html" />
+<link rel='shortlink' href='http://www.xieziming.com/?p=2223' />
+<link rel="alternate" type="application/json+oembed" href="http://www.xieziming.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fxieziming.com%2Farchives%2F2223.html" />
+<link rel="alternate" type="text/xml+oembed" href="http://www.xieziming.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fxieziming.com%2Farchives%2F2223.html&#038;format=xml" />
+ 	<link rel="stylesheet" href="http://www.xieziming.com/wp-content/plugins/live-calendar/live-calendar.css" type="text/css" media="screen" /> 
+<link rel="stylesheet" href="http://www.xieziming.com/wp-content/plugins/wp-code/wp-code.css" type="text/css" media="screen" />
+
+<link rel="stylesheet" href="http://www.xieziming.com/wp-content/plugins/zoom-highslide/highslide.css" type="text/css" media="screen" />
+<script type="text/javascript" src="http://www.xieziming.com/wp-content/plugins/zoom-highslide/js/highslide-full.packed.js"></script>
+<script type="text/javascript">
+	hs.graphicsDir = 'http://www.xieziming.com/wp-content/plugins/zoom-highslide/graphics/';
+	hs.align = 'center';
+	hs.transitions = ['expand', 'crossfade'];
+	hs.outlineType = 'rounded-white';
+  hs.wrapperClassName = 'controls-in-heading';
+	hs.showCredits=false;
+	hs.fadeInOut = true;
+	hs.dimmingOpacity = 0.8;
+
+	// Add the controlbar
+	if (hs.addSlideshow) hs.addSlideshow({
+		//slideshowGroup: 'group1',
+		interval: 4000,
+		repeat: false,
+		useControls: true,
+		fixedControls: false,
+		overlayOptions: {
+			opacity: 1,
+			position: 'top center',
+			hideOnMouseOut: true
+		}
+	});
+</script>
+
+<script type="text/javascript">
+	var widthRestriction = 668; 
+	var heightRestriction = 1000; 
+</script>
+<script type="text/javascript" src="http://www.xieziming.com/wp-content/plugins/zoom-highslide/js/zoom.js"></script>
+	
+<!--script src="http://www.xieziming.com/wp-content/themes/ziming/js/mouse.js" type="text/javascript"></script--> 
+</head>
+<body class="normalbg">
+<div id="container">
+	<div id="head">
+		<div id="nav">
+			<ul>
+				<li class="first"><a href="http://www.xieziming.com" title="首页">首页</a></li>
+				<li class="page_item page-item-2"><a href="http://www.xieziming.com/recent" title="最近">最近</a></li>
+				<li class="page_item page-item-3"><a href="http://www.xieziming.com/photo" title="Photo">映象</a></li>
+				<li class="page_item page-item-4"><a href="http://www.xieziming.com/food" title="Food">美食</a></li>
+				<li class="page_item page-item-5"><a href="http://www.xieziming.com/topic" title="关键字">话题</a></li>
+				<li class="page_item page-item-6"><a href="http://www.xieziming.com/travel" title="Travel">旅行</a></li>
+				<li class="page_item page-item-7"><a href="http://www.xieziming.com/literature" title="Literature">文艺</a></li>
+				<li class="page_item page-item-8"><a href="http://www.xieziming.com/wiki" title="技术维基">维基</a></li>
+				<li class="page_item page-item-9"><a href="http://www.xieziming.com/calendar" title="Calendar">点滴</a></li>
+			</ul>
+		</div><!-- /nav -->		
+	</div><!-- /head -->
+<div id="main" class="altmainbg">
+
+<script type="text/javascript">
+function show_page(id,count,source){
+	for (var i=1;i<=count;i++){
+		if(id != i){
+				jQuery("#part_"+i).hide();
+				document.getElementById("li_"+i).style.fontWeight = "normal";
+				document.getElementById("li_"+i).style.fontSize = "18px";
+		}
+	}
+	jQuery("#part_"+id).show();
+	document.getElementById("li_"+id).style.fontWeight = "bold";
+	document.getElementById("li_"+id).style.fontSize = "30px";
+	jQuery('body,html').animate({scrollTop:0},1000);
+        return false;
+}
+</script>
+<div id="content">
+
+	<div class="post" id="post-2223">
+		<h2 class="title">软件面试题目</h2>
+		<p class="postmetadata">
+			<span class="date">18 August 2009</span>
+			<span class="category">Categoried in <a href="http://www.xieziming.com/topic/ji-shu-wei-ji" rel="category tag">技术维基</a></span>
+			<span class="comments">0</span>
+			<span class="view">Preview : 82 , Read : 836 </span>
+			<span class="mail">Index : 2651 </span>
+		</p>
+		<div class="entry">				
+<div id="part_1"><p>1.写一个函数，完成内存之间的拷贝。</p>
+
+<div class="wp_code"><div class="pre"><pre class="c" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #993333;">void</span><span style="color: #339933;">*</span> mymemcpy<span style="color: #009900;">&#40;</span> <span style="color: #993333;">void</span> <span style="color: #339933;">*</span>dest<span style="color: #339933;">,</span> <span style="color: #993333;">const</span> <span style="color: #993333;">void</span> <span style="color: #339933;">*</span>src<span style="color: #339933;">,</span> size_t count <span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#123;</span>
+    <span style="color: #993333;">char</span><span style="color: #339933;">*</span> pdest <span style="color: #339933;">=</span> static_cast<span style="color: #339933;">&lt;</span>char <span style="color: #339933;">*&gt;</span><span style="color: #009900;">&#40;</span> dest <span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #993333;">const</span> <span style="color: #993333;">char</span><span style="color: #339933;">*</span> psrc <span style="color: #339933;">=</span> static_cast<span style="color: #339933;">&lt;</span>const <span style="color: #993333;">char</span><span style="color: #339933;">*&gt;</span><span style="color: #009900;">&#40;</span> src <span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #b1b100;">if</span><span style="color: #009900;">&#40;</span> pdest<span style="color: #339933;">&gt;</span>psrc <span style="color: #339933;">&amp;&amp;</span> pdest<span style="color: #339933;">&lt;</span>psrc <span style="color: #339933;">+</span><span style="color: #000066;">cout</span> <span style="color: #009900;">&#41;</span>
+    <span style="color: #009900;">&#123;</span>
+        <span style="color: #b1b100;">for</span><span style="color: #009900;">&#40;</span> size_t i<span style="color: #339933;">=</span>count<span style="color: #339933;">-</span><span style="color: #0000dd;">1</span><span style="color: #339933;">;</span> i<span style="color: #339933;">!=-</span><span style="color: #0000dd;">1</span><span style="color: #339933;">;</span> <span style="color: #339933;">--</span>I <span style="color: #009900;">&#41;</span>
+                pdest<span style="color: #009900;">&#91;</span>i<span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> psrc<span style="color: #009900;">&#91;</span>i<span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+    <span style="color: #b1b100;">else</span>
+    <span style="color: #009900;">&#123;</span>
+        <span style="color: #b1b100;">for</span><span style="color: #009900;">&#40;</span> size_t i<span style="color: #339933;">=</span><span style="color: #0000dd;">0</span><span style="color: #339933;">;</span> i<span style="color: #339933;">&lt;</span>count<span style="color: #339933;">;</span> <span style="color: #339933;">++</span>I <span style="color: #009900;">&#41;</span>
+            pdest<span style="color: #009900;">&#91;</span>i<span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> psrc<span style="color: #009900;">&#91;</span>i<span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+    <span style="color: #b1b100;">return</span> dest<span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>2.写一个函数找出一个整数数组中，第二大的数</p>
+
+<div class="wp_code"><div class="pre"><pre class="c" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #993333;">const</span> <span style="color: #993333;">int</span> MINNUMBER <span style="color: #339933;">=</span> <span style="color: #339933;">-</span><span style="color: #0000dd;">32767</span> <span style="color: #339933;">;</span>
+<span style="color: #993333;">int</span> find_sec_max<span style="color: #009900;">&#40;</span> <span style="color: #993333;">int</span> data<span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">,</span> <span style="color: #993333;">int</span> count<span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#123;</span>
+   <span style="color: #993333;">int</span> maxnumber <span style="color: #339933;">=</span> data<span style="color: #009900;">&#91;</span><span style="color: #0000dd;">0</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">;</span>
+   <span style="color: #993333;">int</span> sec_max <span style="color: #339933;">=</span> MINNUMBER <span style="color: #339933;">;</span>
+   <span style="color: #b1b100;">for</span> <span style="color: #009900;">&#40;</span> <span style="color: #993333;">int</span> i <span style="color: #339933;">=</span> <span style="color: #0000dd;">1</span> <span style="color: #339933;">;</span> i <span style="color: #339933;">&lt;</span> count <span style="color: #339933;">;</span> i<span style="color: #339933;">++</span><span style="color: #009900;">&#41;</span>
+   <span style="color: #009900;">&#123;</span>
+      <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span> data<span style="color: #009900;">&#91;</span>i<span style="color: #009900;">&#93;</span> <span style="color: #339933;">&gt;</span> maxnumber <span style="color: #009900;">&#41;</span>
+      <span style="color: #009900;">&#123;</span>
+         sec_max <span style="color: #339933;">=</span> maxnumber <span style="color: #339933;">;</span>
+         maxnumber <span style="color: #339933;">=</span> data<span style="color: #009900;">&#91;</span>i<span style="color: #009900;">&#93;</span> <span style="color: #339933;">;</span>
+      <span style="color: #009900;">&#125;</span>
+      <span style="color: #b1b100;">else</span>
+      <span style="color: #009900;">&#123;</span>
+         <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span> data<span style="color: #009900;">&#91;</span>i<span style="color: #009900;">&#93;</span> <span style="color: #339933;">&gt;</span> sec_max <span style="color: #009900;">&#41;</span>
+            sec_max <span style="color: #339933;">=</span> data<span style="color: #009900;">&#91;</span>i<span style="color: #009900;">&#93;</span> <span style="color: #339933;">;</span>
+      <span style="color: #009900;">&#125;</span>
+   <span style="color: #009900;">&#125;</span>
+   <span style="color: #b1b100;">return</span> sec_max <span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+</div><div id="part_2" style="display:none;"><p>3.用递归算法判断数组a[N]是否为一个递增数组。<br />
+递归的方法，记录当前最大的，并且判断当前的是否比这个还大，大则继续，否则返回false结束：</p>
+
+<div class="wp_code"><div class="pre"><pre class="c" style="font-family:'Times New Roman',Garamond, Times;">bool fun<span style="color: #009900;">&#40;</span> <span style="color: #993333;">int</span> a<span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">,</span> <span style="color: #993333;">int</span> n <span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#123;</span>
+&nbsp;
+      <span style="color: #b1b100;">if</span><span style="color: #009900;">&#40;</span> n<span style="color: #339933;">=</span> <span style="color: #339933;">=</span><span style="color: #0000dd;">1</span> <span style="color: #009900;">&#41;</span>
+&nbsp;
+         <span style="color: #b1b100;">return</span> <span style="color: #000000; font-weight: bold;">true</span><span style="color: #339933;">;</span>
+&nbsp;
+      <span style="color: #b1b100;">if</span><span style="color: #009900;">&#40;</span> n<span style="color: #339933;">=</span> <span style="color: #339933;">=</span><span style="color: #0000dd;">2</span> <span style="color: #009900;">&#41;</span>
+&nbsp;
+         <span style="color: #b1b100;">return</span>  a<span style="color: #009900;">&#91;</span>n<span style="color: #339933;">-</span><span style="color: #0000dd;">1</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">&gt;=</span> a<span style="color: #009900;">&#91;</span>n<span style="color: #339933;">-</span><span style="color: #0000dd;">2</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+&nbsp;
+      <span style="color: #b1b100;">return</span> fun<span style="color: #009900;">&#40;</span> a<span style="color: #339933;">,</span>n<span style="color: #339933;">-</span><span style="color: #0000dd;">1</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">&amp;&amp;</span> <span style="color: #009900;">&#40;</span> a<span style="color: #009900;">&#91;</span>n<span style="color: #339933;">-</span><span style="color: #0000dd;">1</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">&gt;=</span> a<span style="color: #009900;">&#91;</span>n<span style="color: #339933;">-</span><span style="color: #0000dd;">2</span><span style="color: #009900;">&#93;</span> <span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>4.判断字符串是否为回文</p>
+
+<div class="wp_code"><div class="pre"><pre class="c" style="font-family:'Times New Roman',Garamond, Times;">bool IsSymmetry<span style="color: #009900;">&#40;</span><span style="color: #993333;">const</span> <span style="color: #993333;">char</span><span style="color: #339933;">*</span> p<span style="color: #009900;">&#41;</span>
+ <span style="color: #009900;">&#123;</span>
+       assert<span style="color: #009900;">&#40;</span>p<span style="color: #339933;">!=</span>NULL<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+       <span style="color: #993333;">const</span> <span style="color: #993333;">char</span><span style="color: #339933;">*</span> q<span style="color: #339933;">=</span>p<span style="color: #339933;">;</span> 
+       <span style="color: #993333;">int</span> len<span style="color: #339933;">=</span><span style="color: #0000dd;">0</span><span style="color: #339933;">;</span>
+       <span style="color: #b1b100;">while</span><span style="color: #009900;">&#40;</span><span style="color: #339933;">*</span>q<span style="color: #339933;">++!=</span><span style="color: #ff0000;">'<span style="color: #006699; font-weight: bold;">\0</span>'</span><span style="color: #009900;">&#41;</span>
+       <span style="color: #009900;">&#123;</span>
+             len<span style="color: #339933;">++;</span>
+       <span style="color: #009900;">&#125;</span> 
+       bool bSign<span style="color: #339933;">=</span><span style="color: #000000; font-weight: bold;">true</span><span style="color: #339933;">;</span>
+       q<span style="color: #339933;">=</span>p<span style="color: #339933;">+</span>len<span style="color: #339933;">-</span><span style="color: #0000dd;">1</span><span style="color: #339933;">;</span>
+       <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #0000dd;">0</span><span style="color: #339933;">&lt;</span>len <span style="color: #009900;">&#41;</span>
+       <span style="color: #009900;">&#123;</span>
+             <span style="color: #b1b100;">for</span> <span style="color: #009900;">&#40;</span><span style="color: #993333;">int</span> i<span style="color: #339933;">=</span><span style="color: #0000dd;">0</span><span style="color: #339933;">;</span>i<span style="color: #339933;">&lt;</span>len<span style="color: #339933;">/</span><span style="color: #0000dd;">2</span><span style="color: #339933;">;</span>i<span style="color: #339933;">++</span><span style="color: #009900;">&#41;</span>
+             <span style="color: #009900;">&#123;</span>
+                   <span style="color: #b1b100;">if</span><span style="color: #009900;">&#40;</span><span style="color: #339933;">*</span>p<span style="color: #339933;">++!=*</span>q<span style="color: #339933;">--</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span> bSign<span style="color: #339933;">=</span><span style="color: #000000; font-weight: bold;">false</span><span style="color: #339933;">;</span>break<span style="color: #339933;">;</span><span style="color: #009900;">&#125;</span><span style="color: #339933;">;</span>
+             <span style="color: #009900;">&#125;</span>
+       <span style="color: #009900;">&#125;</span>
+       <span style="color: #b1b100;">if</span><span style="color: #009900;">&#40;</span>bSign<span style="color: #339933;">==</span><span style="color: #000000; font-weight: bold;">true</span><span style="color: #009900;">&#41;</span>
+       <span style="color: #009900;">&#123;</span>
+             <span style="color: #000066;">printf</span><span style="color: #009900;">&#40;</span><span style="color: #ff0000;">&quot;Yes!<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+       <span style="color: #009900;">&#125;</span>
+       <span style="color: #b1b100;">else</span>
+       <span style="color: #009900;">&#123;</span>
+             <span style="color: #000066;">printf</span><span style="color: #009900;">&#40;</span><span style="color: #ff0000;">&quot;No!<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+       <span style="color: #009900;">&#125;</span>
+       <span style="color: #b1b100;">return</span> bSign<span style="color: #339933;">;</span>
+ <span style="color: #009900;">&#125;</span></pre></div></div>
+
+</div><div id="part_3" style="display:none;"><p>5.如果编写一个标准strcpy函数</p>
+
+<div class="wp_code"><div class="pre"><pre class="c" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #993333;">char</span> <span style="color: #339933;">*</span> strcpy<span style="color: #009900;">&#40;</span> <span style="color: #993333;">char</span> <span style="color: #339933;">*</span>strDest<span style="color: #339933;">,</span> <span style="color: #993333;">const</span> <span style="color: #993333;">char</span> <span style="color: #339933;">*</span>strSrc <span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#123;</span>
+　　assert<span style="color: #009900;">&#40;</span> <span style="color: #009900;">&#40;</span>strDest <span style="color: #339933;">!=</span> NULL<span style="color: #009900;">&#41;</span> <span style="color: #339933;">&amp;&amp;</span><span style="color: #009900;">&#40;</span>strSrc <span style="color: #339933;">!=</span> NULL<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+　　<span style="color: #993333;">char</span> <span style="color: #339933;">*</span>address <span style="color: #339933;">=</span> strDest<span style="color: #339933;">;</span>
+　　<span style="color: #b1b100;">while</span><span style="color: #009900;">&#40;</span> <span style="color: #009900;">&#40;</span><span style="color: #339933;">*</span>strDest<span style="color: #339933;">++</span> <span style="color: #339933;">=</span> <span style="color: #339933;">*</span> strSrc<span style="color: #339933;">++</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">!=</span> ‘\<span style="color: #0000dd;">0</span>’ <span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+　　<span style="color: #b1b100;">return</span> address<span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>6.用两个栈实现一个队列的功能？要求给出算法和思路！<br />
+答 、设2个栈为A,B, 一开始均为空.<br />
+入队:<br />
+将新元素push入栈A;<br />
+出队:<br />
+(1)判断栈B是否为空；<br />
+(2)如果不为空，则将栈A中所有元素依次pop出并push到栈B；<br />
+(3)将栈B的栈顶元素pop出；<br />
+这样实现的队列入队和出队的平摊复杂度都还是O(1), 比上面的几种方法要好。</p>
+<p>7.线形表a、b为两个有序升序的线形表，编写一程序，使两个有序线形表合并成一个有序升序线形表h；</p>
+
+<div class="wp_code"><div class="pre"><pre class="c" style="font-family:'Times New Roman',Garamond, Times;">Linklist <span style="color: #339933;">*</span>unio<span style="color: #009900;">&#40;</span>Linklist <span style="color: #339933;">*</span>p<span style="color: #339933;">,</span>Linklist <span style="color: #339933;">*</span>q<span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#123;</span>
+     linklist <span style="color: #339933;">*</span>R<span style="color: #339933;">,*</span>pa<span style="color: #339933;">,*</span>qa<span style="color: #339933;">,*</span>ra<span style="color: #339933;">;</span>
+     pa<span style="color: #339933;">=</span>p<span style="color: #339933;">;</span>
+     qa<span style="color: #339933;">=</span>q<span style="color: #339933;">;</span>
+     R<span style="color: #339933;">=</span>ra<span style="color: #339933;">=</span>p<span style="color: #339933;">;</span>
+     <span style="color: #b1b100;">while</span><span style="color: #009900;">&#40;</span>pa<span style="color: #339933;">-&gt;</span>next<span style="color: #339933;">!=</span>NULL<span style="color: #339933;">&amp;&amp;</span>qa<span style="color: #339933;">-&gt;</span>next<span style="color: #339933;">!=</span>NULL<span style="color: #009900;">&#41;</span>
+     <span style="color: #009900;">&#123;</span>
+          <span style="color: #b1b100;">if</span><span style="color: #009900;">&#40;</span>pa<span style="color: #339933;">-&gt;</span>data<span style="color: #339933;">&gt;</span>qa<span style="color: #339933;">-&gt;</span>data<span style="color: #009900;">&#41;</span>
+          <span style="color: #009900;">&#123;</span>
+               ra<span style="color: #339933;">-&gt;</span>next<span style="color: #339933;">=</span>qa<span style="color: #339933;">;</span>
+               qa<span style="color: #339933;">=</span>qa<span style="color: #339933;">-&gt;</span>next<span style="color: #339933;">;</span>
+          <span style="color: #009900;">&#125;</span>
+          <span style="color: #b1b100;">else</span>
+          <span style="color: #009900;">&#123;</span>
+               ra<span style="color: #339933;">-&gt;</span>next<span style="color: #339933;">=</span>pa<span style="color: #339933;">;</span>
+               pa<span style="color: #339933;">=</span>pa<span style="color: #339933;">-&gt;</span>next<span style="color: #339933;">;</span>
+          <span style="color: #009900;">&#125;</span>
+     <span style="color: #009900;">&#125;</span>
+     <span style="color: #b1b100;">if</span><span style="color: #009900;">&#40;</span>pa<span style="color: #339933;">-&gt;</span>next<span style="color: #339933;">!=</span>NULL<span style="color: #009900;">&#41;</span>
+          ra<span style="color: #339933;">-&gt;</span>next<span style="color: #339933;">=</span>pa<span style="color: #339933;">;</span>
+     <span style="color: #b1b100;">if</span><span style="color: #009900;">&#40;</span>qa<span style="color: #339933;">-&gt;</span>next<span style="color: #339933;">!=</span>NULL<span style="color: #009900;">&#41;</span>
+          ra<span style="color: #339933;">-&gt;</span>next<span style="color: #339933;">==</span>qa<span style="color: #339933;">;</span>
+     <span style="color: #b1b100;">return</span> R<span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+</div><div id="part_4" style="display:none;"><p>8.找出水仙花数</p>
+
+<div class="wp_code"><div class="pre"><pre class="c" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #339933;">#include&lt;iostream&gt;</span>
+　　<span style="color: #993333;">int</span> main<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+　　<span style="color: #009900;">&#123;</span><span style="color: #993333;">int</span> a<span style="color: #339933;">,</span>q<span style="color: #339933;">,</span>w<span style="color: #339933;">,</span>e<span style="color: #339933;">;</span>
+　　<span style="color: #b1b100;">for</span><span style="color: #009900;">&#40;</span>a<span style="color: #339933;">=</span><span style="color: #0000dd;">100</span><span style="color: #339933;">;</span>a<span style="color: #339933;">&amp;</span>lt<span style="color: #339933;">;</span><span style="color: #0000dd;">1000</span><span style="color: #339933;">;++</span>a<span style="color: #009900;">&#41;</span>
+　　<span style="color: #009900;">&#123;</span>q<span style="color: #339933;">=</span>a<span style="color: #339933;">/</span><span style="color: #0000dd;">100</span><span style="color: #339933;">;</span>
+　　w<span style="color: #339933;">=</span><span style="color: #009900;">&#40;</span>a<span style="color: #339933;">-</span>q<span style="color: #339933;">*</span><span style="color: #0000dd;">100</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">/</span><span style="color: #0000dd;">10</span><span style="color: #339933;">;</span>
+　　e<span style="color: #339933;">=</span><span style="color: #009900;">&#40;</span>a<span style="color: #339933;">-</span>q<span style="color: #339933;">*</span><span style="color: #0000dd;">100</span><span style="color: #339933;">-</span>w<span style="color: #339933;">*</span><span style="color: #0000dd;">10</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+　　<span style="color: #b1b100;">if</span><span style="color: #009900;">&#40;</span>a<span style="color: #339933;">==</span>q<span style="color: #339933;">*</span>q<span style="color: #339933;">*</span>q<span style="color: #339933;">+</span>w<span style="color: #339933;">*</span>w<span style="color: #339933;">*</span>w<span style="color: #339933;">+</span>e<span style="color: #339933;">*</span>e<span style="color: #339933;">*</span>e<span style="color: #009900;">&#41;</span>
+　　cout<span style="color: #339933;">&lt;</span> <span style="color: #339933;">&lt;</span>a<span style="color: #339933;">&lt;&lt;</span><span style="color: #ff0000;">&quot;是水仙花数&quot;</span><span style="color: #339933;">&lt;&lt;</span>endl<span style="color: #339933;">;</span><span style="color: #009900;">&#125;</span><span style="color: #339933;">;</span>
+　　<span style="color: #b1b100;">return</span> <span style="color: #0000dd;">0</span><span style="color: #339933;">;</span>
+　　<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>9.计算32位整形数字的二进制表示中有多少个一</p>
+
+<div class="wp_code"><div class="pre"><pre class="c" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #993333;">static</span> UInt32 count_ones<span style="color: #009900;">&#40;</span>UInt32 n<span style="color: #009900;">&#41;</span>
+  <span style="color: #009900;">&#123;</span>
+    n <span style="color: #339933;">=</span> <span style="color: #009900;">&#40;</span>n <span style="color: #339933;">&amp;</span> <span style="color: #208080;">0x55555555</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">+</span> <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span>n <span style="color: #339933;">&amp;</span> <span style="color: #208080;">0xaaaaaaaa</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">&gt;&gt;</span> <span style="color: #0000dd;">1</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    n <span style="color: #339933;">=</span> <span style="color: #009900;">&#40;</span>n <span style="color: #339933;">&amp;</span> <span style="color: #208080;">0x33333333</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">+</span> <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span>n <span style="color: #339933;">&amp;</span> <span style="color: #208080;">0xcccccccc</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">&gt;&gt;</span> <span style="color: #0000dd;">2</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    n <span style="color: #339933;">=</span> <span style="color: #009900;">&#40;</span>n <span style="color: #339933;">&amp;</span> <span style="color: #208080;">0x0f0f0f0f</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">+</span> <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span>n <span style="color: #339933;">&amp;</span> <span style="color: #208080;">0xf0f0f0f0</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">&gt;&gt;</span> <span style="color: #0000dd;">4</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    n <span style="color: #339933;">=</span> <span style="color: #009900;">&#40;</span>n <span style="color: #339933;">&amp;</span> <span style="color: #208080;">0x00ff00ff</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">+</span> <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span>n <span style="color: #339933;">&amp;</span> <span style="color: #208080;">0xff00ff00</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">&gt;&gt;</span> <span style="color: #0000dd;">8</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    n <span style="color: #339933;">=</span> <span style="color: #009900;">&#40;</span>n <span style="color: #339933;">&amp;</span> <span style="color: #208080;">0x0000ffff</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">+</span> <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span>n <span style="color: #339933;">&amp;</span> <span style="color: #208080;">0xffff0000</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">&gt;&gt;</span> <span style="color: #0000dd;">16</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #b1b100;">return</span> n<span style="color: #339933;">;</span>
+  <span style="color: #009900;">&#125;</span>
+&nbsp;
+  <span style="color: #993333;">unsigned</span> <span style="color: #993333;">int</span> ones32<span style="color: #009900;">&#40;</span><span style="color: #993333;">register</span> <span style="color: #993333;">unsigned</span> <span style="color: #993333;">int</span> x<span style="color: #009900;">&#41;</span>
+ <span style="color: #009900;">&#123;</span>
+        x <span style="color: #339933;">-=</span> <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span>x <span style="color: #339933;">&gt;&gt;</span> <span style="color: #0000dd;">1</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">&amp;</span> <span style="color: #208080;">0x55555555</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        x <span style="color: #339933;">=</span> <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span>x <span style="color: #339933;">&gt;&gt;</span> <span style="color: #0000dd;">2</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">&amp;</span> <span style="color: #208080;">0x33333333</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">+</span> <span style="color: #009900;">&#40;</span>x <span style="color: #339933;">&amp;</span> <span style="color: #208080;">0x33333333</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        x <span style="color: #339933;">=</span> <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span>x <span style="color: #339933;">&gt;&gt;</span> <span style="color: #0000dd;">4</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">+</span> x<span style="color: #009900;">&#41;</span> <span style="color: #339933;">&amp;</span> <span style="color: #208080;">0x0f0f0f0f</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        x <span style="color: #339933;">+=</span> <span style="color: #009900;">&#40;</span>x <span style="color: #339933;">&gt;&gt;</span> <span style="color: #0000dd;">8</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        x <span style="color: #339933;">+=</span> <span style="color: #009900;">&#40;</span>x <span style="color: #339933;">&gt;&gt;</span> <span style="color: #0000dd;">16</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        <span style="color: #b1b100;">return</span> <span style="color: #009900;">&#40;</span>x <span style="color: #339933;">&amp;</span> <span style="color: #208080;">0x0000003f</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+ <span style="color: #009900;">&#125;</span></pre></div></div>
+
+</div><div id="part_5" style="display:none;"><p>10.写出string类的构造函数，拷贝构造函数，析构函数，赋值函数。</p>
+
+<div class="wp_code"><div class="pre"><pre class="c" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #339933;">#include&lt;iostream&gt;</span>
+using namespace std<span style="color: #339933;">;</span>
+&nbsp;
+class String
+<span style="color: #009900;">&#123;</span>
+public<span style="color: #339933;">:</span>
+       String<span style="color: #009900;">&#40;</span><span style="color: #993333;">const</span> <span style="color: #993333;">char</span> <span style="color: #339933;">*</span>str<span style="color: #339933;">=</span>NULL<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+       String<span style="color: #009900;">&#40;</span><span style="color: #993333;">const</span> String <span style="color: #339933;">&amp;</span>other<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+       ~String<span style="color: #009900;">&#40;</span><span style="color: #993333;">void</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+       String <span style="color: #339933;">&amp;</span>operator <span style="color: #339933;">=</span><span style="color: #009900;">&#40;</span><span style="color: #993333;">const</span> String <span style="color: #339933;">&amp;</span>other<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+private<span style="color: #339933;">:</span>
+       <span style="color: #993333;">char</span> <span style="color: #339933;">*</span>m_data<span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span><span style="color: #339933;">;</span>
+&nbsp;
+String<span style="color: #339933;">::</span><span style="color: #202020;">String</span><span style="color: #009900;">&#40;</span><span style="color: #993333;">const</span> <span style="color: #993333;">char</span> <span style="color: #339933;">*</span>str<span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#123;</span>
+    cout<span style="color: #339933;">&lt;</span> <span style="color: #339933;">&lt;</span><span style="color: #ff0000;">&quot;构造函数被调用了&quot;</span><span style="color: #339933;">&lt;&lt;</span>endl<span style="color: #339933;">;</span>
+    <span style="color: #b1b100;">if</span><span style="color: #009900;">&#40;</span>str<span style="color: #339933;">==</span>NULL<span style="color: #009900;">&#41;</span><span style="color: #666666; font-style: italic;">//避免出现野指针，如String b;如果没有这句话，就会出现野</span>
+                  <span style="color: #666666; font-style: italic;">//指针</span>
+   <span style="color: #009900;">&#123;</span>
+        m_data<span style="color: #339933;">=</span>new <span style="color: #993333;">char</span><span style="color: #009900;">&#91;</span><span style="color: #0000dd;">1</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+        <span style="color: #339933;">*</span>m_data<span style="color: #339933;">=</span><span style="color: #ff0000;">''</span>\<span style="color: #0000dd;">0</span><span style="color: #ff0000;">''</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+    <span style="color: #b1b100;">else</span>
+    <span style="color: #009900;">&#123;</span>
+      <span style="color: #993333;">int</span> length<span style="color: #339933;">=</span>strlen<span style="color: #009900;">&#40;</span>str<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+      m_data<span style="color: #339933;">=</span>new <span style="color: #993333;">char</span><span style="color: #009900;">&#91;</span>length<span style="color: #339933;">+</span><span style="color: #0000dd;">1</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+      strcpy<span style="color: #009900;">&#40;</span>m_data<span style="color: #339933;">,</span>str<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span>
+String<span style="color: #339933;">::</span>~String<span style="color: #009900;">&#40;</span><span style="color: #993333;">void</span><span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#123;</span>
+    delete m_data<span style="color: #339933;">;</span>
+    cout<span style="color: #339933;">&lt;&lt;</span><span style="color: #ff0000;">&quot;析构函数被调用了&quot;</span><span style="color: #339933;">&lt;&lt;</span>endl<span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+String<span style="color: #339933;">::</span><span style="color: #202020;">String</span><span style="color: #009900;">&#40;</span><span style="color: #993333;">const</span> String <span style="color: #339933;">&amp;</span>other<span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#123;</span>
+ cout<span style="color: #339933;">&lt;&lt;</span><span style="color: #ff0000;">&quot;赋值构造函被调用了&quot;</span><span style="color: #339933;">&lt;&lt;</span>endl<span style="color: #339933;">;</span>
+ <span style="color: #993333;">int</span> length<span style="color: #339933;">=</span>strlen<span style="color: #009900;">&#40;</span>other.<span style="color: #202020;">m_data</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+ m_data<span style="color: #339933;">=</span>new <span style="color: #993333;">char</span><span style="color: #009900;">&#91;</span>length<span style="color: #339933;">+</span><span style="color: #0000dd;">1</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+ strcpy<span style="color: #009900;">&#40;</span>m_data<span style="color: #339933;">,</span>other.<span style="color: #202020;">m_data</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span>
+String <span style="color: #339933;">&amp;</span>String<span style="color: #339933;">::</span><span style="color: #202020;">operator</span><span style="color: #339933;">=</span><span style="color: #009900;">&#40;</span><span style="color: #993333;">const</span> String <span style="color: #339933;">&amp;</span>other<span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#123;</span>
+      cout<span style="color: #339933;">&lt;&lt;</span><span style="color: #ff0000;">&quot;赋值函数被调用了&quot;</span><span style="color: #339933;">&lt;&lt;</span>endl<span style="color: #339933;">;</span>
+      <span style="color: #b1b100;">if</span><span style="color: #009900;">&#40;</span>this<span style="color: #339933;">==&amp;</span>other<span style="color: #009900;">&#41;</span><span style="color: #666666; font-style: italic;">//自己拷贝自己就不用拷贝了</span>
+                 <span style="color: #b1b100;">return</span> <span style="color: #339933;">*</span>this<span style="color: #339933;">;</span>
+      delete m_data<span style="color: #339933;">;</span><span style="color: #666666; font-style: italic;">//删除被赋值对象中指针变量指向的前一个内存空间，避免</span>
+                    <span style="color: #666666; font-style: italic;">//内存泄漏</span>
+      <span style="color: #993333;">int</span> length<span style="color: #339933;">=</span>strlen<span style="color: #009900;">&#40;</span>other.<span style="color: #202020;">m_data</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><span style="color: #666666; font-style: italic;">//计算长度</span>
+      m_data<span style="color: #339933;">=</span>new <span style="color: #993333;">char</span><span style="color: #009900;">&#91;</span>length<span style="color: #339933;">+</span><span style="color: #0000dd;">1</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span><span style="color: #666666; font-style: italic;">//申请空间</span>
+      strcpy<span style="color: #009900;">&#40;</span>m_data<span style="color: #339933;">,</span>other.<span style="color: #202020;">m_data</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><span style="color: #666666; font-style: italic;">//拷贝</span>
+      <span style="color: #b1b100;">return</span> <span style="color: #339933;">*</span>this<span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span>
+<span style="color: #993333;">void</span> main<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#123;</span>
+      String b<span style="color: #339933;">;</span><span style="color: #666666; font-style: italic;">//调用构造函数</span>
+      String a<span style="color: #009900;">&#40;</span><span style="color: #ff0000;">&quot;Hello&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><span style="color: #666666; font-style: italic;">//调用构造函数</span>
+      String c<span style="color: #009900;">&#40;</span><span style="color: #ff0000;">&quot;World&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><span style="color: #666666; font-style: italic;">//调用构造函数</span>
+      String d<span style="color: #339933;">=</span>a<span style="color: #339933;">;</span><span style="color: #666666; font-style: italic;">//调用赋值构造函数，因为是在d对象建立的过程中用a来初始化</span>
+      d<span style="color: #339933;">=</span>c<span style="color: #339933;">;</span><span style="color: #666666; font-style: italic;">//调用重载后的赋值函数</span>
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+</div><div id="part_6" style="display:none;"><p>11．已知strcpy 函数的原型是：<br />
+char *strcpy(char *strDest, const char *strSrc);<br />
+其中strDest 是目的字符串，strSrc 是源字符串。不调用C++/C 的字符串库函数，请编写函数 strcpy<br />
+答案：</p>
+
+<div class="wp_code"><div class="pre"><pre class="c" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #993333;">char</span> <span style="color: #339933;">*</span>strcpy<span style="color: #009900;">&#40;</span><span style="color: #993333;">char</span> <span style="color: #339933;">*</span>strDest<span style="color: #339933;">,</span> <span style="color: #993333;">const</span> <span style="color: #993333;">char</span> <span style="color: #339933;">*</span>strSrc<span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#123;</span>
+      <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span> strDest <span style="color: #339933;">==</span> NULL <span style="color: #339933;">||</span> strSrc <span style="color: #339933;">==</span> NULL<span style="color: #009900;">&#41;</span>
+            <span style="color: #b1b100;">return</span> NULL <span style="color: #339933;">;</span>
+      <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span> strDest <span style="color: #339933;">==</span> strSrc<span style="color: #009900;">&#41;</span>
+            <span style="color: #b1b100;">return</span> strDest <span style="color: #339933;">;</span>
+      <span style="color: #993333;">char</span> <span style="color: #339933;">*</span>tempptr <span style="color: #339933;">=</span> strDest <span style="color: #339933;">;</span>
+      <span style="color: #b1b100;">while</span><span style="color: #009900;">&#40;</span> <span style="color: #009900;">&#40;</span><span style="color: #339933;">*</span>strDest<span style="color: #339933;">++</span> <span style="color: #339933;">=</span> <span style="color: #339933;">*</span>strSrc<span style="color: #339933;">++</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">!=</span> ‘’<span style="color: #009900;">&#41;</span>
+            <span style="color: #339933;">;</span>
+      <span style="color: #b1b100;">return</span> tempptr <span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>12.strcat 函数源码<br />
+方法一</p>
+
+<div class="wp_code"><div class="pre"><pre class="c" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #993333;">char</span> <span style="color: #339933;">*</span>strcpy <span style="color: #009900;">&#40;</span>dest<span style="color: #339933;">,</span> src<span style="color: #009900;">&#41;</span>
+     <span style="color: #993333;">char</span> <span style="color: #339933;">*</span>dest<span style="color: #339933;">;</span>
+     <span style="color: #993333;">const</span> <span style="color: #993333;">char</span> <span style="color: #339933;">*</span>src<span style="color: #339933;">;</span>
+<span style="color: #009900;">&#123;</span>
+  <span style="color: #993333;">char</span> c<span style="color: #339933;">;</span>
+  <span style="color: #993333;">char</span> <span style="color: #339933;">*</span>s <span style="color: #339933;">=</span> <span style="color: #009900;">&#40;</span><span style="color: #993333;">char</span> <span style="color: #339933;">*</span><span style="color: #009900;">&#41;</span>src<span style="color: #339933;">;</span>
+  <span style="color: #993333;">const</span> ptrdiff_t off <span style="color: #339933;">=</span> dest <span style="color: #339933;">-</span> s <span style="color: #339933;">-</span> <span style="color: #0000dd;">1</span><span style="color: #339933;">;</span>
+&nbsp;
+  <span style="color: #b1b100;">do</span>
+    <span style="color: #009900;">&#123;</span>
+      c <span style="color: #339933;">=</span> <span style="color: #339933;">*</span>s<span style="color: #339933;">++;</span>
+      s<span style="color: #009900;">&#91;</span>off<span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> c<span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+  <span style="color: #b1b100;">while</span> <span style="color: #009900;">&#40;</span>c <span style="color: #339933;">!=</span> <span style="color: #ff0000;">'<span style="color: #006699; font-weight: bold;">\0</span>'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+  <span style="color: #b1b100;">return</span> dest<span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>方法二</p>
+
+<div class="wp_code"><div class="pre"><pre class="c" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #993333;">char</span> <span style="color: #339933;">*</span>   strcat <span style="color: #009900;">&#40;</span><span style="color: #993333;">char</span> <span style="color: #339933;">*</span>dest<span style="color: #339933;">,</span> <span style="color: #993333;">const</span> <span style="color: #993333;">char</span> <span style="color: #339933;">*</span>src<span style="color: #009900;">&#41;</span>  
+<span style="color: #009900;">&#123;</span>  
+  <span style="color: #666666; font-style: italic;">//通过strcpy来实现strcat函数  </span>
+  strcpy <span style="color: #009900;">&#40;</span>dest <span style="color: #339933;">+</span> strlen <span style="color: #009900;">&#40;</span>dest<span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span> src<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+  <span style="color: #b1b100;">return</span> dest<span style="color: #339933;">;</span>  
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>方法三</p>
+
+<div class="wp_code"><div class="pre"><pre class="c" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #993333;">char</span> <span style="color: #339933;">*</span>   strncat<span style="color: #009900;">&#40;</span><span style="color: #993333;">char</span> <span style="color: #339933;">*</span>dst<span style="color: #339933;">,</span> <span style="color: #993333;">const</span> <span style="color: #993333;">char</span> <span style="color: #339933;">*</span>src<span style="color: #339933;">,</span> size_t n<span style="color: #009900;">&#41;</span>  
+<span style="color: #009900;">&#123;</span>  
+  <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span>n <span style="color: #339933;">!=</span> <span style="color: #0000dd;">0</span><span style="color: #009900;">&#41;</span>  
+  <span style="color: #009900;">&#123;</span>  
+    <span style="color: #666666; font-style: italic;">//保存两个操作字符串的首地址  </span>
+    <span style="color: #993333;">char</span> <span style="color: #339933;">*</span>d <span style="color: #339933;">=</span> dst<span style="color: #339933;">;</span>  
+    <span style="color: #993333;">const</span> <span style="color: #993333;">char</span> <span style="color: #339933;">*</span>s <span style="color: #339933;">=</span> src<span style="color: #339933;">;</span>  
+&nbsp;
+    <span style="color: #666666; font-style: italic;">//将指向dst的指针d移到字符串末尾,指向'\0' </span>
+    <span style="color: #b1b100;">while</span> <span style="color: #009900;">&#40;</span><span style="color: #339933;">*</span>d <span style="color: #339933;">!=</span> <span style="color: #0000dd;">0</span><span style="color: #009900;">&#41;</span>  
+      d<span style="color: #339933;">++;</span>   
+&nbsp;
+    <span style="color: #666666; font-style: italic;">//复制过程  </span>
+    <span style="color: #b1b100;">do</span> <span style="color: #009900;">&#123;</span>  
+      <span style="color: #666666; font-style: italic;">//如果到达了src字符串的末尾,则复制终止  </span>
+      <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span><span style="color: #339933;">*</span>d <span style="color: #339933;">=</span> <span style="color: #339933;">*</span>s<span style="color: #339933;">++</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">==</span> <span style="color: #0000dd;">0</span><span style="color: #009900;">&#41;</span>  
+        <span style="color: #000000; font-weight: bold;">break</span><span style="color: #339933;">;</span>  
+      <span style="color: #666666; font-style: italic;">//移向下一个元素  </span>
+      d<span style="color: #339933;">++;</span>  
+    <span style="color: #009900;">&#125;</span> <span style="color: #b1b100;">while</span> <span style="color: #009900;">&#40;</span><span style="color: #339933;">--</span>n <span style="color: #339933;">!=</span> <span style="color: #0000dd;">0</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">//复制后剩余要复制的元素个数  </span>
+    <span style="color: #339933;">*</span>d <span style="color: #339933;">=</span> <span style="color: #0000dd;">0</span><span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">//复制完毕后,将最后一个元素置为'\0' </span>
+  <span style="color: #009900;">&#125;</span>  
+  <span style="color: #b1b100;">return</span> dst<span style="color: #339933;">;</span>   
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+</div><div id="part_7" style="display:none;"><p>13. 用变量a给出下面的定义<br />
+a) int a; 一个整型数（An integer）</p>
+<p>b) int *a; 一个指向整型数的指针（A pointer to an integer）</p>
+<p>c) int **a; 一个指向指针的的指针，它指向的指针是指向一个整型数（A pointer to a pointer to an integer）</p>
+<p>d) int a[10]; 一个有10个整型数的数组（An array of 10 integers）</p>
+<p>e) int *a[10]; 一个有10个指针的数组，该指针是指向一个整型数的（An array of 10 pointers to integers）</p>
+<p>f) int (*a)[10]; 一个指向有10个整型数数组的指针（A pointer to an array of 10 integers）</p>
+<p>g) int (*a)(int); 一个指向函数的指针，该函数有一个整型参数并返回一个整型数（A pointer to a function that takes an integer as an argument and returns an integer）</p>
+<p>h) int (*a[10])(int); 一个有10个指针的数组，该指针指向一个函数，该函数有一个整型参数并返回一个整型数（ An array of ten pointers to functions that take an integer argument and return an integer ）</iostream></code></iostream></code></len></code></psrc></const></char></code></p>
+</div><div id="paginate"><label id="li_1" onclick="javascript:show_page(1,7,this);" style="font-size:30px;font-weight:bold" onmouseover="this.style.cursor='pointer'">1</label><label id="li_2" onclick="javascript:show_page(2,7,this);"  onmouseover="this.style.cursor='pointer'">2</label><label id="li_3" onclick="javascript:show_page(3,7,this);"  onmouseover="this.style.cursor='pointer'">3</label><label id="li_4" onclick="javascript:show_page(4,7,this);"  onmouseover="this.style.cursor='pointer'">4</label><label id="li_5" onclick="javascript:show_page(5,7,this);"  onmouseover="this.style.cursor='pointer'">5</label><label id="li_6" onclick="javascript:show_page(6,7,this);"  onmouseover="this.style.cursor='pointer'">6</label><label id="li_7" onclick="javascript:show_page(7,7,this);"  onmouseover="this.style.cursor='pointer'">7</label></div> 
+			<div align="center">1 month ago, this page was being read. </div>
+			<p class="tags"><a href="http://www.xieziming.com/tag/cheng-xu" rel="tag">程序</a><br /></p>  
+    </div><!-- /entry -->                                   
+		<div class="postbottom"></div>		                              
+		</div><!-- /post -->	
+
+<div class="postrelated">
+			<table width="100%" >				
+
+					<tr><td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/2464.html" rel="bookmark" title="J2EE入门例子">J2EE入...</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/2468.html" rel="bookmark" title="九个数据结构例子">九个数据结构例...</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/78.html" rel="bookmark" title="VC + Matlab + 数据库">VC + Matla...</a></td>
+
+				<td align="right" class="dashedline_related">★<a href="http://www.xieziming.com/archives/3122.html" rel="bookmark" title="C++ 类访问控制探讨">C++ 类访问...</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7666.html" rel="bookmark" title="RESTful">RESTfu...</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/2220.html" rel="bookmark" title="软件项目开发流程">软件项目开发流程</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7626.html" rel="bookmark" title="控制window程序">控制window程序</a></td>
+
+				<td align="right" class="dashedline_related"><a href="http://www.xieziming.com/archives/6805.html" rel="bookmark" title="Java垃圾回收算法">Java垃圾回收...</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/7693.html" rel="bookmark" title="Solaris内存统计">Solaris内存统...</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7464.html" rel="bookmark" title="IE插件">IE插件</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/6661.html" rel="bookmark" title="Application Monitor">Applica...</a></td>
+
+				<td align="right" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7170.html" rel="bookmark" title="链接器和装入器">链接器和装入器</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/2445.html" rel="bookmark" title="J2EE回忆">J2EE回忆</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/2475.html" rel="bookmark" title="程序员须知（二）">程序员须知...</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7457.html" rel="bookmark" title="Firefox插件制作">Firef...</a></td>
+
+				<td align="right" class="dashedline_related"><a href="http://www.xieziming.com/archives/7636.html" rel="bookmark" title="控制Windows窗体(C#)">控制Window...</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/7000.html" rel="bookmark" title="Java IO类">Java IO类</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/2438.html" rel="bookmark" title="mysql负载均衡配置">mysql负载均...</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/2907.html" rel="bookmark" title="COM/LPT">COM/LPT</a></td>
+
+				<td align="right" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7437.html" rel="bookmark" title="Equals与Hashcode">Equals...</a></td></tr>
+
+		</table>
+</div>
+
+		<div id="comments">
+
+<!-- START COMMENT FORMS -->
+
+
+		</div><!--/comments-->		
+
+</div><!-- /content -->
+<div id="sidebar">			
+			<a class="subscribe" href="http://www.xieziming.com/feed" title="Posts RSS">Subscribe</a>			
+			<div id="search">	
+	<form name="searchform" id="searchform" method="get" action="http://www.xieziming.com/index.php">
+		<input class="text" type="text" name="s" id="s" value=""/>
+		<input class="submit" type="image" src="http://www.xieziming.com/wp-content/themes/ziming/img/submit.jpg" value="search" />
+	</form>	
+</div><!-- /search -->			
+			<div id="widgets">			
+			<div class="widget"><h3>Calendar</h3>
+<table id="wp-calendar">
+  									<caption>December 2016</caption>
+  									<thead>
+                    <tr><th scope="col" title="S">S</th><th scope="col" title="M">M</th><th scope="col" title="T">T</th><th scope="col" title="W">W</th><th scope="col" title="T">T</th><th scope="col" title="F">F</th><th scope="col" title="S">S</th></tr></thead><tbody><tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>1</td><td>2</td><td>3</td></tr><tr><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td></tr><tr><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td></tr><tr><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">18<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">《血战钢锯岭》</span><br/><span class="time" style="color:#000000; " > Time : 21:18 - 23:28</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">晚上和小锅去看，蛮感人的。吃完去沙湾吃猪杂粥，应该是我在那吃到的最新鲜的一次了。</p></span></a></span></td><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">19<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">CentOS</span><br/><span class="time" style="color:#000000; " > Time : 14:11 - 18:11</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">终于有点时间来把那盒子的win7转成CentOS来做server。配置vsftp花了我太多的时间。。。</p></span></a></span></td><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td></tr><tr><td>25</td><td>26</td><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td></tr><tr><td colspan="3" id="prev"><a href="http://www.xieziming.com/archives/2223.html?month=nov&yr=2016">&laquo; Prev</a></td><td colspan="4" id="next"><a href="http://www.xieziming.com/archives/2223.html?month=jan&yr=2017">Next &raquo;</a></td></tr></tbody></table>
+<div class="widgetbottom"></div></div><!--/widget-->				
+					      		<div class="widget">
+ 							<h3>Recent Posts</h3>
+							<ul>
+           				<li><a href="http://www.xieziming.com/archives/9579.html" class="dashedline" title="闽南 · 泉州">闽南 &middot; 泉州</a></li><li><a href="http://www.xieziming.com/archives/9578.html" class="dashedline" title="顺化 · HUE">顺化 &middot; HUE</a></li><li><a href="http://www.xieziming.com/archives/9577.html" class="dashedline" title="会安 · 春卷">会安 &middot; 春卷</a></li><li><a href="http://www.xieziming.com/archives/9576.html" class="dashedline" title="会安 · 夜灯">会安 &middot; 夜灯</a></li><li><a href="http://www.xieziming.com/archives/9575.html" class="dashedline" title="会安古镇">会安古镇</a></li><li><a href="http://www.xieziming.com/archives/9573.html" class="dashedline" title="岘港">岘港</a></li><li><a href="http://www.xieziming.com/archives/9535.html" class="dashedline" title="罗马">罗马</a></li><li><a href="http://www.xieziming.com/archives/9534.html" class="dashedline" title="卢浮宫">卢浮宫</a></li>						
+							</ul>
+      				<div class="widgetbottom"></div>
+	    		</div>
+	    			        
+        	      		<div class="widget">
+ 							<h3>Rand Posts</h3>
+							<ul>
+      						<li><a href="http://www.xieziming.com/archives/6979.html" class="dashedline" title="红专厂（一）">红专厂（一）</a></li><li><a href="http://www.xieziming.com/archives/8672.html" class="dashedline" title="西塘夜（三）">西塘夜（三）</a></li><li><a href="http://www.xieziming.com/archives/7133.html" class="dashedline" title="自动控制理论（二）">自动控制理论（二）</a></li><li><a href="http://www.xieziming.com/archives/96.html" class="dashedline" title="摆摊第二天">摆摊第二天</a></li><li><a href="http://www.xieziming.com/archives/9171.html" class="dashedline" title="印度 · 瓦拉纳西 · 人物">印度 &middot; 瓦拉纳西 &middot; 人...</a></li><li><a href="http://www.xieziming.com/archives/88.html" class="dashedline" title="今天的公开答辩">今天的公开答辩</a></li><li><a href="http://www.xieziming.com/archives/8721.html" class="dashedline" title="潮家馆">潮家馆</a></li><li><a href="http://www.xieziming.com/archives/3361.html" class="dashedline" title="MY STOCK">MY STOCK</a></li>	
+							</ul>
+        			<div class="widgetbottom"></div>
+					</div>                 
+          	                       
+			</div><!-- /widgets -->			                       
+</div><!-- /sidebar --></div><!-- /main -->
+<div id="footer">
+<p align="left">© <a href="http://www.miitbeian.gov.cn" target="_blank"> 明 · 明 · 童 · 鞋</a></p>
+<!--74 queries in 2.550 seconds.-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?c2e18b43ec905e3c4ea82c1b57537223";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</div><!-- /footer -->
+</div><!-- /container -->
+<script type='text/javascript' src='http://www.xieziming.com/wp-includes/js/wp-embed.min.js?ver=4.7'></script>
+</body>
+</html>

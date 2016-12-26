@@ -1,0 +1,454 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head profile="http://gmpg.org/xfn/11">
+<title>  控制Windows窗体(C#) &raquo; 谢子明</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="description" content="控制Windows窗体(C#)  " />
+<meta name="keywords" content="谢子明" />
+<link rel="stylesheet" href="http://www.xieziming.com/wp-content/themes/ziming/style.css" type="text/css" media="screen" />
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://www.xieziming.com/feed" />
+<link rel="alternate" type="application/rss+xml" href="http://www.xieziming.com/comments/feed" title="谢子明 Comments RSS feed" />
+<link rel="shortcut icon" href="http://www.xieziming.com/wp-content/themes/ziming/favicon.ico">
+<link rel="Bookmark" href="http://www.xieziming.com/wp-content/themes/ziming/favicon.ico">
+<link rel="pingback" href="http://www.xieziming.com/xmlrpc.php" />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="谢子明 &raquo; 控制Windows窗体(C#) Comments Feed" href="http://www.xieziming.com/archives/7636.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/xieziming.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.7"}};
+			!function(a,b,c){function d(a){var b,c,d,e,f=String.fromCharCode;if(!k||!k.fillText)return!1;switch(k.clearRect(0,0,j.width,j.height),k.textBaseline="top",k.font="600 32px Arial",a){case"flag":return k.fillText(f(55356,56826,55356,56819),0,0),!(j.toDataURL().length<3e3)&&(k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,65039,8205,55356,57096),0,0),b=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,55356,57096),0,0),c=j.toDataURL(),b!==c);case"emoji4":return k.fillText(f(55357,56425,55356,57341,8205,55357,56507),0,0),d=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55357,56425,55356,57341,55357,56507),0,0),e=j.toDataURL(),d!==e}return!1}function e(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i,j=b.createElement("canvas"),k=j.getContext&&j.getContext("2d");for(i=Array("flag","emoji4"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<script type='text/javascript' src='http://www.xieziming.com/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='http://www.xieziming.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<link rel='https://api.w.org/' href='http://www.xieziming.com/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.xieziming.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.xieziming.com/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='质疑和反驳' href='http://www.xieziming.com/archives/7605.html' />
+<link rel='next' title='控制window程序' href='http://www.xieziming.com/archives/7626.html' />
+<meta name="generator" content="WordPress 4.7" />
+<link rel="canonical" href="http://www.xieziming.com/archives/7636.html" />
+<link rel='shortlink' href='http://www.xieziming.com/?p=7636' />
+<link rel="alternate" type="application/json+oembed" href="http://www.xieziming.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fxieziming.com%2Farchives%2F7636.html" />
+<link rel="alternate" type="text/xml+oembed" href="http://www.xieziming.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fxieziming.com%2Farchives%2F7636.html&#038;format=xml" />
+ 	<link rel="stylesheet" href="http://www.xieziming.com/wp-content/plugins/live-calendar/live-calendar.css" type="text/css" media="screen" /> 
+<link rel="stylesheet" href="http://www.xieziming.com/wp-content/plugins/wp-code/wp-code.css" type="text/css" media="screen" />
+
+<link rel="stylesheet" href="http://www.xieziming.com/wp-content/plugins/zoom-highslide/highslide.css" type="text/css" media="screen" />
+<script type="text/javascript" src="http://www.xieziming.com/wp-content/plugins/zoom-highslide/js/highslide-full.packed.js"></script>
+<script type="text/javascript">
+	hs.graphicsDir = 'http://www.xieziming.com/wp-content/plugins/zoom-highslide/graphics/';
+	hs.align = 'center';
+	hs.transitions = ['expand', 'crossfade'];
+	hs.outlineType = 'rounded-white';
+  hs.wrapperClassName = 'controls-in-heading';
+	hs.showCredits=false;
+	hs.fadeInOut = true;
+	hs.dimmingOpacity = 0.8;
+
+	// Add the controlbar
+	if (hs.addSlideshow) hs.addSlideshow({
+		//slideshowGroup: 'group1',
+		interval: 4000,
+		repeat: false,
+		useControls: true,
+		fixedControls: false,
+		overlayOptions: {
+			opacity: 1,
+			position: 'top center',
+			hideOnMouseOut: true
+		}
+	});
+</script>
+
+<script type="text/javascript">
+	var widthRestriction = 668; 
+	var heightRestriction = 1000; 
+</script>
+<script type="text/javascript" src="http://www.xieziming.com/wp-content/plugins/zoom-highslide/js/zoom.js"></script>
+	
+<!--script src="http://www.xieziming.com/wp-content/themes/ziming/js/mouse.js" type="text/javascript"></script--> 
+</head>
+<body class="normalbg">
+<div id="container">
+	<div id="head">
+		<div id="nav">
+			<ul>
+				<li class="first"><a href="http://www.xieziming.com" title="首页">首页</a></li>
+				<li class="page_item page-item-2"><a href="http://www.xieziming.com/recent" title="最近">最近</a></li>
+				<li class="page_item page-item-3"><a href="http://www.xieziming.com/photo" title="Photo">映象</a></li>
+				<li class="page_item page-item-4"><a href="http://www.xieziming.com/food" title="Food">美食</a></li>
+				<li class="page_item page-item-5"><a href="http://www.xieziming.com/topic" title="关键字">话题</a></li>
+				<li class="page_item page-item-6"><a href="http://www.xieziming.com/travel" title="Travel">旅行</a></li>
+				<li class="page_item page-item-7"><a href="http://www.xieziming.com/literature" title="Literature">文艺</a></li>
+				<li class="page_item page-item-8"><a href="http://www.xieziming.com/wiki" title="技术维基">维基</a></li>
+				<li class="page_item page-item-9"><a href="http://www.xieziming.com/calendar" title="Calendar">点滴</a></li>
+			</ul>
+		</div><!-- /nav -->		
+	</div><!-- /head -->
+<div id="main" class="altmainbg">
+
+<script type="text/javascript">
+function show_page(id,count,source){
+	for (var i=1;i<=count;i++){
+		if(id != i){
+				jQuery("#part_"+i).hide();
+				document.getElementById("li_"+i).style.fontWeight = "normal";
+				document.getElementById("li_"+i).style.fontSize = "18px";
+		}
+	}
+	jQuery("#part_"+id).show();
+	document.getElementById("li_"+id).style.fontWeight = "bold";
+	document.getElementById("li_"+id).style.fontSize = "30px";
+	jQuery('body,html').animate({scrollTop:0},1000);
+        return false;
+}
+</script>
+<div id="content">
+
+	<div class="post" id="post-7636">
+		<h2 class="title">控制Windows窗体(C#)</h2>
+		<p class="postmetadata">
+			<span class="date">08 November 2012</span>
+			<span class="category">Categoried in <a href="http://www.xieziming.com/topic/coding" rel="category tag">程序</a></span>
+			<span class="comments">0</span>
+			<span class="view">Preview : 721 , Read : 994 </span>
+			<span class="mail">Index : 4556 </span>
+		</p>
+		<div class="entry">				
+<div id="part_1"><p>Reflection意思为反射，在.NET中，它是获取运行时类型信息的方式。一般来说，.NET的应用程序由三个部分组成，分别是程序集(Assembly)、模块(Module)、类型(class)，而反射提供一种编程的方式，让程序员可以在程序运行期获得这三个组成部分的相关信息。<br />
+<strong>一、有关知识</strong><br />
+1. System.Assembly类<br />
+Assembly允许用户访问给定程序集的元数据，它也包含可以加载和执行程序集（程序集可执行的情况下）的方法。这个功能相当强大，可以轻易地取得组件内部所有信息，并且将其应用于映射的机制。常用的有LoadFrom()方法、GetType()方法等。Assembly类可以获得正在运行的装配件信息，也可以动态地加载装配件，以及在装配件中查找类型信息，并创建该类型的实例。</p>
+<p>2. System.Type类<br />
+Type实际上是一个抽象的基类，它有与每种数据类型对应的派生类，但一般情况下派生类只提供各种Type方法和属性的不同重载，返回对应数据类型的正确数据。它的大多数方法都是用于获取对应数据类型的成员信息，比如：构造函数、属性、方法和事件等，并且能够进行调用。常用的有GetMethod()方法、GetField()方法、GetProperty()方法等。</p>
+<p>3. 动态调用方法<br />
+方法动态调用是指在执行期利用映射取得的类型方法成员进行动态调用，通过调用实例的Invoke()方法来实现。Invoke方法用以进行方法的动态调用，其一般的定义形式如下：<br />
+Invoke(object obj, object[] parameters)<br />
+第一个为object类型参数，这个参数对象本身所参考的对象，为所要调用的方法其本身所属的来源对象，而第二个数组对象parameters则是调用指定方法所需的参数集合，若是调用的方法不需传入参数，这个对象数组会参考至一个null值。<br />
+<strong>二、映射实例</strong><br />
+下面通过一个实例，运用映射方法实现对Windows窗体的操纵。</p>
+<p>1. 开发环境<br />
+操作系统：Windows XP Professional，版本5.1.2600  Service Pack 2<br />
+开发工具：Microsoft Visual Studio 2005，版本8.0.50727.42<br />
+Microsoft .NET Framework，版本2.0.50727</p>
+<p>2. 创建被操纵的Windows窗体<br />
+首先创建一个Windows窗体应用程序，名称为DataSquare，Form1窗体包含五个控件：两个textBox、两个Label和一个Button，它实现的功能是计算用户输入数的平方，并将结果显示出来。Form1是一个简单的Windows窗体程序，仅实现了计算平方值的功能，代码有待完善，在这里只是以它作为被操纵的对象来介绍如何使用.NET提供的映射方法。</p>
+</div><div id="part_2" style="display:none;"><p>3. 创建控制台程序<br />
+被操纵的Form1窗体创建完后，接下来就该创建主控程序了。为了实时显示操纵过程的需要，故选择创建一个控制台应用程序，名称为ReflectionControlForm。该控制台程序需要实现的功能是：运行要操纵的Form1窗体，并且两个程序之间能够进行通信；访问和设置窗体的属性；访问和设置窗体控件的属性；调用窗体的方法，模拟用户的操作。</p>
+<p>（1）启动Form1窗体线程<br />
+在ReflectionControlForm程序中，可以运用Process.Start()方法很方便地启动Form1窗体程序，但是要实现它们两者之间的通信，这样却行不通。因为进程之间不能够进行通信，只有同一个进程内的线程之间才能进行通信。因此，必须将Form1窗体作为线程来启动。在这里，通过创建CreatThread类，将调用窗体对象的Application.Run()方法传给ThreadStart对象，ThreadStart对象再作为Thread的构造函数，然后调用Thread.Start()方法就可以启动窗体程序了。</p>
+
+<div class="wp_code"><div class="pre"><pre class="vbnet" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #008000;">//</span>通过创建外覆类的方法，启动一个单独的线程
+CreatThread creatThread <span style="color: #008000;">=</span> <span style="color: #FF8000;">new</span> CreatThread<span style="color: #000000;">&#40;</span>form<span style="color: #000000;">&#41;</span>;
+ThreadStart threadStart <span style="color: #008000;">=</span> <span style="color: #FF8000;">new</span> ThreadStart<span style="color: #000000;">&#40;</span>creatThread.<span style="color: #0000FF;">ApplicationRun</span><span style="color: #000000;">&#41;</span>;
+<span style="color: #008000;">//</span>设置线程的相关必要属性
+Thread thread <span style="color: #008000;">=</span> <span style="color: #FF8000;">new</span> Thread<span style="color: #000000;">&#40;</span>threadStart<span style="color: #000000;">&#41;</span>;          
+thread.<span style="color: #0000FF;">IsBackground</span> <span style="color: #008000;">=</span> <span style="color: #0600FF;">true</span>;
+<span style="color: #008000;">//</span>启动线程
+thread.<span style="color: #0000FF;">Start</span><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
+……
+&nbsp;
+<span style="color: #008000;">//</span>创建启动一个单独线程的外覆类
+<span style="color: #FF8000;">private</span> <span style="color: #0600FF;">class</span> CreatThread<span style="color: #000000;">&#123;</span>
+       <span style="color: #FF8000;">public</span> <span style="color: #0600FF;">readonly</span> Form RunForm;
+       <span style="color: #FF8000;">public</span> CreatThread<span style="color: #000000;">&#40;</span>Form form<span style="color: #000000;">&#41;</span><span style="color: #000000;">&#123;</span>
+            this.<span style="color: #0000FF;">RunForm</span> <span style="color: #008000;">=</span> form;
+       <span style="color: #000000;">&#125;</span>
+       <span style="color: #008000;">//</span>通过调用Application.<span style="color: #0000FF;">Run</span><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>，实例化CreatThread对象
+       <span style="color: #FF8000;">public</span> void ApplicationRun<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#123;</span>
+            Application.<span style="color: #0000FF;">Run</span><span style="color: #000000;">&#40;</span>RunForm<span style="color: #000000;">&#41;</span>;
+       <span style="color: #000000;">&#125;</span>
+<span style="color: #000000;">&#125;</span></pre></div></div>
+
+<p>Form1窗体线程被启动后，便可以对它进行操纵了。</p>
+<p>（2）设置和访问窗体属性<br />
+利用Type的GetProperty()方法得到属性后，使用PropertyInfo来了解属性的名称、数据类型、声明类型、反射类型和只读或可写状态等，并获取或设置属性值，需要用到SetValue()方法和GetValue()方法。</p>
+
+<div class="wp_code"><div class="pre"><pre class="vbnet" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #008000;">//</span>设置窗体属性的方法，传递的参数为窗体名称、属性名称、新设置的值
+<span style="color: #0600FF;">delegate</span> void delSetPropertyForm<span style="color: #000000;">&#40;</span>Form form, <span style="color: #FF8000;">string</span> <span style="color: #FF8000;">property</span>, <span style="color: #FF0000;">object</span> value<span style="color: #000000;">&#41;</span>;
+<span style="color: #FF8000;">static</span> void SetPropertyForm<span style="color: #000000;">&#40;</span>Form form, <span style="color: #FF8000;">string</span> <span style="color: #FF8000;">property</span>, <span style="color: #FF0000;">object</span> value<span style="color: #000000;">&#41;</span><span style="color: #000000;">&#123;</span>
+      <span style="color: #008000;">//</span>定义Type对象
+      Type type <span style="color: #008000;">=</span> form.<span style="color: #804040;">GetType</span><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
+      <span style="color: #008000;">//</span>通过GetProperty访问属性
+      PropertyInfo propertyinfo<span style="color: #008000;">=</span>type.<span style="color: #0000FF;">GetProperty</span><span style="color: #000000;">&#40;</span><span style="color: #FF8000;">property</span><span style="color: #000000;">&#41;</span>;
+      <span style="color: #008000;">//</span>通过SetValue设置属性
+      propertyinfo.<span style="color: #0000FF;">SetValue</span><span style="color: #000000;">&#40;</span>form, value, <span style="color: #FF8000;">null</span><span style="color: #000000;">&#41;</span>;
+<span style="color: #000000;">&#125;</span>
+<span style="color: #008000;">//</span>获取窗体属性的方法，传递的参数为窗体名称、属性名称
+<span style="color: #0600FF;">delegate</span> <span style="color: #FF0000;">object</span> delGetPropertyForm<span style="color: #000000;">&#40;</span>Form form, <span style="color: #FF8000;">string</span> <span style="color: #FF8000;">property</span><span style="color: #000000;">&#41;</span>;
+<span style="color: #FF8000;">static</span> <span style="color: #FF0000;">object</span> GetPropertyForm<span style="color: #000000;">&#40;</span>Form form, <span style="color: #FF8000;">string</span> <span style="color: #FF8000;">property</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#123;</span>
+      <span style="color: #008000;">//</span>定义Type对象
+      Type type <span style="color: #008000;">=</span> form.<span style="color: #804040;">GetType</span><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
+      <span style="color: #008000;">//</span>通过GetProperty访问属性
+      PropertyInfo propertyinfo <span style="color: #008000;">=</span> type.<span style="color: #0000FF;">GetProperty</span><span style="color: #000000;">&#40;</span><span style="color: #FF8000;">property</span><span style="color: #000000;">&#41;</span>;
+      <span style="color: #FF8000;">return</span> propertyinfo.<span style="color: #0000FF;">GetValue</span><span style="color: #000000;">&#40;</span>form, <span style="color: #FF8000;">null</span><span style="color: #000000;">&#41;</span>;
+<span style="color: #000000;">&#125;</span></pre></div></div>
+
+<p>（3）设置和访问窗体控件属性<br />
+利用Type的GetField()方法找到字段后，使用FieldInfo来了解字段的名称、访问修饰符和实现详细信息，来获取字段值，需要用到GetValue()方法。然后需要再声明一个Type对象，用于PropertyInfo的SetValue()方法和GetValue()方法，来获取或设置控件的属性。需要指出的是GetField()方法需要BindingFlags参数，它定义的是返回的成员类型。</p>
+
+<div class="wp_code"><div class="pre"><pre class="vbnet" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #008000;">//</span>定义应返回的成员类型
+<span style="color: #FF8000;">static</span> BindingFlags flags <span style="color: #008000;">=</span> BindingFlags.<span style="color: #FF8000;">Public</span> | BindingFlags.<span style="color: #0000FF;">NonPublic</span> | BindingFlags.<span style="color: #FF8000;">Static</span> | BindingFlags.<span style="color: #0000FF;">Instance</span>;
+<span style="color: #008000;">//</span>设置控件属性的方法，传递的参数为窗体名称、控件名称、控件属性、新设置的值
+<span style="color: #0600FF;">delegate</span> void delSetPropertyControl<span style="color: #000000;">&#40;</span>Form form, <span style="color: #FF8000;">string</span> control,<span style="color: #FF8000;">string</span> <span style="color: #FF8000;">property</span>, <span style="color: #FF0000;">object</span> value<span style="color: #000000;">&#41;</span>;
+<span style="color: #FF8000;">static</span> void SetPropertyControl<span style="color: #000000;">&#40;</span>Form form, <span style="color: #FF8000;">string</span> control,<span style="color: #FF8000;">string</span> <span style="color: #FF8000;">property</span>, <span style="color: #FF0000;">object</span> value<span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+      <span style="color: #008000;">//</span>InvokeRequired初始值为<span style="color: #0600FF;">true</span>
+      <span style="color: #0600FF;">if</span> <span style="color: #000000;">&#40;</span>form.<span style="color: #0000FF;">InvokeRequired</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#123;</span>
+         <span style="color: #008000;">//</span>利用递归方式
+         <span style="color: #0600FF;">Delegate</span> del <span style="color: #008000;">=</span> <span style="color: #FF8000;">new</span> delSetPropertyControl<span style="color: #000000;">&#40;</span>SetPropertyControl<span style="color: #000000;">&#41;</span>;
+         <span style="color: #FF0000;">object</span><span style="color: #000000;">&#91;</span><span style="color: #000000;">&#93;</span> obj <span style="color: #008000;">=</span> <span style="color: #FF8000;">new</span> <span style="color: #FF0000;">object</span><span style="color: #000000;">&#91;</span><span style="color: #000000;">&#93;</span> <span style="color: #000000;">&#123;</span> form, control, <span style="color: #FF8000;">property</span>, value <span style="color: #000000;">&#125;</span>;
+         <span style="color: #008000;">//</span>Invoke执行后，InvokeRequired值为<span style="color: #0600FF;">false</span>
+         form.<span style="color: #0000FF;">Invoke</span><span style="color: #000000;">&#40;</span>del, obj<span style="color: #000000;">&#41;</span>;
+      <span style="color: #000000;">&#125;</span><span style="color: #FF8000;">else</span><span style="color: #000000;">&#123;</span>
+         <span style="color: #008000;">//</span>定义Type对象
+          Type type1 <span style="color: #008000;">=</span> form.<span style="color: #804040;">GetType</span><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
+          <span style="color: #008000;">//</span>获取控件
+          FieldInfo fieldinfo <span style="color: #008000;">=</span> type1.<span style="color: #0000FF;">GetField</span><span style="color: #000000;">&#40;</span>control, flags<span style="color: #000000;">&#41;</span>;
+          <span style="color: #FF0000;">object</span> ctrl <span style="color: #008000;">=</span> fieldinfo.<span style="color: #0000FF;">GetValue</span><span style="color: #000000;">&#40;</span>form<span style="color: #000000;">&#41;</span>;
+          Type type2 <span style="color: #008000;">=</span> ctrl.<span style="color: #804040;">GetType</span><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
+          <span style="color: #008000;">//</span>获取控件的属性
+          PropertyInfo propertyinfo <span style="color: #008000;">=</span> type2.<span style="color: #0000FF;">GetProperty</span><span style="color: #000000;">&#40;</span><span style="color: #FF8000;">property</span><span style="color: #000000;">&#41;</span>;
+          propertyinfo.<span style="color: #0000FF;">SetValue</span><span style="color: #000000;">&#40;</span>ctrl, value, <span style="color: #FF8000;">null</span><span style="color: #000000;">&#41;</span>;
+      <span style="color: #000000;">&#125;</span>
+<span style="color: #000000;">&#125;</span>
+<span style="color: #008000;">//</span>获取控件属性的方法，传递的参数为窗体名称、控件名称、控件属性
+<span style="color: #0600FF;">delegate</span> <span style="color: #FF0000;">object</span> delGetPropertyControl<span style="color: #000000;">&#40;</span>Form form, <span style="color: #FF8000;">string</span> control, <span style="color: #FF8000;">string</span> <span style="color: #FF8000;">property</span><span style="color: #000000;">&#41;</span>;
+<span style="color: #FF8000;">static</span> <span style="color: #FF0000;">object</span> GetPropertyControl<span style="color: #000000;">&#40;</span>Form form, <span style="color: #FF8000;">string</span> control, <span style="color: #FF8000;">string</span> <span style="color: #FF8000;">property</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#123;</span>
+      <span style="color: #008000;">//</span>InvokeRequired初始值为<span style="color: #0600FF;">true</span>
+      <span style="color: #0600FF;">if</span> <span style="color: #000000;">&#40;</span>form.<span style="color: #0000FF;">InvokeRequired</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+           <span style="color: #008000;">//</span>利用递归方式
+           <span style="color: #0600FF;">Delegate</span> del <span style="color: #008000;">=</span> <span style="color: #FF8000;">new</span> delGetPropertyControl<span style="color: #000000;">&#40;</span>GetPropertyControl<span style="color: #000000;">&#41;</span>;
+           <span style="color: #FF0000;">object</span><span style="color: #000000;">&#91;</span><span style="color: #000000;">&#93;</span> obj <span style="color: #008000;">=</span> <span style="color: #FF8000;">new</span> <span style="color: #FF0000;">object</span><span style="color: #000000;">&#91;</span><span style="color: #000000;">&#93;</span> <span style="color: #000000;">&#123;</span> form, control, <span style="color: #FF8000;">property</span> <span style="color: #000000;">&#125;</span>;
+           <span style="color: #008000;">//</span>Invoke执行后，InvokeRequired值为<span style="color: #0600FF;">false</span>
+           <span style="color: #FF8000;">return</span> form.<span style="color: #0000FF;">Invoke</span><span style="color: #000000;">&#40;</span>del, obj<span style="color: #000000;">&#41;</span>;
+       <span style="color: #000000;">&#125;</span><span style="color: #FF8000;">else</span><span style="color: #000000;">&#123;</span>
+           Type type1 <span style="color: #008000;">=</span> form.<span style="color: #804040;">GetType</span><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
+           <span style="color: #008000;">//</span>获取控件
+           FieldInfo fieldinfo <span style="color: #008000;">=</span> type1.<span style="color: #0000FF;">GetField</span><span style="color: #000000;">&#40;</span>control, flags<span style="color: #000000;">&#41;</span>;
+           <span style="color: #FF0000;">object</span> ctrl <span style="color: #008000;">=</span> fieldinfo.<span style="color: #0000FF;">GetValue</span><span style="color: #000000;">&#40;</span>form<span style="color: #000000;">&#41;</span>;
+           Type type2 <span style="color: #008000;">=</span> ctrl.<span style="color: #804040;">GetType</span><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
+           <span style="color: #008000;">//</span>获取控件的属性                
+           PropertyInfo propertyinfo <span style="color: #008000;">=</span> type2.<span style="color: #0000FF;">GetProperty</span><span style="color: #000000;">&#40;</span><span style="color: #FF8000;">property</span><span style="color: #000000;">&#41;</span>;
+           <span style="color: #FF8000;">return</span> propertyinfo.<span style="color: #0000FF;">GetValue</span><span style="color: #000000;">&#40;</span>ctrl, <span style="color: #FF8000;">null</span><span style="color: #000000;">&#41;</span>;
+       <span style="color: #000000;">&#125;</span>
+<span style="color: #000000;">&#125;</span></pre></div></div>
+
+<p>通过与设置和访问窗体属性的比较，可以发现根据InvokeRequired值的变化，使用递归的方式可以将Delegate del和object[] obj两个变量的声明放在子函数里，这样能够增加程序的可读性。</p>
+</div><div id="part_3" style="display:none;"><p>（4）调用窗体方法<br />
+窗体的方法即窗体所包含的方法成员。使用MethodInfo来了解方法的名称、返回类型、参数、访问修饰符和实现详细信息等。通过Type的GetMethod()方法获取后，使用MethodInfo的Invoke()来调用方法。GetMethod()方法也需要BindingFlags参数。</p>
+
+<div class="wp_code"><div class="pre"><pre class="vbnet" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #008000;">//</span>访问窗体的方法，传递的参数为窗体名称、方法名称、参数
+<span style="color: #0600FF;">delegate</span> void delMethod<span style="color: #000000;">&#40;</span>Form form, <span style="color: #FF8000;">string</span> <span style="color: #0600FF;">method</span>, params <span style="color: #FF0000;">object</span><span style="color: #000000;">&#91;</span><span style="color: #000000;">&#93;</span> parms<span style="color: #000000;">&#41;</span>;
+<span style="color: #FF8000;">static</span> void <span style="color: #0600FF;">Method</span><span style="color: #000000;">&#40;</span>Form form, <span style="color: #FF8000;">string</span> <span style="color: #0600FF;">method</span>, params <span style="color: #FF0000;">object</span><span style="color: #000000;">&#91;</span><span style="color: #000000;">&#93;</span> parms<span style="color: #000000;">&#41;</span><span style="color: #000000;">&#123;</span>
+      <span style="color: #008000;">//</span>InvokeRequired初始值为<span style="color: #0600FF;">true</span>
+      <span style="color: #0600FF;">if</span> <span style="color: #000000;">&#40;</span>form.<span style="color: #0000FF;">InvokeRequired</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#123;</span>
+                <span style="color: #008000;">//</span>利用递归方式
+                <span style="color: #0600FF;">Delegate</span> del <span style="color: #008000;">=</span> <span style="color: #FF8000;">new</span> delMethod<span style="color: #000000;">&#40;</span><span style="color: #0600FF;">Method</span><span style="color: #000000;">&#41;</span>;
+                <span style="color: #FF0000;">object</span> <span style="color: #000000;">&#91;</span><span style="color: #000000;">&#93;</span>obj <span style="color: #008000;">=</span> <span style="color: #FF8000;">new</span> <span style="color: #FF0000;">object</span><span style="color: #000000;">&#91;</span><span style="color: #000000;">&#93;</span> <span style="color: #000000;">&#123;</span> form, <span style="color: #0600FF;">method</span>, parms <span style="color: #000000;">&#125;</span>;
+                <span style="color: #008000;">//</span>Invoke执行后，InvokeRequired值为<span style="color: #0600FF;">false</span>
+                form.<span style="color: #0000FF;">Invoke</span><span style="color: #000000;">&#40;</span>del, obj<span style="color: #000000;">&#41;</span>;
+      <span style="color: #000000;">&#125;</span><span style="color: #FF8000;">else</span><span style="color: #000000;">&#123;</span>
+                Type type <span style="color: #008000;">=</span> form.<span style="color: #804040;">GetType</span><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
+                <span style="color: #008000;">//</span>获取方法
+                MethodInfo methodinfo <span style="color: #008000;">=</span> type.<span style="color: #0000FF;">GetMethod</span><span style="color: #000000;">&#40;</span><span style="color: #0600FF;">method</span>, flags<span style="color: #000000;">&#41;</span>;
+                <span style="color: #008000;">//</span>调用方法
+                methodinfo.<span style="color: #0000FF;">Invoke</span><span style="color: #000000;">&#40;</span>form, parms<span style="color: #000000;">&#41;</span>;
+      <span style="color: #000000;">&#125;</span>
+<span style="color: #000000;">&#125;</span></pre></div></div>
+
+<p>（5）Main()函数<br />
+各个子函数完成以后，接下来便是编写Main()函数进行子函数的调用，其代码如下：</p>
+
+<div class="wp_code"><div class="pre"><pre class="vbnet" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #FF8000;">static</span> void Main<span style="color: #000000;">&#40;</span><span style="color: #FF8000;">string</span><span style="color: #000000;">&#91;</span><span style="color: #000000;">&#93;</span> args<span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+            Console.<span style="color: #0000FF;">WriteLine</span><span style="color: #000000;">&#40;</span><span style="color: #808080;">&quot;开始启动窗体程序……&quot;</span><span style="color: #000000;">&#41;</span>;
+            Form form <span style="color: #008000;">=</span> <span style="color: #FF8000;">null</span>;
+            <span style="color: #008000;">//</span>窗体caption的全称，不能简略
+            <span style="color: #FF8000;">string</span> formName <span style="color: #008000;">=</span> <span style="color: #808080;">&quot;DataSquare.Form1&quot;</span>;
+            <span style="color: #008000;">//</span>可执行文件的存放路径
+            <span style="color: #FF8000;">string</span> path <span style="color: #008000;">=</span> @<span style="color: #808080;">&quot;DataSquare.exe&quot;</span>;
+            <span style="color: #008000;">//</span>创建 <span style="color: #FF8000;">Assembly</span>对象，取得DataSquare类的组件
+            <span style="color: #FF8000;">Assembly</span> <span style="color: #FF8000;">assembly</span> <span style="color: #008000;">=</span> <span style="color: #FF8000;">Assembly</span>.<span style="color: #0000FF;">LoadFrom</span><span style="color: #000000;">&#40;</span>path<span style="color: #000000;">&#41;</span>;
+            <span style="color: #008000;">//</span>创建Type对象，将窗体的全名传给<span style="color: #FF8000;">Assembly</span>对象
+            Type type <span style="color: #008000;">=</span> <span style="color: #FF8000;">assembly</span>.<span style="color: #804040;">GetType</span><span style="color: #000000;">&#40;</span>formName<span style="color: #000000;">&#41;</span>;
+            <span style="color: #008000;">//</span>利用CreateInstance<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>方法得到对DataSquare.<span style="color: #0000FF;">Form1</span>的引用
+            form <span style="color: #008000;">=</span> <span style="color: #000000;">&#40;</span>Form<span style="color: #000000;">&#41;</span><span style="color: #FF8000;">assembly</span>.<span style="color: #0000FF;">CreateInstance</span><span style="color: #000000;">&#40;</span>type.<span style="color: #0000FF;">FullName</span><span style="color: #000000;">&#41;</span>;
+&nbsp;
+            <span style="color: #008000;">//</span>通过创建外覆类的方法，启动一个单独的线程
+            CreatThread creatThread <span style="color: #008000;">=</span> <span style="color: #FF8000;">new</span> CreatThread<span style="color: #000000;">&#40;</span>form<span style="color: #000000;">&#41;</span>;
+            ThreadStart threadStart <span style="color: #008000;">=</span> <span style="color: #FF8000;">new</span> ThreadStart<span style="color: #000000;">&#40;</span>creatThread.<span style="color: #0000FF;">ApplicationRun</span><span style="color: #000000;">&#41;</span>;
+            <span style="color: #008000;">//</span>设置线程的相关必要属性
+            Thread thread <span style="color: #008000;">=</span> <span style="color: #FF8000;">new</span> Thread<span style="color: #000000;">&#40;</span>threadStart<span style="color: #000000;">&#41;</span>;          
+            thread.<span style="color: #0000FF;">IsBackground</span> <span style="color: #008000;">=</span> <span style="color: #0600FF;">true</span>;
+            <span style="color: #008000;">//</span>启动线程
+            thread.<span style="color: #0000FF;">Start</span><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
+            Console.<span style="color: #0000FF;">WriteLine</span><span style="color: #000000;">&#40;</span><span style="color: #808080;">&quot;窗体程序已经被启动&quot;</span><span style="color: #000000;">&#41;</span>;
+&nbsp;
+            <span style="color: #008000;">//</span>分别定义<span style="color: #FF0000;">object</span>与<span style="color: #0600FF;">Delegate</span>对象，利用委托机制实现对属性的控制
+            <span style="color: #FF0000;">object</span><span style="color: #000000;">&#91;</span><span style="color: #000000;">&#93;</span> obj;
+            <span style="color: #0600FF;">Delegate</span> del;
+            <span style="color: #008000;">//</span>延时设置，方便查看对窗体的操作
+            Thread.<span style="color: #0000FF;">Sleep</span><span style="color: #000000;">&#40;</span><span style="color: #FF0000;">1000</span><span style="color: #000000;">&#41;</span>;
+            <span style="color: #008000;">//</span>设置窗体的属性，以Text属性为例
+            Console.<span style="color: #0000FF;">WriteLine</span><span style="color: #000000;">&#40;</span><span style="color: #808080;">&quot;设置窗体的Text属性&quot;</span><span style="color: #000000;">&#41;</span>;
+            <span style="color: #008000;">//</span>新设置的属性值
+            <span style="color: #FF8000;">string</span> text <span style="color: #008000;">=</span> <span style="color: #808080;">&quot;新设置的窗体&quot;</span>;
+            obj <span style="color: #008000;">=</span> <span style="color: #FF8000;">new</span> <span style="color: #FF0000;">object</span><span style="color: #000000;">&#91;</span><span style="color: #000000;">&#93;</span> <span style="color: #000000;">&#123;</span> form,<span style="color: #808080;">&quot;Text&quot;</span>,text<span style="color: #000000;">&#125;</span>;
+            <span style="color: #008000;">//</span>调用设置窗体属性的方法
+            del<span style="color: #008000;">=</span> <span style="color: #FF8000;">new</span> delSetPropertyForm<span style="color: #000000;">&#40;</span>SetPropertyForm<span style="color: #000000;">&#41;</span>;
+            form.<span style="color: #0000FF;">Invoke</span><span style="color: #000000;">&#40;</span>del, obj<span style="color: #000000;">&#41;</span>;           
+            Console.<span style="color: #0000FF;">WriteLine</span><span style="color: #000000;">&#40;</span><span style="color: #808080;">&quot;窗体的Text属性设置完毕&quot;</span><span style="color: #000000;">&#41;</span>;
+            Thread.<span style="color: #0000FF;">Sleep</span><span style="color: #000000;">&#40;</span><span style="color: #FF0000;">1000</span><span style="color: #000000;">&#41;</span>;
+            <span style="color: #008000;">//</span>获取窗体的属性，以Size属性为例
+            Console.<span style="color: #0000FF;">WriteLine</span><span style="color: #000000;">&#40;</span><span style="color: #808080;">&quot;获得窗体的Size属性&quot;</span><span style="color: #000000;">&#41;</span>;
+            <span style="color: #008000;">//</span>调用获取窗体属性的方法
+            del <span style="color: #008000;">=</span> <span style="color: #FF8000;">new</span> delGetPropertyForm<span style="color: #000000;">&#40;</span>GetPropertyForm<span style="color: #000000;">&#41;</span>;
+            obj <span style="color: #008000;">=</span> <span style="color: #FF8000;">new</span> <span style="color: #FF0000;">object</span><span style="color: #000000;">&#91;</span><span style="color: #000000;">&#93;</span> <span style="color: #000000;">&#123;</span> form,<span style="color: #808080;">&quot;Size&quot;</span><span style="color: #000000;">&#125;</span>;
+            <span style="color: #008000;">//</span>获得属性值
+            Size size <span style="color: #008000;">=</span> <span style="color: #000000;">&#40;</span>Size<span style="color: #000000;">&#41;</span>form.<span style="color: #0000FF;">Invoke</span><span style="color: #000000;">&#40;</span>del, obj<span style="color: #000000;">&#41;</span>;
+            Console.<span style="color: #0000FF;">WriteLine</span><span style="color: #000000;">&#40;</span><span style="color: #808080;">&quot;窗体Size属性值是：高度为{0}，宽度为{1}&quot;</span>,size.<span style="color: #0000FF;">Height</span>,size.<span style="color: #0600FF;">Width</span><span style="color: #000000;">&#41;</span>;
+            Thread.<span style="color: #0000FF;">Sleep</span><span style="color: #000000;">&#40;</span><span style="color: #FF0000;">1000</span><span style="color: #000000;">&#41;</span>;
+            <span style="color: #008000;">//</span>设置控件属性
+             Console.<span style="color: #0000FF;">WriteLine</span><span style="color: #000000;">&#40;</span><span style="color: #808080;">&quot;设置控件textBoxInput的Text属性为20&quot;</span><span style="color: #000000;">&#41;</span>;
+            <span style="color: #008000;">//</span>调用设置控件属性函数
+             SetPropertyControl<span style="color: #000000;">&#40;</span>form, <span style="color: #808080;">&quot;textBoxInput&quot;</span>, <span style="color: #808080;">&quot;Text&quot;</span>, <span style="color: #808080;">&quot;20&quot;</span><span style="color: #000000;">&#41;</span>;
+             Console.<span style="color: #0000FF;">WriteLine</span><span style="color: #000000;">&#40;</span><span style="color: #808080;">&quot;控件textBoxInput的Text属性设置完毕&quot;</span><span style="color: #000000;">&#41;</span>;
+             Thread.<span style="color: #0000FF;">Sleep</span><span style="color: #000000;">&#40;</span><span style="color: #FF0000;">1000</span><span style="color: #000000;">&#41;</span>;
+             <span style="color: #008000;">//</span>访问窗体的方法
+             Console.<span style="color: #0000FF;">WriteLine</span><span style="color: #000000;">&#40;</span><span style="color: #808080;">&quot;调用buttonCalculate_Click方法，求平方值&quot;</span><span style="color: #000000;">&#41;</span>;
+             <span style="color: #FF0000;">object</span><span style="color: #000000;">&#91;</span><span style="color: #000000;">&#93;</span> parms <span style="color: #008000;">=</span> <span style="color: #FF8000;">new</span> <span style="color: #FF0000;">object</span><span style="color: #000000;">&#91;</span><span style="color: #000000;">&#93;</span> <span style="color: #000000;">&#123;</span> <span style="color: #FF8000;">null</span>, EventArgs.<span style="color: #FF8000;">Empty</span> <span style="color: #000000;">&#125;</span>;
+            <span style="color: #008000;">//</span>调用访问窗体方法的函数
+             <span style="color: #0600FF;">Method</span><span style="color: #000000;">&#40;</span>form, <span style="color: #808080;">&quot;buttonCalculate_Click&quot;</span>, parms<span style="color: #000000;">&#41;</span>;
+             Console.<span style="color: #0000FF;">WriteLine</span><span style="color: #000000;">&#40;</span><span style="color: #808080;">&quot;求平方运算完毕&quot;</span><span style="color: #000000;">&#41;</span>;
+             Thread.<span style="color: #0000FF;">Sleep</span><span style="color: #000000;">&#40;</span><span style="color: #FF0000;">1000</span><span style="color: #000000;">&#41;</span>;
+             <span style="color: #008000;">//</span>获得控件属性
+             Console.<span style="color: #0000FF;">WriteLine</span><span style="color: #000000;">&#40;</span><span style="color: #808080;">&quot;获取控件textBoxResult的Text属性&quot;</span><span style="color: #000000;">&#41;</span>;
+            <span style="color: #008000;">//</span>调用获取控件属性的函数
+             text <span style="color: #008000;">=</span> <span style="color: #000000;">&#40;</span><span style="color: #FF8000;">string</span><span style="color: #000000;">&#41;</span>GetPropertyControl<span style="color: #000000;">&#40;</span>form, <span style="color: #808080;">&quot;textBoxResult&quot;</span>, <span style="color: #808080;">&quot;Text&quot;</span><span style="color: #000000;">&#41;</span>;
+             Console.<span style="color: #0000FF;">WriteLine</span><span style="color: #000000;">&#40;</span><span style="color: #808080;">&quot;textBoxResult的Text属性为{0}，即textBoxInput的Text属性的平方&quot;</span>, text<span style="color: #000000;">&#41;</span>;
+             Thread.<span style="color: #0000FF;">Sleep</span><span style="color: #000000;">&#40;</span><span style="color: #FF0000;">1000</span><span style="color: #000000;">&#41;</span>;
+<span style="color: #000000;">&#125;</span></pre></div></div>
+
+</div><div id="paginate"><label id="li_1" onclick="javascript:show_page(1,3,this);" style="font-size:30px;font-weight:bold" onmouseover="this.style.cursor='pointer'">1</label><label id="li_2" onclick="javascript:show_page(2,3,this);"  onmouseover="this.style.cursor='pointer'">2</label><label id="li_3" onclick="javascript:show_page(3,3,this);"  onmouseover="this.style.cursor='pointer'">3</label></div> 
+			<div align="center">1 month ago, this page was being read. </div>
+			<p class="tags"><a href="http://www.xieziming.com/tag/cheng-xu" rel="tag">程序</a><br /></p>  
+    </div><!-- /entry -->                                   
+		<div class="postbottom"></div>		                              
+		</div><!-- /post -->	
+
+<div class="postrelated">
+			<table width="100%" >				
+
+					<tr><td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/2438.html" rel="bookmark" title="mysql负载均衡配置">mysql...</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/6695.html" rel="bookmark" title="PHP通过字符串调用函数">PHP通过...</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/6805.html" rel="bookmark" title="Java垃圾回收算法">Java垃...</a></td>
+
+				<td align="right" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7170.html" rel="bookmark" title="链接器和装入器">链接器和装入器</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7409.html" rel="bookmark" title="Http协议">Http协...</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/2907.html" rel="bookmark" title="COM/LPT">COM/L...</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7000.html" rel="bookmark" title="Java IO类">Java IO类</a></td>
+
+				<td align="right" class="dashedline_related"><a href="http://www.xieziming.com/archives/2475.html" rel="bookmark" title="程序员须知（二）">程序员须知（二）</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/2220.html" rel="bookmark" title="软件项目开发流程">软件项目开发...</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/2445.html" rel="bookmark" title="J2EE回忆">J2EE回...</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/5528.html" rel="bookmark" title="网站配色表">网站配色表</a></td>
+
+				<td align="right" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7451.html" rel="bookmark" title="Javascript之DOM">Javas...</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/78.html" rel="bookmark" title="VC + Matlab + 数据库">VC + M...</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/3114.html" rel="bookmark" title="C/C++经典排序算法">C/C++经典排...</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/8783.html" rel="bookmark" title="Restful之参数获取">Restful...</a></td>
+
+				<td align="right" class="dashedline_related"><a href="http://www.xieziming.com/archives/7620.html" rel="bookmark" title="遍历windows窗口控件">遍历windo...</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/3122.html" rel="bookmark" title="C++ 类访问控制探讨">C++ 类访...</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/2225.html" rel="bookmark" title="函数传递参数的理解">函数传递参数...</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/7464.html" rel="bookmark" title="IE插件">IE插件</a></td>
+
+				<td align="right" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7693.html" rel="bookmark" title="Solaris内存统计">Solaris内存统计</a></td></tr>
+
+		</table>
+</div>
+
+		<div id="comments">
+
+<!-- START COMMENT FORMS -->
+
+
+		</div><!--/comments-->		
+
+</div><!-- /content -->
+<div id="sidebar">			
+			<a class="subscribe" href="http://www.xieziming.com/feed" title="Posts RSS">Subscribe</a>			
+			<div id="search">	
+	<form name="searchform" id="searchform" method="get" action="http://www.xieziming.com/index.php">
+		<input class="text" type="text" name="s" id="s" value=""/>
+		<input class="submit" type="image" src="http://www.xieziming.com/wp-content/themes/ziming/img/submit.jpg" value="search" />
+	</form>	
+</div><!-- /search -->			
+			<div id="widgets">			
+			<div class="widget"><h3>Calendar</h3>
+<table id="wp-calendar">
+  									<caption>December 2016</caption>
+  									<thead>
+                    <tr><th scope="col" title="S">S</th><th scope="col" title="M">M</th><th scope="col" title="T">T</th><th scope="col" title="W">W</th><th scope="col" title="T">T</th><th scope="col" title="F">F</th><th scope="col" title="S">S</th></tr></thead><tbody><tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>1</td><td>2</td><td>3</td></tr><tr><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td></tr><tr><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td></tr><tr><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">18<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">《血战钢锯岭》</span><br/><span class="time" style="color:#000000; " > Time : 21:18 - 23:28</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">晚上和小锅去看，蛮感人的。吃完去沙湾吃猪杂粥，应该是我在那吃到的最新鲜的一次了。</p></span></a></span></td><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">19<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">CentOS</span><br/><span class="time" style="color:#000000; " > Time : 14:11 - 18:11</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">终于有点时间来把那盒子的win7转成CentOS来做server。配置vsftp花了我太多的时间。。。</p></span></a></span></td><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td></tr><tr><td>25</td><td>26</td><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td></tr><tr><td colspan="3" id="prev"><a href="http://www.xieziming.com/archives/7636.html?month=nov&yr=2016">&laquo; Prev</a></td><td colspan="4" id="next"><a href="http://www.xieziming.com/archives/7636.html?month=jan&yr=2017">Next &raquo;</a></td></tr></tbody></table>
+<div class="widgetbottom"></div></div><!--/widget-->				
+					      		<div class="widget">
+ 							<h3>Recent Posts</h3>
+							<ul>
+           				<li><a href="http://www.xieziming.com/archives/9579.html" class="dashedline" title="闽南 · 泉州">闽南 &middot; 泉州</a></li><li><a href="http://www.xieziming.com/archives/9578.html" class="dashedline" title="顺化 · HUE">顺化 &middot; HUE</a></li><li><a href="http://www.xieziming.com/archives/9577.html" class="dashedline" title="会安 · 春卷">会安 &middot; 春卷</a></li><li><a href="http://www.xieziming.com/archives/9576.html" class="dashedline" title="会安 · 夜灯">会安 &middot; 夜灯</a></li><li><a href="http://www.xieziming.com/archives/9575.html" class="dashedline" title="会安古镇">会安古镇</a></li><li><a href="http://www.xieziming.com/archives/9573.html" class="dashedline" title="岘港">岘港</a></li><li><a href="http://www.xieziming.com/archives/9535.html" class="dashedline" title="罗马">罗马</a></li><li><a href="http://www.xieziming.com/archives/9534.html" class="dashedline" title="卢浮宫">卢浮宫</a></li>						
+							</ul>
+      				<div class="widgetbottom"></div>
+	    		</div>
+	    			        
+        	      		<div class="widget">
+ 							<h3>Rand Posts</h3>
+							<ul>
+      						<li><a href="http://www.xieziming.com/archives/9092.html" class="dashedline" title="建水 · 临安城">建水 &middot; 临安城</a></li><li><a href="http://www.xieziming.com/archives/7808.html" class="dashedline" title="软件测试理念（三）">软件测试理念（三）</a></li><li><a href="http://www.xieziming.com/archives/547.html" class="dashedline" title="What a pity am i !">What a pity a...</a></li><li><a href="http://www.xieziming.com/archives/136.html" class="dashedline" title="柴米油盐">柴米油盐</a></li><li><a href="http://www.xieziming.com/archives/3714.html" class="dashedline" title="Around">Around</a></li><li><a href="http://www.xieziming.com/archives/8653.html" class="dashedline" title="南京（杂记）">南京（杂记）</a></li><li><a href="http://www.xieziming.com/archives/7961.html" class="dashedline" title="柬埔寨 · 美食">柬埔寨 &middot; 美食</a></li><li><a href="http://www.xieziming.com/archives/238.html" class="dashedline" title="<数码摄影构图>">&lt;数码摄影构图&gt;</a></li>	
+							</ul>
+        			<div class="widgetbottom"></div>
+					</div>                 
+          	                       
+			</div><!-- /widgets -->			                       
+</div><!-- /sidebar --></div><!-- /main -->
+<div id="footer">
+<p align="left">© <a href="http://www.miitbeian.gov.cn" target="_blank"> 明 · 明 · 童 · 鞋</a></p>
+<!--74 queries in 2.768 seconds.-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?c2e18b43ec905e3c4ea82c1b57537223";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</div><!-- /footer -->
+</div><!-- /container -->
+<script type='text/javascript' src='http://www.xieziming.com/wp-includes/js/wp-embed.min.js?ver=4.7'></script>
+</body>
+</html>

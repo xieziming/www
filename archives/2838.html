@@ -1,0 +1,314 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head profile="http://gmpg.org/xfn/11">
+<title>  linux 网络命令 &raquo; 谢子明</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="description" content="linux 网络命令  " />
+<meta name="keywords" content="谢子明" />
+<link rel="stylesheet" href="http://www.xieziming.com/wp-content/themes/ziming/style.css" type="text/css" media="screen" />
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://www.xieziming.com/feed" />
+<link rel="alternate" type="application/rss+xml" href="http://www.xieziming.com/comments/feed" title="谢子明 Comments RSS feed" />
+<link rel="shortcut icon" href="http://www.xieziming.com/wp-content/themes/ziming/favicon.ico">
+<link rel="Bookmark" href="http://www.xieziming.com/wp-content/themes/ziming/favicon.ico">
+<link rel="pingback" href="http://www.xieziming.com/xmlrpc.php" />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="谢子明 &raquo; linux 网络命令 Comments Feed" href="http://www.xieziming.com/archives/2838.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/xieziming.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.7"}};
+			!function(a,b,c){function d(a){var b,c,d,e,f=String.fromCharCode;if(!k||!k.fillText)return!1;switch(k.clearRect(0,0,j.width,j.height),k.textBaseline="top",k.font="600 32px Arial",a){case"flag":return k.fillText(f(55356,56826,55356,56819),0,0),!(j.toDataURL().length<3e3)&&(k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,65039,8205,55356,57096),0,0),b=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,55356,57096),0,0),c=j.toDataURL(),b!==c);case"emoji4":return k.fillText(f(55357,56425,55356,57341,8205,55357,56507),0,0),d=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55357,56425,55356,57341,55357,56507),0,0),e=j.toDataURL(),d!==e}return!1}function e(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i,j=b.createElement("canvas"),k=j.getContext&&j.getContext("2d");for(i=Array("flag","emoji4"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<script type='text/javascript' src='http://www.xieziming.com/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='http://www.xieziming.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<link rel='https://api.w.org/' href='http://www.xieziming.com/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.xieziming.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.xieziming.com/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='有故事的被子' href='http://www.xieziming.com/archives/1540.html' />
+<link rel='next' title='Quite a long time' href='http://www.xieziming.com/archives/1554.html' />
+<meta name="generator" content="WordPress 4.7" />
+<link rel="canonical" href="http://www.xieziming.com/archives/2838.html" />
+<link rel='shortlink' href='http://www.xieziming.com/?p=2838' />
+<link rel="alternate" type="application/json+oembed" href="http://www.xieziming.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fxieziming.com%2Farchives%2F2838.html" />
+<link rel="alternate" type="text/xml+oembed" href="http://www.xieziming.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fxieziming.com%2Farchives%2F2838.html&#038;format=xml" />
+ 	<link rel="stylesheet" href="http://www.xieziming.com/wp-content/plugins/live-calendar/live-calendar.css" type="text/css" media="screen" /> 
+<link rel="stylesheet" href="http://www.xieziming.com/wp-content/plugins/wp-code/wp-code.css" type="text/css" media="screen" />
+
+<link rel="stylesheet" href="http://www.xieziming.com/wp-content/plugins/zoom-highslide/highslide.css" type="text/css" media="screen" />
+<script type="text/javascript" src="http://www.xieziming.com/wp-content/plugins/zoom-highslide/js/highslide-full.packed.js"></script>
+<script type="text/javascript">
+	hs.graphicsDir = 'http://www.xieziming.com/wp-content/plugins/zoom-highslide/graphics/';
+	hs.align = 'center';
+	hs.transitions = ['expand', 'crossfade'];
+	hs.outlineType = 'rounded-white';
+  hs.wrapperClassName = 'controls-in-heading';
+	hs.showCredits=false;
+	hs.fadeInOut = true;
+	hs.dimmingOpacity = 0.8;
+
+	// Add the controlbar
+	if (hs.addSlideshow) hs.addSlideshow({
+		//slideshowGroup: 'group1',
+		interval: 4000,
+		repeat: false,
+		useControls: true,
+		fixedControls: false,
+		overlayOptions: {
+			opacity: 1,
+			position: 'top center',
+			hideOnMouseOut: true
+		}
+	});
+</script>
+
+<script type="text/javascript">
+	var widthRestriction = 668; 
+	var heightRestriction = 1000; 
+</script>
+<script type="text/javascript" src="http://www.xieziming.com/wp-content/plugins/zoom-highslide/js/zoom.js"></script>
+	
+<!--script src="http://www.xieziming.com/wp-content/themes/ziming/js/mouse.js" type="text/javascript"></script--> 
+</head>
+<body class="normalbg">
+<div id="container">
+	<div id="head">
+		<div id="nav">
+			<ul>
+				<li class="first"><a href="http://www.xieziming.com" title="首页">首页</a></li>
+				<li class="page_item page-item-2"><a href="http://www.xieziming.com/recent" title="最近">最近</a></li>
+				<li class="page_item page-item-3"><a href="http://www.xieziming.com/photo" title="Photo">映象</a></li>
+				<li class="page_item page-item-4"><a href="http://www.xieziming.com/food" title="Food">美食</a></li>
+				<li class="page_item page-item-5"><a href="http://www.xieziming.com/topic" title="关键字">话题</a></li>
+				<li class="page_item page-item-6"><a href="http://www.xieziming.com/travel" title="Travel">旅行</a></li>
+				<li class="page_item page-item-7"><a href="http://www.xieziming.com/literature" title="Literature">文艺</a></li>
+				<li class="page_item page-item-8"><a href="http://www.xieziming.com/wiki" title="技术维基">维基</a></li>
+				<li class="page_item page-item-9"><a href="http://www.xieziming.com/calendar" title="Calendar">点滴</a></li>
+			</ul>
+		</div><!-- /nav -->		
+	</div><!-- /head -->
+<div id="main" class="altmainbg">
+
+<script type="text/javascript">
+function show_page(id,count,source){
+	for (var i=1;i<=count;i++){
+		if(id != i){
+				jQuery("#part_"+i).hide();
+				document.getElementById("li_"+i).style.fontWeight = "normal";
+				document.getElementById("li_"+i).style.fontSize = "18px";
+		}
+	}
+	jQuery("#part_"+id).show();
+	document.getElementById("li_"+id).style.fontWeight = "bold";
+	document.getElementById("li_"+id).style.fontSize = "30px";
+	jQuery('body,html').animate({scrollTop:0},1000);
+        return false;
+}
+</script>
+<div id="content">
+
+	<div class="post" id="post-2838">
+		<h2 class="title">linux 网络命令</h2>
+		<p class="postmetadata">
+			<span class="date">20 June 2009</span>
+			<span class="category">Categoried in <a href="http://www.xieziming.com/topic/ji-shu-wei-ji" rel="category tag">技术维基</a></span>
+			<span class="comments">0</span>
+			<span class="view">Preview : 108 , Read : 762 </span>
+			<span class="mail">Index : 2540 </span>
+		</p>
+		<div class="entry">				
+<div id="part_1"><p>1)列出的是所有连接<br />
+ netstat -tun</p>
+<p>2)列出的是apache所有连接<br />
+ netstat -tun | grep &#8220;:80&#8243;</p>
+<p>3）统计80端口连接数　<br />
+  netstat -nat|grep-i&#8221;80&#8243;|wc -l<br />
+　<br />
+4）统计httpd协议连接数　<br />
+  ps -ef|grep httpd|wc -l<br />
+　<br />
+5）统计已连接上的，状态为“established&#8217;　<br />
+ netstat -na|grep ESTABLISHED|wc -l<br />
+　<br />
+6）查出哪个IP地址连接最多，将其封了<br />
+netstat -na|grep ESTABLISHED|awk'{print$5}&#8217;|awk-F:'{print$1}&#8217;|sort|uniq-c|sort-r+0n</p>
+<p>netstat -na|grep SYN|awk'{print$5}&#8217;|awk-F:'{print$1}&#8217;|sort|uniq-c|sort-r+0n</p>
+<p>7)查看httpd进程数（即prefork模式下Apache能够处理的并发请求数）：<br />
+ps -ef | grep httpd | wc -l</p>
+<p>8)查看Apache的并发请求数及其TCP连接状态：<br />
+netstat -n | awk &#8216;/^tcp/ {++S[$NF]} END {for(a in S) print a, S[a]}&#8217;<br />
+或者 netstat -n | awk &#8216;/^tcp/ {++state[$NF]} END {for(key in state) print key,&#8221;\t&#8221;,state<font color="#00BB00"><strong></strong></font>}&#8217;</p>
+<p>返回结果示例：<br />
+　　LAST_ACK 5<br />
+　　SYN_RECV 30<br />
+　　ESTABLISHED 1597<br />
+　　FIN_WAIT1 51<br />
+　　FIN_WAIT2 504<br />
+　　TIME_WAIT 1057</p>
+</div><div id="part_2" style="display:none;"><p>说明:　　<br />
+SYN_RECV: 表示正在等待处理的请求数；<br />
+ESTABLISHED: 表示正常数据传输状态；<br />
+TIME_WAIT: 表示处理完毕，等待超时结束的请求数<br />
+CLOSED：无连接是活动的或正在进行<br />
+LISTEN：服务器在等待进入呼叫<br />
+SYN_RECV：一个连接请求已经到达，等待确认<br />
+SYN_SENT：应用已经开始，打开一个连接<br />
+ESTABLISHED：正常数据传输状态<br />
+FIN_WAIT1：应用说它已经完成<br />
+FIN_WAIT2：另一边已同意释放<br />
+ITMED_WAIT：等待所有分组死掉<br />
+CLOSING：两边同时尝试关闭<br />
+TIME_WAIT：另一边已初始化一个释放<br />
+LAST_ACK：等待所有分组死掉</p>
+<p>如发现系统存在大量TIME_WAIT状态的连接，通过调整内核参数解决，<br />
+vim /etc/sysctl.conf<br />
+编辑文件，加入以下内容：<br />
+net.ipv4.tcp_syncookies = 1<br />
+net.ipv4.tcp_tw_reuse = 1<br />
+net.ipv4.tcp_tw_recycle = 1<br />
+net.ipv4.tcp_fin_timeout = 30<br />
+然后执行 /sbin/sysctl -p 让参数生效。</p>
+<p>net.ipv4.tcp_syncookies = 1 表示开启SYN cookies。当出现SYN等待队列溢出时，启用cookies来处理，可防范少量SYN攻击，默认为0，表示关闭；<br />
+net.ipv4.tcp_tw_reuse = 1 表示开启重用。允许将TIME-WAIT sockets重新用于新的TCP连接，默认为0，表示关闭；<br />
+net.ipv4.tcp_tw_recycle = 1 表示开启TCP连接中TIME-WAIT sockets的快速回收，默认为0，表示关闭。<br />
+net.ipv4.tcp_fin_timeout 修改系統默认的 TIMEOUT 时间</p>
+</div><div id="part_3" style="display:none;"><p>下面附上TIME_WAIT状态的意义：</p>
+<p>客户端与服务器端建立TCP/IP连接后关闭SOCKET后，服务器端连接的端口<br />
+状态为TIME_WAIT</p>
+<p>是不是所有执行主动关闭的socket都会进入TIME_WAIT状态呢？<br />
+有没有什么情况使主动关闭的socket直接进入CLOSED状态呢？</p>
+<p>主动关闭的一方在发送最后一个 ack 后<br />
+就会进入 TIME_WAIT 状态 停留2MSL（max segment lifetime）时间<br />
+这个是TCP/IP必不可少的，也就是“解决”不了的。</p>
+<p>也就是TCP/IP设计者本来是这么设计的<br />
+主要有两个原因<br />
+1。防止上一次连接中的包，迷路后重新出现，影响新连接<br />
+（经过2MSL，上一次连接中所有的重复包都会消失）<br />
+2。可靠的关闭TCP连接<br />
+在主动关闭方发送的最后一个 ack(fin) ，有可能丢失，这时被动方会重新发<br />
+fin, 如果这时主动方处于 CLOSED 状态 ，就会响应 rst 而不是 ack。所以<br />
+主动方要处于 TIME_WAIT 状态，而不能是 CLOSED 。</p>
+<p>TIME_WAIT 并不会占用很大资源的，除非受到攻击。</p>
+<p>还有，如果一方 send 或 recv 超时，就会直接进入 CLOSED 状态 </p>
+</div><div id="paginate"><label id="li_1" onclick="javascript:show_page(1,3,this);" style="font-size:30px;font-weight:bold" onmouseover="this.style.cursor='pointer'">1</label><label id="li_2" onclick="javascript:show_page(2,3,this);"  onmouseover="this.style.cursor='pointer'">2</label><label id="li_3" onclick="javascript:show_page(3,3,this);"  onmouseover="this.style.cursor='pointer'">3</label></div> 
+			<div align="center">1 month ago, this page was being read. </div>
+			<p class="tags"><a href="http://www.xieziming.com/tag/linux" rel="tag">linux</a>, <a href="http://www.xieziming.com/tag/ji-shu" rel="tag">技术</a><br /></p>  
+    </div><!-- /entry -->                                   
+		<div class="postbottom"></div>		                              
+		</div><!-- /post -->	
+
+<div class="postrelated">
+			<table width="100%" >				
+
+					<tr><td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/689.html" rel="bookmark" title="Arrange">Arrange</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/2529.html" rel="bookmark" title="DAS、NAS与SAN">DAS、NAS与S...</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/7152.html" rel="bookmark" title="Shell (三)">Shell...</a></td>
+
+				<td align="right" class="dashedline_related">★<a href="http://www.xieziming.com/archives/1300.html" rel="bookmark" title="桥接,NAT网络配置详解">桥接,NAT网络配...</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/706.html" rel="bookmark" title="Hub与交换机的区别">Hub与交换机的区别</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/4294.html" rel="bookmark" title="ROR笔记（二）">ROR笔记（二）</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/732.html" rel="bookmark" title="光传输网网管DCN总结">光传输网网管DCN...</a></td>
+
+				<td align="right" class="dashedline_related"><a href="http://www.xieziming.com/archives/538.html" rel="bookmark" title="我还要好好学习&#8230;.">我还要好好学习&hellip;.</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/2783.html" rel="bookmark" title="单元测试全攻略">单元测试全攻略</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/6406.html" rel="bookmark" title="QTP DataTable">QTP Data...</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/2835.html" rel="bookmark" title="linux学习笔记">linux学习笔记</a></td>
+
+				<td align="right" class="dashedline_related">★<a href="http://www.xieziming.com/archives/4302.html" rel="bookmark" title="Ruby（三）">Ruby（三）</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/6917.html" rel="bookmark" title="Linux Shell 之引号">Linux Shell...</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/7150.html" rel="bookmark" title="Shell (二)">Shell...</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/703.html" rel="bookmark" title="两个人能够在电话上打牌吗？">两个人能够在...</a></td>
+
+				<td align="right" class="dashedline_related"><a href="http://www.xieziming.com/archives/4276.html" rel="bookmark" title="ROR笔记（一）">ROR笔记（一...</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/4279.html" rel="bookmark" title="Ruby异常处理">Ruby异常处...</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/574.html" rel="bookmark" title="周期性的火大">周期性的火大</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/567.html" rel="bookmark" title="ECC路由表初探">ECC路由表初探</a></td>
+
+				<td align="right" class="dashedline_related">★<a href="http://www.xieziming.com/archives/714.html" rel="bookmark" title="不同网段无法PING通的原因">不同网段无法P...</a></td></tr>
+
+		</table>
+</div>
+
+		<div id="comments">
+
+<!-- START COMMENT FORMS -->
+
+
+		</div><!--/comments-->		
+
+</div><!-- /content -->
+<div id="sidebar">			
+			<a class="subscribe" href="http://www.xieziming.com/feed" title="Posts RSS">Subscribe</a>			
+			<div id="search">	
+	<form name="searchform" id="searchform" method="get" action="http://www.xieziming.com/index.php">
+		<input class="text" type="text" name="s" id="s" value=""/>
+		<input class="submit" type="image" src="http://www.xieziming.com/wp-content/themes/ziming/img/submit.jpg" value="search" />
+	</form>	
+</div><!-- /search -->			
+			<div id="widgets">			
+			<div class="widget"><h3>Calendar</h3>
+<table id="wp-calendar">
+  									<caption>December 2016</caption>
+  									<thead>
+                    <tr><th scope="col" title="S">S</th><th scope="col" title="M">M</th><th scope="col" title="T">T</th><th scope="col" title="W">W</th><th scope="col" title="T">T</th><th scope="col" title="F">F</th><th scope="col" title="S">S</th></tr></thead><tbody><tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>1</td><td>2</td><td>3</td></tr><tr><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td></tr><tr><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td></tr><tr><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">18<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">《血战钢锯岭》</span><br/><span class="time" style="color:#000000; " > Time : 21:18 - 23:28</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">晚上和小锅去看，蛮感人的。吃完去沙湾吃猪杂粥，应该是我在那吃到的最新鲜的一次了。</p></span></a></span></td><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">19<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">CentOS</span><br/><span class="time" style="color:#000000; " > Time : 14:11 - 18:11</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">终于有点时间来把那盒子的win7转成CentOS来做server。配置vsftp花了我太多的时间。。。</p></span></a></span></td><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td></tr><tr><td>25</td><td>26</td><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td></tr><tr><td colspan="3" id="prev"><a href="http://www.xieziming.com/archives/2838.html?month=nov&yr=2016">&laquo; Prev</a></td><td colspan="4" id="next"><a href="http://www.xieziming.com/archives/2838.html?month=jan&yr=2017">Next &raquo;</a></td></tr></tbody></table>
+<div class="widgetbottom"></div></div><!--/widget-->				
+					      		<div class="widget">
+ 							<h3>Recent Posts</h3>
+							<ul>
+           				<li><a href="http://www.xieziming.com/archives/9579.html" class="dashedline" title="闽南 · 泉州">闽南 &middot; 泉州</a></li><li><a href="http://www.xieziming.com/archives/9578.html" class="dashedline" title="顺化 · HUE">顺化 &middot; HUE</a></li><li><a href="http://www.xieziming.com/archives/9577.html" class="dashedline" title="会安 · 春卷">会安 &middot; 春卷</a></li><li><a href="http://www.xieziming.com/archives/9576.html" class="dashedline" title="会安 · 夜灯">会安 &middot; 夜灯</a></li><li><a href="http://www.xieziming.com/archives/9575.html" class="dashedline" title="会安古镇">会安古镇</a></li><li><a href="http://www.xieziming.com/archives/9573.html" class="dashedline" title="岘港">岘港</a></li><li><a href="http://www.xieziming.com/archives/9535.html" class="dashedline" title="罗马">罗马</a></li><li><a href="http://www.xieziming.com/archives/9534.html" class="dashedline" title="卢浮宫">卢浮宫</a></li>						
+							</ul>
+      				<div class="widgetbottom"></div>
+	    		</div>
+	    			        
+        	      		<div class="widget">
+ 							<h3>Rand Posts</h3>
+							<ul>
+      						<li><a href="http://www.xieziming.com/archives/6115.html" class="dashedline" title="明明 · 青海">明明 &middot; 青海</a></li><li><a href="http://www.xieziming.com/archives/6086.html" class="dashedline" title="雅丹落日">雅丹落日</a></li><li><a href="http://www.xieziming.com/archives/6884.html" class="dashedline" title="芳村江畔">芳村江畔</a></li><li><a href="http://www.xieziming.com/archives/215.html" class="dashedline" title="Amazing grace">Amazing grac...</a></li><li><a href="http://www.xieziming.com/archives/266.html" class="dashedline" title="出差总结">出差总结</a></li><li><a href="http://www.xieziming.com/archives/1554.html" class="dashedline" title="Quite a long time">Quite a long ti...</a></li><li><a href="http://www.xieziming.com/archives/8811.html" class="dashedline" title="Java源码混淆">Java源码混淆</a></li><li><a href="http://www.xieziming.com/archives/7556.html" class="dashedline" title="员村">员村</a></li>	
+							</ul>
+        			<div class="widgetbottom"></div>
+					</div>                 
+          	                       
+			</div><!-- /widgets -->			                       
+</div><!-- /sidebar --></div><!-- /main -->
+<div id="footer">
+<p align="left">© <a href="http://www.miitbeian.gov.cn" target="_blank"> 明 · 明 · 童 · 鞋</a></p>
+<!--76 queries in 2.673 seconds.-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?c2e18b43ec905e3c4ea82c1b57537223";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</div><!-- /footer -->
+</div><!-- /container -->
+<script type='text/javascript' src='http://www.xieziming.com/wp-includes/js/wp-embed.min.js?ver=4.7'></script>
+</body>
+</html>

@@ -1,0 +1,523 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head profile="http://gmpg.org/xfn/11">
+<title>  Java多态总结 &raquo; 谢子明</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="description" content="Java多态总结  " />
+<meta name="keywords" content="谢子明" />
+<link rel="stylesheet" href="http://www.xieziming.com/wp-content/themes/ziming/style.css" type="text/css" media="screen" />
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://www.xieziming.com/feed" />
+<link rel="alternate" type="application/rss+xml" href="http://www.xieziming.com/comments/feed" title="谢子明 Comments RSS feed" />
+<link rel="shortcut icon" href="http://www.xieziming.com/wp-content/themes/ziming/favicon.ico">
+<link rel="Bookmark" href="http://www.xieziming.com/wp-content/themes/ziming/favicon.ico">
+<link rel="pingback" href="http://www.xieziming.com/xmlrpc.php" />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="谢子明 &raquo; Java多态总结 Comments Feed" href="http://www.xieziming.com/archives/7402.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/xieziming.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.7"}};
+			!function(a,b,c){function d(a){var b,c,d,e,f=String.fromCharCode;if(!k||!k.fillText)return!1;switch(k.clearRect(0,0,j.width,j.height),k.textBaseline="top",k.font="600 32px Arial",a){case"flag":return k.fillText(f(55356,56826,55356,56819),0,0),!(j.toDataURL().length<3e3)&&(k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,65039,8205,55356,57096),0,0),b=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,55356,57096),0,0),c=j.toDataURL(),b!==c);case"emoji4":return k.fillText(f(55357,56425,55356,57341,8205,55357,56507),0,0),d=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55357,56425,55356,57341,55357,56507),0,0),e=j.toDataURL(),d!==e}return!1}function e(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i,j=b.createElement("canvas"),k=j.getContext&&j.getContext("2d");for(i=Array("flag","emoji4"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<script type='text/javascript' src='http://www.xieziming.com/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='http://www.xieziming.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<link rel='https://api.w.org/' href='http://www.xieziming.com/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.xieziming.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.xieziming.com/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='QTP Action 参数传递' href='http://www.xieziming.com/archives/7382.html' />
+<link rel='next' title='Http协议' href='http://www.xieziming.com/archives/7409.html' />
+<meta name="generator" content="WordPress 4.7" />
+<link rel="canonical" href="http://www.xieziming.com/archives/7402.html" />
+<link rel='shortlink' href='http://www.xieziming.com/?p=7402' />
+<link rel="alternate" type="application/json+oembed" href="http://www.xieziming.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fxieziming.com%2Farchives%2F7402.html" />
+<link rel="alternate" type="text/xml+oembed" href="http://www.xieziming.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fxieziming.com%2Farchives%2F7402.html&#038;format=xml" />
+ 	<link rel="stylesheet" href="http://www.xieziming.com/wp-content/plugins/live-calendar/live-calendar.css" type="text/css" media="screen" /> 
+<link rel="stylesheet" href="http://www.xieziming.com/wp-content/plugins/wp-code/wp-code.css" type="text/css" media="screen" />
+
+<link rel="stylesheet" href="http://www.xieziming.com/wp-content/plugins/zoom-highslide/highslide.css" type="text/css" media="screen" />
+<script type="text/javascript" src="http://www.xieziming.com/wp-content/plugins/zoom-highslide/js/highslide-full.packed.js"></script>
+<script type="text/javascript">
+	hs.graphicsDir = 'http://www.xieziming.com/wp-content/plugins/zoom-highslide/graphics/';
+	hs.align = 'center';
+	hs.transitions = ['expand', 'crossfade'];
+	hs.outlineType = 'rounded-white';
+  hs.wrapperClassName = 'controls-in-heading';
+	hs.showCredits=false;
+	hs.fadeInOut = true;
+	hs.dimmingOpacity = 0.8;
+
+	// Add the controlbar
+	if (hs.addSlideshow) hs.addSlideshow({
+		//slideshowGroup: 'group1',
+		interval: 4000,
+		repeat: false,
+		useControls: true,
+		fixedControls: false,
+		overlayOptions: {
+			opacity: 1,
+			position: 'top center',
+			hideOnMouseOut: true
+		}
+	});
+</script>
+
+<script type="text/javascript">
+	var widthRestriction = 668; 
+	var heightRestriction = 1000; 
+</script>
+<script type="text/javascript" src="http://www.xieziming.com/wp-content/plugins/zoom-highslide/js/zoom.js"></script>
+	
+<!--script src="http://www.xieziming.com/wp-content/themes/ziming/js/mouse.js" type="text/javascript"></script--> 
+</head>
+<body class="normalbg">
+<div id="container">
+	<div id="head">
+		<div id="nav">
+			<ul>
+				<li class="first"><a href="http://www.xieziming.com" title="首页">首页</a></li>
+				<li class="page_item page-item-2"><a href="http://www.xieziming.com/recent" title="最近">最近</a></li>
+				<li class="page_item page-item-3"><a href="http://www.xieziming.com/photo" title="Photo">映象</a></li>
+				<li class="page_item page-item-4"><a href="http://www.xieziming.com/food" title="Food">美食</a></li>
+				<li class="page_item page-item-5"><a href="http://www.xieziming.com/topic" title="关键字">话题</a></li>
+				<li class="page_item page-item-6"><a href="http://www.xieziming.com/travel" title="Travel">旅行</a></li>
+				<li class="page_item page-item-7"><a href="http://www.xieziming.com/literature" title="Literature">文艺</a></li>
+				<li class="page_item page-item-8"><a href="http://www.xieziming.com/wiki" title="技术维基">维基</a></li>
+				<li class="page_item page-item-9"><a href="http://www.xieziming.com/calendar" title="Calendar">点滴</a></li>
+			</ul>
+		</div><!-- /nav -->		
+	</div><!-- /head -->
+<div id="main" class="altmainbg">
+
+<script type="text/javascript">
+function show_page(id,count,source){
+	for (var i=1;i<=count;i++){
+		if(id != i){
+				jQuery("#part_"+i).hide();
+				document.getElementById("li_"+i).style.fontWeight = "normal";
+				document.getElementById("li_"+i).style.fontSize = "18px";
+		}
+	}
+	jQuery("#part_"+id).show();
+	document.getElementById("li_"+id).style.fontWeight = "bold";
+	document.getElementById("li_"+id).style.fontSize = "30px";
+	jQuery('body,html').animate({scrollTop:0},1000);
+        return false;
+}
+</script>
+<div id="content">
+
+	<div class="post" id="post-7402">
+		<h2 class="title">Java多态总结</h2>
+		<p class="postmetadata">
+			<span class="date">24 September 2012</span>
+			<span class="category">Categoried in <a href="http://www.xieziming.com/topic/coding" rel="category tag">程序</a></span>
+			<span class="comments">0</span>
+			<span class="view">Preview : 1659 , Read : 1009 </span>
+			<span class="mail">Index : 6244 </span>
+		</p>
+		<div class="entry">				
+<div id="part_1"><p>多态是指程序中定义的引用变量所指向的具体类型和通过该引用变量发出的方法调用在编程时并不确定，而是在程序运行期间才确定，即一个引用变量倒底会指向哪个类的实例对象，该引用变量发出的方法调用到底是哪个类中实现的方法，必须在由程序运行期间才能决定。</p>
+<p>比方一下:</p>
+<p>你和你朋友都是烟鬼,</p>
+<p>某日,你没有带烟, 而你朋友有n种烟,</p>
+<p>你说: 来根烟,</p>
+<p>朋友给你一根;</p>
+<p>你通过烟的过滤嘴, 品出为白沙烟</p>
+<p>你再要一根,</p>
+<p>品出这次是芙蓉王,</p>
+<p>再要一根,</p>
+<p>品出这次是熊猫</p>
+<p>&#8230;</p>
+<p>上面描述的就是多态!</p>
+<p>烟 a = 白沙<br />
+烟 b = 芙蓉王<br />
+烟 c = 熊猫</p>
+<p>但发现没有, 仅仅通过&#8221;烟&#8221;基类, 引用到不同的具体类对象, 就能让你调用到不同的对象, 这就是多态. 而烟到你嘴里[此时你还没有发现是那种烟], 你仅仅凭借&#8221;吸&#8221;的动作,就识别出来,到底是哪种烟对象</p>
+<p>这就是多态的悬机.</p>
+<p>多态须具备:</p>
+<p>1. 基类和各个子类</p>
+<p>2. 基类引用, 指向实例化的子类对象.</p>
+<p>再举一个鸡的例子,</p>
+<p>鸡是所有其它鸡的基类, 定义了一个方法shape(), 此方法能指明鸡的形态. 所有的子类[火鸡,山鸡,田鸡等],都有这个shape方法, 表明自己的形态,</p>
+<p>如果用下面的方法定义我需要具体的鸡,</p>
+<p>[基类 引用 = 实现类的对象]</p>
+<p>for example:</p>
+<p>鸡 a = new 火鸡();</p>
+<p>鸡 a = new 田鸡();</p>
+<p>鸡 a = new 山鸡();</p>
+<p>鸡 a = new 母鸡();</p>
+<p>当我使用的时候, 我采用 a 这个引用,</p>
+<p>a.shape(), 就会得到鸡的形态.</p>
+<p>如果我定义的是</p>
+<p>鸡 a = new 火鸡();</p>
+<p>那么a.shape得到的是火鸡的形态, 而不需要用具体的</p>
+<p>火鸡 a = new 火鸡(); 再通过a.shape得到火鸡的形态</p>
+</div><div id="part_2" style="display:none;"><p>多态的表现形式有如下几种：</p>
+<p>（1）重载：允许存在多个同名函数，而这些函数参数表不同。(静态绑定)</p>
+<p>（2）属性隐藏：子类隐藏了父类的同名属性。（静态绑定）</p>
+<p>（3）静态方法隐藏:子类中隐藏了父类中同名的静态方法（静态绑定）</p>
+<p>（4）覆盖：子类中覆盖了父类中同名方法（动态绑定）</p>
+<p>对于一个引用型的变量，编译器按照它声明的类型处理。运行时按照它实际引用的对象处理。成员变量，静态方法按照引用变量声明的类型静态绑定，实例方法按照引用变量的实例绑定。</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">package</span> <span style="color: #006699;">putong</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> Father <span style="color: #009900;">&#123;</span>
+ <span style="color: #003399;">String</span> name<span style="color: #339933;">=</span><span style="color: #0000ff;">&quot;father&quot;</span><span style="color: #339933;">;</span>
+ <span style="color: #000000; font-weight: bold;">private</span> <span style="color: #003399;">String</span> private_v<span style="color: #339933;">=</span><span style="color: #0000ff;">&quot;Father's private attribute&quot;</span><span style="color: #339933;">;</span>
+ <span style="color: #003399;">String</span> afather<span style="color: #339933;">=</span><span style="color: #0000ff;">&quot;Father's normal attribute&quot;</span><span style="color: #339933;">;</span>
+ <span style="color: #000066; font-weight: bold;">void</span> fun<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+  <span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;Father's instance menthod&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+ <span style="color: #009900;">&#125;</span>
+ <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000066; font-weight: bold;">void</span>  f<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+  <span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;Father's static method&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+ <span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span>
+<span style="color: #000000; font-weight: bold;">class</span> Son <span style="color: #000000; font-weight: bold;">extends</span> Father<span style="color: #009900;">&#123;</span>
+ <span style="color: #003399;">String</span> name<span style="color: #339933;">=</span><span style="color: #0000ff;">&quot;Son&quot;</span><span style="color: #339933;">;</span>
+ <span style="color: #000000; font-weight: bold;">private</span> <span style="color: #003399;">String</span> private_v<span style="color: #339933;">=</span><span style="color: #0000ff;">&quot;Son's private attribute&quot;</span><span style="color: #339933;">;</span>
+ <span style="color: #003399;">String</span> ason<span style="color: #339933;">=</span><span style="color: #0000ff;">&quot;son's normal attribute.&quot;</span><span style="color: #339933;">;</span>
+ <span style="color: #000066; font-weight: bold;">void</span> fun<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+  <span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;Son's intance method&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+ <span style="color: #009900;">&#125;</span>
+ <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000066; font-weight: bold;">void</span> f<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+  <span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;son's static method&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+ <span style="color: #009900;">&#125;</span>
+ <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> fun<span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">int</span> i<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+  <span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;***&quot;</span><span style="color: #339933;">+</span>i<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+ <span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span>
+<span style="color: #000000; font-weight: bold;">package</span> <span style="color: #006699;">putong</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> Test <span style="color: #009900;">&#123;</span>
+ <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000066; font-weight: bold;">void</span> main<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> args<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+  Father f <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> Son<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+  <span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span>f.<span style="color: #006633;">afather</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><span style="color: #666666; font-style: italic;">//引用的是父类的成员变量</span>
+  <span style="color: #666666; font-style: italic;">//System.out.println(f.ason);//error</span>
+  <span style="color: #666666; font-style: italic;">//System.out.println(f.private_v);//error</span>
+  <span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span>f.<span style="color: #006633;">name</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><span style="color: #666666; font-style: italic;">//父類的</span>
+  f.<span style="color: #006633;">fun</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><span style="color: #666666; font-style: italic;">//子类的方法动态绑定，覆盖</span>
+  f.<span style="color: #006633;">f</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><span style="color: #666666; font-style: italic;">//父类的静态绑定</span>
+  <span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;******************************************&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+  Son s <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> Son<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+  <span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span>s.<span style="color: #006633;">afather</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><span style="color: #666666; font-style: italic;">//引用从父类继承来的属性</span>
+  <span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span>s.<span style="color: #006633;">ason</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><span style="color: #666666; font-style: italic;">//子类成员变量</span>
+  <span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span>s.<span style="color: #006633;">name</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+  <span style="color: #666666; font-style: italic;">//  System.out.println(s.private_v);//error</span>
+  s.<span style="color: #006633;">fun</span><span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">3</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+  s.<span style="color: #006633;">fun</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+  s.<span style="color: #006633;">f</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><span style="color: #666666; font-style: italic;">//子类的 隐藏了父类的静态方法</span>
+ <span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>输出结果：</p>
+<p>Father&#8217;s normal attribute<br />
+father<br />
+Son&#8217;s intance method<br />
+Father&#8217;s static method<br />
+******************************************<br />
+Father&#8217;s normal attribute<br />
+son&#8217;s normal attribute.<br />
+Son<br />
+***3<br />
+Son&#8217;s intance method<br />
+son&#8217;s static method</p>
+</div><div id="part_3" style="display:none;"><p>Java的多态性总结： </p>
+<p>(1) 首先, 要明确Child对Parent发生了方法的overload还是overwrite，根据参数类型及个数。 </p>
+<p>(2) 如果是overload，则Child继承了Parent的方法，相当于Child多加了父类的方法。 </p>
+<p>(3) 如果是overwrite， 则Child类不会有父类的该方法，而是把该方法重写了，所以该方法存在于父类中，子类只是重写了。要想调用父类的该方法，只能通过super关键字调用。java 的这种机制遵循一个原则：当超类对象引用变量引用子类对象时，被引用对象的类型而不是引用变量的类型决定了调用谁的成员方法，但是这个被调用的方法必须是在超类中定义过的，也就是说被子类覆盖的方法。 </p>
+<p>(4) 接下来，观察方法执行时的参数类型； </p>
+<p>(5) 然后看调用对象的声明类型和实例类型； </p>
+<p>(6) 方法的调度采用最精确参数匹配。</p>
+<p>方法的重写、重载与动态连接构成多态性。Java之所以引入多态的概念，原因之一是它在类的继承问题上和C++不同，后者允许多继承，这确实给其带来的非常强大的功能，但是复杂的继承关系也给C++开发者带来了更大的麻烦，为了规避风险，Java只允许单继承，派生类与基类间有IS-A的关系（即“猫”is a “动物”）。这样做虽然保证了继承关系的简单明了，但是势必在功能上有很大的限制，所以，Java引入了多态性的概念以弥补这点的不足，此外，抽象类和接口也是解决单继承规定限制的重要手段。</p>
+<p>要理解多态性，首先要知道什么是“向上转型”。</p>
+<p>我定义了一个子类Cat，它继承了Animal类，那么后者就是前者是父类。我可以通过Cat c = new Cat(); 实例化一个Cat的对象，这个不难理解。</p>
+<p>但当我这样定义时：Animal a = new Cat(); 这代表什么意思呢？</p>
+<p>很简单，它表示我定义了一个Animal类型的引用，指向新建的Cat类型的对象。由于Cat是继承自它的父类Animal，所以 Animal类型的引用是可以指向Cat类型的对象的。那么这样做有什么意义呢？因为子类是对父类的一个改进和扩充，所以一般子类在功能上较父类更强大，属性较父类更独特，定义一个父类类型的引用指向一个子类的对象既可以使用子类强大的功能，又可以抽取父类的共性。所以，父类类型的引用可以调用父类中定义的所有属性和方法，而对于子类中定义而父类中没有的方法，它是无可奈何的；同时，父类中的一个方法只有在在父类中定义而在子类中没有重写的情况下，才可以被父类类型的引用调用；对于父类中定义的方法，如果子类中重写了该方法，那么父类类型的引用将会调用子类中的这个方法，这就是动态连接。</p>
+<p>再来看下面这段程序：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">class</span> Father <span style="color: #009900;">&#123;</span>
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> func1<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+        func2<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+&nbsp;
+    <span style="color: #666666; font-style: italic;">// 这是父类中的func2()方法，因为下面的子类中重写了该方法</span>
+    <span style="color: #666666; font-style: italic;">// 所以在父类类型的引用中调用时，这个方法将不再有效</span>
+    <span style="color: #666666; font-style: italic;">// 取而代之的是将调用子类中重写的func2()方法</span>
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> func2<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+        <span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;AAA&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+&nbsp;
+&nbsp;
+<span style="color: #000000; font-weight: bold;">class</span> Child <span style="color: #000000; font-weight: bold;">extends</span> Father <span style="color: #009900;">&#123;</span>
+    <span style="color: #666666; font-style: italic;">// func1(int i)是对func1()方法的一个重载</span>
+    <span style="color: #666666; font-style: italic;">// 由于在父类中没有定义这个方法，所以它不能被父类类型的引用调用</span>
+    <span style="color: #666666; font-style: italic;">// 所以在下面的main方法中child.func1(68)是不对的</span>
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> func1<span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">int</span> i<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+        <span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;BBB&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+&nbsp;
+    <span style="color: #666666; font-style: italic;">// func2()重写了父类Father中的func2()方法</span>
+    <span style="color: #666666; font-style: italic;">// 如果父类类型的引用中调用了func2()方法，那么必然是子类中重写的这个方法</span>
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> func2<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+        <span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;CCC&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+&nbsp;
+&nbsp;
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> PolymorphismTest <span style="color: #009900;">&#123;</span>
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000066; font-weight: bold;">void</span> main<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> args<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+        Father child <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> Child<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        child.<span style="color: #006633;">func1</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><span style="color: #666666; font-style: italic;">// 打印结果将会是什么？</span>
+    <span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>上面的程序是个很典型的多态的例子。子类Child继承了父类Father，并重载了父类的func1()方法，重写了父类的func2()方法。重载后的func1(int i)和func1()不再是同一个方法，由于父类中没有func1(int i)，那么，父类类型的引用child就不能调用func1(int i)方法。而子类重写了func2()方法，那么父类类型的引用child在调用该方法时将会调用子类中重写的func2()。</p>
+<p>那么该程序将会打印出什么样的结果呢？很显然，应该是“CCC”。</p>
+<p>对于多态，可以总结它为：</p>
+<p>一、使用父类类型的引用指向子类的对象；</p>
+<p>二、该引用只能调用父类中定义的方法和变量；</p>
+<p>三、如果子类中重写了父类中的一个方法，那么在调用这个方法的时候，将会调用子类中的这个方法；（动态连接、动态调用）</p>
+<p>四、变量不能被重写（覆盖），“重写”的概念只针对方法。</p>
+<p>五、Java中除了static和final方法外，其他所有的方法都是运行时绑定的。private方法都被隐式指定为final的，因此final的方法不会在运行时绑定。当在派生类中重写基类中static、final、或private方法时，实质上是创建了一个新的方法。</p>
+</div><div id="part_4" style="display:none;"><p>方法的重写Overriding和重载Overloading是Java多态性的不同表现。重写Overriding是父类与子类之间多态性的一种表现，重载Overloading是一个类中多态性的一种表现。</p>
+<p>如果在子类中定义某方法与其父类有相同的名称和参数，我们说该方法被重写(Overriding)。子类的对象使用这个方法时，将调用子类中的定义，对它而言，父类中的定义如同被“屏蔽”了。</p>
+<p>如果在一个类中定义了多个同名的方法，它们或有不同的参数个数或有不同的参数类型，则称为方法的重载(Overloading)。Overloaded的方法是可以改变返回值的类型。</p>
+<p>方法的重写Overriding和重载Overloading是Java多态性的不同表现。重写Overriding是父类与子类之间多态性的一种表现，重载Overloading是一个类中多态性的一种表现。如果在子类中定义某方法与其父类有相同的名称和参数，我们说该方法被重写 (Overriding)。子类的对象使用这个方法时，将调用子类中的定义，对它而言，父类中的定义如同被“屏蔽”了。如果在一个类中定义了多个同名的方法，它们或有不同的参数个数或有不同的参数类型，则称为方法的重载(Overloading)。Overloaded的方法是可以改变返回值的类型。</p>
+<p>当超类对象引用变量引用子类对象时，被引用对象的类型而不是引用变量的类型决定了调用谁的成员方法，但是这个被调用的方法必须是在超类中定义过的，也就是说被子类覆盖的方法。 （但是如果强制把超类转换成子类的话，就可以调用子类中新添加而超类没有的方法了。）</p>
+<p>这里涉及方法调用的优先问题 ，优先级由高到低依次为：this.show(O)、super.show(O)、this.show((super)O)、super.show((super)O)。让我们来看看它是怎么工作的。</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> A <span style="color: #009900;">&#123;</span>
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> show<span style="color: #009900;">&#40;</span>A a<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+		<span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;i am from A's show A&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000066; font-weight: bold;">void</span> main<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span> args<span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+		A a <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> A<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		B b <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> B<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		a.<span style="color: #006633;">show</span><span style="color: #009900;">&#40;</span>b<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> B <span style="color: #000000; font-weight: bold;">extends</span> A<span style="color: #009900;">&#123;</span>
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> show<span style="color: #009900;">&#40;</span>B b<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+		<span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;i am from B's show B&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> show<span style="color: #009900;">&#40;</span>A a<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+		<span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;i am from B's show A&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span>
+<span style="color: #666666; font-style: italic;">//output:</span>
+<span style="color: #666666; font-style: italic;">//i am from A's show A</span></pre></div></div>
+
+<p>上面是个最简单的例子，只涉及参数向上转型，比较好理解。</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> A <span style="color: #009900;">&#123;</span>
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> show<span style="color: #009900;">&#40;</span>A a<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+		<span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;i am from A's show A&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> B <span style="color: #000000; font-weight: bold;">extends</span> A<span style="color: #009900;">&#123;</span>
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> show<span style="color: #009900;">&#40;</span>B b<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+		<span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;i am from B's show B&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> show<span style="color: #009900;">&#40;</span>A a<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+		<span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;i am from B's show A&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000066; font-weight: bold;">void</span> main<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span> args<span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+		A a <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> B<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		B b <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> B<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		a.<span style="color: #006633;">show</span><span style="color: #009900;">&#40;</span>b<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">//output:</span>
+<span style="color: #666666; font-style: italic;">//i am from B's show A</span></pre></div></div>
+
+<p>a.show(b)，a是一个引用变量，类型为A，则this为a，b是B的一个实例，于是它到类A里面找show(B obj)方法，没有找到，于是到A的super(超类)找，而A没有超类，因此转到第三优先级this.show((super)O)，this仍然是a，这里O为B，(super)O即(super)B即A，因此它到类A里面找show(A obj)的方法，类A有这个方法，但是由于a引用的是类B的一个对象，B覆盖了A的show(A obj)方法，因此最终锁定到类B的show(A obj)，输出为&#8221;B and A”。</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> A <span style="color: #009900;">&#123;</span>
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> show<span style="color: #009900;">&#40;</span>A a<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+		<span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;i am from A's show A&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> B <span style="color: #000000; font-weight: bold;">extends</span> A<span style="color: #009900;">&#123;</span>
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> show<span style="color: #009900;">&#40;</span>B b<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+		<span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;i am from B's show B&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> show<span style="color: #009900;">&#40;</span>A a<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+		<span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;i am from B's show A&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> C <span style="color: #000000; font-weight: bold;">extends</span> B<span style="color: #009900;">&#123;</span>
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> show<span style="color: #009900;">&#40;</span>C c<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+		<span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;i am from C's show C&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> show<span style="color: #009900;">&#40;</span>B b<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+		<span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;i am from B's show B&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> show<span style="color: #009900;">&#40;</span>A a<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+		<span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;i am from B's show A&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000066; font-weight: bold;">void</span> main<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span> args<span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+		B b <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> C<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		C c <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> C<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		b.<span style="color: #006633;">show</span><span style="color: #009900;">&#40;</span>c<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">//output:</span>
+<span style="color: #666666; font-style: italic;">//i am from B's show B</span></pre></div></div>
+
+<p>b.show(c)，b是一个引用变量，类型为B，则this为b，c是C的一个实例，于是它到类B找show(C obj)方法，没有找到，转而到B的超类A里面找，A里面也没有，因此也转到第三优先级this.show((super)O)，this为b，O为C，(super)O即(super)C即B，因此它到B里面找show(B obj)方法，找到了，由于b引用的是类B的一个对象，因此直接锁定到类B的show(B obj)。</p>
+<p>当超类对象引用变量引用子类对象时，被引用对象的类型而不是引用变量的类型决定了调用谁的成员方法，但是这个被调用的方法必须是在超类中定义过的，也就是说被子类覆盖的方法。还是拿a.show(b)来说吧。</p>
+<p>a是一个引用变量，类型为A，它引用的是B的一个对象，因此这句话的意思是由B来决定调用的是哪个方法。因此应该调用B的show(B obj)从而输出&#8221;B and B”才对。但是为什么跟前面的分析得到的结果不相符呢？！特别指明：这个被调用的方法必须是在超类中定义过的，也就是被子类覆盖的方法。B里面的show(B obj)在超类A中有定义吗？没有！那就更谈不上被覆盖了。实际上这句话隐藏了一条信息：它仍然是按照方法调用的优先级来确定的。它在类A中找到了show(A obj)，如果子类B没有覆盖show(A obj)方法，那么它就调用A的show(A obj)（由于B继承A，虽然没有覆盖这个方法，但从超类A那里继承了这个方法，从某种意义上说，还是由B确定调用的方法，只是方法是在A中实现而已）；现在子类B覆盖了show(A obj)，因此它最终锁定到B的show(A obj)。这就是那句话的意义所在。</p>
+</div><div id="part_5" style="display:none;"><p>1、多态性适用于重写而不是重载。<br />
+2、对象类型（不是引用变量的类型）决定运行时调用哪个<strong>重写</strong>方法。<br />
+3、引用类型决定了在编译时调用哪个<strong>重载</strong>方法。</p>
+<p>多态性：多态性不能决定调用哪个重载方法，他只能在决定调用方法的哪个重写版本时才起作用</p>
+<p>重载 变元：必须改变；返回类型：可以改变；异常：可以改变；访问级别：可以改变；</p>
+<p>重写嘛，限制就比较多了吧，变元：不能改变； 返回类型：除协变式返回之外其他的是不可以的；异常：可以减小或者不声明异常，但是一定不能抛出更新或者更广的异常。访问级别方面：一定不能更小啊。</p>
+<p>再回到“多态性适用于重写而不是重载”，这句话，为什么呢？</p>
+<p>举个例子：<br />
+Animal 类，Horse类 都有public void eat方法，Horse 是Animal的子类。<br />
+那么：Animal a = new Horse(); a.eat(); 这个时候多态性就起作用了，这个地方调用的eat方法是Horse版本的对吧。。。</p>
+<p>为什么说重载和多态性就没大有啥关系了呢？我是这样理解的啊。。重载方法之间的最本质的却别应该是变元不同了，假设有两个方法</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> check<span style="color: #009900;">&#40;</span>Animal animal<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span><span style="color: #009900;">&#125;</span><span style="color: #339933;">;</span> 
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> check<span style="color: #009900;">&#40;</span>Horse animal<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span><span style="color: #009900;">&#125;</span><span style="color: #339933;">;</span></pre></div></div>
+
+<p>我们声明两个实例：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;">Animal a <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> Animal<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> 
+Animal b <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> Horse<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre></div></div>
+
+<p>调用check时，传入参数a，b时，两者都调用了带Animal 参数的那个check函数。也就是说不管你传进来的是Animal对象还是Horse对象，都按照引用类型（也就是Animal）处理，多态性根本没作用。所以多态一班是讲重写方法的。</p>
+</div><div id="paginate"><label id="li_1" onclick="javascript:show_page(1,5,this);" style="font-size:30px;font-weight:bold" onmouseover="this.style.cursor='pointer'">1</label><label id="li_2" onclick="javascript:show_page(2,5,this);"  onmouseover="this.style.cursor='pointer'">2</label><label id="li_3" onclick="javascript:show_page(3,5,this);"  onmouseover="this.style.cursor='pointer'">3</label><label id="li_4" onclick="javascript:show_page(4,5,this);"  onmouseover="this.style.cursor='pointer'">4</label><label id="li_5" onclick="javascript:show_page(5,5,this);"  onmouseover="this.style.cursor='pointer'">5</label></div> 
+			<div align="center">1 month ago, this page was being read. </div>
+			<p class="tags"><a href="http://www.xieziming.com/tag/java" rel="tag">java</a>, <a href="http://www.xieziming.com/tag/summary" rel="tag">Summary</a><br /></p>  
+    </div><!-- /entry -->                                   
+		<div class="postbottom"></div>		                              
+		</div><!-- /post -->	
+
+<div class="postrelated">
+			<table width="100%" >				
+
+					<tr><td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/8807.html" rel="bookmark" title="制作Java Applet签名">制作Java Ap...</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/6826.html" rel="bookmark" title="测试工程师如何和开发工程师交流">测试工程师...</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/7364.html" rel="bookmark" title="Java启动参数">Java启动参数</a></td>
+
+				<td align="right" class="dashedline_related">★<a href="http://www.xieziming.com/archives/8811.html" rel="bookmark" title="Java源码混淆">Java源码混淆</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7377.html" rel="bookmark" title="VBS中的类">VBS中的类</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/6795.html" rel="bookmark" title="Java 多线程">Java 多线程</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7481.html" rel="bookmark" title="Java单例模式">Java单例模式</a></td>
+
+				<td align="right" class="dashedline_related"><a href="http://www.xieziming.com/archives/7366.html" rel="bookmark" title="QTP控制Java程序原理">QTP控制J...</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/7486.html" rel="bookmark" title="Java堆栈">Java堆...</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7561.html" rel="bookmark" title="Java疑问解答">Java疑问解答</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/6661.html" rel="bookmark" title="Application Monitor">Applicati...</a></td>
+
+				<td align="right" class="dashedline_related">★<a href="http://www.xieziming.com/archives/2445.html" rel="bookmark" title="J2EE回忆">J2EE回忆</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/8665.html" rel="bookmark" title="JavaOne Conference">JavaOne Co...</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/7351.html" rel="bookmark" title="Java Layout总结">Java Layou...</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/6962.html" rel="bookmark" title="程序员图书推荐">程序员图书推...</a></td>
+
+				<td align="right" class="dashedline_related"><a href="http://www.xieziming.com/archives/6685.html" rel="bookmark" title="2011年度博客访问统计">2011年度博...</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/7496.html" rel="bookmark" title="Java反射机制">Java反射机制</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/8596.html" rel="bookmark" title="Java Component截图">Java Com...</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/7527.html" rel="bookmark" title="Java自动装箱">Java自动装箱</a></td>
+
+				<td align="right" class="dashedline_related">★<a href="http://www.xieziming.com/archives/2216.html" rel="bookmark" title="Java程序员面试宝典">Java程序员面试宝...</a></td></tr>
+
+		</table>
+</div>
+
+		<div id="comments">
+
+<!-- START COMMENT FORMS -->
+
+
+		</div><!--/comments-->		
+
+</div><!-- /content -->
+<div id="sidebar">			
+			<a class="subscribe" href="http://www.xieziming.com/feed" title="Posts RSS">Subscribe</a>			
+			<div id="search">	
+	<form name="searchform" id="searchform" method="get" action="http://www.xieziming.com/index.php">
+		<input class="text" type="text" name="s" id="s" value=""/>
+		<input class="submit" type="image" src="http://www.xieziming.com/wp-content/themes/ziming/img/submit.jpg" value="search" />
+	</form>	
+</div><!-- /search -->			
+			<div id="widgets">			
+			<div class="widget"><h3>Calendar</h3>
+<table id="wp-calendar">
+  									<caption>December 2016</caption>
+  									<thead>
+                    <tr><th scope="col" title="S">S</th><th scope="col" title="M">M</th><th scope="col" title="T">T</th><th scope="col" title="W">W</th><th scope="col" title="T">T</th><th scope="col" title="F">F</th><th scope="col" title="S">S</th></tr></thead><tbody><tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>1</td><td>2</td><td>3</td></tr><tr><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td></tr><tr><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td></tr><tr><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">18<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">《血战钢锯岭》</span><br/><span class="time" style="color:#000000; " > Time : 21:18 - 23:28</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">晚上和小锅去看，蛮感人的。吃完去沙湾吃猪杂粥，应该是我在那吃到的最新鲜的一次了。</p></span></a></span></td><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">19<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">CentOS</span><br/><span class="time" style="color:#000000; " > Time : 14:11 - 18:11</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">终于有点时间来把那盒子的win7转成CentOS来做server。配置vsftp花了我太多的时间。。。</p></span></a></span></td><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td></tr><tr><td>25</td><td>26</td><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td></tr><tr><td colspan="3" id="prev"><a href="http://www.xieziming.com/archives/7402.html?month=nov&yr=2016">&laquo; Prev</a></td><td colspan="4" id="next"><a href="http://www.xieziming.com/archives/7402.html?month=jan&yr=2017">Next &raquo;</a></td></tr></tbody></table>
+<div class="widgetbottom"></div></div><!--/widget-->				
+					      		<div class="widget">
+ 							<h3>Recent Posts</h3>
+							<ul>
+           				<li><a href="http://www.xieziming.com/archives/9579.html" class="dashedline" title="闽南 · 泉州">闽南 &middot; 泉州</a></li><li><a href="http://www.xieziming.com/archives/9578.html" class="dashedline" title="顺化 · HUE">顺化 &middot; HUE</a></li><li><a href="http://www.xieziming.com/archives/9577.html" class="dashedline" title="会安 · 春卷">会安 &middot; 春卷</a></li><li><a href="http://www.xieziming.com/archives/9576.html" class="dashedline" title="会安 · 夜灯">会安 &middot; 夜灯</a></li><li><a href="http://www.xieziming.com/archives/9575.html" class="dashedline" title="会安古镇">会安古镇</a></li><li><a href="http://www.xieziming.com/archives/9573.html" class="dashedline" title="岘港">岘港</a></li><li><a href="http://www.xieziming.com/archives/9535.html" class="dashedline" title="罗马">罗马</a></li><li><a href="http://www.xieziming.com/archives/9534.html" class="dashedline" title="卢浮宫">卢浮宫</a></li>						
+							</ul>
+      				<div class="widgetbottom"></div>
+	    		</div>
+	    			        
+        	      		<div class="widget">
+ 							<h3>Rand Posts</h3>
+							<ul>
+      						<li><a href="http://www.xieziming.com/archives/9524.html" class="dashedline" title="柏林">柏林</a></li><li><a href="http://www.xieziming.com/archives/2500.html" class="dashedline" title="静听天籁——钢琴曲系列">静听天籁&mdash;&mdash;钢琴曲系列</a></li><li><a href="http://www.xieziming.com/archives/210.html" class="dashedline" title="出差真累">出差真累</a></li><li><a href="http://www.xieziming.com/archives/169.html" class="dashedline" title="买书了">买书了</a></li><li><a href="http://www.xieziming.com/archives/9421.html" class="dashedline" title="大洋路（二）">大洋路（二）</a></li><li><a href="http://www.xieziming.com/archives/9323.html" class="dashedline" title="景福宫">景福宫</a></li><li><a href="http://www.xieziming.com/archives/810.html" class="dashedline" title="鸟儿的食色印象NO.2">鸟儿的食色印象NO.2</a></li><li><a href="http://www.xieziming.com/archives/1887.html" class="dashedline" title="Weekly Analytics">Weekly Analytic...</a></li>	
+							</ul>
+        			<div class="widgetbottom"></div>
+					</div>                 
+          	                       
+			</div><!-- /widgets -->			                       
+</div><!-- /sidebar --></div><!-- /main -->
+<div id="footer">
+<p align="left">© <a href="http://www.miitbeian.gov.cn" target="_blank"> 明 · 明 · 童 · 鞋</a></p>
+<!--74 queries in 3.428 seconds.-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?c2e18b43ec905e3c4ea82c1b57537223";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</div><!-- /footer -->
+</div><!-- /container -->
+<script type='text/javascript' src='http://www.xieziming.com/wp-includes/js/wp-embed.min.js?ver=4.7'></script>
+</body>
+</html>

@@ -1,0 +1,299 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head profile="http://gmpg.org/xfn/11">
+<title>  软件回归测试 &raquo; 谢子明</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="description" content="软件回归测试  " />
+<meta name="keywords" content="谢子明" />
+<link rel="stylesheet" href="http://www.xieziming.com/wp-content/themes/ziming/style.css" type="text/css" media="screen" />
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://www.xieziming.com/feed" />
+<link rel="alternate" type="application/rss+xml" href="http://www.xieziming.com/comments/feed" title="谢子明 Comments RSS feed" />
+<link rel="shortcut icon" href="http://www.xieziming.com/wp-content/themes/ziming/favicon.ico">
+<link rel="Bookmark" href="http://www.xieziming.com/wp-content/themes/ziming/favicon.ico">
+<link rel="pingback" href="http://www.xieziming.com/xmlrpc.php" />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="谢子明 &raquo; 软件回归测试 Comments Feed" href="http://www.xieziming.com/archives/2779.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/xieziming.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.7"}};
+			!function(a,b,c){function d(a){var b,c,d,e,f=String.fromCharCode;if(!k||!k.fillText)return!1;switch(k.clearRect(0,0,j.width,j.height),k.textBaseline="top",k.font="600 32px Arial",a){case"flag":return k.fillText(f(55356,56826,55356,56819),0,0),!(j.toDataURL().length<3e3)&&(k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,65039,8205,55356,57096),0,0),b=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,55356,57096),0,0),c=j.toDataURL(),b!==c);case"emoji4":return k.fillText(f(55357,56425,55356,57341,8205,55357,56507),0,0),d=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55357,56425,55356,57341,55357,56507),0,0),e=j.toDataURL(),d!==e}return!1}function e(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i,j=b.createElement("canvas"),k=j.getContext&&j.getContext("2d");for(i=Array("flag","emoji4"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<script type='text/javascript' src='http://www.xieziming.com/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='http://www.xieziming.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<link rel='https://api.w.org/' href='http://www.xieziming.com/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.xieziming.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.xieziming.com/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='单元测试全攻略' href='http://www.xieziming.com/archives/2783.html' />
+<link rel='next' title='印象派（系列）' href='http://www.xieziming.com/archives/2795.html' />
+<meta name="generator" content="WordPress 4.7" />
+<link rel="canonical" href="http://www.xieziming.com/archives/2779.html" />
+<link rel='shortlink' href='http://www.xieziming.com/?p=2779' />
+<link rel="alternate" type="application/json+oembed" href="http://www.xieziming.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fxieziming.com%2Farchives%2F2779.html" />
+<link rel="alternate" type="text/xml+oembed" href="http://www.xieziming.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fxieziming.com%2Farchives%2F2779.html&#038;format=xml" />
+ 	<link rel="stylesheet" href="http://www.xieziming.com/wp-content/plugins/live-calendar/live-calendar.css" type="text/css" media="screen" /> 
+<link rel="stylesheet" href="http://www.xieziming.com/wp-content/plugins/wp-code/wp-code.css" type="text/css" media="screen" />
+
+<link rel="stylesheet" href="http://www.xieziming.com/wp-content/plugins/zoom-highslide/highslide.css" type="text/css" media="screen" />
+<script type="text/javascript" src="http://www.xieziming.com/wp-content/plugins/zoom-highslide/js/highslide-full.packed.js"></script>
+<script type="text/javascript">
+	hs.graphicsDir = 'http://www.xieziming.com/wp-content/plugins/zoom-highslide/graphics/';
+	hs.align = 'center';
+	hs.transitions = ['expand', 'crossfade'];
+	hs.outlineType = 'rounded-white';
+  hs.wrapperClassName = 'controls-in-heading';
+	hs.showCredits=false;
+	hs.fadeInOut = true;
+	hs.dimmingOpacity = 0.8;
+
+	// Add the controlbar
+	if (hs.addSlideshow) hs.addSlideshow({
+		//slideshowGroup: 'group1',
+		interval: 4000,
+		repeat: false,
+		useControls: true,
+		fixedControls: false,
+		overlayOptions: {
+			opacity: 1,
+			position: 'top center',
+			hideOnMouseOut: true
+		}
+	});
+</script>
+
+<script type="text/javascript">
+	var widthRestriction = 668; 
+	var heightRestriction = 1000; 
+</script>
+<script type="text/javascript" src="http://www.xieziming.com/wp-content/plugins/zoom-highslide/js/zoom.js"></script>
+	
+<!--script src="http://www.xieziming.com/wp-content/themes/ziming/js/mouse.js" type="text/javascript"></script--> 
+</head>
+<body class="normalbg">
+<div id="container">
+	<div id="head">
+		<div id="nav">
+			<ul>
+				<li class="first"><a href="http://www.xieziming.com" title="首页">首页</a></li>
+				<li class="page_item page-item-2"><a href="http://www.xieziming.com/recent" title="最近">最近</a></li>
+				<li class="page_item page-item-3"><a href="http://www.xieziming.com/photo" title="Photo">映象</a></li>
+				<li class="page_item page-item-4"><a href="http://www.xieziming.com/food" title="Food">美食</a></li>
+				<li class="page_item page-item-5"><a href="http://www.xieziming.com/topic" title="关键字">话题</a></li>
+				<li class="page_item page-item-6"><a href="http://www.xieziming.com/travel" title="Travel">旅行</a></li>
+				<li class="page_item page-item-7"><a href="http://www.xieziming.com/literature" title="Literature">文艺</a></li>
+				<li class="page_item page-item-8"><a href="http://www.xieziming.com/wiki" title="技术维基">维基</a></li>
+				<li class="page_item page-item-9"><a href="http://www.xieziming.com/calendar" title="Calendar">点滴</a></li>
+			</ul>
+		</div><!-- /nav -->		
+	</div><!-- /head -->
+<div id="main" class="altmainbg">
+
+<script type="text/javascript">
+function show_page(id,count,source){
+	for (var i=1;i<=count;i++){
+		if(id != i){
+				jQuery("#part_"+i).hide();
+				document.getElementById("li_"+i).style.fontWeight = "normal";
+				document.getElementById("li_"+i).style.fontSize = "18px";
+		}
+	}
+	jQuery("#part_"+id).show();
+	document.getElementById("li_"+id).style.fontWeight = "bold";
+	document.getElementById("li_"+id).style.fontSize = "30px";
+	jQuery('body,html').animate({scrollTop:0},1000);
+        return false;
+}
+</script>
+<div id="content">
+
+	<div class="post" id="post-2779">
+		<h2 class="title">软件回归测试</h2>
+		<p class="postmetadata">
+			<span class="date">11 October 2009</span>
+			<span class="category">Categoried in <a href="http://www.xieziming.com/topic/testing" rel="category tag">测试</a></span>
+			<span class="comments">0</span>
+			<span class="view">Preview : 89 , Read : 3803 </span>
+			<span class="mail">Index : 2228 </span>
+		</p>
+		<div class="entry">				
+<div id="part_1"><p>摘要：本文描述了软件回归测试的概念和进行回归测试的基本步骤，介绍了可用于回归测试的测试用例库的维护方法，给出了几种可以可保证回归测试效率和有效性的回归测试策略，总结了回归测试时应该注意的一些实际问题。</p>
+<p>关键词：回归测试；测试用例；基线测试用例库</p>
+<p>Software Regression Testing and It’s Practice</p>
+<p>Abstract：The article present the conception of regression testing and the step of executing this testing. Introduce how to maintenance the test case library which used in regression testing ,and provide the method of ensure regression testing’s validity. Finally, it gives some problem must be careful in the period of regression testing.<br />
+<!--more--><br />
+Keywords：regression testing；test case；baseline test case library</p>
+<p>作者简介：李丹（1978-），女，江苏如东人，信息产业部电子第五研究所助理工程师，从事软件可靠性研究及测试工作。</p>
+<p>一、 概述</p>
+<p>在软件生命周期中的任何一个阶段，只要软件发生了改变，就可能给该软件带来问题。软件的改变可能是源于发现了错误并做了修改，也有可能是因为在集成或维护阶段加入了新的模块。当软件中所含错误被发现时，如果错误跟踪与管理系统不够完善，就可能会遗漏对这些错误的修改；而开发者对错误理解的不够透彻，也可能导致所做的修改只修正了错误的外在表现，而没有修复错误本身，从而造成修改失败；修改还有可能产生副作用从而导致软件未被修改的部分产生新的问题，使本来工作正常的功能产生错误。同样，在有新代码加入软件的时候，除了新加入的代码中有可能含有错误外，新代码还有可能对原有的代码带来影响。因此，每当软件发生变化时，我们就必须重新测试现有的功能，以便确定修改是否达到了预期的目的，检查修改是否损害了原有的正常功能。同时，还需要补充新的测试用例来测试新的或被修改了的功能。为了验证修改的正确性及其影响就需要进行回归测试。</p>
+<p>回归测试在软件生命周期中扮演着重要的角色，因忽视回归测试而造成严重后果的例子不计其数，导致阿里亚娜5型火箭发射失败的软件缺陷就是由于复用的代码没有经过充分的回归测试造成的。</p>
+<p>回归测试作为软件生命周期的一个组成部分，在整个软件测试过程中占有很大的工作量比重，软件开发的各个阶段都会进行多次回归测试。在渐进和快速迭代开发中，新版本的连续发布使回归测试进行的更加频繁，而在极端编程方法中，更是要求每天都进行若干次回归测试。因此，通过选择正确的回归测试策略来改进回归测试的效率和有效性是非常有意义的。</p>
+</div><div id="part_2" style="display:none;"><p>二、 回归测试策略</p>
+<p>对于一个软件开发项目来说，项目的测试组在实施测试的过程中会将所开发的测试用例保存到“测试用例库”中，并对其进行维护和管理。当得到一个软件的基线版本时，用于基线版本测试的所有测试用例就形成了基线测试用例库。在需要进行回归测试的时候，就可以根据所选择的回归测试策略，从基线测试用例库中提取合适的测试用例组成回归测试包，通过运行回归测试包来实现回归测试。保存在基线测试用例库中的测试用例可能是自动测试脚本，也有可能是测试用例的手工实现过程。</p>
+<p>回归测试需要时间、经费和人力来计划、实施和管理。为了在给定的预算和进度下，尽可能有效率和有效力地进行回归测试，需要对测试用例库进行维护并依据一定的策略选择相应的回归测试包。</p>
+<p>1、测试用例库的维护</p>
+<p>为了最大限度地满足客户的需要和适应应用的要求，软件在其生命周期中会频繁地被修改和不断推出新的版本，修改后的或者新版本的软件会添加一些新的功能或者在软件功能上产生某些变化。随着软件的改变，软件的功能和应用接口以及软件的实现发生了演变，测试用例库中的一些测试用例可能会失去针对性和有效性，而另一些测试用例可能会变得过时，还有一些测试用例将完全不能运行。为了保证测试用例库中测试用例的有效性，必须对测试用例库进行维护。同时，被修改的或新增添的软件功能，仅仅靠重新运行以前的测试用例并不足以揭示其中的问题，有必要追加新的测试用例来测试这些新的功能或特征。因此，测试用例库的维护工作还应包括开发新测试用例，这些新的测试用例用来测试软件的新特征或者覆盖现有测试用例无法覆盖的软件功能或特征。</p>
+<p>测试用例的维护是一个不间断的过程，通常可以将软件开发的基线作为基准，维护的主要内容包括下述几个方面。</p>
+<p>(1)、删除过时的测试用例</p>
+<p>因为需求的改变等原因可能会使一个基线测试用例不再适合被测试系统，这些测试用例就会过时。例如，某个变量的界限发生了改变，原来针对边界值的测试就无法完成对新边界测试。所以，在软件的每次修改后都应进行相应的过时测试用例的删除。</p>
+<p>(2)、改进不受控制的测试用例</p>
+<p>随着软件项目的进展，测试用例库中的用例会不断增加，其中会出现一些对输入或运行状态十分敏感的测试用例。这些测试不容易重复且结果难以控制，会影响回归测试的效率，需要进行改进，使其达到可重复和可控制的要求。</p>
+<p>(3)、删除冗余的测试用例</p>
+<p>如果存在两个或者更多个测试用例针对一组相同的输入和输出进行测试，那么这些测试用例是冗余的。冗余测试用例的存在降低了回归测试的效率。所以需要定期的整理测试用例库，并将冗余的用例删除掉。</p>
+<p>(4)、增添新的测试用例</p>
+<p>如果某个程序段、构件或关键的接口在现有的测试中没有被测试，那么应该开发新测试用例重新对其进行测试。并将新开发的测试用例合并到基线测试包中。</p>
+<p>通过对测试用例库的维护不仅改善了测试用例的可用性，而且也提高了测试库的可信性，同时还可以将一个基线测试用例库的效率和效用保持在一个较高的级别上。</p>
+</div><div id="part_3" style="display:none;"><p>2、回归测试包的选择</p>
+<p>在软件生命周期中，即使一个得到良好维护的测试用例库也可能变得相当大，这使每次回归测试都重新运行完整的测试包变得不切实际。一个完全的回归测试包括每个基线测试用例，时间和成本约束可能阻碍运行这样一个测试，有时测试组不得不选择一个缩减的回归测试包来完成回归测试。</p>
+<p>回归测试的价值在于它是一个能够检测到回归错误的受控实验。当测试组选择缩减的回归测试时，有可能删除了将揭示回归错误的测试用例，消除了发现回归错误的机会。然而，如果采用了代码相依性分析等安全的缩减技术，就可以决定哪些测试用例可以被删除而不会让回归测试的意图遭到破坏。</p>
+<p>选择回归测试策略应该兼顾效率和有效性两个方面。常用的选择回归测试的方式包括：</p>
+<p>(1)、再测试全部用例</p>
+<p>选择基线测试用例库中的全部测试用例组成回归测试包，这是一种比较安全的方法，再测试全部用例具有最低的遗漏回归错误的风险，但测试成本最高。全部再测试几乎可以应用到任何情况下，基本上不需要进行分析和重新开发，但是，随着开发工作的进展，测试用例不断增多，重复原先所有的测试将带来很大的工作量，往往超出了我们的预算和进度。</p>
+<p>(2)、基于风险选择测试</p>
+<p>可以基于一定的风险标准来从基线测试用例库中选择回归测试包。首先运行最重要的、关键的和可疑的测试，而跳过那些非关键的、优先级别低的或者高稳定的测试用例，这些用例即便可能测试到缺陷，这些缺陷的严重性也仅有三级或四级。一般而言，测试从主要特征到次要特征。</p>
+<p>(3)、基于操作剖面选择测试</p>
+<p>如果基线测试用例库的测试用例是基于软件操作剖面开发的，测试用例的分布情况反映了系统的实际使用情况。回归测试所使用的测试用例个数可以由测试预算确定，回归测试可以优先选择那些针对最重要或最频繁使用功能的测试用例，释放和缓解最高级别的风险，有助于尽早发现那些对可靠性有最大影响的故障。这种方法可以在一个给定的预算下最有效的提高系统可靠性，但实施起来有一定的难度。</p>
+<p>(4)、再测试修改的部分</p>
+<p>当测试者对修改的局部化有足够的信心时，可以通过相依性分析识别软件的修改情况并分析修改的影响，将回归测试局限于被改变的模块和它的接口上。通常，一个回归错误一定涉及一个新的、修改的或删除的代码段。在允许的条件下，回归测试尽可能覆盖受到影响的部分。</p>
+<p>再测试全部用例的策略是最安全的策略，但已经运行过许多次的回归测试不太可能揭示新的错误，而且很多时候，由于时间、人员、设备和经费的原因，不允许选择再测试全部用例的回归测试策略，此时，可以选择适当的策略进行缩减的回归测试。</p>
+</div><div id="part_4" style="display:none;"><p>3、回归测试的基本过程</p>
+<p>有了测试用例库的维护方法和回归测试包的选择策略，回归测试可遵循下述基本过程进行:</p>
+<p>(1). 识别出软件中被修改的部分；</p>
+<p>(2). 从原基线测试用例库T中，排除所有不再适用的测试用例，确定那些对新的软件版本依然有效的测试用例，其结果是建立一个新的基线测试用例库T0。</p>
+<p>(3). 依据一定的策略从T0中选择测试用例测试被修改的软件。</p>
+<p>(4). 如果必要，生成新的测试用例集T1，用于测试T0无法充分测试的软件部分。</p>
+<p>(5). 用T1执行修改后的软件。</p>
+<p>第(2)和第(3)步测试验证修改是否破坏了现有的功能，第(4)和第(5)步测试验证 修改工作本身。</p>
+<p>三、 回归测试实践</p>
+<p>在实际工作中，回归测试需要反复进行，当测试者一次又一次地完成相同的测试时，这些回归测试将变得非常令人厌烦，而在大多数回归测试需要手工完成的时候尤其如此，因此，需要通过自动测试来实现重复的和一致的回归测试。通过测试自动化可以提高回归测试效率。为了支持多种回归测试策略，自动测试工具应该是通用的和灵活的，以便满足达到不同回归测试目标的要求。</p>
+<p>在测试软件时，应用多种测试技术是常见的。当测试一个修改了的软件时，测试者也可能希望采用多于一种回归测试策略来增加对修改软件的信心。不同的测试者可能会依据自己的经验和判断选择不同的回归测试技术和策略。</p>
+<p>回归测试并不减少对系统新功能和特征的测试需求，回归测试包应包括新功能和特征的测试。如果回归测试包不能达到所需的覆盖要求，必须补充新的测试用例使覆盖率达到规定的要求。</p>
+<p>回归测试是重复性较多的活动，容易使测试者感到疲劳和厌倦，降低测试效率，在实际工作中可以采用一些策略减轻这些问题。例如，安排新的测试者完成手工回归测试，分配更有经验的测试者开发新的测试用例，编写和调试自动测试脚本，做一些探索性的或ad hoc测试。还可以在不影响测试目标的情况下，鼓励测试者创造性地执行测试用例，变化的输入、按键和配置能够有助于激励测试者又能揭示新的错误。</p>
+<p>在组织回归测试时需要注意两点，首先是各测试阶段发生的修改一定要在本测试阶段内完成回归，以免将错误遗留到下一测试阶段。其次，回归测试期间应对该软件版本冻结，将回归测试发现的问题集中修改，集中回归。</p>
+<p>在实际工作中，可以将回归测试与兼容性测试结合起来进行。在新的配置条件下运行旧的测试可以发现兼容性问题，而同时也可以揭示编码在回归方面的错误。</p>
+<p>参考文献：</p>
+<p>[1] Glenford J.Myers，计算机软件测试技巧，清华大学出版社，1985。</p>
+<p>[2] Robert V. Binder，面向对象系统的测试，人民邮电出版社，2001。</p>
+<p>[3] Rex Black， 测试流程管理，北京大学出版社，2001。</p>
+</div><div id="paginate"><label id="li_1" onclick="javascript:show_page(1,4,this);" style="font-size:30px;font-weight:bold" onmouseover="this.style.cursor='pointer'">1</label><label id="li_2" onclick="javascript:show_page(2,4,this);"  onmouseover="this.style.cursor='pointer'">2</label><label id="li_3" onclick="javascript:show_page(3,4,this);"  onmouseover="this.style.cursor='pointer'">3</label><label id="li_4" onclick="javascript:show_page(4,4,this);"  onmouseover="this.style.cursor='pointer'">4</label></div> 
+			<div align="center">1 day ago, this page was being read. </div>
+			<p class="tags"><a href="http://www.xieziming.com/tag/ji-shu" rel="tag">技术</a><br /></p>  
+    </div><!-- /entry -->                                   
+		<div class="postbottom"></div>		                              
+		</div><!-- /post -->	
+
+<div class="postrelated">
+			<table width="100%" >				
+
+					<tr><td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/538.html" rel="bookmark" title="我还要好好学习&#8230;.">我还要好好学...</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/567.html" rel="bookmark" title="ECC路由表初探">ECC路由表初探</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/574.html" rel="bookmark" title="周期性的火大">周期性的火大</a></td>
+
+				<td align="right" class="dashedline_related">★<a href="http://www.xieziming.com/archives/238.html" rel="bookmark" title="<数码摄影构图>">&lt;数码摄影构图&gt;</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/689.html" rel="bookmark" title="Arrange">Arran...</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/4300.html" rel="bookmark" title="Ruby（二）">Ruby（二）</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/2310.html" rel="bookmark" title="ECC协议簇学习">ECC协议簇学习</a></td>
+
+				<td align="right" class="dashedline_related"><a href="http://www.xieziming.com/archives/4276.html" rel="bookmark" title="ROR笔记（一）">ROR笔记（...</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/7150.html" rel="bookmark" title="Shell (二)">Shell (二)</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/6406.html" rel="bookmark" title="QTP DataTable">QTP DataT...</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/709.html" rel="bookmark" title="不要迷失在技术的海洋中">不要迷失在技术...</a></td>
+
+				<td align="right" class="dashedline_related">★<a href="http://www.xieziming.com/archives/703.html" rel="bookmark" title="两个人能够在电话上打牌吗？">两个人能够在电...</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/2783.html" rel="bookmark" title="单元测试全攻略">单元测试全攻略</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/3993.html" rel="bookmark" title="令人费解的workflow">令人费解的workflo...</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/1300.html" rel="bookmark" title="桥接,NAT网络配置详解">桥接,NAT网络配置详解</a></td>
+
+				<td align="right" class="dashedline_related"><a href="http://www.xieziming.com/archives/4247.html" rel="bookmark" title="小试Ruby">小试Ruby</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/2835.html" rel="bookmark" title="linux学习笔记">linux...</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/3772.html" rel="bookmark" title="Mantis Bug Tracker">Mantis...</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/2787.html" rel="bookmark" title="软件测试要素">软件测试要素</a></td>
+
+				<td align="right" class="dashedline_related">★<a href="http://www.xieziming.com/archives/903.html" rel="bookmark" title="用VLAN分割广播域">用VLAN...</a></td></tr>
+
+		</table>
+</div>
+
+		<div id="comments">
+
+<!-- START COMMENT FORMS -->
+
+
+		</div><!--/comments-->		
+
+</div><!-- /content -->
+<div id="sidebar">			
+			<a class="subscribe" href="http://www.xieziming.com/feed" title="Posts RSS">Subscribe</a>			
+			<div id="search">	
+	<form name="searchform" id="searchform" method="get" action="http://www.xieziming.com/index.php">
+		<input class="text" type="text" name="s" id="s" value=""/>
+		<input class="submit" type="image" src="http://www.xieziming.com/wp-content/themes/ziming/img/submit.jpg" value="search" />
+	</form>	
+</div><!-- /search -->			
+			<div id="widgets">			
+			<div class="widget"><h3>Calendar</h3>
+<table id="wp-calendar">
+  									<caption>December 2016</caption>
+  									<thead>
+                    <tr><th scope="col" title="S">S</th><th scope="col" title="M">M</th><th scope="col" title="T">T</th><th scope="col" title="W">W</th><th scope="col" title="T">T</th><th scope="col" title="F">F</th><th scope="col" title="S">S</th></tr></thead><tbody><tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>1</td><td>2</td><td>3</td></tr><tr><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td></tr><tr><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td></tr><tr><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">18<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">《血战钢锯岭》</span><br/><span class="time" style="color:#000000; " > Time : 21:18 - 23:28</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">晚上和小锅去看，蛮感人的。吃完去沙湾吃猪杂粥，应该是我在那吃到的最新鲜的一次了。</p></span></a></span></td><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">19<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">CentOS</span><br/><span class="time" style="color:#000000; " > Time : 14:11 - 18:11</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">终于有点时间来把那盒子的win7转成CentOS来做server。配置vsftp花了我太多的时间。。。</p></span></a></span></td><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td></tr><tr><td>25</td><td>26</td><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td></tr><tr><td colspan="3" id="prev"><a href="http://www.xieziming.com/archives/2779.html?month=nov&yr=2016">&laquo; Prev</a></td><td colspan="4" id="next"><a href="http://www.xieziming.com/archives/2779.html?month=jan&yr=2017">Next &raquo;</a></td></tr></tbody></table>
+<div class="widgetbottom"></div></div><!--/widget-->				
+					      		<div class="widget">
+ 							<h3>Recent Posts</h3>
+							<ul>
+           				<li><a href="http://www.xieziming.com/archives/9579.html" class="dashedline" title="闽南 · 泉州">闽南 &middot; 泉州</a></li><li><a href="http://www.xieziming.com/archives/9578.html" class="dashedline" title="顺化 · HUE">顺化 &middot; HUE</a></li><li><a href="http://www.xieziming.com/archives/9577.html" class="dashedline" title="会安 · 春卷">会安 &middot; 春卷</a></li><li><a href="http://www.xieziming.com/archives/9576.html" class="dashedline" title="会安 · 夜灯">会安 &middot; 夜灯</a></li><li><a href="http://www.xieziming.com/archives/9575.html" class="dashedline" title="会安古镇">会安古镇</a></li><li><a href="http://www.xieziming.com/archives/9573.html" class="dashedline" title="岘港">岘港</a></li><li><a href="http://www.xieziming.com/archives/9535.html" class="dashedline" title="罗马">罗马</a></li><li><a href="http://www.xieziming.com/archives/9534.html" class="dashedline" title="卢浮宫">卢浮宫</a></li>						
+							</ul>
+      				<div class="widgetbottom"></div>
+	    		</div>
+	    			        
+        	      		<div class="widget">
+ 							<h3>Rand Posts</h3>
+							<ul>
+      						<li><a href="http://www.xieziming.com/archives/9188.html" class="dashedline" title="印度 · 火车 & 地铁">印度 &middot; 火车 &amp; 地铁</a></li><li><a href="http://www.xieziming.com/archives/1316.html" class="dashedline" title="人文（一）宗教">人文（一）宗教</a></li><li><a href="http://www.xieziming.com/archives/4326.html" class="dashedline" title="The One Vision">The One Vis...</a></li><li><a href="http://www.xieziming.com/archives/7952.html" class="dashedline" title="亚航">亚航</a></li><li><a href="http://www.xieziming.com/archives/3355.html" class="dashedline" title="泰国游行程总结">泰国游行程总结</a></li><li><a href="http://www.xieziming.com/archives/1597.html" class="dashedline" title="QQme">QQme</a></li><li><a href="http://www.xieziming.com/archives/5850.html" class="dashedline" title="沙面（一）">沙面（一）</a></li><li><a href="http://www.xieziming.com/archives/8612.html" class="dashedline" title="香港美食">香港美食</a></li>	
+							</ul>
+        			<div class="widgetbottom"></div>
+					</div>                 
+          	                       
+			</div><!-- /widgets -->			                       
+</div><!-- /sidebar --></div><!-- /main -->
+<div id="footer">
+<p align="left">© <a href="http://www.miitbeian.gov.cn" target="_blank"> 明 · 明 · 童 · 鞋</a></p>
+<!--76 queries in 2.698 seconds.-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?c2e18b43ec905e3c4ea82c1b57537223";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</div><!-- /footer -->
+</div><!-- /container -->
+<script type='text/javascript' src='http://www.xieziming.com/wp-includes/js/wp-embed.min.js?ver=4.7'></script>
+</body>
+</html>

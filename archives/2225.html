@@ -1,0 +1,407 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head profile="http://gmpg.org/xfn/11">
+<title>  函数传递参数的理解 &raquo; 谢子明</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="description" content="函数传递参数的理解  " />
+<meta name="keywords" content="谢子明" />
+<link rel="stylesheet" href="http://www.xieziming.com/wp-content/themes/ziming/style.css" type="text/css" media="screen" />
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://www.xieziming.com/feed" />
+<link rel="alternate" type="application/rss+xml" href="http://www.xieziming.com/comments/feed" title="谢子明 Comments RSS feed" />
+<link rel="shortcut icon" href="http://www.xieziming.com/wp-content/themes/ziming/favicon.ico">
+<link rel="Bookmark" href="http://www.xieziming.com/wp-content/themes/ziming/favicon.ico">
+<link rel="pingback" href="http://www.xieziming.com/xmlrpc.php" />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="谢子明 &raquo; 函数传递参数的理解 Comments Feed" href="http://www.xieziming.com/archives/2225.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/xieziming.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.7"}};
+			!function(a,b,c){function d(a){var b,c,d,e,f=String.fromCharCode;if(!k||!k.fillText)return!1;switch(k.clearRect(0,0,j.width,j.height),k.textBaseline="top",k.font="600 32px Arial",a){case"flag":return k.fillText(f(55356,56826,55356,56819),0,0),!(j.toDataURL().length<3e3)&&(k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,65039,8205,55356,57096),0,0),b=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,55356,57096),0,0),c=j.toDataURL(),b!==c);case"emoji4":return k.fillText(f(55357,56425,55356,57341,8205,55357,56507),0,0),d=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55357,56425,55356,57341,55357,56507),0,0),e=j.toDataURL(),d!==e}return!1}function e(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i,j=b.createElement("canvas"),k=j.getContext&&j.getContext("2d");for(i=Array("flag","emoji4"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<script type='text/javascript' src='http://www.xieziming.com/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='http://www.xieziming.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<link rel='https://api.w.org/' href='http://www.xieziming.com/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.xieziming.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.xieziming.com/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='8月音乐推荐' href='http://www.xieziming.com/archives/3105.html' />
+<link rel='next' title='去聽夏天安靜的聲音(1)' href='http://www.xieziming.com/archives/2148.html' />
+<meta name="generator" content="WordPress 4.7" />
+<link rel="canonical" href="http://www.xieziming.com/archives/2225.html" />
+<link rel='shortlink' href='http://www.xieziming.com/?p=2225' />
+<link rel="alternate" type="application/json+oembed" href="http://www.xieziming.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fxieziming.com%2Farchives%2F2225.html" />
+<link rel="alternate" type="text/xml+oembed" href="http://www.xieziming.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fxieziming.com%2Farchives%2F2225.html&#038;format=xml" />
+ 	<link rel="stylesheet" href="http://www.xieziming.com/wp-content/plugins/live-calendar/live-calendar.css" type="text/css" media="screen" /> 
+<link rel="stylesheet" href="http://www.xieziming.com/wp-content/plugins/wp-code/wp-code.css" type="text/css" media="screen" />
+
+<link rel="stylesheet" href="http://www.xieziming.com/wp-content/plugins/zoom-highslide/highslide.css" type="text/css" media="screen" />
+<script type="text/javascript" src="http://www.xieziming.com/wp-content/plugins/zoom-highslide/js/highslide-full.packed.js"></script>
+<script type="text/javascript">
+	hs.graphicsDir = 'http://www.xieziming.com/wp-content/plugins/zoom-highslide/graphics/';
+	hs.align = 'center';
+	hs.transitions = ['expand', 'crossfade'];
+	hs.outlineType = 'rounded-white';
+  hs.wrapperClassName = 'controls-in-heading';
+	hs.showCredits=false;
+	hs.fadeInOut = true;
+	hs.dimmingOpacity = 0.8;
+
+	// Add the controlbar
+	if (hs.addSlideshow) hs.addSlideshow({
+		//slideshowGroup: 'group1',
+		interval: 4000,
+		repeat: false,
+		useControls: true,
+		fixedControls: false,
+		overlayOptions: {
+			opacity: 1,
+			position: 'top center',
+			hideOnMouseOut: true
+		}
+	});
+</script>
+
+<script type="text/javascript">
+	var widthRestriction = 668; 
+	var heightRestriction = 1000; 
+</script>
+<script type="text/javascript" src="http://www.xieziming.com/wp-content/plugins/zoom-highslide/js/zoom.js"></script>
+	
+<!--script src="http://www.xieziming.com/wp-content/themes/ziming/js/mouse.js" type="text/javascript"></script--> 
+</head>
+<body class="normalbg">
+<div id="container">
+	<div id="head">
+		<div id="nav">
+			<ul>
+				<li class="first"><a href="http://www.xieziming.com" title="首页">首页</a></li>
+				<li class="page_item page-item-2"><a href="http://www.xieziming.com/recent" title="最近">最近</a></li>
+				<li class="page_item page-item-3"><a href="http://www.xieziming.com/photo" title="Photo">映象</a></li>
+				<li class="page_item page-item-4"><a href="http://www.xieziming.com/food" title="Food">美食</a></li>
+				<li class="page_item page-item-5"><a href="http://www.xieziming.com/topic" title="关键字">话题</a></li>
+				<li class="page_item page-item-6"><a href="http://www.xieziming.com/travel" title="Travel">旅行</a></li>
+				<li class="page_item page-item-7"><a href="http://www.xieziming.com/literature" title="Literature">文艺</a></li>
+				<li class="page_item page-item-8"><a href="http://www.xieziming.com/wiki" title="技术维基">维基</a></li>
+				<li class="page_item page-item-9"><a href="http://www.xieziming.com/calendar" title="Calendar">点滴</a></li>
+			</ul>
+		</div><!-- /nav -->		
+	</div><!-- /head -->
+<div id="main" class="altmainbg">
+
+<script type="text/javascript">
+function show_page(id,count,source){
+	for (var i=1;i<=count;i++){
+		if(id != i){
+				jQuery("#part_"+i).hide();
+				document.getElementById("li_"+i).style.fontWeight = "normal";
+				document.getElementById("li_"+i).style.fontSize = "18px";
+		}
+	}
+	jQuery("#part_"+id).show();
+	document.getElementById("li_"+id).style.fontWeight = "bold";
+	document.getElementById("li_"+id).style.fontSize = "30px";
+	jQuery('body,html').animate({scrollTop:0},1000);
+        return false;
+}
+</script>
+<div id="content">
+
+	<div class="post" id="post-2225">
+		<h2 class="title">函数传递参数的理解</h2>
+		<p class="postmetadata">
+			<span class="date">13 August 2009</span>
+			<span class="category">Categoried in <a href="http://www.xieziming.com/topic/ji-shu-wei-ji" rel="category tag">技术维基</a></span>
+			<span class="comments">0</span>
+			<span class="view">Preview : 72 , Read : 2808 </span>
+			<span class="mail">Index : 2207 </span>
+		</p>
+		<div class="entry">				
+<div id="part_1"><p>一、 函数参数传递机制的基本理论</p>
+<p>函数参数传递机制问题在本质上是调用函数（过程）和被调用函数（过程）在调用发生时进行通信的方法问题。基本的参数传递机制有两种：值传递和引用传递。以下讨论称调用其他函数的函数为主调函数，被调用的函数为被调函数。<br />
+　　<br />
+值传递（passl-by-value）过程中，被调函数的形式参数作为被调函数的局部变量处理，即在堆栈中开辟了内存空间以存放由主调函数放进来的实参的值，从而成为了实参的一个副本。值传递的特点是被调函数对形式参数的任何操作都是作为局部变量进行，不会影响主调函数的实参变量的值。<br />
+<!--more-->　　<br />
+引用传递(pass-by-reference)过程中，被调函数的形式参数虽然也作为局部变量在堆栈中开辟了内存空间，但是这时存放的是由主调函数放进来的实参变量的地址。被调函数对形参的任何操作都被处理成间接寻址，即通过堆栈中存放的地址访问主调函数中的实参变量。正因为如此，被调函数对形参做的任何操作都影响了主调函数中的<br />
+实参变量。</p>
+<p>二、 C语言中的函数参数传递机制<br />
+　　<br />
+在C语言中，值传递是唯一可用的参数传递机制。但是据笔者所知，由于受指针变量作为函数参数的影响，有许多朋友还认为这种情况是引用传递。这是错误的。请看下面的代码：<br />
+int swap(int *x, int *y)<br />
+{<br />
+int temp;<br />
+temp = *x; *x = *y; *y = temp;<br />
+return temp;<br />
+}<br />
+void main()<br />
+{<br />
+int a = 1, b = 2;<br />
+int *p1 = &a;<br />
+int *p2 = &b;<br />
+swap(p1, p2)<br />
+}<br />
+　　<br />
+函数swap以两个指针变量作为参数，当main()调用swap时，是以值传递的方式将指针变量p1、p2的值（也就是变量a、b的地址）放在了swap在堆栈中为形式参数x、y开辟的内存单元中。这一点从以下的汇编代码可以看出（注释是笔者加的）：<br />
+22: void main()<br />
+23: {<br />
+……<br />
+……<br />
+13: int a = 1, b = 2;<br />
+00401088 mov dword ptr [ebp-4],1<br />
+0040108F mov dword ptr [ebp-8],2<br />
+14: int *p1 = &a;<br />
+00401096 lea eax,[ebp-4]<br />
+00401099 mov dword ptr [ebp-0Ch],eax<br />
+15: int *p2 = &b;<br />
+0040109C lea ecx,[ebp-8]<br />
+0040109F mov dword ptr [ebp-10h],ecx<br />
+16: swap(p1, p2);<br />
+004010A2 mov edx,dword ptr [ebp-10h] ；参数p2的值进栈<br />
+004010A5 push edx<br />
+004010A6 mov eax,dword ptr [ebp-0Ch] ；参数p1的值进栈<br />
+004010A9 push eax<br />
+004010AA call @ILT+15(swap) (00401014) ；调用swap函数<br />
+004010AF add esp,8 ；清理堆栈中的参数<br />
+17: }<br />
+　　<br />
+阅读上述代码要注意，INTEL80x86系列的CPU对堆栈的处理是向下生成，即从高地址单元向低地址单元生成。从上面的汇编代码可知，main() 在调用swap之前，先将实参的值按从右至左的顺序压栈，即先p2进栈，再p1进栈。调用结束之后，主调函数main()负责清理堆栈中的参数。Swap 将使用这些进入堆栈的变量值。下面是swap函数的汇编代码：<br />
+14: void swap(int *x, int *y)<br />
+15: {<br />
+00401030 push ebp<br />
+00401031 mov ebp,esp ；ebp指向栈顶<br />
+……<br />
+……<br />
+16: int temp;<br />
+17: temp = *x;<br />
+4: int temp;<br />
+5: temp = *x;<br />
+00401048 mov eax,dword ptr [ebp+8] ；操作已存放在堆栈中的p1,将p1置<br />
+； 入eax<br />
+0040104B mov ecx,dword ptr [eax] ；通过寄存器间址将*p1置入ecx<br />
+0040104D mov dword ptr [ebp-4],ecx；经由ecx将*p1置入temp变量的内<br />
+；存单元。以下类似<br />
+6: *x = *y;<br />
+00401050 mov edx,dword ptr [ebp+8]<br />
+00401053 mov eax,dword ptr [ebp+0Ch]<br />
+00401056 mov ecx,dword ptr [eax]<br />
+00401058 mov dword ptr [edx],ecx<br />
+7: *y = temp;<br />
+0040105A mov edx,dword ptr [ebp+0Ch]<br />
+0040105D mov eax,dword ptr [ebp-4]<br />
+00401060 mov dword ptr [edx],eax<br />
+8: return temp;<br />
+00401062 mov eax,dword ptr [ebp-4]<br />
+9: }<br />
+　　<br />
+由上述汇编代码基本上说明了C语言中值传递的原理，只不过传递的是指针的值而已。本文后面还要论述使用引用传递的swap函数。从这些汇编代码分析，这里我们可以得到以下几点：<br />
+　　<br />
+1． 进程的堆栈存储区是主调函数和被调函数进行通信的主要区域。<br />
+　　<br />
+2． C语言中参数是从右向左进栈的。<br />
+　　<br />
+3． 被调函数使用的堆栈区域结构为：</p>
+<p>　　　　局部变量（如temp）<br />
+　　　　返回地址<br />
+　　　　函数参数<br />
+　　　　低地址<br />
+　　　　高地址<br />
+　　<br />
+4． 由主调函数在调用后清理堆栈。<br />
+　　<br />
+5． 函数的返回值一般是放在寄存器中的。<br />
+　　<br />
+这里尚需补充说明几点：一是参数进栈的方式。对于内部类型，由于编译器知道各类型变量使用的内存大小故直接使用push指令；对于自定义的类型（如 structure），采用从源地址向目的（堆栈区）地址进行字节传送的方式入栈。二是函数返回值为什么一般放在寄存器中，这主要是为了支持中断；如果放在堆栈中有可能因为中断而被覆盖。三是函数的返回值如果很大，则从堆栈向存放返回值的地址单元（由主调函数在调用前将此地址压栈提供给被调函数）进行字节传送，以达到返回的目的。对于第二和第三点，《Thinking in C++》一书在第10章有比较好的阐述。四是一个显而易见的结论，如果在被调函数中返回局部变量的地址是毫无意义的；因为局部变量存于堆栈中，调用结束后堆栈将被清理，这些地址就变得无效了。</p>
+<p>三、 C++语言中的函数参数传递机制<br />
+　　<br />
+C++既有C的值传递又有引用传递。在值传递上与C一致，这里着重说明引用传递。如本文前面所述，引用传递就是传递变量的地址到被调函数使用的堆栈中。在C++中声明引用传递要使用&#8221;&#038;&#8221;符号，而调用时则不用。下面的代码是使用引用传递的swap2函数和main函数：<br />
+int&#038; swap2(int&#038; x, int&#038; y)<br />
+{<br />
+int temp;<br />
+temp = x;<br />
+x = y;<br />
+y = temp;<br />
+return x;<br />
+}</p>
+<p>void main()<br />
+{<br />
+int a = 1, b = 2;<br />
+swap2(a, b);<br />
+}<br />
+　　<br />
+此时函数swap2将接受两个整型变量的地址，同时返回一个其中的一个。而从main函数中对swap2的调用swap2(a, b)则看不出是否使用引用传递，是否使用引用传递，是由swap2函数的定义决定的。以下是main函数的汇编代码：<br />
+11: void main()<br />
+12: {<br />
+……<br />
+……<br />
+13: int a = 1, b = 2;<br />
+00401088 mov dword ptr [ebp-4],1 ；变量a<br />
+0040108F mov dword ptr [ebp-8],2 ；变量b<br />
+14: swap2(a, b);<br />
+00401096 lea eax,[ebp-8] ；将b的偏移地址送入eax<br />
+00401099 push eax ；b的偏移地址压栈<br />
+0040109A lea ecx,[ebp-4] ；将a的偏移地址送入ecx<br />
+0040109D push ecx ；将a的偏移地址压栈<br />
+0040109E call @ILT+20(swap2) (00401019) ；调用swap函数<br />
+004010A3 add esp,8 ；清理堆栈中的参数<br />
+15: }</p>
+<p>可以看出，main函数在调用swap２之前，按照从右至左的顺序将b和a的偏移地<br />
+址压栈，这就是在传递变量的地址。此时swap２函数的汇编代码是：<br />
+2: int&#038; swap2(int&#038; x, int&#038; y)<br />
+3: {<br />
+00401030 push ebp<br />
+00401031 mov ebp,esp<br />
+……<br />
+……<br />
+4: int temp;<br />
+5: temp = x;<br />
+00401048 mov eax,dword ptr [ebp+8]<br />
+0040104B mov ecx,dword ptr [eax]<br />
+0040104D mov dword ptr [ebp-4],ecx<br />
+6: x = y;<br />
+00401050 mov edx,dword ptr [ebp+8]<br />
+00401053 mov eax,dword ptr [ebp+0Ch]<br />
+00401056 mov ecx,dword ptr [eax]<br />
+00401058 mov dword ptr [edx],ecx<br />
+7: y = temp;<br />
+0040105A mov edx,dword ptr [ebp+0Ch]<br />
+0040105D mov eax,dword ptr [ebp-4]<br />
+00401060 mov dword ptr [edx],eax<br />
+8: return x;<br />
+00401062 mov eax,dword ptr [ebp+8] ；返回x，由于x是外部变量的偏移地<br />
+；址，故返回是合法的<br />
+9: }<br />
+　　<br />
+可以看出，swap2与前面的swap函数的汇编代码是一样的。这是因为前面的swap函数接受指针变量，而指针变量的值正是地址。所以，对于这里的swap2和前面的swap来讲，堆栈中的函数参数存放的都是地址，在函数中操作的方式是一致的。但是，对swap2来说这个地址是主调函数通过将实参变量的偏移地址压栈而传递进来的&#8211;这<br />
+是引用传递；而对swap来说，这个地址是主调函数通过将实参变量的值压栈而传递进来的&#8211;这是值传递，只不过由于这个实参变量是指针变量所以其值是地址而已。<br />
+　　<br />
+这里的关键点在于，同样是地址，一个是引用传递中的变量地址，一个是值传递中的指针变量的值。我想若能明确这一点，就不至于将C语言中的以指针变量作为函数参数的值传递情况混淆为引用传递了。<br />
+　　<br />
+虽然x是一个局部变量，但是由于其值是主调函数中的实参变量的地址，故在swap2中返回这个地址是合法的。<br />
+　　<br />
+c++ 中经常使用的是常量引用，如将swap2改为：<br />
+　　　　<br />
+Swap2(const int&#038; x; const int&#038; y)<br />
+　　<br />
+这时将不能在函数中修改引用地址所指向的内容，具体来说，x和y将不能出现在&#8221;＝&#8221;的左边。</p>
+</div> 
+			<div align="center">1 month ago, this page was being read. </div>
+			<p class="tags"><a href="http://www.xieziming.com/tag/cheng-xu" rel="tag">程序</a><br /></p>  
+    </div><!-- /entry -->                                   
+		<div class="postbottom"></div>		                              
+		</div><!-- /post -->	
+
+<div class="postrelated">
+			<table width="100%" >				
+
+					<tr><td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/4743.html" rel="bookmark" title="为博客添加flash批量上传功能">为博客添加fl...</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/6695.html" rel="bookmark" title="PHP通过字符串调用函数">PHP通过字符串调用函数</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/3122.html" rel="bookmark" title="C++ 类访问控制探讨">C++ 类访问控...</a></td>
+
+				<td align="right" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7000.html" rel="bookmark" title="Java IO类">Java I...</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/2468.html" rel="bookmark" title="九个数据结构例子">九个数据结...</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/2445.html" rel="bookmark" title="J2EE回忆">J2EE回忆</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/6661.html" rel="bookmark" title="Application Monitor">Application ...</a></td>
+
+				<td align="right" class="dashedline_related"><a href="http://www.xieziming.com/archives/7451.html" rel="bookmark" title="Javascript之DOM">Javascript之D...</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/2223.html" rel="bookmark" title="软件面试题目">软件面试题...</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/2220.html" rel="bookmark" title="软件项目开发流程">软件项目开发流程</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/7464.html" rel="bookmark" title="IE插件">IE插件</a></td>
+
+				<td align="right" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7636.html" rel="bookmark" title="控制Windows窗体(C#)">控制Win...</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/6805.html" rel="bookmark" title="Java垃圾回收算法">Java垃圾回收...</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/2216.html" rel="bookmark" title="Java程序员面试宝典">Java程...</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/8783.html" rel="bookmark" title="Restful之参数获取">Restf...</a></td>
+
+				<td align="right" class="dashedline_related"><a href="http://www.xieziming.com/archives/78.html" rel="bookmark" title="VC + Matlab + 数据库">VC + Matla...</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/7409.html" rel="bookmark" title="Http协议">Http协议</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/5528.html" rel="bookmark" title="网站配色表">网站配色表</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/2438.html" rel="bookmark" title="mysql负载均衡配置">mysql负载均...</a></td>
+
+				<td align="right" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7457.html" rel="bookmark" title="Firefox插件制作">Firefox插件...</a></td></tr>
+
+		</table>
+</div>
+
+		<div id="comments">
+
+<!-- START COMMENT FORMS -->
+
+
+		</div><!--/comments-->		
+
+</div><!-- /content -->
+<div id="sidebar">			
+			<a class="subscribe" href="http://www.xieziming.com/feed" title="Posts RSS">Subscribe</a>			
+			<div id="search">	
+	<form name="searchform" id="searchform" method="get" action="http://www.xieziming.com/index.php">
+		<input class="text" type="text" name="s" id="s" value=""/>
+		<input class="submit" type="image" src="http://www.xieziming.com/wp-content/themes/ziming/img/submit.jpg" value="search" />
+	</form>	
+</div><!-- /search -->			
+			<div id="widgets">			
+			<div class="widget"><h3>Calendar</h3>
+<table id="wp-calendar">
+  									<caption>December 2016</caption>
+  									<thead>
+                    <tr><th scope="col" title="S">S</th><th scope="col" title="M">M</th><th scope="col" title="T">T</th><th scope="col" title="W">W</th><th scope="col" title="T">T</th><th scope="col" title="F">F</th><th scope="col" title="S">S</th></tr></thead><tbody><tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>1</td><td>2</td><td>3</td></tr><tr><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td></tr><tr><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td></tr><tr><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">18<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">《血战钢锯岭》</span><br/><span class="time" style="color:#000000; " > Time : 21:18 - 23:28</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">晚上和小锅去看，蛮感人的。吃完去沙湾吃猪杂粥，应该是我在那吃到的最新鲜的一次了。</p></span></a></span></td><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">19<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">CentOS</span><br/><span class="time" style="color:#000000; " > Time : 14:11 - 18:11</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">终于有点时间来把那盒子的win7转成CentOS来做server。配置vsftp花了我太多的时间。。。</p></span></a></span></td><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td></tr><tr><td>25</td><td>26</td><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td></tr><tr><td colspan="3" id="prev"><a href="http://www.xieziming.com/archives/2225.html?month=nov&yr=2016">&laquo; Prev</a></td><td colspan="4" id="next"><a href="http://www.xieziming.com/archives/2225.html?month=jan&yr=2017">Next &raquo;</a></td></tr></tbody></table>
+<div class="widgetbottom"></div></div><!--/widget-->				
+					      		<div class="widget">
+ 							<h3>Recent Posts</h3>
+							<ul>
+           				<li><a href="http://www.xieziming.com/archives/9579.html" class="dashedline" title="闽南 · 泉州">闽南 &middot; 泉州</a></li><li><a href="http://www.xieziming.com/archives/9578.html" class="dashedline" title="顺化 · HUE">顺化 &middot; HUE</a></li><li><a href="http://www.xieziming.com/archives/9577.html" class="dashedline" title="会安 · 春卷">会安 &middot; 春卷</a></li><li><a href="http://www.xieziming.com/archives/9576.html" class="dashedline" title="会安 · 夜灯">会安 &middot; 夜灯</a></li><li><a href="http://www.xieziming.com/archives/9575.html" class="dashedline" title="会安古镇">会安古镇</a></li><li><a href="http://www.xieziming.com/archives/9573.html" class="dashedline" title="岘港">岘港</a></li><li><a href="http://www.xieziming.com/archives/9535.html" class="dashedline" title="罗马">罗马</a></li><li><a href="http://www.xieziming.com/archives/9534.html" class="dashedline" title="卢浮宫">卢浮宫</a></li>						
+							</ul>
+      				<div class="widgetbottom"></div>
+	    		</div>
+	    			        
+        	      		<div class="widget">
+ 							<h3>Rand Posts</h3>
+							<ul>
+      						<li><a href="http://www.xieziming.com/archives/6813.html" class="dashedline" title="鼓浪屿，海的那边">鼓浪屿，海的那边</a></li><li><a href="http://www.xieziming.com/archives/1259.html" class="dashedline" title="突然发现">突然发现</a></li><li><a href="http://www.xieziming.com/archives/6322.html" class="dashedline" title="印象街角">印象街角</a></li><li><a href="http://www.xieziming.com/archives/8663.html" class="dashedline" title="耶里夏丽新疆餐厅">耶里夏丽新疆餐厅</a></li><li><a href="http://www.xieziming.com/archives/959.html" class="dashedline" title="老挝游历之XB篇">老挝游历之XB篇</a></li><li><a href="http://www.xieziming.com/archives/6747.html" class="dashedline" title="GBM ITT">GBM ITT</a></li><li><a href="http://www.xieziming.com/archives/7295.html" class="dashedline" title="川藏线（八）">川藏线（八）</a></li><li><a href="http://www.xieziming.com/archives/7116.html" class="dashedline" title="混搭菜">混搭菜</a></li>	
+							</ul>
+        			<div class="widgetbottom"></div>
+					</div>                 
+          	                       
+			</div><!-- /widgets -->			                       
+</div><!-- /sidebar --></div><!-- /main -->
+<div id="footer">
+<p align="left">© <a href="http://www.miitbeian.gov.cn" target="_blank"> 明 · 明 · 童 · 鞋</a></p>
+<!--74 queries in 2.385 seconds.-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?c2e18b43ec905e3c4ea82c1b57537223";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</div><!-- /footer -->
+</div><!-- /container -->
+<script type='text/javascript' src='http://www.xieziming.com/wp-includes/js/wp-embed.min.js?ver=4.7'></script>
+</body>
+</html>

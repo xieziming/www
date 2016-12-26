@@ -1,0 +1,1556 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head profile="http://gmpg.org/xfn/11">
+<title>  QTP控制Java程序原理 &raquo; 谢子明</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="description" content="QTP控制Java程序原理  " />
+<meta name="keywords" content="谢子明" />
+<link rel="stylesheet" href="http://www.xieziming.com/wp-content/themes/ziming/style.css" type="text/css" media="screen" />
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://www.xieziming.com/feed" />
+<link rel="alternate" type="application/rss+xml" href="http://www.xieziming.com/comments/feed" title="谢子明 Comments RSS feed" />
+<link rel="shortcut icon" href="http://www.xieziming.com/wp-content/themes/ziming/favicon.ico">
+<link rel="Bookmark" href="http://www.xieziming.com/wp-content/themes/ziming/favicon.ico">
+<link rel="pingback" href="http://www.xieziming.com/xmlrpc.php" />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="谢子明 &raquo; QTP控制Java程序原理 Comments Feed" href="http://www.xieziming.com/archives/7366.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/xieziming.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.7"}};
+			!function(a,b,c){function d(a){var b,c,d,e,f=String.fromCharCode;if(!k||!k.fillText)return!1;switch(k.clearRect(0,0,j.width,j.height),k.textBaseline="top",k.font="600 32px Arial",a){case"flag":return k.fillText(f(55356,56826,55356,56819),0,0),!(j.toDataURL().length<3e3)&&(k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,65039,8205,55356,57096),0,0),b=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,55356,57096),0,0),c=j.toDataURL(),b!==c);case"emoji4":return k.fillText(f(55357,56425,55356,57341,8205,55357,56507),0,0),d=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55357,56425,55356,57341,55357,56507),0,0),e=j.toDataURL(),d!==e}return!1}function e(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i,j=b.createElement("canvas"),k=j.getContext&&j.getContext("2d");for(i=Array("flag","emoji4"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<script type='text/javascript' src='http://www.xieziming.com/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='http://www.xieziming.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<link rel='https://api.w.org/' href='http://www.xieziming.com/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.xieziming.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.xieziming.com/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='Java启动参数' href='http://www.xieziming.com/archives/7364.html' />
+<link rel='next' title='VBS中的类' href='http://www.xieziming.com/archives/7377.html' />
+<meta name="generator" content="WordPress 4.7" />
+<link rel="canonical" href="http://www.xieziming.com/archives/7366.html" />
+<link rel='shortlink' href='http://www.xieziming.com/?p=7366' />
+<link rel="alternate" type="application/json+oembed" href="http://www.xieziming.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fxieziming.com%2Farchives%2F7366.html" />
+<link rel="alternate" type="text/xml+oembed" href="http://www.xieziming.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fxieziming.com%2Farchives%2F7366.html&#038;format=xml" />
+ 	<link rel="stylesheet" href="http://www.xieziming.com/wp-content/plugins/live-calendar/live-calendar.css" type="text/css" media="screen" /> 
+<link rel="stylesheet" href="http://www.xieziming.com/wp-content/plugins/wp-code/wp-code.css" type="text/css" media="screen" />
+
+<link rel="stylesheet" href="http://www.xieziming.com/wp-content/plugins/zoom-highslide/highslide.css" type="text/css" media="screen" />
+<script type="text/javascript" src="http://www.xieziming.com/wp-content/plugins/zoom-highslide/js/highslide-full.packed.js"></script>
+<script type="text/javascript">
+	hs.graphicsDir = 'http://www.xieziming.com/wp-content/plugins/zoom-highslide/graphics/';
+	hs.align = 'center';
+	hs.transitions = ['expand', 'crossfade'];
+	hs.outlineType = 'rounded-white';
+  hs.wrapperClassName = 'controls-in-heading';
+	hs.showCredits=false;
+	hs.fadeInOut = true;
+	hs.dimmingOpacity = 0.8;
+
+	// Add the controlbar
+	if (hs.addSlideshow) hs.addSlideshow({
+		//slideshowGroup: 'group1',
+		interval: 4000,
+		repeat: false,
+		useControls: true,
+		fixedControls: false,
+		overlayOptions: {
+			opacity: 1,
+			position: 'top center',
+			hideOnMouseOut: true
+		}
+	});
+</script>
+
+<script type="text/javascript">
+	var widthRestriction = 668; 
+	var heightRestriction = 1000; 
+</script>
+<script type="text/javascript" src="http://www.xieziming.com/wp-content/plugins/zoom-highslide/js/zoom.js"></script>
+	
+<!--script src="http://www.xieziming.com/wp-content/themes/ziming/js/mouse.js" type="text/javascript"></script--> 
+</head>
+<body class="normalbg">
+<div id="container">
+	<div id="head">
+		<div id="nav">
+			<ul>
+				<li class="first"><a href="http://www.xieziming.com" title="首页">首页</a></li>
+				<li class="page_item page-item-2"><a href="http://www.xieziming.com/recent" title="最近">最近</a></li>
+				<li class="page_item page-item-3"><a href="http://www.xieziming.com/photo" title="Photo">映象</a></li>
+				<li class="page_item page-item-4"><a href="http://www.xieziming.com/food" title="Food">美食</a></li>
+				<li class="page_item page-item-5"><a href="http://www.xieziming.com/topic" title="关键字">话题</a></li>
+				<li class="page_item page-item-6"><a href="http://www.xieziming.com/travel" title="Travel">旅行</a></li>
+				<li class="page_item page-item-7"><a href="http://www.xieziming.com/literature" title="Literature">文艺</a></li>
+				<li class="page_item page-item-8"><a href="http://www.xieziming.com/wiki" title="技术维基">维基</a></li>
+				<li class="page_item page-item-9"><a href="http://www.xieziming.com/calendar" title="Calendar">点滴</a></li>
+			</ul>
+		</div><!-- /nav -->		
+	</div><!-- /head -->
+<div id="main" class="altmainbg">
+
+<script type="text/javascript">
+function show_page(id,count,source){
+	for (var i=1;i<=count;i++){
+		if(id != i){
+				jQuery("#part_"+i).hide();
+				document.getElementById("li_"+i).style.fontWeight = "normal";
+				document.getElementById("li_"+i).style.fontSize = "18px";
+		}
+	}
+	jQuery("#part_"+id).show();
+	document.getElementById("li_"+id).style.fontWeight = "bold";
+	document.getElementById("li_"+id).style.fontSize = "30px";
+	jQuery('body,html').animate({scrollTop:0},1000);
+        return false;
+}
+</script>
+<div id="content">
+
+	<div class="post" id="post-7366">
+		<h2 class="title">QTP控制Java程序原理</h2>
+		<p class="postmetadata">
+			<span class="date">16 September 2012</span>
+			<span class="category">Categoried in <a href="http://www.xieziming.com/topic/testing" rel="category tag">测试</a></span>
+			<span class="comments">0</span>
+			<span class="view">Preview : 3528 , Read : 1779 </span>
+			<span class="mail">Index : 8534 </span>
+		</p>
+		<div class="entry">				
+<div id="part_1"><p>首先，添加如下环境变量：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;">_JAVA_OPTIONS：
+<span style="color: #339933;">-</span>Xrunjvmhook <span style="color: #339933;">-</span>Xbootclasspath<span style="color: #339933;">/</span>a<span style="color: #339933;">:</span>C<span style="color: #339933;">:</span>\PROGRA~<span style="color: #cc66cc;">1</span>\HP\QUICKT~<span style="color: #cc66cc;">1</span>\bin\JAVA_S~<span style="color: #cc66cc;">1</span>\classes<span style="color: #339933;">;</span>C<span style="color: #339933;">:</span>\PROGRA~<span style="color: #cc66cc;">1</span>\HP\QUICKT~<span style="color: #cc66cc;">1</span>\bin\JAVA_S~<span style="color: #cc66cc;">1</span>\classes\jasmine.<span style="color: #006633;">jar</span>
+&nbsp;
+JAVA_TOOL_OPTIONS：
+<span style="color: #339933;">-</span>agentlib<span style="color: #339933;">:</span>jvmhook</pre></div></div>
+
+<p>此时再起JVM的时候会有如下log出现：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;">Picked up JAVA_TOOL_OPTIONS<span style="color: #339933;">:</span> <span style="color: #339933;">-</span>agentlib<span style="color: #339933;">:</span>jvmhook
+Picked up _JAVA_OPTIONS<span style="color: #339933;">:</span> <span style="color: #339933;">-</span>Xrunjvmhook <span style="color: #339933;">-</span>Xbootclasspath<span style="color: #339933;">/</span>a<span style="color: #339933;">:</span>\PROGRA~<span style="color: #cc66cc;">1</span>\HP\QUICKT~<span style="color: #cc66cc;">1</span>\bin\JAVA_S~<span style="color: #cc66cc;">1</span>\classes<span style="color: #339933;">;</span>D<span style="color: #339933;">:</span>\PROGRA~<span style="color: #cc66cc;">1</span>\HP\QUICKT~<span style="color: #cc66cc;">1</span>\bin\JAVA_S~<span style="color: #cc66cc;">1</span>\classes\jasmine.<span style="color: #006633;">jar</span>
+Loading HP QuickTest Professional Java Support <span style="color: #009900;">&#40;</span>version 10.0.2297.0<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#40;</span>SUN 1.5.0_09<span style="color: #009900;">&#41;</span></pre></div></div>
+
+<p>接下来呢就要利用Java的JVMTI技术来实现对Java程序的控制了。大体的意思就是JVM提供了一些接口,你可以向JVM注册你感兴趣的事件,比如我们这里感兴趣的是JVM加载类的时候,我们希望有途径把我们自己的代码有选择的注入到类里.在JVMTI中,这个事件就是JVMTI_EVENT_CLASS_FILE_LOAD_HOOK .当JVM加载类的时候,会调用我们注册的回调函数,而我们就可以在这个函数里做自己想做的事。</p>
+<p>要实现这个目的,就要实现一个动态库,也就是JVMTI中的agent,在这个动态库中,有两个函数是必须的: Agent_OnLoad和Agent_OnUnload,他们是JVM与代理交互的接口.当一个代理被JVM加载后,首先调用Agent_OnLoad 这个方法;同样的,代理被JVM卸载后马上会调用Agent_OnUnload.我们就在Agent_OnLoad这个方法里注册感兴趣的事件,之后 JVM就会在&#8221;有事&#8221;的时候通知我们.要使用agent,就要在启动JVM的时候告诉他要用到那个agent:</p>
+<p>java -agentlib:<agentlibname><br />
+这个agentLibName就是有我实现的动态库的名字,因系统而定,在Windows是jvmhook.dll,</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #008000; font-style: italic; font-weight: bold;">/** Will return all methods of a give class */</span>
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">native</span> <span style="color: #003399;">Object</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> getAllObjects<span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">Class</span> clazz<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">//native方法，获取当前Object用，定义在jvmhook.dll里。</span>
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">native</span> <span style="color: #003399;">String</span> getMethodName<span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">long</span> methodId<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">//native方法，定义在jvmhook.dll里。</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">//下面是Jboss-Profiler的部分实现代码</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #003399;">Object</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> getAllObjects<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span> clazz<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+        <span style="color: #003399;">ArrayList</span> list <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">ArrayList</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        <span style="color: #000000; font-weight: bold;">Class</span> <span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> classes <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">this</span>.<span style="color: #006633;">getLoadedClasses</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        <span style="color: #000000; font-weight: bold;">for</span> <span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">int</span> i<span style="color: #339933;">=</span><span style="color: #cc66cc;">0</span><span style="color: #339933;">;</span>i<span style="color: #339933;">&lt;</span>classes .<span style="color: #006633;">length</span><span style="color: #339933;">;</span>i<span style="color: #339933;">++</span><span style="color: #009900;">&#41;</span>
+        <span style="color: #009900;">&#123;</span>
+            <span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>classes<span style="color: #009900;">&#91;</span>i<span style="color: #009900;">&#93;</span>.<span style="color: #006633;">getName</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>.<span style="color: #006633;">equals</span><span style="color: #009900;">&#40;</span>clazz<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>
+            <span style="color: #009900;">&#123;</span>
+                <span style="color: #003399;">Object</span> objs<span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">this</span>.<span style="color: #006633;">getAllObjects</span><span style="color: #009900;">&#40;</span>classes<span style="color: #009900;">&#91;</span>i<span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+                <span style="color: #000000; font-weight: bold;">for</span> <span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">int</span> count<span style="color: #339933;">=</span><span style="color: #cc66cc;">0</span><span style="color: #339933;">;</span>count<span style="color: #339933;">&lt;</span>objs.<span style="color: #006633;">length</span><span style="color: #339933;">;</span>count<span style="color: #339933;">++</span><span style="color: #009900;">&#41;</span>
+                <span style="color: #009900;">&#123;</span>
+                    list.<span style="color: #006633;">add</span><span style="color: #009900;">&#40;</span>objs<span style="color: #009900;">&#91;</span>count<span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+                <span style="color: #009900;">&#125;</span>
+            <span style="color: #009900;">&#125;</span>
+        <span style="color: #009900;">&#125;</span>
+        <span style="color: #000000; font-weight: bold;">return</span> list.<span style="color: #006633;">toArray</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #003399;">Field</span> getObjectField<span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">Class</span> clazz, <span style="color: #000066; font-weight: bold;">int</span> fieldId<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+      <span style="color: #003399;">ArrayList</span> list <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">ArrayList</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+      list.<span style="color: #006633;">add</span><span style="color: #009900;">&#40;</span>clazz<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+      <span style="color: #000000; font-weight: bold;">while</span> <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span>clazz <span style="color: #339933;">=</span> clazz.<span style="color: #006633;">getSuperclass</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">!=</span><span style="color: #000066; font-weight: bold;">null</span><span style="color: #009900;">&#41;</span>
+      <span style="color: #009900;">&#123;</span>
+            list.<span style="color: #006633;">add</span><span style="color: #009900;">&#40;</span>clazz<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+      <span style="color: #009900;">&#125;</span>
+&nbsp;
+      <span style="color: #000000; font-weight: bold;">for</span> <span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">int</span> i<span style="color: #339933;">=</span>list.<span style="color: #006633;">size</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">-</span><span style="color: #cc66cc;">1</span><span style="color: #339933;">;</span>i<span style="color: #339933;">&gt;=</span><span style="color: #cc66cc;">0</span><span style="color: #339933;">;</span>i<span style="color: #339933;">--</span><span style="color: #009900;">&#41;</span>
+      <span style="color: #009900;">&#123;</span>
+            <span style="color: #003399;">Field</span> fields<span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">Class</span><span style="color: #009900;">&#41;</span>list.<span style="color: #006633;">get</span><span style="color: #009900;">&#40;</span>i<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>.<span style="color: #006633;">getDeclaredFields</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+            <span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>fieldId<span style="color: #339933;">&lt;</span>fields .<span style="color: #006633;">length</span><span style="color: #009900;">&#41;</span>
+            <span style="color: #009900;">&#123;</span>
+                  <span style="color: #000000; font-weight: bold;">return</span> fields<span style="color: #009900;">&#91;</span>fieldId<span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+            <span style="color: #009900;">&#125;</span>
+            fieldId <span style="color: #339933;">-=</span> fields.<span style="color: #006633;">length</span><span style="color: #339933;">;</span>
+      <span style="color: #009900;">&#125;</span>
+      <span style="color: #000000; font-weight: bold;">return</span> <span style="color: #000066; font-weight: bold;">null</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span></pre></div></div>
+
+</div><div id="part_2" style="display:none;"><p><strong>Jboss-profiler代码：</strong><br />
+<a href="http://libjboss-profiler-java.sourcearchive.com/documentation/1.0.CR4/dir_1b38b8d95336afe5d2cc6ca86aec3fd2.html">http://libjboss-profiler-java.sourcearchive.com/documentation/1.0.CR4/dir_1b38b8d95336afe5d2cc6ca86aec3fd2.html</a></p>
+<p><strong>1. JVMTI实现代码</strong><br />
+<a href="http://libjboss-profiler-java.sourcearchive.com/documentation/1.0.CR4/dir_fc0f68dda94acb62d7027a06e01dd4c9.html">http://libjboss-profiler-java.sourcearchive.com/documentation/1.0.CR4/dir_fc0f68dda94acb62d7027a06e01dd4c9.html</a></p>
+<p><strong>2. DLL实现代码</strong><br />
+<a href="http://libjboss-profiler-java.sourcearchive.com/documentation/1.0.CR4/dir_9d6cbac687ec40671b50b89811d8e091.html">http://libjboss-profiler-java.sourcearchive.com/documentation/1.0.CR4/dir_9d6cbac687ec40671b50b89811d8e091.html</a></p>
+
+<div class="wp_code"><div class="pre"><pre class="c" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #808080; font-style: italic;">/**jbossAgent.cpp */</span>
+<span style="color: #339933;">#include &lt;stdlib .h&gt;</span>
+<span style="color: #339933;">#include &lt;stdio .h&gt;</span>
+<span style="color: #339933;">#include &quot;jvmti.h&quot;</span>
+&nbsp;
+<span style="color: #339933;">#include &quot;org_jboss_profiler_jvmti_JVMTIInterface.h&quot;</span>
+&nbsp;
+<span style="color: #339933;">#define AGENT_MAIN</span>
+<span style="color: #339933;">#include &quot;jbossAgent.h&quot;</span>
+&nbsp;
+jint initJVMTI<span style="color: #009900;">&#40;</span>JavaVM <span style="color: #339933;">*</span>jvm<span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#123;</span>
+   jint res<span style="color: #339933;">;</span>
+&nbsp;
+   res <span style="color: #339933;">=</span> jvm<span style="color: #339933;">-&gt;</span>GetEnv<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span><span style="color: #993333;">void</span> <span style="color: #339933;">**</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">&amp;</span>jvmti<span style="color: #339933;">,</span> JVMTI_VERSION_1_0<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>   
+   <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span>res<span style="color: #339933;">!=</span>JNI_OK<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+      <span style="color: #b1b100;">return</span> res<span style="color: #339933;">;</span>
+   <span style="color: #009900;">&#125;</span>
+&nbsp;
+   jvmtiError error<span style="color: #339933;">;</span>
+&nbsp;
+&nbsp;
+  jvmtiCapabilities   capabilities<span style="color: #339933;">;</span>
+&nbsp;
+  error <span style="color: #339933;">=</span> jvmti<span style="color: #339933;">-&gt;</span>GetCapabilities<span style="color: #009900;">&#40;</span><span style="color: #339933;">&amp;</span>capabilities<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+  verifyError<span style="color: #009900;">&#40;</span>error<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+  capabilities.<span style="color: #202020;">can_tag_objects</span> <span style="color: #339933;">=</span> <span style="color: #0000dd;">1</span><span style="color: #339933;">;</span>
+  capabilities.<span style="color: #202020;">can_generate_garbage_collection_events</span> <span style="color: #339933;">=</span> <span style="color: #0000dd;">1</span><span style="color: #339933;">;</span>
+  error<span style="color: #339933;">=</span> jvmti<span style="color: #339933;">-&gt;</span>AddCapabilities<span style="color: #009900;">&#40;</span><span style="color: #339933;">&amp;</span>capabilities<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+  verifyError<span style="color: #009900;">&#40;</span>error<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+   <span style="color: #b1b100;">return</span> JNI_OK<span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+JNIEXPORT jint JNICALL Agent_OnLoad<span style="color: #009900;">&#40;</span>JavaVM <span style="color: #339933;">*</span>jvm<span style="color: #339933;">,</span> <span style="color: #993333;">char</span> <span style="color: #339933;">*</span>options<span style="color: #339933;">,</span> <span style="color: #993333;">void</span> <span style="color: #339933;">*</span>reserved<span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#123;</span>
+   <span style="color: #b1b100;">return</span> initJVMTI<span style="color: #009900;">&#40;</span>jvm<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span>
+<span style="color: #339933;">&lt;/</span>stdio<span style="color: #339933;">&gt;&lt;/</span>stdlib<span style="color: #339933;">&gt;</span></pre></div></div>
+
+
+<div class="wp_code"><div class="pre"><pre class="c" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #808080; font-style: italic;">/**jbossAgent.h */</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">// It requires you to include &quot;string.h&quot; and &quot;io.h&quot;</span>
+<span style="color: #339933;">#ifdef AGENT_MAIN</span>
+jvmtiEnv <span style="color: #339933;">*</span>jvmti <span style="color: #339933;">=</span> NULL<span style="color: #339933;">;</span>
+<span style="color: #339933;">#else</span>
+<span style="color: #000000; font-weight: bold;">extern</span> jvmtiEnv <span style="color: #339933;">*</span>jvmti<span style="color: #339933;">;</span>
+<span style="color: #339933;">#endif</span>
+&nbsp;
+<span style="color: #339933;">#define REFERENCE_ROOT 10</span>
+<span style="color: #339933;">#define REFERENCE_THREAD 11</span>
+&nbsp;
+<span style="color: #993333;">typedef</span> <span style="color: #993333;">struct</span> _iterateControl
+<span style="color: #009900;">&#123;</span>
+   FILE <span style="color: #339933;">*</span> fileObjects<span style="color: #339933;">;</span>
+   FILE <span style="color: #339933;">*</span> fileReferences<span style="color: #339933;">;</span>
+   FILE <span style="color: #339933;">*</span> fileClasses<span style="color: #339933;">;</span>
+   jlong genericCount<span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span> IterateControl<span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #993333;">typedef</span> <span style="color: #993333;">struct</span> _iteraOverObjectsControl
+<span style="color: #009900;">&#123;</span>
+   jint size<span style="color: #339933;">;</span>
+   jint maxsize<span style="color: #339933;">;</span>
+   jlong <span style="color: #339933;">*</span> tags<span style="color: #339933;">;</span>
+   jlong count<span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span> IteraOverObjectsControl<span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">inline</span> <span style="color: #993333;">void</span> verifyError<span style="color: #009900;">&#40;</span>jvmtiError error<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+   <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span> error <span style="color: #339933;">!=</span> JVMTI_ERROR_NONE <span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+      <span style="color: #993333;">char</span> <span style="color: #339933;">*</span> errorName<span style="color: #339933;">;</span>
+      jvmti<span style="color: #339933;">-&gt;</span>GetErrorName<span style="color: #009900;">&#40;</span>error<span style="color: #339933;">,&amp;</span>errorName<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+      fprintf <span style="color: #009900;">&#40;</span>stderr<span style="color: #339933;">,</span><span style="color: #ff0000;">&quot;JVMTI Error %s<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">,</span>errorName<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+      fflush<span style="color: #009900;">&#40;</span>stderr<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+      jvmti<span style="color: #339933;">-&gt;</span>Deallocate<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span><span style="color: #993333;">unsigned</span> <span style="color: #993333;">char</span> <span style="color: #339933;">*</span><span style="color: #009900;">&#41;</span>errorName<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+   <span style="color: #009900;">&#125;</span>   
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">inline</span> <span style="color: #993333;">void</span> addTag<span style="color: #009900;">&#40;</span>IteraOverObjectsControl <span style="color: #339933;">*</span> control<span style="color: #339933;">,</span> jlong <span style="color: #339933;">&amp;</span> taglong<span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#123;</span>
+   <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span>control<span style="color: #339933;">-&gt;</span>size<span style="color: #339933;">&gt;=</span>control<span style="color: #339933;">-&gt;</span>maxsize<span style="color: #009900;">&#41;</span>
+   <span style="color: #009900;">&#123;</span>
+      <span style="color: #993333;">unsigned</span> <span style="color: #993333;">char</span> <span style="color: #339933;">*</span> buffer<span style="color: #339933;">;</span>
+      jvmtiError error <span style="color: #339933;">=</span> jvmti<span style="color: #339933;">-&gt;</span>Allocate<span style="color: #009900;">&#40;</span><span style="color: #993333;">sizeof</span><span style="color: #009900;">&#40;</span>jlong<span style="color: #009900;">&#41;</span> <span style="color: #339933;">*</span> <span style="color: #009900;">&#40;</span>control<span style="color: #339933;">-&gt;</span>maxsize<span style="color: #339933;">+</span><span style="color: #0000dd;">1000</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,&amp;</span>buffer<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+      verifyError<span style="color: #009900;">&#40;</span>error<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+      jlong <span style="color: #339933;">*</span> newbuffer <span style="color: #339933;">=</span> <span style="color: #009900;">&#40;</span>jlong <span style="color: #339933;">*</span><span style="color: #009900;">&#41;</span> buffer<span style="color: #339933;">;</span>
+&nbsp;
+      <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span>control<span style="color: #339933;">-&gt;</span>tags<span style="color: #339933;">!=</span>NULL<span style="color: #009900;">&#41;</span>
+      <span style="color: #009900;">&#123;</span>
+            <span style="color: #b1b100;">for</span> <span style="color: #009900;">&#40;</span>jint i<span style="color: #339933;">=</span><span style="color: #0000dd;">0</span><span style="color: #339933;">;</span>i<span style="color: #339933;">&lt;</span>control <span style="color: #339933;">-&gt;</span>size<span style="color: #339933;">;</span>i<span style="color: #339933;">++</span><span style="color: #009900;">&#41;</span> 
+            <span style="color: #009900;">&#123;</span>
+               newbuffer<span style="color: #009900;">&#91;</span>i<span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> control<span style="color: #339933;">-&gt;</span>tags<span style="color: #009900;">&#91;</span>i<span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+            <span style="color: #009900;">&#125;</span>
+            jvmti<span style="color: #339933;">-&gt;</span>Deallocate<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span><span style="color: #993333;">unsigned</span> <span style="color: #993333;">char</span> <span style="color: #339933;">*</span><span style="color: #009900;">&#41;</span>control<span style="color: #339933;">-&gt;</span>tags<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        <span style="color: #009900;">&#125;</span>
+      control<span style="color: #339933;">-&gt;</span>tags <span style="color: #339933;">=</span> newbuffer<span style="color: #339933;">;</span>      
+      control<span style="color: #339933;">-&gt;</span>maxsize<span style="color: #339933;">=</span>control<span style="color: #339933;">-&gt;</span>size<span style="color: #339933;">+</span><span style="color: #0000dd;">1000</span><span style="color: #339933;">;</span>
+   <span style="color: #009900;">&#125;</span>
+&nbsp;
+   control<span style="color: #339933;">-&gt;</span>tags<span style="color: #009900;">&#91;</span>control<span style="color: #339933;">-&gt;</span>size<span style="color: #339933;">++</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> taglong<span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #993333;">void</span> throwException<span style="color: #009900;">&#40;</span>JNIEnv <span style="color: #339933;">*</span> env<span style="color: #339933;">,</span><span style="color: #993333;">char</span> <span style="color: #339933;">*</span> clazz<span style="color: #339933;">,</span> <span style="color: #993333;">char</span> <span style="color: #339933;">*</span> message<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+jint initJVMTI<span style="color: #009900;">&#40;</span>JavaVM <span style="color: #339933;">*</span>jvm<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">inline</span> <span style="color: #993333;">int</span> checkJVMTI<span style="color: #009900;">&#40;</span>JNIEnv <span style="color: #339933;">*</span> env<span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#123;</span>
+   <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span>jvmti<span style="color: #339933;">==</span>NULL<span style="color: #009900;">&#41;</span>
+   <span style="color: #009900;">&#123;</span>
+      throwException<span style="color: #009900;">&#40;</span>env<span style="color: #339933;">,</span><span style="color: #ff0000;">&quot;java/lang/RuntimeException&quot;</span><span style="color: #339933;">,</span><span style="color: #ff0000;">&quot;Agent not initialized&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+      <span style="color: #b1b100;">return</span> <span style="color: #0000dd;">0</span><span style="color: #339933;">;</span>
+   <span style="color: #009900;">&#125;</span>
+&nbsp;
+   <span style="color: #b1b100;">return</span> <span style="color: #0000dd;">1</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span>
+<span style="color: #339933;">&lt;/</span>control<span style="color: #339933;">&gt;</span></pre></div></div>
+
+</div><div id="part_3" style="display:none;">
+<div class="wp_code"><div class="pre"><pre class="c" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #808080; font-style: italic;">/**jbossAgentUtilities.cpp*/</span>
+<span style="color: #339933;">#include &lt;stdlib .h&gt;</span>
+<span style="color: #339933;">#include &lt;stdio .h&gt;</span>
+<span style="color: #339933;">#include &lt;string .h&gt;</span>
+<span style="color: #339933;">#include &quot;jvmti.h&quot;</span>
+&nbsp;
+<span style="color: #339933;">#include &quot;jbossAgent.h&quot;</span>
+&nbsp;
+<span style="color: #993333;">void</span> throwException<span style="color: #009900;">&#40;</span>JNIEnv <span style="color: #339933;">*</span> env<span style="color: #339933;">,</span><span style="color: #993333;">char</span> <span style="color: #339933;">*</span> clazz<span style="color: #339933;">,</span> <span style="color: #993333;">char</span> <span style="color: #339933;">*</span> message<span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#123;</span>
+  jclass exceptionClass <span style="color: #339933;">=</span> env<span style="color: #339933;">-&gt;</span>FindClass<span style="color: #009900;">&#40;</span>clazz<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+  <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span>exceptionClass<span style="color: #339933;">==</span>NULL<span style="color: #009900;">&#41;</span> 
+  <span style="color: #009900;">&#123;</span>
+     exceptionClass <span style="color: #339933;">=</span> env<span style="color: #339933;">-&gt;</span>FindClass<span style="color: #009900;">&#40;</span><span style="color: #ff0000;">&quot;java/lang/RuntimeException&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+     <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span>exceptionClass<span style="color: #339933;">==</span>NULL<span style="color: #009900;">&#41;</span> 
+     <span style="color: #009900;">&#123;</span>
+        fprintf <span style="color: #009900;">&#40;</span>stderr<span style="color: #339933;">,</span><span style="color: #ff0000;">&quot;Couldn't throw exception %s - %s<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">,</span>clazz<span style="color: #339933;">,</span>message<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+     <span style="color: #009900;">&#125;</span>
+  <span style="color: #009900;">&#125;</span>
+&nbsp;
+  env<span style="color: #339933;">-&gt;</span>ThrowNew<span style="color: #009900;">&#40;</span>exceptionClass<span style="color: #339933;">,</span>message<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #009900;">&#125;</span>
+<span style="color: #339933;">&lt;/</span>string<span style="color: #339933;">&gt;&lt;/</span>stdio<span style="color: #339933;">&gt;&lt;/</span>stdlib<span style="color: #339933;">&gt;</span></pre></div></div>
+
+
+<div class="wp_code"><div class="pre"><pre class="c" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #808080; font-style: italic;">/*org_jboss_profiler_jvmti_JVMTIInterface.h*/</span>
+<span style="color: #808080; font-style: italic;">/* DO NOT EDIT THIS FILE - it is machine generated */</span>
+<span style="color: #339933;">#include &lt;jni .h&gt;</span>
+<span style="color: #808080; font-style: italic;">/* Header for class org_jboss_profiler_jvmti_JVMTIInterface */</span>
+&nbsp;
+<span style="color: #339933;">#ifndef _Included_org_jboss_profiler_jvmti_JVMTIInterface</span>
+<span style="color: #339933;">#define _Included_org_jboss_profiler_jvmti_JVMTIInterface</span>
+<span style="color: #339933;">#ifdef __cplusplus</span>
+<span style="color: #000000; font-weight: bold;">extern</span> <span style="color: #ff0000;">&quot;C&quot;</span> <span style="color: #009900;">&#123;</span>
+<span style="color: #339933;">#endif</span>
+<span style="color: #808080; font-style: italic;">/* Inaccessible static: log */</span>
+<span style="color: #808080; font-style: italic;">/* Inaccessible static: isLoaded */</span>
+<span style="color: #808080; font-style: italic;">/*
+ * Class:     org_jboss_profiler_jvmti_JVMTIInterface
+ * Method:    forceGC
+ * Signature: ()V
+ */</span>
+JNIEXPORT <span style="color: #993333;">void</span> JNICALL Java_org_jboss_profiler_jvmti_JVMTIInterface_forceGC
+  <span style="color: #009900;">&#40;</span>JNIEnv <span style="color: #339933;">*,</span> jobject<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #808080; font-style: italic;">/*
+ * Class:     org_jboss_profiler_jvmti_JVMTIInterface
+ * Method:    releaseTags
+ * Signature: ()V
+ */</span>
+JNIEXPORT <span style="color: #993333;">void</span> JNICALL Java_org_jboss_profiler_jvmti_JVMTIInterface_releaseTags
+  <span style="color: #009900;">&#40;</span>JNIEnv <span style="color: #339933;">*,</span> jobject<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #808080; font-style: italic;">/*
+ * Class:     org_jboss_profiler_jvmti_JVMTIInterface
+ * Method:    notifyInventory
+ * Signature: (ZLjava/lang/String;Ljava/lang/String;Lorg/jboss/profiler/jvmti/JVMTICallBack;)V
+ */</span>
+JNIEXPORT <span style="color: #993333;">void</span> JNICALL Java_org_jboss_profiler_jvmti_JVMTIInterface_notifyInventory
+  <span style="color: #009900;">&#40;</span>JNIEnv <span style="color: #339933;">*,</span> jobject<span style="color: #339933;">,</span> jboolean<span style="color: #339933;">,</span> jstring<span style="color: #339933;">,</span> jstring<span style="color: #339933;">,</span> jobject<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #808080; font-style: italic;">/*
+ * Class:     org_jboss_profiler_jvmti_JVMTIInterface
+ * Method:    getReferenceHolders
+ * Signature: ([Ljava/lang/Object;)[Ljava/lang/Object;
+ */</span>
+JNIEXPORT jobjectArray JNICALL Java_org_jboss_profiler_jvmti_JVMTIInterface_getReferenceHolders
+  <span style="color: #009900;">&#40;</span>JNIEnv <span style="color: #339933;">*,</span> jobject<span style="color: #339933;">,</span> jobjectArray<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #808080; font-style: italic;">/*
+ * Class:     org_jboss_profiler_jvmti_JVMTIInterface
+ * Method:    getLoadedClasses
+ * Signature: ()[Ljava/lang/Class;
+ */</span>
+JNIEXPORT jobjectArray JNICALL Java_org_jboss_profiler_jvmti_JVMTIInterface_getLoadedClasses
+  <span style="color: #009900;">&#40;</span>JNIEnv <span style="color: #339933;">*,</span> jobject<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #808080; font-style: italic;">/*
+ * Class:     org_jboss_profiler_jvmti_JVMTIInterface
+ * Method:    getAllObjects
+ * Signature: (Ljava/lang/Class;)[Ljava/lang/Object;
+ */</span>
+JNIEXPORT jobjectArray JNICALL Java_org_jboss_profiler_jvmti_JVMTIInterface_getAllObjects
+  <span style="color: #009900;">&#40;</span>JNIEnv <span style="color: #339933;">*,</span> jobject<span style="color: #339933;">,</span> jclass<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #808080; font-style: italic;">/*
+ * Class:     org_jboss_profiler_jvmti_JVMTIInterface
+ * Method:    getTagOnObject
+ * Signature: (Ljava/lang/Object;)J
+ */</span>
+JNIEXPORT jlong JNICALL Java_org_jboss_profiler_jvmti_JVMTIInterface_getTagOnObject
+  <span style="color: #009900;">&#40;</span>JNIEnv <span style="color: #339933;">*,</span> jobject<span style="color: #339933;">,</span> jobject<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #808080; font-style: italic;">/*
+ * Class:     org_jboss_profiler_jvmti_JVMTIInterface
+ * Method:    getObjectOnTag
+ * Signature: (J)Ljava/lang/Object;
+ */</span>
+JNIEXPORT jobject JNICALL Java_org_jboss_profiler_jvmti_JVMTIInterface_getObjectOnTag
+  <span style="color: #009900;">&#40;</span>JNIEnv <span style="color: #339933;">*,</span> jobject<span style="color: #339933;">,</span> jlong<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #808080; font-style: italic;">/*
+ * Class:     org_jboss_profiler_jvmti_JVMTIInterface
+ * Method:    internalIsConfiguredProperly
+ * Signature: ()Z
+ */</span>
+JNIEXPORT jboolean JNICALL Java_org_jboss_profiler_jvmti_JVMTIInterface_internalIsConfiguredProperly
+  <span style="color: #009900;">&#40;</span>JNIEnv <span style="color: #339933;">*,</span> jobject<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #808080; font-style: italic;">/*
+ * Class:     org_jboss_profiler_jvmti_JVMTIInterface
+ * Method:    getMethodName
+ * Signature: (J)Ljava/lang/String;
+ */</span>
+JNIEXPORT jstring JNICALL Java_org_jboss_profiler_jvmti_JVMTIInterface_getMethodName
+  <span style="color: #009900;">&#40;</span>JNIEnv <span style="color: #339933;">*,</span> jobject<span style="color: #339933;">,</span> jlong<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #808080; font-style: italic;">/*
+ * Class:     org_jboss_profiler_jvmti_JVMTIInterface
+ * Method:    getMethodSignature
+ * Signature: (J)Ljava/lang/String;
+ */</span>
+JNIEXPORT jstring JNICALL Java_org_jboss_profiler_jvmti_JVMTIInterface_getMethodSignature
+  <span style="color: #009900;">&#40;</span>JNIEnv <span style="color: #339933;">*,</span> jobject<span style="color: #339933;">,</span> jlong<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #808080; font-style: italic;">/*
+ * Class:     org_jboss_profiler_jvmti_JVMTIInterface
+ * Method:    getMethodClass
+ * Signature: (J)Ljava/lang/Class;
+ */</span>
+JNIEXPORT jclass JNICALL Java_org_jboss_profiler_jvmti_JVMTIInterface_getMethodClass
+  <span style="color: #009900;">&#40;</span>JNIEnv <span style="color: #339933;">*,</span> jobject<span style="color: #339933;">,</span> jlong<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #808080; font-style: italic;">/*
+ * Class:     org_jboss_profiler_jvmti_JVMTIInterface
+ * Method:    heapSnapshot
+ * Signature: (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+ */</span>
+JNIEXPORT <span style="color: #993333;">void</span> JNICALL Java_org_jboss_profiler_jvmti_JVMTIInterface_heapSnapshot
+  <span style="color: #009900;">&#40;</span>JNIEnv <span style="color: #339933;">*,</span> jclass<span style="color: #339933;">,</span> jstring<span style="color: #339933;">,</span> jstring<span style="color: #339933;">,</span> jstring<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #339933;">#ifdef __cplusplus</span>
+<span style="color: #009900;">&#125;</span>
+<span style="color: #339933;">#endif</span>
+<span style="color: #339933;">#endif</span>
+<span style="color: #339933;">&lt;/</span>jni<span style="color: #339933;">&gt;</span></pre></div></div>
+
+</div><div id="part_4" style="display:none;">
+<div class="wp_code"><div class="pre"><pre class="c" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #808080; font-style: italic;">/**jbossAgentJNI.cpp*/</span>
+<span style="color: #339933;">#include &lt;stdlib .h&gt;</span>
+<span style="color: #339933;">#include &lt;stdio .h&gt;</span>
+<span style="color: #339933;">#include &quot;jvmti.h&quot;</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">//#define DEBUG 0</span>
+<span style="color: #339933;">#include &quot;org_jboss_profiler_jvmti_JVMTIInterface.h&quot;</span>
+&nbsp;
+<span style="color: #339933;">#include &quot;jbossAgent.h&quot;</span>
+&nbsp;
+<span style="color: #808080; font-style: italic;">/** Local function for dealing with memory heaps... loading objects */</span>
+<span style="color: #993333;">void</span> memoryWriteReference<span style="color: #009900;">&#40;</span>IterateControl<span style="color: #339933;">*</span> iterate<span style="color: #339933;">,</span> jlong tagReferrer<span style="color: #339933;">,</span> jlong tagReferee<span style="color: #339933;">,</span> jint index<span style="color: #009900;">&#41;</span> 
+<span style="color: #009900;">&#123;</span>
+<span style="color: #339933;">#ifdef WINDOWS</span>
+   fprintf <span style="color: #009900;">&#40;</span>iterate<span style="color: #339933;">-&gt;</span>fileReferences<span style="color: #339933;">,</span><span style="color: #ff0000;">&quot;%I64d,%I64d,%ld<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">,</span>tagReferrer<span style="color: #339933;">,</span>tagReferee<span style="color: #339933;">,</span>index<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #339933;">#else</span>
+   fprintf <span style="color: #009900;">&#40;</span>iterate<span style="color: #339933;">-&gt;</span>fileReferences<span style="color: #339933;">,</span><span style="color: #ff0000;">&quot;%lld,%lld,%ld<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">,</span>tagReferrer<span style="color: #339933;">,</span>tagReferee<span style="color: #339933;">,</span>index<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #339933;">#endif</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #808080; font-style: italic;">/** Local function for dealing with memory heaps... loading objects */</span>
+<span style="color: #993333;">void</span> memoryWriteThreadReference<span style="color: #009900;">&#40;</span>IterateControl<span style="color: #339933;">*</span> iterate<span style="color: #339933;">,</span> jlong tagReferrer<span style="color: #339933;">,</span> jlong tagReferee<span style="color: #339933;">,</span> jint index<span style="color: #009900;">&#41;</span> 
+<span style="color: #009900;">&#123;</span>
+<span style="color: #339933;">#ifdef WINDOWS</span>
+   fprintf <span style="color: #009900;">&#40;</span>iterate<span style="color: #339933;">-&gt;</span>fileReferences<span style="color: #339933;">,</span><span style="color: #ff0000;">&quot;Thread%I64d,%I64d,%ld<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">,</span>tagReferrer<span style="color: #339933;">,</span>tagReferee<span style="color: #339933;">,</span>index<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #339933;">#else</span>
+   fprintf <span style="color: #009900;">&#40;</span>iterate<span style="color: #339933;">-&gt;</span>fileReferences<span style="color: #339933;">,</span><span style="color: #ff0000;">&quot;Thread%lld,%lld,%ld<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">,</span>tagReferrer<span style="color: #339933;">,</span>tagReferee<span style="color: #339933;">,</span>index<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #339933;">#endif</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #808080; font-style: italic;">/** Local function for dealing with memory heaps... loading objects */</span>
+<span style="color: #993333;">void</span> memoryWriteObject<span style="color: #009900;">&#40;</span>IterateControl<span style="color: #339933;">*</span> iterate<span style="color: #339933;">,</span> jlong objectTag<span style="color: #339933;">,</span> jlong classTag<span style="color: #339933;">,</span> jlong size<span style="color: #009900;">&#41;</span> 
+<span style="color: #009900;">&#123;</span>
+   <span style="color: #993333;">long</span> longclassTag <span style="color: #339933;">=</span> <span style="color: #009900;">&#40;</span><span style="color: #993333;">long</span><span style="color: #009900;">&#41;</span>classTag<span style="color: #339933;">;</span>
+<span style="color: #339933;">#ifdef WINDOWS</span>
+   fprintf <span style="color: #009900;">&#40;</span>iterate<span style="color: #339933;">-&gt;</span>fileObjects<span style="color: #339933;">,</span><span style="color: #ff0000;">&quot;%I64d,%I64d,%I64d<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">,</span>objectTag<span style="color: #339933;">,</span>classTag<span style="color: #339933;">,</span>size<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #339933;">#else</span>
+   fprintf <span style="color: #009900;">&#40;</span>iterate<span style="color: #339933;">-&gt;</span>fileObjects<span style="color: #339933;">,</span><span style="color: #ff0000;">&quot;%lld,%lld,%lld<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">,</span>objectTag<span style="color: #339933;">,</span>classTag<span style="color: #339933;">,</span>size<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #339933;">#endif</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #808080; font-style: italic;">/** Local function for dealing with memory heaps... loading classes */</span>
+<span style="color: #993333;">void</span> memoryWriteClass<span style="color: #009900;">&#40;</span>JNIEnv <span style="color: #339933;">*</span>env<span style="color: #339933;">,</span>  jlong tag<span style="color: #339933;">,</span> IterateControl<span style="color: #339933;">*</span> iterate<span style="color: #339933;">,</span> jclass iterateClass<span style="color: #009900;">&#41;</span> 
+<span style="color: #009900;">&#123;</span>
+    <span style="color: #993333;">char</span> <span style="color: #339933;">*</span> signature<span style="color: #339933;">;</span>
+    <span style="color: #993333;">char</span> <span style="color: #339933;">*</span> genericPointer<span style="color: #339933;">;</span>
+&nbsp;
+    jvmtiError err <span style="color: #339933;">=</span> jvmti<span style="color: #339933;">-&gt;</span>GetClassSignature<span style="color: #009900;">&#40;</span>iterateClass<span style="color: #339933;">,&amp;</span>signature<span style="color: #339933;">,&amp;</span>genericPointer<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span> err <span style="color: #339933;">!=</span> JVMTI_ERROR_NONE <span style="color: #009900;">&#41;</span> 
+    <span style="color: #009900;">&#123;</span>
+        verifyError<span style="color: #009900;">&#40;</span>err<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        <span style="color: #b1b100;">return</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+&nbsp;
+&nbsp;
+    jobject classLoader<span style="color: #339933;">;</span>
+    jvmti<span style="color: #339933;">-&gt;</span>GetClassLoader<span style="color: #009900;">&#40;</span>iterateClass<span style="color: #339933;">,&amp;</span>classLoader<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+    jlong tagLoader <span style="color: #339933;">=</span> <span style="color: #0000dd;">0</span><span style="color: #339933;">;</span>
+    <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span>classLoader<span style="color: #339933;">!=</span>NULL<span style="color: #009900;">&#41;</span> 
+    <span style="color: #009900;">&#123;</span>
+          err <span style="color: #339933;">=</span> jvmti<span style="color: #339933;">-&gt;</span>GetTag<span style="color: #009900;">&#40;</span>classLoader<span style="color: #339933;">,&amp;</span>tagLoader<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+          <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span> err <span style="color: #339933;">!=</span> JVMTI_ERROR_NONE <span style="color: #009900;">&#41;</span> 
+          <span style="color: #009900;">&#123;</span>
+              verifyError<span style="color: #009900;">&#40;</span>err<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+          <span style="color: #009900;">&#125;</span>
+      <span style="color: #009900;">&#125;</span>
+&nbsp;
+    <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span>tagLoader<span style="color: #339933;">==</span><span style="color: #0000dd;">0</span> <span style="color: #339933;">&amp;&amp;</span> classLoader<span style="color: #339933;">!=</span>NULL<span style="color: #009900;">&#41;</span> 
+    <span style="color: #009900;">&#123;</span>
+       tagLoader <span style="color: #339933;">=</span> iterate<span style="color: #339933;">-&gt;</span>genericCount<span style="color: #339933;">++;</span>
+       jvmti<span style="color: #339933;">-&gt;</span>SetTag<span style="color: #009900;">&#40;</span>classLoader<span style="color: #339933;">,</span>tagLoader<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+       jlong classLoaderClassTag<span style="color: #339933;">;</span>
+       jclass classLoaderClass <span style="color: #339933;">=</span> env<span style="color: #339933;">-&gt;</span>GetObjectClass<span style="color: #009900;">&#40;</span>classLoader<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+       jvmti<span style="color: #339933;">-&gt;</span>GetTag<span style="color: #009900;">&#40;</span>classLoaderClass<span style="color: #339933;">,&amp;</span>classLoaderClassTag<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+       jlong size<span style="color: #339933;">;</span>
+       jvmti<span style="color: #339933;">-&gt;</span>GetObjectSize<span style="color: #009900;">&#40;</span>classLoaderClass<span style="color: #339933;">,&amp;</span>size<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+       memoryWriteObject<span style="color: #009900;">&#40;</span>iterate<span style="color: #339933;">,</span>tagLoader<span style="color: #339933;">,</span>classLoaderClassTag<span style="color: #339933;">,</span>size<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span> 
+&nbsp;
+    <span style="color: #339933;">#ifdef WINDOWS</span>
+    fprintf <span style="color: #009900;">&#40;</span>iterate<span style="color: #339933;">-&gt;</span>fileClasses<span style="color: #339933;">,</span><span style="color: #ff0000;">&quot;%10I64d,%s,%I64d<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">,</span>tag<span style="color: #339933;">,</span>signature<span style="color: #339933;">,</span>tagLoader<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #339933;">#else</span>
+    fprintf <span style="color: #009900;">&#40;</span>iterate<span style="color: #339933;">-&gt;</span>fileClasses<span style="color: #339933;">,</span><span style="color: #ff0000;">&quot;%lld,%s,%lld<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">,</span>tag<span style="color: #339933;">,</span>signature<span style="color: #339933;">,</span>tagLoader<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #339933;">#endif</span>
+&nbsp;
+&nbsp;
+&nbsp;
+    <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span>signature<span style="color: #339933;">!=</span>NULL<span style="color: #009900;">&#41;</span> jvmti<span style="color: #339933;">-&gt;</span>Deallocate<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span><span style="color: #993333;">unsigned</span> <span style="color: #993333;">char</span> <span style="color: #339933;">*</span><span style="color: #009900;">&#41;</span>signature<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span>genericPointer<span style="color: #339933;">!=</span>NULL<span style="color: #009900;">&#41;</span> jvmti<span style="color: #339933;">-&gt;</span>Deallocate<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span><span style="color: #993333;">unsigned</span> <span style="color: #993333;">char</span> <span style="color: #339933;">*</span><span style="color: #009900;">&#41;</span>genericPointer<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+JNIEXPORT jobjectArray JNICALL Java_org_jboss_profiler_jvmti_JVMTIInterface_getLoadedClasses
+  <span style="color: #009900;">&#40;</span>JNIEnv <span style="color: #339933;">*</span> env<span style="color: #339933;">,</span> jobject thisObject<span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#123;</span>
+  <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #339933;">!</span>checkJVMTI<span style="color: #009900;">&#40;</span>env<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>
+  <span style="color: #009900;">&#123;</span>
+     <span style="color: #b1b100;">return</span> NULL<span style="color: #339933;">;</span>
+  <span style="color: #009900;">&#125;</span>
+&nbsp;
+&nbsp;
+  jclass loadedClass <span style="color: #339933;">=</span> env<span style="color: #339933;">-&gt;</span>FindClass<span style="color: #009900;">&#40;</span><span style="color: #ff0000;">&quot;java/lang/Class&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #339933;">#ifdef DEBUG</span>
+  fprintf <span style="color: #009900;">&#40;</span>stderr<span style="color: #339933;">,</span><span style="color: #ff0000;">&quot;LoadedClass = %ld<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">,</span>loadedClass<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #339933;">#endif</span>
+&nbsp;
+&nbsp;
+  jint classCount<span style="color: #339933;">=</span><span style="color: #0000dd;">0</span><span style="color: #339933;">;</span>
+  jclass <span style="color: #339933;">*</span> classesPointer<span style="color: #339933;">;</span>
+&nbsp;
+  jvmti<span style="color: #339933;">-&gt;</span>GetLoadedClasses<span style="color: #009900;">&#40;</span><span style="color: #339933;">&amp;</span>classCount<span style="color: #339933;">,&amp;</span>classesPointer<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+  <span style="color: #666666; font-style: italic;">// Set the object array</span>
+  jobjectArray arrayReturn <span style="color: #339933;">=</span> env<span style="color: #339933;">-&gt;</span>NewObjectArray<span style="color: #009900;">&#40;</span>classCount<span style="color: #339933;">,</span>loadedClass<span style="color: #339933;">,</span><span style="color: #0000dd;">0</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+  <span style="color: #b1b100;">for</span> <span style="color: #009900;">&#40;</span>jsize i<span style="color: #339933;">=</span><span style="color: #0000dd;">0</span><span style="color: #339933;">;</span>i<span style="color: #339933;">&lt;</span>classcount <span style="color: #339933;">;</span>i<span style="color: #339933;">++</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+     env<span style="color: #339933;">-&gt;</span>SetObjectArrayElement<span style="color: #009900;">&#40;</span>arrayReturn<span style="color: #339933;">,</span>i<span style="color: #339933;">,</span> classesPointer<span style="color: #009900;">&#91;</span>i<span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+  <span style="color: #009900;">&#125;</span>
+&nbsp;
+  jvmti<span style="color: #339933;">-&gt;</span>Deallocate<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span><span style="color: #993333;">unsigned</span> <span style="color: #993333;">char</span> <span style="color: #339933;">*</span><span style="color: #009900;">&#41;</span>classesPointer<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+  <span style="color: #b1b100;">return</span> arrayReturn<span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #808080; font-style: italic;">/** Callback JVMTI function for threadReference */</span>
+<span style="color: #993333;">static</span> jvmtiIterationControl JNICALL iterateThreadReference
+    <span style="color: #009900;">&#40;</span>jvmtiHeapRootKind root_kind<span style="color: #339933;">,</span> 
+     jlong class_tag<span style="color: #339933;">,</span> 
+     jlong size<span style="color: #339933;">,</span> 
+     jlong<span style="color: #339933;">*</span> tag_ptr<span style="color: #339933;">,</span> 
+     jlong thread_tag<span style="color: #339933;">,</span> 
+     jint depth<span style="color: #339933;">,</span> 
+     jmethodID method<span style="color: #339933;">,</span> 
+     jint slot<span style="color: #339933;">,</span> 
+     <span style="color: #993333;">void</span><span style="color: #339933;">*</span> user_data<span style="color: #009900;">&#41;</span> 
+<span style="color: #009900;">&#123;</span>
+     IterateControl <span style="color: #339933;">*</span> iterate <span style="color: #339933;">=</span> <span style="color: #009900;">&#40;</span>IterateControl <span style="color: #339933;">*</span><span style="color: #009900;">&#41;</span> user_data<span style="color: #339933;">;</span>
+&nbsp;
+     <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span><span style="color: #339933;">*</span>tag_ptr<span style="color: #009900;">&#41;</span><span style="color: #339933;">==</span><span style="color: #0000dd;">0</span><span style="color: #009900;">&#41;</span> 
+     <span style="color: #009900;">&#123;</span>
+        <span style="color: #339933;">*</span>tag_ptr <span style="color: #339933;">=</span> iterate<span style="color: #339933;">-&gt;</span>genericCount<span style="color: #339933;">++;</span>
+        memoryWriteObject<span style="color: #009900;">&#40;</span>iterate<span style="color: #339933;">,</span> <span style="color: #339933;">*</span>tag_ptr<span style="color: #339933;">,</span>class_tag<span style="color: #339933;">,</span>size<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+     <span style="color: #009900;">&#125;</span>
+&nbsp;
+     <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #339933;">!</span>class_tag<span style="color: #009900;">&#41;</span>
+     <span style="color: #009900;">&#123;</span>
+        fprintf <span style="color: #009900;">&#40;</span>stderr<span style="color: #339933;">,</span><span style="color: #ff0000;">&quot;ClassTAG can't be NULL... it happened at iterateThreadReference<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+     <span style="color: #009900;">&#125;</span>
+<span style="color: #339933;">#ifdef DEBUG</span>
+     fprintf <span style="color: #009900;">&#40;</span>stderr<span style="color: #339933;">,</span><span style="color: #ff0000;">&quot;Thread - classTag = %ld<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">,</span>class_tag<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #339933;">#endif</span>
+     memoryWriteThreadReference<span style="color: #009900;">&#40;</span>iterate<span style="color: #339933;">,</span> thread_tag<span style="color: #339933;">,</span> <span style="color: #339933;">*</span>tag_ptr<span style="color: #339933;">,</span> <span style="color: #0000dd;">0</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+     <span style="color: #b1b100;">return</span> JVMTI_ITERATION_CONTINUE<span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #808080; font-style: italic;">/** Callback JVMTI function for Root references */</span>
+jvmtiIterationControl JNICALL iterateRoot <span style="color: #009900;">&#40;</span>jvmtiHeapRootKind root_kind<span style="color: #339933;">,</span> 
+     jlong class_tag<span style="color: #339933;">,</span> 
+     jlong size<span style="color: #339933;">,</span> 
+     jlong<span style="color: #339933;">*</span> tag_ptr<span style="color: #339933;">,</span> 
+     <span style="color: #993333;">void</span><span style="color: #339933;">*</span> user_data<span style="color: #009900;">&#41;</span> 
+<span style="color: #009900;">&#123;</span>
+&nbsp;
+     IterateControl <span style="color: #339933;">*</span> iterate <span style="color: #339933;">=</span> <span style="color: #009900;">&#40;</span>IterateControl <span style="color: #339933;">*</span><span style="color: #009900;">&#41;</span> user_data<span style="color: #339933;">;</span>
+     <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span><span style="color: #339933;">*</span>tag_ptr<span style="color: #009900;">&#41;</span><span style="color: #339933;">==</span><span style="color: #0000dd;">0</span><span style="color: #009900;">&#41;</span> 
+     <span style="color: #009900;">&#123;</span>
+        <span style="color: #339933;">*</span>tag_ptr <span style="color: #339933;">=</span> iterate<span style="color: #339933;">-&gt;</span>genericCount<span style="color: #339933;">++;</span>
+        memoryWriteObject<span style="color: #009900;">&#40;</span>iterate<span style="color: #339933;">,</span> <span style="color: #339933;">*</span>tag_ptr<span style="color: #339933;">,</span>class_tag<span style="color: #339933;">,</span>size<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+     <span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #339933;">#ifdef DEBUG</span>
+     fprintf <span style="color: #009900;">&#40;</span>stderr<span style="color: #339933;">,</span><span style="color: #ff0000;">&quot;Root - classTag = %ld and class=%ld reference = %ld<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">,</span>class_tag<span style="color: #339933;">,*</span>tag_ptr<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #339933;">#endif</span>
+     memoryWriteReference<span style="color: #009900;">&#40;</span>iterate<span style="color: #339933;">,</span> <span style="color: #0000dd;">0</span><span style="color: #339933;">,</span> <span style="color: #339933;">*</span>tag_ptr<span style="color: #339933;">,</span> <span style="color: #0000dd;">0</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+     <span style="color: #b1b100;">return</span> JVMTI_ITERATION_CONTINUE<span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #808080; font-style: italic;">/** Callback JVMTI function for Object Relationships */</span>
+jvmtiIterationControl JNICALL iterateObjectRelationship
+    <span style="color: #009900;">&#40;</span>jvmtiObjectReferenceKind reference_kind<span style="color: #339933;">,</span> 
+     jlong class_tag<span style="color: #339933;">,</span> 
+     jlong size<span style="color: #339933;">,</span> 
+     jlong<span style="color: #339933;">*</span> tag_ptr<span style="color: #339933;">,</span> 
+     jlong referrer_tag<span style="color: #339933;">,</span> 
+     jint referrer_index<span style="color: #339933;">,</span> 
+     <span style="color: #993333;">void</span><span style="color: #339933;">*</span> user_data<span style="color: #009900;">&#41;</span> 
+<span style="color: #009900;">&#123;</span>
+     <span style="color: #808080; font-style: italic;">/*if (reference_kind==JVMTI_REFERENCE_CLASS ||
+         reference_kind==JVMTI_REFERENCE_CLASS_LOADER ||
+         reference_kind==JVMTI_REFERENCE_INTERFACE ||
+         reference_kind==JVMTI_REFERENCE_CONSTANT_POOL)
+         {
+                 return JVMTI_ITERATION_CONTINUE;
+         } */</span>
+&nbsp;
+    IterateControl <span style="color: #339933;">*</span> iterate <span style="color: #339933;">=</span> <span style="color: #009900;">&#40;</span>IterateControl <span style="color: #339933;">*</span><span style="color: #009900;">&#41;</span> user_data<span style="color: #339933;">;</span>
+&nbsp;
+     <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span><span style="color: #339933;">*</span>tag_ptr<span style="color: #009900;">&#41;</span><span style="color: #339933;">==</span><span style="color: #0000dd;">0</span><span style="color: #009900;">&#41;</span> 
+     <span style="color: #009900;">&#123;</span>
+        <span style="color: #339933;">*</span>tag_ptr <span style="color: #339933;">=</span> iterate<span style="color: #339933;">-&gt;</span>genericCount<span style="color: #339933;">++;</span>
+        memoryWriteObject<span style="color: #009900;">&#40;</span>iterate<span style="color: #339933;">,</span> <span style="color: #339933;">*</span>tag_ptr<span style="color: #339933;">,</span>class_tag<span style="color: #339933;">,</span>size<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+     <span style="color: #009900;">&#125;</span>
+&nbsp;
+     memoryWriteReference<span style="color: #009900;">&#40;</span>iterate<span style="color: #339933;">,</span> referrer_tag<span style="color: #339933;">,</span> <span style="color: #339933;">*</span>tag_ptr<span style="color: #339933;">,</span> referrer_index<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #339933;">#ifdef DEBUG</span>
+<span style="color: #666666; font-style: italic;">//     fprintf (stderr,&quot;Relationship between %ld and %ld\n&quot;,referrer_tag, *tag_ptr);</span>
+     fprintf <span style="color: #009900;">&#40;</span>stderr<span style="color: #339933;">,</span><span style="color: #ff0000;">&quot;Relationship between %ld &quot;</span><span style="color: #339933;">,*</span>tag_ptr<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+     fprintf <span style="color: #009900;">&#40;</span>stderr<span style="color: #339933;">,</span><span style="color: #ff0000;">&quot;and reftag=%ld<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">,</span>referrer_tag<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #339933;">#endif</span>
+     <span style="color: #b1b100;">return</span> JVMTI_ITERATION_CONTINUE<span style="color: #339933;">;</span>
+ <span style="color: #009900;">&#125;</span>
+&nbsp;
+jvmtiIterationControl JNICALL cleanTag
+    <span style="color: #009900;">&#40;</span>jlong class_tag<span style="color: #339933;">,</span> 
+     jlong size<span style="color: #339933;">,</span> 
+     jlong<span style="color: #339933;">*</span> tag_ptr<span style="color: #339933;">,</span> 
+     <span style="color: #993333;">void</span><span style="color: #339933;">*</span> user_data<span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#123;</span>
+   <span style="color: #339933;">*</span>tag_ptr<span style="color: #339933;">=</span><span style="color: #0000dd;">0</span><span style="color: #339933;">;</span>
+   <span style="color: #b1b100;">return</span> JVMTI_ITERATION_CONTINUE<span style="color: #339933;">;</span>   
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+&nbsp;
+<span style="color: #993333;">void</span> releaseTags<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#123;</span>
+  jvmti<span style="color: #339933;">-&gt;</span>IterateOverHeap<span style="color: #009900;">&#40;</span> JVMTI_HEAP_OBJECT_TAGGED<span style="color: #339933;">,</span>
+                          <span style="color: #339933;">&amp;</span>cleanTag<span style="color: #339933;">,</span> NULL<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+JNIEXPORT <span style="color: #993333;">void</span> JNICALL Java_org_jboss_profiler_jvmti_JVMTIInterface_heapSnapshot
+  <span style="color: #009900;">&#40;</span>JNIEnv <span style="color: #339933;">*</span> env<span style="color: #339933;">,</span> jclass clazz<span style="color: #339933;">,</span> jstring classesFileName<span style="color: #339933;">,</span> jstring referencesFileName<span style="color: #339933;">,</span> jstring objectsFileName<span style="color: #009900;">&#41;</span> 
+<span style="color: #009900;">&#123;</span>
+&nbsp;
+  jint classCount<span style="color: #339933;">=</span><span style="color: #0000dd;">0</span><span style="color: #339933;">;</span>
+  jclass <span style="color: #339933;">*</span> classesPointer<span style="color: #339933;">;</span>
+&nbsp;
+  <span style="color: #993333;">const</span> <span style="color: #993333;">char</span> <span style="color: #339933;">*</span> strClasses <span style="color: #339933;">=</span>   env<span style="color: #339933;">-&gt;</span>GetStringUTFChars<span style="color: #009900;">&#40;</span>classesFileName<span style="color: #339933;">,</span>NULL<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+  <span style="color: #993333;">const</span> <span style="color: #993333;">char</span> <span style="color: #339933;">*</span> strReferences <span style="color: #339933;">=</span>   env<span style="color: #339933;">-&gt;</span>GetStringUTFChars<span style="color: #009900;">&#40;</span>referencesFileName<span style="color: #339933;">,</span>NULL<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+  <span style="color: #993333;">const</span> <span style="color: #993333;">char</span> <span style="color: #339933;">*</span> strObjects <span style="color: #339933;">=</span>   env<span style="color: #339933;">-&gt;</span>GetStringUTFChars<span style="color: #009900;">&#40;</span>objectsFileName<span style="color: #339933;">,</span>NULL<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+&nbsp;
+  <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #339933;">!</span>checkJVMTI<span style="color: #009900;">&#40;</span>env<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>
+  <span style="color: #009900;">&#123;</span>
+     <span style="color: #b1b100;">return</span><span style="color: #339933;">;</span>
+  <span style="color: #009900;">&#125;</span>
+&nbsp;
+&nbsp;
+  IterateControl iterate<span style="color: #339933;">;</span>
+  iterate.<span style="color: #202020;">genericCount</span><span style="color: #339933;">=</span><span style="color: #0000dd;">0</span><span style="color: #339933;">;</span>
+  iterate.<span style="color: #202020;">fileObjects</span> <span style="color: #339933;">=</span> fopen <span style="color: #009900;">&#40;</span>strObjects<span style="color: #339933;">,</span><span style="color: #ff0000;">&quot;w+&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+  <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span>iterate.<span style="color: #202020;">fileObjects</span><span style="color: #339933;">==</span>NULL<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+     fprintf <span style="color: #009900;">&#40;</span>stderr<span style="color: #339933;">,</span><span style="color: #ff0000;">&quot;couldn't open file %s<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">,</span>strObjects<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+     throwException<span style="color: #009900;">&#40;</span>env<span style="color: #339933;">,</span><span style="color: #ff0000;">&quot;java/lang/RuntimeException&quot;</span><span style="color: #339933;">,</span><span style="color: #ff0000;">&quot;Couldn't open objects file&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+     <span style="color: #b1b100;">return</span><span style="color: #339933;">;</span>
+  <span style="color: #009900;">&#125;</span>
+  fprintf <span style="color: #009900;">&#40;</span>iterate.<span style="color: #202020;">fileObjects</span><span style="color: #339933;">,</span><span style="color: #ff0000;">&quot;objectTag,classTag,size<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+  iterate.<span style="color: #202020;">fileReferences</span> <span style="color: #339933;">=</span> fopen <span style="color: #009900;">&#40;</span>strReferences<span style="color: #339933;">,</span><span style="color: #ff0000;">&quot;w+&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+  <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span>iterate.<span style="color: #202020;">fileReferences</span><span style="color: #339933;">==</span>NULL<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+     fprintf <span style="color: #009900;">&#40;</span>stderr<span style="color: #339933;">,</span><span style="color: #ff0000;">&quot;couldn't open file %s<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">,</span>strReferences<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+     throwException<span style="color: #009900;">&#40;</span>env<span style="color: #339933;">,</span><span style="color: #ff0000;">&quot;java/lang/RuntimeException&quot;</span><span style="color: #339933;">,</span><span style="color: #ff0000;">&quot;Couldn't open references file&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+     <span style="color: #b1b100;">return</span><span style="color: #339933;">;</span>
+  <span style="color: #009900;">&#125;</span>
+  fprintf <span style="color: #009900;">&#40;</span>iterate.<span style="color: #202020;">fileReferences</span><span style="color: #339933;">,</span><span style="color: #ff0000;">&quot;tagReferrer,tagReferee,index<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+  iterate.<span style="color: #202020;">fileClasses</span> <span style="color: #339933;">=</span> fopen <span style="color: #009900;">&#40;</span>strClasses<span style="color: #339933;">,</span><span style="color: #ff0000;">&quot;w+&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+  <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span>iterate.<span style="color: #202020;">fileClasses</span><span style="color: #339933;">==</span>NULL<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+     fprintf <span style="color: #009900;">&#40;</span>stderr<span style="color: #339933;">,</span><span style="color: #ff0000;">&quot;couldn't open file %s<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">,</span>strClasses<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+     throwException<span style="color: #009900;">&#40;</span>env<span style="color: #339933;">,</span><span style="color: #ff0000;">&quot;java/lang/RuntimeException&quot;</span><span style="color: #339933;">,</span><span style="color: #ff0000;">&quot;Couldn't open classes file&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+     <span style="color: #b1b100;">return</span><span style="color: #339933;">;</span>
+  <span style="color: #009900;">&#125;</span>
+  fprintf <span style="color: #009900;">&#40;</span>iterate.<span style="color: #202020;">fileClasses</span><span style="color: #339933;">,</span><span style="color: #ff0000;">&quot;tagClass,signature,tagClassLoader<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+  env<span style="color: #339933;">-&gt;</span>ReleaseStringUTFChars<span style="color: #009900;">&#40;</span>classesFileName<span style="color: #339933;">,</span>strClasses<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+  env<span style="color: #339933;">-&gt;</span>ReleaseStringUTFChars<span style="color: #009900;">&#40;</span>referencesFileName<span style="color: #339933;">,</span>strReferences<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+  env<span style="color: #339933;">-&gt;</span>ReleaseStringUTFChars<span style="color: #009900;">&#40;</span>objectsFileName<span style="color: #339933;">,</span>strObjects<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+  jvmti<span style="color: #339933;">-&gt;</span>GetLoadedClasses<span style="color: #009900;">&#40;</span><span style="color: #339933;">&amp;</span>classCount<span style="color: #339933;">,&amp;</span>classesPointer<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+  jvmtiError    err<span style="color: #339933;">;</span>
+&nbsp;
+  <span style="color: #666666; font-style: italic;">// we need to first setAllTags, to avoid dependencies between classes and classLoaders</span>
+  <span style="color: #b1b100;">for</span> <span style="color: #009900;">&#40;</span>jsize i<span style="color: #339933;">=</span><span style="color: #0000dd;">0</span><span style="color: #339933;">;</span>i<span style="color: #339933;">&lt;/</span>classcount<span style="color: #339933;">&gt;&lt;</span>classcount <span style="color: #339933;">;</span>i<span style="color: #339933;">++</span><span style="color: #009900;">&#41;</span> 
+  <span style="color: #009900;">&#123;</span>
+     err <span style="color: #339933;">=</span> jvmti<span style="color: #339933;">-&gt;</span>SetTag<span style="color: #009900;">&#40;</span>classesPointer<span style="color: #009900;">&#91;</span>i<span style="color: #009900;">&#93;</span><span style="color: #339933;">,</span>i<span style="color: #339933;">+</span><span style="color: #0000dd;">1</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    iterate.<span style="color: #202020;">genericCount</span> <span style="color: #339933;">=</span> i<span style="color: #339933;">;</span>
+  <span style="color: #009900;">&#125;</span>
+&nbsp;
+  iterate.<span style="color: #202020;">genericCount</span> <span style="color: #339933;">=</span> iterate.<span style="color: #202020;">genericCount</span> <span style="color: #339933;">+</span> <span style="color: #0000dd;">1002</span><span style="color: #339933;">;</span>
+&nbsp;
+&nbsp;
+  <span style="color: #b1b100;">for</span> <span style="color: #009900;">&#40;</span>jsize i<span style="color: #339933;">=</span><span style="color: #0000dd;">0</span><span style="color: #339933;">;</span>i<span style="color: #339933;">&lt;/</span>classcount<span style="color: #339933;">&gt;&lt;</span>classcount <span style="color: #339933;">;</span>i<span style="color: #339933;">++</span><span style="color: #009900;">&#41;</span> 
+  <span style="color: #009900;">&#123;</span>
+     jlong classTag<span style="color: #339933;">;</span>
+     jvmti<span style="color: #339933;">-&gt;</span>GetTag<span style="color: #009900;">&#40;</span>classesPointer<span style="color: #009900;">&#91;</span>i<span style="color: #009900;">&#93;</span><span style="color: #339933;">,&amp;</span>classTag<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+     <span style="color: #666666; font-style: italic;">//err = jvmti-&gt;SetTag(classesPointer[i],i);</span>
+&nbsp;
+     <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span> err <span style="color: #339933;">!=</span> JVMTI_ERROR_NONE <span style="color: #009900;">&#41;</span> 
+     <span style="color: #009900;">&#123;</span>
+        verifyError<span style="color: #009900;">&#40;</span>err<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        <span style="color: #b1b100;">return</span><span style="color: #339933;">;</span>
+     <span style="color: #009900;">&#125;</span>
+&nbsp;
+     memoryWriteClass<span style="color: #009900;">&#40;</span>env<span style="color: #339933;">,</span> classTag<span style="color: #339933;">,</span> <span style="color: #339933;">&amp;</span>iterate<span style="color: #339933;">,</span>classesPointer<span style="color: #009900;">&#91;</span>i<span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+  <span style="color: #009900;">&#125;</span>
+&nbsp;
+  jvmti<span style="color: #339933;">-&gt;</span>Deallocate<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span><span style="color: #993333;">unsigned</span> <span style="color: #993333;">char</span> <span style="color: #339933;">*</span><span style="color: #009900;">&#41;</span>classesPointer<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+  err <span style="color: #339933;">=</span> jvmti<span style="color: #339933;">-&gt;</span>IterateOverReachableObjects<span style="color: #009900;">&#40;</span>iterateRoot<span style="color: #339933;">,</span>
+            iterateThreadReference<span style="color: #339933;">,</span>
+            iterateObjectRelationship<span style="color: #339933;">,</span>
+            <span style="color: #339933;">&amp;</span>iterate<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+  verifyError<span style="color: #009900;">&#40;</span>err<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+  fclose<span style="color: #009900;">&#40;</span>iterate.<span style="color: #202020;">fileObjects</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+  fclose<span style="color: #009900;">&#40;</span>iterate.<span style="color: #202020;">fileReferences</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+  fclose<span style="color: #009900;">&#40;</span>iterate.<span style="color: #202020;">fileClasses</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+&nbsp;
+  releaseTags<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+  verifyError<span style="color: #009900;">&#40;</span>err<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+JNIEXPORT <span style="color: #993333;">void</span> JNICALL Java_org_jboss_profiler_jvmti_JVMTIInterface_forceGC
+  <span style="color: #009900;">&#40;</span>JNIEnv <span style="color: #339933;">*</span> env<span style="color: #339933;">,</span> jobject thisObject<span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#123;</span>
+  <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #339933;">!</span>checkJVMTI<span style="color: #009900;">&#40;</span>env<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>
+  <span style="color: #009900;">&#123;</span>
+     <span style="color: #b1b100;">return</span><span style="color: #339933;">;</span>
+  <span style="color: #009900;">&#125;</span>
+&nbsp;
+   jvmti<span style="color: #339933;">-&gt;</span>ForceGarbageCollection<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+jvmtiIterationControl JNICALL iterate_getAllObjects
+    <span style="color: #009900;">&#40;</span>jlong class_tag<span style="color: #339933;">,</span> 
+     jlong size<span style="color: #339933;">,</span> 
+     jlong<span style="color: #339933;">*</span> tag_ptr<span style="color: #339933;">,</span> 
+     <span style="color: #993333;">void</span><span style="color: #339933;">*</span> user_data<span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#123;</span>
+&nbsp;
+    IteraOverObjectsControl <span style="color: #339933;">*</span> control <span style="color: #339933;">=</span> <span style="color: #009900;">&#40;</span>IteraOverObjectsControl <span style="color: #339933;">*</span><span style="color: #009900;">&#41;</span> user_data<span style="color: #339933;">;</span>
+    <span style="color: #339933;">*</span>tag_ptr<span style="color: #339933;">=</span><span style="color: #0000dd;">1</span><span style="color: #339933;">;</span>
+    control<span style="color: #339933;">-&gt;</span>count<span style="color: #339933;">++;</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">//    fprintf (stderr,&quot;Iterate getAllObjects = %ld\n&quot;,control-&gt;count);</span>
+&nbsp;
+    <span style="color: #b1b100;">return</span> JVMTI_ITERATION_CONTINUE<span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+&nbsp;
+<span style="color: #808080; font-style: italic;">/*
+ * Class:     org_jboss_profiler_jvmti_JVMTIInterface
+ * Method:    getAllObjects
+ * Signature: (Ljava/lang/Class;)[Ljava/lang/Object;
+ */</span>
+JNIEXPORT jobjectArray JNICALL Java_org_jboss_profiler_jvmti_JVMTIInterface_getAllObjects
+  <span style="color: #009900;">&#40;</span>JNIEnv <span style="color: #339933;">*</span> env<span style="color: #339933;">,</span> jobject jvmtiInteface_this<span style="color: #339933;">,</span> jclass klass<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+&nbsp;
+  <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #339933;">!</span>checkJVMTI<span style="color: #009900;">&#40;</span>env<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>
+  <span style="color: #009900;">&#123;</span>
+     <span style="color: #b1b100;">return</span> NULL<span style="color: #339933;">;</span>
+  <span style="color: #009900;">&#125;</span>
+&nbsp;
+  jclass loadedObject <span style="color: #339933;">=</span> env<span style="color: #339933;">-&gt;</span>FindClass<span style="color: #009900;">&#40;</span><span style="color: #ff0000;">&quot;java/lang/Object&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+&nbsp;
+&nbsp;
+  IteraOverObjectsControl control<span style="color: #339933;">;</span>
+  control.<span style="color: #202020;">size</span> <span style="color: #339933;">=</span> <span style="color: #0000dd;">0</span><span style="color: #339933;">;</span>
+  control.<span style="color: #202020;">maxsize</span> <span style="color: #339933;">=</span> <span style="color: #0000dd;">0</span><span style="color: #339933;">;</span>
+  control.<span style="color: #202020;">count</span><span style="color: #339933;">=</span><span style="color: #0000dd;">0</span><span style="color: #339933;">;</span>
+&nbsp;
+&nbsp;
+  jvmti<span style="color: #339933;">-&gt;</span>IterateOverInstancesOfClass<span style="color: #009900;">&#40;</span>
+            klass<span style="color: #339933;">,</span>
+            JVMTI_HEAP_OBJECT_EITHER<span style="color: #339933;">,</span>
+            iterate_getAllObjects<span style="color: #339933;">,</span>
+            <span style="color: #339933;">&amp;</span>control<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+&nbsp;
+  jint countObjts<span style="color: #339933;">=</span><span style="color: #0000dd;">0</span><span style="color: #339933;">;</span>
+  jobject <span style="color: #339933;">*</span> objs<span style="color: #339933;">;</span>
+  jlong <span style="color: #339933;">*</span> tagResults<span style="color: #339933;">;</span>
+&nbsp;
+  jlong idToQuery<span style="color: #339933;">=</span><span style="color: #0000dd;">1</span><span style="color: #339933;">;</span>  
+&nbsp;
+  <span style="color: #666666; font-style: italic;">/// http://java.sun.com/j2se/1.5.0/docs/guide/jvmti/jvmti.html#GetObjectsWithTags </span>
+  jvmti<span style="color: #339933;">-&gt;</span>GetObjectsWithTags<span style="color: #009900;">&#40;</span><span style="color: #0000dd;">1</span><span style="color: #339933;">,</span>
+            <span style="color: #339933;">&amp;</span>idToQuery<span style="color: #339933;">,</span>
+            <span style="color: #339933;">&amp;</span>countObjts<span style="color: #339933;">,</span>
+            <span style="color: #339933;">&amp;</span>objs<span style="color: #339933;">,</span>
+            <span style="color: #339933;">&amp;</span>tagResults<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+  <span style="color: #666666; font-style: italic;">// Set the object array</span>
+  jobjectArray arrayReturn <span style="color: #339933;">=</span> env<span style="color: #339933;">-&gt;</span>NewObjectArray<span style="color: #009900;">&#40;</span>countObjts<span style="color: #339933;">,</span>loadedObject<span style="color: #339933;">,</span><span style="color: #0000dd;">0</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+  <span style="color: #b1b100;">for</span> <span style="color: #009900;">&#40;</span>jsize i<span style="color: #339933;">=</span><span style="color: #0000dd;">0</span><span style="color: #339933;">;</span>i<span style="color: #339933;">&lt;</span>countobjts <span style="color: #339933;">;</span>i<span style="color: #339933;">++</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+     env<span style="color: #339933;">-&gt;</span>SetObjectArrayElement<span style="color: #009900;">&#40;</span>arrayReturn<span style="color: #339933;">,</span>i<span style="color: #339933;">,</span> objs<span style="color: #009900;">&#91;</span>i<span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+  <span style="color: #009900;">&#125;</span>
+&nbsp;
+  jvmti<span style="color: #339933;">-&gt;</span>Deallocate<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span><span style="color: #993333;">unsigned</span> <span style="color: #993333;">char</span> <span style="color: #339933;">*</span><span style="color: #009900;">&#41;</span>tagResults<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+  jvmti<span style="color: #339933;">-&gt;</span>Deallocate<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span><span style="color: #993333;">unsigned</span> <span style="color: #993333;">char</span> <span style="color: #339933;">*</span><span style="color: #009900;">&#41;</span>objs<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+&nbsp;
+  releaseTags<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>            
+&nbsp;
+&nbsp;
+  <span style="color: #b1b100;">return</span> arrayReturn<span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+&nbsp;
+<span style="color: #808080; font-style: italic;">/** Callback JVMTI function for threadReference */</span>
+<span style="color: #993333;">static</span> jvmtiIterationControl JNICALL iterateThreadReferenceLookupReference
+    <span style="color: #009900;">&#40;</span>jvmtiHeapRootKind root_kind<span style="color: #339933;">,</span> 
+     jlong class_tag<span style="color: #339933;">,</span> 
+     jlong size<span style="color: #339933;">,</span> 
+     jlong<span style="color: #339933;">*</span> tag_ptr<span style="color: #339933;">,</span> 
+     jlong thread_tag<span style="color: #339933;">,</span> 
+     jint depth<span style="color: #339933;">,</span> 
+     jmethodID method<span style="color: #339933;">,</span> 
+     jint slot<span style="color: #339933;">,</span> 
+     <span style="color: #993333;">void</span><span style="color: #339933;">*</span> user_data<span style="color: #009900;">&#41;</span> 
+<span style="color: #009900;">&#123;</span>
+      IteraOverObjectsControl <span style="color: #339933;">*</span> control <span style="color: #339933;">=</span> <span style="color: #009900;">&#40;</span>IteraOverObjectsControl <span style="color: #339933;">*</span><span style="color: #009900;">&#41;</span>user_data<span style="color: #339933;">;</span>
+&nbsp;
+      <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #339933;">*</span>tag_ptr<span style="color: #339933;">==</span><span style="color: #0000dd;">10</span><span style="color: #009900;">&#41;</span>
+      <span style="color: #009900;">&#123;</span>
+            addTag<span style="color: #009900;">&#40;</span>control<span style="color: #339933;">,</span>thread_tag<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+      <span style="color: #009900;">&#125;</span>
+      <span style="color: #b1b100;">else</span>
+      <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #339933;">*</span>tag_ptr<span style="color: #339933;">!=</span><span style="color: #0000dd;">10</span><span style="color: #009900;">&#41;</span>
+      <span style="color: #009900;">&#123;</span>
+            <span style="color: #339933;">*</span>tag_ptr<span style="color: #339933;">=</span>control<span style="color: #339933;">-&gt;</span>count<span style="color: #339933;">++;</span>
+      <span style="color: #009900;">&#125;</span>
+&nbsp;
+    <span style="color: #b1b100;">return</span> JVMTI_ITERATION_CONTINUE<span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #808080; font-style: italic;">/** Callback JVMTI function for Root references */</span>
+jvmtiIterationControl JNICALL iterateRootLookupReference <span style="color: #009900;">&#40;</span>jvmtiHeapRootKind root_kind<span style="color: #339933;">,</span> 
+     jlong class_tag<span style="color: #339933;">,</span> 
+     jlong size<span style="color: #339933;">,</span> 
+     jlong<span style="color: #339933;">*</span> tag_ptr<span style="color: #339933;">,</span> 
+     <span style="color: #993333;">void</span><span style="color: #339933;">*</span> user_data<span style="color: #009900;">&#41;</span> 
+<span style="color: #009900;">&#123;</span>
+      IteraOverObjectsControl <span style="color: #339933;">*</span> control <span style="color: #339933;">=</span> <span style="color: #009900;">&#40;</span>IteraOverObjectsControl <span style="color: #339933;">*</span><span style="color: #009900;">&#41;</span>user_data<span style="color: #339933;">;</span>
+&nbsp;
+      <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #339933;">*</span>tag_ptr<span style="color: #339933;">!=</span><span style="color: #0000dd;">10</span><span style="color: #009900;">&#41;</span>
+      <span style="color: #009900;">&#123;</span>
+            <span style="color: #339933;">*</span>tag_ptr<span style="color: #339933;">=</span>control<span style="color: #339933;">-&gt;</span>count<span style="color: #339933;">++;</span>
+      <span style="color: #009900;">&#125;</span>
+&nbsp;
+     <span style="color: #b1b100;">return</span> JVMTI_ITERATION_CONTINUE<span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #808080; font-style: italic;">/** Callback JVMTI function for Object Relationships */</span>
+jvmtiIterationControl JNICALL iterateObjectRelationshipLookupReference
+    <span style="color: #009900;">&#40;</span>jvmtiObjectReferenceKind reference_kind<span style="color: #339933;">,</span> 
+     jlong class_tag<span style="color: #339933;">,</span> 
+     jlong size<span style="color: #339933;">,</span> 
+     jlong<span style="color: #339933;">*</span> tag_ptr<span style="color: #339933;">,</span> 
+     jlong referrer_tag<span style="color: #339933;">,</span> 
+     jint referrer_index<span style="color: #339933;">,</span> 
+     <span style="color: #993333;">void</span><span style="color: #339933;">*</span> user_data<span style="color: #009900;">&#41;</span> 
+<span style="color: #009900;">&#123;</span>
+      IteraOverObjectsControl <span style="color: #339933;">*</span> control <span style="color: #339933;">=</span> <span style="color: #009900;">&#40;</span>IteraOverObjectsControl <span style="color: #339933;">*</span><span style="color: #009900;">&#41;</span>user_data<span style="color: #339933;">;</span>
+&nbsp;
+      <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #339933;">*</span>tag_ptr<span style="color: #339933;">==</span><span style="color: #0000dd;">10</span><span style="color: #009900;">&#41;</span>
+      <span style="color: #009900;">&#123;</span>
+            addTag<span style="color: #009900;">&#40;</span>control<span style="color: #339933;">,</span>referrer_tag<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+      <span style="color: #009900;">&#125;</span>
+      <span style="color: #b1b100;">else</span>
+      <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #339933;">*</span>tag_ptr<span style="color: #339933;">!=</span><span style="color: #0000dd;">10</span><span style="color: #009900;">&#41;</span>
+      <span style="color: #009900;">&#123;</span>
+            <span style="color: #339933;">*</span>tag_ptr<span style="color: #339933;">=</span>control<span style="color: #339933;">-&gt;</span>count<span style="color: #339933;">++;</span>
+      <span style="color: #009900;">&#125;</span>
+&nbsp;
+    <span style="color: #b1b100;">return</span> JVMTI_ITERATION_CONTINUE<span style="color: #339933;">;</span>
+ <span style="color: #009900;">&#125;</span>
+&nbsp;
+&nbsp;
+&nbsp;
+JNIEXPORT jobjectArray JNICALL Java_org_jboss_profiler_jvmti_JVMTIInterface_getReferenceHolders
+  <span style="color: #009900;">&#40;</span>JNIEnv <span style="color: #339933;">*</span> env<span style="color: #339933;">,</span> jobject thisObject<span style="color: #339933;">,</span> jobjectArray objectArray<span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#123;</span>
+  <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #339933;">!</span>checkJVMTI<span style="color: #009900;">&#40;</span>env<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>
+  <span style="color: #009900;">&#123;</span>
+     <span style="color: #b1b100;">return</span> NULL<span style="color: #339933;">;</span>
+  <span style="color: #009900;">&#125;</span>
+      jobject referencedObject<span style="color: #339933;">;</span>
+&nbsp;
+&nbsp;
+      jsize arrayLength <span style="color: #339933;">=</span> env<span style="color: #339933;">-&gt;</span>GetArrayLength<span style="color: #009900;">&#40;</span>objectArray<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>       
+      <span style="color: #b1b100;">for</span> <span style="color: #009900;">&#40;</span>jsize i<span style="color: #339933;">=</span><span style="color: #0000dd;">0</span><span style="color: #339933;">;</span>i<span style="color: #339933;">&lt;</span>arraylength <span style="color: #339933;">;</span>i<span style="color: #339933;">++</span><span style="color: #009900;">&#41;</span>
+      <span style="color: #009900;">&#123;</span>
+            referencedObject <span style="color: #339933;">=</span> env<span style="color: #339933;">-&gt;</span>GetObjectArrayElement<span style="color: #009900;">&#40;</span>objectArray<span style="color: #339933;">,</span>i<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+            jvmti<span style="color: #339933;">-&gt;</span>SetTag<span style="color: #009900;">&#40;</span>referencedObject<span style="color: #339933;">,</span><span style="color: #009900;">&#40;</span>jlong<span style="color: #009900;">&#41;</span><span style="color: #0000dd;">10</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+      <span style="color: #009900;">&#125;</span>
+&nbsp;
+    IteraOverObjectsControl control<span style="color: #339933;">;</span>
+      control.<span style="color: #202020;">size</span> <span style="color: #339933;">=</span> <span style="color: #0000dd;">0</span><span style="color: #339933;">;</span>
+      control.<span style="color: #202020;">maxsize</span> <span style="color: #339933;">=</span> <span style="color: #0000dd;">0</span><span style="color: #339933;">;</span>
+      control.<span style="color: #202020;">count</span><span style="color: #339933;">=</span><span style="color: #0000dd;">1000</span><span style="color: #339933;">;</span>
+      control.<span style="color: #202020;">tags</span><span style="color: #339933;">=</span>NULL<span style="color: #339933;">;</span>
+&nbsp;
+    jvmtiError err <span style="color: #339933;">=</span> jvmti<span style="color: #339933;">-&gt;</span>IterateOverReachableObjects<span style="color: #009900;">&#40;</span>iterateRootLookupReference<span style="color: #339933;">,</span>
+            iterateThreadReferenceLookupReference<span style="color: #339933;">,</span>
+            iterateObjectRelationshipLookupReference<span style="color: #339933;">,</span>
+            <span style="color: #339933;">&amp;</span>control<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+    jint countObjts<span style="color: #339933;">=</span><span style="color: #0000dd;">0</span><span style="color: #339933;">;</span>
+    jobject <span style="color: #339933;">*</span> objs<span style="color: #339933;">=</span>NULL<span style="color: #339933;">;</span>
+    jlong <span style="color: #339933;">*</span> tagResults<span style="color: #339933;">;</span>
+&nbsp;
+    jlong idToQuery<span style="color: #339933;">=</span><span style="color: #0000dd;">1</span><span style="color: #339933;">;</span>  
+&nbsp;
+    <span style="color: #666666; font-style: italic;">/// http://java.sun.com/j2se/1.5.0/docs/guide/jvmti/jvmti.html#GetObjectsWithTags </span>
+    jvmti<span style="color: #339933;">-&gt;</span>GetObjectsWithTags<span style="color: #009900;">&#40;</span>control.<span style="color: #202020;">size</span><span style="color: #339933;">,</span>
+            control.<span style="color: #202020;">tags</span><span style="color: #339933;">,</span>
+            <span style="color: #339933;">&amp;</span>countObjts<span style="color: #339933;">,</span>
+            <span style="color: #339933;">&amp;</span>objs<span style="color: #339933;">,</span>
+            <span style="color: #339933;">&amp;</span>tagResults<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+    <span style="color: #666666; font-style: italic;">// Set the object array</span>
+    jclass loadedObject <span style="color: #339933;">=</span> env<span style="color: #339933;">-&gt;</span>FindClass<span style="color: #009900;">&#40;</span><span style="color: #ff0000;">&quot;java/lang/Object&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    jobjectArray arrayReturn <span style="color: #339933;">=</span> env<span style="color: #339933;">-&gt;</span>NewObjectArray<span style="color: #009900;">&#40;</span>countObjts<span style="color: #339933;">,</span>loadedObject<span style="color: #339933;">,</span><span style="color: #0000dd;">0</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+    <span style="color: #b1b100;">for</span> <span style="color: #009900;">&#40;</span>jsize i<span style="color: #339933;">=</span><span style="color: #0000dd;">0</span><span style="color: #339933;">;</span>i<span style="color: #339933;">&lt;</span>countobjts <span style="color: #339933;">;</span>i<span style="color: #339933;">++</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+       env<span style="color: #339933;">-&gt;</span>SetObjectArrayElement<span style="color: #009900;">&#40;</span>arrayReturn<span style="color: #339933;">,</span>i<span style="color: #339933;">,</span> objs<span style="color: #009900;">&#91;</span>i<span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+&nbsp;
+    <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span>control.<span style="color: #202020;">tags</span><span style="color: #339933;">!=</span>NULL<span style="color: #009900;">&#41;</span>
+    <span style="color: #009900;">&#123;</span>
+      jvmti<span style="color: #339933;">-&gt;</span>Deallocate<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span><span style="color: #993333;">unsigned</span> <span style="color: #993333;">char</span> <span style="color: #339933;">*</span><span style="color: #009900;">&#41;</span>control.<span style="color: #202020;">tags</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+    jvmti<span style="color: #339933;">-&gt;</span>Deallocate<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span><span style="color: #993333;">unsigned</span> <span style="color: #993333;">char</span> <span style="color: #339933;">*</span><span style="color: #009900;">&#41;</span>tagResults<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    jvmti<span style="color: #339933;">-&gt;</span>Deallocate<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span><span style="color: #993333;">unsigned</span> <span style="color: #993333;">char</span> <span style="color: #339933;">*</span><span style="color: #009900;">&#41;</span>objs<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+      releaseTags<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+      <span style="color: #b1b100;">return</span> arrayReturn<span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+JNIEXPORT <span style="color: #993333;">void</span> JNICALL Java_org_jboss_profiler_jvmti_JVMTIInterface_releaseTags
+  <span style="color: #009900;">&#40;</span>JNIEnv <span style="color: #339933;">*,</span> jobject<span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#123;</span>
+      releaseTags<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #993333;">void</span> writeReferenceOnNotify<span style="color: #009900;">&#40;</span>FILE <span style="color: #339933;">*</span> fileReference<span style="color: #339933;">,</span>jlong referenceHolder<span style="color: #339933;">,</span>jlong referencedObject<span style="color: #339933;">,</span>jlong classTag<span style="color: #339933;">,</span>jlong index<span style="color: #339933;">,</span>jmethodID method<span style="color: #339933;">,</span>jbyte referenceType<span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#123;</span>
+      <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span>fileReference<span style="color: #339933;">!=</span>NULL<span style="color: #009900;">&#41;</span>
+      <span style="color: #009900;">&#123;</span>
+            fwrite<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span><span style="color: #993333;">const</span> <span style="color: #993333;">void</span> <span style="color: #339933;">*</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">&amp;</span>referenceHolder<span style="color: #339933;">,</span><span style="color: #993333;">sizeof</span><span style="color: #009900;">&#40;</span>referenceHolder<span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span><span style="color: #0000dd;">1</span><span style="color: #339933;">,</span>fileReference<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+            fwrite<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span><span style="color: #993333;">const</span> <span style="color: #993333;">void</span> <span style="color: #339933;">*</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">&amp;</span>referencedObject<span style="color: #339933;">,</span><span style="color: #993333;">sizeof</span><span style="color: #009900;">&#40;</span>referencedObject<span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span><span style="color: #0000dd;">1</span><span style="color: #339933;">,</span>fileReference<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+            fwrite<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span><span style="color: #993333;">const</span> <span style="color: #993333;">void</span> <span style="color: #339933;">*</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">&amp;</span>classTag<span style="color: #339933;">,</span><span style="color: #993333;">sizeof</span><span style="color: #009900;">&#40;</span>classTag<span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span><span style="color: #0000dd;">1</span><span style="color: #339933;">,</span>fileReference<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+            fwrite<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span><span style="color: #993333;">const</span> <span style="color: #993333;">void</span> <span style="color: #339933;">*</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">&amp;</span>index<span style="color: #339933;">,</span><span style="color: #993333;">sizeof</span><span style="color: #009900;">&#40;</span>index<span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span><span style="color: #0000dd;">1</span><span style="color: #339933;">,</span>fileReference<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+            fwrite<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span><span style="color: #993333;">const</span> <span style="color: #993333;">void</span> <span style="color: #339933;">*</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">&amp;</span>referenceType<span style="color: #339933;">,</span><span style="color: #993333;">sizeof</span><span style="color: #009900;">&#40;</span>referenceType<span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span><span style="color: #0000dd;">1</span><span style="color: #339933;">,</span>fileReference<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+            fwrite<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span><span style="color: #993333;">const</span> <span style="color: #993333;">void</span> <span style="color: #339933;">*</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">&amp;</span>method<span style="color: #339933;">,</span><span style="color: #993333;">sizeof</span><span style="color: #009900;">&#40;</span>method<span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span><span style="color: #0000dd;">1</span><span style="color: #339933;">,</span>fileReference<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+      <span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #993333;">void</span> writeObjectOnNotify<span style="color: #009900;">&#40;</span>FILE <span style="color: #339933;">*</span> fileReference<span style="color: #339933;">,</span>jlong classTag<span style="color: #339933;">,</span>jlong objectTag<span style="color: #339933;">,</span>jlong bytes<span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#123;</span>
+      <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span>fileReference<span style="color: #339933;">!=</span>NULL<span style="color: #009900;">&#41;</span>
+      <span style="color: #009900;">&#123;</span>
+            fwrite<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span><span style="color: #993333;">const</span> <span style="color: #993333;">void</span> <span style="color: #339933;">*</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">&amp;</span>classTag<span style="color: #339933;">,</span><span style="color: #993333;">sizeof</span><span style="color: #009900;">&#40;</span>classTag<span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span><span style="color: #0000dd;">1</span><span style="color: #339933;">,</span>fileReference<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+            fwrite<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span><span style="color: #993333;">const</span> <span style="color: #993333;">void</span> <span style="color: #339933;">*</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">&amp;</span>objectTag<span style="color: #339933;">,</span><span style="color: #993333;">sizeof</span><span style="color: #009900;">&#40;</span>objectTag<span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span><span style="color: #0000dd;">1</span><span style="color: #339933;">,</span>fileReference<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+            fwrite<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span><span style="color: #993333;">const</span> <span style="color: #993333;">void</span> <span style="color: #339933;">*</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">&amp;</span>bytes<span style="color: #339933;">,</span><span style="color: #993333;">sizeof</span><span style="color: #009900;">&#40;</span>bytes<span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span><span style="color: #0000dd;">1</span><span style="color: #339933;">,</span>fileReference<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+      <span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #808080; font-style: italic;">/** Callback JVMTI function for Root references used on notifyOnReferences*/</span>
+jvmtiIterationControl JNICALL iterateRootOnNotify <span style="color: #009900;">&#40;</span>jvmtiHeapRootKind root_kind<span style="color: #339933;">,</span> 
+     jlong class_tag<span style="color: #339933;">,</span> 
+     jlong size<span style="color: #339933;">,</span> 
+     jlong<span style="color: #339933;">*</span> tag_ptr<span style="color: #339933;">,</span> 
+     <span style="color: #993333;">void</span><span style="color: #339933;">*</span> user_data<span style="color: #009900;">&#41;</span> 
+<span style="color: #009900;">&#123;</span>
+&nbsp;
+     IterateControl <span style="color: #339933;">*</span> iterate <span style="color: #339933;">=</span> <span style="color: #009900;">&#40;</span>IterateControl <span style="color: #339933;">*</span><span style="color: #009900;">&#41;</span> user_data<span style="color: #339933;">;</span>
+     <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span><span style="color: #339933;">*</span>tag_ptr<span style="color: #009900;">&#41;</span><span style="color: #339933;">==</span><span style="color: #0000dd;">0</span><span style="color: #009900;">&#41;</span> 
+     <span style="color: #009900;">&#123;</span>
+        <span style="color: #339933;">*</span>tag_ptr <span style="color: #339933;">=</span> iterate<span style="color: #339933;">-&gt;</span>genericCount<span style="color: #339933;">++;</span>
+&nbsp;
+        writeObjectOnNotify<span style="color: #009900;">&#40;</span>iterate<span style="color: #339933;">-&gt;</span>fileObjects<span style="color: #339933;">,</span> class_tag<span style="color: #339933;">,</span> <span style="color: #339933;">*</span>tag_ptr<span style="color: #339933;">,</span>size<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+     <span style="color: #009900;">&#125;</span>
+&nbsp;
+     writeReferenceOnNotify<span style="color: #009900;">&#40;</span>iterate<span style="color: #339933;">-&gt;</span>fileReferences<span style="color: #339933;">,-</span><span style="color: #0000dd;">1</span><span style="color: #339933;">,*</span>tag_ptr<span style="color: #339933;">,</span><span style="color: #0000dd;">0</span><span style="color: #339933;">,</span><span style="color: #0000dd;">0</span><span style="color: #339933;">,</span>NULL<span style="color: #339933;">,</span><span style="color: #0000dd;">10</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #339933;">#ifdef DEBUG</span>
+     fprintf <span style="color: #009900;">&#40;</span>stderr<span style="color: #339933;">,</span><span style="color: #ff0000;">&quot;Root - classTag = %ld and class=%ld reference = %ld<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">,</span>class_tag<span style="color: #339933;">,*</span>tag_ptr<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #339933;">#endif</span>
+     <span style="color: #b1b100;">return</span> JVMTI_ITERATION_CONTINUE<span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+&nbsp;
+<span style="color: #808080; font-style: italic;">/** Callback JVMTI function for threadReference used on notifyOnReferences*/</span>
+<span style="color: #993333;">static</span> jvmtiIterationControl JNICALL iterateThreadReferenceOnNotify
+    <span style="color: #009900;">&#40;</span>jvmtiHeapRootKind root_kind<span style="color: #339933;">,</span> 
+     jlong class_tag<span style="color: #339933;">,</span> 
+     jlong size<span style="color: #339933;">,</span> 
+     jlong<span style="color: #339933;">*</span> tag_ptr<span style="color: #339933;">,</span> 
+     jlong thread_tag<span style="color: #339933;">,</span> 
+     jint depth<span style="color: #339933;">,</span> 
+     jmethodID method<span style="color: #339933;">,</span> 
+     jint slot<span style="color: #339933;">,</span> 
+     <span style="color: #993333;">void</span><span style="color: #339933;">*</span> user_data<span style="color: #009900;">&#41;</span> 
+<span style="color: #009900;">&#123;</span>
+     IterateControl <span style="color: #339933;">*</span> iterate <span style="color: #339933;">=</span> <span style="color: #009900;">&#40;</span>IterateControl <span style="color: #339933;">*</span><span style="color: #009900;">&#41;</span> user_data<span style="color: #339933;">;</span>
+&nbsp;
+     <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span><span style="color: #339933;">*</span>tag_ptr<span style="color: #009900;">&#41;</span><span style="color: #339933;">==</span><span style="color: #0000dd;">0</span><span style="color: #009900;">&#41;</span> 
+     <span style="color: #009900;">&#123;</span>
+        <span style="color: #339933;">*</span>tag_ptr <span style="color: #339933;">=</span> iterate<span style="color: #339933;">-&gt;</span>genericCount<span style="color: #339933;">++;</span>
+        writeObjectOnNotify<span style="color: #009900;">&#40;</span>iterate<span style="color: #339933;">-&gt;</span>fileObjects<span style="color: #339933;">,</span> class_tag<span style="color: #339933;">,</span> <span style="color: #339933;">*</span>tag_ptr<span style="color: #339933;">,</span>size<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+     <span style="color: #009900;">&#125;</span>
+&nbsp;
+     <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #339933;">!</span>class_tag<span style="color: #009900;">&#41;</span>
+     <span style="color: #009900;">&#123;</span>
+        fprintf <span style="color: #009900;">&#40;</span>stderr<span style="color: #339933;">,</span><span style="color: #ff0000;">&quot;ClassTAG can't be NULL... it happened at iterateThreadReference<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+     <span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #339933;">#ifdef DEBUG</span>
+     fprintf <span style="color: #009900;">&#40;</span>stderr<span style="color: #339933;">,</span><span style="color: #ff0000;">&quot;Thread - classTag = %ld<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">,</span>class_tag<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #339933;">#endif</span>
+     <span style="color: #666666; font-style: italic;">// meed to verify this option</span>
+     writeReferenceOnNotify<span style="color: #009900;">&#40;</span>iterate<span style="color: #339933;">-&gt;</span>fileReferences<span style="color: #339933;">,</span>class_tag<span style="color: #339933;">,*</span>tag_ptr<span style="color: #339933;">,</span>class_tag<span style="color: #339933;">,</span><span style="color: #0000dd;">0</span><span style="color: #339933;">,</span>method<span style="color: #339933;">,</span>REFERENCE_THREAD<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+     <span style="color: #b1b100;">return</span> JVMTI_ITERATION_CONTINUE<span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #808080; font-style: italic;">/** Callback JVMTI function for Object Relationships used on notifyOnReferences*/</span>
+jvmtiIterationControl JNICALL iterateObjectRelationshipOnNotify
+    <span style="color: #009900;">&#40;</span>jvmtiObjectReferenceKind reference_kind<span style="color: #339933;">,</span> 
+     jlong class_tag<span style="color: #339933;">,</span> 
+     jlong size<span style="color: #339933;">,</span> 
+     jlong<span style="color: #339933;">*</span> tag_ptr<span style="color: #339933;">,</span> 
+     jlong referrer_tag<span style="color: #339933;">,</span> 
+     jint referrer_index<span style="color: #339933;">,</span> 
+     <span style="color: #993333;">void</span><span style="color: #339933;">*</span> user_data<span style="color: #009900;">&#41;</span> 
+<span style="color: #009900;">&#123;</span>
+     <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span>reference_kind<span style="color: #339933;">==</span>JVMTI_REFERENCE_CONSTANT_POOL<span style="color: #009900;">&#41;</span>
+         <span style="color: #009900;">&#123;</span>
+                 <span style="color: #b1b100;">return</span> JVMTI_ITERATION_CONTINUE<span style="color: #339933;">;</span>
+         <span style="color: #009900;">&#125;</span>
+     <span style="color: #808080; font-style: italic;">/*if (reference_kind==JVMTI_REFERENCE_CLASS ||
+         reference_kind==JVMTI_REFERENCE_CLASS_LOADER ||
+         reference_kind==JVMTI_REFERENCE_INTERFACE ||
+         reference_kind==JVMTI_REFERENCE_CONSTANT_POOL)
+         {
+                 return JVMTI_ITERATION_CONTINUE;
+         } */</span>
+&nbsp;
+    IterateControl <span style="color: #339933;">*</span> iterate <span style="color: #339933;">=</span> <span style="color: #009900;">&#40;</span>IterateControl <span style="color: #339933;">*</span><span style="color: #009900;">&#41;</span> user_data<span style="color: #339933;">;</span>
+    <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span><span style="color: #339933;">*</span>tag_ptr<span style="color: #009900;">&#41;</span><span style="color: #339933;">==</span><span style="color: #0000dd;">0</span><span style="color: #009900;">&#41;</span> 
+    <span style="color: #009900;">&#123;</span>
+       <span style="color: #339933;">*</span>tag_ptr <span style="color: #339933;">=</span> iterate<span style="color: #339933;">-&gt;</span>genericCount<span style="color: #339933;">++;</span>
+       writeObjectOnNotify<span style="color: #009900;">&#40;</span>iterate<span style="color: #339933;">-&gt;</span>fileObjects<span style="color: #339933;">,</span> class_tag<span style="color: #339933;">,</span> <span style="color: #339933;">*</span>tag_ptr<span style="color: #339933;">,</span>size<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+&nbsp;
+    writeReferenceOnNotify<span style="color: #009900;">&#40;</span>iterate<span style="color: #339933;">-&gt;</span>fileReferences<span style="color: #339933;">,</span>
+                           referrer_tag<span style="color: #339933;">,</span>
+                           <span style="color: #339933;">*</span>tag_ptr<span style="color: #339933;">,</span>
+                           class_tag<span style="color: #339933;">,</span>
+                           referrer_index<span style="color: #339933;">,</span>
+                           NULL<span style="color: #339933;">,</span>
+                           reference_kind<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #b1b100;">return</span> JVMTI_ITERATION_CONTINUE<span style="color: #339933;">;</span>
+ <span style="color: #009900;">&#125;</span>
+&nbsp;
+&nbsp;
+JNIEXPORT <span style="color: #993333;">void</span> JNICALL Java_org_jboss_profiler_jvmti_JVMTIInterface_notifyInventory
+  <span style="color: #009900;">&#40;</span>JNIEnv <span style="color: #339933;">*</span>env<span style="color: #339933;">,</span> jobject thisObject<span style="color: #339933;">,</span> jboolean notifyClasses<span style="color: #339933;">,</span> jstring temporaryFileReferences<span style="color: #339933;">,</span> jstring temporaryFileObjects<span style="color: #339933;">,</span> jobject jvmtiCallBack<span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#123;</span>
+  <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #339933;">!</span>checkJVMTI<span style="color: #009900;">&#40;</span>env<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>
+  <span style="color: #009900;">&#123;</span>
+     <span style="color: #b1b100;">return</span><span style="color: #339933;">;</span>
+  <span style="color: #009900;">&#125;</span>
+&nbsp;
+  IterateControl iterate<span style="color: #339933;">;</span>
+  releaseTags<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+  jvmtiError err<span style="color: #339933;">;</span>
+  <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span>temporaryFileReferences<span style="color: #339933;">!=</span>NULL<span style="color: #009900;">&#41;</span>
+  <span style="color: #009900;">&#123;</span>
+        <span style="color: #993333;">const</span> <span style="color: #993333;">char</span> <span style="color: #339933;">*</span> strTemporaryFile <span style="color: #339933;">=</span> strTemporaryFile <span style="color: #339933;">=</span> env<span style="color: #339933;">-&gt;</span>GetStringUTFChars<span style="color: #009900;">&#40;</span>temporaryFileReferences<span style="color: #339933;">,</span>NULL<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        iterate.<span style="color: #202020;">fileReferences</span> <span style="color: #339933;">=</span> fopen<span style="color: #009900;">&#40;</span>strTemporaryFile<span style="color: #339933;">,</span><span style="color: #ff0000;">&quot;wb+&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span>iterate.<span style="color: #202020;">fileReferences</span><span style="color: #339933;">==</span>NULL<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+             fprintf <span style="color: #009900;">&#40;</span>stderr<span style="color: #339933;">,</span><span style="color: #ff0000;">&quot;Couldn't open %s<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">,</span>strTemporaryFile<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+           throwException<span style="color: #009900;">&#40;</span>env<span style="color: #339933;">,</span><span style="color: #ff0000;">&quot;java/lang/RuntimeException&quot;</span><span style="color: #339933;">,</span><span style="color: #ff0000;">&quot;Couldn't open references file&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+           <span style="color: #b1b100;">return</span><span style="color: #339933;">;</span>
+        <span style="color: #009900;">&#125;</span>
+      env<span style="color: #339933;">-&gt;</span>ReleaseStringUTFChars<span style="color: #009900;">&#40;</span>temporaryFileReferences<span style="color: #339933;">,</span>strTemporaryFile<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+  <span style="color: #009900;">&#125;</span>
+  <span style="color: #b1b100;">else</span>
+  <span style="color: #009900;">&#123;</span>
+      iterate.<span style="color: #202020;">fileReferences</span> <span style="color: #339933;">=</span> NULL<span style="color: #339933;">;</span>
+  <span style="color: #009900;">&#125;</span>
+&nbsp;
+  <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span>temporaryFileObjects<span style="color: #339933;">!=</span>NULL<span style="color: #009900;">&#41;</span>
+  <span style="color: #009900;">&#123;</span>
+        <span style="color: #993333;">const</span> <span style="color: #993333;">char</span> <span style="color: #339933;">*</span> strTemporaryFile <span style="color: #339933;">=</span> strTemporaryFile <span style="color: #339933;">=</span> env<span style="color: #339933;">-&gt;</span>GetStringUTFChars<span style="color: #009900;">&#40;</span>temporaryFileObjects<span style="color: #339933;">,</span>NULL<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        iterate.<span style="color: #202020;">fileObjects</span> <span style="color: #339933;">=</span> fopen<span style="color: #009900;">&#40;</span>strTemporaryFile<span style="color: #339933;">,</span><span style="color: #ff0000;">&quot;wb+&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span>iterate.<span style="color: #202020;">fileObjects</span><span style="color: #339933;">==</span>NULL<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+             fprintf <span style="color: #009900;">&#40;</span>stderr<span style="color: #339933;">,</span><span style="color: #ff0000;">&quot;Couldn't open %s<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">,</span>strTemporaryFile<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+           throwException<span style="color: #009900;">&#40;</span>env<span style="color: #339933;">,</span><span style="color: #ff0000;">&quot;java/lang/RuntimeException&quot;</span><span style="color: #339933;">,</span><span style="color: #ff0000;">&quot;Couldn't open objects file&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+           <span style="color: #b1b100;">return</span><span style="color: #339933;">;</span>
+        <span style="color: #009900;">&#125;</span>
+      env<span style="color: #339933;">-&gt;</span>ReleaseStringUTFChars<span style="color: #009900;">&#40;</span>temporaryFileObjects<span style="color: #339933;">,</span>strTemporaryFile<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+  <span style="color: #009900;">&#125;</span>
+  <span style="color: #b1b100;">else</span>
+  <span style="color: #009900;">&#123;</span>
+      iterate.<span style="color: #202020;">fileObjects</span><span style="color: #339933;">=</span>NULL<span style="color: #339933;">;</span>
+  <span style="color: #009900;">&#125;</span>
+&nbsp;
+  <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #339933;">!</span>checkJVMTI<span style="color: #009900;">&#40;</span>env<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>
+  <span style="color: #009900;">&#123;</span>
+     <span style="color: #b1b100;">return</span><span style="color: #339933;">;</span>
+  <span style="color: #009900;">&#125;</span>
+&nbsp;
+&nbsp;
+  jint classCount<span style="color: #339933;">=</span><span style="color: #0000dd;">0</span><span style="color: #339933;">;</span>
+  jclass <span style="color: #339933;">*</span> classesPointer<span style="color: #339933;">;</span>
+  jvmti<span style="color: #339933;">-&gt;</span>GetLoadedClasses<span style="color: #009900;">&#40;</span><span style="color: #339933;">&amp;</span>classCount<span style="color: #339933;">,&amp;</span>classesPointer<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+  <span style="color: #666666; font-style: italic;">// we need to first setAllTags, to avoid dependencies between classes and classLoaders</span>
+  <span style="color: #b1b100;">for</span> <span style="color: #009900;">&#40;</span>jsize i<span style="color: #339933;">=</span><span style="color: #0000dd;">0</span><span style="color: #339933;">;</span>i<span style="color: #339933;">&lt;</span>classcount <span style="color: #339933;">;</span>i<span style="color: #339933;">++</span><span style="color: #009900;">&#41;</span> 
+  <span style="color: #009900;">&#123;</span>
+     err <span style="color: #339933;">=</span> jvmti<span style="color: #339933;">-&gt;</span>SetTag<span style="color: #009900;">&#40;</span>classesPointer<span style="color: #009900;">&#91;</span>i<span style="color: #009900;">&#93;</span><span style="color: #339933;">,</span>i<span style="color: #339933;">+</span><span style="color: #0000dd;">1</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+  <span style="color: #009900;">&#125;</span>
+&nbsp;
+  jclass clazz <span style="color: #339933;">=</span> env<span style="color: #339933;">-&gt;</span>GetObjectClass<span style="color: #009900;">&#40;</span>jvmtiCallBack<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+  jmethodID methodNotifyClass <span style="color: #339933;">=</span> env<span style="color: #339933;">-&gt;</span>GetMethodID<span style="color: #009900;">&#40;</span>clazz<span style="color: #339933;">,</span><span style="color: #ff0000;">&quot;notifyClass&quot;</span><span style="color: #339933;">,</span><span style="color: #ff0000;">&quot;(JLjava/lang/Class;)V&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+  <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span>methodNotifyClass<span style="color: #339933;">==</span>NULL<span style="color: #009900;">&#41;</span>
+  <span style="color: #009900;">&#123;</span>
+           throwException<span style="color: #009900;">&#40;</span>env<span style="color: #339933;">,</span><span style="color: #ff0000;">&quot;java/lang/RuntimeException&quot;</span><span style="color: #339933;">,</span><span style="color: #ff0000;">&quot;Method notifyClass not found on JVMTICallBack&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+           <span style="color: #b1b100;">return</span><span style="color: #339933;">;</span>
+  <span style="color: #009900;">&#125;</span>
+  jmethodID notifyMethod <span style="color: #339933;">=</span> env<span style="color: #339933;">-&gt;</span>GetMethodID<span style="color: #009900;">&#40;</span>clazz<span style="color: #339933;">,</span><span style="color: #ff0000;">&quot;notifyReference&quot;</span><span style="color: #339933;">,</span><span style="color: #ff0000;">&quot;(JJJJJB)V&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+  <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span>notifyMethod<span style="color: #339933;">==</span>NULL<span style="color: #009900;">&#41;</span>
+  <span style="color: #009900;">&#123;</span>
+      throwException<span style="color: #009900;">&#40;</span>env<span style="color: #339933;">,</span><span style="color: #ff0000;">&quot;java/lang/RuntimeException&quot;</span><span style="color: #339933;">,</span><span style="color: #ff0000;">&quot;Couldn't find notifyReference&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+      <span style="color: #b1b100;">return</span> <span style="color: #339933;">;</span>
+  <span style="color: #009900;">&#125;</span>
+  jmethodID notifyMethodObject <span style="color: #339933;">=</span> env<span style="color: #339933;">-&gt;</span>GetMethodID<span style="color: #009900;">&#40;</span>clazz<span style="color: #339933;">,</span><span style="color: #ff0000;">&quot;notifyObject&quot;</span><span style="color: #339933;">,</span><span style="color: #ff0000;">&quot;(JJJ)V&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+  <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span>notifyMethodObject<span style="color: #339933;">==</span>NULL<span style="color: #009900;">&#41;</span>
+  <span style="color: #009900;">&#123;</span>
+      throwException<span style="color: #009900;">&#40;</span>env<span style="color: #339933;">,</span><span style="color: #ff0000;">&quot;java/lang/RuntimeException&quot;</span><span style="color: #339933;">,</span><span style="color: #ff0000;">&quot;Couldn't find notifyObject&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+      <span style="color: #b1b100;">return</span> <span style="color: #339933;">;</span>
+  <span style="color: #009900;">&#125;</span>
+&nbsp;
+  fflush<span style="color: #009900;">&#40;</span>stderr<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+  iterate.<span style="color: #202020;">genericCount</span><span style="color: #339933;">=</span>classCount <span style="color: #339933;">+</span> <span style="color: #0000dd;">1000</span><span style="color: #339933;">;</span>
+  jvmti<span style="color: #339933;">-&gt;</span>ForceGarbageCollection<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+&nbsp;
+  fflush<span style="color: #009900;">&#40;</span>stderr<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+  err <span style="color: #339933;">=</span> jvmti<span style="color: #339933;">-&gt;</span>IterateOverReachableObjects<span style="color: #009900;">&#40;</span>iterateRootOnNotify<span style="color: #339933;">,</span>
+            iterateThreadReferenceOnNotify<span style="color: #339933;">,</span>
+            iterateObjectRelationshipOnNotify<span style="color: #339933;">,</span>
+            <span style="color: #339933;">&amp;</span>iterate<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> 
+  verifyError<span style="color: #009900;">&#40;</span>err<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+  <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span>notifyClasses<span style="color: #009900;">&#41;</span>
+  <span style="color: #009900;">&#123;</span>
+        <span style="color: #666666; font-style: italic;">// we need to first setAllTags, to avoid dependencies between classes and classLoaders</span>
+        <span style="color: #b1b100;">for</span> <span style="color: #009900;">&#40;</span>jsize i<span style="color: #339933;">=</span><span style="color: #0000dd;">0</span><span style="color: #339933;">;</span>i<span style="color: #339933;">&lt;/</span>classcount<span style="color: #339933;">&gt;&lt;</span>classcount <span style="color: #339933;">;</span>i<span style="color: #339933;">++</span><span style="color: #009900;">&#41;</span> 
+        <span style="color: #009900;">&#123;</span>
+                env<span style="color: #339933;">-&gt;</span>CallVoidMethod<span style="color: #009900;">&#40;</span>jvmtiCallBack<span style="color: #339933;">,</span>methodNotifyClass<span style="color: #339933;">,</span><span style="color: #009900;">&#40;</span>jlong<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#40;</span>i<span style="color: #339933;">+</span><span style="color: #0000dd;">1</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>classesPointer<span style="color: #009900;">&#91;</span>i<span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        <span style="color: #009900;">&#125;</span>
+  <span style="color: #009900;">&#125;</span>
+&nbsp;
+  jvmti<span style="color: #339933;">-&gt;</span>Deallocate<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span><span style="color: #993333;">unsigned</span> <span style="color: #993333;">char</span> <span style="color: #339933;">*</span><span style="color: #009900;">&#41;</span>classesPointer<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+&nbsp;
+  <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span>iterate.<span style="color: #202020;">fileObjects</span><span style="color: #339933;">!=</span>NULL<span style="color: #009900;">&#41;</span>
+  <span style="color: #009900;">&#123;</span>
+        fseek<span style="color: #009900;">&#40;</span>iterate.<span style="color: #202020;">fileObjects</span><span style="color: #339933;">,</span>SEEK_SET<span style="color: #339933;">,</span><span style="color: #0000dd;">0l</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> 
+&nbsp;
+        jlong classTag<span style="color: #339933;">=</span><span style="color: #0000dd;">0</span><span style="color: #339933;">;</span>
+        jlong objectTag<span style="color: #339933;">=</span><span style="color: #0000dd;">0</span><span style="color: #339933;">;</span>
+        jlong bytes<span style="color: #339933;">=</span><span style="color: #0000dd;">0</span><span style="color: #339933;">;</span>
+        <span style="color: #b1b100;">while</span> <span style="color: #009900;">&#40;</span><span style="color: #339933;">!</span>feof<span style="color: #009900;">&#40;</span>iterate.<span style="color: #202020;">fileObjects</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>
+        <span style="color: #009900;">&#123;</span>
+         fread<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span><span style="color: #993333;">void</span> <span style="color: #339933;">*</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">&amp;</span>classTag<span style="color: #339933;">,</span><span style="color: #993333;">sizeof</span><span style="color: #009900;">&#40;</span>classTag<span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span><span style="color: #0000dd;">1</span><span style="color: #339933;">,</span>iterate.<span style="color: #202020;">fileObjects</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+         fread<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span><span style="color: #993333;">void</span> <span style="color: #339933;">*</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">&amp;</span>objectTag<span style="color: #339933;">,</span><span style="color: #993333;">sizeof</span><span style="color: #009900;">&#40;</span>objectTag<span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span><span style="color: #0000dd;">1</span><span style="color: #339933;">,</span>iterate.<span style="color: #202020;">fileObjects</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+         fread<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span><span style="color: #993333;">void</span> <span style="color: #339933;">*</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">&amp;</span>bytes<span style="color: #339933;">,</span><span style="color: #993333;">sizeof</span><span style="color: #009900;">&#40;</span>bytes<span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span><span style="color: #0000dd;">1</span><span style="color: #339933;">,</span>iterate.<span style="color: #202020;">fileObjects</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+           env<span style="color: #339933;">-&gt;</span>CallVoidMethod<span style="color: #009900;">&#40;</span>jvmtiCallBack<span style="color: #339933;">,</span>notifyMethodObject<span style="color: #339933;">,</span>classTag<span style="color: #339933;">,</span>objectTag<span style="color: #339933;">,</span>bytes<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        <span style="color: #009900;">&#125;</span>
+&nbsp;
+  <span style="color: #009900;">&#125;</span>
+&nbsp;
+&nbsp;
+  <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span>iterate.<span style="color: #202020;">fileReferences</span><span style="color: #339933;">!=</span>NULL<span style="color: #009900;">&#41;</span>
+  <span style="color: #009900;">&#123;</span>  
+        fseek<span style="color: #009900;">&#40;</span>iterate.<span style="color: #202020;">fileReferences</span><span style="color: #339933;">,</span>SEEK_SET<span style="color: #339933;">,</span><span style="color: #0000dd;">0l</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        jlong referenceHolder<span style="color: #339933;">=</span><span style="color: #0000dd;">0</span><span style="color: #339933;">;</span>
+        jlong referencedObject<span style="color: #339933;">=</span><span style="color: #0000dd;">0</span><span style="color: #339933;">;</span>
+        jlong classTag<span style="color: #339933;">;</span>
+        jlong index<span style="color: #339933;">=</span><span style="color: #0000dd;">0</span><span style="color: #339933;">;</span>
+        jbyte referenceType<span style="color: #339933;">=</span><span style="color: #0000dd;">0</span><span style="color: #339933;">;</span>
+        jmethodID method<span style="color: #339933;">;</span>
+        jlong methodParameter<span style="color: #339933;">=</span><span style="color: #0000dd;">0</span><span style="color: #339933;">;</span>
+        <span style="color: #b1b100;">while</span> <span style="color: #009900;">&#40;</span><span style="color: #339933;">!</span>feof<span style="color: #009900;">&#40;</span>iterate.<span style="color: #202020;">fileReferences</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>
+        <span style="color: #009900;">&#123;</span>
+            fread<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span><span style="color: #993333;">void</span> <span style="color: #339933;">*</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">&amp;</span>referenceHolder<span style="color: #339933;">,</span><span style="color: #993333;">sizeof</span><span style="color: #009900;">&#40;</span>referenceHolder<span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span><span style="color: #0000dd;">1</span><span style="color: #339933;">,</span>iterate.<span style="color: #202020;">fileReferences</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+            fread<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span><span style="color: #993333;">void</span> <span style="color: #339933;">*</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">&amp;</span>referencedObject<span style="color: #339933;">,</span><span style="color: #993333;">sizeof</span><span style="color: #009900;">&#40;</span>referencedObject<span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span><span style="color: #0000dd;">1</span><span style="color: #339933;">,</span>iterate.<span style="color: #202020;">fileReferences</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+            fread<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span><span style="color: #993333;">void</span> <span style="color: #339933;">*</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">&amp;</span>classTag<span style="color: #339933;">,</span><span style="color: #993333;">sizeof</span><span style="color: #009900;">&#40;</span>classTag<span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span><span style="color: #0000dd;">1</span><span style="color: #339933;">,</span>iterate.<span style="color: #202020;">fileReferences</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+            fread<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span><span style="color: #993333;">void</span> <span style="color: #339933;">*</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">&amp;</span>index<span style="color: #339933;">,</span><span style="color: #993333;">sizeof</span><span style="color: #009900;">&#40;</span>index<span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span><span style="color: #0000dd;">1</span><span style="color: #339933;">,</span>iterate.<span style="color: #202020;">fileReferences</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+            fread<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span><span style="color: #993333;">void</span> <span style="color: #339933;">*</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">&amp;</span>referenceType<span style="color: #339933;">,</span><span style="color: #993333;">sizeof</span><span style="color: #009900;">&#40;</span>referenceType<span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span><span style="color: #0000dd;">1</span><span style="color: #339933;">,</span>iterate.<span style="color: #202020;">fileReferences</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+            fread<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span><span style="color: #993333;">void</span> <span style="color: #339933;">*</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">&amp;</span>method<span style="color: #339933;">,</span><span style="color: #993333;">sizeof</span><span style="color: #009900;">&#40;</span>method<span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span><span style="color: #0000dd;">1</span><span style="color: #339933;">,</span>iterate.<span style="color: #202020;">fileReferences</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+            <span style="color: #666666; font-style: italic;">// this line generates a warning due to this convertion. You can safely ignore this</span>
+            methodParameter <span style="color: #339933;">=</span> <span style="color: #009900;">&#40;</span>jlong<span style="color: #009900;">&#41;</span>method<span style="color: #339933;">;</span>
+&nbsp;
+          env<span style="color: #339933;">-&gt;</span>CallVoidMethod<span style="color: #009900;">&#40;</span>jvmtiCallBack<span style="color: #339933;">,</span>notifyMethod<span style="color: #339933;">,</span>referenceHolder<span style="color: #339933;">,</span>referencedObject<span style="color: #339933;">,</span>classTag<span style="color: #339933;">,</span> index<span style="color: #339933;">,</span>methodParameter<span style="color: #339933;">,</span>referenceType<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        <span style="color: #009900;">&#125;</span>
+&nbsp;
+        fclose<span style="color: #009900;">&#40;</span>iterate.<span style="color: #202020;">fileReferences</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+  <span style="color: #009900;">&#125;</span>
+&nbsp;
+  verifyError<span style="color: #009900;">&#40;</span>err<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+JNIEXPORT jlong JNICALL Java_org_jboss_profiler_jvmti_JVMTIInterface_getTagOnObject
+  <span style="color: #009900;">&#40;</span>JNIEnv <span style="color: #339933;">*</span> env<span style="color: #339933;">,</span> jobject thisObject<span style="color: #339933;">,</span> jobject taggedObject<span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#123;</span>
+  <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #339933;">!</span>checkJVMTI<span style="color: #009900;">&#40;</span>env<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>
+  <span style="color: #009900;">&#123;</span>
+     <span style="color: #b1b100;">return</span> <span style="color: #0000dd;">0</span><span style="color: #339933;">;</span>
+  <span style="color: #009900;">&#125;</span>
+    jlong retTag<span style="color: #339933;">;</span>
+&nbsp;
+    jvmti<span style="color: #339933;">-&gt;</span>GetTag<span style="color: #009900;">&#40;</span>taggedObject<span style="color: #339933;">,&amp;</span>retTag<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+    <span style="color: #b1b100;">return</span> retTag<span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+JNIEXPORT jobject JNICALL Java_org_jboss_profiler_jvmti_JVMTIInterface_getObjectOnTag
+  <span style="color: #009900;">&#40;</span>JNIEnv <span style="color: #339933;">*</span> env<span style="color: #339933;">,</span> jobject thisObject<span style="color: #339933;">,</span> jlong tag<span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#123;</span>
+  <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #339933;">!</span>checkJVMTI<span style="color: #009900;">&#40;</span>env<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>
+  <span style="color: #009900;">&#123;</span>
+     <span style="color: #b1b100;">return</span> NULL<span style="color: #339933;">;</span>
+  <span style="color: #009900;">&#125;</span>
+    jint countObjts<span style="color: #339933;">=</span><span style="color: #0000dd;">0</span><span style="color: #339933;">;</span>
+    jobject <span style="color: #339933;">*</span> objs<span style="color: #339933;">;</span>
+    jlong <span style="color: #339933;">*</span> tagResults<span style="color: #339933;">;</span>
+&nbsp;
+    <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span>tag<span style="color: #339933;">&lt;</span> <span style="color: #339933;">=</span><span style="color: #0000dd;">0</span><span style="color: #009900;">&#41;</span>
+    <span style="color: #009900;">&#123;</span>
+            throwException<span style="color: #009900;">&#40;</span>env<span style="color: #339933;">,</span><span style="color: #ff0000;">&quot;java/lang/RuntimeException&quot;</span><span style="color: #339933;">,</span><span style="color: #ff0000;">&quot;Can't use a tag=0&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+            <span style="color: #b1b100;">return</span> NULL<span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+&nbsp;
+    <span style="color: #666666; font-style: italic;">/// http://java.sun.com/j2se/1.5.0/docs/guide/jvmti/jvmti.html#GetObjectsWithTags </span>
+    jvmti<span style="color: #339933;">-&gt;</span>GetObjectsWithTags<span style="color: #009900;">&#40;</span><span style="color: #0000dd;">1</span><span style="color: #339933;">,</span>
+            <span style="color: #339933;">&amp;</span>tag<span style="color: #339933;">,</span>
+            <span style="color: #339933;">&amp;</span>countObjts<span style="color: #339933;">,</span>
+            <span style="color: #339933;">&amp;</span>objs<span style="color: #339933;">,</span>
+            <span style="color: #339933;">&amp;</span>tagResults<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+    jobject retObject <span style="color: #339933;">=</span> NULL<span style="color: #339933;">;</span>
+    <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span>countObjts<span style="color: #339933;">==</span><span style="color: #0000dd;">1</span><span style="color: #009900;">&#41;</span>
+    <span style="color: #009900;">&#123;</span>
+      retObject <span style="color: #339933;">=</span> objs<span style="color: #009900;">&#91;</span><span style="color: #0000dd;">0</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+&nbsp;
+    jvmti<span style="color: #339933;">-&gt;</span>Deallocate<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span><span style="color: #993333;">unsigned</span> <span style="color: #993333;">char</span> <span style="color: #339933;">*</span><span style="color: #009900;">&#41;</span>tagResults<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+    jvmti<span style="color: #339933;">-&gt;</span>Deallocate<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span><span style="color: #993333;">unsigned</span> <span style="color: #993333;">char</span> <span style="color: #339933;">*</span><span style="color: #009900;">&#41;</span>objs<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+&nbsp;
+      <span style="color: #b1b100;">return</span> retObject<span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+JNIEXPORT jobject JNICALL Java_org_jboss_profiler_jvmti_JVMTIInterface_getObjectField
+  <span style="color: #009900;">&#40;</span>JNIEnv <span style="color: #339933;">*</span> env<span style="color: #339933;">,</span> jobject thisObject<span style="color: #339933;">,</span> jclass clazz<span style="color: #339933;">,</span> jboolean isStatic<span style="color: #339933;">,</span>jlong fieldIndex<span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#123;</span>
+  <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #339933;">!</span>checkJVMTI<span style="color: #009900;">&#40;</span>env<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>
+  <span style="color: #009900;">&#123;</span>
+     <span style="color: #b1b100;">return</span> NULL<span style="color: #339933;">;</span>
+  <span style="color: #009900;">&#125;</span>
+      jint fieldCount<span style="color: #339933;">=</span><span style="color: #0000dd;">0</span><span style="color: #339933;">;</span>
+      jfieldID <span style="color: #339933;">*</span> fields<span style="color: #339933;">;</span>
+      jvmtiError err <span style="color: #339933;">=</span> jvmti<span style="color: #339933;">-&gt;</span>GetClassFields<span style="color: #009900;">&#40;</span>clazz<span style="color: #339933;">,&amp;</span>fieldCount<span style="color: #339933;">,&amp;</span>fields<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span> err <span style="color: #339933;">!=</span> JVMTI_ERROR_NONE <span style="color: #009900;">&#41;</span> 
+    <span style="color: #009900;">&#123;</span>
+        verifyError<span style="color: #009900;">&#40;</span>err<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        <span style="color: #b1b100;">return</span> NULL<span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+&nbsp;
+    jobject field <span style="color: #339933;">=</span> NULL<span style="color: #339933;">;</span>     
+&nbsp;
+&nbsp;
+      <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span>fields<span style="color: #339933;">!=</span>NULL <span style="color: #339933;">&amp;&amp;</span> fieldIndex<span style="color: #339933;">&lt;</span>fieldcount <span style="color: #009900;">&#41;</span>
+      <span style="color: #009900;">&#123;</span>
+            jfieldID fieldID <span style="color: #339933;">=</span> fields<span style="color: #009900;">&#91;</span>fieldIndex<span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+          jobject field <span style="color: #339933;">=</span> env<span style="color: #339933;">-&gt;</span>ToReflectedField<span style="color: #009900;">&#40;</span>clazz<span style="color: #339933;">,</span>fields<span style="color: #009900;">&#91;</span>fieldIndex<span style="color: #009900;">&#93;</span><span style="color: #339933;">,</span><span style="color: #0000dd;">0</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+      <span style="color: #009900;">&#125;</span>
+&nbsp;
+      <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span>fieldCount<span style="color: #339933;">&gt;</span><span style="color: #0000dd;">0</span> <span style="color: #339933;">&amp;&amp;</span> fields<span style="color: #339933;">!=</span>NULL<span style="color: #009900;">&#41;</span>
+      <span style="color: #009900;">&#123;</span>
+            jvmti<span style="color: #339933;">-&gt;</span>Deallocate<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span><span style="color: #993333;">unsigned</span> <span style="color: #993333;">char</span> <span style="color: #339933;">*</span><span style="color: #009900;">&#41;</span>fields<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+      <span style="color: #009900;">&#125;</span>
+&nbsp;
+      <span style="color: #b1b100;">return</span> field<span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+&nbsp;
+JNIEXPORT jstring JNICALL Java_org_jboss_profiler_jvmti_JVMTIInterface_getMethodName
+  <span style="color: #009900;">&#40;</span>JNIEnv <span style="color: #339933;">*</span> env<span style="color: #339933;">,</span> jobject thisObject<span style="color: #339933;">,</span> jlong lMethodId<span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#123;</span>
+  <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #339933;">!</span>checkJVMTI<span style="color: #009900;">&#40;</span>env<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>
+  <span style="color: #009900;">&#123;</span>
+     <span style="color: #b1b100;">return</span> NULL<span style="color: #339933;">;</span>
+  <span style="color: #009900;">&#125;</span>
+      <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span>lMethodId<span style="color: #339933;">==</span><span style="color: #0000dd;">0</span> <span style="color: #339933;">||</span> lMethodId<span style="color: #339933;">==-</span><span style="color: #0000dd;">1</span><span style="color: #009900;">&#41;</span> <span style="color: #b1b100;">return</span> NULL<span style="color: #339933;">;</span>
+      <span style="color: #993333;">char</span> <span style="color: #339933;">*</span> name<span style="color: #339933;">;</span>
+      <span style="color: #993333;">char</span> <span style="color: #339933;">*</span> signature<span style="color: #339933;">;</span>
+      jmethodID id <span style="color: #339933;">=</span> <span style="color: #009900;">&#40;</span>jmethodID<span style="color: #009900;">&#41;</span>lMethodId<span style="color: #339933;">;</span>
+      jvmti<span style="color: #339933;">-&gt;</span>GetMethodName<span style="color: #009900;">&#40;</span>id<span style="color: #339933;">,&amp;</span>name<span style="color: #339933;">,</span>NULL<span style="color: #339933;">,</span>NULL<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+      jstring retString <span style="color: #339933;">=</span> env<span style="color: #339933;">-&gt;</span>NewStringUTF<span style="color: #009900;">&#40;</span>name<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+      jvmti<span style="color: #339933;">-&gt;</span>Deallocate<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span><span style="color: #993333;">unsigned</span> <span style="color: #993333;">char</span> <span style="color: #339933;">*</span><span style="color: #009900;">&#41;</span> name<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+      jvmti<span style="color: #339933;">-&gt;</span>Deallocate<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span><span style="color: #993333;">unsigned</span> <span style="color: #993333;">char</span> <span style="color: #339933;">*</span><span style="color: #009900;">&#41;</span> signature<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+      <span style="color: #b1b100;">return</span> retString<span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+JNIEXPORT jstring JNICALL Java_org_jboss_profiler_jvmti_JVMTIInterface_getMethodSignature
+  <span style="color: #009900;">&#40;</span>JNIEnv <span style="color: #339933;">*</span> env<span style="color: #339933;">,</span> jobject thisObject<span style="color: #339933;">,</span> jlong lMethodId<span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#123;</span>
+  <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #339933;">!</span>checkJVMTI<span style="color: #009900;">&#40;</span>env<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>
+  <span style="color: #009900;">&#123;</span>
+     <span style="color: #b1b100;">return</span> NULL<span style="color: #339933;">;</span>
+  <span style="color: #009900;">&#125;</span>
+      <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span>lMethodId<span style="color: #339933;">==</span><span style="color: #0000dd;">0</span> <span style="color: #339933;">||</span> lMethodId<span style="color: #339933;">==-</span><span style="color: #0000dd;">1</span><span style="color: #009900;">&#41;</span> <span style="color: #b1b100;">return</span> NULL<span style="color: #339933;">;</span>
+      <span style="color: #993333;">char</span> <span style="color: #339933;">*</span> name<span style="color: #339933;">;</span>
+      <span style="color: #993333;">char</span> <span style="color: #339933;">*</span> signature<span style="color: #339933;">;</span>
+      jmethodID id <span style="color: #339933;">=</span> <span style="color: #009900;">&#40;</span>jmethodID<span style="color: #009900;">&#41;</span>lMethodId<span style="color: #339933;">;</span>
+      jvmti<span style="color: #339933;">-&gt;</span>GetMethodName<span style="color: #009900;">&#40;</span>id<span style="color: #339933;">,</span>NULL<span style="color: #339933;">,&amp;</span>name<span style="color: #339933;">,</span>NULL<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+      jstring retString <span style="color: #339933;">=</span> env<span style="color: #339933;">-&gt;</span>NewStringUTF<span style="color: #009900;">&#40;</span>name<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+      jvmti<span style="color: #339933;">-&gt;</span>Deallocate<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span><span style="color: #993333;">unsigned</span> <span style="color: #993333;">char</span> <span style="color: #339933;">*</span><span style="color: #009900;">&#41;</span> name<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+      jvmti<span style="color: #339933;">-&gt;</span>Deallocate<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span><span style="color: #993333;">unsigned</span> <span style="color: #993333;">char</span> <span style="color: #339933;">*</span><span style="color: #009900;">&#41;</span> signature<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+      <span style="color: #b1b100;">return</span> retString<span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+&nbsp;
+JNIEXPORT jclass JNICALL Java_org_jboss_profiler_jvmti_JVMTIInterface_getMethodClass
+  <span style="color: #009900;">&#40;</span>JNIEnv <span style="color: #339933;">*</span> env<span style="color: #339933;">,</span> jobject thisObject<span style="color: #339933;">,</span> jlong lMethodId<span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#123;</span>
+  <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #339933;">!</span>checkJVMTI<span style="color: #009900;">&#40;</span>env<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>
+  <span style="color: #009900;">&#123;</span>
+     <span style="color: #b1b100;">return</span> NULL<span style="color: #339933;">;</span>
+  <span style="color: #009900;">&#125;</span>
+      <span style="color: #b1b100;">if</span> <span style="color: #009900;">&#40;</span>lMethodId<span style="color: #339933;">==</span><span style="color: #0000dd;">0</span> <span style="color: #339933;">||</span> lMethodId<span style="color: #339933;">==-</span><span style="color: #0000dd;">1</span><span style="color: #009900;">&#41;</span> <span style="color: #b1b100;">return</span> NULL<span style="color: #339933;">;</span>
+      jmethodID id <span style="color: #339933;">=</span> <span style="color: #009900;">&#40;</span>jmethodID<span style="color: #009900;">&#41;</span>lMethodId<span style="color: #339933;">;</span>
+      jclass retClass<span style="color: #339933;">;</span>
+      jvmti<span style="color: #339933;">-&gt;</span>GetMethodDeclaringClass<span style="color: #009900;">&#40;</span>id<span style="color: #339933;">,&amp;</span>retClass<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+      <span style="color: #b1b100;">return</span> retClass<span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+&nbsp;
+JNIEXPORT jboolean JNICALL Java_org_jboss_profiler_jvmti_JVMTIInterface_internalIsConfiguredProperly
+  <span style="color: #009900;">&#40;</span>JNIEnv <span style="color: #339933;">*</span> env<span style="color: #339933;">,</span> jobject thisObject<span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#123;</span>
+      <span style="color: #b1b100;">return</span> jvmti<span style="color: #339933;">!=</span>NULL<span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span>
+<span style="color: #339933;">&lt;/</span>fieldcount<span style="color: #339933;">&gt;&lt;/</span>classcount<span style="color: #339933;">&gt;&lt;/</span>countobjts<span style="color: #339933;">&gt;&lt;/</span>arraylength<span style="color: #339933;">&gt;&lt;/</span>countobjts<span style="color: #339933;">&gt;&lt;/</span>classcount<span style="color: #339933;">&gt;&lt;/</span>stdio<span style="color: #339933;">&gt;&lt;/</span>stdlib<span style="color: #339933;">&gt;</span></pre></div></div>
+
+<p></fields></classes></code></agentlibname></p>
+</div><div id="paginate"><label id="li_1" onclick="javascript:show_page(1,4,this);" style="font-size:30px;font-weight:bold" onmouseover="this.style.cursor='pointer'">1</label><label id="li_2" onclick="javascript:show_page(2,4,this);"  onmouseover="this.style.cursor='pointer'">2</label><label id="li_3" onclick="javascript:show_page(3,4,this);"  onmouseover="this.style.cursor='pointer'">3</label><label id="li_4" onclick="javascript:show_page(4,4,this);"  onmouseover="this.style.cursor='pointer'">4</label></div> 
+			<div align="center">1 month ago, this page was being read. </div>
+			<p class="tags"><a href="http://www.xieziming.com/tag/java" rel="tag">java</a>, <a href="http://www.xieziming.com/tag/qtp" rel="tag">QTP</a>, <a href="http://www.xieziming.com/tag/ce-shi" rel="tag">测试</a><br /></p>  
+    </div><!-- /entry -->                                   
+		<div class="postbottom"></div>		                              
+		</div><!-- /post -->	
+
+<div class="postrelated">
+			<table width="100%" >				
+
+					<tr><td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/7508.html" rel="bookmark" title="Java类的生存周期">Java类的生存周期</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/8811.html" rel="bookmark" title="Java源码混淆">Java源码混淆</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/6830.html" rel="bookmark" title="Selenium Core">Seleni...</a></td>
+
+				<td align="right" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7614.html" rel="bookmark" title="QTP插件拓展（C#）">QTP插件...</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/6832.html" rel="bookmark" title="Selenium之WebDriver">Selenium...</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/7499.html" rel="bookmark" title="Java代理机制">Java代理机制</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7655.html" rel="bookmark" title="LoadRunner测试结果分析">LoadRunn...</a></td>
+
+				<td align="right" class="dashedline_related"><a href="http://www.xieziming.com/archives/8665.html" rel="bookmark" title="JavaOne Conference">JavaOne Conf...</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/6678.html" rel="bookmark" title="QTP 同步等待">QTP 同步等...</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7561.html" rel="bookmark" title="Java疑问解答">Java疑...</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/7729.html" rel="bookmark" title="QTP调用外部函数">QTP调用外部函数</a></td>
+
+				<td align="right" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7486.html" rel="bookmark" title="Java堆栈">Java堆栈</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7481.html" rel="bookmark" title="Java单例模式">Java单例模式</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/7605.html" rel="bookmark" title="质疑和反驳">质疑和反驳</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/6826.html" rel="bookmark" title="测试工程师如何和开发工程师交流">测试工程师如何...</a></td>
+
+				<td align="right" class="dashedline_related"><a href="http://www.xieziming.com/archives/7351.html" rel="bookmark" title="Java Layout总结">Java La...</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/7513.html" rel="bookmark" title="Java自定义注解">Java自...</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7808.html" rel="bookmark" title="软件测试理念（三）">软件测试理念（三）</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/7253.html" rel="bookmark" title="Java中int和Integer的区别">Java中...</a></td>
+
+				<td align="right" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7515.html" rel="bookmark" title="Java装饰模式">Java装饰模式</a></td></tr>
+
+		</table>
+</div>
+
+		<div id="comments">
+
+<!-- START COMMENT FORMS -->
+
+
+		</div><!--/comments-->		
+
+</div><!-- /content -->
+<div id="sidebar">			
+			<a class="subscribe" href="http://www.xieziming.com/feed" title="Posts RSS">Subscribe</a>			
+			<div id="search">	
+	<form name="searchform" id="searchform" method="get" action="http://www.xieziming.com/index.php">
+		<input class="text" type="text" name="s" id="s" value=""/>
+		<input class="submit" type="image" src="http://www.xieziming.com/wp-content/themes/ziming/img/submit.jpg" value="search" />
+	</form>	
+</div><!-- /search -->			
+			<div id="widgets">			
+			<div class="widget"><h3>Calendar</h3>
+<table id="wp-calendar">
+  									<caption>December 2016</caption>
+  									<thead>
+                    <tr><th scope="col" title="S">S</th><th scope="col" title="M">M</th><th scope="col" title="T">T</th><th scope="col" title="W">W</th><th scope="col" title="T">T</th><th scope="col" title="F">F</th><th scope="col" title="S">S</th></tr></thead><tbody><tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>1</td><td>2</td><td>3</td></tr><tr><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td></tr><tr><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td></tr><tr><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">18<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">《血战钢锯岭》</span><br/><span class="time" style="color:#000000; " > Time : 21:18 - 23:28</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">晚上和小锅去看，蛮感人的。吃完去沙湾吃猪杂粥，应该是我在那吃到的最新鲜的一次了。</p></span></a></span></td><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">19<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">CentOS</span><br/><span class="time" style="color:#000000; " > Time : 14:11 - 18:11</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">终于有点时间来把那盒子的win7转成CentOS来做server。配置vsftp花了我太多的时间。。。</p></span></a></span></td><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td></tr><tr><td>25</td><td>26</td><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td></tr><tr><td colspan="3" id="prev"><a href="http://www.xieziming.com/archives/7366.html?month=nov&yr=2016">&laquo; Prev</a></td><td colspan="4" id="next"><a href="http://www.xieziming.com/archives/7366.html?month=jan&yr=2017">Next &raquo;</a></td></tr></tbody></table>
+<div class="widgetbottom"></div></div><!--/widget-->				
+					      		<div class="widget">
+ 							<h3>Recent Posts</h3>
+							<ul>
+           				<li><a href="http://www.xieziming.com/archives/9579.html" class="dashedline" title="闽南 · 泉州">闽南 &middot; 泉州</a></li><li><a href="http://www.xieziming.com/archives/9578.html" class="dashedline" title="顺化 · HUE">顺化 &middot; HUE</a></li><li><a href="http://www.xieziming.com/archives/9577.html" class="dashedline" title="会安 · 春卷">会安 &middot; 春卷</a></li><li><a href="http://www.xieziming.com/archives/9576.html" class="dashedline" title="会安 · 夜灯">会安 &middot; 夜灯</a></li><li><a href="http://www.xieziming.com/archives/9575.html" class="dashedline" title="会安古镇">会安古镇</a></li><li><a href="http://www.xieziming.com/archives/9573.html" class="dashedline" title="岘港">岘港</a></li><li><a href="http://www.xieziming.com/archives/9535.html" class="dashedline" title="罗马">罗马</a></li><li><a href="http://www.xieziming.com/archives/9534.html" class="dashedline" title="卢浮宫">卢浮宫</a></li>						
+							</ul>
+      				<div class="widgetbottom"></div>
+	    		</div>
+	    			        
+        	      		<div class="widget">
+ 							<h3>Rand Posts</h3>
+							<ul>
+      						<li><a href="http://www.xieziming.com/archives/124.html" class="dashedline" title="我的小窝">我的小窝</a></li><li><a href="http://www.xieziming.com/archives/2522.html" class="dashedline" title="单车日志">单车日志</a></li><li><a href="http://www.xieziming.com/archives/885.html" class="dashedline" title="天地存珞珈，此间有山水">天地存珞珈，此间有山水</a></li><li><a href="http://www.xieziming.com/archives/108.html" class="dashedline" title="再见了武大">再见了武大</a></li><li><a href="http://www.xieziming.com/archives/3506.html" class="dashedline" title="黄金期货">黄金期货</a></li><li><a href="http://www.xieziming.com/archives/2154.html" class="dashedline" title="午后（二）">午后（二）</a></li><li><a href="http://www.xieziming.com/archives/4869.html" class="dashedline" title="北京798艺术区">北京798艺术区</a></li><li><a href="http://www.xieziming.com/archives/9053.html" class="dashedline" title="腾冲 · 国殇">腾冲 &middot; 国殇</a></li>	
+							</ul>
+        			<div class="widgetbottom"></div>
+					</div>                 
+          	                       
+			</div><!-- /widgets -->			                       
+</div><!-- /sidebar --></div><!-- /main -->
+<div id="footer">
+<p align="left">© <a href="http://www.miitbeian.gov.cn" target="_blank"> 明 · 明 · 童 · 鞋</a></p>
+<!--74 queries in 3.376 seconds.-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?c2e18b43ec905e3c4ea82c1b57537223";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</div><!-- /footer -->
+</div><!-- /container -->
+<script type='text/javascript' src='http://www.xieziming.com/wp-includes/js/wp-embed.min.js?ver=4.7'></script>
+</body>
+</html>

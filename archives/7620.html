@@ -1,0 +1,428 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head profile="http://gmpg.org/xfn/11">
+<title>  遍历windows窗口控件 &raquo; 谢子明</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="description" content="遍历windows窗口控件  " />
+<meta name="keywords" content="谢子明" />
+<link rel="stylesheet" href="http://www.xieziming.com/wp-content/themes/ziming/style.css" type="text/css" media="screen" />
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://www.xieziming.com/feed" />
+<link rel="alternate" type="application/rss+xml" href="http://www.xieziming.com/comments/feed" title="谢子明 Comments RSS feed" />
+<link rel="shortcut icon" href="http://www.xieziming.com/wp-content/themes/ziming/favicon.ico">
+<link rel="Bookmark" href="http://www.xieziming.com/wp-content/themes/ziming/favicon.ico">
+<link rel="pingback" href="http://www.xieziming.com/xmlrpc.php" />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="谢子明 &raquo; 遍历windows窗口控件 Comments Feed" href="http://www.xieziming.com/archives/7620.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/xieziming.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.7"}};
+			!function(a,b,c){function d(a){var b,c,d,e,f=String.fromCharCode;if(!k||!k.fillText)return!1;switch(k.clearRect(0,0,j.width,j.height),k.textBaseline="top",k.font="600 32px Arial",a){case"flag":return k.fillText(f(55356,56826,55356,56819),0,0),!(j.toDataURL().length<3e3)&&(k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,65039,8205,55356,57096),0,0),b=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,55356,57096),0,0),c=j.toDataURL(),b!==c);case"emoji4":return k.fillText(f(55357,56425,55356,57341,8205,55357,56507),0,0),d=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55357,56425,55356,57341,55357,56507),0,0),e=j.toDataURL(),d!==e}return!1}function e(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i,j=b.createElement("canvas"),k=j.getContext&&j.getContext("2d");for(i=Array("flag","emoji4"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<script type='text/javascript' src='http://www.xieziming.com/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='http://www.xieziming.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<link rel='https://api.w.org/' href='http://www.xieziming.com/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.xieziming.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.xieziming.com/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='QTP插件拓展（C#）' href='http://www.xieziming.com/archives/7614.html' />
+<link rel='next' title='RESTful' href='http://www.xieziming.com/archives/7666.html' />
+<meta name="generator" content="WordPress 4.7" />
+<link rel="canonical" href="http://www.xieziming.com/archives/7620.html" />
+<link rel='shortlink' href='http://www.xieziming.com/?p=7620' />
+<link rel="alternate" type="application/json+oembed" href="http://www.xieziming.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fxieziming.com%2Farchives%2F7620.html" />
+<link rel="alternate" type="text/xml+oembed" href="http://www.xieziming.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fxieziming.com%2Farchives%2F7620.html&#038;format=xml" />
+ 	<link rel="stylesheet" href="http://www.xieziming.com/wp-content/plugins/live-calendar/live-calendar.css" type="text/css" media="screen" /> 
+<link rel="stylesheet" href="http://www.xieziming.com/wp-content/plugins/wp-code/wp-code.css" type="text/css" media="screen" />
+
+<link rel="stylesheet" href="http://www.xieziming.com/wp-content/plugins/zoom-highslide/highslide.css" type="text/css" media="screen" />
+<script type="text/javascript" src="http://www.xieziming.com/wp-content/plugins/zoom-highslide/js/highslide-full.packed.js"></script>
+<script type="text/javascript">
+	hs.graphicsDir = 'http://www.xieziming.com/wp-content/plugins/zoom-highslide/graphics/';
+	hs.align = 'center';
+	hs.transitions = ['expand', 'crossfade'];
+	hs.outlineType = 'rounded-white';
+  hs.wrapperClassName = 'controls-in-heading';
+	hs.showCredits=false;
+	hs.fadeInOut = true;
+	hs.dimmingOpacity = 0.8;
+
+	// Add the controlbar
+	if (hs.addSlideshow) hs.addSlideshow({
+		//slideshowGroup: 'group1',
+		interval: 4000,
+		repeat: false,
+		useControls: true,
+		fixedControls: false,
+		overlayOptions: {
+			opacity: 1,
+			position: 'top center',
+			hideOnMouseOut: true
+		}
+	});
+</script>
+
+<script type="text/javascript">
+	var widthRestriction = 668; 
+	var heightRestriction = 1000; 
+</script>
+<script type="text/javascript" src="http://www.xieziming.com/wp-content/plugins/zoom-highslide/js/zoom.js"></script>
+	
+<!--script src="http://www.xieziming.com/wp-content/themes/ziming/js/mouse.js" type="text/javascript"></script--> 
+</head>
+<body class="normalbg">
+<div id="container">
+	<div id="head">
+		<div id="nav">
+			<ul>
+				<li class="first"><a href="http://www.xieziming.com" title="首页">首页</a></li>
+				<li class="page_item page-item-2"><a href="http://www.xieziming.com/recent" title="最近">最近</a></li>
+				<li class="page_item page-item-3"><a href="http://www.xieziming.com/photo" title="Photo">映象</a></li>
+				<li class="page_item page-item-4"><a href="http://www.xieziming.com/food" title="Food">美食</a></li>
+				<li class="page_item page-item-5"><a href="http://www.xieziming.com/topic" title="关键字">话题</a></li>
+				<li class="page_item page-item-6"><a href="http://www.xieziming.com/travel" title="Travel">旅行</a></li>
+				<li class="page_item page-item-7"><a href="http://www.xieziming.com/literature" title="Literature">文艺</a></li>
+				<li class="page_item page-item-8"><a href="http://www.xieziming.com/wiki" title="技术维基">维基</a></li>
+				<li class="page_item page-item-9"><a href="http://www.xieziming.com/calendar" title="Calendar">点滴</a></li>
+			</ul>
+		</div><!-- /nav -->		
+	</div><!-- /head -->
+<div id="main" class="altmainbg">
+
+<script type="text/javascript">
+function show_page(id,count,source){
+	for (var i=1;i<=count;i++){
+		if(id != i){
+				jQuery("#part_"+i).hide();
+				document.getElementById("li_"+i).style.fontWeight = "normal";
+				document.getElementById("li_"+i).style.fontSize = "18px";
+		}
+	}
+	jQuery("#part_"+id).show();
+	document.getElementById("li_"+id).style.fontWeight = "bold";
+	document.getElementById("li_"+id).style.fontSize = "30px";
+	jQuery('body,html').animate({scrollTop:0},1000);
+        return false;
+}
+</script>
+<div id="content">
+
+	<div class="post" id="post-7620">
+		<h2 class="title">遍历windows窗口控件</h2>
+		<p class="postmetadata">
+			<span class="date">11 November 2012</span>
+			<span class="category">Categoried in <a href="http://www.xieziming.com/topic/testing" rel="category tag">测试</a></span>
+			<span class="comments">0</span>
+			<span class="view">Preview : 2073 , Read : 2366 </span>
+			<span class="mail">Index : 5820 </span>
+		</p>
+		<div class="entry">				
+<div id="part_1"><p>我们要做的事有两个：<br />
+（1）遍历/查找 windows 窗口<br />
+（2）遍历windows窗口里的所有控件</p>
+<p><strong>FindWindowEx ：</strong></p>
+
+<div class="wp_code"><div class="pre"><pre class="cpp" style="font-family:'Times New Roman',Garamond, Times;">HWND FindWindowEx<span style="color: #008000;">&#40;</span>
+　　HWND hwndParent, <span style="color: #666666;">// handle to parent window</span>
+　　HWND hwndChildAfter, <span style="color: #666666;">// handle to child window</span>
+　　LPCTSTR lpszClass, <span style="color: #666666;">// class name</span>
+　　LPCTSTR lpszWindow <span style="color: #666666;">// window name</span>
+　　<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span></pre></div></div>
+
+<p>参数：<br />
+（1）hwndParent：要查找子窗口的父窗口句柄。如果hwndParent为NULL，则函数以桌面窗口为父窗口，查找桌面窗口的所有子窗口。如果hwndParent是HWND_MESSAGE，函数仅查找所有消息窗口。</p>
+<p>（2）hwndChildAfter ：子窗口句柄。查找从在Z序中的下一个子窗口开始。子窗口必须为hwndParent窗口的直接子窗口而非后代窗口。如果HwndChildAfter为NULL，查找从hwndParent的第一个子窗口开始。如果hwndParent 和 hwndChildAfter同时为NULL，则函数查找所有的顶层窗口及消息窗口。</p>
+<p>（3）lpszClass：指向一个指定了类名的空结束字符串，或一个标识类名字符串的成员的指针。如果该参数为一个成员，则它必须为前次调用theGlobaIAddAtom函数产生的全局成员。该成员为16位，必须位于lpClassName的低16位，高位必须为0。</p>
+<p>（4）lpszWindow：指向一个指定了窗口名（窗口标题）的空结束字符串。如果该参数为 NULL，则为所有窗口全匹配。</p>
+<p><strong>FindWindow ：</strong></p>
+
+<div class="wp_code"><div class="pre"><pre class="cpp" style="font-family:'Times New Roman',Garamond, Times;">HWND FindWindow<span style="color: #008000;">&#40;</span>
+　　LPCSTR lpClassName,
+　　LPCSTR lpWindowName
+　　<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span></pre></div></div>
+
+<p>参数：<br />
+（1）lpClassName ： 指向一个以null结尾的、用来指定类名的字符串或一个可以确定类名字符串的原子。如果这个参数是一个原子，那么它必须是一个在调用此函数前已经通过GlobalAddAtom函数创建好的全局原子。这个原子（一个16bit的值），必须被放置在lpClassName的低位字节中，lpClassName的高位字节置零。如果该参数为null时，将会寻找任何与lpWindowName参数匹配的窗口。<br />
+　　<br />
+（2）lpWindowName ： 指向一个以null结尾的、用来指定窗口名（即窗口标题）的字符串。如果此参数为NULL，则匹配所有窗口名。</p>
+</div><div id="part_2" style="display:none;"><p><strong>示例 ：</strong></p>
+
+<div class="wp_code"><div class="pre"><pre class="delphi" style="font-family:'Times New Roman',Garamond, Times;">//如果我们知道窗口的标题是: Form1、窗口的类名是: TForm1
+h := FindWindow('TForm1', 'Form1');
+&nbsp;
+//假如不知道类名
+h := FindWindow(nil, 'Form1');
+&nbsp;
+//假如不知道标题名
+h := FindWindow('TForm1', nil);
+&nbsp;
+//找计算器窗口的句柄(先打开计算器, 如果不是简体中文系统, 这样可能不灵)
+h := FindWindow(nil, '计算器');
+&nbsp;
+//最好这样, 但你得提前知道计算器窗口的类名是: SciCalc
+h := FindWindow('SciCalc', nil);</pre></div></div>
+
+<p>下面是一个使用FindWindowEx枚举窗口的例子</p>
+
+<div class="wp_code"><div class="pre"><pre class="cpp" style="font-family:'Times New Roman',Garamond, Times;">BOOL myEnumWindow<span style="color: #008000;">&#40;</span>HWND hwnd<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+<span style="color: #0000ff;">int</span> main<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span><span style="color: #008000;">&#123;</span>
+  myEnumWindow<span style="color: #008000;">&#40;</span><span style="color: #0000ff;">NULL</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+  <span style="color: #0000ff;">return</span> <span style="color: #0000dd;">0</span><span style="color: #008080;">;</span>
+<span style="color: #008000;">&#125;</span>
+&nbsp;
+BOOL myEnumWindow<span style="color: #008000;">&#40;</span>HWND inHwnd<span style="color: #008000;">&#41;</span><span style="color: #008000;">&#123;</span>
+  <span style="color: #0000ff;">char</span> szText<span style="color: #008000;">&#91;</span><span style="color: #0000dd;">256</span><span style="color: #008000;">&#93;</span><span style="color: #008080;">;</span>
+&nbsp;
+  HWND hwndAfter <span style="color: #000080;">=</span> <span style="color: #0000ff;">NULL</span><span style="color: #008080;">;</span>
+  <span style="color: #0000ff;">while</span><span style="color: #008000;">&#40;</span>hwndAfter <span style="color: #000080;">=</span> <span style="color: #008080;">::</span><span style="color: #007788;">FindWindowEx</span><span style="color: #008000;">&#40;</span>inHwnd,hwndAfter,<span style="color: #0000ff;">NULL</span>,<span style="color: #0000ff;">NULL</span><span style="color: #008000;">&#41;</span><span style="color: #008000;">&#41;</span><span style="color: #008000;">&#123;</span>
+    <span style="color: #0000dd;">memset</span><span style="color: #008000;">&#40;</span>szText,<span style="color: #0000dd;">0</span>,<span style="color: #0000dd;">256</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+    <span style="color: #008080;">::</span><span style="color: #007788;">SendMessage</span><span style="color: #008000;">&#40;</span>hwndAfter,WM_GETTEXT,<span style="color: #008000;">&#40;</span>WPARAM<span style="color: #008000;">&#41;</span><span style="color: #0000dd;">256</span>,<span style="color: #008000;">&#40;</span>LPARAM<span style="color: #008000;">&#41;</span>szText<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+    <span style="color: #0000dd;">printf</span><span style="color: #008000;">&#40;</span><span style="color: #FF0000;">&quot;%s<span style="color: #000099; font-weight: bold;">\t</span>&quot;</span>,szText<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+    myEnumWindow<span style="color: #008000;">&#40;</span>hwndAfter<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+  <span style="color: #008000;">&#125;</span>
+  <span style="color: #0000ff;">return</span> <span style="color: #0000dd;">1</span><span style="color: #008080;">;</span>
+<span style="color: #008000;">&#125;</span></pre></div></div>
+
+<font color="#00BB00"><strong>遍历window窗口中的所有控件</strong></font>
+
+<div class="wp_code"><div class="pre"><pre class="cpp" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #666666;">// 遍历得到页面中的所有Button控件，依次设定其样式和颜色</span>
+    CWnd<span style="color: #000040;">*</span> pWnd <span style="color: #000080;">=</span> GetWindow<span style="color: #008000;">&#40;</span>GW_CHILD<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>   
+    <span style="color: #0000ff;">char</span> cClassName<span style="color: #008000;">&#91;</span><span style="color: #0000dd;">255</span><span style="color: #008000;">&#93;</span><span style="color: #000080;">=</span><span style="color: #008000;">&#123;</span><span style="color: #0000dd;">0</span><span style="color: #008000;">&#125;</span><span style="color: #008080;">;</span>
+    <span style="color: #0000ff;">while</span><span style="color: #008000;">&#40;</span>pWnd<span style="color: #008000;">&#41;</span> <span style="color: #008000;">&#123;</span>   
+        GetClassName<span style="color: #008000;">&#40;</span>pWnd<span style="color: #000040;">-</span><span style="color: #000080;">&gt;</span>GetSafeHwnd<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span>,cClassName,<span style="color: #0000dd;">255</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span><span style="color: #666666;">//得到控件的类名，主要有Edit，Button，Static等等</span>
+        <span style="color: #0000ff;">if</span><span style="color: #008000;">&#40;</span><span style="color: #0000dd;">strcmp</span><span style="color: #008000;">&#40;</span>cClassName,<span style="color: #FF0000;">&quot;Button&quot;</span><span style="color: #008000;">&#41;</span> <span style="color: #000080;">==</span> <span style="color: #0000dd;">0</span><span style="color: #008000;">&#41;</span> <span style="color: #666666;">//是Button控件</span>
+        <span style="color: #008000;">&#123;</span>
+            CXTButton <span style="color: #000040;">*</span>pBtn <span style="color: #000080;">=</span> <span style="color: #008000;">&#40;</span>CXTButton<span style="color: #000040;">*</span><span style="color: #008000;">&#41;</span> pWnd<span style="color: #008080;">;</span>
+            pBtn<span style="color: #000040;">-</span><span style="color: #000080;">&gt;</span>SetXButtonStyle<span style="color: #008000;">&#40;</span>BS_XT_XPFLAT<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+            pBtn<span style="color: #000040;">-</span><span style="color: #000080;">&gt;</span>SetColorFace<span style="color: #008000;">&#40;</span>BUTTON_BKCOLOR<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span> <span style="color: #666666;">//按钮背景色</span>
+        <span style="color: #008000;">&#125;</span>
+        pWnd <span style="color: #000080;">=</span> pWnd<span style="color: #000040;">-</span><span style="color: #000080;">&gt;</span>GetWindow<span style="color: #008000;">&#40;</span>GW_HWNDNEXT<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+     <span style="color: #008000;">&#125;</span></pre></div></div>
+
+</div><div id="part_3" style="display:none;"><p>全面控制Windows任务栏</p>
+<p>从系统功能角度而言，整个任务栏包括几个不同的子区域，从左至右依次是：开始 按钮、应用程序切换区(Application Switch Bar)、任务栏通知区(Notification Area)以 及任务栏时钟。与其它Windows应用程序相同，任务栏程序(systray.exe)由几个不同的窗体组成，这些窗体是具有各自的窗口类名、显示方式等信息。因此，只要得到有关窗口信息， 即可通过编程全面控制Windows任务栏的不同区域。 </p>
+<p>(1)任务栏窗体的窗口信息为:(我用spy++查出来的)<br />
+①任务栏的窗口类名是：ShellTrayWnd。<br />
+②开始按钮的窗口类名是：Button。<br />
+③应用程序切换区的窗口类名是：ReBarWindow32。<br />
+④任务栏通知区的窗口类名是：TrayNotifyWnd。<br />
+⑤任务栏时钟的窗口类名是：TrayClockWClass。<br />
+(2)调用FindWindow函数得到任务栏的窗口句柄。<br />
+(3)调用FindWindowEx函数得到任务栏各子区域的窗口句柄。<br />
+(4)根据窗口句柄，调用ShowWindow函数控制任务栏各区域显示或隐藏(Show/Hide)；调用EnableWindow函数控制任务栏各区域有效或无效(Enabled/Disabled)。</p>
+
+<div class="wp_code"><div class="pre"><pre class="delphi" style="font-family:'Times New Roman',Garamond, Times;">unit Unit1;
+interface
+uses 
+   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
+   Dialogs, StdCtrls;
+type 
+   TForm1 = class(TForm) 
+     CheckBox1: TCheckBox; 
+     procedure FormClose(Sender: TObject; var Action: TCloseAction); 
+   private 
+     { Private declarations } 
+     Wnd:array [0..4] of THandle; 
+     procedure GetHandles ; 
+     procedure   EnableOrDisable(Sender:TOBject); 
+     procedure HideOrShow(Sender:TObject); 
+   public 
+     { Public declarations } 
+   end;
+var 
+   Form1: TForm1;
+implementation
+{$R *.dfm}
+{ TForm1 }
+procedure TForm1.EnableOrDisable(Sender: TOBject); 
+begin 
+     GetHandles; 
+     if TCheckBox(Sender).Checked   then 
+         case Tcheckbox(Sender).Tag of 
+             0:EnableWindow(wnd[0],False); 
+             1:EnableWindow(wnd[1],False); 
+             2:EnableWindow(wnd[2],False); 
+             3:EnableWindow(wnd[3],False); 
+             4:EnableWindow(wnd[4],False); 
+         end 
+     else 
+         case Tcheckbox(Sender).Tag of 
+             0:EnableWindow(wnd[0],True); 
+             1:EnableWindow(wnd[1],True); 
+             2:EnableWindow(wnd[2],True); 
+             3:EnableWindow(wnd[3],True); 
+             4:EnableWindow(wnd[4],True); 
+         end; 
+end;
+procedure TForm1.GetHandles; 
+begin 
+     //得到Tray Bar的窗口句柄； 
+     Wnd[0]:=FindWindow('ShellTrayWnd',nil);
+     //得到开始按钮的窗口句柄； 
+     Wnd[1]:=FindWindow('ShellTrayWnd',nil); 
+     Wnd[1]:=FindWindowEx(Wnd[1],HWND(0),'Button',nil);
+     //得到应用程序切换区的窗口句柄； 
+     Wnd[2]:=FindWindow('ShellTrayWnd',nil); 
+     Wnd[2]:=FindWindowEx(Wnd[2],HWND(0),'ReBarWindow32',nil);
+     //得到任务栏通知区的窗口句柄； 
+     Wnd[3]:=FindWindow('ShellTrayWnd',nil); 
+     Wnd[3]:=FindWindowEx(Wnd[3],HWND(0),'TrayNotifyWnd',nil);
+     //得到任务栏时钟的窗口句柄； 
+     Wnd[4]:=FindWindow('ShellTrayWnd',nil); 
+     Wnd[4]:=FindWindowEx(wnd[4],HWND(0),'TrayNotifyWnd',nil); 
+     Wnd[4]:=FindWindowEx(wnd[4],HWND(0),'TrayClockWClass',nil); 
+end;
+procedure TForm1.HideOrShow(Sender: TObject); 
+begin 
+     GetHandles; 
+     if TCheckBox(Sender).Checked   then 
+        case Tcheckbox(Sender).Tag of 
+             0:ShowWindow(wnd[0],SW_HIDE); 
+             1:ShowWindow(wnd[1],SW_HIDE); 
+             2:ShowWindow(wnd[2],SW_HIDE); 
+             3:ShowWindow(wnd[3],SW_HIDE); 
+             4:ShowWindow(wnd[4],SW_HIDE); 
+         end 
+     else 
+         case Tcheckbox(Sender).Tag of 
+             0:ShowWindow(wnd[0],SW_SHOW ); 
+             1:ShowWindow(wnd[1],SW_SHOW ); 
+             2:ShowWindow(wnd[2],SW_SHOW ); 
+             3:ShowWindow(wnd[3],SW_SHOW ); 
+             4:ShowWindow(wnd[4],SW_SHOW ); 
+         end; 
+end;
+procedure TForm1.FormClose(Sender: TObject; var Action: TCloseAction); 
+var 
+     i:Integer ; 
+begin 
+     for i:=0   to 4 do 
+     begin 
+         EnableWindow(wnd[i],True); 
+         ShowWindow(wnd[i],SW_SHOW); 
+     end; 
+end; 
+end;</pre></div></div>
+
+</div><div id="paginate"><label id="li_1" onclick="javascript:show_page(1,3,this);" style="font-size:30px;font-weight:bold" onmouseover="this.style.cursor='pointer'">1</label><label id="li_2" onclick="javascript:show_page(2,3,this);"  onmouseover="this.style.cursor='pointer'">2</label><label id="li_3" onclick="javascript:show_page(3,3,this);"  onmouseover="this.style.cursor='pointer'">3</label></div> 
+			<div align="center">1 month ago, this page was being read. </div>
+			<p class="tags"><a href="http://www.xieziming.com/tag/ce-shi" rel="tag">测试</a>, <a href="http://www.xieziming.com/tag/cheng-xu" rel="tag">程序</a><br /></p>  
+    </div><!-- /entry -->                                   
+		<div class="postbottom"></div>		                              
+		</div><!-- /post -->	
+
+<div class="postrelated">
+			<table width="100%" >				
+
+					<tr><td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/2216.html" rel="bookmark" title="Java程序员面试宝典">Java程序员面试...</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/78.html" rel="bookmark" title="VC + Matlab + 数据库">VC + Mat...</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/7464.html" rel="bookmark" title="IE插件">IE插件</a></td>
+
+				<td align="right" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7366.html" rel="bookmark" title="QTP控制Java程序原理">QTP控制...</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7626.html" rel="bookmark" title="控制window程序">控制window...</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/6695.html" rel="bookmark" title="PHP通过字符串调用函数">PHP通过字符串...</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/2445.html" rel="bookmark" title="J2EE回忆">J2EE回忆</a></td>
+
+				<td align="right" class="dashedline_related"><a href="http://www.xieziming.com/archives/7409.html" rel="bookmark" title="Http协议">Http协议</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/3114.html" rel="bookmark" title="C/C++经典排序算法">C/C++经典排序算...</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/6830.html" rel="bookmark" title="Selenium Core">Selenium Co...</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/8783.html" rel="bookmark" title="Restful之参数获取">Restful之参...</a></td>
+
+				<td align="right" class="dashedline_related">★<a href="http://www.xieziming.com/archives/2223.html" rel="bookmark" title="软件面试题目">软件面试题...</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7451.html" rel="bookmark" title="Javascript之DOM">Javascript...</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/7437.html" rel="bookmark" title="Equals与Hashcode">Equals与Hash...</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/2438.html" rel="bookmark" title="mysql负载均衡配置">mysql负...</a></td>
+
+				<td align="right" class="dashedline_related"><a href="http://www.xieziming.com/archives/7666.html" rel="bookmark" title="RESTful">RESTful</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/7661.html" rel="bookmark" title="WebDriver（一）">WebDri...</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/5528.html" rel="bookmark" title="网站配色表">网站配色表</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/7382.html" rel="bookmark" title="QTP Action 参数传递">QTP Actio...</a></td>
+
+				<td align="right" class="dashedline_related">★<a href="http://www.xieziming.com/archives/2225.html" rel="bookmark" title="函数传递参数的理解">函数传递参数的理解</a></td></tr>
+
+		</table>
+</div>
+
+		<div id="comments">
+
+<!-- START COMMENT FORMS -->
+
+
+		</div><!--/comments-->		
+
+</div><!-- /content -->
+<div id="sidebar">			
+			<a class="subscribe" href="http://www.xieziming.com/feed" title="Posts RSS">Subscribe</a>			
+			<div id="search">	
+	<form name="searchform" id="searchform" method="get" action="http://www.xieziming.com/index.php">
+		<input class="text" type="text" name="s" id="s" value=""/>
+		<input class="submit" type="image" src="http://www.xieziming.com/wp-content/themes/ziming/img/submit.jpg" value="search" />
+	</form>	
+</div><!-- /search -->			
+			<div id="widgets">			
+			<div class="widget"><h3>Calendar</h3>
+<table id="wp-calendar">
+  									<caption>December 2016</caption>
+  									<thead>
+                    <tr><th scope="col" title="S">S</th><th scope="col" title="M">M</th><th scope="col" title="T">T</th><th scope="col" title="W">W</th><th scope="col" title="T">T</th><th scope="col" title="F">F</th><th scope="col" title="S">S</th></tr></thead><tbody><tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>1</td><td>2</td><td>3</td></tr><tr><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td></tr><tr><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td></tr><tr><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">18<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">《血战钢锯岭》</span><br/><span class="time" style="color:#000000; " > Time : 21:18 - 23:28</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">晚上和小锅去看，蛮感人的。吃完去沙湾吃猪杂粥，应该是我在那吃到的最新鲜的一次了。</p></span></a></span></td><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">19<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">CentOS</span><br/><span class="time" style="color:#000000; " > Time : 14:11 - 18:11</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">终于有点时间来把那盒子的win7转成CentOS来做server。配置vsftp花了我太多的时间。。。</p></span></a></span></td><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td></tr><tr><td>25</td><td>26</td><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td></tr><tr><td colspan="3" id="prev"><a href="http://www.xieziming.com/archives/7620.html?month=nov&yr=2016">&laquo; Prev</a></td><td colspan="4" id="next"><a href="http://www.xieziming.com/archives/7620.html?month=jan&yr=2017">Next &raquo;</a></td></tr></tbody></table>
+<div class="widgetbottom"></div></div><!--/widget-->				
+					      		<div class="widget">
+ 							<h3>Recent Posts</h3>
+							<ul>
+           				<li><a href="http://www.xieziming.com/archives/9579.html" class="dashedline" title="闽南 · 泉州">闽南 &middot; 泉州</a></li><li><a href="http://www.xieziming.com/archives/9578.html" class="dashedline" title="顺化 · HUE">顺化 &middot; HUE</a></li><li><a href="http://www.xieziming.com/archives/9577.html" class="dashedline" title="会安 · 春卷">会安 &middot; 春卷</a></li><li><a href="http://www.xieziming.com/archives/9576.html" class="dashedline" title="会安 · 夜灯">会安 &middot; 夜灯</a></li><li><a href="http://www.xieziming.com/archives/9575.html" class="dashedline" title="会安古镇">会安古镇</a></li><li><a href="http://www.xieziming.com/archives/9573.html" class="dashedline" title="岘港">岘港</a></li><li><a href="http://www.xieziming.com/archives/9535.html" class="dashedline" title="罗马">罗马</a></li><li><a href="http://www.xieziming.com/archives/9534.html" class="dashedline" title="卢浮宫">卢浮宫</a></li>						
+							</ul>
+      				<div class="widgetbottom"></div>
+	    		</div>
+	    			        
+        	      		<div class="widget">
+ 							<h3>Rand Posts</h3>
+							<ul>
+      						<li><a href="http://www.xieziming.com/archives/9487.html" class="dashedline" title="UI Automation通过相对位置来进行对象识别">UI Automati...</a></li><li><a href="http://www.xieziming.com/archives/1398.html" class="dashedline" title="若有所失">若有所失</a></li><li><a href="http://www.xieziming.com/archives/5966.html" class="dashedline" title="迷失">迷失</a></li><li><a href="http://www.xieziming.com/archives/7515.html" class="dashedline" title="Java装饰模式">Java装饰模式</a></li><li><a href="http://www.xieziming.com/archives/8757.html" class="dashedline" title="人像摄影后期">人像摄影后期</a></li><li><a href="http://www.xieziming.com/archives/379.html" class="dashedline" title="上班嘞...">上班嘞...</a></li><li><a href="http://www.xieziming.com/archives/4937.html" class="dashedline" title="日照">日照</a></li><li><a href="http://www.xieziming.com/archives/6873.html" class="dashedline" title="R & R Dinner">R &amp; R Dinner</a></li>	
+							</ul>
+        			<div class="widgetbottom"></div>
+					</div>                 
+          	                       
+			</div><!-- /widgets -->			                       
+</div><!-- /sidebar --></div><!-- /main -->
+<div id="footer">
+<p align="left">© <a href="http://www.miitbeian.gov.cn" target="_blank"> 明 · 明 · 童 · 鞋</a></p>
+<!--76 queries in 2.319 seconds.-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?c2e18b43ec905e3c4ea82c1b57537223";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</div><!-- /footer -->
+</div><!-- /container -->
+<script type='text/javascript' src='http://www.xieziming.com/wp-includes/js/wp-embed.min.js?ver=4.7'></script>
+</body>
+</html>

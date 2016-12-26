@@ -1,0 +1,287 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head profile="http://gmpg.org/xfn/11">
+<title>  Java垃圾回收算法 &raquo; 谢子明</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="description" content="Java垃圾回收算法  " />
+<meta name="keywords" content="谢子明" />
+<link rel="stylesheet" href="http://www.xieziming.com/wp-content/themes/ziming/style.css" type="text/css" media="screen" />
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://www.xieziming.com/feed" />
+<link rel="alternate" type="application/rss+xml" href="http://www.xieziming.com/comments/feed" title="谢子明 Comments RSS feed" />
+<link rel="shortcut icon" href="http://www.xieziming.com/wp-content/themes/ziming/favicon.ico">
+<link rel="Bookmark" href="http://www.xieziming.com/wp-content/themes/ziming/favicon.ico">
+<link rel="pingback" href="http://www.xieziming.com/xmlrpc.php" />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="谢子明 &raquo; Java垃圾回收算法 Comments Feed" href="http://www.xieziming.com/archives/6805.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/xieziming.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.7"}};
+			!function(a,b,c){function d(a){var b,c,d,e,f=String.fromCharCode;if(!k||!k.fillText)return!1;switch(k.clearRect(0,0,j.width,j.height),k.textBaseline="top",k.font="600 32px Arial",a){case"flag":return k.fillText(f(55356,56826,55356,56819),0,0),!(j.toDataURL().length<3e3)&&(k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,65039,8205,55356,57096),0,0),b=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,55356,57096),0,0),c=j.toDataURL(),b!==c);case"emoji4":return k.fillText(f(55357,56425,55356,57341,8205,55357,56507),0,0),d=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55357,56425,55356,57341,55357,56507),0,0),e=j.toDataURL(),d!==e}return!1}function e(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i,j=b.createElement("canvas"),k=j.getContext&&j.getContext("2d");for(i=Array("flag","emoji4"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<script type='text/javascript' src='http://www.xieziming.com/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='http://www.xieziming.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<link rel='https://api.w.org/' href='http://www.xieziming.com/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.xieziming.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.xieziming.com/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='Around' href='http://www.xieziming.com/archives/3714.html' />
+<link rel='next' title='蒸汤记' href='http://www.xieziming.com/archives/3737.html' />
+<meta name="generator" content="WordPress 4.7" />
+<link rel="canonical" href="http://www.xieziming.com/archives/6805.html" />
+<link rel='shortlink' href='http://www.xieziming.com/?p=6805' />
+<link rel="alternate" type="application/json+oembed" href="http://www.xieziming.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fxieziming.com%2Farchives%2F6805.html" />
+<link rel="alternate" type="text/xml+oembed" href="http://www.xieziming.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fxieziming.com%2Farchives%2F6805.html&#038;format=xml" />
+ 	<link rel="stylesheet" href="http://www.xieziming.com/wp-content/plugins/live-calendar/live-calendar.css" type="text/css" media="screen" /> 
+<link rel="stylesheet" href="http://www.xieziming.com/wp-content/plugins/wp-code/wp-code.css" type="text/css" media="screen" />
+
+<link rel="stylesheet" href="http://www.xieziming.com/wp-content/plugins/zoom-highslide/highslide.css" type="text/css" media="screen" />
+<script type="text/javascript" src="http://www.xieziming.com/wp-content/plugins/zoom-highslide/js/highslide-full.packed.js"></script>
+<script type="text/javascript">
+	hs.graphicsDir = 'http://www.xieziming.com/wp-content/plugins/zoom-highslide/graphics/';
+	hs.align = 'center';
+	hs.transitions = ['expand', 'crossfade'];
+	hs.outlineType = 'rounded-white';
+  hs.wrapperClassName = 'controls-in-heading';
+	hs.showCredits=false;
+	hs.fadeInOut = true;
+	hs.dimmingOpacity = 0.8;
+
+	// Add the controlbar
+	if (hs.addSlideshow) hs.addSlideshow({
+		//slideshowGroup: 'group1',
+		interval: 4000,
+		repeat: false,
+		useControls: true,
+		fixedControls: false,
+		overlayOptions: {
+			opacity: 1,
+			position: 'top center',
+			hideOnMouseOut: true
+		}
+	});
+</script>
+
+<script type="text/javascript">
+	var widthRestriction = 668; 
+	var heightRestriction = 1000; 
+</script>
+<script type="text/javascript" src="http://www.xieziming.com/wp-content/plugins/zoom-highslide/js/zoom.js"></script>
+	
+<!--script src="http://www.xieziming.com/wp-content/themes/ziming/js/mouse.js" type="text/javascript"></script--> 
+</head>
+<body class="normalbg">
+<div id="container">
+	<div id="head">
+		<div id="nav">
+			<ul>
+				<li class="first"><a href="http://www.xieziming.com" title="首页">首页</a></li>
+				<li class="page_item page-item-2"><a href="http://www.xieziming.com/recent" title="最近">最近</a></li>
+				<li class="page_item page-item-3"><a href="http://www.xieziming.com/photo" title="Photo">映象</a></li>
+				<li class="page_item page-item-4"><a href="http://www.xieziming.com/food" title="Food">美食</a></li>
+				<li class="page_item page-item-5"><a href="http://www.xieziming.com/topic" title="关键字">话题</a></li>
+				<li class="page_item page-item-6"><a href="http://www.xieziming.com/travel" title="Travel">旅行</a></li>
+				<li class="page_item page-item-7"><a href="http://www.xieziming.com/literature" title="Literature">文艺</a></li>
+				<li class="page_item page-item-8"><a href="http://www.xieziming.com/wiki" title="技术维基">维基</a></li>
+				<li class="page_item page-item-9"><a href="http://www.xieziming.com/calendar" title="Calendar">点滴</a></li>
+			</ul>
+		</div><!-- /nav -->		
+	</div><!-- /head -->
+<div id="main" class="altmainbg">
+
+<script type="text/javascript">
+function show_page(id,count,source){
+	for (var i=1;i<=count;i++){
+		if(id != i){
+				jQuery("#part_"+i).hide();
+				document.getElementById("li_"+i).style.fontWeight = "normal";
+				document.getElementById("li_"+i).style.fontSize = "18px";
+		}
+	}
+	jQuery("#part_"+id).show();
+	document.getElementById("li_"+id).style.fontWeight = "bold";
+	document.getElementById("li_"+id).style.fontSize = "30px";
+	jQuery('body,html').animate({scrollTop:0},1000);
+        return false;
+}
+</script>
+<div id="content">
+
+	<div class="post" id="post-6805">
+		<h2 class="title">Java垃圾回收算法</h2>
+		<p class="postmetadata">
+			<span class="date">05 February 2010</span>
+			<span class="category">Categoried in <a href="http://www.xieziming.com/topic/coding" rel="category tag">程序</a></span>
+			<span class="comments">0</span>
+			<span class="view">Preview : 138 , Read : 882 </span>
+			<span class="mail">Index : 2486 </span>
+		</p>
+		<div class="entry">				
+<div id="part_1"><p><strong>=====  自动内存管理  =====</strong><br />
+    内存管理就是查找出不再使用的对象，释放这些对象占用的内存空间，为其他对象的分配提供足够的内存空间。在一些编程语言(C,C++)中，内存管理是程序员的职责。内存管理使开发变得复杂，而且会造成许多潜在的bug和不可知的崩溃。导致程序猿花费大量时间debug来修复这些很隐蔽的问题。</p>
+<p>    在精确的内存管理中经常发生一个问题是悬摆指针 (dangling references )。程序猿可能释放一个对象占用的内存空间，即使这个对象还在被其他对象引用。如果一个对象引用另一个被不小心 释放的对象，这个释放对象的内存空间可能被重新分配新的对象，这个时候，不可预期的结果就可能发生了，而且很可能是致命的。</p>
+<p>    另一个在精确内存管理中经常发生的问题是内存泄露 (menory leaks )。泄露经常是对象占用的内存空间不再被任何其他对象引用，但是这个对象没有被回收。例如，如果你打算回收一个列表的空间，但是不小心只释放了列表的第一个元素，这个列表的其他元素将一直持有内存空间，因为这个列表引用已经不存在了，其他元素占用的空间得不到释放，造成了泄露。久而久之，类似的泄露累计，将会填满内存空间，导致没有足够的内存分配给其他的新对象。</p>
+<p>    鉴于上面的原因，Java做出一个明智但艰难的抉择，自动内存管 理。程序猿不再管理负责的内存分配和回收，把更多的精力放在业务开发上。承担次任务的是Java中的垃圾收集器，它能解决悬摆指针，内存泄露问题。对象的引用关系会被垃圾收集器检索到，当某个对象不再被任何对象引用的时候，垃圾收集器会自动回收。</p>
+<p><strong>=====  垃圾收集的概念  =====</strong><br />
+一个垃圾回收器的职责：</p>
+<blockquote><p>
+分配内存</p>
+<p>确保被引用的对象留在内存中</p>
+<p>释放那些不再被任何其他对象引用的对象占用的内存空间
+</p></blockquote>
+<p>    如果一个对象在以根对象 (root objects )为首的引用链中可达 ，那么这个对象是存活 的；否则，这个对象已经死亡 (将要被回收)。查找并释放不可达对象占用内存空间的过程，成为垃圾回收。</p>
+<p>    垃圾回收能解决大部分问题，但不是所有问题。你可以不断创建新的对象，并保持这写对象的引用，直到没有足够的内存位置(操作系统可能会用到交换空间，虚拟内存等保证系统正常运行，但是效率会下降)。</p>
+<p>    对于垃圾收集器分配和回收内存的算法，对程序员来说是透明的，通常对象内存空间是从堆 (heap )中分配的。</p>
+<p>    垃圾收集器控制着垃圾回收的时间。通常，垃圾回收发生在整个堆或者堆一部分已经被填满或者堆的使用情况达到某个阈值 。对象内存分配需要垃圾收集器在堆中找到特定大小的连续 空间 ，而垃圾回收又会产生碎片 ，导致内存空间不连续。所以为了避免碎片，垃圾回收过程会有一些动作保证内存连续。</p>
+</div><div id="part_2" style="display:none;"><p>=====  垃圾回收器特点  =====<br />
+    垃圾收集器应该是安全并且全面的。存活对象不能被错误的回收，并且在一次垃圾回收周期中，垃圾对象应该被全部清除，不能有残留。</p>
+<p>    垃圾回收器还应该是高效的，不能给正在运行的程序造成太大的停顿(STW ——stop the word )。在一个计算密集的系统中，在耗时，空间，频率 通常会有一个权衡。如果堆的空间很小，垃圾收集很快就会完成，但是堆很快就会被填满，这时候垃圾收集器活动就会更频繁。相反，对于一个较大的堆，填满这个堆需要相对较长时间，但是收集器执行一次垃圾回收耗时也相对较长。</p>
+<p>    垃圾收集器的另一个特点是减少碎片空间。当回收对象占用的内存空间的时候，内存随便会遍布整个堆，新的对象分配没有足够大的连续空间导致分配失败。为了解决这个问题，在回收对象时，会对内存进行整理 或压缩 。</p>
+<p>    可扩展对垃圾收集器也很重要。垃圾收收集器不应该在单线程和多线程执行效率是一样的，也就是说，多cpu不应该成为垃圾收集器的瓶颈。</p>
+<p>===== JVM 垃圾回收算法  =====</p>
+<p>在说垃圾回收算法之前，先谈谈JVM怎样确定哪些对象是“垃圾”。</p>
+<p><strong>1.引用计数器算法：</strong></p>
+<p>引用计数器算法是给每个对象设置一个计数器，当有地方引用这个对象的时候，计数器+1 ，当引用失效的时候，计数器 -1 ，当计数器为 0 的时候， JVM 就认为对象不再被使用，是“垃圾”了。</p>
+<p>引用计数器实现简单，效率高；但是不能解决循环引用问问题（A 对象引用 B 对象， B 对象又引用 A 对象，但是 A,B 对象已不被任何其他对象引用），同时每次计数器的增加和减少都带来了很多额外的开销，所以在 JDK1.1 之后，这个算法已经不再使用了。</p>
+<p><strong>2.根搜索方法：</strong></p>
+<p>根搜索方法是通过一些“GCRoots ”对象作为起点，从这些节点开始往下搜索，搜索通过的路径成为引用链（ ReferenceChain ），当一个对象没有被 GCRoots 的引用链连接的时候，说明这个对象是不可用的。</p>
+<p>GCRoots对象包括：</p>
+<blockquote><p>
+a)虚拟机栈（栈帧中的本地变量表）中的引用的对象。</p>
+<p>b)方法区域中的类静态属性引用的对象。</p>
+<p>c)方法区域中常量引用的对象。</p>
+<p>d)本地方法栈中JNI （Native 方法）的引用的对象。
+</p></blockquote>
+<p>我们可以将对象考虑为有向图的顶点，将引用关系考虑为图的有向边，有向边从引用者指向被引对象。另外，每个线程对象可以作为一个图的起始顶点，例如大多程序从main进程开始执行，那么该图就是以main进程顶点开始的一棵根树。在这个有向图中，根顶点可达的对象都是有效对象，GC将不回收这些对象。如果某个对象 (连通子图)与这个根顶点不可达(注意，该图为有向图)，那么我们认为这个(这些)对象不再被引用，可以被GC回收。</p>
+</div><div id="part_3" style="display:none;"><p>了解了JVM 是怎么确定对象是“垃圾”之后，进入正题，让我们来看看垃圾回收的算法。</p>
+<p><strong>1.标记—清除算法（Mark-Sweep）</strong></p>
+<p>标记—清除算法包括两个阶段：“标记”和“清除”。在标记阶段，确定所有要回收的对象，并做标记。清除阶段紧随标记阶段，将标记阶段确定不可用的对象清除。标记—清除算法是基础的收集算法，标记和清除阶段的效率不高，而且清除后回产生大量的不连续空间，这样当程序需要分配大内存对象时，可能无法找到足够的连续空间。</p>
+<p><strong>2.复制算法（Copying）</strong><br />
+复制算法是把内存分成大小相等的两块，每次使用其中一块，当垃圾回收的时候，把存活的对象复制到另一块上，然后把这块内存整个清理掉。<br />
+复制算法实现简单，运行效率高，但是由于每次只能使用其中的一半，造成内存的利用率不高。现在的JVM 用复制方法收集新生代，由于新生代中大部分对象（ 98% ）都是朝生夕死的，所以两块内存的比例不是 1:1(大概是 8:1) 。</p>
+<p><strong>3.标记—整理算法（Mark-Compact）</strong></p>
+<p>标记—整理算法和标记—清除算法一样，但是标记—整理算法不是把存活对象复制到另一块内存，而是把存活对象往内存的一端移动，然后直接回收边界以外的内存。标记—整理算法提高了内存的利用率，并且它适合在收集对象存活时间较长的老年代。</p>
+<p><strong>4.分代收集（GenerationalCollection）</strong><br />
+分代收集是根据对象的存活时间把内存分为新生代和老年代，根据每个代对象的存活特点，每个代采用不同的垃圾回收算法。新生代采用标记—复制算法，老年代采用标记—整理算法。垃圾算法的实现涉及大量的程序细节，而且不同的虚拟机平台实现的方法也各不相同。上面介绍的只不过是基本思想。 </p>
+</div><div id="paginate"><label id="li_1" onclick="javascript:show_page(1,3,this);" style="font-size:30px;font-weight:bold" onmouseover="this.style.cursor='pointer'">1</label><label id="li_2" onclick="javascript:show_page(2,3,this);"  onmouseover="this.style.cursor='pointer'">2</label><label id="li_3" onclick="javascript:show_page(3,3,this);"  onmouseover="this.style.cursor='pointer'">3</label></div> 
+			<div align="center">1 month ago, this page was being read. </div>
+			<p class="tags"><a href="http://www.xieziming.com/tag/java" rel="tag">java</a>, <a href="http://www.xieziming.com/tag/cheng-xu" rel="tag">程序</a><br /></p>  
+    </div><!-- /entry -->                                   
+		<div class="postbottom"></div>		                              
+		</div><!-- /post -->	
+
+<div class="postrelated">
+			<table width="100%" >				
+
+					<tr><td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/2475.html" rel="bookmark" title="程序员须知（二）">程序员须知（...</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7605.html" rel="bookmark" title="质疑和反驳">质疑和反驳</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/6967.html" rel="bookmark" title="Java基础面试题">Java基础面...</a></td>
+
+				<td align="right" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7515.html" rel="bookmark" title="Java装饰模式">Java装饰模式</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/2464.html" rel="bookmark" title="J2EE入门例子">J2EE入门例子</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/2445.html" rel="bookmark" title="J2EE回忆">J2EE回忆</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/8807.html" rel="bookmark" title="制作Java Applet签名">制作Java ...</a></td>
+
+				<td align="right" class="dashedline_related"><a href="http://www.xieziming.com/archives/8506.html" rel="bookmark" title="Java Socket长连接">Java S...</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/7499.html" rel="bookmark" title="Java代理机制">Java代理...</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/3114.html" rel="bookmark" title="C/C++经典排序算法">C/C++...</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/7437.html" rel="bookmark" title="Equals与Hashcode">Equal...</a></td>
+
+				<td align="right" class="dashedline_related">★<a href="http://www.xieziming.com/archives/4743.html" rel="bookmark" title="为博客添加flash批量上传功能">为博客添加flash批量...</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/2220.html" rel="bookmark" title="软件项目开发流程">软件项目开...</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/8665.html" rel="bookmark" title="JavaOne Conference">JavaOne Conf...</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/8575.html" rel="bookmark" title="Comparison Tool">Comparis...</a></td>
+
+				<td align="right" class="dashedline_related"><a href="http://www.xieziming.com/archives/7513.html" rel="bookmark" title="Java自定义注解">Java自定义注解</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/7457.html" rel="bookmark" title="Firefox插件制作">Firefo...</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7481.html" rel="bookmark" title="Java单例模式">Java单...</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/6795.html" rel="bookmark" title="Java 多线程">Java 多线程</a></td>
+
+				<td align="right" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7496.html" rel="bookmark" title="Java反射机制">Java反射机...</a></td></tr>
+
+		</table>
+</div>
+
+		<div id="comments">
+
+<!-- START COMMENT FORMS -->
+
+
+		</div><!--/comments-->		
+
+</div><!-- /content -->
+<div id="sidebar">			
+			<a class="subscribe" href="http://www.xieziming.com/feed" title="Posts RSS">Subscribe</a>			
+			<div id="search">	
+	<form name="searchform" id="searchform" method="get" action="http://www.xieziming.com/index.php">
+		<input class="text" type="text" name="s" id="s" value=""/>
+		<input class="submit" type="image" src="http://www.xieziming.com/wp-content/themes/ziming/img/submit.jpg" value="search" />
+	</form>	
+</div><!-- /search -->			
+			<div id="widgets">			
+			<div class="widget"><h3>Calendar</h3>
+<table id="wp-calendar">
+  									<caption>December 2016</caption>
+  									<thead>
+                    <tr><th scope="col" title="S">S</th><th scope="col" title="M">M</th><th scope="col" title="T">T</th><th scope="col" title="W">W</th><th scope="col" title="T">T</th><th scope="col" title="F">F</th><th scope="col" title="S">S</th></tr></thead><tbody><tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>1</td><td>2</td><td>3</td></tr><tr><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td></tr><tr><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td></tr><tr><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">18<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">《血战钢锯岭》</span><br/><span class="time" style="color:#000000; " > Time : 21:18 - 23:28</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">晚上和小锅去看，蛮感人的。吃完去沙湾吃猪杂粥，应该是我在那吃到的最新鲜的一次了。</p></span></a></span></td><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">19<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">CentOS</span><br/><span class="time" style="color:#000000; " > Time : 14:11 - 18:11</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">终于有点时间来把那盒子的win7转成CentOS来做server。配置vsftp花了我太多的时间。。。</p></span></a></span></td><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td></tr><tr><td>25</td><td>26</td><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td></tr><tr><td colspan="3" id="prev"><a href="http://www.xieziming.com/archives/6805.html?month=nov&yr=2016">&laquo; Prev</a></td><td colspan="4" id="next"><a href="http://www.xieziming.com/archives/6805.html?month=jan&yr=2017">Next &raquo;</a></td></tr></tbody></table>
+<div class="widgetbottom"></div></div><!--/widget-->				
+					      		<div class="widget">
+ 							<h3>Recent Posts</h3>
+							<ul>
+           				<li><a href="http://www.xieziming.com/archives/9579.html" class="dashedline" title="闽南 · 泉州">闽南 &middot; 泉州</a></li><li><a href="http://www.xieziming.com/archives/9578.html" class="dashedline" title="顺化 · HUE">顺化 &middot; HUE</a></li><li><a href="http://www.xieziming.com/archives/9577.html" class="dashedline" title="会安 · 春卷">会安 &middot; 春卷</a></li><li><a href="http://www.xieziming.com/archives/9576.html" class="dashedline" title="会安 · 夜灯">会安 &middot; 夜灯</a></li><li><a href="http://www.xieziming.com/archives/9575.html" class="dashedline" title="会安古镇">会安古镇</a></li><li><a href="http://www.xieziming.com/archives/9573.html" class="dashedline" title="岘港">岘港</a></li><li><a href="http://www.xieziming.com/archives/9535.html" class="dashedline" title="罗马">罗马</a></li><li><a href="http://www.xieziming.com/archives/9534.html" class="dashedline" title="卢浮宫">卢浮宫</a></li>						
+							</ul>
+      				<div class="widgetbottom"></div>
+	    		</div>
+	    			        
+        	      		<div class="widget">
+ 							<h3>Rand Posts</h3>
+							<ul>
+      						<li><a href="http://www.xieziming.com/archives/879.html" class="dashedline" title="风生水起～">风生水起～</a></li><li><a href="http://www.xieziming.com/archives/4960.html" class="dashedline" title="草原 - 杂">草原 - 杂</a></li><li><a href="http://www.xieziming.com/archives/6181.html" class="dashedline" title="同学聚会">同学聚会</a></li><li><a href="http://www.xieziming.com/archives/272.html" class="dashedline" title="秋风扫落叶...">秋风扫落叶...</a></li><li><a href="http://www.xieziming.com/archives/6108.html" class="dashedline" title="嘉峪关">嘉峪关</a></li><li><a href="http://www.xieziming.com/archives/4867.html" class="dashedline" title="798 &小锅">798 &amp;小锅</a></li><li><a href="http://www.xieziming.com/archives/268.html" class="dashedline" title="今 , 事真多...">今 , 事真多...</a></li><li><a href="http://www.xieziming.com/archives/9523.html" class="dashedline" title="布拉格（八）">布拉格（八）</a></li>	
+							</ul>
+        			<div class="widgetbottom"></div>
+					</div>                 
+          	                       
+			</div><!-- /widgets -->			                       
+</div><!-- /sidebar --></div><!-- /main -->
+<div id="footer">
+<p align="left">© <a href="http://www.miitbeian.gov.cn" target="_blank"> 明 · 明 · 童 · 鞋</a></p>
+<!--74 queries in 2.589 seconds.-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?c2e18b43ec905e3c4ea82c1b57537223";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</div><!-- /footer -->
+</div><!-- /container -->
+<script type='text/javascript' src='http://www.xieziming.com/wp-includes/js/wp-embed.min.js?ver=4.7'></script>
+</body>
+</html>

@@ -1,0 +1,511 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head profile="http://gmpg.org/xfn/11">
+<title>  VBS中的类 &raquo; 谢子明</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="description" content="VBS中的类  " />
+<meta name="keywords" content="谢子明" />
+<link rel="stylesheet" href="http://www.xieziming.com/wp-content/themes/ziming/style.css" type="text/css" media="screen" />
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://www.xieziming.com/feed" />
+<link rel="alternate" type="application/rss+xml" href="http://www.xieziming.com/comments/feed" title="谢子明 Comments RSS feed" />
+<link rel="shortcut icon" href="http://www.xieziming.com/wp-content/themes/ziming/favicon.ico">
+<link rel="Bookmark" href="http://www.xieziming.com/wp-content/themes/ziming/favicon.ico">
+<link rel="pingback" href="http://www.xieziming.com/xmlrpc.php" />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="谢子明 &raquo; VBS中的类 Comments Feed" href="http://www.xieziming.com/archives/7377.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/xieziming.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.7"}};
+			!function(a,b,c){function d(a){var b,c,d,e,f=String.fromCharCode;if(!k||!k.fillText)return!1;switch(k.clearRect(0,0,j.width,j.height),k.textBaseline="top",k.font="600 32px Arial",a){case"flag":return k.fillText(f(55356,56826,55356,56819),0,0),!(j.toDataURL().length<3e3)&&(k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,65039,8205,55356,57096),0,0),b=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,55356,57096),0,0),c=j.toDataURL(),b!==c);case"emoji4":return k.fillText(f(55357,56425,55356,57341,8205,55357,56507),0,0),d=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55357,56425,55356,57341,55357,56507),0,0),e=j.toDataURL(),d!==e}return!1}function e(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i,j=b.createElement("canvas"),k=j.getContext&&j.getContext("2d");for(i=Array("flag","emoji4"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<script type='text/javascript' src='http://www.xieziming.com/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='http://www.xieziming.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<link rel='https://api.w.org/' href='http://www.xieziming.com/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.xieziming.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.xieziming.com/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='QTP控制Java程序原理' href='http://www.xieziming.com/archives/7366.html' />
+<link rel='next' title='QTP Action 参数传递' href='http://www.xieziming.com/archives/7382.html' />
+<meta name="generator" content="WordPress 4.7" />
+<link rel="canonical" href="http://www.xieziming.com/archives/7377.html" />
+<link rel='shortlink' href='http://www.xieziming.com/?p=7377' />
+<link rel="alternate" type="application/json+oembed" href="http://www.xieziming.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fxieziming.com%2Farchives%2F7377.html" />
+<link rel="alternate" type="text/xml+oembed" href="http://www.xieziming.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fxieziming.com%2Farchives%2F7377.html&#038;format=xml" />
+ 	<link rel="stylesheet" href="http://www.xieziming.com/wp-content/plugins/live-calendar/live-calendar.css" type="text/css" media="screen" /> 
+<link rel="stylesheet" href="http://www.xieziming.com/wp-content/plugins/wp-code/wp-code.css" type="text/css" media="screen" />
+
+<link rel="stylesheet" href="http://www.xieziming.com/wp-content/plugins/zoom-highslide/highslide.css" type="text/css" media="screen" />
+<script type="text/javascript" src="http://www.xieziming.com/wp-content/plugins/zoom-highslide/js/highslide-full.packed.js"></script>
+<script type="text/javascript">
+	hs.graphicsDir = 'http://www.xieziming.com/wp-content/plugins/zoom-highslide/graphics/';
+	hs.align = 'center';
+	hs.transitions = ['expand', 'crossfade'];
+	hs.outlineType = 'rounded-white';
+  hs.wrapperClassName = 'controls-in-heading';
+	hs.showCredits=false;
+	hs.fadeInOut = true;
+	hs.dimmingOpacity = 0.8;
+
+	// Add the controlbar
+	if (hs.addSlideshow) hs.addSlideshow({
+		//slideshowGroup: 'group1',
+		interval: 4000,
+		repeat: false,
+		useControls: true,
+		fixedControls: false,
+		overlayOptions: {
+			opacity: 1,
+			position: 'top center',
+			hideOnMouseOut: true
+		}
+	});
+</script>
+
+<script type="text/javascript">
+	var widthRestriction = 668; 
+	var heightRestriction = 1000; 
+</script>
+<script type="text/javascript" src="http://www.xieziming.com/wp-content/plugins/zoom-highslide/js/zoom.js"></script>
+	
+<!--script src="http://www.xieziming.com/wp-content/themes/ziming/js/mouse.js" type="text/javascript"></script--> 
+</head>
+<body class="normalbg">
+<div id="container">
+	<div id="head">
+		<div id="nav">
+			<ul>
+				<li class="first"><a href="http://www.xieziming.com" title="首页">首页</a></li>
+				<li class="page_item page-item-2"><a href="http://www.xieziming.com/recent" title="最近">最近</a></li>
+				<li class="page_item page-item-3"><a href="http://www.xieziming.com/photo" title="Photo">映象</a></li>
+				<li class="page_item page-item-4"><a href="http://www.xieziming.com/food" title="Food">美食</a></li>
+				<li class="page_item page-item-5"><a href="http://www.xieziming.com/topic" title="关键字">话题</a></li>
+				<li class="page_item page-item-6"><a href="http://www.xieziming.com/travel" title="Travel">旅行</a></li>
+				<li class="page_item page-item-7"><a href="http://www.xieziming.com/literature" title="Literature">文艺</a></li>
+				<li class="page_item page-item-8"><a href="http://www.xieziming.com/wiki" title="技术维基">维基</a></li>
+				<li class="page_item page-item-9"><a href="http://www.xieziming.com/calendar" title="Calendar">点滴</a></li>
+			</ul>
+		</div><!-- /nav -->		
+	</div><!-- /head -->
+<div id="main" class="altmainbg">
+
+<script type="text/javascript">
+function show_page(id,count,source){
+	for (var i=1;i<=count;i++){
+		if(id != i){
+				jQuery("#part_"+i).hide();
+				document.getElementById("li_"+i).style.fontWeight = "normal";
+				document.getElementById("li_"+i).style.fontSize = "18px";
+		}
+	}
+	jQuery("#part_"+id).show();
+	document.getElementById("li_"+id).style.fontWeight = "bold";
+	document.getElementById("li_"+id).style.fontSize = "30px";
+	jQuery('body,html').animate({scrollTop:0},1000);
+        return false;
+}
+</script>
+<div id="content">
+
+	<div class="post" id="post-7377">
+		<h2 class="title">VBS中的类</h2>
+		<p class="postmetadata">
+			<span class="date">17 September 2012</span>
+			<span class="category">Categoried in <a href="http://www.xieziming.com/topic/coding" rel="category tag">程序</a></span>
+			<span class="comments">0</span>
+			<span class="view">Preview : 4080 , Read : 917 </span>
+			<span class="mail">Index : 8342 </span>
+		</p>
+		<div class="entry">				
+<div id="part_1"><p><strong>1.VBS的类有两种事件：</strong></p>
+<p>(1)Initialize 事件,在创建类的实例时发生（新建）此事件。</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #E56717; font-weight: bold;">Private</span> <span style="color: #E56717; font-weight: bold;">Sub</span> Class_Initialize()
+    statements
+<span style="color: #8D38C9; font-weight: bold;">End</span> <span style="color: #E56717; font-weight: bold;">Sub</span></pre></div></div>
+
+<p>当类初始化时，statements部分由零个或多个将要运行的代码语句组成。</p>
+<p>(2)Terminate 事件,在所关联的类的实例终止（销毁）时发生此事件。</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #E56717; font-weight: bold;">Private</span> <span style="color: #E56717; font-weight: bold;">Sub</span> Class_Terminate()
+    statements
+<span style="color: #8D38C9; font-weight: bold;">End</span> <span style="color: #E56717; font-weight: bold;">Sub</span></pre></div></div>
+
+<p>当类初始化时，statements 部分由零个或多个将要运行的代码语句组成。</p>
+<p>下面是类事件的例子：</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;">Class TestClass
+  <span style="color: #E56717; font-weight: bold;">Private</span> <span style="color: #E56717; font-weight: bold;">Sub</span> Class_Initialize   <span style="color: #008000;">' 设置 Initialize 事件。
+</span>    MsgBox(<span style="color: #800000;">&quot;TestClass started&quot;</span>)
+  <span style="color: #8D38C9; font-weight: bold;">End</span> <span style="color: #E56717; font-weight: bold;">Sub</span>
+  <span style="color: #E56717; font-weight: bold;">Private</span> <span style="color: #E56717; font-weight: bold;">Sub</span> Class_Terminate   <span style="color: #008000;">' 设置 Terminate 事件。
+</span>    MsgBox(<span style="color: #800000;">&quot;TestClass terminated&quot;</span>)
+  <span style="color: #8D38C9; font-weight: bold;">End</span> <span style="color: #E56717; font-weight: bold;">Sub</span>
+<span style="color: #8D38C9; font-weight: bold;">End</span> Class
+&nbsp;
+<span style="color: #151B8D; font-weight: bold;">Set</span> X = <span style="color: #E56717; font-weight: bold;">New</span> TestClass   <span style="color: #008000;">' 创建一个 TestClass 实例。
+</span><span style="color: #151B8D; font-weight: bold;">Set</span> X = <span style="color: #00C2FF; font-weight: bold;">Nothing</span>      ' 删除实例。</pre></div></div>
+
+<p><strong>NOTE：</strong><br />
+a.类的事件方法格式是固定的，事件名是固定的，事件只能是Sub不能是Function，事件无参数；<br />
+b.类实例通过New来创建，通过Nothing来销毁；<br />
+c.记住所有的类实例都是对象，创建与销毁时记得用Set语句，没有Set是错的<br />
+d.这两个事件都不是必须的，即编写类时可以不提供这两个事件的实现代码；<br />
+e.这两个事件作用比较大，可以在这两个事件中初始化对象以及销毁对象时做一些其他的工作<br />
+f.因为VBS的两个类事件都不接受参数，所以不能在用New创建对象时初始化对象，可以另外设置一个公有的过程来完成这个任务</p>
+</div><div id="part_2" style="display:none;"><p><strong>2.类可以有公有和私有字段：</strong></p>
+<p>（1）公有的字段可以外部访问，私有的不能：<br />
+（2）可以定义数组字段，且此数组字段可以是动态数组</p>
+<p><strong>3.类可以有公有或者私有的属性：</strong></p>
+<p>（1）公有的属性可以外部调用，私有的属性不能<br />
+（2）用Property Get定义读属性，用Property Set和Property Let来定义写属性<br />
+（3）当定义写属性时，如果此属性封装的是对象字段，则此写属性必须是Property Set<br />
+（4）属性不必是成对出现，这样就可以造成只读或只写属性，当然Private任意一方也可以造成这种情况</p>
+<p><strong>4.类可以有公有和私有的方法：</strong></p>
+<p>（1）公有的方法可以外部调用，私有的方法不能</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;">Class Circle
+            <span style="color: #E56717; font-weight: bold;">Public</span> r        
+            <span style="color: #E56717; font-weight: bold;">Private</span> mArea        
+            <span style="color: #E56717; font-weight: bold;">Public</span> <span style="color: #E56717; font-weight: bold;">Sub</span> Init(a)
+                        r=a
+            <span style="color: #8D38C9; font-weight: bold;">End</span> <span style="color: #E56717; font-weight: bold;">Sub</span>
+&nbsp;
+            <span style="color: #E56717; font-weight: bold;">Public</span> <span style="color: #E56717; font-weight: bold;">Function</span> Area()
+                        <span style="color: #8D38C9; font-weight: bold;">If</span> mArea=<span style="color: #800000;">&quot;&quot;</span> <span style="color: #8D38C9; font-weight: bold;">Then</span> mArea=Atn(1)*4*r*r
+                        Area=mArea
+            <span style="color: #8D38C9; font-weight: bold;">End</span> <span style="color: #E56717; font-weight: bold;">Function</span>
+&nbsp;
+            <span style="color: #E56717; font-weight: bold;">Private</span> <span style="color: #E56717; font-weight: bold;">Sub</span> EchoInfo()
+                        MsgBox <span style="color: #800000;">&quot;圆的半径是：&quot;</span> &amp; r &amp; vbCrLf &amp; <span style="color: #800000;">&quot;圆的面积是：&quot;</span> &amp; mArea
+            <span style="color: #8D38C9; font-weight: bold;">End</span> <span style="color: #E56717; font-weight: bold;">Sub</span> 
+&nbsp;
+<span style="color: #8D38C9; font-weight: bold;">End</span> Class
+&nbsp;
+<span style="color: #151B8D; font-weight: bold;">Set</span> c = <span style="color: #E56717; font-weight: bold;">New</span> Circle   <span style="color: #008000;">' 创建一个 TestClass 实例。
+</span>c.Init 2
+MsgBox c.r
+MsgBox c.Area()
+<span style="color: #008000;">'MsgBox c.mArea  '无法访问，因为这个字段是私有的，只能类内部访问，如上面的Area方法
+</span><span style="color: #008000;">'MsgBox c.EchoInfo()   '无法访问，因为这个方法是私有的，只能类内部访问
+</span><span style="color: #151B8D; font-weight: bold;">Set</span> c = <span style="color: #00C2FF; font-weight: bold;">Nothing</span>      ' 删除实例</pre></div></div>
+
+<p>下面是与属性相关的例子：</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;">Class Student
+        <span style="color: #E56717; font-weight: bold;">Private</span> mAge,mName,mNumber,mSex,mLover,mYear,mRank
+        <span style="color: #008000;">'这里字段最好都定义为私有的，这样可以更强的控制字段的读写并可以在读写时提供一些其他的计算处理
+</span>        <span style="color: #008000;">'这里我们假设Lover(情侣)也是一个学生，那么此字段就是一个
+</span>        <span style="color: #008000;">'对象类型的字段，请留意它的属性是怎么实现的
+</span>        <span style="color: #151B8D; font-weight: bold;">Dim</span> Belief   <span style="color: #008000;">'人生信条，这里不指定其可访问性
+</span>        <span style="color: #E56717; font-weight: bold;">Sub</span> Init(namestr,sexstr,ageint,rankint)
+                <span style="color: #8D38C9; font-weight: bold;">If</span> mName=<span style="color: #800000;">&quot;&quot;</span> <span style="color: #8D38C9; font-weight: bold;">Then</span> <span style="color: #008000;">'这个判断可以确保实例只被初始化一次
+</span>                        mName=namestr
+                        mSex=sexstr
+                        mAge=ageint
+                        mRank=rankint
+                        Randomize
+                        mNumber=Int(Rnd*10000+1)
+                        mYear=Year(<span style="color: #F660AB; font-weight: bold;">Date</span>)
+                        <span style="color: #008000;">'这里没有提供mLover字段的初始化，毕竟一见钟情太少
+</span>                <span style="color: #8D38C9; font-weight: bold;">Else</span>
+                        MsgBox <span style="color: #800000;">&quot;No,you can't initialize a instance twice&quot;</span>
+                <span style="color: #8D38C9; font-weight: bold;">End</span> <span style="color: #8D38C9; font-weight: bold;">If</span>
+        <span style="color: #8D38C9; font-weight: bold;">End</span> <span style="color: #E56717; font-weight: bold;">Sub</span>
+&nbsp;
+        <span style="color: #151B8D; font-weight: bold;">Property</span> <span style="color: #151B8D; font-weight: bold;">Get</span> Rank()
+                Rank=mRank
+        <span style="color: #8D38C9; font-weight: bold;">End</span> <span style="color: #151B8D; font-weight: bold;">Property</span>
+&nbsp;
+        <span style="color: #151B8D; font-weight: bold;">Property</span> <span style="color: #151B8D; font-weight: bold;">Let</span> Rank(value)
+                mRank=value
+        <span style="color: #8D38C9; font-weight: bold;">End</span> <span style="color: #151B8D; font-weight: bold;">Property</span>
+        <span style="color: #008000;">'这里的写属性只能是Property Let，不能是Property Set，因为在外部要赋值给属性的是一个int型的
+</span>        <span style="color: #008000;">'是值类型，不是对象类型（常说的引用类型）所以不能用Set，外部赋值时也不能用Set语句
+</span>        
+        <span style="color: #151B8D; font-weight: bold;">Property</span> <span style="color: #151B8D; font-weight: bold;">Get</span> Age()
+                <span style="color: #8D38C9; font-weight: bold;">If</span> mYear&lt;year (<span style="color: #F660AB; font-weight: bold;">Date</span>) <span style="color: #8D38C9; font-weight: bold;">Then</span>
+                        mYear=Year(<span style="color: #F660AB; font-weight: bold;">Date</span>)
+                        mAge=mAge+1
+                <span style="color: #8D38C9; font-weight: bold;">End</span> <span style="color: #8D38C9; font-weight: bold;">If</span>
+                age=mAge
+        <span style="color: #8D38C9; font-weight: bold;">End</span> <span style="color: #151B8D; font-weight: bold;">Property</span>
+        <span style="color: #008000;">'Age一经设置只会随着年份增加而改变，毕竟人们生活于同一个时空
+</span>        
+        <span style="color: #E56717; font-weight: bold;">Public</span> Default <span style="color: #151B8D; font-weight: bold;">Property</span> <span style="color: #151B8D; font-weight: bold;">Get</span> Name()
+                Name=mName
+        <span style="color: #8D38C9; font-weight: bold;">End</span> <span style="color: #151B8D; font-weight: bold;">Property</span>
+        <span style="color: #008000;">'学生姓名默认是不能更改，当然你也可以改名字，建议在类中定义
+</span>        <span style="color: #008000;">'保守的改名方法
+</span>        <span style="color: #008000;">'这里定义Name为默认属性，注意使用Default关键字定义默认属性时，必须有Public关键字
+</span>        
+        <span style="color: #151B8D; font-weight: bold;">Property</span> <span style="color: #151B8D; font-weight: bold;">Get</span> Sex()
+                Sex=mSex
+        <span style="color: #8D38C9; font-weight: bold;">End</span> <span style="color: #151B8D; font-weight: bold;">Property</span>
+        <span style="color: #008000;">'学生性别当然，一经初始化，不会更改，除非蛋疼得跑去变性
+</span>        
+        <span style="color: #151B8D; font-weight: bold;">Property</span> <span style="color: #151B8D; font-weight: bold;">Get</span> Lover()
+                <span style="color: #151B8D; font-weight: bold;">Set</span> Lover=mLover
+        <span style="color: #8D38C9; font-weight: bold;">End</span> <span style="color: #151B8D; font-weight: bold;">Property</span>
+&nbsp;
+        <span style="color: #151B8D; font-weight: bold;">Property</span> <span style="color: #151B8D; font-weight: bold;">Set</span> Lover(value)
+                <span style="color: #151B8D; font-weight: bold;">Set</span> mLover=value
+        <span style="color: #8D38C9; font-weight: bold;">End</span> <span style="color: #151B8D; font-weight: bold;">Property</span>
+        <span style="color: #008000;">'有Set属性，此子（女）真风流，如果你专情，不妨Private它
+</span>        <span style="color: #008000;">'这里写成Property Let也是可以的，不过后面Set stu1.Lover=stu2要把Set去掉
+</span>        <span style="color: #008000;">'由此例可以看出Property Let和Property Get定义的属性内部定义都一样的Set语句，但是在外部
+</span>        <span style="color: #008000;">'时，如果上面这里定义的是Let属性那么不能用Set语句来赋值，虽然赋值给Lover属性的是一个
+</span>        <span style="color: #008000;">'引用类型（即对象类型），如果上面这里是定义的是Set属性，则必须Set语句
+</span>        
+        <span style="color: #008000;">'由以上Lover和Rank两个属性知，我们可以得出这样的结论：
+</span>        <span style="color: #008000;">'(1)无论是对引用类型字段的封装，还是对值类型字段的封装，都可以用Property Let，而Set
+</span>        <span style="color: #008000;">'只能在对引用类型字段封装时出现
+</span>        <span style="color: #008000;">'(2)定义类时我们可以根据外部赋值到属性的类型来决定用Set还是用Let，而后定义好了之后，再由
+</span>        <span style="color: #008000;">'定义的是Property Let还是Property Set来决定赋值方式，即用不用Set语句
+</span>        
+        <span style="color: #E56717; font-weight: bold;">Function</span> IsGay() 
+                <span style="color: #8D38C9; font-weight: bold;">If</span> Lover.Sex=Sex <span style="color: #8D38C9; font-weight: bold;">Then</span>
+                        IsGay=<span style="color: #00C2FF; font-weight: bold;">True</span>
+                <span style="color: #8D38C9; font-weight: bold;">Else</span>
+                        IsGay=<span style="color: #00C2FF; font-weight: bold;">False</span>
+                <span style="color: #8D38C9; font-weight: bold;">End</span> <span style="color: #8D38C9; font-weight: bold;">If</span>
+        <span style="color: #8D38C9; font-weight: bold;">End</span> <span style="color: #E56717; font-weight: bold;">Function</span>
+&nbsp;
+        <span style="color: #E56717; font-weight: bold;">Function</span> Info()
+                Info=<span style="color: #800000;">&quot;学生信息：&quot;</span> &amp; vbCrLf &amp; _
+                                <span style="color: #800000;">&quot;学号：&quot;</span> &amp; mNumber &amp; vbCrLf &amp; _
+                                <span style="color: #800000;">&quot;姓名：&quot;</span> &amp; mName &amp; vbCrLf &amp; _
+                                <span style="color: #800000;">&quot;性别：&quot;</span> &amp; mSex &amp; vbCrLf &amp; _
+                                <span style="color: #800000;">&quot;年龄：&quot;</span> &amp; Age &amp; vbCrLf &amp; _
+                                <span style="color: #800000;">&quot;排名：&quot;</span> &amp; mRank &amp; vbcrlf &amp; _
+                                <span style="color: #800000;">&quot;情侣：&quot;</span> &amp; mLover
+        <span style="color: #8D38C9; font-weight: bold;">End</span> <span style="color: #E56717; font-weight: bold;">Function</span>
+        <span style="color: #008000;">'这之中Age通过属性来获取以确保每次获取的是正确的年龄
+</span>        <span style="color: #008000;">'没有定义Age的写属性，这样就保护了字段，避免非法改写
+</span>        <span style="color: #008000;">'外部只能通过Age的读属性来访问，所以确保了外部读取年龄的正确性
+</span>        <span style="color: #008000;">'对mLover.Name可以直接用mLover来输出，因为它的Name属性是默认属性
+</span><span style="color: #8D38C9; font-weight: bold;">End</span> Class
+&nbsp;
+<span style="color: #151B8D; font-weight: bold;">Dim</span> stu1,stu2                                       
+<span style="color: #008000;">'最好定义变量，这样可以防止全局变量对自定义函数的影响
+</span><span style="color: #151B8D; font-weight: bold;">Set</span> stu1=<span style="color: #E56717; font-weight: bold;">New</span> Student
+<span style="color: #151B8D; font-weight: bold;">Set</span> stu2=<span style="color: #E56717; font-weight: bold;">New</span> Student
+stu1.Init <span style="color: #800000;">&quot;Jobs&quot;</span>,<span style="color: #800000;">&quot;BigBoy&quot;</span>,23,13        
+<span style="color: #008000;">'stu1.Age=32               
+</span><span style="color: #008000;">'这里运行会报错，因为没有定义Age的写属性，外部无法通过赋值修改年龄
+</span>stu2.Init <span style="color: #800000;">&quot;Joliy&quot;</span>,<span style="color: #800000;">&quot;Girl&quot;</span>,21,10
+<span style="color: #151B8D; font-weight: bold;">Set</span> stu1.Lover=stu2
+MsgBox stu1.Info     <span style="color: #008000;">'可访问，说明方法隐式为Public
+</span>stu1.Rank=8          <span style="color: #008000;">'可访问，说明属性隐式为Public
+</span>stu1.Belief=<span style="color: #800000;">&quot;No pains,no gains&quot;</span>
+MsgBox stu1.Belief    <span style="color: #008000;">'可访问，说明字段隐式为Public
+</span>MsgBox <span style="color: #800000;">&quot;使用默认属性：&quot;</span> &amp; vbcrlf &amp; stu1 &amp; vbcrlf &amp; stu2
+<span style="color: #151B8D; font-weight: bold;">Set</span> stu1=<span style="color: #00C2FF; font-weight: bold;">Nothing</span>
+<span style="color: #151B8D; font-weight: bold;">Set</span> stu2=<span style="color: #00C2FF; font-weight: bold;">Nothing</span></pre></div></div>
+
+<p><strong>NOTE：</strong><br />
+1.使用Default关键字定义默认属性时，必须显式指定属性为Public，虽然隐含的属性就是Public<br />
+2.在对象构造函数中设置条件，以确保初始化只能进行一次<br />
+3.<br />
+(1)无论是对引用类型字段的封装，还是对值类型字段的封装，都可以用Property Let，而Property Set 只能在对引用类型字段封装时出现，而且这种情况下依然可以不用Property Set</p>
+<p>(2)定义类时我们可以根据外部赋值到属性的类型来决定用Set还是用Let，因为如果要赋值给属性的值的类型是值类型，那么无论如何也用不着Property Set；而后定义好了之后，可以再由定义的是Property Let还是Property Set来决定赋值方式，即用不用Set语句</p>
+</div><div id="part_3" style="display:none;"><p>4.关于类中元素的可访问性：</p>
+<p>(1)属性不作说明时被认为是Public的，但定义Default时必须显式指定Public</p>
+<p>(2)方法与字段在不显式指定其可访问性时，被认为是Public的</p>
+<p>(3)由下面这个例子知，类仅有的两个事件也可以不指定可访问性，隐式也被认为是Public，可以外调</p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;">Class TestClass
+  <span style="color: #E56717; font-weight: bold;">Sub</span> Class_Initialize   <span style="color: #008000;">' 设置 Initialize 事件。
+</span>    MsgBox(<span style="color: #800000;">&quot;TestClass started&quot;</span>)
+  <span style="color: #8D38C9; font-weight: bold;">End</span> <span style="color: #E56717; font-weight: bold;">Sub</span>
+  <span style="color: #E56717; font-weight: bold;">Sub</span> Class_Terminate   <span style="color: #008000;">' 设置 Terminate 事件。
+</span>    MsgBox(<span style="color: #800000;">&quot;TestClass terminated&quot;</span>)
+  <span style="color: #8D38C9; font-weight: bold;">End</span> <span style="color: #E56717; font-weight: bold;">Sub</span>
+<span style="color: #8D38C9; font-weight: bold;">End</span> Class
+&nbsp;
+<span style="color: #151B8D; font-weight: bold;">Set</span> X = <span style="color: #E56717; font-weight: bold;">New</span> TestClass   <span style="color: #008000;">' 创建一个 TestClass 实例。
+</span>x.Class_Initialize         <span style="color: #008000;">'可正常运行
+</span><span style="color: #151B8D; font-weight: bold;">Set</span> X = <span style="color: #00C2FF; font-weight: bold;">Nothing</span>      ' 删除实例。</pre></div></div>
+
+<p>注意：上面的例子中，即使把第12句去掉，Class_Terminate事件仍然会发生，它会在脚本终止前被解释器触发。</p>
+<p><strong>VBS类中的多参数的Property Let和Property Set:</strong></p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;">Class Twitter  
+&nbsp;
+        <span style="color: #E56717; font-weight: bold;">Private</span> mName,mMessage  
+&nbsp;
+        <span style="color: #E56717; font-weight: bold;">Public</span> <span style="color: #E56717; font-weight: bold;">Sub</span> Init(pName)  
+                <span style="color: #8D38C9; font-weight: bold;">If</span> mName&lt;&gt;<span style="color: #800000;">&quot;&quot;</span> <span style="color: #8D38C9; font-weight: bold;">Then</span> mName=pName  
+        <span style="color: #8D38C9; font-weight: bold;">End</span> <span style="color: #E56717; font-weight: bold;">Sub</span>  
+&nbsp;
+        <span style="color: #151B8D; font-weight: bold;">Property</span> <span style="color: #151B8D; font-weight: bold;">Get</span> Message(width)  
+                Message=mMessage  
+        <span style="color: #8D38C9; font-weight: bold;">End</span> <span style="color: #151B8D; font-weight: bold;">Property</span>  
+&nbsp;
+        <span style="color: #151B8D; font-weight: bold;">Property</span> <span style="color: #151B8D; font-weight: bold;">Let</span> Message(width,value)  
+                mMessage=Left(value,width)  
+        <span style="color: #8D38C9; font-weight: bold;">End</span> <span style="color: #151B8D; font-weight: bold;">Property</span>  
+&nbsp;
+        <span style="color: #151B8D; font-weight: bold;">Property</span> <span style="color: #151B8D; font-weight: bold;">Get</span> Name  
+                Name=mName  
+        <span style="color: #8D38C9; font-weight: bold;">End</span> <span style="color: #151B8D; font-weight: bold;">Property</span>  
+&nbsp;
+<span style="color: #8D38C9; font-weight: bold;">End</span> Class  
+&nbsp;
+<span style="color: #151B8D; font-weight: bold;">Set</span> libai=<span style="color: #E56717; font-weight: bold;">New</span> Twitter  
+libai.Init <span style="color: #800000;">&quot;李白&quot;</span>  
+libai.Message(5)=<span style="color: #800000;">&quot;hello world!&quot;</span>  
+MsgBox libai.Message(5)  
+<span style="color: #151B8D; font-weight: bold;">Set</span> t=<span style="color: #00C2FF; font-weight: bold;">Nothing</span></pre></div></div>
+
+<p><strong>VBS类中的动态数组字段：</strong></p>
+
+<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;">Class Twitter  
+&nbsp;
+        <span style="color: #E56717; font-weight: bold;">Private</span> mName,mMessages(),mNextIndex  
+&nbsp;
+        <span style="color: #E56717; font-weight: bold;">Public</span> <span style="color: #E56717; font-weight: bold;">Sub</span> Init(pName)  
+                <span style="color: #8D38C9; font-weight: bold;">If</span> mName&lt;&gt;<span style="color: #800000;">&quot;&quot;</span> <span style="color: #8D38C9; font-weight: bold;">Then</span>  
+                        mName=pName  
+                        <span style="color: #151B8D; font-weight: bold;">ReDim</span> mMessages(0)  
+                        mNextIndex=0  
+                <span style="color: #8D38C9; font-weight: bold;">End</span> <span style="color: #8D38C9; font-weight: bold;">If</span>  
+        <span style="color: #8D38C9; font-weight: bold;">End</span> <span style="color: #E56717; font-weight: bold;">Sub</span>  
+&nbsp;
+        <span style="color: #151B8D; font-weight: bold;">Property</span> <span style="color: #151B8D; font-weight: bold;">Get</span> Messages(number)  
+                <span style="color: #8D38C9; font-weight: bold;">If</span> number&gt;=mNextIndex <span style="color: #8D38C9; font-weight: bold;">Then</span>  
+                        Messages=<span style="color: #800000;">&quot;Sorry,the number of messages in your twitter is less than &quot;</span> &amp; number  
+                <span style="color: #8D38C9; font-weight: bold;">Else</span>  
+                        Messages=<span style="color: #800000;">&quot;The first &quot;</span> &amp; number &amp; <span style="color: #800000;">&quot; messages are:&quot;</span>  
+                        <span style="color: #8D38C9; font-weight: bold;">For</span> i=0 <span style="color: #8D38C9; font-weight: bold;">To</span> number-1  
+                                Messages=Messages &amp; vbCrLf &amp; vbCrLf &amp; mMessages(i)  
+                        <span style="color: #8D38C9; font-weight: bold;">Next</span>  
+                <span style="color: #8D38C9; font-weight: bold;">End</span> <span style="color: #8D38C9; font-weight: bold;">If</span>  
+        <span style="color: #8D38C9; font-weight: bold;">End</span> <span style="color: #151B8D; font-weight: bold;">Property</span>  
+&nbsp;
+        <span style="color: #151B8D; font-weight: bold;">Property</span> <span style="color: #151B8D; font-weight: bold;">Let</span> Messages(number,value)  
+                <span style="color: #8D38C9; font-weight: bold;">For</span> i=1 <span style="color: #8D38C9; font-weight: bold;">To</span> number  
+                        <span style="color: #151B8D; font-weight: bold;">ReDim</span> <span style="color: #151B8D; font-weight: bold;">Preserve</span> mMessages(mNextIndex)  
+                        mMessages(mNextIndex)=value  
+                        mNextIndex=mNextIndex+1  
+                <span style="color: #8D38C9; font-weight: bold;">Next</span>  
+        <span style="color: #8D38C9; font-weight: bold;">End</span> <span style="color: #151B8D; font-weight: bold;">Property</span>  
+&nbsp;
+        <span style="color: #151B8D; font-weight: bold;">Property</span> <span style="color: #151B8D; font-weight: bold;">Get</span> Name  
+                Name=mName  
+        <span style="color: #8D38C9; font-weight: bold;">End</span> <span style="color: #151B8D; font-weight: bold;">Property</span>  
+&nbsp;
+<span style="color: #8D38C9; font-weight: bold;">End</span> Class  
+&nbsp;
+<span style="color: #151B8D; font-weight: bold;">Set</span> libai=<span style="color: #E56717; font-weight: bold;">New</span> Twitter  
+libai.Init <span style="color: #800000;">&quot;李白&quot;</span>  
+libai.Messages(3)=<span style="color: #800000;">&quot;Hello world!&quot;</span>  
+libai.Messages(3)=<span style="color: #800000;">&quot;This is a test!&quot;</span>  
+libai.Messages(5)=<span style="color: #800000;">&quot;VBScript is a good script tool!&quot;</span>  
+MsgBox libai.Messages(5)  
+MsgBox libai.Messages(20)  
+<span style="color: #151B8D; font-weight: bold;">Set</span> libai=<span style="color: #00C2FF; font-weight: bold;">Nothing</span></pre></div></div>
+
+<p></year></code></p>
+</div><div id="paginate"><label id="li_1" onclick="javascript:show_page(1,3,this);" style="font-size:30px;font-weight:bold" onmouseover="this.style.cursor='pointer'">1</label><label id="li_2" onclick="javascript:show_page(2,3,this);"  onmouseover="this.style.cursor='pointer'">2</label><label id="li_3" onclick="javascript:show_page(3,3,this);"  onmouseover="this.style.cursor='pointer'">3</label></div> 
+			<div align="center">1 month ago, this page was being read. </div>
+			<p class="tags"><a href="http://www.xieziming.com/tag/summary" rel="tag">Summary</a>, <a href="http://www.xieziming.com/tag/vbs" rel="tag">VBS</a><br /></p>  
+    </div><!-- /entry -->                                   
+		<div class="postbottom"></div>		                              
+		</div><!-- /post -->	
+
+<div class="postrelated">
+			<table width="100%" >				
+
+					<tr><td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/5438.html" rel="bookmark" title="Happy Chinese New Year">Happy Chine...</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/6188.html" rel="bookmark" title="西北行青旅总结">西北行青旅总结</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/6962.html" rel="bookmark" title="程序员图书推荐">程序员图书...</a></td>
+
+				<td align="right" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7397.html" rel="bookmark" title="Java QA">Java ...</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7351.html" rel="bookmark" title="Java Layout总结">Java L...</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/7605.html" rel="bookmark" title="质疑和反驳">质疑和反驳</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/6685.html" rel="bookmark" title="2011年度博客访问统计">2011年度博客...</a></td>
+
+				<td align="right" class="dashedline_related"><a href="http://www.xieziming.com/archives/6830.html" rel="bookmark" title="Selenium Core">Selenium C...</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/6826.html" rel="bookmark" title="测试工程师如何和开发工程师交流">测试工程师如何和...</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7402.html" rel="bookmark" title="Java多态总结">Java多态总结</a></td>
+
+		</table>
+</div>
+
+		<div id="comments">
+
+<!-- START COMMENT FORMS -->
+
+
+		</div><!--/comments-->		
+
+</div><!-- /content -->
+<div id="sidebar">			
+			<a class="subscribe" href="http://www.xieziming.com/feed" title="Posts RSS">Subscribe</a>			
+			<div id="search">	
+	<form name="searchform" id="searchform" method="get" action="http://www.xieziming.com/index.php">
+		<input class="text" type="text" name="s" id="s" value=""/>
+		<input class="submit" type="image" src="http://www.xieziming.com/wp-content/themes/ziming/img/submit.jpg" value="search" />
+	</form>	
+</div><!-- /search -->			
+			<div id="widgets">			
+			<div class="widget"><h3>Calendar</h3>
+<table id="wp-calendar">
+  									<caption>December 2016</caption>
+  									<thead>
+                    <tr><th scope="col" title="S">S</th><th scope="col" title="M">M</th><th scope="col" title="T">T</th><th scope="col" title="W">W</th><th scope="col" title="T">T</th><th scope="col" title="F">F</th><th scope="col" title="S">S</th></tr></thead><tbody><tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>1</td><td>2</td><td>3</td></tr><tr><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td></tr><tr><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td></tr><tr><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">18<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">《血战钢锯岭》</span><br/><span class="time" style="color:#000000; " > Time : 21:18 - 23:28</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">晚上和小锅去看，蛮感人的。吃完去沙湾吃猪杂粥，应该是我在那吃到的最新鲜的一次了。</p></span></a></span></td><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">19<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">CentOS</span><br/><span class="time" style="color:#000000; " > Time : 14:11 - 18:11</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">终于有点时间来把那盒子的win7转成CentOS来做server。配置vsftp花了我太多的时间。。。</p></span></a></span></td><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td></tr><tr><td>25</td><td>26</td><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td></tr><tr><td colspan="3" id="prev"><a href="http://www.xieziming.com/archives/7377.html?month=nov&yr=2016">&laquo; Prev</a></td><td colspan="4" id="next"><a href="http://www.xieziming.com/archives/7377.html?month=jan&yr=2017">Next &raquo;</a></td></tr></tbody></table>
+<div class="widgetbottom"></div></div><!--/widget-->				
+					      		<div class="widget">
+ 							<h3>Recent Posts</h3>
+							<ul>
+           				<li><a href="http://www.xieziming.com/archives/9579.html" class="dashedline" title="闽南 · 泉州">闽南 &middot; 泉州</a></li><li><a href="http://www.xieziming.com/archives/9578.html" class="dashedline" title="顺化 · HUE">顺化 &middot; HUE</a></li><li><a href="http://www.xieziming.com/archives/9577.html" class="dashedline" title="会安 · 春卷">会安 &middot; 春卷</a></li><li><a href="http://www.xieziming.com/archives/9576.html" class="dashedline" title="会安 · 夜灯">会安 &middot; 夜灯</a></li><li><a href="http://www.xieziming.com/archives/9575.html" class="dashedline" title="会安古镇">会安古镇</a></li><li><a href="http://www.xieziming.com/archives/9573.html" class="dashedline" title="岘港">岘港</a></li><li><a href="http://www.xieziming.com/archives/9535.html" class="dashedline" title="罗马">罗马</a></li><li><a href="http://www.xieziming.com/archives/9534.html" class="dashedline" title="卢浮宫">卢浮宫</a></li>						
+							</ul>
+      				<div class="widgetbottom"></div>
+	    		</div>
+	    			        
+        	      		<div class="widget">
+ 							<h3>Rand Posts</h3>
+							<ul>
+      						<li><a href="http://www.xieziming.com/archives/9378.html" class="dashedline" title="悉尼大学（二）">悉尼大学（二）</a></li><li><a href="http://www.xieziming.com/archives/9041.html" class="dashedline" title="腾冲 · 和顺">腾冲 &middot; 和顺</a></li><li><a href="http://www.xieziming.com/archives/9050.html" class="dashedline" title="和顺 · 遇见阳光">和顺 &middot; 遇见阳光</a></li><li><a href="http://www.xieziming.com/archives/9052.html" class="dashedline" title="和顺 · 古镇">和顺 &middot; 古镇</a></li><li><a href="http://www.xieziming.com/archives/9560.html" class="dashedline" title="萨尔茨堡">萨尔茨堡</a></li><li><a href="http://www.xieziming.com/archives/7888.html" class="dashedline" title="下龙湾（三）">下龙湾（三）</a></li><li><a href="http://www.xieziming.com/archives/1398.html" class="dashedline" title="若有所失">若有所失</a></li><li><a href="http://www.xieziming.com/archives/9051.html" class="dashedline" title="和顺 · 宁静">和顺 &middot; 宁静</a></li>	
+							</ul>
+        			<div class="widgetbottom"></div>
+					</div>                 
+          	                       
+			</div><!-- /widgets -->			                       
+</div><!-- /sidebar --></div><!-- /main -->
+<div id="footer">
+<p align="left">© <a href="http://www.miitbeian.gov.cn" target="_blank"> 明 · 明 · 童 · 鞋</a></p>
+<!--74 queries in 2.484 seconds.-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?c2e18b43ec905e3c4ea82c1b57537223";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</div><!-- /footer -->
+</div><!-- /container -->
+<script type='text/javascript' src='http://www.xieziming.com/wp-includes/js/wp-embed.min.js?ver=4.7'></script>
+</body>
+</html>

@@ -1,0 +1,537 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head profile="http://gmpg.org/xfn/11">
+<title>  Selenium之WebDriver &raquo; 谢子明</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="description" content="Selenium之WebDriver  " />
+<meta name="keywords" content="谢子明" />
+<link rel="stylesheet" href="http://www.xieziming.com/wp-content/themes/ziming/style.css" type="text/css" media="screen" />
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://www.xieziming.com/feed" />
+<link rel="alternate" type="application/rss+xml" href="http://www.xieziming.com/comments/feed" title="谢子明 Comments RSS feed" />
+<link rel="shortcut icon" href="http://www.xieziming.com/wp-content/themes/ziming/favicon.ico">
+<link rel="Bookmark" href="http://www.xieziming.com/wp-content/themes/ziming/favicon.ico">
+<link rel="pingback" href="http://www.xieziming.com/xmlrpc.php" />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="谢子明 &raquo; Selenium之WebDriver Comments Feed" href="http://www.xieziming.com/archives/6832.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/xieziming.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.7"}};
+			!function(a,b,c){function d(a){var b,c,d,e,f=String.fromCharCode;if(!k||!k.fillText)return!1;switch(k.clearRect(0,0,j.width,j.height),k.textBaseline="top",k.font="600 32px Arial",a){case"flag":return k.fillText(f(55356,56826,55356,56819),0,0),!(j.toDataURL().length<3e3)&&(k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,65039,8205,55356,57096),0,0),b=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,55356,57096),0,0),c=j.toDataURL(),b!==c);case"emoji4":return k.fillText(f(55357,56425,55356,57341,8205,55357,56507),0,0),d=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55357,56425,55356,57341,55357,56507),0,0),e=j.toDataURL(),d!==e}return!1}function e(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i,j=b.createElement("canvas"),k=j.getContext&&j.getContext("2d");for(i=Array("flag","emoji4"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<script type='text/javascript' src='http://www.xieziming.com/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='http://www.xieziming.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<link rel='https://api.w.org/' href='http://www.xieziming.com/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.xieziming.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.xieziming.com/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='天涯海角（二）' href='http://www.xieziming.com/archives/5498.html' />
+<link rel='next' title='天涯海角' href='http://www.xieziming.com/archives/5505.html' />
+<meta name="generator" content="WordPress 4.7" />
+<link rel="canonical" href="http://www.xieziming.com/archives/6832.html" />
+<link rel='shortlink' href='http://www.xieziming.com/?p=6832' />
+<link rel="alternate" type="application/json+oembed" href="http://www.xieziming.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fxieziming.com%2Farchives%2F6832.html" />
+<link rel="alternate" type="text/xml+oembed" href="http://www.xieziming.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fxieziming.com%2Farchives%2F6832.html&#038;format=xml" />
+ 	<link rel="stylesheet" href="http://www.xieziming.com/wp-content/plugins/live-calendar/live-calendar.css" type="text/css" media="screen" /> 
+<link rel="stylesheet" href="http://www.xieziming.com/wp-content/plugins/wp-code/wp-code.css" type="text/css" media="screen" />
+
+<link rel="stylesheet" href="http://www.xieziming.com/wp-content/plugins/zoom-highslide/highslide.css" type="text/css" media="screen" />
+<script type="text/javascript" src="http://www.xieziming.com/wp-content/plugins/zoom-highslide/js/highslide-full.packed.js"></script>
+<script type="text/javascript">
+	hs.graphicsDir = 'http://www.xieziming.com/wp-content/plugins/zoom-highslide/graphics/';
+	hs.align = 'center';
+	hs.transitions = ['expand', 'crossfade'];
+	hs.outlineType = 'rounded-white';
+  hs.wrapperClassName = 'controls-in-heading';
+	hs.showCredits=false;
+	hs.fadeInOut = true;
+	hs.dimmingOpacity = 0.8;
+
+	// Add the controlbar
+	if (hs.addSlideshow) hs.addSlideshow({
+		//slideshowGroup: 'group1',
+		interval: 4000,
+		repeat: false,
+		useControls: true,
+		fixedControls: false,
+		overlayOptions: {
+			opacity: 1,
+			position: 'top center',
+			hideOnMouseOut: true
+		}
+	});
+</script>
+
+<script type="text/javascript">
+	var widthRestriction = 668; 
+	var heightRestriction = 1000; 
+</script>
+<script type="text/javascript" src="http://www.xieziming.com/wp-content/plugins/zoom-highslide/js/zoom.js"></script>
+	
+<!--script src="http://www.xieziming.com/wp-content/themes/ziming/js/mouse.js" type="text/javascript"></script--> 
+</head>
+<body class="normalbg">
+<div id="container">
+	<div id="head">
+		<div id="nav">
+			<ul>
+				<li class="first"><a href="http://www.xieziming.com" title="首页">首页</a></li>
+				<li class="page_item page-item-2"><a href="http://www.xieziming.com/recent" title="最近">最近</a></li>
+				<li class="page_item page-item-3"><a href="http://www.xieziming.com/photo" title="Photo">映象</a></li>
+				<li class="page_item page-item-4"><a href="http://www.xieziming.com/food" title="Food">美食</a></li>
+				<li class="page_item page-item-5"><a href="http://www.xieziming.com/topic" title="关键字">话题</a></li>
+				<li class="page_item page-item-6"><a href="http://www.xieziming.com/travel" title="Travel">旅行</a></li>
+				<li class="page_item page-item-7"><a href="http://www.xieziming.com/literature" title="Literature">文艺</a></li>
+				<li class="page_item page-item-8"><a href="http://www.xieziming.com/wiki" title="技术维基">维基</a></li>
+				<li class="page_item page-item-9"><a href="http://www.xieziming.com/calendar" title="Calendar">点滴</a></li>
+			</ul>
+		</div><!-- /nav -->		
+	</div><!-- /head -->
+<div id="main" class="altmainbg">
+
+<script type="text/javascript">
+function show_page(id,count,source){
+	for (var i=1;i<=count;i++){
+		if(id != i){
+				jQuery("#part_"+i).hide();
+				document.getElementById("li_"+i).style.fontWeight = "normal";
+				document.getElementById("li_"+i).style.fontSize = "18px";
+		}
+	}
+	jQuery("#part_"+id).show();
+	document.getElementById("li_"+id).style.fontWeight = "bold";
+	document.getElementById("li_"+id).style.fontSize = "30px";
+	jQuery('body,html').animate({scrollTop:0},1000);
+        return false;
+}
+</script>
+<div id="content">
+
+	<div class="post" id="post-6832">
+		<h2 class="title">Selenium之WebDriver</h2>
+		<p class="postmetadata">
+			<span class="date">12 February 2011</span>
+			<span class="category">Categoried in <a href="http://www.xieziming.com/topic/testing" rel="category tag">测试</a></span>
+			<span class="comments">0</span>
+			<span class="view">Preview : 423 , Read : 4350 </span>
+			<span class="mail">Index : 5232 </span>
+		</p>
+		<div class="entry">				
+<div id="part_1"><p><strong>===== Selenium 2 背景 =====</strong></p>
+<p>Selenium 1是一款流行和完善的测试框架，支持众多浏览器（因其JavaScript实现），允许用户通过许多编程语言（从Java/C#到PHP、Erlang……）​。WebDriver弥补了Selenium 1的缺点​，跳出了Javascript的沙箱（嵌入到被测Web应用中），针对各个浏览器而开发，提供快速、轻量级的浏览器模拟器​。与浏览器的紧密集成支持创建更高级的测试，避免了JavaScript安全模型导致的限制。除了来自浏览器厂商的支持，WebDriver还利用操作系统级的调用模拟用户输入。</p>
+<p><strong>===== WebDriver的几个实现 =====</strong></p>
+<p><span style="color: #800080;"><strong>HtmlUnit Driver</strong></span> &#8211; &#8211; &#8211; -&gt; org.openqa.selenium.htmlunit.HtmlUnitDriver<br />
+<span style="color: #800080;"><strong>Firefox Driver</strong></span> &#8211; &#8211; &#8211; -&gt; org.openqa.selenium.firefox.FirefoxDriver<br />
+<span style="color: #800080;"><strong>Internet Explorer Driver</strong></span> &#8211; &#8211; &#8211; -&gt; org.openqa.selenium.ie.InternetExplorerDriver<br />
+<span style="color: #800080;"><strong>Chrome Driver</strong></span> &#8211; &#8211; &#8211; -&gt; org.openqa.selenium.chrome.ChromeDriver</p>
+<p><strong>ps：</strong><br />
+（1）HtmlUnit Driver是纯java的驱动器，全部在内存中运行，不会实际打开浏览器，但其速度很快。<br />
+（2）Firefox Driver：速度慢。</p>
+<p>===== <strong>WebDriver常用的函数接口 =====</strong></p>
+<p>以HtmlUnitDriver为例：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;">WebDriver driver <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> HtmlUnitDriver<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+WebDriver driver <span style="color: #339933;">=</span> newFirefoxDriver<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> 
+WebDriver driver <span style="color: #339933;">=</span> newInternetExplorerDriver <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre></div></div>
+
+<p><em><strong>（1）页面导航</strong></em>：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;">driver.<span style="color: #006633;">get</span><span style="color: #009900;">&#40;</span> <span style="color: #0000ff;">&quot;http://www.google.com&quot;</span> <span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre></div></div>
+
+<p>完全装载页面后将控制返回给测试脚本。注意：当页面又很多AJAX调用时，该接口无法确认页面是否完全装载，这时需要使用&#8221;waits&#8221;。</p>
+<p><em><strong>（2）与页面交互</strong></em></p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #339933;">&lt;</span>input type<span style="color: #339933;">=</span> <span style="color: #0000ff;">&quot;text&quot;</span> name<span style="color: #339933;">=</span> <span style="color: #0000ff;">&quot;passwd&quot;</span> id<span style="color: #339933;">=</span> <span style="color: #0000ff;">&quot;passwd-id&quot;</span> <span style="color: #339933;">/&gt;</span>
+<span style="color: #666666; font-style: italic;">//找到输入框元素</span>
+WebElement element<span style="color: #339933;">;</span>
+element <span style="color: #339933;">=</span> driver.<span style="color: #006633;">findElement</span><span style="color: #009900;">&#40;</span>By.<span style="color: #006633;">id</span><span style="color: #009900;">&#40;</span> <span style="color: #0000ff;">&quot;passwd-id&quot;</span> <span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+element <span style="color: #339933;">=</span> driver.<span style="color: #006633;">findElement</span><span style="color: #009900;">&#40;</span>By.<span style="color: #006633;">name</span><span style="color: #009900;">&#40;</span> <span style="color: #0000ff;">&quot;passwd&quot;</span> <span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+element <span style="color: #339933;">=</span> driver.<span style="color: #006633;">findElement</span><span style="color: #009900;">&#40;</span>By.<span style="color: #006633;">xpath</span><span style="color: #009900;">&#40;</span> <span style="color: #0000ff;">&quot;//input[@id=’passwd-id’]&quot;</span> <span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #666666; font-style: italic;">//XPATH返回第一个匹配到的元素，如果没有匹配到，抛出NoSuchElementException</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">//在输入框中输入内容</span>
+element.<span style="color: #006633;">sendKeys</span><span style="color: #009900;">&#40;</span> <span style="color: #0000ff;">&quot;some text&quot;</span> <span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+element.<span style="color: #006633;">sendKeys</span><span style="color: #009900;">&#40;</span> <span style="color: #0000ff;">&quot; and some&quot;</span> , Keys.<span style="color: #006633;">ARROW_DOWN</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> （按向下箭头）
+<span style="color: #666666; font-style: italic;">//任何页面元素都可以调用sendKeys，例如可以测试一些快捷方式键，键盘的每次输入都是附加在文本串的后面</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">//清除输入框内容</span>
+element.<span style="color: #006633;">clear</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> 
+&nbsp;
+<span style="color: #666666; font-style: italic;">//获取输入框的文本内容：</span>
+element.<span style="color: #006633;">getText</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">//? element.getAttribute(&quot;value&quot;);</span></pre></div></div>
+
+</div><div id="part_2" style="display:none;"><p><em><strong>（3）填写表单 </strong></em>：</p>
+<p>（3.1）处理SELECT（下拉选择框）：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #666666; font-style: italic;">//找到下拉框元素</span>
+Select select <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> Select<span style="color: #009900;">&#40;</span>driver.<span style="color: #006633;">findElement</span><span style="color: #009900;">&#40;</span>By.<span style="color: #006633;">id</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;select&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+<span style="color: #666666; font-style: italic;">//选择对应的选择项</span>
+select.<span style="color: #006633;">selectByVisibleText</span><span style="color: #009900;">&#40;</span>“mediaAgencyA”<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #666666; font-style: italic;">//或</span>
+select.<span style="color: #006633;">selectByValue</span><span style="color: #009900;">&#40;</span>“MA_ID_001”<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> 
+&nbsp;
+<span style="color: #666666; font-style: italic;">//不选择对应的选择项</span>
+select.<span style="color: #006633;">deselectAll</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+select.<span style="color: #006633;">deselectByValue</span><span style="color: #009900;">&#40;</span>“MA_ID_001”<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+select.<span style="color: #006633;">deselectByVisibleText</span><span style="color: #009900;">&#40;</span>“mediaAgencyA”<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">//获取选择项的值</span>
+select.<span style="color: #006633;">getAllSelectedOptions</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+select.<span style="color: #006633;">getFirstSelectedOption</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">//遍历所有元素</span>
+WebElement select <span style="color: #339933;">=</span> driver.<span style="color: #006633;">findElement</span><span style="color: #009900;">&#40;</span>By.<span style="color: #006633;">xpath</span><span style="color: #009900;">&#40;</span> <span style="color: #0000ff;">&quot;//select&quot;</span> <span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> 
+&nbsp;
+List<span style="color: #339933;">&lt;</span>webelement<span style="color: #339933;">&gt;</span> allOptions <span style="color: #339933;">=</span> select.<span style="color: #006633;">findElements</span><span style="color: #009900;">&#40;</span>By.<span style="color: #006633;">tagName</span><span style="color: #009900;">&#40;</span> <span style="color: #0000ff;">&quot;option&quot;</span> <span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> 
+&nbsp;
+<span style="color: #000000; font-weight: bold;">for</span> <span style="color: #009900;">&#40;</span>WebElement option <span style="color: #339933;">:</span> allOptions<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span> 
+<span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span>.<span style="color: #006633;">format</span><span style="color: #009900;">&#40;</span> <span style="color: #0000ff;">&quot;Value is: %s&quot;</span> , option.<span style="color: #006633;">getValue</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> 
+option.<span style="color: #006633;">setSelected</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> 
+<span style="color: #009900;">&#125;</span> 
+<span style="color: #339933;">&lt;/</span>webelement<span style="color: #339933;">&gt;</span></pre></div></div>
+
+<p>（3.2）处理Radio Button（单选项）：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #666666; font-style: italic;">//找到单选框元素：</span>
+WebElement bookMode <span style="color: #339933;">=</span>driver.<span style="color: #006633;">findElement</span><span style="color: #009900;">&#40;</span>By.<span style="color: #006633;">id</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;BookMode&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">//选择某个单选项</span>
+bookMode.<span style="color: #006633;">click</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">//清空某个单选项</span>
+bookMode.<span style="color: #006633;">clear</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">//判断某个单选项是否已经被选择</span>
+bookMode.<span style="color: #006633;">isSelected</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre></div></div>
+
+<p>（3.3）处理Checkbox（多选项）：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;">WebElement checkbox <span style="color: #339933;">=</span> driver.<span style="color: #006633;">findElement</span><span style="color: #009900;">&#40;</span>By.<span style="color: #006633;">id</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;myCheckbox.&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+checkbox.<span style="color: #006633;">click</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+checkbox.<span style="color: #006633;">clear</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+checkbox.<span style="color: #006633;">isSelected</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+checkbox.<span style="color: #006633;">isEnabled</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre></div></div>
+
+</div><div id="part_3" style="display:none;"><p>（3.4）处理Button（按钮）：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #666666; font-style: italic;">//找到按钮元素</span>
+WebElement saveButton <span style="color: #339933;">=</span> driver.<span style="color: #006633;">findElement</span><span style="color: #009900;">&#40;</span>By.<span style="color: #006633;">id</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;save&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">//点击按钮</span>
+saveButton.<span style="color: #006633;">click</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">//判断按钮是否enable</span>
+saveButton.<span style="color: #006633;">isEnabled</span> <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre></div></div>
+
+<p>（3.5）处理左右选择框：</p>
+<p>也就是左边是可供选择项，选择后移动到右边的框中，反之亦然。</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;">Select lang <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> Select<span style="color: #009900;">&#40;</span>driver.<span style="color: #006633;">findElement</span><span style="color: #009900;">&#40;</span>By.<span style="color: #006633;">id</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;languages&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+lang.<span style="color: #006633;">selectByVisibleText</span><span style="color: #009900;">&#40;</span>“English”<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+WebElement addLanguage <span style="color: #339933;">=</span>driver.<span style="color: #006633;">findElement</span><span style="color: #009900;">&#40;</span>By.<span style="color: #006633;">id</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;addButton&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+addLanguage.<span style="color: #006633;">click</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre></div></div>
+
+<p>（3.6）提交：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;">driver.<span style="color: #006633;">findElement</span><span style="color: #009900;">&#40;</span>By.<span style="color: #006633;">id</span><span style="color: #009900;">&#40;</span> <span style="color: #0000ff;">&quot;submit&quot;</span> <span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>.<span style="color: #006633;">click</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> 
+element.<span style="color: #006633;">submit</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>（要求element必须在表单中，否则抛出<span style="color: #003399;">NoSuchElementException</span>） 
+<span style="color: #666666; font-style: italic;">//或者</span>
+element.<span style="color: #006633;">click</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre></div></div>
+
+<p><em><strong>（4）元素拖拉 </strong></em>：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;">RenderedWebElement element <span style="color: #339933;">=</span> <span style="color: #009900;">&#40;</span>RenderedWebElement<span style="color: #009900;">&#41;</span> driver.<span style="color: #006633;">findElement</span><span style="color: #009900;">&#40;</span>By.<span style="color: #006633;">name</span><span style="color: #009900;">&#40;</span> <span style="color: #0000ff;">&quot;source&quot;</span> <span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> 
+RenderedWebElement target <span style="color: #339933;">=</span> <span style="color: #009900;">&#40;</span>RenderedWebElement<span style="color: #009900;">&#41;</span> driver.<span style="color: #006633;">findElement</span><span style="color: #009900;">&#40;</span>By.<span style="color: #006633;">name</span><span style="color: #009900;">&#40;</span> <span style="color: #0000ff;">&quot;target&quot;</span> <span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+element.<span style="color: #006633;">dragAndDropOn</span><span style="color: #009900;">&#40;</span>target<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre></div></div>
+
+<p><em><strong>（5）在窗口和frame之间移动 </strong></em>：</p>
+<p>（5.1）在命名的窗口之间移动：switchTo</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;">driver.<span style="color: #006633;">switchTo</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>.<span style="color: #006633;">window</span><span style="color: #009900;">&#40;</span> <span style="color: #0000ff;">&quot;windowName&quot;</span> <span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">//可以通过js或者打开窗口的链接获取窗口名称</span></pre></div></div>
+
+<p>（5.2）也可通过窗口句柄切换：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">for</span> <span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span> handle <span style="color: #339933;">:</span> driver.<span style="color: #006633;">getWindowHandles</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span> 
+driver.<span style="color: #006633;">switchTo</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>.<span style="color: #006633;">window</span><span style="color: #009900;">&#40;</span>handle<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> 
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+</div><div id="part_4" style="display:none;"><p>（5.3）frame之间切换或者切换到iframe：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;">driver.<span style="color: #006633;">switchTo</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>.<span style="color: #006633;">frame</span><span style="color: #009900;">&#40;</span> <span style="color: #0000ff;">&quot;frameName&quot;</span> <span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> 
+<span style="color: #666666; font-style: italic;">//通过索引访问subframe： </span>
+driver.<span style="color: #006633;">switchTo</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>.<span style="color: #006633;">frame</span><span style="color: #009900;">&#40;</span> <span style="color: #0000ff;">&quot;frameName.0.child&quot;</span> <span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><span style="color: #666666; font-style: italic;">//frameName的第一个subframe的child的frame）</span></pre></div></div>
+
+<p>（5.4）登录： </p>
+<p>一般来说，登录后建议是先：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;">driver.<span style="color: #006633;">switchTo</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>.<span style="color: #006633;">defaultContent</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre></div></div>
+
+<p><em><strong>（6）弹出对话框 </strong></em>：</p>
+<p>窗口弹出后，可以使用如下语句访问到弹出窗口：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;">Alert alert <span style="color: #339933;">=</span> driver.<span style="color: #006633;">switchTo</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>.<span style="color: #006633;">alert</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> 
+&nbsp;
+alert.<span style="color: #006633;">accept</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+alert.<span style="color: #006633;">dismiss</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+alert.<span style="color: #006633;">getText</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre></div></div>
+
+<p>获取到alert窗口后，可进行各种操作。 </p>
+<p><em><strong>（7）页面导航 </strong></em>：<br />
+navigate().to()和get()功能完全一样。</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;">driver.<span style="color: #006633;">navigate</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>.<span style="color: #006633;">to</span><span style="color: #009900;">&#40;</span> <span style="color: #0000ff;">&quot;http://www.example.com&quot;</span> <span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre></div></div>
+
+<p>浏览器的前进和后退</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;">driver.<span style="color: #006633;">navigate</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>.<span style="color: #006633;">forward</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> 
+driver.<span style="color: #006633;">navigate</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>.<span style="color: #006633;">back</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre></div></div>
+
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;">（注意这两个方法取决于浏览器的实现，可以会出现某些调用失败） 
+&nbsp;
+<span style="color: #339933;">&lt;</span>em<span style="color: #339933;">&gt;&lt;</span>strong<span style="color: #339933;">&gt;</span>（<span style="color: #cc66cc;">8</span>）Cookies <span style="color: #339933;">&lt;/</span>strong<span style="color: #339933;">&gt;&lt;/</span>em<span style="color: #339933;">&gt;</span>：</pre></div></div>
+
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #666666; font-style: italic;">// Go to the correct domain </span>
+driver.<span style="color: #006633;">get</span><span style="color: #009900;">&#40;</span> <span style="color: #0000ff;">&quot;http://www.example.com&quot;</span> <span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> 
+<span style="color: #666666; font-style: italic;">// Now set the cookie. This one’s valid for the entire domain </span>
+Cookie cookie <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> Cookie<span style="color: #009900;">&#40;</span> <span style="color: #0000ff;">&quot;key&quot;</span> , <span style="color: #0000ff;">&quot;value&quot;</span> <span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> 
+driver.<span style="color: #006633;">manage</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>.<span style="color: #006633;">addCookie</span><span style="color: #009900;">&#40;</span>cookie<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> 
+<span style="color: #666666; font-style: italic;">// And now output all the available cookies for the current URL </span>
+Set<span style="color: #339933;">&lt;</span>cookie<span style="color: #339933;">&gt;</span> allCookies <span style="color: #339933;">=</span> driver.<span style="color: #006633;">manage</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>.<span style="color: #006633;">getCookies</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> 
+<span style="color: #000000; font-weight: bold;">for</span> <span style="color: #009900;">&#40;</span>Cookie loadedCookie <span style="color: #339933;">:</span> allCookies<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span> 
+<span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span>.<span style="color: #006633;">format</span><span style="color: #009900;">&#40;</span> <span style="color: #0000ff;">&quot;%s -&gt; %s&quot;</span> , loadedCookie.<span style="color: #006633;">getName</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>, loadedCookie.<span style="color: #006633;">getValue</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> 
+<span style="color: #009900;">&#125;</span> 
+<span style="color: #339933;">&lt;/</span>cookie<span style="color: #339933;">&gt;</span></pre></div></div>
+
+</div><div id="part_5" style="display:none;"><p><em><strong>（9）上传文件 </strong></em>：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;">WebElement adFileUpload <span style="color: #339933;">=</span>driver.<span style="color: #006633;">findElement</span><span style="color: #009900;">&#40;</span>By.<span style="color: #006633;">id</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;WAP-upload&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #003399;">String</span> filePath <span style="color: #339933;">=</span> <span style="color: #0000ff;">&quot;C:<span style="color: #000099; font-weight: bold;">\t</span>est<span style="color: #000099; font-weight: bold;">\\</span>uploadfile<span style="color: #000099; font-weight: bold;">\\</span>media_ads<span style="color: #000099; font-weight: bold;">\\</span>test.jpg&quot;</span><span style="color: #339933;">;</span>
+&nbsp;
+adFileUpload.<span style="color: #006633;">sendKeys</span><span style="color: #009900;">&#40;</span>filePath<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre></div></div>
+
+<p><em><strong>（10）调用Java Script </strong></em>：</p>
+<p>Web driver对Java Script的调用是通过JavascriptExecutor来实现的。</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;">JavascriptExecutor js <span style="color: #339933;">=</span> <span style="color: #009900;">&#40;</span>JavascriptExecutor<span style="color: #009900;">&#41;</span> driver<span style="color: #339933;">;</span>
+js.<span style="color: #006633;">executeScript</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;(function(){inventoryGridMgr.setTableFieldValue('&quot;</span><span style="color: #339933;">+</span> inventoryId <span style="color: #339933;">+</span> <span style="color: #0000ff;">&quot;','&quot;</span> <span style="color: #339933;">+</span> fieldName <span style="color: #339933;">+</span> <span style="color: #0000ff;">&quot;','&quot;</span><span style="color: #339933;">+</span> value <span style="color: #339933;">+</span> <span style="color: #0000ff;">&quot;');})()&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre></div></div>
+
+<p><em><strong>（11）页面等待</strong></em>：</p>
+<p>页面的操作比较慢，通常需要等待一段时间，页面元素才出现，但webdriver没有提供现成的方法，需要自己写。</p>
+<p>等一段时间再对页面元素进行操作：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;">    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> waitForPageToLoad<span style="color: #009900;">&#40;</span>longtime<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+        <span style="color: #000000; font-weight: bold;">try</span> <span style="color: #009900;">&#123;</span>
+            <span style="color: #003399;">Thread</span>.<span style="color: #006633;">sleep</span><span style="color: #009900;">&#40;</span>time<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        <span style="color: #009900;">&#125;</span> <span style="color: #000000; font-weight: bold;">catch</span> <span style="color: #009900;">&#40;</span>Exceptione<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+        <span style="color: #009900;">&#125;</span>
+    <span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>在找WebElement的时候等待：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;">   <span style="color: #000000; font-weight: bold;">public</span> WebElementwaitFindElement<span style="color: #009900;">&#40;</span>By by<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+        <span style="color: #000000; font-weight: bold;">return</span> waitFindElement<span style="color: #009900;">&#40;</span>by, <span style="color: #003399;">Long</span>.<span style="color: #006633;">parseLong</span><span style="color: #009900;">&#40;</span>CommonConstant.<span style="color: #006633;">GUI_FIND_ELEMENT_TIMEOUT</span><span style="color: #009900;">&#41;</span>,<span style="color: #003399;">Long</span>.<span style="color: #006633;">parseLong</span><span style="color: #009900;">&#40;</span>CommonConstant.<span style="color: #006633;">GUI_FIND_ELEMENT_INTERVAL</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span> 
+&nbsp;
+    <span style="color: #000000; font-weight: bold;">public</span> WebElement waitFindElement<span style="color: #009900;">&#40;</span>By by, <span style="color: #000066; font-weight: bold;">long</span> timeout, <span style="color: #000066; font-weight: bold;">long</span> interval<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+        <span style="color: #000066; font-weight: bold;">long</span> start <span style="color: #339933;">=</span> <span style="color: #003399;">System</span>.<span style="color: #006633;">currentTimeMillis</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        <span style="color: #000000; font-weight: bold;">while</span> <span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">true</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+            <span style="color: #000000; font-weight: bold;">try</span> <span style="color: #009900;">&#123;</span>
+                <span style="color: #000000; font-weight: bold;">return</span> driver.<span style="color: #006633;">findElement</span><span style="color: #009900;">&#40;</span>by<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+            <span style="color: #009900;">&#125;</span> <span style="color: #000000; font-weight: bold;">catch</span><span style="color: #009900;">&#40;</span><span style="color: #003399;">NoSuchElementException</span> nse<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                <span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #003399;">System</span>.<span style="color: #006633;">currentTimeMillis</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">-</span> start <span style="color: #339933;">&gt;=</span> timeout<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                    <span style="color: #000000; font-weight: bold;">throw</span> newError<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;Timeout reached and element[&quot;</span> <span style="color: #339933;">+</span> by <span style="color: #339933;">+</span> <span style="color: #0000ff;">&quot;]not found&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+                <span style="color: #009900;">&#125;</span> <span style="color: #000000; font-weight: bold;">else</span> <span style="color: #009900;">&#123;</span>
+                    <span style="color: #000000; font-weight: bold;">try</span> <span style="color: #009900;">&#123;</span>
+                        <span style="color: #000000; font-weight: bold;">synchronized</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">this</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                           wait<span style="color: #009900;">&#40;</span>interval<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+                        <span style="color: #009900;">&#125;</span>
+                    <span style="color: #009900;">&#125;</span> <span style="color: #000000; font-weight: bold;">catch</span><span style="color: #009900;">&#40;</span><span style="color: #003399;">InterruptedException</span> e<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                        e.<span style="color: #006633;">printStackTrace</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+                    <span style="color: #009900;">&#125;</span>
+                <span style="color: #009900;">&#125;</span>
+            <span style="color: #009900;">&#125;</span>
+        <span style="color: #009900;">&#125;</span>
+    <span style="color: #009900;">&#125;</span></pre></div></div>
+
+</div><div id="part_6" style="display:none;"><p><em><strong>（12）使用selenium1.0的API</strong></em>：<br />
+Selenium2.0中使用WeDriver API对页面进行操作，它最大的优点是不需要安装一个selenium server就可以运行，但是对页面进行操作不如selenium1.0的Selenium RC API那么方便。Selenium2.0提供了使用Selenium RC API的方法：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;">WebDriver driver <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> FirefoxDriver<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> 
+&nbsp;
+<span style="color: #003399;">String</span> baseUrl <span style="color: #339933;">=</span><span style="color: #0000ff;">&quot;http://www.google.com&quot;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">// Create the Selenium implementation</span>
+Selenium selenium <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> WebDriverBackedSelenium<span style="color: #009900;">&#40;</span>driver, baseUrl<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">// Perform actions with selenium</span>
+selenium.<span style="color: #006633;">open</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;http://www.google.com&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+selenium.<span style="color: #006633;">type</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;name=q&quot;</span>, <span style="color: #0000ff;">&quot;cheese&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+selenium.<span style="color: #006633;">click</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;name=btnG&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> 
+&nbsp;
+<span style="color: #666666; font-style: italic;">// Get the underlying WebDriver implementation back. This will refer to the same WebDriver instance as the &quot;driver&quot; variableabove.</span>
+&nbsp;
+WebDriver driverInstance <span style="color: #339933;">=</span> <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span>WebDriverBackedSelenium<span style="color: #009900;">&#41;</span>selenium<span style="color: #009900;">&#41;</span>.<span style="color: #006633;">getUnderlyingWebDriver</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> 
+&nbsp;
+<span style="color: #666666; font-style: italic;">//Finally, close the browser. Call stop on the WebDriverBackedSelenium instance instead of calling driver.quit(). Otherwise, the JVM will continue running after the browser has beenclosed.</span>
+&nbsp;
+selenium.<span style="color: #006633;">stop</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre></div></div>
+
+<p>我分别使用WebDriver API和SeleniumRC API写了一个Login的脚本，很明显，后者的操作更加简单明了。</p>
+<p>WebDriver API写的Login脚本：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> login<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+        driver.<span style="color: #006633;">switchTo</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>.<span style="color: #006633;">defaultContent</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        driver.<span style="color: #006633;">switchTo</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>.<span style="color: #006633;">frame</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;mainFrame&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+        WebElement eUsername<span style="color: #339933;">=</span> waitFindElement<span style="color: #009900;">&#40;</span>By.<span style="color: #006633;">id</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;username&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        eUsername.<span style="color: #006633;">sendKeys</span><span style="color: #009900;">&#40;</span>manager@ericsson.<span style="color: #006633;">com</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> 
+&nbsp;
+        WebElement ePassword<span style="color: #339933;">=</span> waitFindElement<span style="color: #009900;">&#40;</span>By.<span style="color: #006633;">id</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;password&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        ePassword.<span style="color: #006633;">sendKeys</span><span style="color: #009900;">&#40;</span>manager<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> 
+&nbsp;
+        WebElement eLoginButton <span style="color: #339933;">=</span> waitFindElement<span style="color: #009900;">&#40;</span>By.<span style="color: #006633;">id</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;loginButton&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        eLoginButton.<span style="color: #006633;">click</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>SeleniumRC API写的Login脚本：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;">    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> login<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+        selenium.<span style="color: #006633;">selectFrame</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;relative=top&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        selenium.<span style="color: #006633;">selectFrame</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;mainFrame&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+        selenium.<span style="color: #006633;">type</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;username&quot;</span>,<span style="color: #0000ff;">&quot;manager@ericsson.com&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        selenium.<span style="color: #006633;">type</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;password&quot;</span>,<span style="color: #0000ff;">&quot;manager&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        selenium.<span style="color: #006633;">click</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;loginButton&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+</div><div id="paginate"><label id="li_1" onclick="javascript:show_page(1,6,this);" style="font-size:30px;font-weight:bold" onmouseover="this.style.cursor='pointer'">1</label><label id="li_2" onclick="javascript:show_page(2,6,this);"  onmouseover="this.style.cursor='pointer'">2</label><label id="li_3" onclick="javascript:show_page(3,6,this);"  onmouseover="this.style.cursor='pointer'">3</label><label id="li_4" onclick="javascript:show_page(4,6,this);"  onmouseover="this.style.cursor='pointer'">4</label><label id="li_5" onclick="javascript:show_page(5,6,this);"  onmouseover="this.style.cursor='pointer'">5</label><label id="li_6" onclick="javascript:show_page(6,6,this);"  onmouseover="this.style.cursor='pointer'">6</label></div> 
+			<div align="center">1 month ago, this page was being read. </div>
+			<p class="tags"><a href="http://www.xieziming.com/tag/selenium" rel="tag">Selenium</a>, <a href="http://www.xieziming.com/tag/ce-shi" rel="tag">测试</a><br /></p>  
+    </div><!-- /entry -->                                   
+		<div class="postbottom"></div>		                              
+		</div><!-- /post -->	
+
+<div class="postrelated">
+			<table width="100%" >				
+
+					<tr><td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/7382.html" rel="bookmark" title="QTP Action 参数传递">QTP A...</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/6830.html" rel="bookmark" title="Selenium Core">Selen...</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/7666.html" rel="bookmark" title="RESTful">RESTful</a></td>
+
+				<td align="right" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7614.html" rel="bookmark" title="QTP插件拓展（C#）">QTP插件拓展（...</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/3993.html" rel="bookmark" title="令人费解的workflow">令人费解的...</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/6668.html" rel="bookmark" title="LoadRunner 例子">LoadRunner ...</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7366.html" rel="bookmark" title="QTP控制Java程序原理">QTP控制Java程序...</a></td>
+
+				<td align="right" class="dashedline_related"><a href="http://www.xieziming.com/archives/7729.html" rel="bookmark" title="QTP调用外部函数">QTP调用外部...</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/7626.html" rel="bookmark" title="控制window程序">控制window程序</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/6398.html" rel="bookmark" title="外部调用QTP">外部调用QTP</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/6406.html" rel="bookmark" title="QTP DataTable">QTP DataT...</a></td>
+
+				<td align="right" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7801.html" rel="bookmark" title="当我们谈论自动化测试">当我们谈论自动化测试</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/6678.html" rel="bookmark" title="QTP 同步等待">QTP 同步等待</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/7655.html" rel="bookmark" title="LoadRunner测试结果分析">LoadRunn...</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7661.html" rel="bookmark" title="WebDriver（一）">WebDriver（一...</a></td>
+
+				<td align="right" class="dashedline_related"><a href="http://www.xieziming.com/archives/6661.html" rel="bookmark" title="Application Monitor">Applicat...</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/7620.html" rel="bookmark" title="遍历windows窗口控件">遍历windo...</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7808.html" rel="bookmark" title="软件测试理念（三）">软件测试理念（...</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/6826.html" rel="bookmark" title="测试工程师如何和开发工程师交流">测试工程师如何和...</a></td>
+
+				<td align="right" class="dashedline_related">★<a href="http://www.xieziming.com/archives/8475.html" rel="bookmark" title="QTP自动化框架建设">QTP自动化...</a></td></tr>
+
+		</table>
+</div>
+
+		<div id="comments">
+
+<!-- START COMMENT FORMS -->
+
+
+		</div><!--/comments-->		
+
+</div><!-- /content -->
+<div id="sidebar">			
+			<a class="subscribe" href="http://www.xieziming.com/feed" title="Posts RSS">Subscribe</a>			
+			<div id="search">	
+	<form name="searchform" id="searchform" method="get" action="http://www.xieziming.com/index.php">
+		<input class="text" type="text" name="s" id="s" value=""/>
+		<input class="submit" type="image" src="http://www.xieziming.com/wp-content/themes/ziming/img/submit.jpg" value="search" />
+	</form>	
+</div><!-- /search -->			
+			<div id="widgets">			
+			<div class="widget"><h3>Calendar</h3>
+<table id="wp-calendar">
+  									<caption>December 2016</caption>
+  									<thead>
+                    <tr><th scope="col" title="S">S</th><th scope="col" title="M">M</th><th scope="col" title="T">T</th><th scope="col" title="W">W</th><th scope="col" title="T">T</th><th scope="col" title="F">F</th><th scope="col" title="S">S</th></tr></thead><tbody><tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>1</td><td>2</td><td>3</td></tr><tr><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td></tr><tr><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td></tr><tr><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">18<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">《血战钢锯岭》</span><br/><span class="time" style="color:#000000; " > Time : 21:18 - 23:28</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">晚上和小锅去看，蛮感人的。吃完去沙湾吃猪杂粥，应该是我在那吃到的最新鲜的一次了。</p></span></a></span></td><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">19<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">CentOS</span><br/><span class="time" style="color:#000000; " > Time : 14:11 - 18:11</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">终于有点时间来把那盒子的win7转成CentOS来做server。配置vsftp花了我太多的时间。。。</p></span></a></span></td><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td></tr><tr><td>25</td><td>26</td><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td></tr><tr><td colspan="3" id="prev"><a href="http://www.xieziming.com/archives/6832.html?month=nov&yr=2016">&laquo; Prev</a></td><td colspan="4" id="next"><a href="http://www.xieziming.com/archives/6832.html?month=jan&yr=2017">Next &raquo;</a></td></tr></tbody></table>
+<div class="widgetbottom"></div></div><!--/widget-->				
+					      		<div class="widget">
+ 							<h3>Recent Posts</h3>
+							<ul>
+           				<li><a href="http://www.xieziming.com/archives/9579.html" class="dashedline" title="闽南 · 泉州">闽南 &middot; 泉州</a></li><li><a href="http://www.xieziming.com/archives/9578.html" class="dashedline" title="顺化 · HUE">顺化 &middot; HUE</a></li><li><a href="http://www.xieziming.com/archives/9577.html" class="dashedline" title="会安 · 春卷">会安 &middot; 春卷</a></li><li><a href="http://www.xieziming.com/archives/9576.html" class="dashedline" title="会安 · 夜灯">会安 &middot; 夜灯</a></li><li><a href="http://www.xieziming.com/archives/9575.html" class="dashedline" title="会安古镇">会安古镇</a></li><li><a href="http://www.xieziming.com/archives/9573.html" class="dashedline" title="岘港">岘港</a></li><li><a href="http://www.xieziming.com/archives/9535.html" class="dashedline" title="罗马">罗马</a></li><li><a href="http://www.xieziming.com/archives/9534.html" class="dashedline" title="卢浮宫">卢浮宫</a></li>						
+							</ul>
+      				<div class="widgetbottom"></div>
+	    		</div>
+	    			        
+        	      		<div class="widget">
+ 							<h3>Rand Posts</h3>
+							<ul>
+      						<li><a href="http://www.xieziming.com/archives/3788.html" class="dashedline" title="厦大掠影">厦大掠影</a></li><li><a href="http://www.xieziming.com/archives/9338.html" class="dashedline" title="雾凇岛（二）">雾凇岛（二）</a></li><li><a href="http://www.xieziming.com/archives/3775.html" class="dashedline" title="汀州">汀州</a></li><li><a href="http://www.xieziming.com/archives/2594.html" class="dashedline" title="paper-plane(二)">paper-plane(二...</a></li><li><a href="http://www.xieziming.com/archives/4760.html" class="dashedline" title="北京后海">北京后海</a></li><li><a href="http://www.xieziming.com/archives/7437.html" class="dashedline" title="Equals与Hashcode">Equals与Hash...</a></li><li><a href="http://www.xieziming.com/archives/956.html" class="dashedline" title="老挝游历之LP篇">老挝游历之LP篇</a></li><li><a href="http://www.xieziming.com/archives/6947.html" class="dashedline" title="九毛九">九毛九</a></li>	
+							</ul>
+        			<div class="widgetbottom"></div>
+					</div>                 
+          	                       
+			</div><!-- /widgets -->			                       
+</div><!-- /sidebar --></div><!-- /main -->
+<div id="footer">
+<p align="left">© <a href="http://www.miitbeian.gov.cn" target="_blank"> 明 · 明 · 童 · 鞋</a></p>
+<!--74 queries in 7.557 seconds.-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?c2e18b43ec905e3c4ea82c1b57537223";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</div><!-- /footer -->
+</div><!-- /container -->
+<script type='text/javascript' src='http://www.xieziming.com/wp-includes/js/wp-embed.min.js?ver=4.7'></script>
+</body>
+</html>

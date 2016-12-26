@@ -1,0 +1,376 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head profile="http://gmpg.org/xfn/11">
+<title>  Java静态工厂模式 &raquo; 谢子明</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="description" content="Java静态工厂模式  " />
+<meta name="keywords" content="谢子明" />
+<link rel="stylesheet" href="http://www.xieziming.com/wp-content/themes/ziming/style.css" type="text/css" media="screen" />
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://www.xieziming.com/feed" />
+<link rel="alternate" type="application/rss+xml" href="http://www.xieziming.com/comments/feed" title="谢子明 Comments RSS feed" />
+<link rel="shortcut icon" href="http://www.xieziming.com/wp-content/themes/ziming/favicon.ico">
+<link rel="Bookmark" href="http://www.xieziming.com/wp-content/themes/ziming/favicon.ico">
+<link rel="pingback" href="http://www.xieziming.com/xmlrpc.php" />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="谢子明 &raquo; Java静态工厂模式 Comments Feed" href="http://www.xieziming.com/archives/7473.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/xieziming.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.7"}};
+			!function(a,b,c){function d(a){var b,c,d,e,f=String.fromCharCode;if(!k||!k.fillText)return!1;switch(k.clearRect(0,0,j.width,j.height),k.textBaseline="top",k.font="600 32px Arial",a){case"flag":return k.fillText(f(55356,56826,55356,56819),0,0),!(j.toDataURL().length<3e3)&&(k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,65039,8205,55356,57096),0,0),b=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,55356,57096),0,0),c=j.toDataURL(),b!==c);case"emoji4":return k.fillText(f(55357,56425,55356,57341,8205,55357,56507),0,0),d=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55357,56425,55356,57341,55357,56507),0,0),e=j.toDataURL(),d!==e}return!1}function e(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i,j=b.createElement("canvas"),k=j.getContext&&j.getContext("2d");for(i=Array("flag","emoji4"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<script type='text/javascript' src='http://www.xieziming.com/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='http://www.xieziming.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<link rel='https://api.w.org/' href='http://www.xieziming.com/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.xieziming.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.xieziming.com/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='IE插件' href='http://www.xieziming.com/archives/7464.html' />
+<link rel='next' title='Java单例模式' href='http://www.xieziming.com/archives/7481.html' />
+<meta name="generator" content="WordPress 4.7" />
+<link rel="canonical" href="http://www.xieziming.com/archives/7473.html" />
+<link rel='shortlink' href='http://www.xieziming.com/?p=7473' />
+<link rel="alternate" type="application/json+oembed" href="http://www.xieziming.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fxieziming.com%2Farchives%2F7473.html" />
+<link rel="alternate" type="text/xml+oembed" href="http://www.xieziming.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fxieziming.com%2Farchives%2F7473.html&#038;format=xml" />
+ 	<link rel="stylesheet" href="http://www.xieziming.com/wp-content/plugins/live-calendar/live-calendar.css" type="text/css" media="screen" /> 
+<link rel="stylesheet" href="http://www.xieziming.com/wp-content/plugins/wp-code/wp-code.css" type="text/css" media="screen" />
+
+<link rel="stylesheet" href="http://www.xieziming.com/wp-content/plugins/zoom-highslide/highslide.css" type="text/css" media="screen" />
+<script type="text/javascript" src="http://www.xieziming.com/wp-content/plugins/zoom-highslide/js/highslide-full.packed.js"></script>
+<script type="text/javascript">
+	hs.graphicsDir = 'http://www.xieziming.com/wp-content/plugins/zoom-highslide/graphics/';
+	hs.align = 'center';
+	hs.transitions = ['expand', 'crossfade'];
+	hs.outlineType = 'rounded-white';
+  hs.wrapperClassName = 'controls-in-heading';
+	hs.showCredits=false;
+	hs.fadeInOut = true;
+	hs.dimmingOpacity = 0.8;
+
+	// Add the controlbar
+	if (hs.addSlideshow) hs.addSlideshow({
+		//slideshowGroup: 'group1',
+		interval: 4000,
+		repeat: false,
+		useControls: true,
+		fixedControls: false,
+		overlayOptions: {
+			opacity: 1,
+			position: 'top center',
+			hideOnMouseOut: true
+		}
+	});
+</script>
+
+<script type="text/javascript">
+	var widthRestriction = 668; 
+	var heightRestriction = 1000; 
+</script>
+<script type="text/javascript" src="http://www.xieziming.com/wp-content/plugins/zoom-highslide/js/zoom.js"></script>
+	
+<!--script src="http://www.xieziming.com/wp-content/themes/ziming/js/mouse.js" type="text/javascript"></script--> 
+</head>
+<body class="normalbg">
+<div id="container">
+	<div id="head">
+		<div id="nav">
+			<ul>
+				<li class="first"><a href="http://www.xieziming.com" title="首页">首页</a></li>
+				<li class="page_item page-item-2"><a href="http://www.xieziming.com/recent" title="最近">最近</a></li>
+				<li class="page_item page-item-3"><a href="http://www.xieziming.com/photo" title="Photo">映象</a></li>
+				<li class="page_item page-item-4"><a href="http://www.xieziming.com/food" title="Food">美食</a></li>
+				<li class="page_item page-item-5"><a href="http://www.xieziming.com/topic" title="关键字">话题</a></li>
+				<li class="page_item page-item-6"><a href="http://www.xieziming.com/travel" title="Travel">旅行</a></li>
+				<li class="page_item page-item-7"><a href="http://www.xieziming.com/literature" title="Literature">文艺</a></li>
+				<li class="page_item page-item-8"><a href="http://www.xieziming.com/wiki" title="技术维基">维基</a></li>
+				<li class="page_item page-item-9"><a href="http://www.xieziming.com/calendar" title="Calendar">点滴</a></li>
+			</ul>
+		</div><!-- /nav -->		
+	</div><!-- /head -->
+<div id="main" class="altmainbg">
+
+<script type="text/javascript">
+function show_page(id,count,source){
+	for (var i=1;i<=count;i++){
+		if(id != i){
+				jQuery("#part_"+i).hide();
+				document.getElementById("li_"+i).style.fontWeight = "normal";
+				document.getElementById("li_"+i).style.fontSize = "18px";
+		}
+	}
+	jQuery("#part_"+id).show();
+	document.getElementById("li_"+id).style.fontWeight = "bold";
+	document.getElementById("li_"+id).style.fontSize = "30px";
+	jQuery('body,html').animate({scrollTop:0},1000);
+        return false;
+}
+</script>
+<div id="content">
+
+	<div class="post" id="post-7473">
+		<h2 class="title">Java静态工厂模式</h2>
+		<p class="postmetadata">
+			<span class="date">08 October 2012</span>
+			<span class="category">Categoried in <a href="http://www.xieziming.com/topic/coding" rel="category tag">程序</a></span>
+			<span class="comments">0</span>
+			<span class="view">Preview : 1064 , Read : 2263 </span>
+			<span class="mail">Index : 7121 </span>
+		</p>
+		<div class="entry">				
+<div id="part_1"><p>创建类的实例的最常见的方式是用new语句调用类的构造方法。在这种情况下，程序可以创建类的任意多个实例，每执行一条new语句，都会导致Java虚拟机的堆区中产生一个新的对象。假如类需要进一步封装创建自身实例的细节，并且控制自身实例的数目，那么可以提供静态工厂方法。</p>
+<p>所谓的工厂是提供一个特定的类，这个类是专门用来创建对象实例，客户端无须关心具体的实现。这个模式由三个部分组成。</p>
+<p><strong>抽象类：</strong>它对外提供方法的调用，屏蔽了内部具体的实现。</p>
+<p><strong>具体实现类：</strong>相同类的不同实体的具体实现，一般情况下它包含多个实现类。</p>
+<p><strong>工厂类：</strong>它提供一个统一的生成具体对象的方法，在这个方法中会有一些逻辑的判断，根据参数的不同来创建不同的实例。一般情况下，这个工厂类定义成为了static的类型，所以也称为静态工厂模式。</p>
+<p><strong>优点：</strong></p>
+<p>(1) 构造函数有命名的限制，而静态方法有自己的名字，更加易于理解。</p>
+<p>(2) 静态工厂方法在每次调用的时候不要求创建一个新的对象。这种做法对于一个要频繁创建相同对象的程序来说，可以极大的提高性能。它使得一个类可以保证是一个singleton；他使非可变类可以保证“不会有两个相等的实例存在”。</p>
+<p>(3) 静态工厂方法在选择返回类型时有更大的灵活性。使用静态工厂方法，可以通过调用方法时使用不同的参数创建不同类的实例，还可以创建非公有类的对象，这就封装了类的实现细节。</p>
+<p><strong>缺点：</strong></p>
+<p>(1) 如果一个类是通过静态工厂方法来取得实例的，并且该类的构造函数都不是公有的或者保护的，那该类就不可能有子类（被继承），子类的构造函数需要首先调用父类的构造函数，因为父类的构造函数是private的,所以即使我们假设继承成功的话,那么子类也根本没有权限去调用父类的私有构造函数，所以是无法被继承的。</p>
+<p>(2)毕竟通过构造函数创建实例还是SUN公司所提倡的，静态工厂方法跟其他的静态方法区别不大，这样创建的实例谁又知道这个静态方法是创建实例呢？弥补的办法就是：静态工厂方法名字使用valueOf或者getInstance.</p>
+<p>3、当实现类比较多时，工厂类中的逻辑判断会比较复杂。而且当新增实现类时，需要修改工厂类的代码，违反了开-闭原则。要避免这种情况的发生，可以使用反射机制来避免这种问题。</p>
+</div><div id="part_2" style="display:none;"><p>(1)、建立Car接口类：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">interface</span> Car <span style="color: #009900;">&#123;</span>
+ <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> run<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+ <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> stop<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>(2)、建立Car的实现类</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> Bus <span style="color: #000000; font-weight: bold;">implements</span> Car <span style="color: #009900;">&#123;</span>
+    @Override
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> run<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+      <span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;Bus is starting run&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+&nbsp;
+    @Override
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> stop<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+       <span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;Bus is starting stop&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+   <span style="color: #009900;">&#125;</span>
+ <span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> MinCar <span style="color: #000000; font-weight: bold;">implements</span> Car<span style="color: #009900;">&#123;</span>
+ @Override
+ <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> run<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+  <span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;miniCar is starting run&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+ <span style="color: #009900;">&#125;</span>
+&nbsp;
+ @Override
+ <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> stop<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+  <span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;miniCar is starting stop&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+ <span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>(3)、建立工厂类</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"> <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> CarFactory <span style="color: #009900;">&#123;</span>
+ <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">static</span> Car car <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">null</span><span style="color: #339933;">;</span>
+ <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">static</span> Car getCar<span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">int</span> i<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+ <span style="color: #000000; font-weight: bold;">switch</span><span style="color: #009900;">&#40;</span>i<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+ <span style="color: #000000; font-weight: bold;">case</span> <span style="color: #cc66cc;">1</span><span style="color: #339933;">:</span>
+  car <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> Bus<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+  <span style="color: #000000; font-weight: bold;">break</span><span style="color: #339933;">;</span>
+ <span style="color: #000000; font-weight: bold;">case</span> <span style="color: #cc66cc;">2</span><span style="color: #339933;">:</span>
+  car <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span>  MinCar<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+  <span style="color: #000000; font-weight: bold;">break</span><span style="color: #339933;">;</span>
+ <span style="color: #009900;">&#125;</span>
+ <span style="color: #000000; font-weight: bold;">return</span> car<span style="color: #339933;">;</span>
+ <span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>(4)、客户端调用</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> Test <span style="color: #009900;">&#123;</span>
+ <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000066; font-weight: bold;">void</span> main<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> args<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+  Car car <span style="color: #339933;">=</span> CarFactory.<span style="color: #006633;">getCar</span><span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">2</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+  car.<span style="color: #006633;">run</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+  car.<span style="color: #006633;">stop</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+ <span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>在上面的实例中，如果想添加一个Car的实例，除了要添加一个实现类外，还需要在factory类中，加入一个逻辑判断。这样不符合设计原则。可以采用反射机制加以改进。</p>
+<p>实现方法如下：单独建立一个.properties的文件，将实现类都写在这个配置文件中。当添加一个新的实现类时，只需要把新添加的实现类加入到这个属性文件中即可。</p>
+<p><em>当然也可以不采用属性文件，在使用Class.forname(”包.子包.功能包.“+ 传过来的类名值)也行。</em></p>
+<p>实例如下：假设这个属性文件为：car.properties。接口类和实现类都相同，不同的地方在于工厂类中。以下代码是工厂类的实现</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> CarFactory <span style="color: #009900;">&#123;</span>
+ <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">static</span> Car car <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">null</span><span style="color: #339933;">;</span>
+ <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #003399;">Properties</span> properties <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">Properties</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+ <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">static</span> Car getCar<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span> carType<span style="color: #009900;">&#41;</span> <span style="color: #000000; font-weight: bold;">throws</span> <span style="color: #003399;">IOException</span>, <span style="color: #003399;">InstantiationException</span>, <span style="color: #003399;">IllegalAccessException</span>,   <span style="color: #003399;">ClassNotFoundException</span><span style="color: #009900;">&#123;</span>
+  <span style="color: #003399;">InputStream</span> inStream <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">null</span><span style="color: #339933;">;</span>
+  <span style="color: #000000; font-weight: bold;">try</span> <span style="color: #009900;">&#123;</span>
+   inStream <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">FileInputStream</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;src/simple_factory_reflect/factory/car.properties&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+  <span style="color: #009900;">&#125;</span> <span style="color: #000000; font-weight: bold;">catch</span> <span style="color: #009900;">&#40;</span><span style="color: #003399;">FileNotFoundException</span> e<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+   e.<span style="color: #006633;">printStackTrace</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+  <span style="color: #009900;">&#125;</span>
+  properties.<span style="color: #006633;">load</span><span style="color: #009900;">&#40;</span>inStream<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+  <span style="color: #003399;">String</span> carClass <span style="color: #339933;">=</span> properties.<span style="color: #006633;">getProperty</span><span style="color: #009900;">&#40;</span>carType<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+  car <span style="color: #339933;">=</span> <span style="color: #009900;">&#40;</span>Car<span style="color: #009900;">&#41;</span> <span style="color: #000000; font-weight: bold;">Class</span>.<span style="color: #006633;">forName</span><span style="color: #009900;">&#40;</span>carClass<span style="color: #009900;">&#41;</span>.<span style="color: #006633;">newInstance</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+  <span style="color: #000000; font-weight: bold;">return</span> car<span style="color: #339933;">;</span>
+ <span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>car.properties的内容如下：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;">bus <span style="color: #339933;">=</span> simple_factory_reflect.<span style="color: #006633;">carImpl</span>.<span style="color: #006633;">Bus</span>
+minicar <span style="color: #339933;">=</span> simple_factory_reflect.<span style="color: #006633;">carImpl</span>.<span style="color: #006633;">MiniCar</span>
+tractor <span style="color: #339933;">=</span>simple_factory_reflect.<span style="color: #006633;">carImpl</span>.<span style="color: #006633;">Tractor</span></pre></div></div>
+
+<p>客户端调用方法 如下：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000066; font-weight: bold;">void</span> main<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> args<span style="color: #009900;">&#41;</span> <span style="color: #000000; font-weight: bold;">throws</span> <span style="color: #003399;">IOException</span>, <span style="color: #003399;">InstantiationException</span>, <span style="color: #003399;">IllegalAccessException</span>, <span style="color: #003399;">ClassNotFoundException</span> <span style="color: #009900;">&#123;</span>
+ <span style="color: #003399;">Object</span> object <span style="color: #339933;">=</span> CarFactory.<span style="color: #006633;">getCar</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;minicar&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+ <span style="color: #000000; font-weight: bold;">if</span><span style="color: #009900;">&#40;</span>object<span style="color: #339933;">==</span><span style="color: #000066; font-weight: bold;">null</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+  <span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;工厂没有为您造出车来&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+ <span style="color: #009900;">&#125;</span><span style="color: #000000; font-weight: bold;">else</span> <span style="color: #009900;">&#123;</span>
+  Car car <span style="color: #339933;">=</span> <span style="color: #009900;">&#40;</span>Car<span style="color: #009900;">&#41;</span> object<span style="color: #339933;">;</span>
+  car.<span style="color: #006633;">run</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+  car.<span style="color: #006633;">stop</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+ <span style="color: #009900;">&#125;</span>
+ <span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>这样，只需要在配置文件中添加新加入的实现类即可。</p>
+<p>最后再顺便讲一下Class.forName方法。</p>
+<p>Class.forName(xxx.xx.xx) 返回的是一个类。首先你要明白在java里面任何class都要装载在虚拟机上才能运行。这句话就是装载类用的(和new 不一样，要分清楚)。 </p>
+<p>至于什么时候用，你可以考虑一下这个问题，给你一个字符串变量，它代表一个类的包名和类名，你怎么实例化它？只有你提到的这个方法了，不过要再加一点。</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;">A a <span style="color: #339933;">=</span> <span style="color: #009900;">&#40;</span>A<span style="color: #009900;">&#41;</span><span style="color: #000000; font-weight: bold;">Class</span>.<span style="color: #006633;">forName</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;pacage.A&quot;</span><span style="color: #009900;">&#41;</span>.<span style="color: #006633;">newInstance</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre></div></div>
+
+<p>这和你</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;">A a <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> A<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>；</pre></div></div>
+
+<p>是一样的效果。 </p>
+<p>jvm加载类的时候会执行静态代码段，你要记住一个概念，静态代码是和class绑定的，class装载成功就表示执行了你的静态代码了。而且以后不会再走这段静态代码了。</p>
+<p>动态加载和创建Class 对象，比如想根据用户输入的字符串来创建对象：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #003399;">String</span> str <span style="color: #339933;">=</span> <span style="color: #0000ff;">&quot;class name&quot;</span> 
+<span style="color: #000000; font-weight: bold;">Class</span> t <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">Class</span>.<span style="color: #006633;">forName</span><span style="color: #009900;">&#40;</span>str<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> 
+t.<span style="color: #006633;">newInstance</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre></div></div>
+
+<p>在初始化一个类，生成一个实例的时候，newInstance()方法和new关键字除了一个是方法，一个是关键字外，最主要有什么区别？它们的区别在于创建对象的方式不一样，前者是使用类加载机制，后者是创建一个新类。那么为什么会有两种创建对象方式？这主要考虑到软件的可伸缩、可扩展和可重用等软件设计思想。 </p>
+</div><div id="paginate"><label id="li_1" onclick="javascript:show_page(1,2,this);" style="font-size:30px;font-weight:bold" onmouseover="this.style.cursor='pointer'">1</label><label id="li_2" onclick="javascript:show_page(2,2,this);"  onmouseover="this.style.cursor='pointer'">2</label></div> 
+			<div align="center">1 month ago, this page was being read. </div>
+			<p class="tags"><a href="http://www.xieziming.com/tag/java" rel="tag">java</a><br /></p>  
+    </div><!-- /entry -->                                   
+		<div class="postbottom"></div>		                              
+		</div><!-- /post -->	
+
+<div class="postrelated">
+			<table width="100%" >				
+
+					<tr><td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/7000.html" rel="bookmark" title="Java IO类">Java IO类</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7486.html" rel="bookmark" title="Java堆栈">Java堆栈</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/7402.html" rel="bookmark" title="Java多态总结">Java多态总...</a></td>
+
+				<td align="right" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7364.html" rel="bookmark" title="Java启动参数">Java启...</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7527.html" rel="bookmark" title="Java自动装箱">Java自动装箱</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/7508.html" rel="bookmark" title="Java类的生存周期">Java类的生存...</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7605.html" rel="bookmark" title="质疑和反驳">质疑和反驳</a></td>
+
+				<td align="right" class="dashedline_related"><a href="http://www.xieziming.com/archives/7366.html" rel="bookmark" title="QTP控制Java程序原理">QTP控制Java程序原...</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/6805.html" rel="bookmark" title="Java垃圾回收算法">Java垃圾回收算法</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/2464.html" rel="bookmark" title="J2EE入门例子">J2EE入门例子</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/8575.html" rel="bookmark" title="Comparison Tool">Compariso...</a></td>
+
+				<td align="right" class="dashedline_related">★<a href="http://www.xieziming.com/archives/6661.html" rel="bookmark" title="Application Monitor">Applicatio...</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7513.html" rel="bookmark" title="Java自定义注解">Java自定义注解</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/8804.html" rel="bookmark" title="Java源码加/解密">Java源码...</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/8665.html" rel="bookmark" title="JavaOne Conference">JavaOne C...</a></td>
+
+				<td align="right" class="dashedline_related"><a href="http://www.xieziming.com/archives/8494.html" rel="bookmark" title="Java内存管理之字符串">Java内存管理之字...</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/7561.html" rel="bookmark" title="Java疑问解答">Java疑问解答</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7481.html" rel="bookmark" title="Java单例模式">Java单例...</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/7437.html" rel="bookmark" title="Equals与Hashcode">Equals...</a></td>
+
+				<td align="right" class="dashedline_related">★<a href="http://www.xieziming.com/archives/8807.html" rel="bookmark" title="制作Java Applet签名">制作Java Apple...</a></td></tr>
+
+		</table>
+</div>
+
+		<div id="comments">
+
+<!-- START COMMENT FORMS -->
+
+
+		</div><!--/comments-->		
+
+</div><!-- /content -->
+<div id="sidebar">			
+			<a class="subscribe" href="http://www.xieziming.com/feed" title="Posts RSS">Subscribe</a>			
+			<div id="search">	
+	<form name="searchform" id="searchform" method="get" action="http://www.xieziming.com/index.php">
+		<input class="text" type="text" name="s" id="s" value=""/>
+		<input class="submit" type="image" src="http://www.xieziming.com/wp-content/themes/ziming/img/submit.jpg" value="search" />
+	</form>	
+</div><!-- /search -->			
+			<div id="widgets">			
+			<div class="widget"><h3>Calendar</h3>
+<table id="wp-calendar">
+  									<caption>December 2016</caption>
+  									<thead>
+                    <tr><th scope="col" title="S">S</th><th scope="col" title="M">M</th><th scope="col" title="T">T</th><th scope="col" title="W">W</th><th scope="col" title="T">T</th><th scope="col" title="F">F</th><th scope="col" title="S">S</th></tr></thead><tbody><tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>1</td><td>2</td><td>3</td></tr><tr><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td></tr><tr><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td></tr><tr><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">18<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">《血战钢锯岭》</span><br/><span class="time" style="color:#000000; " > Time : 21:18 - 23:28</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">晚上和小锅去看，蛮感人的。吃完去沙湾吃猪杂粥，应该是我在那吃到的最新鲜的一次了。</p></span></a></span></td><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">19<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">CentOS</span><br/><span class="time" style="color:#000000; " > Time : 14:11 - 18:11</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">终于有点时间来把那盒子的win7转成CentOS来做server。配置vsftp花了我太多的时间。。。</p></span></a></span></td><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td></tr><tr><td>25</td><td>26</td><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td></tr><tr><td colspan="3" id="prev"><a href="http://www.xieziming.com/archives/7473.html?month=nov&yr=2016">&laquo; Prev</a></td><td colspan="4" id="next"><a href="http://www.xieziming.com/archives/7473.html?month=jan&yr=2017">Next &raquo;</a></td></tr></tbody></table>
+<div class="widgetbottom"></div></div><!--/widget-->				
+					      		<div class="widget">
+ 							<h3>Recent Posts</h3>
+							<ul>
+           				<li><a href="http://www.xieziming.com/archives/9579.html" class="dashedline" title="闽南 · 泉州">闽南 &middot; 泉州</a></li><li><a href="http://www.xieziming.com/archives/9578.html" class="dashedline" title="顺化 · HUE">顺化 &middot; HUE</a></li><li><a href="http://www.xieziming.com/archives/9577.html" class="dashedline" title="会安 · 春卷">会安 &middot; 春卷</a></li><li><a href="http://www.xieziming.com/archives/9576.html" class="dashedline" title="会安 · 夜灯">会安 &middot; 夜灯</a></li><li><a href="http://www.xieziming.com/archives/9575.html" class="dashedline" title="会安古镇">会安古镇</a></li><li><a href="http://www.xieziming.com/archives/9573.html" class="dashedline" title="岘港">岘港</a></li><li><a href="http://www.xieziming.com/archives/9535.html" class="dashedline" title="罗马">罗马</a></li><li><a href="http://www.xieziming.com/archives/9534.html" class="dashedline" title="卢浮宫">卢浮宫</a></li>						
+							</ul>
+      				<div class="widgetbottom"></div>
+	    		</div>
+	    			        
+        	      		<div class="widget">
+ 							<h3>Rand Posts</h3>
+							<ul>
+      						<li><a href="http://www.xieziming.com/archives/402.html" class="dashedline" title="武汉四年，年年飘雪">武汉四年，年年飘雪</a></li><li><a href="http://www.xieziming.com/archives/8936.html" class="dashedline" title="长滩岛（二）">长滩岛（二）</a></li><li><a href="http://www.xieziming.com/archives/4684.html" class="dashedline" title="也许，一个人会更好">也许，一个人会更好</a></li><li><a href="http://www.xieziming.com/archives/1859.html" class="dashedline" title="我一贱你就笑">我一贱你就笑</a></li><li><a href="http://www.xieziming.com/archives/7457.html" class="dashedline" title="Firefox插件制作">Firefox插件制作</a></li><li><a href="http://www.xieziming.com/archives/6201.html" class="dashedline" title="记忆 * 嘉峪关">记忆 * 嘉峪关</a></li><li><a href="http://www.xieziming.com/archives/3509.html" class="dashedline" title="内存不足">内存不足</a></li><li><a href="http://www.xieziming.com/archives/4138.html" class="dashedline" title="拙政园">拙政园</a></li>	
+							</ul>
+        			<div class="widgetbottom"></div>
+					</div>                 
+          	                       
+			</div><!-- /widgets -->			                       
+</div><!-- /sidebar --></div><!-- /main -->
+<div id="footer">
+<p align="left">© <a href="http://www.miitbeian.gov.cn" target="_blank"> 明 · 明 · 童 · 鞋</a></p>
+<!--76 queries in 4.189 seconds.-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?c2e18b43ec905e3c4ea82c1b57537223";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</div><!-- /footer -->
+</div><!-- /container -->
+<script type='text/javascript' src='http://www.xieziming.com/wp-includes/js/wp-embed.min.js?ver=4.7'></script>
+</body>
+</html>

@@ -1,0 +1,326 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head profile="http://gmpg.org/xfn/11">
+<title>  DAS、NAS与SAN &raquo; 谢子明</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="description" content="DAS、NAS与SAN  " />
+<meta name="keywords" content="谢子明" />
+<link rel="stylesheet" href="http://www.xieziming.com/wp-content/themes/ziming/style.css" type="text/css" media="screen" />
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://www.xieziming.com/feed" />
+<link rel="alternate" type="application/rss+xml" href="http://www.xieziming.com/comments/feed" title="谢子明 Comments RSS feed" />
+<link rel="shortcut icon" href="http://www.xieziming.com/wp-content/themes/ziming/favicon.ico">
+<link rel="Bookmark" href="http://www.xieziming.com/wp-content/themes/ziming/favicon.ico">
+<link rel="pingback" href="http://www.xieziming.com/xmlrpc.php" />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="谢子明 &raquo; DAS、NAS与SAN Comments Feed" href="http://www.xieziming.com/archives/2529.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/xieziming.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.7"}};
+			!function(a,b,c){function d(a){var b,c,d,e,f=String.fromCharCode;if(!k||!k.fillText)return!1;switch(k.clearRect(0,0,j.width,j.height),k.textBaseline="top",k.font="600 32px Arial",a){case"flag":return k.fillText(f(55356,56826,55356,56819),0,0),!(j.toDataURL().length<3e3)&&(k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,65039,8205,55356,57096),0,0),b=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,55356,57096),0,0),c=j.toDataURL(),b!==c);case"emoji4":return k.fillText(f(55357,56425,55356,57341,8205,55357,56507),0,0),d=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55357,56425,55356,57341,55357,56507),0,0),e=j.toDataURL(),d!==e}return!1}function e(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i,j=b.createElement("canvas"),k=j.getContext&&j.getContext("2d");for(i=Array("flag","emoji4"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<script type='text/javascript' src='http://www.xieziming.com/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='http://www.xieziming.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<link rel='https://api.w.org/' href='http://www.xieziming.com/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.xieziming.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.xieziming.com/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='单车日志' href='http://www.xieziming.com/archives/2522.html' />
+<link rel='next' title='软件测试要素' href='http://www.xieziming.com/archives/2787.html' />
+<meta name="generator" content="WordPress 4.7" />
+<link rel="canonical" href="http://www.xieziming.com/archives/2529.html" />
+<link rel='shortlink' href='http://www.xieziming.com/?p=2529' />
+<link rel="alternate" type="application/json+oembed" href="http://www.xieziming.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fxieziming.com%2Farchives%2F2529.html" />
+<link rel="alternate" type="text/xml+oembed" href="http://www.xieziming.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fxieziming.com%2Farchives%2F2529.html&#038;format=xml" />
+ 	<link rel="stylesheet" href="http://www.xieziming.com/wp-content/plugins/live-calendar/live-calendar.css" type="text/css" media="screen" /> 
+<link rel="stylesheet" href="http://www.xieziming.com/wp-content/plugins/wp-code/wp-code.css" type="text/css" media="screen" />
+
+<link rel="stylesheet" href="http://www.xieziming.com/wp-content/plugins/zoom-highslide/highslide.css" type="text/css" media="screen" />
+<script type="text/javascript" src="http://www.xieziming.com/wp-content/plugins/zoom-highslide/js/highslide-full.packed.js"></script>
+<script type="text/javascript">
+	hs.graphicsDir = 'http://www.xieziming.com/wp-content/plugins/zoom-highslide/graphics/';
+	hs.align = 'center';
+	hs.transitions = ['expand', 'crossfade'];
+	hs.outlineType = 'rounded-white';
+  hs.wrapperClassName = 'controls-in-heading';
+	hs.showCredits=false;
+	hs.fadeInOut = true;
+	hs.dimmingOpacity = 0.8;
+
+	// Add the controlbar
+	if (hs.addSlideshow) hs.addSlideshow({
+		//slideshowGroup: 'group1',
+		interval: 4000,
+		repeat: false,
+		useControls: true,
+		fixedControls: false,
+		overlayOptions: {
+			opacity: 1,
+			position: 'top center',
+			hideOnMouseOut: true
+		}
+	});
+</script>
+
+<script type="text/javascript">
+	var widthRestriction = 668; 
+	var heightRestriction = 1000; 
+</script>
+<script type="text/javascript" src="http://www.xieziming.com/wp-content/plugins/zoom-highslide/js/zoom.js"></script>
+	
+<!--script src="http://www.xieziming.com/wp-content/themes/ziming/js/mouse.js" type="text/javascript"></script--> 
+</head>
+<body class="normalbg">
+<div id="container">
+	<div id="head">
+		<div id="nav">
+			<ul>
+				<li class="first"><a href="http://www.xieziming.com" title="首页">首页</a></li>
+				<li class="page_item page-item-2"><a href="http://www.xieziming.com/recent" title="最近">最近</a></li>
+				<li class="page_item page-item-3"><a href="http://www.xieziming.com/photo" title="Photo">映象</a></li>
+				<li class="page_item page-item-4"><a href="http://www.xieziming.com/food" title="Food">美食</a></li>
+				<li class="page_item page-item-5"><a href="http://www.xieziming.com/topic" title="关键字">话题</a></li>
+				<li class="page_item page-item-6"><a href="http://www.xieziming.com/travel" title="Travel">旅行</a></li>
+				<li class="page_item page-item-7"><a href="http://www.xieziming.com/literature" title="Literature">文艺</a></li>
+				<li class="page_item page-item-8"><a href="http://www.xieziming.com/wiki" title="技术维基">维基</a></li>
+				<li class="page_item page-item-9"><a href="http://www.xieziming.com/calendar" title="Calendar">点滴</a></li>
+			</ul>
+		</div><!-- /nav -->		
+	</div><!-- /head -->
+<div id="main" class="altmainbg">
+
+<script type="text/javascript">
+function show_page(id,count,source){
+	for (var i=1;i<=count;i++){
+		if(id != i){
+				jQuery("#part_"+i).hide();
+				document.getElementById("li_"+i).style.fontWeight = "normal";
+				document.getElementById("li_"+i).style.fontSize = "18px";
+		}
+	}
+	jQuery("#part_"+id).show();
+	document.getElementById("li_"+id).style.fontWeight = "bold";
+	document.getElementById("li_"+id).style.fontSize = "30px";
+	jQuery('body,html').animate({scrollTop:0},1000);
+        return false;
+}
+</script>
+<div id="content">
+
+	<div class="post" id="post-2529">
+		<h2 class="title">DAS、NAS与SAN</h2>
+		<p class="postmetadata">
+			<span class="date">25 September 2009</span>
+			<span class="category">Categoried in <a href="http://www.xieziming.com/topic/ji-shu-wei-ji" rel="category tag">技术维基</a></span>
+			<span class="comments">1</span>
+			<span class="view">Preview : 352 , Read : 892 </span>
+			<span class="mail">Index : 3091 </span>
+		</p>
+		<div class="entry">				
+<div id="part_1"><p>目前磁盘存储市场上，存储分类根据服务器类型分为：封闭系统的存储和开放系统的存储，封闭系统主要指大型机，AS400等服务器，开放系统指基于包括Windows、UNIX、Linux等操作系统的服务器；开放系统的存储分为：内置存储和外挂存储；开放系统的外挂存储根据连接的方式分为：直连式存储（Direct-Attached Storage，简称DAS）和网络化存储（Fabric-Attached Storage，简称FAS）；开放系统的网络化存储根据传输协议又分为：网络接入存储（Network-Attached Storage，简称NAS）和存储区域网络（Storage Area Network，简称SAN）。由于目前绝大部分用户采用的是开放系统，其外挂存储占有目前磁盘存储市场的70%以上<br />
+<!--more--><br />
+开放系统的直连式存储（Direct-Attached Storage，简称DAS）已经有近四十年的使用历史，随着用户数据的不断增长，尤其是数百GB以上时，其在备份、恢复、扩展、灾备等方面的问题变得日益困扰系统管理员。</p>
+<p>主要问题和不足为：<br />
+直连式存储依赖服务器主机操作系统进行数据的IO读写和存储维护管理，数据备份和恢复要求占用服务器主机资源（包括CPU、系统IO等），数据流需要回流主机再到服务器连接着的磁带机（库），数据备份通常占用服务器主机资源20-30%，因此许多企业用户的日常数据备份常常在深夜或业务系统不繁忙时进行，以免影响正常业务系统的运行。直连式存储的数据量越大，备份和恢复的时间就越长，对服务器硬件的依赖性和影响就越大。</p>
+<p>直连式存储与服务器主机之间的连接通道通常采用SCSI连接，带宽为10MB/s、20MB/s、40MB/s、80MB/s等，随着服务器CPU的处理能力越来越强，存储硬盘空间越来越大，阵列的硬盘数量越来越多，SCSI通道将会成为IO瓶颈；服务器主机SCSI ID资源有限，能够建立的SCSI通道连接有限。</p>
+<p>无论直连式存储还是服务器主机的扩展，从一台服务器扩展为多台服务器组成的群集(Cluster)，或存储阵列容量的扩展，都会造成业务系统的停机，从而给企业带来经济损失，对于银行、电信、传媒等行业7×24小时服务的关键业务系统，这是不可接受的。并且直连式存储或服务器主机的升级扩展，只能由原设备厂商提供，往往受原设备厂商限制。</p>
+</div><div id="part_2" style="display:none;"><p>存储区域网络（Storage Area Network，简称SAN）采用光纤通道（Fibre Channel）技术，通过光纤通道交换机连接存储阵列和服务器主机，建立专用于数据存储的区域网络。SAN经过十多年历史的发展，已经相当成熟，成为业界的事实标准（但各个厂商的光纤交换技术不完全相同，其服务器和SAN存储有兼容性的要求）。SAN存储采用的带宽从100MB/s、200MB/s，发展到目前的1Gbps、2Gbps。</p>
+<p>网络接入存储（Network-Attached Storage，简称NAS）采用网络（TCP/IP、ATM、FDDI）技术，通过网络交换机连接存储系统和服务器主机，建立专用于数据存储的存储私网。随着IP网络技术的发展，网络接入存储（NAS）技术发生质的飞跃。早期80年代末到90年代初的10Mbps带宽，网络接入存储作为文件服务器存储，性能受带宽影响；后来快速以太网（100Mbps）、VLAN虚网、Trunk(Ethernet Channel) 以太网通道的出现，网络接入存储的读写性能得到改善；1998年千兆以太网（1000Mbps）的出现和投入商用，为网络接入存储（NAS）带来质的变化和市场广泛认可。由于网络接入存储采用TCP/IP网络进行数据交换，TCP/IP是IT业界的标准协议，不同厂商的产品（服务器、交换机、NAS存储）只要满足协议标准就能够实现互连互通，无兼容性的要求；并且2002年万兆以太网（10000Mbps）的出现和投入商用，存储网络带宽将大大提高NAS 存储的性能。NAS需求旺盛已经成为事实。首先NAS几乎继承了磁盘列阵的所有优点，可以将设备通过标准的网络拓扑结构连接，摆脱了服务器和异构化构架的桎梏；其次，在企业数据量飞速膨胀中，SAN、大型磁带库、磁盘柜等产品虽然都是很好的存储解决方案，但他们那高贵的身份和复杂的操作是资金和技术实力有限的中小企业无论如何也不能接受的。NAS正是满足这种需求的产品，在解决足够的存储和扩展空间的同时，还提供极高的性价比。因此，无论是从适用性还是 TCO的角度来说，NAS自然成为多数企业，尤其是大中小企业的最佳选择。</p>
+<p>1、DAS与NAS存储方案的比较</p>
+<p>DAS是大型服务器采用的主要存储方式，从提高存储利用率的角度来看，实现网络化的DAS势在必行，因此导致了SAN的出现。与DAS相应的另外一种存储方式就是NAS，NAS在多用户网络环境中发挥着越来越重要的作用。</p>
+</div><div id="part_3" style="display:none;"><p>首先，我们可以先对比DAS与NAS的典型网络架构：<br />
+<a href="http://images.xieziming.com/upload/file/storage/1.jpg" class="highslide" onclick="return hs.expand(this)"><img src="http://images.xieziming.com/upload/file/storage/1.jpg"  alt="图片载入中" /></a></p>
+<p style="text-align: center;">Typical LAN using DAS</p>
+<p><a href="http://images.xieziming.com/upload/file/storage/2.jpg" class="highslide" onclick="return hs.expand(this)"><img src="http://images.xieziming.com/upload/file/storage/2.jpg"  alt="图片载入中" /></a></p>
+<p style="text-align: center;">Typical LAN using NAS</p>
+</div><div id="part_4" style="display:none;"><p>2、NAS与SAN存储方案的比较</p>
+<p>NAS与SAN都是在DAS的基础上发展起来的，是新型数据存储模式中的两个主要发展方向。当要求给提供许多客户提供文件共享的接入时，NAS一般来说是可选的方法。现在NAS设备在满足此种要求上有极大的功效。因为NAS系统是建立在现有的LAN和文件系统协议之上的。同SAN相比，NAS 技术是相对成熟的。尽管有一些SAN文件共享解决方案存在，它们一般是针对特定的要求，多个服务器要求高速的的接入通过私有的轻量级的协议来实现共享数据。<br />
+<a href="http://images.xieziming.com/upload/file/storage/1.jpg" class="highslide" onclick="return hs.expand(this)"><img src="http://images.xieziming.com/upload/file/storage/1.jpg"  alt="图片载入中" /></a></p>
+<p style="text-align: center;">SAN</p>
+<p><a href="http://images.xieziming.com/upload/file/storage/2.jpg" class="highslide" onclick="return hs.expand(this)"><img src="http://images.xieziming.com/upload/file/storage/2.jpg"  alt="图片载入中" /></a></p>
+<p style="text-align: center;">SAN &amp; NAS Coexistence</p>
+</div><div id="part_5" style="display:none;"><p>NAS是在RAID的基础上增加了存储操作系统，而SAN是独立出一个数据存储网络，网络内部的数据传输率很快，但操作系统仍停留在服务器端，用户不是在直接访问SAN的网络，因此这就造成SAN在异构环境下不能实现文件共享。SAN是只能独享的数据存储池，NAS是共享与独享兼顾的数据存储池。因此， NAS与SAN的关系也可以表述为：NAS是Network-attached，而SAN是Channel-attached。<br />
+SAN结构中，文件管理系统（FS）还是分别在每一个应用服务器上；而NAS则是每个应用服务器通过网络共享协议（如：NFS、CIFS）使用同一个文件管理系统。换句话说：NAS和SAN存储系统的区别是NAS有自己的文件系统管理。</p>
+<p>NAS是将目光集中在应用、用户和文件以及它们共享的数据上。SAN是将目光集中在磁盘、磁带以及联接它们的可靠的基础结构。将来从桌面系统到数据集中管理到存储设备的全面解决方案将是NAS加SAN。</p>
+<p>三、编后语</p>
+<p>总的来说，DAS、NAS、SAN三种存储模式，已经很好地满足目前企业信息化应用在单服务器扩容、服务器双机高可用集群、高性能、高可用、高扩展的网络存储和简单易用的网络文件共享等方面的需求。随着信息化建设朝深度和广度发展，新兴的存储模式也必将会逐步走向普及应用。</p>
+<p>NAS和SAN的优劣已经停止了争论，现在一个比较一致的看法是：NAS可以很经济地解决存储容量不足的问题，但难以获得满意的性能，对于关键事务应用而言，它必须使用专用的宽带网络。因此，如果公司的发展将需要大量的NAS设备或是网络带宽需求超过千兆以太网，就应该考虑最高端的存储解决方案SAN。 SAN与NAS体系的融合正在积极发展。这种融合存在其合理性，SAN提供速度，NAS提供由文件处理带来的协作性。</p>
+<p>对SAN来说，点到点之间光纤通道的最大距离不得超过10km限度是一个瓶颈，但这种缺陷可以被NAS的IP连结所弥补。也就是说，可以通过IP网络发送光纤通道命令（FC/IP）。借助于先进的以太网技术，这种处理方法最终变成了现实。融合NAS/SAN技术的呼声很高，但要实现这种融合可能需要两三年或者更长的一段时间。</p>
+</div><div id="paginate"><label id="li_1" onclick="javascript:show_page(1,5,this);" style="font-size:30px;font-weight:bold" onmouseover="this.style.cursor='pointer'">1</label><label id="li_2" onclick="javascript:show_page(2,5,this);"  onmouseover="this.style.cursor='pointer'">2</label><label id="li_3" onclick="javascript:show_page(3,5,this);"  onmouseover="this.style.cursor='pointer'">3</label><label id="li_4" onclick="javascript:show_page(4,5,this);"  onmouseover="this.style.cursor='pointer'">4</label><label id="li_5" onclick="javascript:show_page(5,5,this);"  onmouseover="this.style.cursor='pointer'">5</label></div> 
+			<div align="center">1 month ago, this page was being read. </div>
+			<p class="tags"><a href="http://www.xieziming.com/tag/ji-shu" rel="tag">技术</a><br /></p>  
+    </div><!-- /entry -->                                   
+		<div class="postbottom"></div>		                              
+		</div><!-- /post -->	
+
+<div class="postrelated">
+			<table width="100%" >				
+
+					<tr><td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/2310.html" rel="bookmark" title="ECC协议簇学习">ECC协议簇学习</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/2783.html" rel="bookmark" title="单元测试全攻略">单元测试全攻略</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/2787.html" rel="bookmark" title="软件测试要素">软件测试要素</a></td>
+
+				<td align="right" class="dashedline_related">★<a href="http://www.xieziming.com/archives/2779.html" rel="bookmark" title="软件回归测试">软件回归测试</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/2838.html" rel="bookmark" title="linux 网络命令">linux 网络命令</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/3772.html" rel="bookmark" title="Mantis Bug Tracker">Mantis Bug...</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/4276.html" rel="bookmark" title="ROR笔记（一）">ROR笔记（一）</a></td>
+
+				<td align="right" class="dashedline_related"><a href="http://www.xieziming.com/archives/2835.html" rel="bookmark" title="linux学习笔记">linux学习笔记</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/574.html" rel="bookmark" title="周期性的火大">周期性的火大</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/934.html" rel="bookmark" title="GNS3下搭建cisco实验环境">GNS3下搭建...</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/1300.html" rel="bookmark" title="桥接,NAT网络配置详解">桥接,NAT网络配...</a></td>
+
+				<td align="right" class="dashedline_related">★<a href="http://www.xieziming.com/archives/903.html" rel="bookmark" title="用VLAN分割广播域">用VLAN...</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/709.html" rel="bookmark" title="不要迷失在技术的海洋中">不要迷失在技术的海洋中</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/732.html" rel="bookmark" title="光传输网网管DCN总结">光传输网网...</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7152.html" rel="bookmark" title="Shell (三)">Shell (三...</a></td>
+
+				<td align="right" class="dashedline_related"><a href="http://www.xieziming.com/archives/6406.html" rel="bookmark" title="QTP DataTable">QTP DataTab...</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/238.html" rel="bookmark" title="<数码摄影构图>">&lt;数码摄影构图&gt;</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/4294.html" rel="bookmark" title="ROR笔记（二）">ROR笔记（二）</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/703.html" rel="bookmark" title="两个人能够在电话上打牌吗？">两个人能够在电话上...</a></td>
+
+				<td align="right" class="dashedline_related">★<a href="http://www.xieziming.com/archives/4302.html" rel="bookmark" title="Ruby（三）">Ruby（三...</a></td></tr>
+
+		</table>
+</div>
+
+		<div id="comments">
+
+<ol class="commentlist">
+
+<p align="right">Order by : <a href="?c=1&o=d" >Newer</a> | <a href="?c=1&o=a" >Older</a></p>
+
+
+	<li class="alt2" id="comment-791">	
+
+	<div class="commentmeta">
+
+		<table class="widefat page fixed" width="100%" cellpadding="1" cellspacing="1">
+
+			<tr>
+
+				<td align="left"><B><font size="2"><a href='http://www.ideashot.com' rel='external nofollow' class='url'>suny</a></font></B></td>
+
+				<td align="right">2009-09-25</td>
+
+			</tr>
+
+			<tr>
+
+				<td align="left">@15:23</td>
+
+				<script type="text/javascript">
+
+					function reply_comment(comment_id,comment_author){
+
+					 		document.getElementById("comment_parent_id").value = comment_id;
+
+					 		document.getElementById('reply-comment').innerText = "Reply to "+comment_author+" :";
+
+					}
+
+				</script>
+
+				<td align="right"><a href="javascript:document.getElementById('comment').focus()" onclick="reply_comment(791,'suny')" >Reply</a></td>
+
+			</tr>
+
+		</table>
+
+	</div><!-- /commentmeta -->
+
+	<div class="commententry">
+
+
+<p>虽然没去成EMC，但好像又发现了另一个领域</p>
+
+	</div><!-- /commententry -->
+
+	</li>
+
+
+</ol>
+
+
+<!-- START COMMENT FORMS -->
+
+
+		</div><!--/comments-->		
+
+</div><!-- /content -->
+<div id="sidebar">			
+			<a class="subscribe" href="http://www.xieziming.com/feed" title="Posts RSS">Subscribe</a>			
+			<div id="search">	
+	<form name="searchform" id="searchform" method="get" action="http://www.xieziming.com/index.php">
+		<input class="text" type="text" name="s" id="s" value=""/>
+		<input class="submit" type="image" src="http://www.xieziming.com/wp-content/themes/ziming/img/submit.jpg" value="search" />
+	</form>	
+</div><!-- /search -->			
+			<div id="widgets">			
+			<div class="widget"><h3>Calendar</h3>
+<table id="wp-calendar">
+  									<caption>December 2016</caption>
+  									<thead>
+                    <tr><th scope="col" title="S">S</th><th scope="col" title="M">M</th><th scope="col" title="T">T</th><th scope="col" title="W">W</th><th scope="col" title="T">T</th><th scope="col" title="F">F</th><th scope="col" title="S">S</th></tr></thead><tbody><tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>1</td><td>2</td><td>3</td></tr><tr><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td></tr><tr><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td></tr><tr><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">18<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">《血战钢锯岭》</span><br/><span class="time" style="color:#000000; " > Time : 21:18 - 23:28</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">晚上和小锅去看，蛮感人的。吃完去沙湾吃猪杂粥，应该是我在那吃到的最新鲜的一次了。</p></span></a></span></td><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">19<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">CentOS</span><br/><span class="time" style="color:#000000; " > Time : 14:11 - 18:11</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">终于有点时间来把那盒子的win7转成CentOS来做server。配置vsftp花了我太多的时间。。。</p></span></a></span></td><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td></tr><tr><td>25</td><td>26</td><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td></tr><tr><td colspan="3" id="prev"><a href="http://www.xieziming.com/archives/2529.html?month=nov&yr=2016">&laquo; Prev</a></td><td colspan="4" id="next"><a href="http://www.xieziming.com/archives/2529.html?month=jan&yr=2017">Next &raquo;</a></td></tr></tbody></table>
+<div class="widgetbottom"></div></div><!--/widget-->				
+					      		<div class="widget">
+ 							<h3>Recent Posts</h3>
+							<ul>
+           				<li><a href="http://www.xieziming.com/archives/9579.html" class="dashedline" title="闽南 · 泉州">闽南 &middot; 泉州</a></li><li><a href="http://www.xieziming.com/archives/9578.html" class="dashedline" title="顺化 · HUE">顺化 &middot; HUE</a></li><li><a href="http://www.xieziming.com/archives/9577.html" class="dashedline" title="会安 · 春卷">会安 &middot; 春卷</a></li><li><a href="http://www.xieziming.com/archives/9576.html" class="dashedline" title="会安 · 夜灯">会安 &middot; 夜灯</a></li><li><a href="http://www.xieziming.com/archives/9575.html" class="dashedline" title="会安古镇">会安古镇</a></li><li><a href="http://www.xieziming.com/archives/9573.html" class="dashedline" title="岘港">岘港</a></li><li><a href="http://www.xieziming.com/archives/9535.html" class="dashedline" title="罗马">罗马</a></li><li><a href="http://www.xieziming.com/archives/9534.html" class="dashedline" title="卢浮宫">卢浮宫</a></li>						
+							</ul>
+      				<div class="widgetbottom"></div>
+	    		</div>
+	    			        
+        	      		<div class="widget">
+ 							<h3>Rand Posts</h3>
+							<ul>
+      						<li><a href="http://www.xieziming.com/archives/8728.html" class="dashedline" title="长洲岛（二）">长洲岛（二）</a></li><li><a href="http://www.xieziming.com/archives/9312.html" class="dashedline" title="雪乡（三）">雪乡（三）</a></li><li><a href="http://www.xieziming.com/archives/183.html" class="dashedline" title="很郁闷，无论是哪方面...">很郁闷，无论是哪方面....</a></li><li><a href="http://www.xieziming.com/archives/3506.html" class="dashedline" title="黄金期货">黄金期货</a></li><li><a href="http://www.xieziming.com/archives/3794.html" class="dashedline" title="I could be the one">I could be the ...</a></li><li><a href="http://www.xieziming.com/archives/3257.html" class="dashedline" title="冬日恋歌">冬日恋歌</a></li><li><a href="http://www.xieziming.com/archives/7970.html" class="dashedline" title="柬埔寨 · 杂图">柬埔寨 &middot; 杂图</a></li><li><a href="http://www.xieziming.com/archives/3687.html" class="dashedline" title="Book Store (fr limeis)">Book Store (fr ...</a></li>	
+							</ul>
+        			<div class="widgetbottom"></div>
+					</div>                 
+          	                       
+			</div><!-- /widgets -->			                       
+</div><!-- /sidebar --></div><!-- /main -->
+<div id="footer">
+<p align="left">© <a href="http://www.miitbeian.gov.cn" target="_blank"> 明 · 明 · 童 · 鞋</a></p>
+<!--80 queries in 3.474 seconds.-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?c2e18b43ec905e3c4ea82c1b57537223";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</div><!-- /footer -->
+</div><!-- /container -->
+<script type='text/javascript' src='http://www.xieziming.com/wp-includes/js/wp-embed.min.js?ver=4.7'></script>
+</body>
+</html>

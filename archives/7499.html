@@ -1,0 +1,442 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head profile="http://gmpg.org/xfn/11">
+<title>  Java代理机制 &raquo; 谢子明</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="description" content="Java代理机制  " />
+<meta name="keywords" content="谢子明" />
+<link rel="stylesheet" href="http://www.xieziming.com/wp-content/themes/ziming/style.css" type="text/css" media="screen" />
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://www.xieziming.com/feed" />
+<link rel="alternate" type="application/rss+xml" href="http://www.xieziming.com/comments/feed" title="谢子明 Comments RSS feed" />
+<link rel="shortcut icon" href="http://www.xieziming.com/wp-content/themes/ziming/favicon.ico">
+<link rel="Bookmark" href="http://www.xieziming.com/wp-content/themes/ziming/favicon.ico">
+<link rel="pingback" href="http://www.xieziming.com/xmlrpc.php" />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="谢子明 &raquo; Java代理机制 Comments Feed" href="http://www.xieziming.com/archives/7499.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/xieziming.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.7"}};
+			!function(a,b,c){function d(a){var b,c,d,e,f=String.fromCharCode;if(!k||!k.fillText)return!1;switch(k.clearRect(0,0,j.width,j.height),k.textBaseline="top",k.font="600 32px Arial",a){case"flag":return k.fillText(f(55356,56826,55356,56819),0,0),!(j.toDataURL().length<3e3)&&(k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,65039,8205,55356,57096),0,0),b=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,55356,57096),0,0),c=j.toDataURL(),b!==c);case"emoji4":return k.fillText(f(55357,56425,55356,57341,8205,55357,56507),0,0),d=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55357,56425,55356,57341,55357,56507),0,0),e=j.toDataURL(),d!==e}return!1}function e(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i,j=b.createElement("canvas"),k=j.getContext&&j.getContext("2d");for(i=Array("flag","emoji4"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<script type='text/javascript' src='http://www.xieziming.com/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='http://www.xieziming.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<link rel='https://api.w.org/' href='http://www.xieziming.com/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.xieziming.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.xieziming.com/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='Java反射机制' href='http://www.xieziming.com/archives/7496.html' />
+<link rel='next' title='Java类的生存周期' href='http://www.xieziming.com/archives/7508.html' />
+<meta name="generator" content="WordPress 4.7" />
+<link rel="canonical" href="http://www.xieziming.com/archives/7499.html" />
+<link rel='shortlink' href='http://www.xieziming.com/?p=7499' />
+<link rel="alternate" type="application/json+oembed" href="http://www.xieziming.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fxieziming.com%2Farchives%2F7499.html" />
+<link rel="alternate" type="text/xml+oembed" href="http://www.xieziming.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fxieziming.com%2Farchives%2F7499.html&#038;format=xml" />
+ 	<link rel="stylesheet" href="http://www.xieziming.com/wp-content/plugins/live-calendar/live-calendar.css" type="text/css" media="screen" /> 
+<link rel="stylesheet" href="http://www.xieziming.com/wp-content/plugins/wp-code/wp-code.css" type="text/css" media="screen" />
+
+<link rel="stylesheet" href="http://www.xieziming.com/wp-content/plugins/zoom-highslide/highslide.css" type="text/css" media="screen" />
+<script type="text/javascript" src="http://www.xieziming.com/wp-content/plugins/zoom-highslide/js/highslide-full.packed.js"></script>
+<script type="text/javascript">
+	hs.graphicsDir = 'http://www.xieziming.com/wp-content/plugins/zoom-highslide/graphics/';
+	hs.align = 'center';
+	hs.transitions = ['expand', 'crossfade'];
+	hs.outlineType = 'rounded-white';
+  hs.wrapperClassName = 'controls-in-heading';
+	hs.showCredits=false;
+	hs.fadeInOut = true;
+	hs.dimmingOpacity = 0.8;
+
+	// Add the controlbar
+	if (hs.addSlideshow) hs.addSlideshow({
+		//slideshowGroup: 'group1',
+		interval: 4000,
+		repeat: false,
+		useControls: true,
+		fixedControls: false,
+		overlayOptions: {
+			opacity: 1,
+			position: 'top center',
+			hideOnMouseOut: true
+		}
+	});
+</script>
+
+<script type="text/javascript">
+	var widthRestriction = 668; 
+	var heightRestriction = 1000; 
+</script>
+<script type="text/javascript" src="http://www.xieziming.com/wp-content/plugins/zoom-highslide/js/zoom.js"></script>
+	
+<!--script src="http://www.xieziming.com/wp-content/themes/ziming/js/mouse.js" type="text/javascript"></script--> 
+</head>
+<body class="normalbg">
+<div id="container">
+	<div id="head">
+		<div id="nav">
+			<ul>
+				<li class="first"><a href="http://www.xieziming.com" title="首页">首页</a></li>
+				<li class="page_item page-item-2"><a href="http://www.xieziming.com/recent" title="最近">最近</a></li>
+				<li class="page_item page-item-3"><a href="http://www.xieziming.com/photo" title="Photo">映象</a></li>
+				<li class="page_item page-item-4"><a href="http://www.xieziming.com/food" title="Food">美食</a></li>
+				<li class="page_item page-item-5"><a href="http://www.xieziming.com/topic" title="关键字">话题</a></li>
+				<li class="page_item page-item-6"><a href="http://www.xieziming.com/travel" title="Travel">旅行</a></li>
+				<li class="page_item page-item-7"><a href="http://www.xieziming.com/literature" title="Literature">文艺</a></li>
+				<li class="page_item page-item-8"><a href="http://www.xieziming.com/wiki" title="技术维基">维基</a></li>
+				<li class="page_item page-item-9"><a href="http://www.xieziming.com/calendar" title="Calendar">点滴</a></li>
+			</ul>
+		</div><!-- /nav -->		
+	</div><!-- /head -->
+<div id="main" class="altmainbg">
+
+<script type="text/javascript">
+function show_page(id,count,source){
+	for (var i=1;i<=count;i++){
+		if(id != i){
+				jQuery("#part_"+i).hide();
+				document.getElementById("li_"+i).style.fontWeight = "normal";
+				document.getElementById("li_"+i).style.fontSize = "18px";
+		}
+	}
+	jQuery("#part_"+id).show();
+	document.getElementById("li_"+id).style.fontWeight = "bold";
+	document.getElementById("li_"+id).style.fontSize = "30px";
+	jQuery('body,html').animate({scrollTop:0},1000);
+        return false;
+}
+</script>
+<div id="content">
+
+	<div class="post" id="post-7499">
+		<h2 class="title">Java代理机制</h2>
+		<p class="postmetadata">
+			<span class="date">11 October 2012</span>
+			<span class="category">Categoried in <a href="http://www.xieziming.com/topic/coding" rel="category tag">程序</a></span>
+			<span class="comments">0</span>
+			<span class="view">Preview : 1480 , Read : 670 </span>
+			<span class="mail">Index : 9833 </span>
+		</p>
+		<div class="entry">				
+<div id="part_1"><p>代理模式的作用是：为其他对象提供一种代理以控制对这个对象的访问。在某些情况下，一个客户不想或者不能直接引用另一个对象，而代理对象可以在客户端和目标对象之间起到中介的作用。 </p>
+<p>代理模式一般涉及到的角色有： </p>
+<p><strong>抽象角色：</strong>声明真实对象和代理对象的共同接口； </p>
+<p><strong>代理角色：</strong>代理对象角色内部含有对真实对象的引用，从而可以操作真实对象，同时代理对象提供与真实对象相同的接口以便在任何时刻都能代替真实对象。同时，代理对象可以在执行真实对象操作时，附加其他的操作，相当于对真实对象进行封装。 </p>
+<p><strong>真实角色：</strong>代理角色所代表的真实对象，是我们最终要引用的对象。</p>
+<p>抽象角色：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">interface</span> Subject <span style="color: #009900;">&#123;</span> 
+  <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> request<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> 
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>真实角色：实现了Subject的request()方法。</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> RealSubject <span style="color: #000000; font-weight: bold;">implements</span> Subject <span style="color: #009900;">&#123;</span> 
+  <span style="color: #000000; font-weight: bold;">public</span> RealSubject<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span> <span style="color: #009900;">&#125;</span> 
+  <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> request<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span> 
+   <span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;From real subject.&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> 
+  <span style="color: #009900;">&#125;</span> 
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>代理角色：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> ProxySubject <span style="color: #000000; font-weight: bold;">extends</span> Subject <span style="color: #009900;">&#123;</span> 
+  <span style="color: #000000; font-weight: bold;">private</span> RealSubject realSubject<span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">//以真实角色作为代理角色的属性 </span>
+  <span style="color: #000000; font-weight: bold;">public</span> ProxySubject<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span> <span style="color: #009900;">&#125;</span> 
+  <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> request<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span> <span style="color: #666666; font-style: italic;">//该方法封装了真实对象的request方法 </span>
+    preRequest<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> 
+    <span style="color: #000000; font-weight: bold;">if</span><span style="color: #009900;">&#40;</span> realSubject <span style="color: #339933;">==</span> <span style="color: #000066; font-weight: bold;">null</span> <span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span> 
+       realSubject <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> RealSubject<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> 
+    <span style="color: #009900;">&#125;</span> 
+    realSubject.<span style="color: #006633;">request</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">//此处执行真实对象的request方法 </span>
+    postRequest<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> 
+  <span style="color: #009900;">&#125;</span> 
+&nbsp;
+  <span style="color: #000000; font-weight: bold;">private</span> <span style="color: #000066; font-weight: bold;">void</span> preRequest<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span> 
+    <span style="color: #666666; font-style: italic;">//something you want to do before requesting </span>
+  <span style="color: #009900;">&#125;</span> 
+  <span style="color: #000000; font-weight: bold;">private</span> <span style="color: #000066; font-weight: bold;">void</span> postRequest<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span> 
+    <span style="color: #666666; font-style: italic;">//something you want to do after requesting </span>
+  <span style="color: #009900;">&#125;</span> 
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>客户端调用：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;">Subject sub<span style="color: #339933;">=</span><span style="color: #000000; font-weight: bold;">new</span> ProxySubject<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> 
+Sub.<span style="color: #006633;">request</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre></div></div>
+
+<p>由以上代码可以看出，客户实际需要调用的是RealSubject类的request()方法，现在用ProxySubject来代理 RealSubject类，同样达到目的，同时还封装了其他方法(preRequest(),postRequest())，可以处理一些其他问题。 </p>
+<p>另外，如果要按照上述的方法使用代理模式，那么真实角色必须是事先已经存在的，并将其作为代理对象的内部属性。但是实际使用时，一个真实角色必须对应一个代理角色，如果大量使用会导致类的急剧膨胀；此外，如果事先并不知道真实角色，该如何使用代理呢？这个问题可以通过Java的动态代理类来解决。 </p>
+</div><div id="part_2" style="display:none;"><p>被代理对象的接口:</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">package</span> <span style="color: #006699;">com.ml.test</span><span style="color: #339933;">;</span>
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">interface</span> Manager <span style="color: #009900;">&#123;</span>
+   <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> modify<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>被代理对象的实现类</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">package</span> <span style="color: #006699;">com.ml.test</span><span style="color: #339933;">;</span>
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> ManagerImpl <span style="color: #000000; font-weight: bold;">implements</span> Manager <span style="color: #009900;">&#123;</span>
+   @Override
+   <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> modify<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+      <span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;*******modify()方法被调用&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+   <span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>业务代理类:</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">package</span> <span style="color: #006699;">com.ml.test</span><span style="color: #339933;">;</span>
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">java.lang.reflect.InvocationHandler</span><span style="color: #339933;">;</span>
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">java.lang.reflect.Method</span><span style="color: #339933;">;</span>
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> BusinessHandler <span style="color: #000000; font-weight: bold;">implements</span> <span style="color: #003399;">InvocationHandler</span> <span style="color: #009900;">&#123;</span>
+   <span style="color: #000000; font-weight: bold;">private</span> <span style="color: #003399;">Object</span> object <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">null</span><span style="color: #339933;">;</span>
+   <span style="color: #000000; font-weight: bold;">public</span> BusinessHandler<span style="color: #009900;">&#40;</span><span style="color: #003399;">Object</span> object<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+      <span style="color: #000000; font-weight: bold;">this</span>.<span style="color: #006633;">object</span> <span style="color: #339933;">=</span> object<span style="color: #339933;">;</span>
+   <span style="color: #009900;">&#125;</span>
+   @Override
+   <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #003399;">Object</span> invoke<span style="color: #009900;">&#40;</span><span style="color: #003399;">Object</span> proxy, <span style="color: #003399;">Method</span> method, <span style="color: #003399;">Object</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> args<span style="color: #009900;">&#41;</span> <span style="color: #000000; font-weight: bold;">throws</span> <span style="color: #003399;">Throwable</span> <span style="color: #009900;">&#123;</span>
+      <span style="color: #666666; font-style: italic;">//第一个参数proxy其实没什么用</span>
+      <span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;do something before method&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+      <span style="color: #003399;">Object</span> ret <span style="color: #339933;">=</span> method.<span style="color: #006633;">invoke</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">this</span>.<span style="color: #006633;">object</span>, args<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+      <span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;do something after method&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+      <span style="color: #000000; font-weight: bold;">return</span> ret<span style="color: #339933;">;</span>
+   <span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>客户端类:</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">package</span> <span style="color: #006699;">com.ml.test</span><span style="color: #339933;">;</span>
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">java.lang.reflect.Proxy</span><span style="color: #339933;">;</span>
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> Client <span style="color: #009900;">&#123;</span>
+   <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000066; font-weight: bold;">void</span> main<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> args<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+      <span style="color: #666666; font-style: italic;">// 元对象(被代理对象)</span>
+      ManagerImpl managerImpl <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> ManagerImpl<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+      <span style="color: #666666; font-style: italic;">// 业务代理类</span>
+      BusinessHandler securityHandler <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> BusinessHandler<span style="color: #009900;">&#40;</span>managerImpl<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+      <span style="color: #666666; font-style: italic;">// 获得代理类($Proxy0 extends Proxy implements Manager)的实例.</span>
+      Manager managerProxy <span style="color: #339933;">=</span> <span style="color: #009900;">&#40;</span>Manager<span style="color: #009900;">&#41;</span> <span style="color: #003399;">Proxy</span>.<span style="color: #006633;">newProxyInstance</span><span style="color: #009900;">&#40;</span>managerImpl.<span style="color: #006633;">getClass</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>.<span style="color: #006633;">getClassLoader</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>, managerImpl.<span style="color: #006633;">getClass</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>.<span style="color: #006633;">getInterfaces</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>, securityHandler<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+      managerProxy.<span style="color: #006633;">modify</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+   <span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>执行结果:<br />
+do something before method<br />
+*******modify()方法被调用<br />
+do something after method</p>
+<p>Proxy.newProxyInstance(ClassLoader loader, Class< ?>[] interfaces, InvocationHandler h)做了以下几件事：</p>
+<p>(1)根据传入的第二个参数interfaces动态生成一个类$Proxy0。$Proxy0类实现了interfaces的接口,并继承了Proxy类，重写了hashcode,toString,equals等三个方法。具体实现可参看 ProxyGenerator.generateProxyClass(&#8230;); 该例中生成了$Proxy0类</p>
+<p>(2)通过传入的第一个参数classloder将刚生成的类加载到jvm中。即将$Proxy0类load</p>
+<p>(3)利用第三个参数，调用$Proxy0的$Proxy0(InvocationHandler)构造函数 创建$Proxy0的对象，并且用interfaces参数遍历其所有接口的方法，并重写这些方法。</p>
+<p>所谓Dynamic Proxy($Proxy0)是这样一种class：它是在运行时生成的class，在生成它时你必须提供一组interface给它，然后该class就宣称它实现了这些 interface。你当然可以把该class的实例当作这些interface中的任何一个来用。当然啦，这个Dynamic Proxy其实就是一个Proxy，它不会替你作实质性的工作，在生成它的实例时你必须提供一个handler(业务代理类)，由它接管实际的工作。</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">class</span> <span style="color: #003399;">Proxy</span><span style="color: #009900;">&#123;</span>
+   <span style="color: #003399;">InvocationHandler</span> h<span style="color: #339933;">=</span><span style="color: #000066; font-weight: bold;">null</span><span style="color: #339933;">;</span>
+   <span style="color: #000000; font-weight: bold;">protected</span> <span style="color: #003399;">Proxy</span><span style="color: #009900;">&#40;</span><span style="color: #003399;">InvocationHandler</span> h<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+      <span style="color: #000000; font-weight: bold;">this</span>.<span style="color: #006633;">h</span> <span style="color: #339933;">=</span> h<span style="color: #339933;">;</span>
+   <span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span>
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">final</span> <span style="color: #000000; font-weight: bold;">class</span> $Proxy0 <span style="color: #000000; font-weight: bold;">extends</span> <span style="color: #003399;">Proxy</span> <span style="color: #000000; font-weight: bold;">implements</span> Manager <span style="color: #009900;">&#123;</span>
+   <span style="color: #000000; font-weight: bold;">public</span> $Proxy0<span style="color: #009900;">&#40;</span><span style="color: #003399;">InvocationHandler</span> invocationhandler<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+      <span style="color: #000000; font-weight: bold;">super</span><span style="color: #009900;">&#40;</span>invocationhandler<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+   <span style="color: #009900;">&#125;</span>
+   ...
+   <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">final</span> <span style="color: #000066; font-weight: bold;">void</span> modify<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span> <span style="color: #666666; font-style: italic;">//重写传进来的interface（也就是Manager）里的所有方法，全部改成用invoke调用（），也就是调用业务代理类的相应函数。</span>
+      <span style="color: #000000; font-weight: bold;">try</span> <span style="color: #009900;">&#123;</span>
+         <span style="color: #000000; font-weight: bold;">super</span>.<span style="color: #006633;">h</span>.<span style="color: #006633;">invoke</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">this</span>, <span style="color: #339933;">**</span>, <span style="color: #000066; font-weight: bold;">null</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+         <span style="color: #000000; font-weight: bold;">return</span><span style="color: #339933;">;</span>
+      <span style="color: #009900;">&#125;</span> <span style="color: #000000; font-weight: bold;">catch</span> <span style="color: #009900;">&#40;</span><span style="color: #003399;">Error</span> e<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+      <span style="color: #009900;">&#125;</span> <span style="color: #000000; font-weight: bold;">catch</span> <span style="color: #009900;">&#40;</span><span style="color: #003399;">Throwable</span> throwable<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+         <span style="color: #000000; font-weight: bold;">throw</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">UndeclaredThrowableException</span><span style="color: #009900;">&#40;</span>throwable<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+      <span style="color: #009900;">&#125;</span>
+   <span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>(4)将$Proxy0的实例返回给客户端。</p>
+</div><div id="part_3" style="display:none;"><p>下面是本例的$Proxy0类的源码:</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">java.lang.reflect.InvocationHandler</span><span style="color: #339933;">;</span>
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">java.lang.reflect.Method</span><span style="color: #339933;">;</span>
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">java.lang.reflect.Proxy</span><span style="color: #339933;">;</span>
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">java.lang.reflect.UndeclaredThrowableException</span><span style="color: #339933;">;</span>
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">final</span> <span style="color: #000000; font-weight: bold;">class</span> $Proxy0 <span style="color: #000000; font-weight: bold;">extends</span> <span style="color: #003399;">Proxy</span> <span style="color: #000000; font-weight: bold;">implements</span> Manager <span style="color: #009900;">&#123;</span>
+   <span style="color: #000000; font-weight: bold;">private</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #003399;">Method</span> m1<span style="color: #339933;">;</span>
+   <span style="color: #000000; font-weight: bold;">private</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #003399;">Method</span> m0<span style="color: #339933;">;</span>
+   <span style="color: #000000; font-weight: bold;">private</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #003399;">Method</span> <span style="color: #339933;">**;</span>
+   <span style="color: #000000; font-weight: bold;">private</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #003399;">Method</span> m2<span style="color: #339933;">;</span>
+&nbsp;
+   <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #009900;">&#123;</span>
+      <span style="color: #000000; font-weight: bold;">try</span> <span style="color: #009900;">&#123;</span>
+         m1 <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">Class</span>.<span style="color: #006633;">forName</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;java.lang.Object&quot;</span><span style="color: #009900;">&#41;</span>.<span style="color: #006633;">getMethod</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;equals&quot;</span>, <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #000000; font-weight: bold;">Class</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> <span style="color: #009900;">&#123;</span> <span style="color: #000000; font-weight: bold;">Class</span>.<span style="color: #006633;">forName</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;java.lang.Object&quot;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+         m0 <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">Class</span>.<span style="color: #006633;">forName</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;java.lang.Object&quot;</span><span style="color: #009900;">&#41;</span>.<span style="color: #006633;">getMethod</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;hashCode&quot;</span>, <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #000000; font-weight: bold;">Class</span><span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">0</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+         <span style="color: #339933;">**</span> <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">Class</span>.<span style="color: #006633;">forName</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;com.ml.test.Manager&quot;</span><span style="color: #009900;">&#41;</span>.<span style="color: #006633;">getMethod</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;modify&quot;</span>, <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #000000; font-weight: bold;">Class</span><span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">0</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+         m2 <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">Class</span>.<span style="color: #006633;">forName</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;java.lang.Object&quot;</span><span style="color: #009900;">&#41;</span>.<span style="color: #006633;">getMethod</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;toString&quot;</span>, <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #000000; font-weight: bold;">Class</span><span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">0</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+      <span style="color: #009900;">&#125;</span> <span style="color: #000000; font-weight: bold;">catch</span> <span style="color: #009900;">&#40;</span><span style="color: #003399;">NoSuchMethodException</span> nosuchmethodexception<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+          <span style="color: #000000; font-weight: bold;">throw</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">NoSuchMethodError</span><span style="color: #009900;">&#40;</span>nosuchmethodexception.<span style="color: #006633;">getMessage</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+      <span style="color: #009900;">&#125;</span> <span style="color: #000000; font-weight: bold;">catch</span> <span style="color: #009900;">&#40;</span><span style="color: #003399;">ClassNotFoundException</span> classnotfoundexception<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+          <span style="color: #000000; font-weight: bold;">throw</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">NoClassDefFoundError</span><span style="color: #009900;">&#40;</span>classnotfoundexception.<span style="color: #006633;">getMessage</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+      <span style="color: #009900;">&#125;</span>
+   <span style="color: #009900;">&#125;</span>
+&nbsp;
+   <span style="color: #000000; font-weight: bold;">public</span> $Proxy0<span style="color: #009900;">&#40;</span><span style="color: #003399;">InvocationHandler</span> invocationhandler<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+      <span style="color: #000000; font-weight: bold;">super</span><span style="color: #009900;">&#40;</span>invocationhandler<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+   <span style="color: #009900;">&#125;</span>
+   @Override
+   <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">final</span> <span style="color: #000066; font-weight: bold;">boolean</span> equals<span style="color: #009900;">&#40;</span><span style="color: #003399;">Object</span> obj<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+      <span style="color: #000000; font-weight: bold;">try</span> <span style="color: #009900;">&#123;</span>
+         <span style="color: #000000; font-weight: bold;">return</span> <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span><span style="color: #003399;">Boolean</span><span style="color: #009900;">&#41;</span> <span style="color: #000000; font-weight: bold;">super</span>.<span style="color: #006633;">h</span>.<span style="color: #006633;">invoke</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">this</span>, m1, <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">Object</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> <span style="color: #009900;">&#123;</span> obj <span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>.<span style="color: #006633;">booleanValue</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+      <span style="color: #009900;">&#125;</span> <span style="color: #000000; font-weight: bold;">catch</span> <span style="color: #009900;">&#40;</span><span style="color: #003399;">Throwable</span> throwable<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+         <span style="color: #000000; font-weight: bold;">throw</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">UndeclaredThrowableException</span><span style="color: #009900;">&#40;</span>throwable<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+      <span style="color: #009900;">&#125;</span>
+   <span style="color: #009900;">&#125;</span>
+   @Override
+   <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">final</span> <span style="color: #000066; font-weight: bold;">int</span> hashCode<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+      <span style="color: #000000; font-weight: bold;">try</span> <span style="color: #009900;">&#123;</span>
+         <span style="color: #000000; font-weight: bold;">return</span> <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span><span style="color: #003399;">Integer</span><span style="color: #009900;">&#41;</span> <span style="color: #000000; font-weight: bold;">super</span>.<span style="color: #006633;">h</span>.<span style="color: #006633;">invoke</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">this</span>, m0, <span style="color: #000066; font-weight: bold;">null</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>.<span style="color: #006633;">intValue</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+      <span style="color: #009900;">&#125;</span> <span style="color: #000000; font-weight: bold;">catch</span> <span style="color: #009900;">&#40;</span><span style="color: #003399;">Throwable</span> throwable<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+         <span style="color: #000000; font-weight: bold;">throw</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">UndeclaredThrowableException</span><span style="color: #009900;">&#40;</span>throwable<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+      <span style="color: #009900;">&#125;</span>
+   <span style="color: #009900;">&#125;</span>
+   <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">final</span> <span style="color: #000066; font-weight: bold;">void</span> modify<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+      <span style="color: #000000; font-weight: bold;">try</span> <span style="color: #009900;">&#123;</span>
+         <span style="color: #000000; font-weight: bold;">super</span>.<span style="color: #006633;">h</span>.<span style="color: #006633;">invoke</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">this</span>, <span style="color: #339933;">**</span>, <span style="color: #000066; font-weight: bold;">null</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+         <span style="color: #000000; font-weight: bold;">return</span><span style="color: #339933;">;</span>
+      <span style="color: #009900;">&#125;</span> <span style="color: #000000; font-weight: bold;">catch</span> <span style="color: #009900;">&#40;</span><span style="color: #003399;">Error</span> e<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+      <span style="color: #009900;">&#125;</span> <span style="color: #000000; font-weight: bold;">catch</span> <span style="color: #009900;">&#40;</span><span style="color: #003399;">Throwable</span> throwable<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+         <span style="color: #000000; font-weight: bold;">throw</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">UndeclaredThrowableException</span><span style="color: #009900;">&#40;</span>throwable<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+     <span style="color: #009900;">&#125;</span>
+   <span style="color: #009900;">&#125;</span>
+   @Override
+   <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">final</span> <span style="color: #003399;">String</span> toString<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+      <span style="color: #000000; font-weight: bold;">try</span> <span style="color: #009900;">&#123;</span>
+         <span style="color: #000000; font-weight: bold;">return</span> <span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span><span style="color: #009900;">&#41;</span> <span style="color: #000000; font-weight: bold;">super</span>.<span style="color: #006633;">h</span>.<span style="color: #006633;">invoke</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">this</span>, m2, <span style="color: #000066; font-weight: bold;">null</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+      <span style="color: #009900;">&#125;</span> <span style="color: #000000; font-weight: bold;">catch</span> <span style="color: #009900;">&#40;</span><span style="color: #003399;">Throwable</span> throwable<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+         <span style="color: #000000; font-weight: bold;">throw</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">UndeclaredThrowableException</span><span style="color: #009900;">&#40;</span>throwable<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+      <span style="color: #009900;">&#125;</span>
+   <span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>调用managerProxy.modify()方法（也就是就调用$Proxy0类中的modify()方法）时，从代码中我们可以看出其实调用的是父类Proxy中的h的invoke()方法，即InvocationHandler.invoke()。</p>
+<p>我们可以看到在managerProxy中对被代理对象managerImpl方法的调用都是通过业务代理类invoke来调的。</p>
+<p>通俗的来说，在代理机制下，业务代理类要能调用被代理对象所有的公开方法，最直接的方法是直接targetObj.method，但这样一来，一则业务代理类中的方法要和被代理对象的方法同步，代码量很大，也难维护；二则，如果有很多被代理对象公用同一个业务代理类的话，代码量就更大了。于是这样一种方法产生了：动态创建一个类，它根据传进来的被代理对象，获取它的全部方法，然后动态改写这些方法，改成通过业务代理类来调用（加些pre action和post action）。</p>
+</div><div id="paginate"><label id="li_1" onclick="javascript:show_page(1,3,this);" style="font-size:30px;font-weight:bold" onmouseover="this.style.cursor='pointer'">1</label><label id="li_2" onclick="javascript:show_page(2,3,this);"  onmouseover="this.style.cursor='pointer'">2</label><label id="li_3" onclick="javascript:show_page(3,3,this);"  onmouseover="this.style.cursor='pointer'">3</label></div> 
+			<div align="center">1 month ago, this page was being read. </div>
+			<p class="tags"><a href="http://www.xieziming.com/tag/java" rel="tag">java</a><br /></p>  
+    </div><!-- /entry -->                                   
+		<div class="postbottom"></div>		                              
+		</div><!-- /post -->	
+
+<div class="postrelated">
+			<table width="100%" >				
+
+					<tr><td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/2216.html" rel="bookmark" title="Java程序员面试宝典">Java程序员...</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7473.html" rel="bookmark" title="Java静态工厂模式">Java静...</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/7561.html" rel="bookmark" title="Java疑问解答">Java疑...</a></td>
+
+				<td align="right" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7545.html" rel="bookmark" title="Java集合类">Java集合...</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7605.html" rel="bookmark" title="质疑和反驳">质疑和反驳</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/7402.html" rel="bookmark" title="Java多态总结">Java多态总结</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/8596.html" rel="bookmark" title="Java Component截图">Java Compon...</a></td>
+
+				<td align="right" class="dashedline_related"><a href="http://www.xieziming.com/archives/7364.html" rel="bookmark" title="Java启动参数">Java启动参数</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/7508.html" rel="bookmark" title="Java类的生存周期">Java类的生存...</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/8807.html" rel="bookmark" title="制作Java Applet签名">制作Java A...</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/2464.html" rel="bookmark" title="J2EE入门例子">J2EE入门例子</a></td>
+
+				<td align="right" class="dashedline_related">★<a href="http://www.xieziming.com/archives/6805.html" rel="bookmark" title="Java垃圾回收算法">Java垃...</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7437.html" rel="bookmark" title="Equals与Hashcode">Equals...</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/8804.html" rel="bookmark" title="Java源码加/解密">Java源码...</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/8811.html" rel="bookmark" title="Java源码混淆">Java源码混淆</a></td>
+
+				<td align="right" class="dashedline_related"><a href="http://www.xieziming.com/archives/7481.html" rel="bookmark" title="Java单例模式">Java单例模式</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/8494.html" rel="bookmark" title="Java内存管理之字符串">Java内...</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/8665.html" rel="bookmark" title="JavaOne Conference">JavaOne...</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/7527.html" rel="bookmark" title="Java自动装箱">Java自动装箱</a></td>
+
+				<td align="right" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7366.html" rel="bookmark" title="QTP控制Java程序原理">QTP控制Java...</a></td></tr>
+
+		</table>
+</div>
+
+		<div id="comments">
+
+<!-- START COMMENT FORMS -->
+
+
+		</div><!--/comments-->		
+
+</div><!-- /content -->
+<div id="sidebar">			
+			<a class="subscribe" href="http://www.xieziming.com/feed" title="Posts RSS">Subscribe</a>			
+			<div id="search">	
+	<form name="searchform" id="searchform" method="get" action="http://www.xieziming.com/index.php">
+		<input class="text" type="text" name="s" id="s" value=""/>
+		<input class="submit" type="image" src="http://www.xieziming.com/wp-content/themes/ziming/img/submit.jpg" value="search" />
+	</form>	
+</div><!-- /search -->			
+			<div id="widgets">			
+			<div class="widget"><h3>Calendar</h3>
+<table id="wp-calendar">
+  									<caption>December 2016</caption>
+  									<thead>
+                    <tr><th scope="col" title="S">S</th><th scope="col" title="M">M</th><th scope="col" title="T">T</th><th scope="col" title="W">W</th><th scope="col" title="T">T</th><th scope="col" title="F">F</th><th scope="col" title="S">S</th></tr></thead><tbody><tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>1</td><td>2</td><td>3</td></tr><tr><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td></tr><tr><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td></tr><tr><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">18<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">《血战钢锯岭》</span><br/><span class="time" style="color:#000000; " > Time : 21:18 - 23:28</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">晚上和小锅去看，蛮感人的。吃完去沙湾吃猪杂粥，应该是我在那吃到的最新鲜的一次了。</p></span></a></span></td><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">19<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">CentOS</span><br/><span class="time" style="color:#000000; " > Time : 14:11 - 18:11</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">终于有点时间来把那盒子的win7转成CentOS来做server。配置vsftp花了我太多的时间。。。</p></span></a></span></td><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td></tr><tr><td>25</td><td>26</td><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td></tr><tr><td colspan="3" id="prev"><a href="http://www.xieziming.com/archives/7499.html?month=nov&yr=2016">&laquo; Prev</a></td><td colspan="4" id="next"><a href="http://www.xieziming.com/archives/7499.html?month=jan&yr=2017">Next &raquo;</a></td></tr></tbody></table>
+<div class="widgetbottom"></div></div><!--/widget-->				
+					      		<div class="widget">
+ 							<h3>Recent Posts</h3>
+							<ul>
+           				<li><a href="http://www.xieziming.com/archives/9579.html" class="dashedline" title="闽南 · 泉州">闽南 &middot; 泉州</a></li><li><a href="http://www.xieziming.com/archives/9578.html" class="dashedline" title="顺化 · HUE">顺化 &middot; HUE</a></li><li><a href="http://www.xieziming.com/archives/9577.html" class="dashedline" title="会安 · 春卷">会安 &middot; 春卷</a></li><li><a href="http://www.xieziming.com/archives/9576.html" class="dashedline" title="会安 · 夜灯">会安 &middot; 夜灯</a></li><li><a href="http://www.xieziming.com/archives/9575.html" class="dashedline" title="会安古镇">会安古镇</a></li><li><a href="http://www.xieziming.com/archives/9573.html" class="dashedline" title="岘港">岘港</a></li><li><a href="http://www.xieziming.com/archives/9535.html" class="dashedline" title="罗马">罗马</a></li><li><a href="http://www.xieziming.com/archives/9534.html" class="dashedline" title="卢浮宫">卢浮宫</a></li>						
+							</ul>
+      				<div class="widgetbottom"></div>
+	    		</div>
+	    			        
+        	      		<div class="widget">
+ 							<h3>Rand Posts</h3>
+							<ul>
+      						<li><a href="http://www.xieziming.com/archives/9076.html" class="dashedline" title="大理 · 洱海（二）">大理 &middot; 洱海（二）</a></li><li><a href="http://www.xieziming.com/archives/9210.html" class="dashedline" title="博卡拉 · 兰花酒店">博卡拉 &middot; 兰花酒店</a></li><li><a href="http://www.xieziming.com/archives/8931.html" class="dashedline" title="蒲甘">蒲甘</a></li><li><a href="http://www.xieziming.com/archives/4692.html" class="dashedline" title="习惯了的幸福">习惯了的幸福</a></li><li><a href="http://www.xieziming.com/archives/3540.html" class="dashedline" title="有阳光的房间">有阳光的房间</a></li><li><a href="http://www.xieziming.com/archives/4054.html" class="dashedline" title="张江，一个鸟不拉屎的地方">张江，一个鸟不拉屎的地方</a></li><li><a href="http://www.xieziming.com/archives/3975.html" class="dashedline" title="上海城隍庙">上海城隍庙</a></li><li><a href="http://www.xieziming.com/archives/4869.html" class="dashedline" title="北京798艺术区">北京798艺术区</a></li>	
+							</ul>
+        			<div class="widgetbottom"></div>
+					</div>                 
+          	                       
+			</div><!-- /widgets -->			                       
+</div><!-- /sidebar --></div><!-- /main -->
+<div id="footer">
+<p align="left">© <a href="http://www.miitbeian.gov.cn" target="_blank"> 明 · 明 · 童 · 鞋</a></p>
+<!--76 queries in 3.956 seconds.-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?c2e18b43ec905e3c4ea82c1b57537223";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</div><!-- /footer -->
+</div><!-- /container -->
+<script type='text/javascript' src='http://www.xieziming.com/wp-includes/js/wp-embed.min.js?ver=4.7'></script>
+</body>
+</html>

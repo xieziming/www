@@ -1,0 +1,524 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head profile="http://gmpg.org/xfn/11">
+<title>  九个数据结构例子 &raquo; 谢子明</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="description" content="九个数据结构例子  " />
+<meta name="keywords" content="谢子明" />
+<link rel="stylesheet" href="http://www.xieziming.com/wp-content/themes/ziming/style.css" type="text/css" media="screen" />
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://www.xieziming.com/feed" />
+<link rel="alternate" type="application/rss+xml" href="http://www.xieziming.com/comments/feed" title="谢子明 Comments RSS feed" />
+<link rel="shortcut icon" href="http://www.xieziming.com/wp-content/themes/ziming/favicon.ico">
+<link rel="Bookmark" href="http://www.xieziming.com/wp-content/themes/ziming/favicon.ico">
+<link rel="pingback" href="http://www.xieziming.com/xmlrpc.php" />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="谢子明 &raquo; 九个数据结构例子 Comments Feed" href="http://www.xieziming.com/archives/2468.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/xieziming.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.7"}};
+			!function(a,b,c){function d(a){var b,c,d,e,f=String.fromCharCode;if(!k||!k.fillText)return!1;switch(k.clearRect(0,0,j.width,j.height),k.textBaseline="top",k.font="600 32px Arial",a){case"flag":return k.fillText(f(55356,56826,55356,56819),0,0),!(j.toDataURL().length<3e3)&&(k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,65039,8205,55356,57096),0,0),b=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,55356,57096),0,0),c=j.toDataURL(),b!==c);case"emoji4":return k.fillText(f(55357,56425,55356,57341,8205,55357,56507),0,0),d=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55357,56425,55356,57341,55357,56507),0,0),e=j.toDataURL(),d!==e}return!1}function e(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i,j=b.createElement("canvas"),k=j.getContext&&j.getContext("2d");for(i=Array("flag","emoji4"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<script type='text/javascript' src='http://www.xieziming.com/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='http://www.xieziming.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<link rel='https://api.w.org/' href='http://www.xieziming.com/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.xieziming.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.xieziming.com/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='J2EE入门例子' href='http://www.xieziming.com/archives/2464.html' />
+<link rel='next' title='9月音乐推荐' href='http://www.xieziming.com/archives/3108.html' />
+<meta name="generator" content="WordPress 4.7" />
+<link rel="canonical" href="http://www.xieziming.com/archives/2468.html" />
+<link rel='shortlink' href='http://www.xieziming.com/?p=2468' />
+<link rel="alternate" type="application/json+oembed" href="http://www.xieziming.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fxieziming.com%2Farchives%2F2468.html" />
+<link rel="alternate" type="text/xml+oembed" href="http://www.xieziming.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fxieziming.com%2Farchives%2F2468.html&#038;format=xml" />
+ 	<link rel="stylesheet" href="http://www.xieziming.com/wp-content/plugins/live-calendar/live-calendar.css" type="text/css" media="screen" /> 
+<link rel="stylesheet" href="http://www.xieziming.com/wp-content/plugins/wp-code/wp-code.css" type="text/css" media="screen" />
+
+<link rel="stylesheet" href="http://www.xieziming.com/wp-content/plugins/zoom-highslide/highslide.css" type="text/css" media="screen" />
+<script type="text/javascript" src="http://www.xieziming.com/wp-content/plugins/zoom-highslide/js/highslide-full.packed.js"></script>
+<script type="text/javascript">
+	hs.graphicsDir = 'http://www.xieziming.com/wp-content/plugins/zoom-highslide/graphics/';
+	hs.align = 'center';
+	hs.transitions = ['expand', 'crossfade'];
+	hs.outlineType = 'rounded-white';
+  hs.wrapperClassName = 'controls-in-heading';
+	hs.showCredits=false;
+	hs.fadeInOut = true;
+	hs.dimmingOpacity = 0.8;
+
+	// Add the controlbar
+	if (hs.addSlideshow) hs.addSlideshow({
+		//slideshowGroup: 'group1',
+		interval: 4000,
+		repeat: false,
+		useControls: true,
+		fixedControls: false,
+		overlayOptions: {
+			opacity: 1,
+			position: 'top center',
+			hideOnMouseOut: true
+		}
+	});
+</script>
+
+<script type="text/javascript">
+	var widthRestriction = 668; 
+	var heightRestriction = 1000; 
+</script>
+<script type="text/javascript" src="http://www.xieziming.com/wp-content/plugins/zoom-highslide/js/zoom.js"></script>
+	
+<!--script src="http://www.xieziming.com/wp-content/themes/ziming/js/mouse.js" type="text/javascript"></script--> 
+</head>
+<body class="normalbg">
+<div id="container">
+	<div id="head">
+		<div id="nav">
+			<ul>
+				<li class="first"><a href="http://www.xieziming.com" title="首页">首页</a></li>
+				<li class="page_item page-item-2"><a href="http://www.xieziming.com/recent" title="最近">最近</a></li>
+				<li class="page_item page-item-3"><a href="http://www.xieziming.com/photo" title="Photo">映象</a></li>
+				<li class="page_item page-item-4"><a href="http://www.xieziming.com/food" title="Food">美食</a></li>
+				<li class="page_item page-item-5"><a href="http://www.xieziming.com/topic" title="关键字">话题</a></li>
+				<li class="page_item page-item-6"><a href="http://www.xieziming.com/travel" title="Travel">旅行</a></li>
+				<li class="page_item page-item-7"><a href="http://www.xieziming.com/literature" title="Literature">文艺</a></li>
+				<li class="page_item page-item-8"><a href="http://www.xieziming.com/wiki" title="技术维基">维基</a></li>
+				<li class="page_item page-item-9"><a href="http://www.xieziming.com/calendar" title="Calendar">点滴</a></li>
+			</ul>
+		</div><!-- /nav -->		
+	</div><!-- /head -->
+<div id="main" class="altmainbg">
+
+<script type="text/javascript">
+function show_page(id,count,source){
+	for (var i=1;i<=count;i++){
+		if(id != i){
+				jQuery("#part_"+i).hide();
+				document.getElementById("li_"+i).style.fontWeight = "normal";
+				document.getElementById("li_"+i).style.fontSize = "18px";
+		}
+	}
+	jQuery("#part_"+id).show();
+	document.getElementById("li_"+id).style.fontWeight = "bold";
+	document.getElementById("li_"+id).style.fontSize = "30px";
+	jQuery('body,html').animate({scrollTop:0},1000);
+        return false;
+}
+</script>
+<div id="content">
+
+	<div class="post" id="post-2468">
+		<h2 class="title">九个数据结构例子</h2>
+		<p class="postmetadata">
+			<span class="date">09 September 2009</span>
+			<span class="category">Categoried in <a href="http://www.xieziming.com/topic/coding" rel="category tag">程序</a></span>
+			<span class="comments">0</span>
+			<span class="view">Preview : 103 , Read : 953 </span>
+			<span class="mail">Index : 2318 </span>
+		</p>
+		<div class="entry">				
+<div id="part_1"><p>1.判断链表是否存在环型链表问题：</p>
+<p>判断一个链表是否存在环，例如下面这个链表就存在一个环：N1->N2->N3->N4->N5->N2就是一个有环的链表，环的开始结点是N5，这里有一个比较简单的解法。</p>
+<p>设置两个指针p1，p2。每次循环p1向前走一步，p2向前走两步。直到p2碰到NULL指针或者两个指针相等结束循环。如果两个指针相等则说明存在环。<br />
+<!--more--></p>
+
+<div class="wp_code"><div class="pre"><pre class="cpp" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #0000ff;">struct</span> link <span style="color: #008000;">&#123;</span>     
+                   <span style="color: #0000ff;">int</span> data<span style="color: #008080;">;</span>     link<span style="color: #000040;">*</span> next<span style="color: #008080;">;</span> 
+<span style="color: #008000;">&#125;</span><span style="color: #008080;">;</span>
+&nbsp;
+<span style="color: #0000ff;">bool</span> IsLoop<span style="color: #008000;">&#40;</span>link<span style="color: #000040;">*</span> head<span style="color: #008000;">&#41;</span> <span style="color: #008000;">&#123;</span>    
+&nbsp;
+                   link<span style="color: #000040;">*</span> p1<span style="color: #000080;">=</span>head, <span style="color: #000040;">*</span>p2 <span style="color: #000080;">=</span> head<span style="color: #008080;">;</span>     
+                   <span style="color: #0000ff;">if</span> <span style="color: #008000;">&#40;</span>head <span style="color: #000080;">==</span><span style="color: #0000ff;">NULL</span> <span style="color: #000040;">||</span> head<span style="color: #000040;">-</span><span style="color: #000080;">&gt;</span>next <span style="color: #000080;">==</span><span style="color: #0000ff;">NULL</span><span style="color: #008000;">&#41;</span>      <span style="color: #008000;">&#123;</span>      <span style="color: #0000ff;">return</span> <span style="color: #0000ff;">false</span><span style="color: #008080;">;</span>      <span style="color: #008000;">&#125;</span>    
+                   <span style="color: #0000ff;">do</span><span style="color: #008000;">&#123;</span>         p1<span style="color: #000080;">=</span> p1<span style="color: #000040;">-</span><span style="color: #000080;">&gt;</span>next<span style="color: #008080;">;</span>         p2 <span style="color: #000080;">=</span> p2<span style="color: #000040;">-</span><span style="color: #000080;">&gt;</span>next<span style="color: #000040;">-</span><span style="color: #000080;">&gt;</span>next<span style="color: #008080;">;</span>     
+                   <span style="color: #008000;">&#125;</span> <span style="color: #0000ff;">while</span><span style="color: #008000;">&#40;</span>p2 <span style="color: #000040;">&amp;&amp;</span> p2<span style="color: #000040;">-</span><span style="color: #000080;">&gt;</span>next <span style="color: #000040;">&amp;&amp;</span> p1<span style="color: #000040;">!</span><span style="color: #000080;">=</span>p2<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>          
+                   <span style="color: #0000ff;">if</span><span style="color: #008000;">&#40;</span>p1 <span style="color: #000080;">==</span> p2<span style="color: #008000;">&#41;</span>    <span style="color: #0000ff;">return</span> <span style="color: #0000ff;">true</span><span style="color: #008080;">;</span>      
+                   <span style="color: #0000ff;">else</span>           <span style="color: #0000ff;">return</span> <span style="color: #0000ff;">false</span><span style="color: #008080;">;</span> 
+<span style="color: #008000;">&#125;</span></pre></div></div>
+
+<p>2,链表反转 单向链表的反转是一个经常被问到的一个面试题，也是一个非常基础的问题。比如一个链表是这样的： 1->2->3->4->5 通过反转后成为5->4->3->2->1。最容易想到的方法遍历一遍链表，利用一个辅助指针，存储遍历过程中当前指针指向的下一个元素，然后将当前节点元素的指针反转后，利用已经存储的指针往后面继续遍历。源代码如下：</p>
+
+<div class="wp_code"><div class="pre"><pre class="cpp" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #0000ff;">struct</span> linka <span style="color: #008000;">&#123;</span>
+                          <span style="color: #0000ff;">int</span> data<span style="color: #008080;">;</span>      linka<span style="color: #000040;">*</span> next<span style="color: #008080;">;</span> 
+<span style="color: #008000;">&#125;</span><span style="color: #008080;">;</span>
+<span style="color: #0000ff;">void</span> reverse<span style="color: #008000;">&#40;</span>linka<span style="color: #000040;">*</span><span style="color: #000040;">&amp;</span> head<span style="color: #008000;">&#41;</span> <span style="color: #008000;">&#123;</span>     
+                          <span style="color: #0000ff;">if</span><span style="color: #008000;">&#40;</span>head <span style="color: #000080;">==</span><span style="color: #0000ff;">NULL</span><span style="color: #008000;">&#41;</span>           <span style="color: #0000ff;">return</span><span style="color: #008080;">;</span>      
+                          linka<span style="color: #000040;">*</span>pre, <span style="color: #000040;">*</span>cur, <span style="color: #000040;">*</span>ne<span style="color: #008080;">;</span>      pre<span style="color: #000080;">=</span>head<span style="color: #008080;">;</span>      
+                          cur<span style="color: #000080;">=</span>head<span style="color: #000040;">-</span><span style="color: #000080;">&gt;</span>next<span style="color: #008080;">;</span>      
+                          <span style="color: #0000ff;">while</span><span style="color: #008000;">&#40;</span>cur<span style="color: #008000;">&#41;</span>      <span style="color: #008000;">&#123;</span>          
+                                                             ne <span style="color: #000080;">=</span> cur<span style="color: #000040;">-</span><span style="color: #000080;">&gt;</span>next<span style="color: #008080;">;</span>           cur<span style="color: #000040;">-</span><span style="color: #000080;">&gt;</span>next <span style="color: #000080;">=</span> pre<span style="color: #008080;">;</span>          
+                                                             pre <span style="color: #000080;">=</span> cur<span style="color: #008080;">;</span>           cur <span style="color: #000080;">=</span> ne<span style="color: #008080;">;</span>      
+                         <span style="color: #008000;">&#125;</span>     
+                         head<span style="color: #000040;">-</span><span style="color: #000080;">&gt;</span>next <span style="color: #000080;">=</span> <span style="color: #0000ff;">NULL</span><span style="color: #008080;">;</span>      
+                         head <span style="color: #000080;">=</span> pre<span style="color: #008080;">;</span>
+<span style="color: #008000;">&#125;</span></pre></div></div>
+
+</div><div id="part_2" style="display:none;"><p>还有一种利用递归的方法。这种方法的基本思想是在反转当前节点之前先调用递归函数反转后续节点。不过这个方法有一个缺点，就是在反转后的最后一个结点会形成一个环，所以必须将函数的返回的节点的next域置为NULL。因为要改变head指针，所以我用了引用。算法的源代码如下：</p>
+
+<div class="wp_code"><div class="pre"><pre class="cpp" style="font-family:'Times New Roman',Garamond, Times;">linka<span style="color: #000040;">*</span> reverse<span style="color: #008000;">&#40;</span>linka<span style="color: #000040;">*</span> p,linka<span style="color: #000040;">*</span><span style="color: #000040;">&amp;</span> head<span style="color: #008000;">&#41;</span> <span style="color: #008000;">&#123;</span>      
+                            <span style="color: #0000ff;">if</span><span style="color: #008000;">&#40;</span>p <span style="color: #000080;">==</span> <span style="color: #0000ff;">NULL</span> <span style="color: #000040;">||</span> p<span style="color: #000040;">-</span><span style="color: #000080;">&gt;</span>next <span style="color: #000080;">==</span> <span style="color: #0000ff;">NULL</span><span style="color: #008000;">&#41;</span>      <span style="color: #008000;">&#123;</span>          
+                                               head<span style="color: #000080;">=</span>p<span style="color: #008080;">;</span>           <span style="color: #0000ff;">return</span> p<span style="color: #008080;">;</span>      
+                            <span style="color: #008000;">&#125;</span> <span style="color: #0000ff;">else</span>      <span style="color: #008000;">&#123;</span>           
+                                               linka<span style="color: #000040;">*</span> tmp <span style="color: #000080;">=</span> reverse<span style="color: #008000;">&#40;</span>p<span style="color: #000040;">-</span><span style="color: #000080;">&gt;</span>next,head<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>         
+                                               tmp<span style="color: #000040;">-</span><span style="color: #000080;">&gt;</span>next <span style="color: #000080;">=</span> p<span style="color: #008080;">;</span>           <span style="color: #0000ff;">return</span> p<span style="color: #008080;">;</span>      
+                               <span style="color: #008000;">&#125;</span> 
+<span style="color: #008000;">&#125;</span></pre></div></div>
+
+<p>3,判断两个数组中是否存在相同的数字 给定两个排好序的数组，怎样高效得判断这两个数组中存在相同的数字？<br />
+这个问题首先想到的是一个O(nlogn)的算法。就是任意挑选一个数组，遍历这个数组的所有元素，遍历过程中，在另一个数组中对第一个数组中的每个元素进行binary search。用C++实现代码如下：</p>
+
+<div class="wp_code"><div class="pre"><pre class="cpp" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #0000ff;">bool</span> findcommon<span style="color: #008000;">&#40;</span><span style="color: #0000ff;">int</span> a<span style="color: #008000;">&#91;</span><span style="color: #008000;">&#93;</span>,<span style="color: #0000ff;">int</span> size1,<span style="color: #0000ff;">int</span> b<span style="color: #008000;">&#91;</span><span style="color: #008000;">&#93;</span>,<span style="color: #0000ff;">int</span> size2<span style="color: #008000;">&#41;</span> <span style="color: #008000;">&#123;</span>     
+                             <span style="color: #0000ff;">int</span> i<span style="color: #008080;">;</span>     
+                             <span style="color: #0000ff;">for</span><span style="color: #008000;">&#40;</span>i<span style="color: #000080;">=</span><span style="color: #0000dd;">0</span><span style="color: #008080;">;</span>i<span style="color: #000080;">&lt;</span>size1 <span style="color: #008080;">;</span>i<span style="color: #000040;">++</span><span style="color: #008000;">&#41;</span><span style="color: #008000;">&#123;</span>          
+                                                         <span style="color: #0000ff;">int</span> start<span style="color: #000080;">=</span><span style="color: #0000dd;">0</span>,end<span style="color: #000080;">=</span>size2<span style="color: #000040;">-</span><span style="color: #0000dd;">1</span>,mid<span style="color: #008080;">;</span> 
+                                                         <span style="color: #0000ff;">while</span><span style="color: #008000;">&#40;</span>start<span style="color: #000080;">&lt;=</span>end<span style="color: #008000;">&#41;</span> <span style="color: #008000;">&#123;</span>                
+                                                                   mid<span style="color: #000080;">=</span><span style="color: #008000;">&#40;</span>start<span style="color: #000040;">+</span>end<span style="color: #008000;">&#41;</span><span style="color: #000040;">/</span><span style="color: #0000dd;">2</span><span style="color: #008080;">;</span>                
+                                                                  <span style="color: #0000ff;">if</span><span style="color: #008000;">&#40;</span>a<span style="color: #008000;">&#91;</span>i<span style="color: #008000;">&#93;</span><span style="color: #000080;">==</span>b<span style="color: #008000;">&#91;</span>mid<span style="color: #008000;">&#93;</span><span style="color: #008000;">&#41;</span>  <span style="color: #0000ff;">return</span> <span style="color: #0000ff;">true</span><span style="color: #008080;">;</span>                
+                                                                  <span style="color: #0000ff;">else</span> <span style="color: #0000ff;">if</span> <span style="color: #008000;">&#40;</span>a<span style="color: #008000;">&#91;</span>i<span style="color: #008000;">&#93;</span><span style="color: #000080;">&lt;</span>b<span style="color: #008000;">&#91;</span>mid<span style="color: #008000;">&#93;</span><span style="color: #008000;">&#41;</span>    end<span style="color: #000080;">=</span>mid<span style="color: #000040;">-</span><span style="color: #0000dd;">1</span><span style="color: #008080;">;</span>              
+                                                                  <span style="color: #0000ff;">else</span>   start<span style="color: #000080;">=</span>mid<span style="color: #000040;">+</span><span style="color: #0000dd;">1</span><span style="color: #008080;">;</span>           
+                                                       <span style="color: #008000;">&#125;</span>      
+                              <span style="color: #008000;">&#125;</span>     
+                              <span style="color: #0000ff;">return</span> <span style="color: #0000ff;">false</span><span style="color: #008080;">;</span> 
+<span style="color: #008000;">&#125;</span></pre></div></div>
+
+</div><div id="part_3" style="display:none;"><p>后来发现有一个 O(n)算法。因为两个数组都是排好序的。所以只要一次遍历就行了。首先设两个下标，分别初始化为两个数组的起始地址，依次向前推进。推进的规则是比较两个数组中的数字，小的那个数组的下标向前推进一步，直到任何一个数组的下标到达数组末尾时，如果这时还没碰到相同的数字，说明数组中没有相同的数字。</p>
+
+<div class="wp_code"><div class="pre"><pre class="cpp" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #0000ff;">bool</span> findcommon2<span style="color: #008000;">&#40;</span><span style="color: #0000ff;">int</span> a<span style="color: #008000;">&#91;</span><span style="color: #008000;">&#93;</span>, <span style="color: #0000ff;">int</span> size1, <span style="color: #0000ff;">int</span> b<span style="color: #008000;">&#91;</span><span style="color: #008000;">&#93;</span>,<span style="color: #0000ff;">int</span> size2<span style="color: #008000;">&#41;</span> <span style="color: #008000;">&#123;</span>     
+                                            <span style="color: #0000ff;">int</span> i<span style="color: #000080;">=</span><span style="color: #0000dd;">0</span>,j<span style="color: #000080;">=</span><span style="color: #0000dd;">0</span><span style="color: #008080;">;</span>      
+                                            <span style="color: #0000ff;">while</span><span style="color: #008000;">&#40;</span>i<span style="color: #000080;">&lt;</span>size1 <span style="color: #000040;">&amp;&amp;</span> j<span style="color: #000080;">&lt;</span>size2<span style="color: #008000;">&#41;</span> <span style="color: #008000;">&#123;</span>           
+                                                                                 <span style="color: #0000ff;">if</span><span style="color: #008000;">&#40;</span>a<span style="color: #008000;">&#91;</span>i<span style="color: #008000;">&#93;</span><span style="color: #000080;">==</span>b<span style="color: #008000;">&#91;</span>j<span style="color: #008000;">&#93;</span><span style="color: #008000;">&#41;</span>     <span style="color: #0000ff;">return</span> <span style="color: #0000ff;">true</span><span style="color: #008080;">;</span>         
+                                                                                 <span style="color: #0000ff;">if</span><span style="color: #008000;">&#40;</span>a<span style="color: #008000;">&#91;</span>i<span style="color: #008000;">&#93;</span><span style="color: #000080;">&gt;</span>b<span style="color: #008000;">&#91;</span>j<span style="color: #008000;">&#93;</span><span style="color: #008000;">&#41;</span>        j<span style="color: #000040;">++</span><span style="color: #008080;">;</span>
+                                                                                 <span style="color: #0000ff;">if</span><span style="color: #008000;">&#40;</span>a<span style="color: #008000;">&#91;</span>i<span style="color: #008000;">&#93;</span><span style="color: #000080;">&lt;</span>b <span style="color: #008000;">&#91;</span>j<span style="color: #008000;">&#93;</span><span style="color: #008000;">&#41;</span>        i<span style="color: #000040;">++</span><span style="color: #008080;">;</span>      
+                                            <span style="color: #008000;">&#125;</span>      
+<span style="color: #0000ff;">return</span> <span style="color: #0000ff;">false</span><span style="color: #008080;">;</span> 
+<span style="color: #008000;">&#125;</span></pre></div></div>
+
+<p>4,最大子序列问题：</p>
+<p>给定一整数序列A1， A2，&#8230; An （可能有负数），求A1~An的一个子序列Ai~Aj，使得Ai到Aj的和最大<br />
+例如：<br />
+整数序列-2, 11, -4, 13, -5, 2, -5, -3, 12, -9的最大子序列的和为21。<br />
+对于这个问题，最简单也是最容易想到的那就是穷举所有子序列的方法。利用三重循环，依次求出所有子序列的和然后取最大的那个。当然算法复杂度会达到O(n^3)。显然这种方法不是最优的，下面给出一个算法复杂度为O(n)的线性算法实现，算法的来源于Programming Pearls一书。 在给出线性算法之前，先来看一个对穷举算法进行优化的算法，它的算法复杂度为O(n^2)。其实这个算法只是对对穷举算法稍微做了一些修改：其实子序列的和我们并不需要每次都重新计算一遍。假设Sum(i, j)是A[i] &#8230; A[j]的和，那么Sum(i, j+1) = Sum(i, j) + A[j+1]。利用这一个递推，我们就可以得到下面这个算法：</p>
+
+<div class="wp_code"><div class="pre"><pre class="cpp" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #0000ff;">int</span> max_sub<span style="color: #008000;">&#40;</span><span style="color: #0000ff;">int</span> a<span style="color: #008000;">&#91;</span><span style="color: #008000;">&#93;</span>,<span style="color: #0000ff;">int</span> size<span style="color: #008000;">&#41;</span> <span style="color: #008000;">&#123;</span>     
+                     <span style="color: #0000ff;">int</span> i,j,v,max<span style="color: #000080;">=</span>a<span style="color: #008000;">&#91;</span><span style="color: #0000dd;">0</span><span style="color: #008000;">&#93;</span><span style="color: #008080;">;</span>     
+                     <span style="color: #0000ff;">for</span><span style="color: #008000;">&#40;</span>i<span style="color: #000080;">=</span><span style="color: #0000dd;">0</span><span style="color: #008080;">;</span>i<span style="color: #000080;">&lt;</span>size <span style="color: #008080;">;</span>i<span style="color: #000040;">++</span><span style="color: #008000;">&#41;</span><span style="color: #008000;">&#123;</span>           
+                                v<span style="color: #000080;">=</span><span style="color: #0000dd;">0</span><span style="color: #008080;">;</span>           
+                                <span style="color: #0000ff;">for</span><span style="color: #008000;">&#40;</span>j<span style="color: #000080;">=</span>i<span style="color: #008080;">;</span>j<span style="color: #000080;">&lt;</span>size<span style="color: #008080;">;</span>j<span style="color: #000040;">++</span><span style="color: #008000;">&#41;</span><span style="color: #008000;">&#123;</span>               
+                                             v<span style="color: #000080;">=</span>v<span style="color: #000040;">+</span>a<span style="color: #008000;">&#91;</span>j<span style="color: #008000;">&#93;</span><span style="color: #008080;">;</span><span style="color: #666666;">//Sum(i, j+1) = Sum(i, j) + A[j+1]  </span>
+                                             <span style="color: #0000ff;">if</span><span style="color: #008000;">&#40;</span>v<span style="color: #000080;">&gt;</span>max<span style="color: #008000;">&#41;</span>      max<span style="color: #000080;">=</span>v<span style="color: #008080;">;</span>           
+                                <span style="color: #008000;">&#125;</span>      
+                      <span style="color: #008000;">&#125;</span>      
+                      <span style="color: #0000ff;">return</span> max<span style="color: #008080;">;</span> 
+<span style="color: #008000;">&#125;</span>
+<span style="color: #000080;">&lt;</span><span style="color: #000040;">/</span>size<span style="color: #000080;">&gt;</span></pre></div></div>
+
+</div><div id="part_4" style="display:none;"><p>那怎样才能达到线性复杂度呢？这里运用动态规划的思想。先看一下源代码实现：</p>
+
+<div class="wp_code"><div class="pre"><pre class="cpp" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #0000ff;">int</span> max_sub2<span style="color: #008000;">&#40;</span><span style="color: #0000ff;">int</span> a<span style="color: #008000;">&#91;</span><span style="color: #008000;">&#93;</span>, <span style="color: #0000ff;">int</span> size<span style="color: #008000;">&#41;</span> <span style="color: #008000;">&#123;</span>     
+                    <span style="color: #0000ff;">int</span> i,max<span style="color: #000080;">=</span><span style="color: #0000dd;">0</span>,temp_sum<span style="color: #000080;">=</span><span style="color: #0000dd;">0</span><span style="color: #008080;">;</span>      
+                    <span style="color: #0000ff;">for</span><span style="color: #008000;">&#40;</span>i<span style="color: #000080;">=</span><span style="color: #0000dd;">0</span><span style="color: #008080;">;</span>i<span style="color: #000080;">&lt;</span>size <span style="color: #008080;">;</span>i<span style="color: #000040;">++</span><span style="color: #008000;">&#41;</span> <span style="color: #008000;">&#123;</span>           
+                                 temp_sum<span style="color: #000040;">+</span><span style="color: #000080;">=</span>a<span style="color: #008000;">&#91;</span>i<span style="color: #008000;">&#93;</span><span style="color: #008080;">;</span>           
+                                 <span style="color: #0000ff;">if</span><span style="color: #008000;">&#40;</span>temp_sum<span style="color: #000080;">&gt;</span>max<span style="color: #008000;">&#41;</span>     max<span style="color: #000080;">=</span>temp_sum<span style="color: #008080;">;</span>           
+                                 <span style="color: #0000ff;">else</span> <span style="color: #0000ff;">if</span><span style="color: #008000;">&#40;</span>temp_sum<span style="color: #000040;">&amp;</span>lt<span style="color: #008080;">;</span><span style="color: #0000dd;">0</span><span style="color: #008000;">&#41;</span>    temp_sum<span style="color: #000080;">=</span><span style="color: #0000dd;">0</span><span style="color: #008080;">;</span>      
+                    <span style="color: #008000;">&#125;</span>      
+                    <span style="color: #0000ff;">return</span> max<span style="color: #008080;">;</span> 
+<span style="color: #008000;">&#125;</span>
+<span style="color: #000080;">&lt;</span><span style="color: #000040;">/</span>size<span style="color: #000080;">&gt;</span></pre></div></div>
+
+<p>在这一遍扫描数组当中，从左到右记录当前子序列的和temp_sum，若这个和不断增加，那么最大子序列的和max也不断增加(不断更新max)。如果往前扫描中遇到负数，那么当前子序列的和将会减小。此时temp_sum 将会小于max，当然max也就不更新。如果temp_sum降到0时，说明前面已经扫描的那一段就可以抛弃了，这时将temp_sum置为0。然后，temp_sum将从后面开始将这个子段进行分析，若有比当前max大的子段，继续更新max。这样一趟扫描结果也就出来了。</p>
+<p>5, 找出单向链表的中间结点 </p>
+<p>这道题和解判断链表是否存在环，我用的是非常类似的方法，只不过结束循环的条件和函数返回值不一样罢了。设置两个指针p1，p2。每次循环p1向前走一步，p2向前走两步。当p2到达链表的末尾时，p1指向的是链表的中间。</p>
+
+<div class="wp_code"><div class="pre"><pre class="cpp" style="font-family:'Times New Roman',Garamond, Times;">link<span style="color: #000040;">*</span> mid<span style="color: #008000;">&#40;</span>link<span style="color: #000040;">*</span> head<span style="color: #008000;">&#41;</span> <span style="color: #008000;">&#123;</span>       
+                     link<span style="color: #000040;">*</span> p1,<span style="color: #000040;">*</span>p2<span style="color: #008080;">;</span>       
+                     p1<span style="color: #000080;">=</span>p2<span style="color: #000080;">=</span>head<span style="color: #008080;">;</span>        
+                     <span style="color: #0000ff;">if</span><span style="color: #008000;">&#40;</span>head<span style="color: #000080;">==</span><span style="color: #0000ff;">NULL</span> <span style="color: #000040;">||</span> head<span style="color: #000040;">-</span><span style="color: #000080;">&gt;</span>next<span style="color: #000080;">==</span><span style="color: #0000ff;">NULL</span><span style="color: #008000;">&#41;</span>   <span style="color: #0000ff;">return</span> head<span style="color: #008080;">;</span>  
+                     <span style="color: #0000ff;">do</span> <span style="color: #008000;">&#123;</span>              
+                              p1<span style="color: #000080;">=</span>p1<span style="color: #000040;">-</span><span style="color: #000080;">&gt;</span>next<span style="color: #008080;">;</span>               p2<span style="color: #000080;">=</span>p2<span style="color: #000040;">-</span><span style="color: #000080;">&gt;</span>next<span style="color: #000040;">-</span><span style="color: #000080;">&gt;</span>next<span style="color: #008080;">;</span>
+                     <span style="color: #008000;">&#125;</span> <span style="color: #0000ff;">while</span><span style="color: #008000;">&#40;</span>p2 <span style="color: #000040;">&amp;&amp;</span> p2<span style="color: #000040;">-</span><span style="color: #000080;">&gt;</span>next<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>       
+                      <span style="color: #0000ff;">return</span> p1<span style="color: #008080;">;</span> 
+<span style="color: #008000;">&#125;</span></pre></div></div>
+
+</div><div id="part_5" style="display:none;"><p>6,按单词反转字符串 </p>
+<p>并不是简单的字符串反转，而是按给定字符串里的单词将字符串倒转过来，就是说字符串里面的单词还是保持原来的顺序，这里的每个单词用空格分开。例如：Here is www.fishksy.com.cn，经过反转后变为：www.fishksy.com.cn is Here</p>
+<p>如果只是简单的将所有字符串翻转的话，可以遍历字符串，将第一个字符和最后一个交换，第二个和倒数第二个交换，依次循环。其实按照单词反转的话可以在第一遍遍历的基础上，再遍历一遍字符串，对每一个单词再反转一次。这样每个单词又恢复了原来的顺序。</p>
+
+<div class="wp_code"><div class="pre"><pre class="cpp" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #0000ff;">char</span><span style="color: #000040;">*</span> reverse_word<span style="color: #008000;">&#40;</span><span style="color: #0000ff;">const</span> <span style="color: #0000ff;">char</span><span style="color: #000040;">*</span> str<span style="color: #008000;">&#41;</span><span style="color: #008000;">&#123;</span>
+                     <span style="color: #0000ff;">int</span> len <span style="color: #000080;">=</span> <span style="color: #0000dd;">strlen</span><span style="color: #008000;">&#40;</span>str<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+                     <span style="color: #0000ff;">char</span><span style="color: #000040;">*</span> restr <span style="color: #000080;">=</span> <span style="color: #0000dd;">new</span> <span style="color: #0000ff;">char</span><span style="color: #008000;">&#91;</span>len<span style="color: #000040;">+</span><span style="color: #0000dd;">1</span><span style="color: #008000;">&#93;</span><span style="color: #008080;">;</span>
+                     <span style="color: #0000dd;">strcpy</span><span style="color: #008000;">&#40;</span>restr,str<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+                     <span style="color: #0000ff;">int</span> i,j<span style="color: #008080;">;</span>
+                     <span style="color: #0000ff;">for</span><span style="color: #008000;">&#40;</span>i<span style="color: #000080;">=</span><span style="color: #0000dd;">0</span>,j<span style="color: #000080;">=</span>len<span style="color: #000040;">-</span><span style="color: #0000dd;">1</span><span style="color: #008080;">;</span>i<span style="color: #000080;">&lt;</span>j <span style="color: #008080;">;</span>i<span style="color: #000040;">++</span>,j<span style="color: #000040;">--</span><span style="color: #008000;">&#41;</span><span style="color: #008000;">&#123;</span>
+                                              <span style="color: #0000ff;">char</span> temp<span style="color: #000080;">=</span>restr<span style="color: #008000;">&#91;</span>i<span style="color: #008000;">&#93;</span><span style="color: #008080;">;</span>
+                                              restr<span style="color: #008000;">&#91;</span>i<span style="color: #008000;">&#93;</span><span style="color: #000080;">=</span>restr<span style="color: #008000;">&#91;</span>j<span style="color: #008000;">&#93;</span><span style="color: #008080;">;</span>
+                                              restr<span style="color: #008000;">&#91;</span>j<span style="color: #008000;">&#93;</span><span style="color: #000080;">=</span>temp<span style="color: #008080;">;</span>
+                     <span style="color: #008000;">&#125;</span>
+                     <span style="color: #0000ff;">int</span> k<span style="color: #000080;">=</span><span style="color: #0000dd;">0</span><span style="color: #008080;">;</span>
+                     <span style="color: #0000ff;">while</span><span style="color: #008000;">&#40;</span>k<span style="color: #000080;">&lt;</span>len<span style="color: #008000;">&#41;</span>  <span style="color: #008000;">&#123;</span>
+                                               i<span style="color: #000080;">=</span>j<span style="color: #000080;">=</span>k<span style="color: #008080;">;</span>
+                                               <span style="color: #0000ff;">while</span><span style="color: #008000;">&#40;</span>restr<span style="color: #008000;">&#91;</span>j<span style="color: #008000;">&#93;</span><span style="color: #000040;">!</span><span style="color: #000080;">=</span><span style="color: #FF0000;">' '</span> <span style="color: #000040;">&amp;&amp;</span> restr<span style="color: #008000;">&#91;</span>j<span style="color: #008000;">&#93;</span><span style="color: #000040;">!</span><span style="color: #000080;">=</span><span style="color: #FF0000;">''</span> <span style="color: #008000;">&#41;</span>｛
+                                               j<span style="color: #000040;">++</span><span style="color: #008080;">;</span>
+                                               k<span style="color: #000080;">=</span>j<span style="color: #000040;">+</span><span style="color: #0000dd;">1</span><span style="color: #008080;">;</span>
+                                               j<span style="color: #000040;">--</span><span style="color: #008080;">;</span>
+                                               <span style="color: #008000;">&#125;</span>
+                                               <span style="color: #0000ff;">for</span><span style="color: #008000;">&#40;</span><span style="color: #008080;">;</span>i<span style="color: #000080;">&lt;</span>j<span style="color: #008080;">;</span>i<span style="color: #000040;">++</span>,j<span style="color: #000040;">--</span><span style="color: #008000;">&#41;</span><span style="color: #008000;">&#123;</span>
+                                                               <span style="color: #0000ff;">char</span> temp<span style="color: #000080;">=</span>restr<span style="color: #008000;">&#91;</span>i<span style="color: #008000;">&#93;</span><span style="color: #008080;">;</span>
+                                                               restr<span style="color: #008000;">&#91;</span>i<span style="color: #008000;">&#93;</span><span style="color: #000080;">=</span>restr<span style="color: #008000;">&#91;</span>j<span style="color: #008000;">&#93;</span><span style="color: #008080;">;</span>
+                                                               restr<span style="color: #008000;">&#91;</span>j<span style="color: #008000;">&#93;</span><span style="color: #000080;">=</span>temp<span style="color: #008080;">;</span>
+                                              <span style="color: #008000;">&#125;</span>
+                       <span style="color: #008000;">&#125;</span>
+     <span style="color: #0000ff;">return</span> restr<span style="color: #008080;">;</span>
+<span style="color: #008000;">&#125;</span></pre></div></div>
+
+<p>如果考虑空间和时间的优化的话，当然可以将上面代码里两个字符串交换部分改为异或实现。</p>
+</div><div id="part_6" style="display:none;"><p>例如将 char temp=restr[i];       restr[i]=restr[j];         restr[j]=temp;<br />
+改为<br />
+           restr[i]^=restr[j];        restr[j]^=restr[i];        restr[i]^=restr[j];</p>
+<p>7,字符串反转 </p>
+<p>我没有记错的话是一道MSN的笔试题，网上无意中看到的，拿来做了一下。题目是这样的，给定一个字符串，一个这个字符串的子串，将第一个字符串反转，但保留子串的顺序不变。例如：</p>
+<p>输入：第一个字符串: &#8220;This is fishsky &#8216;s Chinese site: http://www.fishsky.com.cn/cn&#8221;</p>
+<p>子串: &#8220;fishsky&#8221;</p>
+<p>输出： &#8220;nc/nc.moc.fishsky.www//:ptth :etis esenihC s&#8217;fishsky si sihT&#8221;</p>
+<p>一般的方法是先扫描一边第一个字符串，然后用stack把它反转，同时记录下子串出现的位置。然后再扫描一遍把记录下来的子串再用stack反转。我用的方法是用一遍扫描数组的方法。扫描中如果发现子串，就将子串倒过来压入堆栈。</p>
+<p>最后再将堆栈里的字符弹出，这样子串又恢复了原来的顺序。源代码如下：</p>
+
+<div class="wp_code"><div class="pre"><pre class="cpp" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #339900;">#include &lt;iostream&gt;</span>
+<span style="color: #339900;">#include &lt;cassert&gt;</span>
+<span style="color: #339900;">#include &lt;stack&gt;</span>
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span> std<span style="color: #008080;">;</span>
+<span style="color: #0000ff;">const</span> <span style="color: #0000ff;">char</span><span style="color: #000040;">*</span> reverse<span style="color: #008000;">&#40;</span><span style="color: #0000ff;">const</span> <span style="color: #0000ff;">char</span><span style="color: #000040;">*</span> s1, <span style="color: #0000ff;">const</span> <span style="color: #0000ff;">char</span><span style="color: #000040;">*</span> token<span style="color: #008000;">&#41;</span>
+<span style="color: #008000;">&#123;</span>
+       <span style="color: #0000dd;">assert</span><span style="color: #008000;">&#40;</span>s1 <span style="color: #000040;">&amp;&amp;</span> token<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+       stack<span style="color: #000080;">&lt;</span><span style="color: #0000ff;">char</span><span style="color: #000080;">&gt;</span> stack1<span style="color: #008080;">;</span>
+       <span style="color: #0000ff;">const</span> <span style="color: #0000ff;">char</span><span style="color: #000040;">*</span> ptoken <span style="color: #000080;">=</span> token, <span style="color: #000040;">*</span>head <span style="color: #000080;">=</span> s1, <span style="color: #000040;">*</span>rear <span style="color: #000080;">=</span> s1<span style="color: #008080;">;</span>
+       <span style="color: #0000ff;">while</span> <span style="color: #008000;">&#40;</span><span style="color: #000040;">*</span>head <span style="color: #000040;">!</span><span style="color: #000080;">=</span> <span style="color: #FF0000;">''</span><span style="color: #008000;">&#41;</span><span style="color: #008000;">&#123;</span>
+              <span style="color: #0000ff;">while</span><span style="color: #008000;">&#40;</span><span style="color: #000040;">*</span>head<span style="color: #000040;">!</span><span style="color: #000080;">=</span> <span style="color: #FF0000;">''</span> <span style="color: #000040;">&amp;&amp;</span> <span style="color: #000040;">*</span>ptoken <span style="color: #000080;">==</span> <span style="color: #000040;">*</span>head<span style="color: #008000;">&#41;</span> <span style="color: #008000;">&#123;</span>
+                 ptoken<span style="color: #000040;">++</span><span style="color: #008080;">;</span>
+                 head<span style="color: #000040;">++</span><span style="color: #008080;">;</span>
+              <span style="color: #008000;">&#125;</span>
+              <span style="color: #0000ff;">if</span><span style="color: #008000;">&#40;</span><span style="color: #000040;">*</span>ptoken <span style="color: #000080;">==</span> <span style="color: #FF0000;">''</span><span style="color: #008000;">&#41;</span><span style="color: #008000;">&#123;</span><span style="color: #666666;">//contain the token</span>
+                 <span style="color: #0000ff;">const</span> <span style="color: #0000ff;">char</span><span style="color: #000040;">*</span> p<span style="color: #008080;">;</span>
+                 <span style="color: #0000ff;">for</span><span style="color: #008000;">&#40;</span>p<span style="color: #000080;">=</span>head<span style="color: #000040;">-</span><span style="color: #0000dd;">1</span><span style="color: #008080;">;</span>p<span style="color: #000080;">&gt;=</span>rear<span style="color: #008080;">;</span>p<span style="color: #000040;">--</span><span style="color: #008000;">&#41;</span>    stack1.<span style="color: #007788;">push</span><span style="color: #008000;">&#40;</span><span style="color: #000040;">*</span>p<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+                 ptoken <span style="color: #000080;">=</span> token<span style="color: #008080;">;</span>
+                 rear <span style="color: #000080;">=</span> head<span style="color: #008080;">;</span>
+              <span style="color: #008000;">&#125;</span>
+              <span style="color: #0000ff;">else</span><span style="color: #008000;">&#123;</span>
+                 stack1.<span style="color: #007788;">push</span><span style="color: #008000;">&#40;</span><span style="color: #000040;">*</span>rear<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+                 head<span style="color: #000080;">=</span><span style="color: #000040;">++</span>rear<span style="color: #008080;">;</span>
+                 ptoken <span style="color: #000080;">=</span> token<span style="color: #008080;">;</span>
+              <span style="color: #008000;">&#125;</span>
+       <span style="color: #008000;">&#125;</span>
+ <span style="color: #0000ff;">char</span> <span style="color: #000040;">*</span> return_v <span style="color: #000080;">=</span> <span style="color: #0000dd;">new</span> <span style="color: #0000ff;">char</span><span style="color: #008000;">&#91;</span><span style="color: #0000dd;">strlen</span><span style="color: #008000;">&#40;</span>s1<span style="color: #008000;">&#41;</span><span style="color: #000040;">+</span><span style="color: #0000dd;">1</span><span style="color: #008000;">&#93;</span><span style="color: #008080;">;</span>
+       <span style="color: #0000ff;">int</span> i<span style="color: #000080;">=</span><span style="color: #0000dd;">0</span><span style="color: #008080;">;</span>
+       <span style="color: #0000ff;">while</span><span style="color: #008000;">&#40;</span><span style="color: #000040;">!</span>stack1.<span style="color: #007788;">empty</span><span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span><span style="color: #008000;">&#41;</span> <span style="color: #008000;">&#123;</span>
+              return_v<span style="color: #008000;">&#91;</span>i<span style="color: #000040;">++</span><span style="color: #008000;">&#93;</span> <span style="color: #000080;">=</span> stack1.<span style="color: #007788;">top</span><span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+              stack1.<span style="color: #007788;">pop</span><span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+       <span style="color: #008000;">&#125;</span>
+       return_v<span style="color: #008000;">&#91;</span>i<span style="color: #008000;">&#93;</span><span style="color: #000080;">=</span><span style="color: #FF0000;">''</span><span style="color: #008080;">;</span>
+       <span style="color: #0000ff;">return</span> return_v<span style="color: #008080;">;</span>
+<span style="color: #008000;">&#125;</span>
+<span style="color: #0000ff;">int</span> main<span style="color: #008000;">&#40;</span><span style="color: #0000ff;">int</span> argc, <span style="color: #0000ff;">char</span><span style="color: #000040;">*</span> argv<span style="color: #008000;">&#91;</span><span style="color: #008000;">&#93;</span><span style="color: #008000;">&#41;</span><span style="color: #008000;">&#123;</span>
+&nbsp;
+       <span style="color: #0000dd;">cout</span><span style="color: #000080;">&lt;</span> <span style="color: #000080;">&lt;</span><span style="color: #FF0000;">&quot;This is fishsky 's Chinese site: http://www.fishsky.com.cn/cn&quot;</span><span style="color: #008080;">;</span>
+       <span style="color: #0000dd;">cout</span><span style="color: #000080;">&lt;&lt;</span>reverse<span style="color: #008000;">&#40;</span><span style="color: #FF0000;">&quot;This is fishsky's Chinese site: http://www. fishsky.com.cn/cn&quot;</span>,<span style="color: #FF0000;">&quot; fishsky &quot;</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+       <span style="color: #0000ff;">return</span> <span style="color: #0000dd;">0</span><span style="color: #008080;">;</span>
+<span style="color: #008000;">&#125;</span></pre></div></div>
+
+</div><div id="part_7" style="display:none;"><p>8, 删除数组中重复的数字 </p>
+<p>问题：一个动态长度可变的数字序列，以数字0为结束标志，要求将重复的数字用一个数字代替，例如：</p>
+<p>将数组 1,1,1,2,2,2,2,2,7,7,1,5,5,5,0 转变成1,2,7,1,5,0 问题比较简单，要注意的是这个数组是动态的。所以避免麻烦我还是用了STL的vector。</p>
+
+<div class="wp_code"><div class="pre"><pre class="cpp" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #339900;">#include &lt;iostream&gt;</span>
+<span style="color: #339900;">#include &lt;vector&gt;</span>
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span> std<span style="color: #008080;">;</span>
+<span style="color: #666666;">//remove the duplicated numbers in an intger array, the array was end with 0;</span>
+<span style="color: #666666;">//e.g. 1,1,1,2,2,5,4,4,4,4,1,0 ---&gt;1,2,5,4,1,0</span>
+<span style="color: #0000ff;">void</span> <span style="color: #0000ff;">static</span> remove_duplicated<span style="color: #008000;">&#40;</span><span style="color: #0000ff;">int</span> a<span style="color: #008000;">&#91;</span><span style="color: #008000;">&#93;</span>, vector<span style="color: #000080;">&lt;</span><span style="color: #0000ff;">int</span><span style="color: #000080;">&gt;</span><span style="color: #000040;">&amp;</span> _st<span style="color: #008000;">&#41;</span>
+<span style="color: #008000;">&#123;</span>
+       _st.<span style="color: #007788;">push_back</span><span style="color: #008000;">&#40;</span>a<span style="color: #008000;">&#91;</span><span style="color: #0000dd;">0</span><span style="color: #008000;">&#93;</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+       <span style="color: #0000ff;">for</span><span style="color: #008000;">&#40;</span><span style="color: #0000ff;">int</span> i<span style="color: #000080;">=</span><span style="color: #0000dd;">1</span><span style="color: #008080;">;</span>_st<span style="color: #008000;">&#91;</span>_st.<span style="color: #007788;">size</span><span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span><span style="color: #000040;">-</span><span style="color: #0000dd;">1</span><span style="color: #008000;">&#93;</span><span style="color: #000040;">!</span><span style="color: #000080;">=</span><span style="color: #0000dd;">0</span><span style="color: #008080;">;</span>i<span style="color: #000040;">++</span><span style="color: #008000;">&#41;</span>
+       <span style="color: #008000;">&#123;</span>
+              <span style="color: #0000ff;">if</span><span style="color: #008000;">&#40;</span>a<span style="color: #008000;">&#91;</span>i<span style="color: #000040;">-</span><span style="color: #0000dd;">1</span><span style="color: #008000;">&#93;</span><span style="color: #000040;">!</span><span style="color: #000080;">=</span>a<span style="color: #008000;">&#91;</span>i<span style="color: #008000;">&#93;</span><span style="color: #008000;">&#41;</span>
+                 _st.<span style="color: #007788;">push_back</span><span style="color: #008000;">&#40;</span>a<span style="color: #008000;">&#91;</span>i<span style="color: #008000;">&#93;</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+       <span style="color: #008000;">&#125;</span>
+<span style="color: #008000;">&#125;</span>
+<span style="color: #000080;">&lt;</span><span style="color: #000040;">/</span><span style="color: #0000ff;">int</span><span style="color: #000080;">&gt;&lt;</span><span style="color: #000040;">/</span>vector<span style="color: #000080;">&gt;&lt;</span><span style="color: #000040;">/</span>iostream<span style="color: #000080;">&gt;</span></pre></div></div>
+
+<p>当然如果可以改变原来的数组的话，可以不用STL，仅需要指针操作就可以了。下面这个程序将修改原来数组的内容。</p>
+
+<div class="wp_code"><div class="pre"><pre class="cpp" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #0000ff;">void</span> <span style="color: #0000ff;">static</span> remove_duplicated2<span style="color: #008000;">&#40;</span><span style="color: #0000ff;">int</span> a<span style="color: #008000;">&#91;</span><span style="color: #008000;">&#93;</span><span style="color: #008000;">&#41;</span>
+<span style="color: #008000;">&#123;</span>
+       <span style="color: #0000ff;">if</span><span style="color: #008000;">&#40;</span>a<span style="color: #008000;">&#91;</span><span style="color: #0000dd;">0</span><span style="color: #008000;">&#93;</span><span style="color: #000080;">==</span><span style="color: #0000dd;">0</span> <span style="color: #000040;">||</span> a<span style="color: #000080;">==</span><span style="color: #0000ff;">NULL</span><span style="color: #008000;">&#41;</span>  <span style="color: #0000ff;">return</span><span style="color: #008080;">;</span>
+       <span style="color: #0000ff;">int</span> insert<span style="color: #000080;">=</span><span style="color: #0000dd;">1</span>,current<span style="color: #000080;">=</span><span style="color: #0000dd;">1</span><span style="color: #008080;">;</span>
+       <span style="color: #0000ff;">while</span><span style="color: #008000;">&#40;</span>a<span style="color: #008000;">&#91;</span>current<span style="color: #008000;">&#93;</span><span style="color: #000040;">!</span><span style="color: #000080;">=</span><span style="color: #0000dd;">0</span><span style="color: #008000;">&#41;</span>
+       <span style="color: #008000;">&#123;</span>
+              <span style="color: #0000ff;">if</span><span style="color: #008000;">&#40;</span>a<span style="color: #008000;">&#91;</span>current<span style="color: #008000;">&#93;</span><span style="color: #000040;">!</span><span style="color: #000080;">=</span>a<span style="color: #008000;">&#91;</span>current<span style="color: #000040;">-</span><span style="color: #0000dd;">1</span><span style="color: #008000;">&#93;</span><span style="color: #008000;">&#41;</span>
+              <span style="color: #008000;">&#123;</span>
+                 a<span style="color: #008000;">&#91;</span>insert<span style="color: #008000;">&#93;</span><span style="color: #000080;">=</span>a<span style="color: #008000;">&#91;</span>current<span style="color: #008000;">&#93;</span><span style="color: #008080;">;</span>
+                 insert<span style="color: #000040;">++</span><span style="color: #008080;">;</span>
+                 current<span style="color: #000040;">++</span><span style="color: #008080;">;</span>
+              <span style="color: #008000;">&#125;</span>
+              <span style="color: #0000ff;">else</span>
+                 current<span style="color: #000040;">++</span><span style="color: #008080;">;</span>
+       <span style="color: #008000;">&#125;</span>
+       a<span style="color: #008000;">&#91;</span>insert<span style="color: #008000;">&#93;</span><span style="color: #000080;">=</span><span style="color: #0000dd;">0</span><span style="color: #008080;">;</span>
+<span style="color: #008000;">&#125;</span></pre></div></div>
+
+</div><div id="part_8" style="display:none;"><p>9,如何判断一棵二叉树是否是平衡二叉树 </p>
+<p>问题：判断一个二叉排序树是否是平衡二叉树</p>
+<p>解决方案：</p>
+<p>根据平衡二叉树的定义，如果任意节点的左右子树的深度相差不超过1，那这棵树就是平衡二叉树。</p>
+<p>首先编写一个计算二叉树深度的函数，利用递归实现。</p>
+
+<div class="wp_code"><div class="pre"><pre class="cpp" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #0000ff;">template</span><span style="color: #000080;">&lt;</span><span style="color: #0000ff;">typename</span> T<span style="color: #000080;">&gt;</span>
+<span style="color: #0000ff;">static</span> <span style="color: #0000ff;">int</span> Depth<span style="color: #008000;">&#40;</span>BSTreeNode<span style="color: #000080;">&lt;</span>t<span style="color: #000080;">&gt;</span><span style="color: #000040;">*</span> pbs<span style="color: #008000;">&#41;</span>
+<span style="color: #008000;">&#123;</span>
+       <span style="color: #0000ff;">if</span> <span style="color: #008000;">&#40;</span>pbs<span style="color: #000080;">==</span><span style="color: #0000ff;">NULL</span><span style="color: #008000;">&#41;</span>
+              <span style="color: #0000ff;">return</span> <span style="color: #0000dd;">0</span><span style="color: #008080;">;</span>
+       <span style="color: #0000ff;">else</span>
+       <span style="color: #008000;">&#123;</span>
+              <span style="color: #0000ff;">int</span> ld <span style="color: #000080;">=</span> Depth<span style="color: #008000;">&#40;</span>pbs<span style="color: #000040;">-</span><span style="color: #000080;">&gt;</span>left<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+              <span style="color: #0000ff;">int</span> rd <span style="color: #000080;">=</span> Depth<span style="color: #008000;">&#40;</span>pbs<span style="color: #000040;">-</span><span style="color: #000080;">&gt;</span>right<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+              <span style="color: #0000ff;">return</span> <span style="color: #0000dd;">1</span> <span style="color: #000040;">+</span> <span style="color: #008000;">&#40;</span>ld <span style="color: #000080;">&gt;</span>rd <span style="color: #008080;">?</span> ld <span style="color: #008080;">:</span> rd<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+       <span style="color: #008000;">&#125;</span>
+<span style="color: #008000;">&#125;</span>
+<span style="color: #000080;">&lt;</span><span style="color: #000040;">/</span>t<span style="color: #000080;">&gt;&lt;</span><span style="color: #000040;">/</span><span style="color: #0000ff;">typename</span><span style="color: #000080;">&gt;</span></pre></div></div>
+
+<p>下面是利用递归判断左右子树的深度是否相差1来判断是否是平衡二叉树的函数：</p>
+
+<div class="wp_code"><div class="pre"><pre class="cpp" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #0000ff;">template</span><span style="color: #000080;">&lt;</span><span style="color: #0000ff;">typename</span> T<span style="color: #000080;">&gt;</span>
+<span style="color: #0000ff;">static</span> <span style="color: #0000ff;">bool</span> isBalance<span style="color: #008000;">&#40;</span>BSTreeNode<span style="color: #000080;">&lt;</span>t<span style="color: #000080;">&gt;</span><span style="color: #000040;">*</span> pbs<span style="color: #008000;">&#41;</span>
+<span style="color: #008000;">&#123;</span>
+       <span style="color: #0000ff;">if</span> <span style="color: #008000;">&#40;</span>pbs<span style="color: #000080;">==</span><span style="color: #0000ff;">NULL</span><span style="color: #008000;">&#41;</span>
+              <span style="color: #0000ff;">return</span> <span style="color: #0000ff;">true</span><span style="color: #008080;">;</span>
+       <span style="color: #0000ff;">int</span> dis <span style="color: #000080;">=</span> Depth<span style="color: #008000;">&#40;</span>pbs<span style="color: #000040;">-</span><span style="color: #000080;">&gt;</span>left<span style="color: #008000;">&#41;</span> <span style="color: #000040;">-</span> Depth<span style="color: #008000;">&#40;</span>pbs<span style="color: #000040;">-</span><span style="color: #000080;">&gt;</span>right<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+       <span style="color: #0000ff;">if</span> <span style="color: #008000;">&#40;</span>dis<span style="color: #000080;">&gt;</span><span style="color: #0000dd;">1</span> <span style="color: #000040;">||</span> dis<span style="color: #000080;">&lt;</span> <span style="color: #000040;">-</span><span style="color: #0000dd;">1</span> <span style="color: #008000;">&#41;</span>
+              <span style="color: #0000ff;">return</span> <span style="color: #0000ff;">false</span><span style="color: #008080;">;</span>
+       <span style="color: #0000ff;">else</span>
+              <span style="color: #0000ff;">return</span> isBalance<span style="color: #008000;">&#40;</span>pbs<span style="color: #000040;">-</span><span style="color: #000080;">&gt;</span>left<span style="color: #008000;">&#41;</span> <span style="color: #000040;">&amp;&amp;</span> isBalance<span style="color: #008000;">&#40;</span>pbs<span style="color: #000040;">-</span><span style="color: #000080;">&gt;</span>right<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+<span style="color: #008000;">&#125;</span>
+<span style="color: #000080;">&lt;</span><span style="color: #000040;">/</span>t<span style="color: #000080;">&gt;&lt;</span><span style="color: #000040;">/</span><span style="color: #0000ff;">typename</span><span style="color: #000080;">&gt;</span></pre></div></div>
+
+<p></char></stack></cassert></iostream></code></j></code></b></size1></code></size1></code></p>
+</div><div id="paginate"><label id="li_1" onclick="javascript:show_page(1,8,this);" style="font-size:30px;font-weight:bold" onmouseover="this.style.cursor='pointer'">1</label><label id="li_2" onclick="javascript:show_page(2,8,this);"  onmouseover="this.style.cursor='pointer'">2</label><label id="li_3" onclick="javascript:show_page(3,8,this);"  onmouseover="this.style.cursor='pointer'">3</label><label id="li_4" onclick="javascript:show_page(4,8,this);"  onmouseover="this.style.cursor='pointer'">4</label><label id="li_5" onclick="javascript:show_page(5,8,this);"  onmouseover="this.style.cursor='pointer'">5</label><label id="li_6" onclick="javascript:show_page(6,8,this);"  onmouseover="this.style.cursor='pointer'">6</label><label id="li_7" onclick="javascript:show_page(7,8,this);"  onmouseover="this.style.cursor='pointer'">7</label><label id="li_8" onclick="javascript:show_page(8,8,this);"  onmouseover="this.style.cursor='pointer'">8</label></div> 
+			<div align="center">1 month ago, this page was being read. </div>
+			<p class="tags"><a href="http://www.xieziming.com/tag/cheng-xu" rel="tag">程序</a><br /></p>  
+    </div><!-- /entry -->                                   
+		<div class="postbottom"></div>		                              
+		</div><!-- /post -->	
+
+<div class="postrelated">
+			<table width="100%" >				
+
+					<tr><td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/78.html" rel="bookmark" title="VC + Matlab + 数据库">VC + Matl...</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7620.html" rel="bookmark" title="遍历windows窗口控件">遍历windo...</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/4743.html" rel="bookmark" title="为博客添加flash批量上传功能">为博客添加...</a></td>
+
+				<td align="right" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7446.html" rel="bookmark" title="DOM">DOM</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7409.html" rel="bookmark" title="Http协议">Http协议</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/2438.html" rel="bookmark" title="mysql负载均衡配置">mysql负载...</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7693.html" rel="bookmark" title="Solaris内存统计">Solaris内存统...</a></td>
+
+				<td align="right" class="dashedline_related"><a href="http://www.xieziming.com/archives/6805.html" rel="bookmark" title="Java垃圾回收算法">Java垃圾回...</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/2225.html" rel="bookmark" title="函数传递参数的理解">函数传递参数的理解</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/2445.html" rel="bookmark" title="J2EE回忆">J2EE回忆</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/7457.html" rel="bookmark" title="Firefox插件制作">Firefo...</a></td>
+
+				<td align="right" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7626.html" rel="bookmark" title="控制window程序">控制window...</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/2220.html" rel="bookmark" title="软件项目开发流程">软件项目开发流程</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/2475.html" rel="bookmark" title="程序员须知（二）">程序员须知（...</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/5528.html" rel="bookmark" title="网站配色表">网站配色表</a></td>
+
+				<td align="right" class="dashedline_related"><a href="http://www.xieziming.com/archives/7636.html" rel="bookmark" title="控制Windows窗体(C#)">控制Window...</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/7000.html" rel="bookmark" title="Java IO类">Java ...</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7170.html" rel="bookmark" title="链接器和装入器">链接器和装入...</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/3122.html" rel="bookmark" title="C++ 类访问控制探讨">C++ 类访问控制探讨</a></td>
+
+				<td align="right" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7464.html" rel="bookmark" title="IE插件">IE插件</a></td></tr>
+
+		</table>
+</div>
+
+		<div id="comments">
+
+<!-- START COMMENT FORMS -->
+
+
+		</div><!--/comments-->		
+
+</div><!-- /content -->
+<div id="sidebar">			
+			<a class="subscribe" href="http://www.xieziming.com/feed" title="Posts RSS">Subscribe</a>			
+			<div id="search">	
+	<form name="searchform" id="searchform" method="get" action="http://www.xieziming.com/index.php">
+		<input class="text" type="text" name="s" id="s" value=""/>
+		<input class="submit" type="image" src="http://www.xieziming.com/wp-content/themes/ziming/img/submit.jpg" value="search" />
+	</form>	
+</div><!-- /search -->			
+			<div id="widgets">			
+			<div class="widget"><h3>Calendar</h3>
+<table id="wp-calendar">
+  									<caption>December 2016</caption>
+  									<thead>
+                    <tr><th scope="col" title="S">S</th><th scope="col" title="M">M</th><th scope="col" title="T">T</th><th scope="col" title="W">W</th><th scope="col" title="T">T</th><th scope="col" title="F">F</th><th scope="col" title="S">S</th></tr></thead><tbody><tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>1</td><td>2</td><td>3</td></tr><tr><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td></tr><tr><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td></tr><tr><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">18<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">《血战钢锯岭》</span><br/><span class="time" style="color:#000000; " > Time : 21:18 - 23:28</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">晚上和小锅去看，蛮感人的。吃完去沙湾吃猪杂粥，应该是我在那吃到的最新鲜的一次了。</p></span></a></span></td><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">19<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">CentOS</span><br/><span class="time" style="color:#000000; " > Time : 14:11 - 18:11</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">终于有点时间来把那盒子的win7转成CentOS来做server。配置vsftp花了我太多的时间。。。</p></span></a></span></td><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td></tr><tr><td>25</td><td>26</td><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td></tr><tr><td colspan="3" id="prev"><a href="http://www.xieziming.com/archives/2468.html?month=nov&yr=2016">&laquo; Prev</a></td><td colspan="4" id="next"><a href="http://www.xieziming.com/archives/2468.html?month=jan&yr=2017">Next &raquo;</a></td></tr></tbody></table>
+<div class="widgetbottom"></div></div><!--/widget-->				
+					      		<div class="widget">
+ 							<h3>Recent Posts</h3>
+							<ul>
+           				<li><a href="http://www.xieziming.com/archives/9579.html" class="dashedline" title="闽南 · 泉州">闽南 &middot; 泉州</a></li><li><a href="http://www.xieziming.com/archives/9578.html" class="dashedline" title="顺化 · HUE">顺化 &middot; HUE</a></li><li><a href="http://www.xieziming.com/archives/9577.html" class="dashedline" title="会安 · 春卷">会安 &middot; 春卷</a></li><li><a href="http://www.xieziming.com/archives/9576.html" class="dashedline" title="会安 · 夜灯">会安 &middot; 夜灯</a></li><li><a href="http://www.xieziming.com/archives/9575.html" class="dashedline" title="会安古镇">会安古镇</a></li><li><a href="http://www.xieziming.com/archives/9573.html" class="dashedline" title="岘港">岘港</a></li><li><a href="http://www.xieziming.com/archives/9535.html" class="dashedline" title="罗马">罗马</a></li><li><a href="http://www.xieziming.com/archives/9534.html" class="dashedline" title="卢浮宫">卢浮宫</a></li>						
+							</ul>
+      				<div class="widgetbottom"></div>
+	    		</div>
+	    			        
+        	      		<div class="widget">
+ 							<h3>Rand Posts</h3>
+							<ul>
+      						<li><a href="http://www.xieziming.com/archives/8702.html" class="dashedline" title="广州西关">广州西关</a></li><li><a href="http://www.xieziming.com/archives/7303.html" class="dashedline" title="川藏线（十）">川藏线（十）</a></li><li><a href="http://www.xieziming.com/archives/6979.html" class="dashedline" title="红专厂（一）">红专厂（一）</a></li><li><a href="http://www.xieziming.com/archives/4379.html" class="dashedline" title="调戏文字">调戏文字</a></li><li><a href="http://www.xieziming.com/archives/9379.html" class="dashedline" title="悉尼大学（三）">悉尼大学（三）</a></li><li><a href="http://www.xieziming.com/archives/88.html" class="dashedline" title="今天的公开答辩">今天的公开答辩</a></li><li><a href="http://www.xieziming.com/archives/4964.html" class="dashedline" title="草原 & 河">草原 &amp; 河</a></li><li><a href="http://www.xieziming.com/archives/6698.html" class="dashedline" title="Calvin Klein">Calvin Kle...</a></li>	
+							</ul>
+        			<div class="widgetbottom"></div>
+					</div>                 
+          	                       
+			</div><!-- /widgets -->			                       
+</div><!-- /sidebar --></div><!-- /main -->
+<div id="footer">
+<p align="left">© <a href="http://www.miitbeian.gov.cn" target="_blank"> 明 · 明 · 童 · 鞋</a></p>
+<!--74 queries in 2.420 seconds.-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?c2e18b43ec905e3c4ea82c1b57537223";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</div><!-- /footer -->
+</div><!-- /container -->
+<script type='text/javascript' src='http://www.xieziming.com/wp-includes/js/wp-embed.min.js?ver=4.7'></script>
+</body>
+</html>

@@ -1,0 +1,459 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head profile="http://gmpg.org/xfn/11">
+<title>  Java 多线程 &raquo; 谢子明</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="description" content="Java 多线程  " />
+<meta name="keywords" content="谢子明" />
+<link rel="stylesheet" href="http://www.xieziming.com/wp-content/themes/ziming/style.css" type="text/css" media="screen" />
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://www.xieziming.com/feed" />
+<link rel="alternate" type="application/rss+xml" href="http://www.xieziming.com/comments/feed" title="谢子明 Comments RSS feed" />
+<link rel="shortcut icon" href="http://www.xieziming.com/wp-content/themes/ziming/favicon.ico">
+<link rel="Bookmark" href="http://www.xieziming.com/wp-content/themes/ziming/favicon.ico">
+<link rel="pingback" href="http://www.xieziming.com/xmlrpc.php" />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="谢子明 &raquo; Java 多线程 Comments Feed" href="http://www.xieziming.com/archives/6795.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/xieziming.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.7"}};
+			!function(a,b,c){function d(a){var b,c,d,e,f=String.fromCharCode;if(!k||!k.fillText)return!1;switch(k.clearRect(0,0,j.width,j.height),k.textBaseline="top",k.font="600 32px Arial",a){case"flag":return k.fillText(f(55356,56826,55356,56819),0,0),!(j.toDataURL().length<3e3)&&(k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,65039,8205,55356,57096),0,0),b=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,55356,57096),0,0),c=j.toDataURL(),b!==c);case"emoji4":return k.fillText(f(55357,56425,55356,57341,8205,55357,56507),0,0),d=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55357,56425,55356,57341,55357,56507),0,0),e=j.toDataURL(),d!==e}return!1}function e(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i,j=b.createElement("canvas"),k=j.getContext&&j.getContext("2d");for(i=Array("flag","emoji4"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<script type='text/javascript' src='http://www.xieziming.com/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='http://www.xieziming.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<link rel='https://api.w.org/' href='http://www.xieziming.com/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.xieziming.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.xieziming.com/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='OTTO' href='http://www.xieziming.com/archives/5423.html' />
+<link rel='next' title='Happy Chinese New Year' href='http://www.xieziming.com/archives/5438.html' />
+<meta name="generator" content="WordPress 4.7" />
+<link rel="canonical" href="http://www.xieziming.com/archives/6795.html" />
+<link rel='shortlink' href='http://www.xieziming.com/?p=6795' />
+<link rel="alternate" type="application/json+oembed" href="http://www.xieziming.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fxieziming.com%2Farchives%2F6795.html" />
+<link rel="alternate" type="text/xml+oembed" href="http://www.xieziming.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fxieziming.com%2Farchives%2F6795.html&#038;format=xml" />
+ 	<link rel="stylesheet" href="http://www.xieziming.com/wp-content/plugins/live-calendar/live-calendar.css" type="text/css" media="screen" /> 
+<link rel="stylesheet" href="http://www.xieziming.com/wp-content/plugins/wp-code/wp-code.css" type="text/css" media="screen" />
+
+<link rel="stylesheet" href="http://www.xieziming.com/wp-content/plugins/zoom-highslide/highslide.css" type="text/css" media="screen" />
+<script type="text/javascript" src="http://www.xieziming.com/wp-content/plugins/zoom-highslide/js/highslide-full.packed.js"></script>
+<script type="text/javascript">
+	hs.graphicsDir = 'http://www.xieziming.com/wp-content/plugins/zoom-highslide/graphics/';
+	hs.align = 'center';
+	hs.transitions = ['expand', 'crossfade'];
+	hs.outlineType = 'rounded-white';
+  hs.wrapperClassName = 'controls-in-heading';
+	hs.showCredits=false;
+	hs.fadeInOut = true;
+	hs.dimmingOpacity = 0.8;
+
+	// Add the controlbar
+	if (hs.addSlideshow) hs.addSlideshow({
+		//slideshowGroup: 'group1',
+		interval: 4000,
+		repeat: false,
+		useControls: true,
+		fixedControls: false,
+		overlayOptions: {
+			opacity: 1,
+			position: 'top center',
+			hideOnMouseOut: true
+		}
+	});
+</script>
+
+<script type="text/javascript">
+	var widthRestriction = 668; 
+	var heightRestriction = 1000; 
+</script>
+<script type="text/javascript" src="http://www.xieziming.com/wp-content/plugins/zoom-highslide/js/zoom.js"></script>
+	
+<!--script src="http://www.xieziming.com/wp-content/themes/ziming/js/mouse.js" type="text/javascript"></script--> 
+</head>
+<body class="normalbg">
+<div id="container">
+	<div id="head">
+		<div id="nav">
+			<ul>
+				<li class="first"><a href="http://www.xieziming.com" title="首页">首页</a></li>
+				<li class="page_item page-item-2"><a href="http://www.xieziming.com/recent" title="最近">最近</a></li>
+				<li class="page_item page-item-3"><a href="http://www.xieziming.com/photo" title="Photo">映象</a></li>
+				<li class="page_item page-item-4"><a href="http://www.xieziming.com/food" title="Food">美食</a></li>
+				<li class="page_item page-item-5"><a href="http://www.xieziming.com/topic" title="关键字">话题</a></li>
+				<li class="page_item page-item-6"><a href="http://www.xieziming.com/travel" title="Travel">旅行</a></li>
+				<li class="page_item page-item-7"><a href="http://www.xieziming.com/literature" title="Literature">文艺</a></li>
+				<li class="page_item page-item-8"><a href="http://www.xieziming.com/wiki" title="技术维基">维基</a></li>
+				<li class="page_item page-item-9"><a href="http://www.xieziming.com/calendar" title="Calendar">点滴</a></li>
+			</ul>
+		</div><!-- /nav -->		
+	</div><!-- /head -->
+<div id="main" class="altmainbg">
+
+<script type="text/javascript">
+function show_page(id,count,source){
+	for (var i=1;i<=count;i++){
+		if(id != i){
+				jQuery("#part_"+i).hide();
+				document.getElementById("li_"+i).style.fontWeight = "normal";
+				document.getElementById("li_"+i).style.fontSize = "18px";
+		}
+	}
+	jQuery("#part_"+id).show();
+	document.getElementById("li_"+id).style.fontWeight = "bold";
+	document.getElementById("li_"+id).style.fontSize = "30px";
+	jQuery('body,html').animate({scrollTop:0},1000);
+        return false;
+}
+</script>
+<div id="content">
+
+	<div class="post" id="post-6795">
+		<h2 class="title">Java 多线程</h2>
+		<p class="postmetadata">
+			<span class="date">30 January 2011</span>
+			<span class="category">Categoried in <a href="http://www.xieziming.com/topic/coding" rel="category tag">程序</a></span>
+			<span class="comments">0</span>
+			<span class="view">Preview : 253 , Read : 1045 </span>
+			<span class="mail">Index : 3304 </span>
+		</p>
+		<div class="entry">				
+<div id="part_1"><p>1、在Java程序中，JVM负责线程的调度。线程调度是指按照特定的机制为多个线程分配CPU的使用权。<br />
+调度的模式有两种：分时调度和抢占式调度。分时调度是所有线程轮流获得CPU使用权，并平均分配每个线程占用CPU的时间；抢占式调度是根据线程的优先级别来获取CPU的使用权。JVM的线程调度模式采用了抢占式模式。 </p>
+<p>2、Thread类实际上也是实现了Runnable接口的类。<br />
+在启动的多线程的时候，需要先通过Thread类的构造方法Thread(Runnable target) 构造出对象，然后调用Thread对象的start()方法来运行多线程代码。 </p>
+<p>实际上所有的多线程代码都是通过运行Thread的start()方法来运行的。因此，不管是扩展Thread类还是实现Runnable接口来实现多线程，最终还是通过Thread的对象的API来控制线程的，熟悉Thread类的API是进行多线程编程的基础。 </p>
+<p>3、JAVA多线程涉及到2个问题，一个是线程的调度，另一个是线程的同步 </p>
+<p>4、线程的状态有：new、runnable、running、waiting、timed_waiting、blocked、dead </p>
+<p>当执行new Thread(Runnable r)后，新创建出来的线程处于new状态，这种线程不可能执行 </p>
+<p>当执行thread.start()后，线程处于runnable状态，这种情况下只要得到CPU，就可以开始执行了。runnable状态的线程，会接受JVM的调度，进入running状态，但是具体何时会进入这个状态，是随机不可知的 </p>
+<p>running状态中的线程最为复杂，可能会进入runnable、waiting、timed_waiting、blocked、dead状态：<br />
+如果CPU调度给了别的线程，或者执行了Thread.yield()方法，则进入runnable状态，但是也有可能立刻又进入running状态<br />
+如果执行了Thread.sleep(long)，或者thread.join(long)，或者在锁对象上调用object.wait(long)方法，则会进入timed_waiting状态<br />
+如果执行了thread.join()，或者在锁对象上调用了object.wait()方法，则会进入waiting状态<br />
+如果进入了同步方法或者同步代码块，没有获取锁对象的话，则会进入blocked状态 </p>
+<p>处于waiting状态中的线程，如果是因为thread.join()方法进入等待的话，在目标thread执行完毕之后，会回到runnable状态；如果是因为object.wait()方法进入等待的话，在锁对象执行object.notify()或者object.notifyAll()之后会回到runnable状态 </p>
+<p>处于timed_waiting状态中的线程，和waiting状态中的差不多，只不过是设定时间到了，就会回到runnable状态 </p>
+<p>处于blocked状态中的线程，只有获取了锁之后，才会脱离阻塞状态 </p>
+<p>当线程执行完毕，或者抛出了未捕获的异常之后，会进入dead状态，该线程结束 </p>
+</div><div id="part_2" style="display:none;"><p>5、当线程池中线程都具有相同的优先级，调度程序的JVM实现自由选择它喜欢的线程。这时候调度程序的操作有两种可能：一是选择一个线程运行，直到它阻塞或者运行完成为止。二是时间分片，为池内的每个线程提供均等的运行机会。 </p>
+<p>6、设置线程的优先级：线程默认的优先级是创建它的执行线程的优先级。可以更改线程的优先级。 </p>
+<p>JVM从不会改变一个线程的优先级。然而，1-10之间的值是没有保证的。一些JVM可能不能识别10个不同的值，而将这些优先级进行每两个或多个合并，变成少于10个的优先级，则两个或多个优先级的线程可能被映射为一个优先级。 </p>
+<p>7、Thread.yield()方法作用是：暂停当前正在执行的线程对象，并执行其他线程。 yield()应该做的是让当前运行线程回到可运行状态，以允许<strong>具有相同优先级的</strong>其他线程获得运行机会。因此，使用yield()的目的是让相同优先级的线程之间能适当的轮转执行。但是，实际中无法保证yield()达到让步目的，因为让步的线程还有可能被线程调度程序再次选中。 </p>
+<p>yield()<strong>不会</strong>释放锁标志。</p>
+<p>yield()方法执行时，当前线程仍处在可运行状态，所以不可能让出较低优先级的线程些时获得CPU占有权。 在一个运行系统中，如果较高优先级的线程没有调用 sleep 方法，又没有受到 I/O阻塞，那么较低优先级线程只能等待所有较高优先级的线程运行结束，才有机会运行。</p>
+<p>8、另一个问题是线程的同步，这个我感觉比调度更加复杂一些。Java中每个对象都有一个“内置锁”，也有一个内置的“线程表” 。</p>
+<p>当程序运行到非静态的synchronized方法上时，会获得与正在执行代码类的当前实例（this实例）有关的锁；当运行到同步代码块时，获得与声明的对象有关的锁 </p>
+<p>释放锁是指持锁线程退出了synchronized方法或代码块。 当程序运行到synchronized同步方法或代码块时对象锁才起作用。 </p>
+<p>一个对象只有一个锁。所以，如果一个线程获得该锁，就没有其他线程可以获得锁，直到第一个线程释放（或返回）锁。这也意味着任何其他线程都不能进入该对象上的synchronized方法或代码块，直到该锁被释放。 </p>
+<p>9、Thread.sleep(long millis),必须带有一个时间参数。使当前线程(即调用该方法的线程)暂停执行一段时间，让其他线程有机会继续执行，但它并<strong>不释放对象锁</strong>。也就是如果有Synchronized同步块，其他线程仍然不同访问共享数据。注意该方法要捕获异常。</p>
+<p>比如有两个线程同时执行(没有Synchronized)，一个线程优先级为MAX_PRIORITY，另一个为MIN_PRIORITY，如果没有Sleep()方法，只有高优先级的线程执行完成后，低优先级的线程才能执行；但当高优先级的线程sleep(5000)后，低优先级就有机会执行了。 </p>
+<p>总之，sleep()可以使低优先级的线程得到执行的机会，当然也可以让同优先级、高优先级的线程有执行的机会。</p>
+<p>10、</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;">obj.<span style="color: #006633;">wait</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> 
+obj.<span style="color: #006633;">notify</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> 
+obj.<span style="color: #006633;">notifyAll</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span></pre></div></div>
+
+<p>wait()后，线程会释放掉它所占有的“锁标志”，从而使线程所在对象中的其它synchronized数据可被别的线程使用。</p>
+<p>wait()、notify()和notify()因为会对对象的“锁标志”进行操作，所以它们必须在synchronized函数或synchronized　 block中进行调用。如果在non-synchronized函数或non-synchronized　block中进行调用，虽然能编译通过，但在运行时会发生IllegalMonitorStateException的异常。</p>
+<p>与每个对象具有锁一样，每个对象也可以有一个线程列表，他们等待来自该对象的通知。线程通过执行对象上的wait()方法获得这个等待列表。从那时候起，它不再执行任何其他指令，直到调用对象的notify()方法为止。如果多个线程在同一个对象上等待，则将只选择一个线程（不保证以何种顺序）继续执行。如果没有线程等待，则不采取任何特殊操作。 </p>
+</div><div id="part_3" style="display:none;"><p>下面贴几个代码实例说明一下</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> ThreadA <span style="color: #009900;">&#123;</span>
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000066; font-weight: bold;">void</span> main<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> args<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>		
+		ThreadB b <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> ThreadB<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><span style="color: #666666; font-style: italic;">// ThreadB status: new	</span>
+		b.<span style="color: #006633;">start</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><span style="color: #666666; font-style: italic;">// ThreadB status: runnable		</span>
+		<span style="color: #000000; font-weight: bold;">synchronized</span> <span style="color: #009900;">&#40;</span>b<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+			<span style="color: #000000; font-weight: bold;">try</span> <span style="color: #009900;">&#123;</span>				
+				<span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;等待对象b完成计算。。。&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+				<span style="color: #003399;">Thread</span>.<span style="color: #006633;">sleep</span><span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">60000</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+				b.<span style="color: #006633;">wait</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+			<span style="color: #009900;">&#125;</span> <span style="color: #000000; font-weight: bold;">catch</span> <span style="color: #009900;">&#40;</span><span style="color: #003399;">InterruptedException</span> e<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+				e.<span style="color: #006633;">printStackTrace</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+			<span style="color: #009900;">&#125;</span>
+			<span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;b对象计算的总和是：&quot;</span> <span style="color: #339933;">+</span> b.<span style="color: #006633;">total</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		<span style="color: #009900;">&#125;</span>
+	<span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> ThreadB <span style="color: #000000; font-weight: bold;">extends</span> <span style="color: #003399;">Thread</span> <span style="color: #009900;">&#123;</span>
+	<span style="color: #000066; font-weight: bold;">int</span> total<span style="color: #339933;">;</span>
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> run<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		<span style="color: #000000; font-weight: bold;">synchronized</span> <span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">this</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+			<span style="color: #000000; font-weight: bold;">for</span> <span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">int</span> i <span style="color: #339933;">=</span> <span style="color: #cc66cc;">0</span><span style="color: #339933;">;</span> i <span style="color: #339933;">&lt;</span> <span style="color: #cc66cc;">101</span><span style="color: #339933;">;</span> i<span style="color: #339933;">++</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+				total <span style="color: #339933;">+=</span> i<span style="color: #339933;">;</span>
+			<span style="color: #009900;">&#125;</span>
+			notifyAll<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		<span style="color: #009900;">&#125;</span>
+	<span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>输出的结果是：<br />
+</code></p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;">等待对象b完成计算....
+....<span style="color: #009900;">&#91;</span>sleep 60s<span style="color: #009900;">&#93;</span>....
+<span style="color: #006633;">b</span>对象计算的总和是：<span style="color: #cc66cc;">5050</span></pre></div></div>
+
+<p>可以看到，主线程和新线程在同一个对象上锁定，主线程的方法里执行了Thread.sleep(60000)，因此进入了TIMED_WAITING状态，而新线程则进入BLOCKED状态。</p>
+</div><div id="part_4" style="display:none;"><p>例2：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> ThreadA <span style="color: #009900;">&#123;</span>
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000066; font-weight: bold;">void</span> main<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> args<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		ThreadB b <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> ThreadB<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><span style="color: #666666; font-style: italic;">// ThreadB status: new</span>
+		b.<span style="color: #006633;">start</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><span style="color: #666666; font-style: italic;">// ThreadB status: runnable</span>
+		<span style="color: #000000; font-weight: bold;">synchronized</span> <span style="color: #009900;">&#40;</span>b<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>			
+			<span style="color: #000000; font-weight: bold;">try</span> <span style="color: #009900;">&#123;</span>
+				<span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;等待对象b完成计算。。。&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+				b.<span style="color: #006633;">wait</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+			<span style="color: #009900;">&#125;</span> <span style="color: #000000; font-weight: bold;">catch</span> <span style="color: #009900;">&#40;</span><span style="color: #003399;">InterruptedException</span> e<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+				e.<span style="color: #006633;">printStackTrace</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+			<span style="color: #009900;">&#125;</span>
+			<span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;b对象计算的总和是：&quot;</span> <span style="color: #339933;">+</span> b.<span style="color: #006633;">total</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		<span style="color: #009900;">&#125;</span>
+	<span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> ThreadB <span style="color: #000000; font-weight: bold;">extends</span> <span style="color: #003399;">Thread</span> <span style="color: #009900;">&#123;</span>
+	<span style="color: #000066; font-weight: bold;">int</span> total<span style="color: #339933;">;</span>
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> run<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		<span style="color: #000000; font-weight: bold;">synchronized</span> <span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">this</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+			<span style="color: #000000; font-weight: bold;">try</span> <span style="color: #009900;">&#123;</span>
+				<span style="color: #003399;">Thread</span>.<span style="color: #006633;">sleep</span><span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">60000</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+			<span style="color: #009900;">&#125;</span> <span style="color: #000000; font-weight: bold;">catch</span> <span style="color: #009900;">&#40;</span><span style="color: #003399;">InterruptedException</span> e<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+				e.<span style="color: #006633;">printStackTrace</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+			<span style="color: #009900;">&#125;</span>
+			<span style="color: #000000; font-weight: bold;">for</span> <span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">int</span> i <span style="color: #339933;">=</span> <span style="color: #cc66cc;">0</span><span style="color: #339933;">;</span> i <span style="color: #339933;">&lt;</span> <span style="color: #cc66cc;">101</span><span style="color: #339933;">;</span> i<span style="color: #339933;">++</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+				total <span style="color: #339933;">+=</span> i<span style="color: #339933;">;</span>
+			<span style="color: #009900;">&#125;</span>
+			notifyAll<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		<span style="color: #009900;">&#125;</span>
+	<span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>输出的结果是：<br />
+</code></p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;">等待对象b完成计算....
+....<span style="color: #009900;">&#91;</span>sleep 60s<span style="color: #009900;">&#93;</span>....
+<span style="color: #006633;">b</span>对象计算的总和是：<span style="color: #cc66cc;">5050</span></pre></div></div>
+
+<p>2个线程还是在同一个对象上同步，但这次主线程立刻执行了b.wait()方法，因此释放了对象b上的锁，自己进入了WAITING状态。接下来新线程得到了对象b上的锁，所以没有进入阻塞状态，紧接着执行Thread.sleep(60000)方法，进入了TIMED_WAITING状态</p>
+</div><div id="part_5" style="display:none;"><p>例3：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> ThreadA <span style="color: #009900;">&#123;</span>
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000066; font-weight: bold;">void</span> main<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> args<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		ThreadB b <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> ThreadB<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><span style="color: #666666; font-style: italic;">// ThreadB status: new</span>
+		b.<span style="color: #006633;">start</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><span style="color: #666666; font-style: italic;">// ThreadB status: runnable</span>
+		<span style="color: #000000; font-weight: bold;">synchronized</span> <span style="color: #009900;">&#40;</span>b<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+			<span style="color: #000000; font-weight: bold;">try</span> <span style="color: #009900;">&#123;</span>
+				<span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;等待对象b完成计算。。。&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+				b.<span style="color: #006633;">wait</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><span style="color: #666666; font-style: italic;">// ThreadB status: running</span>
+			<span style="color: #009900;">&#125;</span> <span style="color: #000000; font-weight: bold;">catch</span> <span style="color: #009900;">&#40;</span><span style="color: #003399;">InterruptedException</span> e<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+				e.<span style="color: #006633;">printStackTrace</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+			<span style="color: #009900;">&#125;</span>
+			<span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;b对象计算的总和是：&quot;</span> <span style="color: #339933;">+</span> b.<span style="color: #006633;">total</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		<span style="color: #009900;">&#125;</span>
+	<span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> ThreadB <span style="color: #000000; font-weight: bold;">extends</span> <span style="color: #003399;">Thread</span> <span style="color: #009900;">&#123;</span>
+	<span style="color: #000066; font-weight: bold;">int</span> total<span style="color: #339933;">;</span>
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> run<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		<span style="color: #000000; font-weight: bold;">synchronized</span> <span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">this</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+			<span style="color: #000000; font-weight: bold;">for</span> <span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">int</span> i <span style="color: #339933;">=</span> <span style="color: #cc66cc;">0</span><span style="color: #339933;">;</span> i <span style="color: #339933;">&lt;</span> <span style="color: #cc66cc;">101</span><span style="color: #339933;">;</span> i<span style="color: #339933;">++</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+				total <span style="color: #339933;">+=</span> i<span style="color: #339933;">;</span>
+			<span style="color: #009900;">&#125;</span>
+			notifyAll<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+			<span style="color: #000000; font-weight: bold;">try</span> <span style="color: #009900;">&#123;</span>
+				<span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;我还没释放锁呢，等等&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+				<span style="color: #003399;">Thread</span>.<span style="color: #006633;">sleep</span><span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">60000</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+			<span style="color: #009900;">&#125;</span> <span style="color: #000000; font-weight: bold;">catch</span> <span style="color: #009900;">&#40;</span><span style="color: #003399;">InterruptedException</span> e<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+				e.<span style="color: #006633;">printStackTrace</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+			<span style="color: #009900;">&#125;</span>
+		<span style="color: #009900;">&#125;</span>
+	<span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>输出的结果是：<br />
+</code></p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;">等待对象b完成计算。。。
+我还没释放锁呢，等等
+b对象计算的总和是：<span style="color: #cc66cc;">5050</span></pre></div></div>
+
+<p>当主线程执行b.wait()之后，就进入了WAITING状态，但是新线程执行notifyAll()之后，有一个瞬间主线程回到了RUNNABLE状态，但是好景不长，由于这个时候新线程还没有释放锁，所以主线程立刻进入了BLOCKED状态 </p>
+<p>当在对象上调用wait()方法时，执行该代码的线程立即放弃它在对象上的锁。然而调用notify()时，并不意味着这时线程会放弃其锁。如果线程仍然在完成同步代码，则<strong>线程在移出之前不会放弃锁</strong>。因此，只要调用notify()并不意味着这时该锁被释放。</p>
+<p>如果在ThreadA中调用b.wait()释放了b的锁，但在b中却没有释放回b的锁的时候，ThreadA是无法继续执行下去的，会一直停在b.wait()。b中释放锁的方式是synchronized (this)同步块执行完毕（无论有无notify或notifyAll，只要同步块执行完都可以释放锁）。</p>
+</div><div id="part_6" style="display:none;"><p>13、与线程休眠类似，线程的优先级仍然无法保障线程的执行次序。只不过，优先级高的线程获取CPU资源的概率较大，优先级低的并非没机会执行。 </p>
+<p>14、在一个线程中开启另外一个新线程，则新开线程称为该线程的子线程，子线程初始优先级与父线程相同。 </p>
+<p>15、虽然我们调用的是start（）方法，而不知直接调用run（）方法是因为，在start（）里面还有些线程初始化的事情要做，而且需要本地操作系统的支持。</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">private</span> <span style="color: #000000; font-weight: bold;">native</span> <span style="color: #000066; font-weight: bold;">void</span> start0<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">synchronized</span> <span style="color: #000066; font-weight: bold;">void</span> start<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+        <span style="color: #008000; font-style: italic; font-weight: bold;">/**
+	 * This method is not invoked for the main method thread or &quot;system&quot;
+	 * group threads created/set up by the VM. Any new functionality added 
+	 * to this method in the future may have to also be added to the VM.
+	 *
+	 * A zero status value corresponds to state &quot;NEW&quot;.
+         */</span>
+        <span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>threadStatus <span style="color: #339933;">!=</span> <span style="color: #cc66cc;">0</span> <span style="color: #339933;">||</span> <span style="color: #000000; font-weight: bold;">this</span> <span style="color: #339933;">!=</span> me<span style="color: #009900;">&#41;</span>
+            <span style="color: #000000; font-weight: bold;">throw</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">IllegalThreadStateException</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        group.<span style="color: #006633;">add</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">this</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        start0<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        <span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>stopBeforeStart<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+	    stop0<span style="color: #009900;">&#40;</span>throwableFromStop<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>start里调用了start0（）。并且这个这个方法用了native关键字，表示需要调用本地操作系统的函数。</p>
+<p>16、JRE判断程序是否执行结束的标准是所有的前台执线程行完毕了，而不管后台线程的状态，因此，在使用后台线程时候一定要注意这个问题。 </p>
+<p>使用Thread建立的线程默认情况下是前台线程，在进程中，只要有一个前台线程未退出，进程就不会终止。主线程就是一个前台线程。而后台线程不管线程是否结束，只要所有的前台线程都退出（包括正常退出和异常退出）后，进程就会自动终止。</p>
+<p>一般后台线程用于处理时间较短的任务，如在一个Web服务器中可以利用后台线程来处理客户端发过来的请求信息。而前台线程一般用于处理需要长时间等待的任务，如在Web服务器中的客户端请求的程序，或是定时对某些系统资源进行扫描的程序。</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> ThreadDemo1 <span style="color: #009900;">&#123;</span>
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000066; font-weight: bold;">void</span> main<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> args<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>		
+		TestThread tt <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> TestThread<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		<span style="color: #003399;">Thread</span> p1 <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">Thread</span><span style="color: #009900;">&#40;</span>tt<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>		
+		p1.<span style="color: #006633;">setDaemon</span><span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">true</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		p1.<span style="color: #006633;">start</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>		
+	<span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">class</span> TestThread <span style="color: #000000; font-weight: bold;">implements</span> <span style="color: #003399;">Runnable</span><span style="color: #009900;">&#123;</span>
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> run<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>		
+		<span style="color: #000000; font-weight: bold;">while</span><span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">true</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+			<span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span><span style="color: #003399;">Thread</span>.<span style="color: #006633;">currentThread</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>.<span style="color: #006633;">getName</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">+</span><span style="color: #0000ff;">&quot; is running&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		<span style="color: #009900;">&#125;</span>
+	<span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+</div><div id="paginate"><label id="li_1" onclick="javascript:show_page(1,6,this);" style="font-size:30px;font-weight:bold" onmouseover="this.style.cursor='pointer'">1</label><label id="li_2" onclick="javascript:show_page(2,6,this);"  onmouseover="this.style.cursor='pointer'">2</label><label id="li_3" onclick="javascript:show_page(3,6,this);"  onmouseover="this.style.cursor='pointer'">3</label><label id="li_4" onclick="javascript:show_page(4,6,this);"  onmouseover="this.style.cursor='pointer'">4</label><label id="li_5" onclick="javascript:show_page(5,6,this);"  onmouseover="this.style.cursor='pointer'">5</label><label id="li_6" onclick="javascript:show_page(6,6,this);"  onmouseover="this.style.cursor='pointer'">6</label></div> 
+			<div align="center">1 month ago, this page was being read. </div>
+			<p class="tags"><a href="http://www.xieziming.com/tag/java" rel="tag">java</a><br /></p>  
+    </div><!-- /entry -->                                   
+		<div class="postbottom"></div>		                              
+		</div><!-- /post -->	
+
+<div class="postrelated">
+			<table width="100%" >				
+
+					<tr><td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/8494.html" rel="bookmark" title="Java内存管理之字符串">Java内存管理之字符...</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/2216.html" rel="bookmark" title="Java程序员面试宝典">Java程序员面试宝典</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/7437.html" rel="bookmark" title="Equals与Hashcode">Equals与Ha...</a></td>
+
+				<td align="right" class="dashedline_related">★<a href="http://www.xieziming.com/archives/8665.html" rel="bookmark" title="JavaOne Conference">JavaO...</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7253.html" rel="bookmark" title="Java中int和Integer的区别">Java中in...</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/7486.html" rel="bookmark" title="Java堆栈">Java堆...</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7605.html" rel="bookmark" title="质疑和反驳">质疑和反驳</a></td>
+
+				<td align="right" class="dashedline_related"><a href="http://www.xieziming.com/archives/8811.html" rel="bookmark" title="Java源码混淆">Java源...</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/6661.html" rel="bookmark" title="Application Monitor">Application...</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7511.html" rel="bookmark" title="Java枚举类">Java枚举类</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/7515.html" rel="bookmark" title="Java装饰模式">Java装饰...</a></td>
+
+				<td align="right" class="dashedline_related">★<a href="http://www.xieziming.com/archives/8807.html" rel="bookmark" title="制作Java Applet签名">制作Jav...</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7000.html" rel="bookmark" title="Java IO类">Java IO类</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/8596.html" rel="bookmark" title="Java Component截图">Java Com...</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7499.html" rel="bookmark" title="Java代理机制">Java代理...</a></td>
+
+				<td align="right" class="dashedline_related"><a href="http://www.xieziming.com/archives/2445.html" rel="bookmark" title="J2EE回忆">J2EE回忆</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/7397.html" rel="bookmark" title="Java QA">Java QA</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7402.html" rel="bookmark" title="Java多态总结">Java多...</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/2464.html" rel="bookmark" title="J2EE入门例子">J2EE入门例...</a></td>
+
+				<td align="right" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7481.html" rel="bookmark" title="Java单例模式">Java单例模式</a></td></tr>
+
+		</table>
+</div>
+
+		<div id="comments">
+
+<!-- START COMMENT FORMS -->
+
+
+		</div><!--/comments-->		
+
+</div><!-- /content -->
+<div id="sidebar">			
+			<a class="subscribe" href="http://www.xieziming.com/feed" title="Posts RSS">Subscribe</a>			
+			<div id="search">	
+	<form name="searchform" id="searchform" method="get" action="http://www.xieziming.com/index.php">
+		<input class="text" type="text" name="s" id="s" value=""/>
+		<input class="submit" type="image" src="http://www.xieziming.com/wp-content/themes/ziming/img/submit.jpg" value="search" />
+	</form>	
+</div><!-- /search -->			
+			<div id="widgets">			
+			<div class="widget"><h3>Calendar</h3>
+<table id="wp-calendar">
+  									<caption>December 2016</caption>
+  									<thead>
+                    <tr><th scope="col" title="S">S</th><th scope="col" title="M">M</th><th scope="col" title="T">T</th><th scope="col" title="W">W</th><th scope="col" title="T">T</th><th scope="col" title="F">F</th><th scope="col" title="S">S</th></tr></thead><tbody><tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>1</td><td>2</td><td>3</td></tr><tr><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td></tr><tr><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td></tr><tr><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">18<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">《血战钢锯岭》</span><br/><span class="time" style="color:#000000; " > Time : 21:18 - 23:28</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">晚上和小锅去看，蛮感人的。吃完去沙湾吃猪杂粥，应该是我在那吃到的最新鲜的一次了。</p></span></a></span></td><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">19<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">CentOS</span><br/><span class="time" style="color:#000000; " > Time : 14:11 - 18:11</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">终于有点时间来把那盒子的win7转成CentOS来做server。配置vsftp花了我太多的时间。。。</p></span></a></span></td><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td></tr><tr><td>25</td><td>26</td><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td></tr><tr><td colspan="3" id="prev"><a href="http://www.xieziming.com/archives/6795.html?month=nov&yr=2016">&laquo; Prev</a></td><td colspan="4" id="next"><a href="http://www.xieziming.com/archives/6795.html?month=jan&yr=2017">Next &raquo;</a></td></tr></tbody></table>
+<div class="widgetbottom"></div></div><!--/widget-->				
+					      		<div class="widget">
+ 							<h3>Recent Posts</h3>
+							<ul>
+           				<li><a href="http://www.xieziming.com/archives/9579.html" class="dashedline" title="闽南 · 泉州">闽南 &middot; 泉州</a></li><li><a href="http://www.xieziming.com/archives/9578.html" class="dashedline" title="顺化 · HUE">顺化 &middot; HUE</a></li><li><a href="http://www.xieziming.com/archives/9577.html" class="dashedline" title="会安 · 春卷">会安 &middot; 春卷</a></li><li><a href="http://www.xieziming.com/archives/9576.html" class="dashedline" title="会安 · 夜灯">会安 &middot; 夜灯</a></li><li><a href="http://www.xieziming.com/archives/9575.html" class="dashedline" title="会安古镇">会安古镇</a></li><li><a href="http://www.xieziming.com/archives/9573.html" class="dashedline" title="岘港">岘港</a></li><li><a href="http://www.xieziming.com/archives/9535.html" class="dashedline" title="罗马">罗马</a></li><li><a href="http://www.xieziming.com/archives/9534.html" class="dashedline" title="卢浮宫">卢浮宫</a></li>						
+							</ul>
+      				<div class="widgetbottom"></div>
+	    		</div>
+	    			        
+        	      		<div class="widget">
+ 							<h3>Rand Posts</h3>
+							<ul>
+      						<li><a href="http://www.xieziming.com/archives/4084.html" class="dashedline" title="交行花开">交行花开</a></li><li><a href="http://www.xieziming.com/archives/3428.html" class="dashedline" title="猜猜我是谁">猜猜我是谁</a></li><li><a href="http://www.xieziming.com/archives/7251.html" class="dashedline" title="二沙岛">二沙岛</a></li><li><a href="http://www.xieziming.com/archives/6762.html" class="dashedline" title="香港（十）">香港（十）</a></li><li><a href="http://www.xieziming.com/archives/7626.html" class="dashedline" title="控制window程序">控制window程序</a></li><li><a href="http://www.xieziming.com/archives/7972.html" class="dashedline" title="越南 · 美食">越南 &middot; 美食</a></li><li><a href="http://www.xieziming.com/archives/138.html" class="dashedline" title="培训生活">培训生活</a></li><li><a href="http://www.xieziming.com/archives/7990.html" class="dashedline" title="广西大学">广西大学</a></li>	
+							</ul>
+        			<div class="widgetbottom"></div>
+					</div>                 
+          	                       
+			</div><!-- /widgets -->			                       
+</div><!-- /sidebar --></div><!-- /main -->
+<div id="footer">
+<p align="left">© <a href="http://www.miitbeian.gov.cn" target="_blank"> 明 · 明 · 童 · 鞋</a></p>
+<!--74 queries in 3.967 seconds.-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?c2e18b43ec905e3c4ea82c1b57537223";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</div><!-- /footer -->
+</div><!-- /container -->
+<script type='text/javascript' src='http://www.xieziming.com/wp-includes/js/wp-embed.min.js?ver=4.7'></script>
+</body>
+</html>

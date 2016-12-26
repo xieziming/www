@@ -1,0 +1,295 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head profile="http://gmpg.org/xfn/11">
+<title>  自动控制理论（二） &raquo; 谢子明</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="description" content="自动控制理论（二）  " />
+<meta name="keywords" content="谢子明" />
+<link rel="stylesheet" href="http://www.xieziming.com/wp-content/themes/ziming/style.css" type="text/css" media="screen" />
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://www.xieziming.com/feed" />
+<link rel="alternate" type="application/rss+xml" href="http://www.xieziming.com/comments/feed" title="谢子明 Comments RSS feed" />
+<link rel="shortcut icon" href="http://www.xieziming.com/wp-content/themes/ziming/favicon.ico">
+<link rel="Bookmark" href="http://www.xieziming.com/wp-content/themes/ziming/favicon.ico">
+<link rel="pingback" href="http://www.xieziming.com/xmlrpc.php" />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="谢子明 &raquo; 自动控制理论（二） Comments Feed" href="http://www.xieziming.com/archives/7133.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/xieziming.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.7"}};
+			!function(a,b,c){function d(a){var b,c,d,e,f=String.fromCharCode;if(!k||!k.fillText)return!1;switch(k.clearRect(0,0,j.width,j.height),k.textBaseline="top",k.font="600 32px Arial",a){case"flag":return k.fillText(f(55356,56826,55356,56819),0,0),!(j.toDataURL().length<3e3)&&(k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,65039,8205,55356,57096),0,0),b=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,55356,57096),0,0),c=j.toDataURL(),b!==c);case"emoji4":return k.fillText(f(55357,56425,55356,57341,8205,55357,56507),0,0),d=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55357,56425,55356,57341,55357,56507),0,0),e=j.toDataURL(),d!==e}return!1}function e(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i,j=b.createElement("canvas"),k=j.getContext&&j.getContext("2d");for(i=Array("flag","emoji4"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<script type='text/javascript' src='http://www.xieziming.com/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='http://www.xieziming.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<link rel='https://api.w.org/' href='http://www.xieziming.com/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.xieziming.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.xieziming.com/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='Application Monitor' href='http://www.xieziming.com/archives/6661.html' />
+<link rel='next' title='自动控制理论（一）' href='http://www.xieziming.com/archives/7125.html' />
+<meta name="generator" content="WordPress 4.7" />
+<link rel="canonical" href="http://www.xieziming.com/archives/7133.html" />
+<link rel='shortlink' href='http://www.xieziming.com/?p=7133' />
+<link rel="alternate" type="application/json+oembed" href="http://www.xieziming.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fxieziming.com%2Farchives%2F7133.html" />
+<link rel="alternate" type="text/xml+oembed" href="http://www.xieziming.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fxieziming.com%2Farchives%2F7133.html&#038;format=xml" />
+ 	<link rel="stylesheet" href="http://www.xieziming.com/wp-content/plugins/live-calendar/live-calendar.css" type="text/css" media="screen" /> 
+<link rel="stylesheet" href="http://www.xieziming.com/wp-content/plugins/wp-code/wp-code.css" type="text/css" media="screen" />
+
+<link rel="stylesheet" href="http://www.xieziming.com/wp-content/plugins/zoom-highslide/highslide.css" type="text/css" media="screen" />
+<script type="text/javascript" src="http://www.xieziming.com/wp-content/plugins/zoom-highslide/js/highslide-full.packed.js"></script>
+<script type="text/javascript">
+	hs.graphicsDir = 'http://www.xieziming.com/wp-content/plugins/zoom-highslide/graphics/';
+	hs.align = 'center';
+	hs.transitions = ['expand', 'crossfade'];
+	hs.outlineType = 'rounded-white';
+  hs.wrapperClassName = 'controls-in-heading';
+	hs.showCredits=false;
+	hs.fadeInOut = true;
+	hs.dimmingOpacity = 0.8;
+
+	// Add the controlbar
+	if (hs.addSlideshow) hs.addSlideshow({
+		//slideshowGroup: 'group1',
+		interval: 4000,
+		repeat: false,
+		useControls: true,
+		fixedControls: false,
+		overlayOptions: {
+			opacity: 1,
+			position: 'top center',
+			hideOnMouseOut: true
+		}
+	});
+</script>
+
+<script type="text/javascript">
+	var widthRestriction = 668; 
+	var heightRestriction = 1000; 
+</script>
+<script type="text/javascript" src="http://www.xieziming.com/wp-content/plugins/zoom-highslide/js/zoom.js"></script>
+	
+<!--script src="http://www.xieziming.com/wp-content/themes/ziming/js/mouse.js" type="text/javascript"></script--> 
+</head>
+<body class="normalbg">
+<div id="container">
+	<div id="head">
+		<div id="nav">
+			<ul>
+				<li class="first"><a href="http://www.xieziming.com" title="首页">首页</a></li>
+				<li class="page_item page-item-2"><a href="http://www.xieziming.com/recent" title="最近">最近</a></li>
+				<li class="page_item page-item-3"><a href="http://www.xieziming.com/photo" title="Photo">映象</a></li>
+				<li class="page_item page-item-4"><a href="http://www.xieziming.com/food" title="Food">美食</a></li>
+				<li class="page_item page-item-5"><a href="http://www.xieziming.com/topic" title="关键字">话题</a></li>
+				<li class="page_item page-item-6"><a href="http://www.xieziming.com/travel" title="Travel">旅行</a></li>
+				<li class="page_item page-item-7"><a href="http://www.xieziming.com/literature" title="Literature">文艺</a></li>
+				<li class="page_item page-item-8"><a href="http://www.xieziming.com/wiki" title="技术维基">维基</a></li>
+				<li class="page_item page-item-9"><a href="http://www.xieziming.com/calendar" title="Calendar">点滴</a></li>
+			</ul>
+		</div><!-- /nav -->		
+	</div><!-- /head -->
+<div id="main" class="altmainbg">
+
+<script type="text/javascript">
+function show_page(id,count,source){
+	for (var i=1;i<=count;i++){
+		if(id != i){
+				jQuery("#part_"+i).hide();
+				document.getElementById("li_"+i).style.fontWeight = "normal";
+				document.getElementById("li_"+i).style.fontSize = "18px";
+		}
+	}
+	jQuery("#part_"+id).show();
+	document.getElementById("li_"+id).style.fontWeight = "bold";
+	document.getElementById("li_"+id).style.fontSize = "30px";
+	jQuery('body,html').animate({scrollTop:0},1000);
+        return false;
+}
+</script>
+<div id="content">
+
+	<div class="post" id="post-7133">
+		<h2 class="title">自动控制理论（二）</h2>
+		<p class="postmetadata">
+			<span class="date">13 May 2011</span>
+			<span class="category">Categoried in <a href="http://www.xieziming.com/topic/network" rel="category tag">网摘</a></span>
+			<span class="comments">0</span>
+			<span class="view">Preview : 74 , Read : 567 </span>
+			<span class="mail">Index : 3221 </span>
+		</p>
+		<div class="entry">				
+<div id="part_1"><p><strong>辨识</strong></p>
+<p>形形色色的控制理论再牛，没有被控过程的数学模型，照样抓瞎。前面的洗澡水温就是一个数学模型。这个模型是杜撰的，当然可以很容易地给它所有模型参数。但在实际中，模型参数不会从天上掉下来。多少科学家毕生致力于建立某一特定的物理、生物、化学或别的学科的数学模型，基本机制已经清楚的模型都不容易建立，更不用说很多过程的基本机制或深层机制并不清楚。所以靠机理推导被控过程的数学模型是可能的，但对日常的控制问题来说，并不实际。这就是控制理论的另一个分支—辨识—一显身手的地方了。</p>
+<p>如果给定一个模型，也就是一个数学公式，给它一组输入数据，模型就可以计算出对应的输出数据。比如说，给定模型y=2*x+1，再给出x=1，2，3，4，那y就等于3，5，7，9，就这么很简单。辨识的问题反过来，先给定一个模型结构，在这里就是y=a*x+b，已知输入-输出数据是x=1，2时y=3，5，要求计算出a和b。显然，这是一个二元一次方程，谁都会解。在实际中，输入-输出的观察数据含有测量噪声，这对参数估计的精度不利；但通常积累观察的数据量远远超过未知参数的个数，不说数学，感觉上这就应该对克服测量噪声有利，关键是怎么利用这“多余”的数据。一个办法是把数据组两两配对，借众多的二元一次方程，然后对解出来的a和b作平均。还有一个办法就是有名的最小二乘法了，说穿了，就是以a和b为最优化的“控制量”，使模型输出和实际观测值之间的累积平方误差为最小。</p>
+<p>实际工业过程大多有多年的运行经验，大量的数据不成问题。对于大多数常见过程，模型的基本结构和定性性质也可以猜一个八九不离十，有了如此有力的数学“大锤”，那么应该可以砸开一切建模的硬核桃啦。且慢，世上没有真正的“神奇子弹”，一个问题解决了，另一个同等难度的问题又会出现。对于辨识来说，问题有好几个。</p>
+<p>第一个问题是工业数据的闭环性。大多数重要参数都有闭环回路控制。如果没有闭环回路控制，那要么就是过程特性实在太复杂，简单回路控制不了；要么就是这个参数其实不重要，飘移一点没人在乎。然而，一旦闭环，系统地输入和输出就是相关的了。这一相关不要紧，输入-输出数据之间的因果性就全乱了：输出通过被控过程本身和输入相关（这是好的，辨识就是要测算出这个相关关系，输出要是和输入不相关，也没有控制或辨识什么事了），输入通过反馈和输出相关；输入-输出成为一个闭合系统，你可以用任意多条定理或方法证明同样的事：由于因果不分，闭环辨识是不可能的，除非另外加入“新鲜”的激励，比如使劲变设定值，或者在闭环回路里额外施加独立于输入、输出的激励信号，比如“莫名其妙”地把阀门动几下。弄到最后，工业数据到底能用多少，就不是一个简单的回答。有的过程常年稳定操作，像乙烯装置，只有小范围的微调。这倒不是人家懒或者不求上进，而是这些装置早已高度优化，常年操作在极其接近极限的位置，但原料和产品单一，所以工艺状况不怎么大变。这种系统的闭环数据用起来很吃力，常常必须做一定的开环试验。有的过程经常在不同的状态之间转换（transition），或者由于不同的原料，如“吃”得很杂的炼油厂，或者由于不同的产品，如聚乙烯装置，这实际上就是“使劲变设定值”，是新鲜的激励。这种系统的闭环数据比较好用，但有别的问题，下面要谈到。</p>
+<p>第二个问题是动态和稳态。动态模型的作用有两个：一是描述需要多少时间输出才能达到某一数值；二是输出最终能够达到什么数值。用股票市场举一个例子，你需要知道两件事：一是这支股票最后会升到多少，二是需要多少时间才能升到那里，只知道其中一个对你并没有太大的用处。当然为了简化，这里假定这支股票一路飙升，不来忽升忽降（也就是非线性）或跌买涨卖（也就是闭环影响）的名堂。这就要求输入-输出数据必须包含充分的动态和稳态信息，过于偏颇其中一方面对另一方面会不利。所以，长期稳定运行的过程中可能包含足够的稳态数据，但动态不足；常年不怎么稳定的过程可能包含足够的动态数据，但稳态不足。用PID控制打比方，精确的稳态数据有助于计算正确的比例控制增益，精确的动态数据有助于计算正确的积分和微分增益，显然，把比例增益整对了更为重要。为了获得精确的稳态，在辨识中常常需要等过程开环稳定下来才进行下一步，但是问题是，实际过程有时时间常数很长，几个精馏塔一串联，时间常数几个小时是客气的，一、两天都是可能的。这样一来，一个不太大的模型，十来个变量，开环试验一做就是一、两个星期或者更长。要是一个装置能够两个星期开环，那也不需要什么控制了。</p>
+</div><div id="part_2" style="display:none;"><p>第三个问题是激励的信噪比。都说人类活动是二氧化碳和温室效应的主要原因，但要是你去生一堆篝火，再去高空大气层去测一测二氧化碳和温室效应，肯定什么也测不出来，本来多少，现在还是多少。为什么呢？不是因为这堆篝火没有效果，而是环境中的自然的变化远远超过了篝火的作用，换句话说，就是噪声远远超过了信号。工业测试也是一样，信号一定要有一定的强度，否则是白耽误工夫。信号强度应该使过程达到严重失稳的边缘，这样才好获得在大范围内都精确的模型，以便控制器不光在“风平浪静”的情况下可以正常工作，在“惊涛骇浪”的情况下也能使系统恢复稳定。然而，工厂以生产为主，在一切都“斤斤计较”的今天，如此大范围的测试所带来的产品损失甚至对设备的可能的危害，都是工厂极不愿意见到的。理论家们设计了一个伪随机信号，用一连串宽窄不等的方波信号，作为激励过程的输入，在理论上可以使过程参数的平均值不致偏离设定值太多，但ISO9000不仅要求产品质量的平均值要保证，产品质量的一致性也要保证。再说，伪随机信号的脉宽不好确定，太窄了，稳态数据不够；太宽了，和常规的阶跃信号也没有什么两样。所以伪随机信号在实际上用得很少。</p>
+<p>第四个问题是输入的相关性。实际工业过程到了要用辨识来确定模型的时候，都是单回路对付不了了，所以都是多变量过程。在理论上，多个输入变量可以同时变化，只要输入变量的变化是相互独立的，数学上容许多个输入变量同时变化，而辨识可以正确地辨别模型。然而，在使用实际过程的历史数据时，常常遇到多个输入变量并不相互独立的问题。比如说，在制作巧克力的过程中，香草巧克力比较“苦”，或者说不太甜，而牛奶巧克力比较甜。问题是做牛奶巧克力时，不光加糖，还要加牛奶（废话，不加牛奶那还是牛奶巧克力吗？）由于两者总是同时出现，从纯数学角度来说，在甜度模型里，就难以辨别甜度是由于加糖的关系，还是由于加牛奶的关系。有的时候可以根据对具体过程的认识，人工地限制辨识的过程，来消除这种影响，有的时候，就不太容易了，只好不用历史数据，专门做试验，用各自独立的输入，便是模型。</p>
+<p>第五个问题是模型结构。模型结构包括两个方面，一是模型的阶数，二是剔除在物理上不可能的模型。辨识的模型归根结蒂还是差分方程，这就有一个如何预设阶数的问题。数学上有很多验前和验后的检验方法，在工业上，人们偷一个懒，改用非参数模型，也就是用一条响应曲线而不是一个方程来表述一个模型，这样就可以绕过阶数的问题。但是剔出不现实的模型还是一个手工活，需要对每一个模型仔细研究，以确定模型所描述的动态关系是否合理。数学方法还是不够可靠。</p>
+<p>在搞模型的人中间，常常会听到黑箱、白箱和灰箱的说法。黑箱模型就是不理会实际过程的物理、化学等性质，纯粹从数学出发，假设一个模型结构，然后用种种数学方法找出一个最好的模型。白箱反其道而行之，从物理、化学等性质出发，建立机理模型。黑箱模型的好处是“放之四海而皆准”，不需要对具体过程有深入的了解。黑箱模型是一种削足适履的作法，但是如果履本身就做得比较好，具有相当的灵活性和适应性，就并不需要削太多的足。由于黑箱模型可以自由假设模型结构，黑箱模型的处理和使用都比较方便。黑箱模型是经验主义的，数据里没有包含的情况，黑箱模型无法预测。白箱模型则是“量身度造”的，反映了过程的物理、化学等性质，对实际过程的数据依赖较少，对数据中不包含的情况也能可靠地预测。但是白箱模型的结构由具体问题决定，得出的模型不一定容易使用。在实际中，人们经常在假设一个模型结构的时候考虑进大大简化的过程机理，所以模型结构不是凭空拍脑袋出来，而是粗略地抓住了过程的基本特质，然后再用黑箱方法的“数据绞肉机”，将简化模型没有能够捕捉的细微末节一网打尽。这种模型结合了黑箱和白箱的特点，所以称为灰箱。实际建模中，纯粹黑箱或白箱的成功例子很少，灰箱的成功机会就要多得多。</p>
+<p>不管什么箱，最后还是有一个如何辨识实际过程的问题。闭环辨识的好处不用多说了，问题是如何从闭环辨识中获得有用的模型。工业上有一个办法，没有一个“官名”，但实际上是一个开环-反馈过程。具体做法是这样的：先用粗略的过程知识构造一个简单的多变量控制器，其任务不是精确控制被控过程，而是将被控变量维持在极限之内，一旦逼近或超过极限，就采取动作将其“赶”回极限内；但只要在极限内，就按部就班地作阶跃扰动，测试过程特性。测试的结果用来改进控制器的模型，然后再来一遍。几遍（一般两遍就够了）之后，模型精度应该很不错了。这个方法比较好地解决了辨识精度和过程稳定性的要求。</p>
+</div><div id="part_3" style="display:none;"><p><strong>自适应</strong> </p>
+<p>西游记里最好看的打斗是孙悟空大战二郎神那一段。孙悟空打不过就变，二郎神则是“敌变我变”，紧追不舍，最后把个无法无天的顽皮猴子擒拿归案。用控制理论的观点看，这“敌变我变”的本事就是自适应控制控制器结构根据被控过程的变化自动调整、自动优化。</p>
+<p>自适应控制有两个基本思路，一是所谓模型跟踪控制，二是所谓自校正控制。模型跟踪控制也叫模型参考控制，在概念上对人们并不陌生。毛主席那阵子，经常树立各种榜样，目的就是要在党发出号召时，普通人们比照榜样的行为，尽量调整自己的行为，使我们的行为和榜样的行为接近。这就是模型跟踪控制的基本思路。模型跟踪控制在航空和机电上用得比较多，在过程控制中很少使用。</p>
+<p>自校正控制的思路更接近人们对自适应的理解。自校正控制是一个两步走的过程，首先对被控过程作实时辨识，然后再辨识出来的模型的基础，实时地重新构造控制器。思路简单明了，实施也不算复杂，但自校正控制在一开始的欢呼后，并没有在工业上取得大范围的成功，原因何在呢？</p>
+<p>原因之一是闭环辨识。虽然自校正控制不断改变控制器的参数，在一定程度上打破了固定增益反馈控制对输入、输出带来的因果关系，但是因果关系还是存在，还是相当强烈，对辨识模型的质量带来影响。</p>
+<p>原因之二是所谓“协方差爆炸”。数学上当然有严格的说法，但简单地说，就是自校正控制器的目的当然还是使系统稳定下来，但是在系统越来越稳定的过程中，自校正控制器对偏差和扰动的敏感度越来越高，最后到“万籁俱静”的时候，敏感度在理论上可以达到无穷大，然而，这时如果真的扰动来了，控制器一下子就手足无措了。</p>
+<p>原因之三是实际过程的复杂性。在辨识实际过程时，最重要的步骤不是后面的“数学绞肉机”，而是对数据的筛选，必须把各种异常数据剔除出去，否则就是“垃圾进来，垃圾出去”。但是，要实时、自动地剔除异常数据，这个要求非同小可，比设计、投运一个自校正控制器费事多了。这是自校正控制在实际中成功例子有限的最大原因。</p>
+</div><div id="part_4" style="display:none;"><p><strong>模型预估控制</strong> </p>
+<p>自动控制从一开始就是以机电控制为主导的。60年代数学派主导了一段时间后，70年代化工派开始“小荷才露尖尖角”。自校正控制已经有很多化工的影子，但化工派的正式入场之作是模型预估控制（modelpredictivecontrol，MPC）。这是一个总称，其代表作是动态矩阵控制（dynamicmatrixcontrol，DMC）。DMC是CharlieCuttler的PhD论文，最先在壳牌石油公司获得应用，以后Cuttler自立门户，创办DMC公司，现在是AspenTechnology公司的一部分。</p>
+<p>数学控制理论非常优美，放之四海而皆准，但是像老虎一样，看起来威猛，却是干不得活的，干活毕竟靠老牛。DMC的成功之处在于应用伪理论，将一些本来不相干的数学工具一锅煮，给一头老老实实的老牛披上一张绚烂的老虎皮，在把普罗大众唬得一愣一愣的时候，悄悄地把活干了。</p>
+<p>DMC基本就是把非参数模型（在这里是截断的阶跃曲线）放入线性二次型最优控制的架构下，成功地解决了解决了多变量、滞后补偿和约束控制问题。多变量的含义不言自明，滞后放在离散动态模型下也很容易实现预测，这也没有什么稀奇。稀奇的是，DMC用“土办法”解决了约束控制问题。所有实际控制问题的控制量都有极限。加速时，油门踩到底了，那就是极限，再要多一马力也多不出来了。庞特里亚金的最大值原理在理论上可以处理约束控制问题，在实际上很难求出有用的解来，最速控制是一个特例。那DMC是怎么解决约束控制问题的呢？当某个控制量达到极限时，这个控制量就固定在极限值上了，这就不再是变量，而是已知量，把已知量代进去，将控制矩阵中相关的行和列抽掉，重新排列矩阵，剩余的接着求解。这也没有什么稀奇。令人头疼的是如何处理输出约束的问题。DMC把线性规划和控制问题结合起来，用线性规划解决输出约束的问题，同时解决了静态最优的问题，一石两鸟，在工业界取得了极大的成功。自卡尔曼始，这是第一个大规模产品化的“现代控制技术”，Cuttler在DMC上赚了大钱了，在“高技术泡沫”破碎之前把公司卖给AspenTechnology，更是赚得钵满盆溢。他女婿是一个医生，也不行医了，改行搞过程控制，跟着Cuttler干了。</p>
+<p>DMC的英明之初在于从实际需要入手，不拘泥于理论上的严格性、完整性，人参、麻黄、红药水、狗皮膏药统统上，只要管用就行。在很长一段时间内，DMC的稳定性根本没有办法分析，但是它管用。搞实际的人容易理解DMC的歪道理，但搞理论的人对DMC很头疼。</p>
+<p>DMC打开局面后，一时群雄蜂起，但尘埃落定之后，包括DMC，如今只有三家还在舞台上。Honeywell的RMPCT（RobustMultivariablePredictiveControlTechnology）是一个中国同胞开创的，他的独特之处在于引入“漏斗”概念。大部分控制问题都有一个特点：如果扰动当前，有一点控制偏差是可以容忍的；但时间一长，控制偏差应该消除。换句话说，这就像一个时间轴上对偏差的横放的漏斗。这个概念对复杂过程的MPC参数整定非常有用，已经在别的公司的产品上也出现了。</p>
+<p>第三家就是方兴正艾的PavilionTechnology的Perfecter。美国公司有一个坏毛病，喜欢对好好的产品取一个不伦不类的名字，不过现在也改名了，规规矩矩叫controller了。Perfecter的特色是将神经元技术（neuralnet）和MPC结合起来，所以可以有效地处理非线性过程。神经元模型没有什么神秘的，说穿了，就是具有某些特定复杂形式的回归模型，但是比回归模型更不适宜内插和外推。DMC也号称可以处理非线性，因为即使阶跃响应曲线拐上几拐，DMC照样囫囵吞枣，可以计算控制输出来，这就是非参数模型的好处。但是问题在于DMC的结构框架毕竟还是线性的，阶跃响应的概念根本不适合非线性过程，因为非线性响应和输入的绝对数值、相对变化甚至变化方向有关，甚至可以更复杂，所以所谓DMC可以处理非线性是放空炮。如果实际过程的非线性不强，根本可以忽略它；如果实际过程有很强的非线性，DMC肯定抓瞎。那么，Perfecter用了神经元，是不是就所向披靡了呢？也不尽然。Perfecter继承了DMC不问理论、唯实用是问的好传统，但是Perfecter的基本骨架还是线性的MPC，只是用静态的神经元模型时不时地作一个线性化。Perfecter在理论上乏善可陈，在实用上还是管用的。</p>
+<p>前面说到PID在当今过程控制中占至少85%，那MPC就要占14.5%了。</p>
+</div><div id="part_5" style="display:none;"><p><strong>计算机控制系统</strong> </p>
+<p>计算机对自动控制的影响要是只局限在离散控制理论上，那也就不是计算机控制了。事实上，80年代以后新建的化工厂，基本都采用计算机控制。说是可以采用比PID更先进的技术，实际上，绝大多数还是在用PID，加上顺序控制，按部就班地执行一系列动作。那计算机控制的好处到底在什么地方呢？</p>
+<p>过程控制的实际装置最初全是直接安装在现场的，后来出现气动单元仪表，可以把压缩空气的信号管线从现场拉到中心控制室，操作工可以在中控观察、控制全厂了。电动单元仪表防爆问题解决后，中控的使用更加广泛。操作工坐在仪表板前，对管辖工段的情况一目了然。但是随着工厂的增大和过程的复杂，仪表板越来越长，一个大型化工厂随随便便就可以有上千个基本控制回路和上万个各种监控、报警点，仪表板非有几百米长不可，这显然是不可能的。生产过程的高度整合，使一两个人控制整个工厂不光满足削减人工的需要，也对减少通讯环节、综合掌控全局有利。所以，计算机显示屏就不光是酷，而是必须的了。另外，计算机控制使现场仪表（阀门、测量变送器等）的自检成为可能，大大提高了系统的可靠性。于是，计算机控制就是不花没人性了。</p>
+<p>计算机控制从一开始的集中控制（用IBM的大型机）到现在的分散控制（所谓DistributedControlSystem，DCS）走过一个螺旋形上升的过程。集中控制的要害在于风险集中，要是大型机挂了，全厂都要失控。分散控制将全厂划分为若干条条块块，用以微处理器为基础的一个控制用局部网来分散控制，主要子系统都是实时冗余的，故障时在第一时间内切换到备用系统，主系统和备用系统在平时定期互相自检、切换，以保证可靠。分散控制显然大大提高由于计算机本身引起的可靠性。但是现场仪表和接线终端（fieldterminalassembly，FTA）不是冗余的，整个可靠性链还是有漏洞。另外，控制局部网的同轴电缆长度有物理限制，FTA到DCS的长度也有物理限制，所以最后分散控制还是不怎么分散，全是集中在中控室附近或地下室里。不过DCS在地理上的集中，并不妨碍其在逻辑上的分散，只要不是一把火把DCS的机房烧掉，部件可靠性的问题还是可以很好地隔离在小范围。</p>
+<p>既然DCS是一个局部网，那就有一个通信协议的问题。DCS基本上用两大类型的通信协议：轮询（polling，中文的准确译名是什么？）和中断。轮询由中心控制单元轮流查询所有子系统，不管有没有数据更新，到时候就来问一遍，所以不管什么时候，系统地通信流量都很高，但是恒定。中断方式正好相反，子系统自己先检查一下，如果数据没有变化，就不上网更新；直到数据有变化，再上网“打一个招呼”。这个方式的平时通信流量较低，所以网路带宽要求较低。但是生产过程发生异常时，大量警报数据蜂拥而来，如果带宽不够，就会发生通信阻塞的问题。所以，中断和轮询到最后对带宽的要求是一样的，因为谁也不能承担生产过程异常时通信阻塞的后果。</p>
+<p>二十年前，Honeywell是第一个吃DCS这个螃蟹的公司，今天Honeywell仍然是行业里的老大，尽管其设备昂贵，被戏称为Moneywell。当年的DCS全是量身度造的硬件、软件。今天在“开放系统”（openarchitecture）的大潮里，DCS的制造厂家都纷纷将控制台和计算、网络控制单元转向通用的WINTEL或UNIX平台，自己专注于工控专用装置（如基本控制装置，包括I/O）和系统的软件整合。但是这带来了新的问题。通用/商用硬件、软件的可靠性常常不能满足24小时、365天的连续运转要求。对于大多数IT来说，机子坏了，两小时内换上就是很快的了。系统需要维护，弄一个周末或者晚上停机维修就是了。但是对于生产过程来说，这是不可容忍的，不惜365天一天24小时可靠运转，很多乙烯厂、炼油厂要4、5年才有一次停车大修。开放结构容许将DCS和经营、管理、办公网络相连接，极大地提高了信息交流速度和深度、广度，但也带来了网络安全问题，紧接着就是DCS前面竖起一道又一道的防火墙，把数据分享和远程操控压缩到最低。另外就是WINTEL夜以继日的不断更新换代，使硬件、软件的稳定性十分糟糕，没有过多少时间，又要升级，又是头疼。这是DCS的第二个螺旋形上升，只是现在还是盘旋多于上升。</p>
+</div><div id="part_6" style="display:none;"><p>计算机控制的领地也在扩大，类似USB那样的技术也开始用于数字化的仪表。过去的仪表都必须把信号线拉到接线板（marshallingpanel）上，然后再连到FTA上，这样同样远在百把米外的10台仪表，需要并行拉10条线，很浪费。用了类似USB的现场总线（fieldbus），各个仪表可以“挂”在总线上，然后一根总线连到DCS就可以了，大大节约拉线费用和时间，对系统（如加一个测量用的变送器或控制阀）的扩展也极为方便。现场总线也有现场总线的问题，不过这里就不多扯了。</p>
+<p><strong>控制软件</strong> </p>
+<p>DCS的最大优越性是可编程。这不是简单的像PLC（programmablelogiccontroller，可编程序逻辑控制器，多用于机电控制）的梯级逻辑那样编程，而是可以像C、FORTRAN那样“正规”的编程。我没有在IT干过，只能和学校里计算机语言课程和大作业的程序相比。DCS编程和平常的编程相比，还是有一些特点的。首先，DCS的程序属于“再入”式，也就是定时反复运行的，而不是一次从头到底运行就完事的。所以DCS程序可以在运行完毕时在内存里存放数据，到下次运行时再调用，形成所谓“递归”运算。这既是优点，也是缺点，要是别人在你两次运算中间把那个中间数据更改了，你就惨了，找债主都不容易。</p>
+<p>DCS程序的特色是实时，所以其执行非常取决于一系列事件在时间上的顺序。时序上要是搞岔了，老母鸡也就变鸭了。问题是，分散控制要求越分散越好，不光是可靠性，在系统资源的调度上，分散了也容易使系统的计算负荷均匀。这样一来，一个应用程序包常常将一个巨大的程序打散成很多小程序，各自的时序和衔接就要非常小心。</p>
+<p>和学术型控制计算程序最大的不同，或许还在于对异常情况的处理。一个多变量控制问题在实际上常常会有部分变量处于手动控制，而其余变量处于自动控制的情况。这在理论上是一个麻烦，在实际上是一个噩梦。不光要考虑所有的排列、组合，还要考虑所有情况平顺的切入、切出，不同模式之间的切换。还有就是要考虑异常情况下如何安全、自动地退出自动控制，交还手动控制。有时操作规程上的一句话，程序写写就是一页。如果操作规程上来一句“视情处理”，那就更惨了。在所有控制程序中，控制计算通常不超过30%，20%为人机接口功能，而50%为异常情况处理。</p>
+</div><div id="part_7" style="display:none;"><p><strong>人机界面</strong> </p>
+<p>计算机控制不是因为更先进、更有效的人机界面才开始的。从一开始，人机界面就面临一个管中窥豹的问题。计算机的CRT显屏只有这么大，不可能“一言以蔽之”，在一瞥之中把所有的过程信息尽收眼底。计算机可以不断地换屏，分段显示其他装置、工段的信息，但是把所有的工段、装置分别用各自的画幅表示，如果没有有效的组织，找都不容易找到，就像在同一个目录里杂乱无章地放上百把个文件一样。分级的菜单是传统的解决办法，但是要逐级上去再逐级下来，很费时间，情急之中，往往来不及更换。大键盘上shortcut键可以“一键调出”，但需要死记硬背，这可不是几个、十几个画幅，而是上百个甚至更多。很长时间以来，如何有效地在画幅之间导航，可以在最短时间和最少点击内，不需要死记硬背，就可以直观地找到所需要的画幅，一直是一个令人头疼的问题。其实，这个问题在网页设计里也碰到，一个内容丰富的网站，要如何组织网页，使用户自然、迅速地找到自己需要的内容，很不容易。所不同的是，工控的“网页”需要保证在最短时间里找到，需要的时候找不到是要出大问题的。</p>
+<p>人机界面设计的另一个问题是色彩。还记得DOS2.0时代的WordStar吗？那是黑底绿字的。那时候，CRT亮度不足，寿命也糟糕，黑底可以延长寿命，绿字可以增加反差，帮助阅读，反正机房是暗暗的，黑底并不伤眼睛。到了WordPerfect5.0的时候，就是蓝底白字了，字和背景之间的反差大大减小，蓝底也比较适宜于在明亮的房间内使用。到了Word的时代，没有昏暗的机房了，基本上都用像纸上写字一样的白底黑字了，再用黑底绿字，太伤眼睛。</p>
+<p>中控室计算机显示也经历了类似的旅程。早期DCS的显示都是黑底绿字的，到了用WINTEL或UNIX的时代，很多人出于习惯，仍然采用黑底绿字，但是现代人机工程研究表明，浅色背景大大减低眼睛的疲劳，在明亮室内的灯光对屏幕的反光也小，所以控制室的显示开始向浅灰背景进化了。人机工程研究同时发现，色彩可以作为过程信息的一部分，天下太平的时候，应该用最不显眼的灰色，所有的图形、数据都用不同深浅的灰色来表示，只有在过程参数越限或报警时，才采用彩色显示，这样可以一下子就把操作工的注意力吸引到需要的地方。但是，出于习惯思维，很多地方还是大量采用各种色彩表示不同的设备状态和参数，即使是正常状态也是一样。这样在平日里色彩缤纷很好看，但在异常情况时，不容易在万马军中找到上将的首级，实际上是舍本逐末。</p>
+<p>显示器的布置也很有讲究，少了当然不行，也不是越多越好，一个操作工的视界的上下左右有一定的范围，控制台的色彩、构造、照明都不能想当然的。这不是助长修正主义，而是保持操作工最有效地控制生产过程的要求。</p>
+</div><div id="part_8" style="display:none;"><p><strong>性能评估</strong> </p>
+<p>传统上，如果操作工不抱怨，控制回路的性能就是可以接受的，除非你想精益求精，一般不会去没事找事，重新整定参数。在对经济效益斤斤计较的今天，生产过程的工艺条件被推到极端，对控制性能提出极大的挑战，控制回路必需时时、处处都在最优状态。随着控制回路数的迅速增长，单靠人工观察，已经难于随时掌握所有控制回路的性能状况了。控制回路性能评估技术应运而生。</p>
+<p>理论上，对一个过程可以设计一个最优控制，其中一种就叫最小方差控制。这其实是线性二次型最优控制的一种，控制作用比较猛，但是这是理论上的极限，控制方差不可能再小了。90年代时，理论界提出一个方法，可以用闭环辨识的方法，不辨识模型，而是直接确定理论上的最小方差，然后将实际方差和理论上的最小方差相比，判别控制回路是否需要重新整定。这个方法开创了控制回路性能评估的先河，但是在实用上不容易排除不利影响，应用不多。</p>
+<p>然而，不和理论上的最优值比较，而是和实际上的理想值比较，就可以绕过很多麻烦的理论问题。比如说，流量回路应该在1分钟内安定下来，那理想值就是1分钟。通过快速富利叶变换和频域分析，可以将理论性能和实际性能相比较，迅速确定回路的当前性能状况。最要紧的是，这可以用计算机自动采集数据，自动计算，每天早上（或随便什么时候）给出报表，控制工程师可以一目了然，哪些回路需要重新整定，哪些没有问题，可以有的放矢。实时频域分析还可以将所有以相近频率振荡的回路罗列出来，接下来控制工程师就可以按图索骥，找出害群之马了。</p>
+<p>控制回路性能评估的下一步当然就是自动整定。这实际上是一个简化的、断续运行的自校正PID控制器，在理论上已经没有问题，但实用上还有很多可靠性问题没有完全解决，现在产品不少，但实用的还是不多。</p>
+<p><strong>故障诊断和容错系统</strong></p>
+<p>对控制回路性能评估的更进一步，当然就是对生产过程的故障诊断了。故障就是异常情况，异常就是和正常不一样。所以故障诊断的核心在于如何探测这“不一样”。</p>
+<p>故障总是有蛛丝马迹的，问题在于工业过程的数据量太大，在大海里捞针，等捞到的时候，常常已经时过境迁了。在数据分析中，PLS（其实是PeojectiontoLatentStructure，而不是一般所认为的PartialLeastSquare）和主元分析（PrincipalComponentAnalysis，PCA）是很流行的方法。PLS和PCA将众多相关的变量归拢到少数几个“合成”的变量，这样一个有大量变量的复杂大系统就可以简化为一个小系统，就从大海捞针变为碗里捞针了。捞出来的针不再是单个的变量，而是变量的组合。这和实际是相符的，故障的早期征兆常常是若干变量的组合，而不能单从一两个变量上看出来。</p>
+<p>PLS和PCA还可以和图形方法结合起来使用。比如说，将那些合成变量标称化，就是除以正常值，那所有合成变量的标称值就是1。把所有变量画成“蜘蛛图”（spiderchart），每一个蜘蛛脚代表一个合成变量，由于合成变量的标称值都是1，蜘蛛图就是大体为圆的。如果哪一个脚出现变化，蜘蛛就不圆了，非常容易看出异常来，接下来就可以有的放矢地寻找故障的早期迹象了。</p>
+<p>图形数据分析的另一个路子是所谓co-linear分析。这是IBM早年琢磨出来的一个东西，理论上简直没有东西，但要求换一个思路，正所谓退一步海阔天空。平常的数据点，三维以上就没法画了。但是如果把三维空间的所有数轴画成平行线，而不是常见的直角坐标，那三维空间里的一个点，就是连接三根平行线的一根折线。如果仅此而已，那也就是一个简单但愚蠢的数学游戏。平行坐标系的妙处在于，平行线可以尽着画，所以5维、20维、3千维，只要纸足够大，都可以画，而且可以看见，而不是只能想像。平行坐标只有一个缺点，就是只能表述离散的点，而难以表述连续的线或面，但这对计算机采集的数据来说，不是问题，计算机采集的数据本来就是离散的点。这样，用平行坐标把大量的数据点画成折线簇，可以很直观地看出数据中的模式来，</p>
+<p>故障诊断的另一个思路是对整个过程进行辨识。辨识出来的模型表述系统的行为，故障当然就是行为的改变，所以将实时辨识出来的模型和正常模型相比较，就可以判断系统是否出现异常或故障。</p>
+</div><div id="part_9" style="display:none;"><p><strong>仿真</strong> </p>
+<p>计算机和模型的另一个用处就是仿真。仿真（simulation）也叫模拟，但是模拟容易和模拟电路（analogcircuit）搞混，所以现在叫仿真多了。只要对实际过程有一个足够精确的模型，计算机是可以相当精确地模仿实际系统的行为的。</p>
+<p>仿真有静态仿真和动态仿真。静态仿真基本上就是解一个巨大的非线性联立方程组，描述空间分布的微分方程也被有限元方法分解了。现代静态仿真已经可以做得相当精确，但这也是在多年结合实际过程数据“磨合”模型的基础上才能做到的。静态仿真大量用于工艺设备设计计算，但是对研究实际过程的真实行为的作用有限，因为对整个生产过程和工艺的仿真要考虑进各个设备动作的时间和控制回路的影响，这些静态仿真是无法体现的。动态仿真要解同样巨大的联立微分方程组，由于要达到实时或更快，一般只能大大简化，否则计算速度跟不上，收敛性也难以保证。希望有朝一日，动态仿真可以达到静态仿真同等的精度，而不必担心损失计算速度。</p>
+<p>仿真在工业上十分有用。现代化工厂越来越稳定，越来越安全，很多操作工一辈子也没有遇到过真正危险的情况。但没有遇到过不等于不会遇到，操作工必须接受足够的训练，只有这样，才能当遇到危险情况时，首先能及时、正确地识别故障，然后才能及时、正确地作出反应。这就要靠仿真训练了。现代化工厂也在不断地拓展工艺参数的极限，经常需要做各种各样的试验。有了仿真，就可以预先验证试验的构思，和验证对紧急情况的处理。</p>
+<p>仿真更是控制工程师的好帮手，新的控制回路先放到仿真上试一下，得出初始整定参数，验证异常情况的处理能力，然后再放到真家伙上，可以避免很多不必要的惊讶。</p>
+<p><strong>RTO</strong></p>
+<p>仿真的一个远亲是实时最优化。对于斤斤计较的现代制造业，实时最优化当然是求之不得的。实时最优化就是把整个生产过程当一个大的实时仿真来运算，实时（实际上是每小时）计算出最优工况。想法是好的，困难是多的。首先，那么大一个方程组收敛不容易，要划成很多条条块块，分别求解，然后拼起来。问题就出在“拼”上，边界条件碰不拢怎么办？模型总是有相当的简化，其中有些参数必须和实际测量值符合，有些就没有实际测量值对应，就是“经验系数”（fudgefactor）了。这些经验系数就是承担收拾烂账的，边界碰不拢，就调整经验系数，使他们对齐。问题是，好多时候，这一招也不灵，所以实时最优化的喇叭吹得很响，真正用起来的很少，花了大钱最后放弃的也不在少数。</p>
+<p><strong>人的因素</strong> </p>
+<p>和打仗一样，赢得战斗的是武士，不是武器。控制工程师是控制回路成功与否的关键，而不是价值千金的计算机，或者“放之四海而皆准”的数学控制理论。</p>
+</div><div id="part_10" style="display:none;"><p>在加拿大，化工系的控制“专业”要选满所有化工学分，然后再加选控制学分，所以要求比一般的化学工程师还要高一点。选满化工学分是很重要的一点，如果没有对化工的话语权，那化工控制也别混了，这一点是国内（至少是三十多前我读大学的时候）所欠缺的。这就像医生一样，只有对生理、病理有深刻的了解，对病人的具体情况有深刻的了解，才有可能可靠地判断病情，才能可靠地开方治病。只会看单抓药，这就不是医生，而是药剂师了。在实际中，控制工程师对工艺过程的动态行为的理解至少应该和工艺工程师同等，和操作工相当。事实上，很多时候，控制工程师的使命就是将工艺工程师和操作工的经验和知识具体化、自动化，如果你不能深刻理解，那如何实现呢？一个优秀的控制工程师可以在操作工不在的时候，顶班操作；可以在工艺工程师不在的时候，做出工艺决定。</p>
+<p>但是控制工程师毕竟不是工艺工程师，也不是操作工。控制工程师应该掌握前面说到的所有领域，从数学控制理论，到计算机网络，到人机工程，到工艺和仪表知识。这个要求很高，但不是不切实际的。这些是搅这个瓷器活所必需的金刚钻。这也是为什么现在加拿大工业界热衷于招雇具有硕士学位的控制毕业生，因为本科的几年已经很难学习必须的知识了。至于博士，那还是有眼高手低的嫌疑，不过也开始改观了。</p>
+<p>专业知识只是成功的一面，控制工程师必须善于与人打交道。工艺工程师比较好说，毕竟有类似的背景，但操作工是控制系统成败的关键，如果无法取得操作工对你个人和你的控制系统的信任和合作，那控制系统很可能就是永久性地被关闭，操作工宁愿手工控制，出了问题还是因为控制系统不可靠，你就等着里外不是人吧。但是取得操作工的信任和合作后，事情会向相反的方向发展。操作工会主动向你提出改进建议，或新的想法，主动找机会帮你试验新的功能，主动拓展控制系统的性能极限。如果说顾客是上帝的话，操作工而不是部门主管才是控制工程师的上帝。</p>
+<p>控制工程师也要善于和头儿打交道，毕竟搞项目、要钱的时候，还是要找头儿的。打报告、作报告、项目控制和管理、和供应商打交道，这些都是必备的技能。</p>
+<p>工艺工程师也是工程师，但用军队的比方来说，他们人多势众，更像常规部队，习惯大兵团协同作战。控制工程师则像特种部队，人数少，行止怪癖（至少对工艺的人来说，他们永远弄不明白控制的人到底在做什么，怎么做出来的），从规划到实施到维修，全一手包办。</p>
+<p>控制理论的发展历程就是一个寻找“放之四海而皆准”的“神奇子弹”的历程，终极目标是可以用一个统一的数学控制工具去“套”任何一个具体的控制问题，而不必对具体过程的物理、化学等特性有深入的理解。控制理论的每一次重大进展，都给人们带来希望，“这一次终于找到了”。但每一次希望都带来了新的失望，新方法、新工具解决了老问题，但带来了新的局限，有的时候甚至转了一圈兜回去了。新的局限往往比老问题更棘手，需要对过程的理解是更多而不是更少。矛和盾就是这么着在螺旋形上升中斗法。</p>
+</div><div id="paginate"><label id="li_1" onclick="javascript:show_page(1,10,this);" style="font-size:30px;font-weight:bold" onmouseover="this.style.cursor='pointer'">1</label><label id="li_2" onclick="javascript:show_page(2,10,this);"  onmouseover="this.style.cursor='pointer'">2</label><label id="li_3" onclick="javascript:show_page(3,10,this);"  onmouseover="this.style.cursor='pointer'">3</label><label id="li_4" onclick="javascript:show_page(4,10,this);"  onmouseover="this.style.cursor='pointer'">4</label><label id="li_5" onclick="javascript:show_page(5,10,this);"  onmouseover="this.style.cursor='pointer'">5</label><label id="li_6" onclick="javascript:show_page(6,10,this);"  onmouseover="this.style.cursor='pointer'">6</label><label id="li_7" onclick="javascript:show_page(7,10,this);"  onmouseover="this.style.cursor='pointer'">7</label><label id="li_8" onclick="javascript:show_page(8,10,this);"  onmouseover="this.style.cursor='pointer'">8</label><label id="li_9" onclick="javascript:show_page(9,10,this);"  onmouseover="this.style.cursor='pointer'">9</label><label id="li_10" onclick="javascript:show_page(10,10,this);"  onmouseover="this.style.cursor='pointer'">10</label></div> 
+			<div align="center">1 month ago, this page was being read. </div>
+			<p class="tags"><a href="http://www.xieziming.com/tag/automation" rel="tag">Automation</a>, <a href="http://www.xieziming.com/tag/wang-zhai" rel="tag">网摘</a><br /></p>  
+    </div><!-- /entry -->                                   
+		<div class="postbottom"></div>		                              
+		</div><!-- /post -->	
+
+<div class="postrelated">
+			<table width="100%" >				
+
+					<tr><td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/9488.html" rel="bookmark" title="UI Automation自定义控件处理">UI Automat...</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7125.html" rel="bookmark" title="自动控制理论（一）">自动控制理论（一）</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/9487.html" rel="bookmark" title="UI Automation通过相对位置来进行对象识别">UI Automati...</a></td>
+
+				<td align="right" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7801.html" rel="bookmark" title="当我们谈论自动化测试">当我们谈论自动化测试</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7140.html" rel="bookmark" title="漫谈工业过程控制系统">漫谈工业过程...</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/8475.html" rel="bookmark" title="QTP自动化框架建设">QTP自动...</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/9480.html" rel="bookmark" title="微软UI Automation">微软UI Autom...</a></td>
+
+				<td align="right" class="dashedline_related"><a href="http://www.xieziming.com/archives/8626.html" rel="bookmark" title="Jemmy入门之接口">Jemmy入门...</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/5958.html" rel="bookmark" title="12星座最配与最不配">12星座最配与最不配</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/9468.html" rel="bookmark" title="UI Automation对象识别方式">UI Au...</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/7170.html" rel="bookmark" title="链接器和装入器">链接器和装入器</a></td>
+
+				<td align="right" class="dashedline_related">★<a href="http://www.xieziming.com/archives/8636.html" rel="bookmark" title="Jemmy入门之ActionProducer">Jemmy入...</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/8630.html" rel="bookmark" title="Jemmy入门之Waiter">Jemmy入门...</a></td>
+
+		</table>
+</div>
+
+		<div id="comments">
+
+<!-- START COMMENT FORMS -->
+
+
+		</div><!--/comments-->		
+
+</div><!-- /content -->
+<div id="sidebar">			
+			<a class="subscribe" href="http://www.xieziming.com/feed" title="Posts RSS">Subscribe</a>			
+			<div id="search">	
+	<form name="searchform" id="searchform" method="get" action="http://www.xieziming.com/index.php">
+		<input class="text" type="text" name="s" id="s" value=""/>
+		<input class="submit" type="image" src="http://www.xieziming.com/wp-content/themes/ziming/img/submit.jpg" value="search" />
+	</form>	
+</div><!-- /search -->			
+			<div id="widgets">			
+			<div class="widget"><h3>Calendar</h3>
+<table id="wp-calendar">
+  									<caption>December 2016</caption>
+  									<thead>
+                    <tr><th scope="col" title="S">S</th><th scope="col" title="M">M</th><th scope="col" title="T">T</th><th scope="col" title="W">W</th><th scope="col" title="T">T</th><th scope="col" title="F">F</th><th scope="col" title="S">S</th></tr></thead><tbody><tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>1</td><td>2</td><td>3</td></tr><tr><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td></tr><tr><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td></tr><tr><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">18<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">《血战钢锯岭》</span><br/><span class="time" style="color:#000000; " > Time : 21:18 - 23:28</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">晚上和小锅去看，蛮感人的。吃完去沙湾吃猪杂粥，应该是我在那吃到的最新鲜的一次了。</p></span></a></span></td><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">19<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">CentOS</span><br/><span class="time" style="color:#000000; " > Time : 14:11 - 18:11</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">终于有点时间来把那盒子的win7转成CentOS来做server。配置vsftp花了我太多的时间。。。</p></span></a></span></td><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td></tr><tr><td>25</td><td>26</td><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td></tr><tr><td colspan="3" id="prev"><a href="http://www.xieziming.com/archives/7133.html?month=nov&yr=2016">&laquo; Prev</a></td><td colspan="4" id="next"><a href="http://www.xieziming.com/archives/7133.html?month=jan&yr=2017">Next &raquo;</a></td></tr></tbody></table>
+<div class="widgetbottom"></div></div><!--/widget-->				
+					      		<div class="widget">
+ 							<h3>Recent Posts</h3>
+							<ul>
+           				<li><a href="http://www.xieziming.com/archives/9579.html" class="dashedline" title="闽南 · 泉州">闽南 &middot; 泉州</a></li><li><a href="http://www.xieziming.com/archives/9578.html" class="dashedline" title="顺化 · HUE">顺化 &middot; HUE</a></li><li><a href="http://www.xieziming.com/archives/9577.html" class="dashedline" title="会安 · 春卷">会安 &middot; 春卷</a></li><li><a href="http://www.xieziming.com/archives/9576.html" class="dashedline" title="会安 · 夜灯">会安 &middot; 夜灯</a></li><li><a href="http://www.xieziming.com/archives/9575.html" class="dashedline" title="会安古镇">会安古镇</a></li><li><a href="http://www.xieziming.com/archives/9573.html" class="dashedline" title="岘港">岘港</a></li><li><a href="http://www.xieziming.com/archives/9535.html" class="dashedline" title="罗马">罗马</a></li><li><a href="http://www.xieziming.com/archives/9534.html" class="dashedline" title="卢浮宫">卢浮宫</a></li>						
+							</ul>
+      				<div class="widgetbottom"></div>
+	    		</div>
+	    			        
+        	      		<div class="widget">
+ 							<h3>Rand Posts</h3>
+							<ul>
+      						<li><a href="http://www.xieziming.com/archives/5071.html" class="dashedline" title="暖暖的旅程">暖暖的旅程</a></li><li><a href="http://www.xieziming.com/archives/4900.html" class="dashedline" title="天坛">天坛</a></li><li><a href="http://www.xieziming.com/archives/9269.html" class="dashedline" title="梨花女子大学（一）">梨花女子大学（一）</a></li><li><a href="http://www.xieziming.com/archives/8959.html" class="dashedline" title="印尼日惹">印尼日惹</a></li><li><a href="http://www.xieziming.com/archives/7984.html" class="dashedline" title="飞机上看落日">飞机上看落日</a></li><li><a href="http://www.xieziming.com/archives/223.html" class="dashedline" title="生活是这么的单调">生活是这么的单调</a></li><li><a href="http://www.xieziming.com/archives/5855.html" class="dashedline" title="沙面（杂二）">沙面（杂二）</a></li><li><a href="http://www.xieziming.com/archives/408.html" class="dashedline" title="1月音乐推荐">1月音乐推荐</a></li>	
+							</ul>
+        			<div class="widgetbottom"></div>
+					</div>                 
+          	                       
+			</div><!-- /widgets -->			                       
+</div><!-- /sidebar --></div><!-- /main -->
+<div id="footer">
+<p align="left">© <a href="http://www.miitbeian.gov.cn" target="_blank"> 明 · 明 · 童 · 鞋</a></p>
+<!--76 queries in 2.372 seconds.-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?c2e18b43ec905e3c4ea82c1b57537223";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</div><!-- /footer -->
+</div><!-- /container -->
+<script type='text/javascript' src='http://www.xieziming.com/wp-includes/js/wp-embed.min.js?ver=4.7'></script>
+</body>
+</html>

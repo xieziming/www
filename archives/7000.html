@@ -1,0 +1,619 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head profile="http://gmpg.org/xfn/11">
+<title>  Java IO类 &raquo; 谢子明</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="description" content="Java IO类  " />
+<meta name="keywords" content="谢子明" />
+<link rel="stylesheet" href="http://www.xieziming.com/wp-content/themes/ziming/style.css" type="text/css" media="screen" />
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://www.xieziming.com/feed" />
+<link rel="alternate" type="application/rss+xml" href="http://www.xieziming.com/comments/feed" title="谢子明 Comments RSS feed" />
+<link rel="shortcut icon" href="http://www.xieziming.com/wp-content/themes/ziming/favicon.ico">
+<link rel="Bookmark" href="http://www.xieziming.com/wp-content/themes/ziming/favicon.ico">
+<link rel="pingback" href="http://www.xieziming.com/xmlrpc.php" />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="谢子明 &raquo; Java IO类 Comments Feed" href="http://www.xieziming.com/archives/7000.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/xieziming.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.7"}};
+			!function(a,b,c){function d(a){var b,c,d,e,f=String.fromCharCode;if(!k||!k.fillText)return!1;switch(k.clearRect(0,0,j.width,j.height),k.textBaseline="top",k.font="600 32px Arial",a){case"flag":return k.fillText(f(55356,56826,55356,56819),0,0),!(j.toDataURL().length<3e3)&&(k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,65039,8205,55356,57096),0,0),b=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,55356,57096),0,0),c=j.toDataURL(),b!==c);case"emoji4":return k.fillText(f(55357,56425,55356,57341,8205,55357,56507),0,0),d=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55357,56425,55356,57341,55357,56507),0,0),e=j.toDataURL(),d!==e}return!1}function e(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i,j=b.createElement("canvas"),k=j.getContext&&j.getContext("2d");for(i=Array("flag","emoji4"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<script type='text/javascript' src='http://www.xieziming.com/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='http://www.xieziming.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<link rel='https://api.w.org/' href='http://www.xieziming.com/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.xieziming.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.xieziming.com/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='Http协议' href='http://www.xieziming.com/archives/7409.html' />
+<link rel='next' title='Equals与Hashcode' href='http://www.xieziming.com/archives/7437.html' />
+<meta name="generator" content="WordPress 4.7" />
+<link rel="canonical" href="http://www.xieziming.com/archives/7000.html" />
+<link rel='shortlink' href='http://www.xieziming.com/?p=7000' />
+<link rel="alternate" type="application/json+oembed" href="http://www.xieziming.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fxieziming.com%2Farchives%2F7000.html" />
+<link rel="alternate" type="text/xml+oembed" href="http://www.xieziming.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fxieziming.com%2Farchives%2F7000.html&#038;format=xml" />
+ 	<link rel="stylesheet" href="http://www.xieziming.com/wp-content/plugins/live-calendar/live-calendar.css" type="text/css" media="screen" /> 
+<link rel="stylesheet" href="http://www.xieziming.com/wp-content/plugins/wp-code/wp-code.css" type="text/css" media="screen" />
+
+<link rel="stylesheet" href="http://www.xieziming.com/wp-content/plugins/zoom-highslide/highslide.css" type="text/css" media="screen" />
+<script type="text/javascript" src="http://www.xieziming.com/wp-content/plugins/zoom-highslide/js/highslide-full.packed.js"></script>
+<script type="text/javascript">
+	hs.graphicsDir = 'http://www.xieziming.com/wp-content/plugins/zoom-highslide/graphics/';
+	hs.align = 'center';
+	hs.transitions = ['expand', 'crossfade'];
+	hs.outlineType = 'rounded-white';
+  hs.wrapperClassName = 'controls-in-heading';
+	hs.showCredits=false;
+	hs.fadeInOut = true;
+	hs.dimmingOpacity = 0.8;
+
+	// Add the controlbar
+	if (hs.addSlideshow) hs.addSlideshow({
+		//slideshowGroup: 'group1',
+		interval: 4000,
+		repeat: false,
+		useControls: true,
+		fixedControls: false,
+		overlayOptions: {
+			opacity: 1,
+			position: 'top center',
+			hideOnMouseOut: true
+		}
+	});
+</script>
+
+<script type="text/javascript">
+	var widthRestriction = 668; 
+	var heightRestriction = 1000; 
+</script>
+<script type="text/javascript" src="http://www.xieziming.com/wp-content/plugins/zoom-highslide/js/zoom.js"></script>
+	
+<!--script src="http://www.xieziming.com/wp-content/themes/ziming/js/mouse.js" type="text/javascript"></script--> 
+</head>
+<body class="normalbg">
+<div id="container">
+	<div id="head">
+		<div id="nav">
+			<ul>
+				<li class="first"><a href="http://www.xieziming.com" title="首页">首页</a></li>
+				<li class="page_item page-item-2"><a href="http://www.xieziming.com/recent" title="最近">最近</a></li>
+				<li class="page_item page-item-3"><a href="http://www.xieziming.com/photo" title="Photo">映象</a></li>
+				<li class="page_item page-item-4"><a href="http://www.xieziming.com/food" title="Food">美食</a></li>
+				<li class="page_item page-item-5"><a href="http://www.xieziming.com/topic" title="关键字">话题</a></li>
+				<li class="page_item page-item-6"><a href="http://www.xieziming.com/travel" title="Travel">旅行</a></li>
+				<li class="page_item page-item-7"><a href="http://www.xieziming.com/literature" title="Literature">文艺</a></li>
+				<li class="page_item page-item-8"><a href="http://www.xieziming.com/wiki" title="技术维基">维基</a></li>
+				<li class="page_item page-item-9"><a href="http://www.xieziming.com/calendar" title="Calendar">点滴</a></li>
+			</ul>
+		</div><!-- /nav -->		
+	</div><!-- /head -->
+<div id="main" class="altmainbg">
+
+<script type="text/javascript">
+function show_page(id,count,source){
+	for (var i=1;i<=count;i++){
+		if(id != i){
+				jQuery("#part_"+i).hide();
+				document.getElementById("li_"+i).style.fontWeight = "normal";
+				document.getElementById("li_"+i).style.fontSize = "18px";
+		}
+	}
+	jQuery("#part_"+id).show();
+	document.getElementById("li_"+id).style.fontWeight = "bold";
+	document.getElementById("li_"+id).style.fontSize = "30px";
+	jQuery('body,html').animate({scrollTop:0},1000);
+        return false;
+}
+</script>
+<div id="content">
+
+	<div class="post" id="post-7000">
+		<h2 class="title">Java IO类</h2>
+		<p class="postmetadata">
+			<span class="date">03 October 2012</span>
+			<span class="category">Categoried in <a href="http://www.xieziming.com/topic/coding" rel="category tag">程序</a></span>
+			<span class="comments">0</span>
+			<span class="view">Preview : 633 , Read : 870 </span>
+			<span class="mail">Index : 5510 </span>
+		</p>
+		<div class="entry">				
+<div id="part_1"><p><strong>Java IO类分类：</strong></p>
+<p>按流向分:　　<br />
+输入流: 程序可以从中读取数据的流。　　<br />
+输出流: 程序能向其中写入数据的流。<br />
+　　<br />
+按数据传输单位分:　　<br />
+字节流: 以字节为单位传输数据的流<br />
+字符流: 以字符为单位传输数据的流<br />
+　　<br />
+按功能分:　　<br />
+节点流：从特定的地方读写的流类，例如：磁盘或一块内存区域。<br />
+过滤流：使用节点流作为输入或输出。过滤流是使用一个已经存在的输入流或输出流连接创建的。 </p>
+<p>InputStream和Reader是所有输入流的基类，OutputStream和Writer是所有输出流的基类。他们都是抽象类，本身并不能创建实例来执行输入，但他们有输入/输出流的模版，所以它们的方法是所有的输入/输出流可以用的方法。</p>
+<p>从Stream到Reader,Writer的转换类：InputStreamReader, OutputStreamWriter</p>
+<p>BufferedReader(FileReader(String)), BufferedReader(InputStreamReader(FileInputStream(String)))</p>
+<p><strong>简单来讲，要有BufferedReader，先要有Reader，这个Reader可以直接来自FileReader,也可以从InputStream转化而来，这个时候就需要InputStreamReader做桥梁。</strong></p>
+<p>InputStreamReader和FileReader处于同一层，读写方法差不多。</p>
+<p><strong>基本的流类:</strong></p>
+<p>(1)FileInputStream和FileOutputStream<br />
+节点流，用于从文件中读取或往文件中写入字节流。如果在构造FileOutputStream时，文件已经存在，则覆盖这个文件。</p>
+<p>(2)BufferedInputStream和BufferedOutputStream<br />
+过滤流，需要使用已经存在的节点流来构造，提供带缓冲的读写，提高了读写的效率。</p>
+<p>(3)DataInputStream和DataOutputStream<br />
+过滤流，需要使用已经存在的节点流来构造，提供了读写Java中的基本数据类型的功能。</p>
+<p>(4)PipedInputStream和PipedOutputStream<br />
+管道流，用于线程间的通信。一个线程的PipedInputStream对象从另一个线程的PipedOutputStream对象读取输入。要使管道流有用，必须同时构造管道输入流和管道输出流。</p>
+<p>在InputStream里常用的方法：</p>
+<p>int read(): 从输入流中读取单个字节<br />
+int read(byte[] b): 从输入流中读取最多b.length个字节，将读取的字节存在数组b中，返回实际读取的字节数<br />
+int read(byte[] b, int off, int len): 从输入流中读取最多len个字节数据，并将其存储在数字b中，放入b数组中时，并不是从数组起点开始，而是从off位置开始，返回实际读取字节数。</p>
+<p>在Reader里经常使用的方法：</p>
+<p>int read(): 从输入流中读取单个字符<br />
+int read(char[] c): 从输入流读取最多c.length个字符数据，并将其存储在字符数组c中，返回实际读取的字符<br />
+int read(char[] c, int off, int len): 从输入流中读取最多len个字符的数据，将读取的数据放到字符数组c中保存，从数组的off开始读取。</p>
+</div><div id="part_2" style="display:none;"><p>
+（1）、FileInputStream 、FileOutputStream</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #666666; font-style: italic;">//FileOutputStream(File file), FileOutputStream(String FileName) 向指定文件对象或文件名写入输入出流。 </span>
+<span style="color: #003399;">FileOutputStream</span> fos <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">FileOutputStream</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;1.txt&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>   <span style="color: #666666; font-style: italic;">//向文件中输出节点流</span>
+fos.<span style="color: #006633;">write</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;www.hahah.com&quot;</span>.<span style="color: #006633;">getBytes</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>   
+<span style="color: #666666; font-style: italic;">//String.getBytes() 将String 解析为字节序列,并存储到 byte[] 中; </span>
+fos.<span style="color: #006633;">close</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>    <span style="color: #666666; font-style: italic;">//关闭输出流</span>
+&nbsp;
+<span style="color: #003399;">FileInputStream</span> fis <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">FileInputStream</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;1.txt&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #000066; font-weight: bold;">byte</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> buf <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #000066; font-weight: bold;">byte</span><span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">100</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+<span style="color: #000066; font-weight: bold;">int</span> len <span style="color: #339933;">=</span> fis.<span style="color: #006633;">read</span><span style="color: #009900;">&#40;</span>buf<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>            <span style="color: #666666; font-style: italic;">//将输入流读取到一个字节数组中</span>
+<span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">String</span><span style="color: #009900;">&#40;</span>buf,<span style="color: #cc66cc;">0</span>,len<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>   <span style="color: #666666; font-style: italic;">//从0到len长度的实际读取</span>
+fis.<span style="color: #006633;">close</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>     <span style="color: #666666; font-style: italic;">//关闭输入流</span></pre></div></div>
+
+<p>(2)、BufferedInputStream 、 BufferedOutputStream</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #003399;">FileOutputStream</span> fos <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">FileOutputStream</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;1.txt&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #003399;">BufferedOutputStream</span> bos<span style="color: #339933;">=</span><span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">BufferedOutputStream</span><span style="color: #009900;">&#40;</span>fos<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">//必须以已经存在的节点流来构造</span>
+bos.<span style="color: #006633;">write</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;I'll never give up!&quot;</span>.<span style="color: #006633;">getBytes</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+bos.<span style="color: #006633;">flush</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>      <span style="color: #666666; font-style: italic;">//强制输出缓冲区的数据</span>
+bos.<span style="color: #006633;">close</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #003399;">FileInputStream</span> fis <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">FileInputStream</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;1.txt&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #003399;">BufferedInputStream</span> bus <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">BufferedInputStream</span><span style="color: #009900;">&#40;</span>fis<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #000066; font-weight: bold;">byte</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> buf <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #000066; font-weight: bold;">byte</span><span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">100</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+<span style="color: #000066; font-weight: bold;">int</span> len <span style="color: #339933;">=</span> bus.<span style="color: #006633;">read</span><span style="color: #009900;">&#40;</span>buf<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">String</span><span style="color: #009900;">&#40;</span>buf,<span style="color: #cc66cc;">0</span>,len<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+bus.<span style="color: #006633;">close</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre></div></div>
+
+<p>（3）、DataInputStream 、 DataOutputStream</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #003399;">FileOutputStream</span> fos <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">FileOutputStream</span><span style="color: #009900;">&#40;</span>“<span style="color: #cc66cc;">1</span>.<span style="color: #006633;">txt</span>”<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #003399;">BufferedOutputStream</span> bos <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">BufferedOutputStream</span><span style="color: #009900;">&#40;</span>fos<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #003399;">DataOutputStream</span> dos <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">DataOutputStream</span><span style="color: #009900;">&#40;</span>bos<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> 
+<span style="color: #666666; font-style: italic;">//这里除了可以用BufferedOutputStream bos外，也可以用FileOutputStream的fos</span>
+<span style="color: #000066; font-weight: bold;">int</span> a <span style="color: #339933;">=</span> <span style="color: #cc66cc;">12</span><span style="color: #339933;">;</span>
+<span style="color: #000066; font-weight: bold;">char</span> c <span style="color: #339933;">=</span> <span style="color: #0000ff;">'2'</span><span style="color: #339933;">;</span>
+<span style="color: #000066; font-weight: bold;">double</span> d <span style="color: #339933;">=</span> <span style="color: #cc66cc;">30.00</span><span style="color: #339933;">;</span>
+dos.<span style="color: #006633;">writeInt</span><span style="color: #009900;">&#40;</span>a<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+dos.<span style="color: #006633;">writeChar</span><span style="color: #009900;">&#40;</span>c<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+dos.<span style="color: #006633;">writeDouble</span><span style="color: #009900;">&#40;</span>d<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+dos.<span style="color: #006633;">close</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #003399;">FileInputStream</span> fis <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">FileInputStream</span><span style="color: #009900;">&#40;</span>“<span style="color: #cc66cc;">1</span>.<span style="color: #006633;">txt</span>”<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #003399;">BufferedInputStream</span> bis <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">BufferedInputStream</span><span style="color: #009900;">&#40;</span>fis<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #003399;">DataInputStream</span> dis <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">DataInputStream</span><span style="color: #009900;">&#40;</span>bis<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #666666; font-style: italic;">//这里除了可以用BufferedInputStream bis外，也可以用FileInputStream的fis</span>
+<span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span>dis.<span style="color: #006633;">readInt</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span>dis.<span style="color: #006633;">readChar</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span>dis.<span style="color: #006633;">readDouble</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #666666; font-style: italic;">//注意上面三个读取的顺序要和写入的顺序一样，否则读出来的数据不对</span>
+dis.<span style="color: #006633;">close</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">//String类的数据读取有readByte,readChar,readUTF   .witeChar,writeByte,writeUTF</span></pre></div></div>
+
+<p>（3）、Reader 、 Writer<br />
+Java程序语言使用Unicode来表示字符串和字符。Reader和Writer这两个抽象类主要用来读写字符流。</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #666666; font-style: italic;">//使用Writer 进行文件写入数据</span>
+<span style="color: #003399;">FileOutputStream</span> fos <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">FileOutputStream</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;1.txt&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #003399;">OutputStreamWriter</span> osw <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">OutputStreamWriter</span><span style="color: #009900;">&#40;</span>fos<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> 
+<span style="color: #666666; font-style: italic;">//OutputStreamWriter是字节流到字符流的桥梁</span>
+<span style="color: #003399;">BufferedWriter</span> bw <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">BufferedWriter</span><span style="color: #009900;">&#40;</span>osw<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+bw.<span style="color: #006633;">write</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;haha,i am the number one&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+bw.<span style="color: #006633;">close</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">//使用Reader进行文件读取</span>
+<span style="color: #003399;">FileInputStream</span> fis <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">FileInputStream</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;1.txt&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #003399;">InputStreamReader</span> ism <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">InputStreamReader</span><span style="color: #009900;">&#40;</span>fis<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #003399;">BufferedReader</span> br <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">BufferedReader</span><span style="color: #009900;">&#40;</span>ism<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span>br.<span style="color: #006633;">readLine</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">//readLine() 按行读取数据</span>
+br.<span style="color: #006633;">close</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">//多行文本的读取        </span>
+<span style="color: #003399;">InputStreamReader</span> ism <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">InputStreamReader</span><span style="color: #009900;">&#40;</span><span style="color: #003399;">System</span>.<span style="color: #006633;">in</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #003399;">BufferedReader</span> br <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">BufferedReader</span><span style="color: #009900;">&#40;</span>ism<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #003399;">String</span> strLine<span style="color: #339933;">;</span>
+<span style="color: #000000; font-weight: bold;">while</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span>strLine<span style="color: #339933;">=</span>br.<span style="color: #006633;">readLine</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">!=</span><span style="color: #000066; font-weight: bold;">null</span><span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#123;</span>
+       <span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span>strLine<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span>
+br.<span style="color: #006633;">close</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre></div></div>
+
+</div><div id="part_3" style="display:none;"><p>
+Java遵循标准I/O的模型，提供了Syetem.in，System.out，以及System.err。本书一直都在用System.out往标准输出上写，而它(System.out)是一个已经预先处理过的，被包装成PrintStream的对象。和System.out一样，System.err也是一个PrintStream，但是System.in就不对了，它是一个未经处理的InputStream。也就是说，虽然你可以直接往System.out和System.err上写，但是要想读System.in的话，就必须先做处理了。</p>
+<p>System.in.read() 返回的是输入数值的 ASKII 码（一个 int 整数）。通常情况下，你会用readLine( )一行一行地读取输入，因此要把System.in包装成BufferedReader。但在这之前还得先用InputSteamReader把System.in转换成Reader。</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #003399;">BufferedReader</span> in <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">BufferedReader</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">InputStreamReader</span><span style="color: #009900;">&#40;</span><span style="color: #003399;">System</span>.<span style="color: #006633;">in</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #000066; font-weight: bold;">int</span> a <span style="color: #339933;">=</span> <span style="color: #003399;">Integer</span>.<span style="color: #006633;">parseInt</span><span style="color: #009900;">&#40;</span>in.<span style="color: #006633;">readLine</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><span style="color: #666666; font-style: italic;">//强制转换为需要的类型</span></pre></div></div>
+
+<p>当我们读写文本文件的时候，采用Reader是非常方便的，比如FileReader，InputStreamReader和BufferedReader。其中最重要的类是InputStreamReader，它是字节转换为字符的桥梁。</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #003399;">FileReader</span> fr <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">FileReader</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;ming.txt&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+<span style="color: #000066; font-weight: bold;">int</span> ch <span style="color: #339933;">=</span> <span style="color: #cc66cc;">0</span><span style="color: #339933;">;</span>  
+<span style="color: #000000; font-weight: bold;">while</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span>ch <span style="color: #339933;">=</span> fr.<span style="color: #006633;">read</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">!=-</span><span style="color: #cc66cc;">1</span> <span style="color: #009900;">&#41;</span>  <span style="color: #009900;">&#123;</span>  <span style="color: #666666; font-style: italic;">//记住，只有BufferedReader才有readline</span>
+    <span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">print</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">char</span><span style="color: #009900;">&#41;</span>ch<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  <span style="color: #666666; font-style: italic;">//其中read()方法返回的是读取得下个字符。当然你也可以使用read(char[] ch,int off,int length)</span>
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>我们可以使用BufferedReader对Reader进行包装，这样可以提高读取得速度，我们可以一行一行的读取文本，使用readLine()方法。</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #003399;">BufferedReader</span> br <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">BufferedReader</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">InputStreamReader</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">FileInputStream</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;ming.txt&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #003399;">String</span> data <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">null</span><span style="color: #339933;">;</span>
+<span style="color: #000000; font-weight: bold;">while</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span>data <span style="color: #339933;">=</span> br.<span style="color: #006633;">readLine</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">!=</span><span style="color: #000066; font-weight: bold;">null</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+    <span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span>data<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> 
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>当你明白了如何用Reader来读取文本文件的时候那么用Writer写文件同样非常简单。有一点需要注意，当你写文件的时候，为了提高效率，写入的数据会先<br />
+放入缓冲区，然后写入文件。因此有时候你需要主动调用flush()方法。与上面对应的写文件的方法为：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #003399;">FileWriter</span> fw <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">FileWriter</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;hello.txt&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+<span style="color: #003399;">String</span> s <span style="color: #339933;">=</span> <span style="color: #0000ff;">&quot;hello world&quot;</span><span style="color: #339933;">;</span>  
+fw.<span style="color: #006633;">write</span><span style="color: #009900;">&#40;</span>s,<span style="color: #cc66cc;">0</span>,s.<span style="color: #006633;">length</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+fw.<span style="color: #006633;">flush</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+<span style="color: #003399;">OutputStreamWriter</span> osw <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">OutputStreamWriter</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">FileOutputStream</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;hello2.txt&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+osw.<span style="color: #006633;">write</span><span style="color: #009900;">&#40;</span>s,<span style="color: #cc66cc;">0</span>,s.<span style="color: #006633;">length</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+osw.<span style="color: #006633;">flush</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+<span style="color: #003399;">PrintWriter</span> pw <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">PrintWriter</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">OutputStreamWriter</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">FileOutputStream</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;hello3.txt&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>,<span style="color: #000066; font-weight: bold;">true</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+pw.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span>s<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre></div></div>
+
+<p>下面是几个读写的例子：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">java.io.*</span><span style="color: #339933;">;</span>  
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> TestFile2 <span style="color: #009900;">&#123;</span>  
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000066; font-weight: bold;">void</span> main<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> args<span style="color: #009900;">&#41;</span> <span style="color: #000000; font-weight: bold;">throws</span> <span style="color: #003399;">IOException</span> <span style="color: #009900;">&#123;</span>  
+<span style="color: #003399;">FileReader</span> fr <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">FileReader</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;ming.txt&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+<span style="color: #000066; font-weight: bold;">char</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> buffer <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #000066; font-weight: bold;">char</span><span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">1024</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>  
+<span style="color: #000066; font-weight: bold;">int</span> ch <span style="color: #339933;">=</span> <span style="color: #cc66cc;">0</span><span style="color: #339933;">;</span>  
+<span style="color: #000000; font-weight: bold;">while</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span>ch <span style="color: #339933;">=</span> fr.<span style="color: #006633;">read</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">!=-</span><span style="color: #cc66cc;">1</span> <span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>  
+   <span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">print</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">char</span><span style="color: #009900;">&#41;</span>ch<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span>  
+&nbsp;
+<span style="color: #003399;">InputStreamReader</span> isr <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">InputStreamReader</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">FileInputStream</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;ming.txt&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+<span style="color: #000000; font-weight: bold;">while</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span>ch <span style="color: #339933;">=</span> isr.<span style="color: #006633;">read</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">!=-</span><span style="color: #cc66cc;">1</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>  
+   <span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">print</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">char</span><span style="color: #009900;">&#41;</span>ch<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+<span style="color: #009900;">&#125;</span>  
+&nbsp;
+<span style="color: #003399;">BufferedReader</span> br <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">BufferedReader</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">InputStreamReader</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">FileInputStream</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;ming.txt&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+<span style="color: #003399;">String</span> data <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">null</span><span style="color: #339933;">;</span>  
+<span style="color: #000000; font-weight: bold;">while</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span>data <span style="color: #339933;">=</span> br.<span style="color: #006633;">readLine</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">!=</span><span style="color: #000066; font-weight: bold;">null</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>  
+   <span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span>data<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+<span style="color: #009900;">&#125;</span>  
+&nbsp;
+<span style="color: #003399;">BufferedReader</span> br <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">BufferedReader</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">FileReader</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;ming.txt&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+<span style="color: #003399;">String</span> data <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">null</span><span style="color: #339933;">;</span>  
+<span style="color: #000000; font-weight: bold;">while</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span>data <span style="color: #339933;">=</span> br.<span style="color: #006633;">readLine</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">!=</span><span style="color: #000066; font-weight: bold;">null</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>  
+   <span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span>data<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+<span style="color: #009900;">&#125;</span>  
+&nbsp;
+<span style="color: #003399;">FileWriter</span> fw <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">FileWriter</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;hello.txt&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+<span style="color: #003399;">String</span> s <span style="color: #339933;">=</span> <span style="color: #0000ff;">&quot;hello world&quot;</span><span style="color: #339933;">;</span>  
+fw.<span style="color: #006633;">write</span><span style="color: #009900;">&#40;</span>s,<span style="color: #cc66cc;">0</span>,s.<span style="color: #006633;">length</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+fw.<span style="color: #006633;">flush</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+　　
+<span style="color: #003399;">OutputStreamWriter</span> osw <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">OutputStreamWriter</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">FileOutputStream</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;hello2.txt&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+osw.<span style="color: #006633;">write</span><span style="color: #009900;">&#40;</span>s,<span style="color: #cc66cc;">0</span>,s.<span style="color: #006633;">length</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+osw.<span style="color: #006633;">flush</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+　　
+<span style="color: #003399;">PrintWriter</span> pw <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">PrintWriter</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">OutputStreamWriter</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">FileOutputStream</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;hello3.txt&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>,<span style="color: #000066; font-weight: bold;">true</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+pw.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span>s<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+fr.<span style="color: #006633;">close</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+isr.<span style="color: #006633;">close</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+br.<span style="color: #006633;">close</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+fw.<span style="color: #006633;">close</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+osw.<span style="color: #006633;">close</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+pw.<span style="color: #006633;">close</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+<span style="color: #009900;">&#125;</span>  
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+</div><div id="part_4" style="display:none;"><p>
+各种读写方式：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #008000; font-style: italic; font-weight: bold;">/** 
+* 以字节为单位读取文件，常用于读二进制文件，如图片、声音、影像等文件。 
+* @param fileName 文件的名 
+*/</span>  
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000066; font-weight: bold;">void</span> readFileByBytes<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span> fileName<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>  
+<span style="color: #003399;">File</span> file <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">File</span><span style="color: #009900;">&#40;</span>fileName<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+<span style="color: #003399;">InputStream</span> in <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">null</span><span style="color: #339933;">;</span>  
+<span style="color: #000000; font-weight: bold;">try</span> <span style="color: #009900;">&#123;</span>  
+<span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;以字节为单位读取文件内容，一次读一个字节：&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+<span style="color: #666666; font-style: italic;">// 一次读一个字节  </span>
+in <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">FileInputStream</span><span style="color: #009900;">&#40;</span>file<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+<span style="color: #000066; font-weight: bold;">int</span> tempbyte<span style="color: #339933;">;</span>  
+<span style="color: #000000; font-weight: bold;">while</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span>tempbyte<span style="color: #339933;">=</span>in.<span style="color: #006633;">read</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">!=</span> <span style="color: #339933;">-</span><span style="color: #cc66cc;">1</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>  
+<span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">write</span><span style="color: #009900;">&#40;</span>tempbyte<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+<span style="color: #009900;">&#125;</span>  
+in.<span style="color: #006633;">close</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+<span style="color: #009900;">&#125;</span> <span style="color: #000000; font-weight: bold;">catch</span> <span style="color: #009900;">&#40;</span><span style="color: #003399;">IOException</span> e<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>  
+e.<span style="color: #006633;">printStackTrace</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+<span style="color: #000000; font-weight: bold;">return</span><span style="color: #339933;">;</span>  
+<span style="color: #009900;">&#125;</span>  
+<span style="color: #000000; font-weight: bold;">try</span> <span style="color: #009900;">&#123;</span>  
+<span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;以字节为单位读取文件内容，一次读多个字节：&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+<span style="color: #666666; font-style: italic;">//一次读多个字节  </span>
+<span style="color: #000066; font-weight: bold;">byte</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> tempbytes <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #000066; font-weight: bold;">byte</span><span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">100</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>  
+<span style="color: #000066; font-weight: bold;">int</span> byteread <span style="color: #339933;">=</span> <span style="color: #cc66cc;">0</span><span style="color: #339933;">;</span>  
+in <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">FileInputStream</span><span style="color: #009900;">&#40;</span>fileName<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+ReadFromFile.<span style="color: #006633;">showAvailableBytes</span><span style="color: #009900;">&#40;</span>in<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+<span style="color: #666666; font-style: italic;">//读入多个字节到字节数组中，byteread为一次读入的字节数  </span>
+<span style="color: #000000; font-weight: bold;">while</span> <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span>byteread <span style="color: #339933;">=</span> in.<span style="color: #006633;">read</span><span style="color: #009900;">&#40;</span>tempbytes<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">!=</span> <span style="color: #339933;">-</span><span style="color: #cc66cc;">1</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>  
+<span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">write</span><span style="color: #009900;">&#40;</span>tempbytes, <span style="color: #cc66cc;">0</span>, byteread<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+<span style="color: #009900;">&#125;</span>  
+<span style="color: #009900;">&#125;</span> <span style="color: #000000; font-weight: bold;">catch</span> <span style="color: #009900;">&#40;</span><span style="color: #003399;">Exception</span> e1<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>  
+e1.<span style="color: #006633;">printStackTrace</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+<span style="color: #009900;">&#125;</span> <span style="color: #000000; font-weight: bold;">finally</span> <span style="color: #009900;">&#123;</span>  
+<span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>in <span style="color: #339933;">!=</span> <span style="color: #000066; font-weight: bold;">null</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>  
+<span style="color: #000000; font-weight: bold;">try</span> <span style="color: #009900;">&#123;</span>  
+in.<span style="color: #006633;">close</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+<span style="color: #009900;">&#125;</span> <span style="color: #000000; font-weight: bold;">catch</span> <span style="color: #009900;">&#40;</span><span style="color: #003399;">IOException</span> e1<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>  
+<span style="color: #009900;">&#125;</span>  
+<span style="color: #009900;">&#125;</span>  
+<span style="color: #009900;">&#125;</span>  
+<span style="color: #009900;">&#125;</span>  
+<span style="color: #008000; font-style: italic; font-weight: bold;">/** 
+* 以字符为单位读取文件，常用于读文本，数字等类型的文件 
+* @param fileName 文件名 
+*/</span>  
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000066; font-weight: bold;">void</span> readFileByChars<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span> fileName<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>  
+<span style="color: #003399;">File</span> file <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">File</span><span style="color: #009900;">&#40;</span>fileName<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+<span style="color: #003399;">Reader</span> reader <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">null</span><span style="color: #339933;">;</span>  
+<span style="color: #000000; font-weight: bold;">try</span> <span style="color: #009900;">&#123;</span>  
+<span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;以字符为单位读取文件内容，一次读一个字符：&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+<span style="color: #666666; font-style: italic;">//每次调用 InputStreamReader 中的一个 read() 方法都会导致从底层输入流读取一个或多个字节。要启用从字节到字符的有效转换，可以提前从底层流读取更多的字节，使其超过满足当前读取操作所需的字节。</span>
+&nbsp;
+reader <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">InputStreamReader</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">FileInputStream</span><span style="color: #009900;">&#40;</span>file<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+<span style="color: #000066; font-weight: bold;">int</span> tempchar<span style="color: #339933;">;</span>  
+<span style="color: #000000; font-weight: bold;">while</span> <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span>tempchar <span style="color: #339933;">=</span> reader.<span style="color: #006633;">read</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">!=</span> <span style="color: #339933;">-</span><span style="color: #cc66cc;">1</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>  
+<span style="color: #666666; font-style: italic;">//对于windows下，rn这两个字符在一起时，表示一个换行。  </span>
+<span style="color: #666666; font-style: italic;">//但如果这两个字符分开显示时，会换两次行。  </span>
+<span style="color: #666666; font-style: italic;">//因此，屏蔽掉r，或者屏蔽n。否则，将会多出很多空行。  </span>
+<span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">char</span><span style="color: #009900;">&#41;</span>tempchar<span style="color: #009900;">&#41;</span> <span style="color: #339933;">!=</span> <span style="color: #0000ff;">'r'</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>  
+<span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">print</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">char</span><span style="color: #009900;">&#41;</span>tempchar<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+<span style="color: #009900;">&#125;</span>  
+<span style="color: #009900;">&#125;</span>  
+reader.<span style="color: #006633;">close</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+<span style="color: #009900;">&#125;</span> <span style="color: #000000; font-weight: bold;">catch</span> <span style="color: #009900;">&#40;</span><span style="color: #003399;">Exception</span> e<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>  
+e.<span style="color: #006633;">printStackTrace</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+<span style="color: #009900;">&#125;</span>  
+<span style="color: #000000; font-weight: bold;">try</span> <span style="color: #009900;">&#123;</span>  
+<span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;以字符为单位读取文件内容，一次读多个字符：&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+<span style="color: #666666; font-style: italic;">//一次读多个字符  </span>
+<span style="color: #000066; font-weight: bold;">char</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> tempchars <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #000066; font-weight: bold;">char</span><span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">30</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>  
+<span style="color: #000066; font-weight: bold;">int</span> charread <span style="color: #339933;">=</span> <span style="color: #cc66cc;">0</span><span style="color: #339933;">;</span>  
+reader <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">InputStreamReader</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">FileInputStream</span><span style="color: #009900;">&#40;</span>fileName<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+<span style="color: #666666; font-style: italic;">//读入多个字符到字符数组中，charread为一次读取字符数  </span>
+<span style="color: #000000; font-weight: bold;">while</span> <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span>charread <span style="color: #339933;">=</span> reader.<span style="color: #006633;">read</span><span style="color: #009900;">&#40;</span>tempchars<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">!=-</span><span style="color: #cc66cc;">1</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>  
+<span style="color: #666666; font-style: italic;">//同样屏蔽掉r不显示  </span>
+<span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span>charread <span style="color: #339933;">==</span> tempchars.<span style="color: #006633;">length</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">&amp;&amp;</span><span style="color: #009900;">&#40;</span>tempchars<span style="color: #009900;">&#91;</span>tempchars.<span style="color: #006633;">length</span><span style="color: #339933;">-</span><span style="color: #cc66cc;">1</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">!=</span> <span style="color: #0000ff;">'r'</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>  
+<span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">print</span><span style="color: #009900;">&#40;</span>tempchars<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+<span style="color: #009900;">&#125;</span><span style="color: #000000; font-weight: bold;">else</span><span style="color: #009900;">&#123;</span>  
+<span style="color: #000000; font-weight: bold;">for</span> <span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">int</span> i<span style="color: #339933;">=</span><span style="color: #cc66cc;">0</span><span style="color: #339933;">;</span> i<span style="color: #339933;">&lt;</span>charread <span style="color: #339933;">;</span> i<span style="color: #339933;">++</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>  
+<span style="color: #000000; font-weight: bold;">if</span><span style="color: #009900;">&#40;</span>tempchars<span style="color: #009900;">&#91;</span>i<span style="color: #009900;">&#93;</span> <span style="color: #339933;">==</span> <span style="color: #0000ff;">'r'</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>  
+<span style="color: #000000; font-weight: bold;">continue</span><span style="color: #339933;">;</span>  
+<span style="color: #009900;">&#125;</span><span style="color: #000000; font-weight: bold;">else</span><span style="color: #009900;">&#123;</span>  
+<span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">print</span><span style="color: #009900;">&#40;</span>tempchars<span style="color: #009900;">&#91;</span>i<span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+<span style="color: #009900;">&#125;</span>  
+<span style="color: #009900;">&#125;</span>  
+<span style="color: #009900;">&#125;</span>  
+<span style="color: #009900;">&#125;</span>  
+<span style="color: #009900;">&#125;</span> <span style="color: #000000; font-weight: bold;">catch</span> <span style="color: #009900;">&#40;</span><span style="color: #003399;">Exception</span> e1<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>  
+e1.<span style="color: #006633;">printStackTrace</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+<span style="color: #009900;">&#125;</span><span style="color: #000000; font-weight: bold;">finally</span> <span style="color: #009900;">&#123;</span>  
+<span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>reader <span style="color: #339933;">!=</span> <span style="color: #000066; font-weight: bold;">null</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>  
+<span style="color: #000000; font-weight: bold;">try</span> <span style="color: #009900;">&#123;</span>  
+reader.<span style="color: #006633;">close</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+<span style="color: #009900;">&#125;</span> <span style="color: #000000; font-weight: bold;">catch</span> <span style="color: #009900;">&#40;</span><span style="color: #003399;">IOException</span> e1<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>  
+<span style="color: #009900;">&#125;</span>  
+<span style="color: #009900;">&#125;</span>  
+<span style="color: #009900;">&#125;</span>  
+<span style="color: #009900;">&#125;</span>  
+<span style="color: #008000; font-style: italic; font-weight: bold;">/** 
+* 以行为单位读取文件，常用于读面向行的格式化文件 
+* @param fileName 文件名 
+*/</span>  
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000066; font-weight: bold;">void</span> readFileByLines<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span> fileName<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>  
+<span style="color: #003399;">File</span> file <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">File</span><span style="color: #009900;">&#40;</span>fileName<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+<span style="color: #003399;">BufferedReader</span> reader <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">null</span><span style="color: #339933;">;</span>  
+<span style="color: #000000; font-weight: bold;">try</span> <span style="color: #009900;">&#123;</span>  
+<span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;以行为单位读取文件内容，一次读一整行：&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+reader <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">BufferedReader</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">FileReader</span><span style="color: #009900;">&#40;</span>file<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+<span style="color: #003399;">String</span> tempString <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">null</span><span style="color: #339933;">;</span>  
+<span style="color: #000066; font-weight: bold;">int</span> line <span style="color: #339933;">=</span> <span style="color: #cc66cc;">1</span><span style="color: #339933;">;</span>  
+<span style="color: #666666; font-style: italic;">//一次读入一行，直到读入null为文件结束</span>
+<span style="color: #000000; font-weight: bold;">while</span> <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span>tempString <span style="color: #339933;">=</span> reader.<span style="color: #006633;">readLine</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">!=</span> <span style="color: #000066; font-weight: bold;">null</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>  
+<span style="color: #666666; font-style: italic;">//显示行号  </span>
+<span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;line &quot;</span> <span style="color: #339933;">+</span> line <span style="color: #339933;">+</span> <span style="color: #0000ff;">&quot;: &quot;</span> <span style="color: #339933;">+</span> tempString<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+line<span style="color: #339933;">++;</span>  
+<span style="color: #009900;">&#125;</span>  
+reader.<span style="color: #006633;">close</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+<span style="color: #009900;">&#125;</span> <span style="color: #000000; font-weight: bold;">catch</span> <span style="color: #009900;">&#40;</span><span style="color: #003399;">IOException</span> e<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>  
+e.<span style="color: #006633;">printStackTrace</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+<span style="color: #009900;">&#125;</span> <span style="color: #000000; font-weight: bold;">finally</span> <span style="color: #009900;">&#123;</span>  
+<span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>reader <span style="color: #339933;">!=</span> <span style="color: #000066; font-weight: bold;">null</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>  
+<span style="color: #000000; font-weight: bold;">try</span> <span style="color: #009900;">&#123;</span>  
+reader.<span style="color: #006633;">close</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+<span style="color: #009900;">&#125;</span> <span style="color: #000000; font-weight: bold;">catch</span> <span style="color: #009900;">&#40;</span><span style="color: #003399;">IOException</span> e1<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>  
+<span style="color: #009900;">&#125;</span>  
+<span style="color: #009900;">&#125;</span>  
+<span style="color: #009900;">&#125;</span>  
+<span style="color: #009900;">&#125;</span>  
+&nbsp;
+<span style="color: #008000; font-style: italic; font-weight: bold;">/** 
+* 将内容追加到文件尾部 
+*/</span>  
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> AppendToFile <span style="color: #009900;">&#123;</span>  
+<span style="color: #008000; font-style: italic; font-weight: bold;">/** 
+* A方法追加文件：使用RandomAccessFile 
+* @param fileName 文件名 
+* @param content 追加的内容 
+*/</span>  
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000066; font-weight: bold;">void</span> appendMethodA<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span> fileName,  
+&nbsp;
+<span style="color: #003399;">String</span> content<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>  
+<span style="color: #000000; font-weight: bold;">try</span> <span style="color: #009900;">&#123;</span>  
+<span style="color: #666666; font-style: italic;">// 打开一个随机访问文件流，按读写方式  </span>
+<span style="color: #003399;">RandomAccessFile</span> randomFile <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">RandomAccessFile</span><span style="color: #009900;">&#40;</span>fileName, <span style="color: #0000ff;">&quot;rw&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+<span style="color: #666666; font-style: italic;">// 文件长度，字节数  </span>
+<span style="color: #000066; font-weight: bold;">long</span> fileLength <span style="color: #339933;">=</span> randomFile.<span style="color: #006633;">length</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+<span style="color: #666666; font-style: italic;">//将写文件指针移到文件尾。  </span>
+randomFile.<span style="color: #006633;">seek</span><span style="color: #009900;">&#40;</span>fileLength<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+randomFile.<span style="color: #006633;">writeBytes</span><span style="color: #009900;">&#40;</span>content<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+randomFile.<span style="color: #006633;">close</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+<span style="color: #009900;">&#125;</span> <span style="color: #000000; font-weight: bold;">catch</span> <span style="color: #009900;">&#40;</span><span style="color: #003399;">IOException</span> e<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>  
+e.<span style="color: #006633;">printStackTrace</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+<span style="color: #009900;">&#125;</span>  
+<span style="color: #009900;">&#125;</span>  
+<span style="color: #008000; font-style: italic; font-weight: bold;">/** 
+* B方法追加文件：使用FileWriter 
+* @param fileName 
+* @param content 
+*/</span>  
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000066; font-weight: bold;">void</span> appendMethodB<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span> fileName, <span style="color: #003399;">String</span> content<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>  
+<span style="color: #000000; font-weight: bold;">try</span> <span style="color: #009900;">&#123;</span>  
+<span style="color: #666666; font-style: italic;">//打开一个写文件器，构造函数中的第二个参数true表示以追加形式写文件  </span>
+<span style="color: #003399;">FileWriter</span> writer <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">FileWriter</span><span style="color: #009900;">&#40;</span>fileName, <span style="color: #000066; font-weight: bold;">true</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+writer.<span style="color: #006633;">write</span><span style="color: #009900;">&#40;</span>content<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+writer.<span style="color: #006633;">close</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+<span style="color: #009900;">&#125;</span> <span style="color: #000000; font-weight: bold;">catch</span> <span style="color: #009900;">&#40;</span><span style="color: #003399;">IOException</span> e<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>  
+e.<span style="color: #006633;">printStackTrace</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+<span style="color: #009900;">&#125;</span>  
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p></charread></code></p>
+</div><div id="paginate"><label id="li_1" onclick="javascript:show_page(1,4,this);" style="font-size:30px;font-weight:bold" onmouseover="this.style.cursor='pointer'">1</label><label id="li_2" onclick="javascript:show_page(2,4,this);"  onmouseover="this.style.cursor='pointer'">2</label><label id="li_3" onclick="javascript:show_page(3,4,this);"  onmouseover="this.style.cursor='pointer'">3</label><label id="li_4" onclick="javascript:show_page(4,4,this);"  onmouseover="this.style.cursor='pointer'">4</label></div> 
+			<div align="center">1 month ago, this page was being read. </div>
+			<p class="tags"><a href="http://www.xieziming.com/tag/java" rel="tag">java</a>, <a href="http://www.xieziming.com/tag/cheng-xu" rel="tag">程序</a><br /></p>  
+    </div><!-- /entry -->                                   
+		<div class="postbottom"></div>		                              
+		</div><!-- /post -->	
+
+<div class="postrelated">
+			<table width="100%" >				
+
+					<tr><td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/2216.html" rel="bookmark" title="Java程序员面试宝典">Java程序员面试宝典</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7626.html" rel="bookmark" title="控制window程序">控制window...</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/7527.html" rel="bookmark" title="Java自动装箱">Java自动...</a></td>
+
+				<td align="right" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7397.html" rel="bookmark" title="Java QA">Java QA</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/2464.html" rel="bookmark" title="J2EE入门例子">J2EE入门例子</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/7457.html" rel="bookmark" title="Firefox插件制作">Firefox插件制作</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/8506.html" rel="bookmark" title="Java Socket长连接">Java Socket长...</a></td>
+
+				<td align="right" class="dashedline_related"><a href="http://www.xieziming.com/archives/7513.html" rel="bookmark" title="Java自定义注解">Java自...</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/7364.html" rel="bookmark" title="Java启动参数">Java启动参数</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7499.html" rel="bookmark" title="Java代理机制">Java代理机制</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/7545.html" rel="bookmark" title="Java集合类">Java集合类</a></td>
+
+				<td align="right" class="dashedline_related">★<a href="http://www.xieziming.com/archives/6967.html" rel="bookmark" title="Java基础面试题">Java基础面试题</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7605.html" rel="bookmark" title="质疑和反驳">质疑和反驳</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/7170.html" rel="bookmark" title="链接器和装入器">链接器和装...</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7693.html" rel="bookmark" title="Solaris内存统计">Solaris内存统...</a></td>
+
+				<td align="right" class="dashedline_related"><a href="http://www.xieziming.com/archives/8811.html" rel="bookmark" title="Java源码混淆">Java源...</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/7486.html" rel="bookmark" title="Java堆栈">Java堆...</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/2438.html" rel="bookmark" title="mysql负载均衡配置">mysql负载...</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/2220.html" rel="bookmark" title="软件项目开发流程">软件项目开发流程</a></td>
+
+				<td align="right" class="dashedline_related">★<a href="http://www.xieziming.com/archives/5528.html" rel="bookmark" title="网站配色表">网站配色表</a></td></tr>
+
+		</table>
+</div>
+
+		<div id="comments">
+
+<!-- START COMMENT FORMS -->
+
+
+		</div><!--/comments-->		
+
+</div><!-- /content -->
+<div id="sidebar">			
+			<a class="subscribe" href="http://www.xieziming.com/feed" title="Posts RSS">Subscribe</a>			
+			<div id="search">	
+	<form name="searchform" id="searchform" method="get" action="http://www.xieziming.com/index.php">
+		<input class="text" type="text" name="s" id="s" value=""/>
+		<input class="submit" type="image" src="http://www.xieziming.com/wp-content/themes/ziming/img/submit.jpg" value="search" />
+	</form>	
+</div><!-- /search -->			
+			<div id="widgets">			
+			<div class="widget"><h3>Calendar</h3>
+<table id="wp-calendar">
+  									<caption>December 2016</caption>
+  									<thead>
+                    <tr><th scope="col" title="S">S</th><th scope="col" title="M">M</th><th scope="col" title="T">T</th><th scope="col" title="W">W</th><th scope="col" title="T">T</th><th scope="col" title="F">F</th><th scope="col" title="S">S</th></tr></thead><tbody><tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>1</td><td>2</td><td>3</td></tr><tr><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td></tr><tr><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td></tr><tr><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">18<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">《血战钢锯岭》</span><br/><span class="time" style="color:#000000; " > Time : 21:18 - 23:28</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">晚上和小锅去看，蛮感人的。吃完去沙湾吃猪杂粥，应该是我在那吃到的最新鲜的一次了。</p></span></a></span></td><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">19<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">CentOS</span><br/><span class="time" style="color:#000000; " > Time : 14:11 - 18:11</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">终于有点时间来把那盒子的win7转成CentOS来做server。配置vsftp花了我太多的时间。。。</p></span></a></span></td><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td></tr><tr><td>25</td><td>26</td><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td></tr><tr><td colspan="3" id="prev"><a href="http://www.xieziming.com/archives/7000.html?month=nov&yr=2016">&laquo; Prev</a></td><td colspan="4" id="next"><a href="http://www.xieziming.com/archives/7000.html?month=jan&yr=2017">Next &raquo;</a></td></tr></tbody></table>
+<div class="widgetbottom"></div></div><!--/widget-->				
+					      		<div class="widget">
+ 							<h3>Recent Posts</h3>
+							<ul>
+           				<li><a href="http://www.xieziming.com/archives/9579.html" class="dashedline" title="闽南 · 泉州">闽南 &middot; 泉州</a></li><li><a href="http://www.xieziming.com/archives/9578.html" class="dashedline" title="顺化 · HUE">顺化 &middot; HUE</a></li><li><a href="http://www.xieziming.com/archives/9577.html" class="dashedline" title="会安 · 春卷">会安 &middot; 春卷</a></li><li><a href="http://www.xieziming.com/archives/9576.html" class="dashedline" title="会安 · 夜灯">会安 &middot; 夜灯</a></li><li><a href="http://www.xieziming.com/archives/9575.html" class="dashedline" title="会安古镇">会安古镇</a></li><li><a href="http://www.xieziming.com/archives/9573.html" class="dashedline" title="岘港">岘港</a></li><li><a href="http://www.xieziming.com/archives/9535.html" class="dashedline" title="罗马">罗马</a></li><li><a href="http://www.xieziming.com/archives/9534.html" class="dashedline" title="卢浮宫">卢浮宫</a></li>						
+							</ul>
+      				<div class="widgetbottom"></div>
+	    		</div>
+	    			        
+        	      		<div class="widget">
+ 							<h3>Rand Posts</h3>
+							<ul>
+      						<li><a href="http://www.xieziming.com/archives/4417.html" class="dashedline" title="湖湘">湖湘</a></li><li><a href="http://www.xieziming.com/archives/2911.html" class="dashedline" title="10.26">10.26</a></li><li><a href="http://www.xieziming.com/archives/6025.html" class="dashedline" title="大美新疆（二）">大美新疆（二）</a></li><li><a href="http://www.xieziming.com/archives/9428.html" class="dashedline" title="大洋路 · 酒庄">大洋路 &middot; 酒庄</a></li><li><a href="http://www.xieziming.com/archives/9307.html" class="dashedline" title="哈尔滨">哈尔滨</a></li><li><a href="http://www.xieziming.com/archives/263.html" class="dashedline" title="揭开十二星座的传统面具">揭开十二星座的传统面具</a></li><li><a href="http://www.xieziming.com/archives/9128.html" class="dashedline" title="斯里兰卡 · Kandy （二）">斯里兰卡 &middot; Kandy ...</a></li><li><a href="http://www.xieziming.com/archives/371.html" class="dashedline" title="假期中...">假期中...</a></li>	
+							</ul>
+        			<div class="widgetbottom"></div>
+					</div>                 
+          	                       
+			</div><!-- /widgets -->			                       
+</div><!-- /sidebar --></div><!-- /main -->
+<div id="footer">
+<p align="left">© <a href="http://www.miitbeian.gov.cn" target="_blank"> 明 · 明 · 童 · 鞋</a></p>
+<!--74 queries in 4.381 seconds.-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?c2e18b43ec905e3c4ea82c1b57537223";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</div><!-- /footer -->
+</div><!-- /container -->
+<script type='text/javascript' src='http://www.xieziming.com/wp-includes/js/wp-embed.min.js?ver=4.7'></script>
+</body>
+</html>

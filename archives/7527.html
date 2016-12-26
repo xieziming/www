@@ -1,0 +1,381 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head profile="http://gmpg.org/xfn/11">
+<title>  Java自动装箱 &raquo; 谢子明</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="description" content="Java自动装箱  " />
+<meta name="keywords" content="谢子明" />
+<link rel="stylesheet" href="http://www.xieziming.com/wp-content/themes/ziming/style.css" type="text/css" media="screen" />
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://www.xieziming.com/feed" />
+<link rel="alternate" type="application/rss+xml" href="http://www.xieziming.com/comments/feed" title="谢子明 Comments RSS feed" />
+<link rel="shortcut icon" href="http://www.xieziming.com/wp-content/themes/ziming/favicon.ico">
+<link rel="Bookmark" href="http://www.xieziming.com/wp-content/themes/ziming/favicon.ico">
+<link rel="pingback" href="http://www.xieziming.com/xmlrpc.php" />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="谢子明 &raquo; Java自动装箱 Comments Feed" href="http://www.xieziming.com/archives/7527.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/xieziming.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.7"}};
+			!function(a,b,c){function d(a){var b,c,d,e,f=String.fromCharCode;if(!k||!k.fillText)return!1;switch(k.clearRect(0,0,j.width,j.height),k.textBaseline="top",k.font="600 32px Arial",a){case"flag":return k.fillText(f(55356,56826,55356,56819),0,0),!(j.toDataURL().length<3e3)&&(k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,65039,8205,55356,57096),0,0),b=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,55356,57096),0,0),c=j.toDataURL(),b!==c);case"emoji4":return k.fillText(f(55357,56425,55356,57341,8205,55357,56507),0,0),d=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55357,56425,55356,57341,55357,56507),0,0),e=j.toDataURL(),d!==e}return!1}function e(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i,j=b.createElement("canvas"),k=j.getContext&&j.getContext("2d");for(i=Array("flag","emoji4"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<script type='text/javascript' src='http://www.xieziming.com/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='http://www.xieziming.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<link rel='https://api.w.org/' href='http://www.xieziming.com/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.xieziming.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.xieziming.com/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='Java装饰模式' href='http://www.xieziming.com/archives/7515.html' />
+<link rel='next' title='桂林龙脊' href='http://www.xieziming.com/archives/7539.html' />
+<meta name="generator" content="WordPress 4.7" />
+<link rel="canonical" href="http://www.xieziming.com/archives/7527.html" />
+<link rel='shortlink' href='http://www.xieziming.com/?p=7527' />
+<link rel="alternate" type="application/json+oembed" href="http://www.xieziming.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fxieziming.com%2Farchives%2F7527.html" />
+<link rel="alternate" type="text/xml+oembed" href="http://www.xieziming.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fxieziming.com%2Farchives%2F7527.html&#038;format=xml" />
+ 	<link rel="stylesheet" href="http://www.xieziming.com/wp-content/plugins/live-calendar/live-calendar.css" type="text/css" media="screen" /> 
+<link rel="stylesheet" href="http://www.xieziming.com/wp-content/plugins/wp-code/wp-code.css" type="text/css" media="screen" />
+
+<link rel="stylesheet" href="http://www.xieziming.com/wp-content/plugins/zoom-highslide/highslide.css" type="text/css" media="screen" />
+<script type="text/javascript" src="http://www.xieziming.com/wp-content/plugins/zoom-highslide/js/highslide-full.packed.js"></script>
+<script type="text/javascript">
+	hs.graphicsDir = 'http://www.xieziming.com/wp-content/plugins/zoom-highslide/graphics/';
+	hs.align = 'center';
+	hs.transitions = ['expand', 'crossfade'];
+	hs.outlineType = 'rounded-white';
+  hs.wrapperClassName = 'controls-in-heading';
+	hs.showCredits=false;
+	hs.fadeInOut = true;
+	hs.dimmingOpacity = 0.8;
+
+	// Add the controlbar
+	if (hs.addSlideshow) hs.addSlideshow({
+		//slideshowGroup: 'group1',
+		interval: 4000,
+		repeat: false,
+		useControls: true,
+		fixedControls: false,
+		overlayOptions: {
+			opacity: 1,
+			position: 'top center',
+			hideOnMouseOut: true
+		}
+	});
+</script>
+
+<script type="text/javascript">
+	var widthRestriction = 668; 
+	var heightRestriction = 1000; 
+</script>
+<script type="text/javascript" src="http://www.xieziming.com/wp-content/plugins/zoom-highslide/js/zoom.js"></script>
+	
+<!--script src="http://www.xieziming.com/wp-content/themes/ziming/js/mouse.js" type="text/javascript"></script--> 
+</head>
+<body class="normalbg">
+<div id="container">
+	<div id="head">
+		<div id="nav">
+			<ul>
+				<li class="first"><a href="http://www.xieziming.com" title="首页">首页</a></li>
+				<li class="page_item page-item-2"><a href="http://www.xieziming.com/recent" title="最近">最近</a></li>
+				<li class="page_item page-item-3"><a href="http://www.xieziming.com/photo" title="Photo">映象</a></li>
+				<li class="page_item page-item-4"><a href="http://www.xieziming.com/food" title="Food">美食</a></li>
+				<li class="page_item page-item-5"><a href="http://www.xieziming.com/topic" title="关键字">话题</a></li>
+				<li class="page_item page-item-6"><a href="http://www.xieziming.com/travel" title="Travel">旅行</a></li>
+				<li class="page_item page-item-7"><a href="http://www.xieziming.com/literature" title="Literature">文艺</a></li>
+				<li class="page_item page-item-8"><a href="http://www.xieziming.com/wiki" title="技术维基">维基</a></li>
+				<li class="page_item page-item-9"><a href="http://www.xieziming.com/calendar" title="Calendar">点滴</a></li>
+			</ul>
+		</div><!-- /nav -->		
+	</div><!-- /head -->
+<div id="main" class="altmainbg">
+
+<script type="text/javascript">
+function show_page(id,count,source){
+	for (var i=1;i<=count;i++){
+		if(id != i){
+				jQuery("#part_"+i).hide();
+				document.getElementById("li_"+i).style.fontWeight = "normal";
+				document.getElementById("li_"+i).style.fontSize = "18px";
+		}
+	}
+	jQuery("#part_"+id).show();
+	document.getElementById("li_"+id).style.fontWeight = "bold";
+	document.getElementById("li_"+id).style.fontSize = "30px";
+	jQuery('body,html').animate({scrollTop:0},1000);
+        return false;
+}
+</script>
+<div id="content">
+
+	<div class="post" id="post-7527">
+		<h2 class="title">Java自动装箱</h2>
+		<p class="postmetadata">
+			<span class="date">14 October 2012</span>
+			<span class="category">Categoried in <a href="http://www.xieziming.com/topic/coding" rel="category tag">程序</a></span>
+			<span class="comments">0</span>
+			<span class="view">Preview : 2768 , Read : 994 </span>
+			<span class="mail">Index : 10101 </span>
+		</p>
+		<div class="entry">				
+<div id="part_1"><p>在Java中，数据类型可以分为两大种，基本数据类型（值类型）和类类型（引用数据类型）。基本类型的数值不是对象，不能作为对象调用其toString()、hashCode()、getClass()、equals()等等方法。</p>
+<p>所谓装箱，就是把基本类型用它们相对应的引用类型包起来，使它们可以具有对象的特质，如我们可以把int型包装成Integer类的对象，或者把double包装成Double，等等。</p>
+<p>所谓拆箱，就是跟装箱的方向相反，将Integer及Double这样的引用类型的对象重新简化为值类型的数据。</p>
+<p>装箱和拆箱是valueOf和xxValue的别名。</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000066; font-weight: bold;">int</span> i<span style="color: #339933;">=</span><span style="color: #cc66cc;">10</span><span style="color: #339933;">;</span>
+<span style="color: #003399;">Integer</span> j<span style="color: #339933;">=</span><span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">Integer</span><span style="color: #009900;">&#40;</span>i<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">//手动装箱操作</span>
+<span style="color: #000066; font-weight: bold;">int</span> i1<span style="color: #339933;">=</span>j.<span style="color: #006633;">intValue</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><span style="color: #666666; font-style: italic;">//手动拆箱操作，拆箱调用了wrapper类的xxxValueOf()方法，所以记住此时不允许wrapper类的对象为null。</span>
+&nbsp;
+<span style="color: #003399;">Integer</span> j<span style="color: #339933;">=</span>i<span style="color: #339933;">;</span><span style="color: #666666; font-style: italic;">//自动装箱操作 Integer j=Integer.valueOf(10);</span>
+<span style="color: #000066; font-weight: bold;">int</span> k<span style="color: #339933;">=</span>j<span style="color: #339933;">;</span><span style="color: #666666; font-style: italic;">//自动拆箱操作</span></pre></div></div>
+
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> EqualsDemo <span style="color: #009900;">&#123;</span>
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000066; font-weight: bold;">void</span> main<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> args<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+        <span style="color: #000066; font-weight: bold;">int</span> i1<span style="color: #339933;">=</span><span style="color: #cc66cc;">1</span>,i2<span style="color: #339933;">=</span><span style="color: #cc66cc;">1</span><span style="color: #339933;">;</span>
+        <span style="color: #003399;">Integer</span> iv1<span style="color: #339933;">=</span><span style="color: #cc66cc;">1</span>,iv2<span style="color: #339933;">=</span><span style="color: #cc66cc;">1</span><span style="color: #339933;">;</span>  
+        <span style="color: #003399;">Integer</span> in1<span style="color: #339933;">=</span><span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">Integer</span><span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">1</span><span style="color: #009900;">&#41;</span>,in2<span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">Integer</span><span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">1</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+        print<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;(1) &quot;</span> <span style="color: #339933;">+</span> <span style="color: #009900;">&#40;</span>i1<span style="color: #339933;">==</span>i2<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">//(1)</span>
+        print<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;(2) &quot;</span> <span style="color: #339933;">+</span> <span style="color: #009900;">&#40;</span>iv1<span style="color: #339933;">==</span>iv2<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">//(2)</span>
+        print<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;(3) &quot;</span> <span style="color: #339933;">+</span> <span style="color: #009900;">&#40;</span>in1<span style="color: #339933;">==</span>in2<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">//(3)</span>
+&nbsp;
+        print<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;(4) &quot;</span> <span style="color: #339933;">+</span> <span style="color: #009900;">&#40;</span>i1<span style="color: #339933;">==</span>iv1<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">//(4)</span>
+        print<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;(5) &quot;</span> <span style="color: #339933;">+</span> <span style="color: #009900;">&#40;</span>i1<span style="color: #339933;">==</span>in1<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">//(5)</span>
+        print<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;(6) &quot;</span> <span style="color: #339933;">+</span> <span style="color: #009900;">&#40;</span>iv1<span style="color: #339933;">==</span>in1<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">//(6)</span>
+    <span style="color: #009900;">&#125;</span> 
+    <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000066; font-weight: bold;">void</span> print<span style="color: #009900;">&#40;</span><span style="color: #003399;">Object</span> obj<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+        <span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span>obj<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>输出结果：<br />
+(1) true<br />
+(2) true<br />
+(3) false<br />
+(4) true<br />
+(5) true<br />
+(6) false</p>
+<p>解释：<br />
+(1) 基本类型的比较，值和地址都是相等的<br />
+(2) 自动装箱，不是调用new来完成，否则地址肯定不相等。</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #003399;">Integer</span> i<span style="color: #339933;">=</span><span style="color: #cc66cc;">1</span><span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">//相当于 Integer i=Integer.valueOf(1);</span>
+<span style="color: #008000; font-style: italic; font-weight: bold;">/**
+(1)valueOf(int)：返回一个表示指定的int值的Integer实例。如果不需要新的Integer实例，则通常应优先使用该方法，而不是构造方法 
+(2)Integer(int)：因为该方法有可能通过缓存经常请求的值而显著提高空间和时间性能。
+&nbsp;
+Byte,Integer 和Long都是缓存了-128～+127之间的对象，autoboxing的时候，如果需要boxing的值在此范围之内，则直接返回缓存的对象，没有的时候再去new. Boolean类型中直接缓存了两个Boolean对象，true和false，这样使用valueOf()方法时只需要直接返回这两个对象中的一个，而不是每次调用的时候都用new,这也就是文档里所说的通过缓存经常请求的值二显著提高空间和时间性能。
+&nbsp;
+Character因为类型的特殊性，保存的是0-127之间的对象。
+*/</span>
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #003399;">Integer</span> valueOf<span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">int</span> i<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>  
+  <span style="color: #000000; font-weight: bold;">if</span><span style="color: #009900;">&#40;</span>i <span style="color: #339933;">&gt;=</span> <span style="color: #339933;">-</span><span style="color: #cc66cc;">128</span> <span style="color: #339933;">&amp;&amp;</span> i <span style="color: #339933;">&lt;</span> <span style="color: #339933;">=</span> IntegerCache.<span style="color: #006633;">high</span><span style="color: #009900;">&#41;</span>  
+    <span style="color: #000000; font-weight: bold;">return</span> IntegerCache.<span style="color: #006633;">cache</span><span style="color: #009900;">&#91;</span>i <span style="color: #339933;">+</span> <span style="color: #cc66cc;">128</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>  
+  <span style="color: #000000; font-weight: bold;">else</span>  
+    <span style="color: #000000; font-weight: bold;">return</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">Integer</span><span style="color: #009900;">&#40;</span>i<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>如果把所有的值都改成1000，输出的结果是：<br />
+(1) true<br />
+<strong>(2) false</strong><br />
+(3) false<br />
+(4) true<br />
+(5) true<br />
+(6) false</p>
+<p>发现(2)不再是true，这是因为Integer没有缓存1000这个值。</p>
+<p>(3) 调用new来创建实例，地址不相等。如果是equals的话就是true<br />
+(4) 发生拆箱，编译之后其实调用了intValue，获得的是基本类型。<br />
+(5) 发生拆箱，编译之后其实调用了intValue，获得的是基本类型。<br />
+(6) 没有发生拆箱，但要注意下，判断条件如果改为iv1>=in1 或 iv1< =in1，则会发生拆箱，此时为true
+</p>
+</div><div id="part_2" style="display:none;"><p>Integer Integer.valueOf(String)和int Integer.parseInt(String)内部解析过程区别：</p>
+<p>方法valueOf实际是调用了方法parseInt，在没有指定基数的时候都是以十为基数。通过以下代码我们可以清楚的了解到Integer valueOf(String s)实际是调用Integer valueOf(int i)，而Integer valueOf(int i)以int parseInt(s,radix))的返回值为参数进行调用。</p>
+<p>所以当int parseInt(s,radix))的返回值小于等于127、大于等于-128的Integer valueOf(String s)返回的Integer对象是从缓存中取出来的Integer的实例，否则返回一个新的Integer实例，而parseInt则是每次都是返回一个基本类型的int值，和缓存毫无关系。</p>
+<p>jdk 1.6 java.lang.Integer.class源码：<br />
+</code></p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #003399;">Integer</span> valueOf<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span> s, <span style="color: #000066; font-weight: bold;">int</span> radix<span style="color: #009900;">&#41;</span> <span style="color: #000000; font-weight: bold;">throws</span> <span style="color: #003399;">NumberFormatException</span> <span style="color: #009900;">&#123;</span>  
+    <span style="color: #000000; font-weight: bold;">return</span> <span style="color: #003399;">Integer</span>.<span style="color: #006633;">valueOf</span><span style="color: #009900;">&#40;</span>parseInt<span style="color: #009900;">&#40;</span>s,radix<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+<span style="color: #009900;">&#125;</span>  
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #003399;">Integer</span> valueOf<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span> s<span style="color: #009900;">&#41;</span> <span style="color: #000000; font-weight: bold;">throws</span> <span style="color: #003399;">NumberFormatException</span> <span style="color: #009900;">&#123;</span>  
+    <span style="color: #000000; font-weight: bold;">return</span> <span style="color: #003399;">Integer</span>.<span style="color: #006633;">valueOf</span><span style="color: #009900;">&#40;</span>parseInt<span style="color: #009900;">&#40;</span>s, <span style="color: #cc66cc;">10</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+<span style="color: #009900;">&#125;</span>  
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #003399;">Integer</span> valueOf<span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">int</span> i<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>  
+    <span style="color: #000000; font-weight: bold;">assert</span> IntegerCache.<span style="color: #006633;">high</span> <span style="color: #339933;">&gt;=</span> <span style="color: #cc66cc;">127</span><span style="color: #339933;">;</span>  
+    <span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>i <span style="color: #339933;">&gt;=</span> IntegerCache.<span style="color: #006633;">low</span> <span style="color: #339933;">&amp;&amp;</span> i <span style="color: #339933;">&lt;</span> <span style="color: #339933;">=</span> IntegerCache.<span style="color: #006633;">high</span><span style="color: #009900;">&#41;</span>  
+         <span style="color: #000000; font-weight: bold;">return</span> IntegerCache.<span style="color: #006633;">cache</span><span style="color: #009900;">&#91;</span>i <span style="color: #339933;">+</span> <span style="color: #009900;">&#40;</span><span style="color: #339933;">-</span>IntegerCache.<span style="color: #006633;">low</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>  
+     <span style="color: #000000; font-weight: bold;">return</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">Integer</span><span style="color: #009900;">&#40;</span>i<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+<span style="color: #009900;">&#125;</span>  
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000066; font-weight: bold;">int</span> parseInt<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span> s<span style="color: #009900;">&#41;</span> <span style="color: #000000; font-weight: bold;">throws</span> <span style="color: #003399;">NumberFormatException</span> <span style="color: #009900;">&#123;</span>  
+    <span style="color: #000000; font-weight: bold;">return</span> parseInt<span style="color: #009900;">&#40;</span>s,<span style="color: #cc66cc;">10</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+<span style="color: #009900;">&#125;</span>  
+ <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000066; font-weight: bold;">int</span> parseInt<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span> s, <span style="color: #000066; font-weight: bold;">int</span> radix<span style="color: #009900;">&#41;</span>  
+                <span style="color: #000000; font-weight: bold;">throws</span> <span style="color: #003399;">NumberFormatException</span>  
+    <span style="color: #009900;">&#123;</span>     
+<span style="color: #666666; font-style: italic;">//省略一系列参数检测  </span>
+        <span style="color: #000066; font-weight: bold;">int</span> result <span style="color: #339933;">=</span> <span style="color: #cc66cc;">0</span><span style="color: #339933;">;</span>  
+        <span style="color: #000066; font-weight: bold;">boolean</span> negative <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">false</span><span style="color: #339933;">;</span>  
+        <span style="color: #000066; font-weight: bold;">int</span> i <span style="color: #339933;">=</span> <span style="color: #cc66cc;">0</span>, len <span style="color: #339933;">=</span> s.<span style="color: #006633;">length</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+        <span style="color: #000066; font-weight: bold;">int</span> limit <span style="color: #339933;">=</span> <span style="color: #339933;">-</span><span style="color: #003399;">Integer</span>.<span style="color: #006633;">MAX_VALUE</span><span style="color: #339933;">;</span>  
+        <span style="color: #000066; font-weight: bold;">int</span> multmin<span style="color: #339933;">;</span>  
+        <span style="color: #000066; font-weight: bold;">int</span> digit<span style="color: #339933;">;</span>  
+&nbsp;
+        <span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>len <span style="color: #339933;">&gt;</span> <span style="color: #cc66cc;">0</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>  
+            <span style="color: #000066; font-weight: bold;">char</span> firstChar <span style="color: #339933;">=</span> s.<span style="color: #006633;">charAt</span><span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">0</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+            <span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>firstChar <span style="color: #339933;">&lt;</span> <span style="color: #0000ff;">'0'</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span> <span style="color: #666666; font-style: italic;">// Possible leading &quot;+&quot; or &quot;-&quot;  </span>
+                <span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>firstChar <span style="color: #339933;">==</span> <span style="color: #0000ff;">'-'</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>  
+                    negative <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">true</span><span style="color: #339933;">;</span>  
+                    limit <span style="color: #339933;">=</span> <span style="color: #003399;">Integer</span>.<span style="color: #006633;">MIN_VALUE</span><span style="color: #339933;">;</span>  
+                <span style="color: #009900;">&#125;</span> <span style="color: #000000; font-weight: bold;">else</span> <span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>firstChar <span style="color: #339933;">!=</span> <span style="color: #0000ff;">'+'</span><span style="color: #009900;">&#41;</span>  
+                    <span style="color: #000000; font-weight: bold;">throw</span> <span style="color: #003399;">NumberFormatException</span>.<span style="color: #006633;">forInputString</span><span style="color: #009900;">&#40;</span>s<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+&nbsp;
+                <span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>len <span style="color: #339933;">==</span> <span style="color: #cc66cc;">1</span><span style="color: #009900;">&#41;</span> <span style="color: #666666; font-style: italic;">// Cannot have lone &quot;+&quot; or &quot;-&quot;  </span>
+                    <span style="color: #000000; font-weight: bold;">throw</span> <span style="color: #003399;">NumberFormatException</span>.<span style="color: #006633;">forInputString</span><span style="color: #009900;">&#40;</span>s<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+                i<span style="color: #339933;">++;</span>  
+            <span style="color: #009900;">&#125;</span>  
+            multmin <span style="color: #339933;">=</span> limit <span style="color: #339933;">/</span> radix<span style="color: #339933;">;</span>  
+            <span style="color: #000000; font-weight: bold;">while</span> <span style="color: #009900;">&#40;</span>i <span style="color: #339933;">&lt;</span> len<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>  
+                <span style="color: #666666; font-style: italic;">// Accumulating negatively avoids surprises near MAX_VALUE  </span>
+                digit <span style="color: #339933;">=</span> <span style="color: #003399;">Character</span>.<span style="color: #006633;">digit</span><span style="color: #009900;">&#40;</span>s.<span style="color: #006633;">charAt</span><span style="color: #009900;">&#40;</span>i<span style="color: #339933;">++</span><span style="color: #009900;">&#41;</span>,radix<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+                <span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>digit <span style="color: #339933;">&lt;</span> <span style="color: #cc66cc;">0</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>  
+                    <span style="color: #000000; font-weight: bold;">throw</span> <span style="color: #003399;">NumberFormatException</span>.<span style="color: #006633;">forInputString</span><span style="color: #009900;">&#40;</span>s<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+                <span style="color: #009900;">&#125;</span>  
+                <span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>result <span style="color: #339933;">&lt;</span> multmin<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>  
+                    <span style="color: #000000; font-weight: bold;">throw</span> <span style="color: #003399;">NumberFormatException</span>.<span style="color: #006633;">forInputString</span><span style="color: #009900;">&#40;</span>s<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+                <span style="color: #009900;">&#125;</span>  
+                result <span style="color: #339933;">*=</span> radix<span style="color: #339933;">;</span>  
+                <span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>result <span style="color: #339933;">&lt;</span> limit <span style="color: #339933;">+</span> digit<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>  
+                    <span style="color: #000000; font-weight: bold;">throw</span> <span style="color: #003399;">NumberFormatException</span>.<span style="color: #006633;">forInputString</span><span style="color: #009900;">&#40;</span>s<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+                <span style="color: #009900;">&#125;</span>  
+                result <span style="color: #339933;">-=</span> digit<span style="color: #339933;">;</span>  
+            <span style="color: #009900;">&#125;</span>  
+        <span style="color: #009900;">&#125;</span> <span style="color: #000000; font-weight: bold;">else</span> <span style="color: #009900;">&#123;</span>  
+            <span style="color: #000000; font-weight: bold;">throw</span> <span style="color: #003399;">NumberFormatException</span>.<span style="color: #006633;">forInputString</span><span style="color: #009900;">&#40;</span>s<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+        <span style="color: #009900;">&#125;</span>  
+        <span style="color: #000000; font-weight: bold;">return</span> negative <span style="color: #339933;">?</span> result <span style="color: #339933;">:</span> <span style="color: #339933;">-</span>result<span style="color: #339933;">;</span>  
+    <span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>另外，通过查看编译后的字节码（这里就不贴了），我们可以看到基本类型和装箱类型相比较时，调用了Integer实例的intValue()方法返回了该实例相应的int值，从而最后比较的实际是int和int进行比较。</code></p>
+</div><div id="paginate"><label id="li_1" onclick="javascript:show_page(1,2,this);" style="font-size:30px;font-weight:bold" onmouseover="this.style.cursor='pointer'">1</label><label id="li_2" onclick="javascript:show_page(2,2,this);"  onmouseover="this.style.cursor='pointer'">2</label></div> 
+			<div align="center">1 month ago, this page was being read. </div>
+			<p class="tags"><a href="http://www.xieziming.com/tag/java" rel="tag">java</a><br /></p>  
+    </div><!-- /entry -->                                   
+		<div class="postbottom"></div>		                              
+		</div><!-- /post -->	
+
+<div class="postrelated">
+			<table width="100%" >				
+
+					<tr><td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/7486.html" rel="bookmark" title="Java堆栈">Java堆栈</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7511.html" rel="bookmark" title="Java枚举类">Java枚举类</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/6795.html" rel="bookmark" title="Java 多线程">Java 多线程</a></td>
+
+				<td align="right" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7364.html" rel="bookmark" title="Java启动参数">Java启动参...</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7437.html" rel="bookmark" title="Equals与Hashcode">Equals与Hash...</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/8807.html" rel="bookmark" title="制作Java Applet签名">制作Java A...</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/8575.html" rel="bookmark" title="Comparison Tool">Compari...</a></td>
+
+				<td align="right" class="dashedline_related"><a href="http://www.xieziming.com/archives/8811.html" rel="bookmark" title="Java源码混淆">Java源码混...</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/8804.html" rel="bookmark" title="Java源码加/解密">Java源码加/解密</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7481.html" rel="bookmark" title="Java单例模式">Java单例模式</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/7000.html" rel="bookmark" title="Java IO类">Java IO类</a></td>
+
+				<td align="right" class="dashedline_related">★<a href="http://www.xieziming.com/archives/2464.html" rel="bookmark" title="J2EE入门例子">J2EE入门例子</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7496.html" rel="bookmark" title="Java反射机制">Java反射机制</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/2216.html" rel="bookmark" title="Java程序员面试宝典">Java程序员面...</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7545.html" rel="bookmark" title="Java集合类">Java集合类</a></td>
+
+				<td align="right" class="dashedline_related"><a href="http://www.xieziming.com/archives/7351.html" rel="bookmark" title="Java Layout总结">Java Layout...</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/7366.html" rel="bookmark" title="QTP控制Java程序原理">QTP控制Java程序...</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/6805.html" rel="bookmark" title="Java垃圾回收算法">Java垃圾回收算法</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/8494.html" rel="bookmark" title="Java内存管理之字符串">Java内存管理之字符串</a></td>
+
+				<td align="right" class="dashedline_related">★<a href="http://www.xieziming.com/archives/8506.html" rel="bookmark" title="Java Socket长连接">Java So...</a></td></tr>
+
+		</table>
+</div>
+
+		<div id="comments">
+
+<!-- START COMMENT FORMS -->
+
+
+		</div><!--/comments-->		
+
+</div><!-- /content -->
+<div id="sidebar">			
+			<a class="subscribe" href="http://www.xieziming.com/feed" title="Posts RSS">Subscribe</a>			
+			<div id="search">	
+	<form name="searchform" id="searchform" method="get" action="http://www.xieziming.com/index.php">
+		<input class="text" type="text" name="s" id="s" value=""/>
+		<input class="submit" type="image" src="http://www.xieziming.com/wp-content/themes/ziming/img/submit.jpg" value="search" />
+	</form>	
+</div><!-- /search -->			
+			<div id="widgets">			
+			<div class="widget"><h3>Calendar</h3>
+<table id="wp-calendar">
+  									<caption>December 2016</caption>
+  									<thead>
+                    <tr><th scope="col" title="S">S</th><th scope="col" title="M">M</th><th scope="col" title="T">T</th><th scope="col" title="W">W</th><th scope="col" title="T">T</th><th scope="col" title="F">F</th><th scope="col" title="S">S</th></tr></thead><tbody><tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>1</td><td>2</td><td>3</td></tr><tr><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td></tr><tr><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td></tr><tr><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">18<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">《血战钢锯岭》</span><br/><span class="time" style="color:#000000; " > Time : 21:18 - 23:28</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">晚上和小锅去看，蛮感人的。吃完去沙湾吃猪杂粥，应该是我在那吃到的最新鲜的一次了。</p></span></a></span></td><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">19<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">CentOS</span><br/><span class="time" style="color:#000000; " > Time : 14:11 - 18:11</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">终于有点时间来把那盒子的win7转成CentOS来做server。配置vsftp花了我太多的时间。。。</p></span></a></span></td><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td></tr><tr><td>25</td><td>26</td><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td></tr><tr><td colspan="3" id="prev"><a href="http://www.xieziming.com/archives/7527.html?month=nov&yr=2016">&laquo; Prev</a></td><td colspan="4" id="next"><a href="http://www.xieziming.com/archives/7527.html?month=jan&yr=2017">Next &raquo;</a></td></tr></tbody></table>
+<div class="widgetbottom"></div></div><!--/widget-->				
+					      		<div class="widget">
+ 							<h3>Recent Posts</h3>
+							<ul>
+           				<li><a href="http://www.xieziming.com/archives/9579.html" class="dashedline" title="闽南 · 泉州">闽南 &middot; 泉州</a></li><li><a href="http://www.xieziming.com/archives/9578.html" class="dashedline" title="顺化 · HUE">顺化 &middot; HUE</a></li><li><a href="http://www.xieziming.com/archives/9577.html" class="dashedline" title="会安 · 春卷">会安 &middot; 春卷</a></li><li><a href="http://www.xieziming.com/archives/9576.html" class="dashedline" title="会安 · 夜灯">会安 &middot; 夜灯</a></li><li><a href="http://www.xieziming.com/archives/9575.html" class="dashedline" title="会安古镇">会安古镇</a></li><li><a href="http://www.xieziming.com/archives/9573.html" class="dashedline" title="岘港">岘港</a></li><li><a href="http://www.xieziming.com/archives/9535.html" class="dashedline" title="罗马">罗马</a></li><li><a href="http://www.xieziming.com/archives/9534.html" class="dashedline" title="卢浮宫">卢浮宫</a></li>						
+							</ul>
+      				<div class="widgetbottom"></div>
+	    		</div>
+	    			        
+        	      		<div class="widget">
+ 							<h3>Rand Posts</h3>
+							<ul>
+      						<li><a href="http://www.xieziming.com/archives/8713.html" class="dashedline" title="那时的爱情">那时的爱情</a></li><li><a href="http://www.xieziming.com/archives/2425.html" class="dashedline" title="通信机房布线规范图">通信机房布线规范图</a></li><li><a href="http://www.xieziming.com/archives/1383.html" class="dashedline" title="HongKong">HongKong</a></li><li><a href="http://www.xieziming.com/archives/7382.html" class="dashedline" title="QTP Action 参数传递">QTP Action 参数传递</a></li><li><a href="http://www.xieziming.com/archives/879.html" class="dashedline" title="风生水起～">风生水起～</a></li><li><a href="http://www.xieziming.com/archives/279.html" class="dashedline" title="后知后觉">后知后觉</a></li><li><a href="http://www.xieziming.com/archives/3737.html" class="dashedline" title="蒸汤记">蒸汤记</a></li><li><a href="http://www.xieziming.com/archives/885.html" class="dashedline" title="天地存珞珈，此间有山水">天地存珞珈，此间有山水</a></li>	
+							</ul>
+        			<div class="widgetbottom"></div>
+					</div>                 
+          	                       
+			</div><!-- /widgets -->			                       
+</div><!-- /sidebar --></div><!-- /main -->
+<div id="footer">
+<p align="left">© <a href="http://www.miitbeian.gov.cn" target="_blank"> 明 · 明 · 童 · 鞋</a></p>
+<!--74 queries in 3.160 seconds.-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?c2e18b43ec905e3c4ea82c1b57537223";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</div><!-- /footer -->
+</div><!-- /container -->
+<script type='text/javascript' src='http://www.xieziming.com/wp-includes/js/wp-embed.min.js?ver=4.7'></script>
+</body>
+</html>

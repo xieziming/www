@@ -1,0 +1,574 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head profile="http://gmpg.org/xfn/11">
+<title>  截屏工具（C++）API &raquo; 谢子明</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="description" content="截屏工具（C++）API  " />
+<meta name="keywords" content="谢子明" />
+<link rel="stylesheet" href="http://www.xieziming.com/wp-content/themes/ziming/style.css" type="text/css" media="screen" />
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://www.xieziming.com/feed" />
+<link rel="alternate" type="application/rss+xml" href="http://www.xieziming.com/comments/feed" title="谢子明 Comments RSS feed" />
+<link rel="shortcut icon" href="http://www.xieziming.com/wp-content/themes/ziming/favicon.ico">
+<link rel="Bookmark" href="http://www.xieziming.com/wp-content/themes/ziming/favicon.ico">
+<link rel="pingback" href="http://www.xieziming.com/xmlrpc.php" />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="谢子明 &raquo; 截屏工具（C++）API Comments Feed" href="http://www.xieziming.com/archives/8517.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/xieziming.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.7"}};
+			!function(a,b,c){function d(a){var b,c,d,e,f=String.fromCharCode;if(!k||!k.fillText)return!1;switch(k.clearRect(0,0,j.width,j.height),k.textBaseline="top",k.font="600 32px Arial",a){case"flag":return k.fillText(f(55356,56826,55356,56819),0,0),!(j.toDataURL().length<3e3)&&(k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,65039,8205,55356,57096),0,0),b=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,55356,57096),0,0),c=j.toDataURL(),b!==c);case"emoji4":return k.fillText(f(55357,56425,55356,57341,8205,55357,56507),0,0),d=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55357,56425,55356,57341,55357,56507),0,0),e=j.toDataURL(),d!==e}return!1}function e(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i,j=b.createElement("canvas"),k=j.getContext&&j.getContext("2d");for(i=Array("flag","emoji4"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<script type='text/javascript' src='http://www.xieziming.com/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='http://www.xieziming.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<link rel='https://api.w.org/' href='http://www.xieziming.com/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.xieziming.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.xieziming.com/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='公元前' href='http://www.xieziming.com/archives/8514.html' />
+<link rel='next' title='我与Oracle' href='http://www.xieziming.com/archives/8590.html' />
+<meta name="generator" content="WordPress 4.7" />
+<link rel="canonical" href="http://www.xieziming.com/archives/8517.html" />
+<link rel='shortlink' href='http://www.xieziming.com/?p=8517' />
+<link rel="alternate" type="application/json+oembed" href="http://www.xieziming.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fxieziming.com%2Farchives%2F8517.html" />
+<link rel="alternate" type="text/xml+oembed" href="http://www.xieziming.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fxieziming.com%2Farchives%2F8517.html&#038;format=xml" />
+ 	<link rel="stylesheet" href="http://www.xieziming.com/wp-content/plugins/live-calendar/live-calendar.css" type="text/css" media="screen" /> 
+<link rel="stylesheet" href="http://www.xieziming.com/wp-content/plugins/wp-code/wp-code.css" type="text/css" media="screen" />
+
+<link rel="stylesheet" href="http://www.xieziming.com/wp-content/plugins/zoom-highslide/highslide.css" type="text/css" media="screen" />
+<script type="text/javascript" src="http://www.xieziming.com/wp-content/plugins/zoom-highslide/js/highslide-full.packed.js"></script>
+<script type="text/javascript">
+	hs.graphicsDir = 'http://www.xieziming.com/wp-content/plugins/zoom-highslide/graphics/';
+	hs.align = 'center';
+	hs.transitions = ['expand', 'crossfade'];
+	hs.outlineType = 'rounded-white';
+  hs.wrapperClassName = 'controls-in-heading';
+	hs.showCredits=false;
+	hs.fadeInOut = true;
+	hs.dimmingOpacity = 0.8;
+
+	// Add the controlbar
+	if (hs.addSlideshow) hs.addSlideshow({
+		//slideshowGroup: 'group1',
+		interval: 4000,
+		repeat: false,
+		useControls: true,
+		fixedControls: false,
+		overlayOptions: {
+			opacity: 1,
+			position: 'top center',
+			hideOnMouseOut: true
+		}
+	});
+</script>
+
+<script type="text/javascript">
+	var widthRestriction = 668; 
+	var heightRestriction = 1000; 
+</script>
+<script type="text/javascript" src="http://www.xieziming.com/wp-content/plugins/zoom-highslide/js/zoom.js"></script>
+	
+<!--script src="http://www.xieziming.com/wp-content/themes/ziming/js/mouse.js" type="text/javascript"></script--> 
+</head>
+<body class="normalbg">
+<div id="container">
+	<div id="head">
+		<div id="nav">
+			<ul>
+				<li class="first"><a href="http://www.xieziming.com" title="首页">首页</a></li>
+				<li class="page_item page-item-2"><a href="http://www.xieziming.com/recent" title="最近">最近</a></li>
+				<li class="page_item page-item-3"><a href="http://www.xieziming.com/photo" title="Photo">映象</a></li>
+				<li class="page_item page-item-4"><a href="http://www.xieziming.com/food" title="Food">美食</a></li>
+				<li class="page_item page-item-5"><a href="http://www.xieziming.com/topic" title="关键字">话题</a></li>
+				<li class="page_item page-item-6"><a href="http://www.xieziming.com/travel" title="Travel">旅行</a></li>
+				<li class="page_item page-item-7"><a href="http://www.xieziming.com/literature" title="Literature">文艺</a></li>
+				<li class="page_item page-item-8"><a href="http://www.xieziming.com/wiki" title="技术维基">维基</a></li>
+				<li class="page_item page-item-9"><a href="http://www.xieziming.com/calendar" title="Calendar">点滴</a></li>
+			</ul>
+		</div><!-- /nav -->		
+	</div><!-- /head -->
+<div id="main" class="altmainbg">
+
+<script type="text/javascript">
+function show_page(id,count,source){
+	for (var i=1;i<=count;i++){
+		if(id != i){
+				jQuery("#part_"+i).hide();
+				document.getElementById("li_"+i).style.fontWeight = "normal";
+				document.getElementById("li_"+i).style.fontSize = "18px";
+		}
+	}
+	jQuery("#part_"+id).show();
+	document.getElementById("li_"+id).style.fontWeight = "bold";
+	document.getElementById("li_"+id).style.fontSize = "30px";
+	jQuery('body,html').animate({scrollTop:0},1000);
+        return false;
+}
+</script>
+<div id="content">
+
+	<div class="post" id="post-8517">
+		<h2 class="title">截屏工具（C++）API</h2>
+		<p class="postmetadata">
+			<span class="date">01 May 2013</span>
+			<span class="category">Categoried in <a href="http://www.xieziming.com/topic/kai-yuan" rel="category tag">开源</a></span>
+			<span class="comments">0</span>
+			<span class="view">Preview : 3066 , Read : 521 </span>
+			<span class="mail">Index : 12039 </span>
+		</p>
+		<div class="entry">				
+<div id="part_1"><p>前阵子在搞一个Agent的监控功能，每隔几秒传回一张图，用Java编写。但发现有以下两个问题：</p>
+<p>（1） 鼠标闪，当刷新屏幕设置为3秒以下时，发现鼠标闪的非常厉害，严重影响Agent机的使用。<br />
+（2） 当屏幕Lock，或者远程登录Agent最小化登录窗口时，将截不到图。</p>
+<p>后来搜索发现，用Java是没办法解决这个问题的，必须使用C/C++跟操作系统底层打交道才行，放在这里的话就是GDI。</p>
+<p><strong>程序下载：</strong></p>
+<p><a href="http://images.xieziming.com/upload/file/screencapture/ScreenCapture.zip" title="download">ScreenCapture.zip</a></p>
+<p><strong>用法：</strong></p>
+<p><em>ScreenCapture.exe [filePath.jpg] [sleepTime]</em></p>
+<p>（1） 无参数  &#8212;&#8212;&#8212;-保存图片于相同目录，文件名screen.jpg<br />
+（2） 1个参数  &#8212;&#8211;保存图片于filePath.jpg<br />
+（3） 2个参数  &#8212;&#8211;循环截图，间隔时间为sleepTime（毫秒），保存图片于filePath.jpg</p>
+<p><strong>程序源码：</strong></p>
+<p>Blow is the content of ScreenCapture.cpp</p>
+
+<div class="wp_code"><div class="pre"><pre class="cpp" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #339900;">#include &quot;screen_shooter.h&quot;</span>
+<span style="color: #0000ff;">int</span> main <span style="color: #008000;">&#40;</span><span style="color: #0000ff;">int</span> argc, <span style="color: #0000ff;">char</span><span style="color: #000040;">*</span> argv<span style="color: #008000;">&#91;</span><span style="color: #008000;">&#93;</span><span style="color: #008000;">&#41;</span><span style="color: #008000;">&#123;</span>
+	ScreenShooter screen_shooter<span style="color: #008080;">;</span>
+	Screenshot<span style="color: #000040;">*</span> screenshot<span style="color: #008080;">;</span>
+	<span style="color: #0000ff;">int</span> sleepTime<span style="color: #008080;">;</span>
+	<span style="color: #0000ff;">char</span><span style="color: #000040;">*</span> filePath<span style="color: #008080;">;</span>
+	<span style="color: #0000ff;">if</span> <span style="color: #008000;">&#40;</span>argc <span style="color: #000080;">==</span> <span style="color: #0000dd;">1</span><span style="color: #008000;">&#41;</span> <span style="color: #008000;">&#123;</span>
+		filePath <span style="color: #000080;">=</span> <span style="color: #FF0000;">&quot;screen.jpg&quot;</span><span style="color: #008080;">;</span>
+		screenshot <span style="color: #000080;">=</span> screen_shooter.<span style="color: #007788;">take_screenshot</span><span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+		screenshot<span style="color: #000040;">-</span><span style="color: #000080;">&gt;</span>write_jpeg<span style="color: #008000;">&#40;</span>filePath<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+	<span style="color: #008000;">&#125;</span>
+	<span style="color: #0000ff;">if</span> <span style="color: #008000;">&#40;</span>argc <span style="color: #000080;">==</span> <span style="color: #0000dd;">2</span><span style="color: #008000;">&#41;</span> <span style="color: #008000;">&#123;</span>
+		filePath <span style="color: #000080;">=</span> argv<span style="color: #008000;">&#91;</span><span style="color: #0000dd;">1</span><span style="color: #008000;">&#93;</span><span style="color: #008080;">;</span>
+		screenshot <span style="color: #000080;">=</span> screen_shooter.<span style="color: #007788;">take_screenshot</span><span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+		screenshot<span style="color: #000040;">-</span><span style="color: #000080;">&gt;</span>write_jpeg<span style="color: #008000;">&#40;</span>filePath<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+	<span style="color: #008000;">&#125;</span>
+&nbsp;
+	<span style="color: #0000ff;">if</span> <span style="color: #008000;">&#40;</span>argc <span style="color: #000080;">==</span> <span style="color: #0000dd;">3</span><span style="color: #008000;">&#41;</span> <span style="color: #008000;">&#123;</span>
+		filePath <span style="color: #000080;">=</span> argv<span style="color: #008000;">&#91;</span><span style="color: #0000dd;">1</span><span style="color: #008000;">&#93;</span><span style="color: #008080;">;</span>
+		<span style="color: #0000dd;">sscanf</span><span style="color: #008000;">&#40;</span>argv<span style="color: #008000;">&#91;</span><span style="color: #0000dd;">2</span><span style="color: #008000;">&#93;</span>,<span style="color: #FF0000;">&quot;%d&quot;</span>,<span style="color: #000040;">&amp;</span>sleepTime<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+		<span style="color: #0000ff;">while</span><span style="color: #008000;">&#40;</span><span style="color: #0000ff;">true</span><span style="color: #008000;">&#41;</span><span style="color: #008000;">&#123;</span>
+			  screenshot <span style="color: #000080;">=</span> screen_shooter.<span style="color: #007788;">take_screenshot</span><span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+			  screenshot<span style="color: #000040;">-</span><span style="color: #000080;">&gt;</span>write_jpeg<span style="color: #008000;">&#40;</span>filePath<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+			  Sleep<span style="color: #008000;">&#40;</span>sleepTime<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+		  <span style="color: #008000;">&#125;</span>
+	<span style="color: #008000;">&#125;</span>
+&nbsp;
+	<span style="color: #0000dd;">delete</span> screenshot<span style="color: #008080;">;</span>
+	<span style="color: #0000ff;">return</span> <span style="color: #0000dd;">0</span><span style="color: #008080;">;</span>
+<span style="color: #008000;">&#125;</span></pre></div></div>
+
+</div><div id="part_2" style="display:none;"><p>Blow is the content of screen_shooter.h</p>
+
+<div class="wp_code"><div class="pre"><pre class="cpp" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #339900;">#ifndef _SCREEN_SHOOTER_H_</span>
+<span style="color: #339900;">#define _SCREEN_SHOOTER_H_</span>
+&nbsp;
+<span style="color: #339900;">#include &quot;screen_shot.h&quot;</span>
+&nbsp;
+<span style="color: #0000ff;">struct</span> SimplePoint <span style="color: #008000;">&#123;</span>
+  <span style="color: #0000ff;">int</span> x<span style="color: #008080;">;</span>
+  <span style="color: #0000ff;">int</span> y<span style="color: #008080;">;</span>
+<span style="color: #008000;">&#125;</span><span style="color: #008080;">;</span>
+&nbsp;
+BOOL CALLBACK monitor_count_enum_proc<span style="color: #008000;">&#40;</span>HMONITOR hMonitor, HDC hdcMonitor, LPRECT lprcMonitor, LPARAM dwData<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+BOOL CALLBACK monitor_info_enum_proc<span style="color: #008000;">&#40;</span>HMONITOR hMonitor, HDC hdcMonitor, LPRECT lprcMonitor, LPARAM dwData<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+&nbsp;
+<span style="color: #ff0000; font-style: italic;">/**
+ * A ScreenShooter provides a facility to take one of more screenshots where a screenshot
+ * includes a large image of ALL active displays on a computer.
+ *
+ */</span>
+<span style="color: #0000ff;">class</span> ScreenShooter <span style="color: #008000;">&#123;</span>
+  <span style="color: #0000ff;">public</span><span style="color: #008080;">:</span>
+    ScreenShooter<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+    ~ScreenShooter<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+&nbsp;
+    <span style="color: #666666;">// Allocate and take a new screenshot of all active screens. The caller</span>
+    <span style="color: #666666;">// is responsible for its deletion.</span>
+    <span style="color: #0000ff;">void</span> take_single_screenshot<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+    Screenshot<span style="color: #000040;">*</span> take_screenshot<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+&nbsp;
+  <span style="color: #0000ff;">public</span><span style="color: #008080;">:</span>
+    <span style="color: #0000ff;">static</span> RECT<span style="color: #000040;">*</span> _display_rects<span style="color: #008080;">;</span>
+&nbsp;
+  <span style="color: #0000ff;">private</span><span style="color: #008080;">:</span>
+    <span style="color: #0000ff;">void</span> calculate_bounds<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+    <span style="color: #0000ff;">void</span> init_displays<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+    <span style="color: #0000ff;">int</span>  monitor_count<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+&nbsp;
+  <span style="color: #0000ff;">private</span><span style="color: #008080;">:</span>
+    <span style="color: #0000ff;">int</span>      _dsp_count<span style="color: #008080;">;</span>
+    SimplePoint    _top_left<span style="color: #008080;">;</span>
+    SimplePoint    _bottom_right<span style="color: #008080;">;</span>
+<span style="color: #008000;">&#125;</span><span style="color: #008080;">;</span>
+&nbsp;
+&nbsp;
+<span style="color: #339900;">#endif // _SCREEN_SHOOTER_H_</span></pre></div></div>
+
+</div><div id="part_3" style="display:none;"><p>Blow is the content of screen_shooter.cpp</p>
+
+<div class="wp_code"><div class="pre"><pre class="cpp" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #339900;">#include &quot;screen_shooter.h&quot;</span>
+<span style="color: #339900;">#include &lt;string&gt;</span>
+<span style="color: #339900;">#include &lt;gdiplus.h&gt;</span>
+<span style="color: #339900;">#include &lt;windows.h&gt;</span>
+<span style="color: #339900;">#include &lt;winuser.h&gt;</span>
+&nbsp;
+<span style="color: #339900;">#define max(a,b) \
+({ __typeof__ (a) _a = (a); \
+__typeof__ (b) _b = (b); \
+_a &gt; _b ? _a : _b; })</span>
+&nbsp;
+<span style="color: #339900;">#define min(a,b) \
+({ __typeof__ (a) _a = (a); \
+__typeof__ (b) _b = (b); \
+_a &lt; _b ? _a : _b; })</span>
+&nbsp;
+RECT<span style="color: #000040;">*</span> ScreenShooter<span style="color: #008080;">::</span>_display_rects<span style="color: #008080;">;</span>
+&nbsp;
+<span style="color: #ff0000; font-style: italic;">/* monitor_count_enum_proc helps monitor_count get number of displays */</span>
+BOOL CALLBACK monitor_count_enum_proc<span style="color: #008000;">&#40;</span>HMONITOR hMonitor, HDC hdcMonitor, LPRECT lprcMonitor, LPARAM dwData<span style="color: #008000;">&#41;</span><span style="color: #008000;">&#123;</span>
+  <span style="color: #0000ff;">int</span> <span style="color: #000040;">*</span>count <span style="color: #000080;">=</span> <span style="color: #008000;">&#40;</span><span style="color: #0000ff;">int</span><span style="color: #000040;">*</span><span style="color: #008000;">&#41;</span>dwData<span style="color: #008080;">;</span>
+  <span style="color: #008000;">&#40;</span><span style="color: #000040;">*</span>count<span style="color: #008000;">&#41;</span><span style="color: #000040;">++</span><span style="color: #008080;">;</span>
+  <span style="color: #0000ff;">return</span> TRUE<span style="color: #008080;">;</span>
+<span style="color: #008000;">&#125;</span>
+&nbsp;
+<span style="color: #ff0000; font-style: italic;">/* monitor_info_enum_proc stores the display information in its indexed struct */</span>
+BOOL CALLBACK monitor_info_enum_proc<span style="color: #008000;">&#40;</span>HMONITOR hMonitor, HDC hdcMonitor, LPRECT lprcMonitor, LPARAM dwData<span style="color: #008000;">&#41;</span><span style="color: #008000;">&#123;</span>
+  <span style="color: #0000ff;">int</span> <span style="color: #000040;">*</span> count <span style="color: #000080;">=</span> <span style="color: #008000;">&#40;</span><span style="color: #0000ff;">int</span><span style="color: #000040;">*</span><span style="color: #008000;">&#41;</span>dwData<span style="color: #008080;">;</span>
+&nbsp;
+  <span style="color: #666666;">// extract dimensions of monitor from MONITOR INFO</span>
+  MONITORINFO mi<span style="color: #008080;">;</span>
+  mi.<span style="color: #007788;">cbSize</span> <span style="color: #000080;">=</span> <span style="color: #0000dd;">sizeof</span><span style="color: #008000;">&#40;</span>mi<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+  GetMonitorInfo<span style="color: #008000;">&#40;</span>hMonitor, <span style="color: #000040;">&amp;</span>mi<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+&nbsp;
+  ScreenShooter<span style="color: #008080;">::</span>_display_rects<span style="color: #008000;">&#91;</span><span style="color: #000040;">*</span>count<span style="color: #008000;">&#93;</span> <span style="color: #000080;">=</span> mi.<span style="color: #007788;">rcMonitor</span><span style="color: #008080;">;</span>
+  <span style="color: #008000;">&#40;</span><span style="color: #000040;">*</span>count<span style="color: #008000;">&#41;</span><span style="color: #000040;">++</span><span style="color: #008080;">;</span>
+  <span style="color: #0000ff;">return</span> TRUE<span style="color: #008080;">;</span>
+<span style="color: #008000;">&#125;</span>
+&nbsp;
+ScreenShooter<span style="color: #008080;">::</span><span style="color: #007788;">ScreenShooter</span><span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span> <span style="color: #008000;">&#123;</span>
+    init_displays<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+    calculate_bounds<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+  <span style="color: #008000;">&#125;</span>
+&nbsp;
+ScreenShooter<span style="color: #008080;">::</span>~ScreenShooter<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span> <span style="color: #008000;">&#123;</span>
+    <span style="color: #0000dd;">free</span><span style="color: #008000;">&#40;</span>_display_rects<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+<span style="color: #008000;">&#125;</span>
+&nbsp;
+<span style="color: #0000ff;">int</span> ScreenShooter<span style="color: #008080;">::</span><span style="color: #007788;">monitor_count</span><span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span> <span style="color: #008000;">&#123;</span>
+  <span style="color: #0000ff;">int</span> Count <span style="color: #000080;">=</span> <span style="color: #0000dd;">0</span><span style="color: #008080;">;</span>
+  <span style="color: #0000ff;">if</span> <span style="color: #008000;">&#40;</span>EnumDisplayMonitors<span style="color: #008000;">&#40;</span><span style="color: #0000ff;">NULL</span>, <span style="color: #0000ff;">NULL</span>, monitor_count_enum_proc, <span style="color: #008000;">&#40;</span>LPARAM<span style="color: #008000;">&#41;</span><span style="color: #000040;">&amp;</span>Count<span style="color: #008000;">&#41;</span><span style="color: #008000;">&#41;</span>
+    <span style="color: #0000ff;">return</span> Count<span style="color: #008080;">;</span>
+  <span style="color: #0000ff;">return</span> <span style="color: #000040;">-</span><span style="color: #0000dd;">1</span><span style="color: #008080;">;</span><span style="color: #666666;">//signals an error</span>
+<span style="color: #008000;">&#125;</span>
+&nbsp;
+Screenshot<span style="color: #000040;">*</span> ScreenShooter<span style="color: #008080;">::</span><span style="color: #007788;">take_screenshot</span><span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span> <span style="color: #008000;">&#123;</span>
+  HBITMAP combined_image<span style="color: #008080;">;</span>
+&nbsp;
+  <span style="color: #666666;">// calculate size of final image</span>
+  SimpleSize final_size<span style="color: #008080;">;</span>
+  final_size.<span style="color: #007788;">width</span> <span style="color: #000080;">=</span> _bottom_right.<span style="color: #007788;">x</span> <span style="color: #000040;">-</span> _top_left.<span style="color: #007788;">x</span><span style="color: #008080;">;</span>
+  final_size.<span style="color: #007788;">height</span> <span style="color: #000080;">=</span> _bottom_right.<span style="color: #007788;">y</span> <span style="color: #000040;">-</span> _top_left.<span style="color: #007788;">y</span><span style="color: #008080;">;</span>
+&nbsp;
+  <span style="color: #666666;">// Copies bitmap data from desktop window device context into a memory device context where it can be captured into combined_image</span>
+  HDC scrContext <span style="color: #000080;">=</span> GetDC<span style="color: #008000;">&#40;</span>GetDesktopWindow<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+  HDC memContext <span style="color: #000080;">=</span> CreateCompatibleDC<span style="color: #008000;">&#40;</span>scrContext<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+  combined_image <span style="color: #000080;">=</span> CreateCompatibleBitmap<span style="color: #008000;">&#40;</span>scrContext, final_size.<span style="color: #007788;">width</span>, final_size.<span style="color: #007788;">height</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+  SelectObject<span style="color: #008000;">&#40;</span>memContext, combined_image<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+  BitBlt<span style="color: #008000;">&#40;</span>memContext, <span style="color: #0000dd;">0</span>, <span style="color: #0000dd;">0</span>, final_size.<span style="color: #007788;">width</span>, final_size.<span style="color: #007788;">height</span>, scrContext, _top_left.<span style="color: #007788;">x</span>, _top_left.<span style="color: #007788;">y</span>, SRCCOPY<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+&nbsp;
+  Screenshot<span style="color: #000040;">*</span> screenshot <span style="color: #000080;">=</span> <span style="color: #0000dd;">new</span> Screenshot<span style="color: #008000;">&#40;</span>combined_image, final_size<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+&nbsp;
+  <span style="color: #666666;">// gotta keep things tidy</span>
+  ReleaseDC<span style="color: #008000;">&#40;</span><span style="color: #0000dd;">0</span>, memContext<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+  ReleaseDC<span style="color: #008000;">&#40;</span><span style="color: #0000dd;">0</span>, scrContext<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+&nbsp;
+  <span style="color: #0000ff;">return</span> screenshot<span style="color: #008080;">;</span>
+<span style="color: #008000;">&#125;</span>
+&nbsp;
+<span style="color: #ff0000; font-style: italic;">/* Calculate the _top_left and _bottom_right corners of our virtual display. Must be called after init_displays. */</span>
+<span style="color: #0000ff;">void</span> ScreenShooter<span style="color: #008080;">::</span><span style="color: #007788;">calculate_bounds</span><span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span> <span style="color: #008000;">&#123;</span>
+  _top_left.<span style="color: #007788;">x</span> <span style="color: #000080;">=</span> <span style="color: #0000dd;">0</span><span style="color: #008080;">;</span>
+  _top_left.<span style="color: #007788;">y</span> <span style="color: #000080;">=</span> <span style="color: #0000dd;">0</span><span style="color: #008080;">;</span>
+  _bottom_right.<span style="color: #007788;">x</span> <span style="color: #000080;">=</span> <span style="color: #0000dd;">0</span><span style="color: #008080;">;</span>
+  _bottom_right.<span style="color: #007788;">y</span> <span style="color: #000080;">=</span> <span style="color: #0000dd;">0</span><span style="color: #008080;">;</span>
+  <span style="color: #0000ff;">for</span><span style="color: #008000;">&#40;</span><span style="color: #0000ff;">int</span> i <span style="color: #000080;">=</span> <span style="color: #0000dd;">0</span><span style="color: #008080;">;</span> i <span style="color: #000080;">&lt;</span> _dsp_count<span style="color: #008080;">;</span> i<span style="color: #000040;">++</span><span style="color: #008000;">&#41;</span><span style="color: #008000;">&#123;</span>
+      RECT bounds <span style="color: #000080;">=</span> _display_rects<span style="color: #008000;">&#91;</span>i<span style="color: #008000;">&#93;</span><span style="color: #008080;">;</span>
+&nbsp;
+      _top_left.<span style="color: #007788;">x</span>     <span style="color: #000080;">=</span> min<span style="color: #008000;">&#40;</span>_top_left.<span style="color: #007788;">x</span>, bounds.<span style="color: #007788;">left</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+      _top_left.<span style="color: #007788;">y</span>     <span style="color: #000080;">=</span> min<span style="color: #008000;">&#40;</span>_top_left.<span style="color: #007788;">y</span>, bounds.<span style="color: #007788;">top</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+      _bottom_right.<span style="color: #007788;">x</span> <span style="color: #000080;">=</span> max<span style="color: #008000;">&#40;</span>_bottom_right.<span style="color: #007788;">x</span>, bounds.<span style="color: #007788;">right</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+      _bottom_right.<span style="color: #007788;">y</span> <span style="color: #000080;">=</span> max<span style="color: #008000;">&#40;</span>_bottom_right.<span style="color: #007788;">y</span>, bounds.<span style="color: #007788;">bottom</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+  <span style="color: #008000;">&#125;</span>
+<span style="color: #008000;">&#125;</span>
+&nbsp;
+<span style="color: #ff0000; font-style: italic;">/* Initialize the array and size of the Active Displays */</span>
+<span style="color: #0000ff;">void</span> ScreenShooter<span style="color: #008080;">::</span><span style="color: #007788;">init_displays</span><span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span> <span style="color: #008000;">&#123;</span>
+    <span style="color: #ff0000; font-style: italic;">/* How many active displays do we have? */</span>
+    _dsp_count <span style="color: #000080;">=</span> monitor_count<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+&nbsp;
+    <span style="color: #ff0000; font-style: italic;">/* Allocate enough memory to hold display information */</span>
+    _display_rects <span style="color: #000080;">=</span> <span style="color: #008000;">&#40;</span>RECT <span style="color: #000040;">*</span><span style="color: #008000;">&#41;</span> <span style="color: #0000dd;">calloc</span><span style="color: #008000;">&#40;</span><span style="color: #008000;">&#40;</span><span style="color: #0000ff;">size_t</span><span style="color: #008000;">&#41;</span> _dsp_count, <span style="color: #0000dd;">sizeof</span><span style="color: #008000;">&#40;</span>RECT<span style="color: #008000;">&#41;</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+&nbsp;
+    <span style="color: #ff0000; font-style: italic;">/* Populate displays information */</span>
+    <span style="color: #0000ff;">int</span> count <span style="color: #000080;">=</span> <span style="color: #0000dd;">0</span><span style="color: #008080;">;</span>
+    EnumDisplayMonitors<span style="color: #008000;">&#40;</span><span style="color: #0000ff;">NULL</span>, <span style="color: #0000ff;">NULL</span>, monitor_info_enum_proc, <span style="color: #008000;">&#40;</span>LPARAM<span style="color: #008000;">&#41;</span><span style="color: #000040;">&amp;</span>count<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+<span style="color: #008000;">&#125;</span></pre></div></div>
+
+</div><div id="part_4" style="display:none;"><p>Blow is the content of screen_shot.h</p>
+
+<div class="wp_code"><div class="pre"><pre class="cpp" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #339900;">#include &lt;string&gt;</span>
+<span style="color: #339900;">#include &lt;stdio.h&gt;</span>
+<span style="color: #339900;">#include &lt;windows.h&gt;</span>
+&nbsp;
+<span style="color: #339900;">#include &quot;mq.h&quot;</span>
+<span style="color: #339900;">#include &lt;gdiplus.h&gt;</span>
+&nbsp;
+<span style="color: #339900;">#ifndef _SCREEN_SHOT_H_</span>
+<span style="color: #339900;">#define _SCREEN_SHOT_H_</span>
+&nbsp;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span> Gdiplus<span style="color: #008080;">;</span>
+&nbsp;
+<span style="color: #0000ff;">struct</span> SimpleSize <span style="color: #008000;">&#123;</span>
+  <span style="color: #0000ff;">int</span> width<span style="color: #008080;">;</span>
+  <span style="color: #0000ff;">int</span> height<span style="color: #008080;">;</span>
+<span style="color: #008000;">&#125;</span><span style="color: #008080;">;</span>
+&nbsp;
+<span style="color: #0000ff;">int</span> get_encoder_clsid<span style="color: #008000;">&#40;</span><span style="color: #0000ff;">const</span> WCHAR<span style="color: #000040;">*</span> format, CLSID<span style="color: #000040;">*</span> pClsid<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+<span style="color: #0000ff;">wchar_t</span><span style="color: #000040;">*</span> char_str_to_wchar<span style="color: #008000;">&#40;</span><span style="color: #0000ff;">const</span> <span style="color: #0000ff;">char</span> <span style="color: #000040;">*</span> in<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+&nbsp;
+<span style="color: #ff0000; font-style: italic;">/**
+ * A Screenshot encapsulates an HBITMAP, containing a screenshot image.
+ *
+ * Destruction of the Screenshot will release the context.
+ */</span>
+<span style="color: #0000ff;">class</span> Screenshot <span style="color: #008000;">&#123;</span>
+  <span style="color: #0000ff;">public</span><span style="color: #008080;">:</span>
+    Screenshot<span style="color: #008000;">&#40;</span>HBITMAP hBitmap, SimpleSize <span style="color: #000040;">&amp;</span> size<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+    ~Screenshot<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+&nbsp;
+    <span style="color: #666666;">// Write specified type encoded screenshot data to filename</span>
+    <span style="color: #0000ff;">void</span> write_png<span style="color: #008000;">&#40;</span><span style="color: #0000ff;">const</span> <span style="color: #0000ff;">char</span><span style="color: #000040;">*</span> filename<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+    <span style="color: #0000ff;">void</span> write_bmp<span style="color: #008000;">&#40;</span><span style="color: #0000ff;">const</span> <span style="color: #0000ff;">char</span><span style="color: #000040;">*</span> filename<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+    <span style="color: #0000ff;">void</span> write_jpeg<span style="color: #008000;">&#40;</span><span style="color: #0000ff;">const</span> <span style="color: #0000ff;">char</span><span style="color: #000040;">*</span> filename<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+    <span style="color: #0000ff;">void</span> write_gif<span style="color: #008000;">&#40;</span><span style="color: #0000ff;">const</span> <span style="color: #0000ff;">char</span><span style="color: #000040;">*</span> filename<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+    <span style="color: #0000ff;">void</span> write_tiff<span style="color: #008000;">&#40;</span><span style="color: #0000ff;">const</span> <span style="color: #0000ff;">char</span><span style="color: #000040;">*</span> filename<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+&nbsp;
+  <span style="color: #0000ff;">private</span><span style="color: #008080;">:</span>
+    <span style="color: #0000ff;">void</span> write<span style="color: #008000;">&#40;</span><span style="color: #0000ff;">const</span> <span style="color: #0000ff;">char</span><span style="color: #000040;">*</span> filename, <span style="color: #0000ff;">const</span> <span style="color: #0000ff;">char</span><span style="color: #000040;">*</span> encoder_type<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+&nbsp;
+  <span style="color: #0000ff;">private</span><span style="color: #008080;">:</span>
+    HDC _bitmap_context<span style="color: #008080;">;</span>
+    HBITMAP  _hBitmap<span style="color: #008080;">;</span>
+    SimpleSize _size<span style="color: #008080;">;</span>
+    ULONG_PTR _gdiplusToken<span style="color: #008080;">;</span>
+<span style="color: #008000;">&#125;</span><span style="color: #008080;">;</span>
+&nbsp;
+<span style="color: #339900;">#endif // _SCREEN_SHOT_H_</span></pre></div></div>
+
+</div><div id="part_5" style="display:none;"><p>Blow is the content of screen_shot.cpp</p>
+
+<div class="wp_code"><div class="pre"><pre class="cpp" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #339900;">#include &quot;screen_shot.h&quot;</span>
+&nbsp;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span> Gdiplus<span style="color: #008080;">;</span>
+&nbsp;
+Screenshot<span style="color: #008080;">::</span><span style="color: #007788;">Screenshot</span><span style="color: #008000;">&#40;</span>HBITMAP hBitmap, SimpleSize <span style="color: #000040;">&amp;</span> size<span style="color: #008000;">&#41;</span> <span style="color: #008000;">&#123;</span>
+ <span style="color: #666666;">// fprintf(stderr,&quot;Screenshot Constructor Called\n&quot;);</span>
+  _hBitmap <span style="color: #000080;">=</span> hBitmap<span style="color: #008080;">;</span>
+  _size <span style="color: #000080;">=</span> size<span style="color: #008080;">;</span>
+&nbsp;
+  GdiplusStartupInput gdiplusStartupInput<span style="color: #008080;">;</span>
+  GdiplusStartup<span style="color: #008000;">&#40;</span><span style="color: #000040;">&amp;</span>_gdiplusToken, <span style="color: #000040;">&amp;</span>gdiplusStartupInput, <span style="color: #0000ff;">NULL</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+&nbsp;
+<span style="color: #008000;">&#125;</span>
+&nbsp;
+Screenshot<span style="color: #008080;">::</span>~Screenshot<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span> <span style="color: #008000;">&#123;</span>
+  DeleteObject<span style="color: #008000;">&#40;</span>_hBitmap<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+  GdiplusShutdown<span style="color: #008000;">&#40;</span>_gdiplusToken<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+<span style="color: #008000;">&#125;</span>
+&nbsp;
+<span style="color: #ff0000; font-style: italic;">/* write_png takes a filepath and writes the bitmap data as a png into it. */</span>
+<span style="color: #0000ff;">void</span> Screenshot<span style="color: #008080;">::</span><span style="color: #007788;">write_png</span><span style="color: #008000;">&#40;</span><span style="color: #0000ff;">const</span> <span style="color: #0000ff;">char</span><span style="color: #000040;">*</span> filepath<span style="color: #008000;">&#41;</span> <span style="color: #008000;">&#123;</span>
+  write<span style="color: #008000;">&#40;</span>filepath, <span style="color: #FF0000;">&quot;image/png&quot;</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+<span style="color: #008000;">&#125;</span>
+&nbsp;
+<span style="color: #ff0000; font-style: italic;">/* write_jpeg takes a filepath and writes the bitmap data as a jpeg into it. */</span>
+<span style="color: #0000ff;">void</span> Screenshot<span style="color: #008080;">::</span><span style="color: #007788;">write_jpeg</span><span style="color: #008000;">&#40;</span><span style="color: #0000ff;">const</span> <span style="color: #0000ff;">char</span><span style="color: #000040;">*</span> filepath<span style="color: #008000;">&#41;</span> <span style="color: #008000;">&#123;</span>
+  write<span style="color: #008000;">&#40;</span>filepath, <span style="color: #FF0000;">&quot;image/jpeg&quot;</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+<span style="color: #008000;">&#125;</span>
+&nbsp;
+<span style="color: #ff0000; font-style: italic;">/* write_bmp takes a filepath and writes the bitmap data as a bmp into it. */</span>
+<span style="color: #0000ff;">void</span> Screenshot<span style="color: #008080;">::</span><span style="color: #007788;">write_bmp</span><span style="color: #008000;">&#40;</span><span style="color: #0000ff;">const</span> <span style="color: #0000ff;">char</span><span style="color: #000040;">*</span> filepath<span style="color: #008000;">&#41;</span> <span style="color: #008000;">&#123;</span>
+  write<span style="color: #008000;">&#40;</span>filepath, <span style="color: #FF0000;">&quot;image/bmp&quot;</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+<span style="color: #008000;">&#125;</span>
+&nbsp;
+<span style="color: #ff0000; font-style: italic;">/* write_gif takes a filepath and writes the bitmap data as a gif into it. */</span>
+<span style="color: #0000ff;">void</span> Screenshot<span style="color: #008080;">::</span><span style="color: #007788;">write_gif</span><span style="color: #008000;">&#40;</span><span style="color: #0000ff;">const</span> <span style="color: #0000ff;">char</span><span style="color: #000040;">*</span> filepath<span style="color: #008000;">&#41;</span> <span style="color: #008000;">&#123;</span>
+  write<span style="color: #008000;">&#40;</span>filepath, <span style="color: #FF0000;">&quot;image/gif&quot;</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+<span style="color: #008000;">&#125;</span>
+&nbsp;
+<span style="color: #ff0000; font-style: italic;">/* write_tiff takes a filepath and writes the bitmap data as a tiff into it. */</span>
+<span style="color: #0000ff;">void</span> Screenshot<span style="color: #008080;">::</span><span style="color: #007788;">write_tiff</span><span style="color: #008000;">&#40;</span><span style="color: #0000ff;">const</span> <span style="color: #0000ff;">char</span><span style="color: #000040;">*</span> filepath<span style="color: #008000;">&#41;</span> <span style="color: #008000;">&#123;</span>
+  write<span style="color: #008000;">&#40;</span>filepath, <span style="color: #FF0000;">&quot;image/tiff&quot;</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+<span style="color: #008000;">&#125;</span>
+&nbsp;
+<span style="color: #ff0000; font-style: italic;">/* write takes a filepath and encoder type (as char*) and writes the bitmap data of this screenshot into the specified path */</span>
+<span style="color: #0000ff;">void</span> Screenshot<span style="color: #008080;">::</span><span style="color: #007788;">write</span><span style="color: #008000;">&#40;</span><span style="color: #0000ff;">const</span> <span style="color: #0000ff;">char</span><span style="color: #000040;">*</span> filepath, <span style="color: #0000ff;">const</span> <span style="color: #0000ff;">char</span><span style="color: #000040;">*</span> encoder_type<span style="color: #008000;">&#41;</span><span style="color: #008000;">&#123;</span>
+  <span style="color: #0000dd;">fprintf</span><span style="color: #008000;">&#40;</span><span style="color: #0000ff;">stdout</span>,<span style="color: #FF0000;">&quot;Author: Suny, Mail: message@xieziming.com, Web: http://www.xieziming.com<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+  DeleteFile<span style="color: #008000;">&#40;</span>filepath<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+  Gdiplus<span style="color: #008080;">::</span><span style="color: #007788;">Bitmap</span> bmp<span style="color: #008000;">&#40;</span>_hBitmap,<span style="color: #008000;">&#40;</span>HPALETTE<span style="color: #008000;">&#41;</span><span style="color: #0000dd;">0</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+  CLSID pngClsid<span style="color: #008080;">;</span>
+  <span style="color: #0000ff;">wchar_t</span><span style="color: #000040;">*</span> encoder_type_wide <span style="color: #000080;">=</span> char_str_to_wchar<span style="color: #008000;">&#40;</span>encoder_type<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+  get_encoder_clsid<span style="color: #008000;">&#40;</span>encoder_type_wide, <span style="color: #000040;">&amp;</span>pngClsid<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+&nbsp;
+  <span style="color: #0000ff;">wchar_t</span><span style="color: #000040;">*</span> filepath_wide <span style="color: #000080;">=</span> char_str_to_wchar<span style="color: #008000;">&#40;</span>filepath<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+  bmp.<span style="color: #007788;">Save</span><span style="color: #008000;">&#40;</span>filepath_wide,<span style="color: #000040;">&amp;</span>pngClsid,<span style="color: #0000ff;">NULL</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+  <span style="color: #0000dd;">delete</span><span style="color: #008000;">&#91;</span><span style="color: #008000;">&#93;</span> filepath_wide<span style="color: #008080;">;</span>
+  <span style="color: #0000dd;">delete</span><span style="color: #008000;">&#91;</span><span style="color: #008000;">&#93;</span> encoder_type_wide<span style="color: #008080;">;</span>
+<span style="color: #008000;">&#125;</span>
+&nbsp;
+<span style="color: #ff0000; font-style: italic;">/* Some Gdiplus functions take wide char arrays; provides a conversion from char[] to wchar_t[] */</span>
+<span style="color: #0000ff;">wchar_t</span><span style="color: #000040;">*</span> char_str_to_wchar<span style="color: #008000;">&#40;</span><span style="color: #0000ff;">const</span> <span style="color: #0000ff;">char</span> <span style="color: #000040;">*</span> in<span style="color: #008000;">&#41;</span> <span style="color: #008000;">&#123;</span>
+  <span style="color: #0000ff;">size_t</span> size <span style="color: #000080;">=</span> <span style="color: #0000dd;">strlen</span><span style="color: #008000;">&#40;</span>in<span style="color: #008000;">&#41;</span><span style="color: #000040;">+</span><span style="color: #0000dd;">1</span><span style="color: #008080;">;</span>
+  <span style="color: #0000ff;">wchar_t</span><span style="color: #000040;">*</span> out <span style="color: #000080;">=</span> <span style="color: #0000dd;">new</span> <span style="color: #0000ff;">wchar_t</span><span style="color: #008000;">&#91;</span>size<span style="color: #008000;">&#93;</span><span style="color: #008080;">;</span>
+  mbstowcs<span style="color: #008000;">&#40;</span>out, in, size<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+  <span style="color: #0000ff;">return</span> out<span style="color: #008080;">;</span>
+<span style="color: #008000;">&#125;</span>
+&nbsp;
+<span style="color: #ff0000; font-style: italic;">/* GetEncoderClsid is a helper method for write_png
+  --&gt; it returns an encoder class id that Gdiplus needs to save a Bitmap in another format.
+  Borrowed from MSDN */</span>
+<span style="color: #0000ff;">int</span> get_encoder_clsid<span style="color: #008000;">&#40;</span><span style="color: #0000ff;">const</span> WCHAR<span style="color: #000040;">*</span> format, CLSID<span style="color: #000040;">*</span> pClsid<span style="color: #008000;">&#41;</span><span style="color: #008000;">&#123;</span>
+  UINT  num <span style="color: #000080;">=</span> <span style="color: #0000dd;">0</span><span style="color: #008080;">;</span>          <span style="color: #666666;">// number of image encoders</span>
+  UINT  size <span style="color: #000080;">=</span> <span style="color: #0000dd;">0</span><span style="color: #008080;">;</span>         <span style="color: #666666;">// size of the image encoder array in bytes</span>
+&nbsp;
+  ImageCodecInfo<span style="color: #000040;">*</span> pImageCodecInfo <span style="color: #000080;">=</span> <span style="color: #0000ff;">NULL</span><span style="color: #008080;">;</span>
+&nbsp;
+  GetImageEncodersSize<span style="color: #008000;">&#40;</span><span style="color: #000040;">&amp;</span>num, <span style="color: #000040;">&amp;</span>size<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+  <span style="color: #0000ff;">if</span><span style="color: #008000;">&#40;</span>size <span style="color: #000080;">==</span> <span style="color: #0000dd;">0</span><span style="color: #008000;">&#41;</span>
+    <span style="color: #0000ff;">return</span> <span style="color: #000040;">-</span><span style="color: #0000dd;">1</span><span style="color: #008080;">;</span>  <span style="color: #666666;">// Failure</span>
+  <span style="color: #666666;">//fprintf(stderr,&quot;%i Image Encoders\n&quot;, size);</span>
+&nbsp;
+  pImageCodecInfo <span style="color: #000080;">=</span> <span style="color: #008000;">&#40;</span>ImageCodecInfo<span style="color: #000040;">*</span><span style="color: #008000;">&#41;</span><span style="color: #008000;">&#40;</span><span style="color: #0000dd;">malloc</span><span style="color: #008000;">&#40;</span>size<span style="color: #008000;">&#41;</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+  <span style="color: #0000ff;">if</span><span style="color: #008000;">&#40;</span>pImageCodecInfo <span style="color: #000080;">==</span> <span style="color: #0000ff;">NULL</span><span style="color: #008000;">&#41;</span>
+    <span style="color: #0000ff;">return</span> <span style="color: #000040;">-</span><span style="color: #0000dd;">1</span><span style="color: #008080;">;</span>  <span style="color: #666666;">// Failure</span>
+&nbsp;
+  GetImageEncoders<span style="color: #008000;">&#40;</span>num, size, pImageCodecInfo<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+  <span style="color: #666666;">//fprintf(stderr,&quot;Got image encoders\n&quot;);</span>
+&nbsp;
+  <span style="color: #0000ff;">for</span><span style="color: #008000;">&#40;</span>UINT j <span style="color: #000080;">=</span> <span style="color: #0000dd;">0</span><span style="color: #008080;">;</span> j <span style="color: #000080;">&lt;</span> num<span style="color: #008080;">;</span> <span style="color: #000040;">++</span>j<span style="color: #008000;">&#41;</span><span style="color: #008000;">&#123;</span>
+    <span style="color: #0000ff;">if</span><span style="color: #008000;">&#40;</span> wcscmp<span style="color: #008000;">&#40;</span>pImageCodecInfo<span style="color: #008000;">&#91;</span>j<span style="color: #008000;">&#93;</span>.<span style="color: #007788;">MimeType</span>, format<span style="color: #008000;">&#41;</span> <span style="color: #000080;">==</span> <span style="color: #0000dd;">0</span> <span style="color: #008000;">&#41;</span><span style="color: #008000;">&#123;</span>
+      <span style="color: #000040;">*</span>pClsid <span style="color: #000080;">=</span> pImageCodecInfo<span style="color: #008000;">&#91;</span>j<span style="color: #008000;">&#93;</span>.<span style="color: #007788;">Clsid</span><span style="color: #008080;">;</span>
+      <span style="color: #0000dd;">free</span><span style="color: #008000;">&#40;</span>pImageCodecInfo<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+      <span style="color: #0000ff;">return</span> j<span style="color: #008080;">;</span>  <span style="color: #666666;">// Success</span>
+    <span style="color: #008000;">&#125;</span>
+  <span style="color: #008000;">&#125;</span>
+&nbsp;
+  <span style="color: #0000dd;">free</span><span style="color: #008000;">&#40;</span>pImageCodecInfo<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+  <span style="color: #0000ff;">return</span> <span style="color: #000040;">-</span><span style="color: #0000dd;">1</span><span style="color: #008080;">;</span>
+<span style="color: #008000;">&#125;</span></pre></div></div>
+
+</div><div id="paginate"><label id="li_1" onclick="javascript:show_page(1,5,this);" style="font-size:30px;font-weight:bold" onmouseover="this.style.cursor='pointer'">1</label><label id="li_2" onclick="javascript:show_page(2,5,this);"  onmouseover="this.style.cursor='pointer'">2</label><label id="li_3" onclick="javascript:show_page(3,5,this);"  onmouseover="this.style.cursor='pointer'">3</label><label id="li_4" onclick="javascript:show_page(4,5,this);"  onmouseover="this.style.cursor='pointer'">4</label><label id="li_5" onclick="javascript:show_page(5,5,this);"  onmouseover="this.style.cursor='pointer'">5</label></div> 
+			<div align="center">1 month ago, this page was being read. </div>
+			<p class="tags"><a href="http://www.xieziming.com/tag/c" rel="tag">C++</a>, <a href="http://www.xieziming.com/tag/yuan-chuang" rel="tag">原创</a><br /></p>  
+    </div><!-- /entry -->                                   
+		<div class="postbottom"></div>		                              
+		</div><!-- /post -->	
+
+<div class="postrelated">
+			<table width="100%" >				
+
+					<tr><td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/7121.html" rel="bookmark" title="培根+黄瓜">培根+黄瓜</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/5980.html" rel="bookmark" title="紫薯炒肉">紫薯炒肉</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/9120.html" rel="bookmark" title="红专厂 · 虫虫 （二）">红专厂 &middot; 虫...</a></td>
+
+				<td align="right" class="dashedline_related">★<a href="http://www.xieziming.com/archives/5952.html" rel="bookmark" title="绿踪林">绿踪林</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/7772.html" rel="bookmark" title="2012广州车展（二）">2012广州车展（二...</a></td>
+
+					<td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/7774.html" rel="bookmark" title="2012广州车展（三）">2012广州车展（三...</a></td>
+
+					<td align="left" class="dashedline_related">★<a href="http://www.xieziming.com/archives/9118.html" rel="bookmark" title="红专厂 · 虫虫 （一）">红专厂 &middot; 虫虫 （一）</a></td>
+
+				<td align="right" class="dashedline_related"><a href="http://www.xieziming.com/archives/7116.html" rel="bookmark" title="混搭菜">混搭菜</a></td></tr>
+
+					<tr><td align="left" class="dashedline_related"><a href="http://www.xieziming.com/archives/7769.html" rel="bookmark" title="2012广州车展（一）">2012广州车展（...</a></td>
+
+		</table>
+</div>
+
+		<div id="comments">
+
+<!-- START COMMENT FORMS -->
+
+
+		</div><!--/comments-->		
+
+</div><!-- /content -->
+<div id="sidebar">			
+			<a class="subscribe" href="http://www.xieziming.com/feed" title="Posts RSS">Subscribe</a>			
+			<div id="search">	
+	<form name="searchform" id="searchform" method="get" action="http://www.xieziming.com/index.php">
+		<input class="text" type="text" name="s" id="s" value=""/>
+		<input class="submit" type="image" src="http://www.xieziming.com/wp-content/themes/ziming/img/submit.jpg" value="search" />
+	</form>	
+</div><!-- /search -->			
+			<div id="widgets">			
+			<div class="widget"><h3>Calendar</h3>
+<table id="wp-calendar">
+  									<caption>December 2016</caption>
+  									<thead>
+                    <tr><th scope="col" title="S">S</th><th scope="col" title="M">M</th><th scope="col" title="T">T</th><th scope="col" title="W">W</th><th scope="col" title="T">T</th><th scope="col" title="F">F</th><th scope="col" title="S">S</th></tr></thead><tbody><tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>1</td><td>2</td><td>3</td></tr><tr><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td></tr><tr><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td></tr><tr><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">18<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">《血战钢锯岭》</span><br/><span class="time" style="color:#000000; " > Time : 21:18 - 23:28</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">晚上和小锅去看，蛮感人的。吃完去沙湾吃猪杂粥，应该是我在那吃到的最新鲜的一次了。</p></span></a></span></td><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">19<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">CentOS</span><br/><span class="time" style="color:#000000; " > Time : 14:11 - 18:11</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">终于有点时间来把那盒子的win7转成CentOS来做server。配置vsftp花了我太多的时间。。。</p></span></a></span></td><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td></tr><tr><td>25</td><td>26</td><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td></tr><tr><td colspan="3" id="prev"><a href="http://www.xieziming.com/archives/8517.html?month=nov&yr=2016">&laquo; Prev</a></td><td colspan="4" id="next"><a href="http://www.xieziming.com/archives/8517.html?month=jan&yr=2017">Next &raquo;</a></td></tr></tbody></table>
+<div class="widgetbottom"></div></div><!--/widget-->				
+					      		<div class="widget">
+ 							<h3>Recent Posts</h3>
+							<ul>
+           				<li><a href="http://www.xieziming.com/archives/9579.html" class="dashedline" title="闽南 · 泉州">闽南 &middot; 泉州</a></li><li><a href="http://www.xieziming.com/archives/9578.html" class="dashedline" title="顺化 · HUE">顺化 &middot; HUE</a></li><li><a href="http://www.xieziming.com/archives/9577.html" class="dashedline" title="会安 · 春卷">会安 &middot; 春卷</a></li><li><a href="http://www.xieziming.com/archives/9576.html" class="dashedline" title="会安 · 夜灯">会安 &middot; 夜灯</a></li><li><a href="http://www.xieziming.com/archives/9575.html" class="dashedline" title="会安古镇">会安古镇</a></li><li><a href="http://www.xieziming.com/archives/9573.html" class="dashedline" title="岘港">岘港</a></li><li><a href="http://www.xieziming.com/archives/9535.html" class="dashedline" title="罗马">罗马</a></li><li><a href="http://www.xieziming.com/archives/9534.html" class="dashedline" title="卢浮宫">卢浮宫</a></li>						
+							</ul>
+      				<div class="widgetbottom"></div>
+	    		</div>
+	    			        
+        	      		<div class="widget">
+ 							<h3>Rand Posts</h3>
+							<ul>
+      						<li><a href="http://www.xieziming.com/archives/2220.html" class="dashedline" title="软件项目开发流程">软件项目开发流程</a></li><li><a href="http://www.xieziming.com/archives/6907.html" class="dashedline" title="那些公式">那些公式</a></li><li><a href="http://www.xieziming.com/archives/9284.html" class="dashedline" title="黄姚古镇(一)">黄姚古镇(一)</a></li><li><a href="http://www.xieziming.com/archives/4849.html" class="dashedline" title="紫禁城（二）">紫禁城（二）</a></li><li><a href="http://www.xieziming.com/archives/1324.html" class="dashedline" title="对银行无语">对银行无语</a></li><li><a href="http://www.xieziming.com/archives/288.html" class="dashedline" title="记录 & 分享">记录 &amp; 分享</a></li><li><a href="http://www.xieziming.com/archives/7145.html" class="dashedline" title="Shell (一)">Shell (一)</a></li><li><a href="http://www.xieziming.com/archives/4912.html" class="dashedline" title="伏尔加庄园">伏尔加庄园</a></li>	
+							</ul>
+        			<div class="widgetbottom"></div>
+					</div>                 
+          	                       
+			</div><!-- /widgets -->			                       
+</div><!-- /sidebar --></div><!-- /main -->
+<div id="footer">
+<p align="left">© <a href="http://www.miitbeian.gov.cn" target="_blank"> 明 · 明 · 童 · 鞋</a></p>
+<!--74 queries in 2.652 seconds.-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?c2e18b43ec905e3c4ea82c1b57537223";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</div><!-- /footer -->
+</div><!-- /container -->
+<script type='text/javascript' src='http://www.xieziming.com/wp-includes/js/wp-embed.min.js?ver=4.7'></script>
+</body>
+</html>
