@@ -96,14 +96,14 @@ img.emoji {
 <div id="content">	
 	<div class="post" id="post">			
 		<div class="entry">
-			<span class="date"><a href="http://www.xieziming.com/archives/7661.html" title="Permalink to WebDriver（一）">WebDriver（一）</a> , In <a href="http://www.xieziming.com/topic/testing" rel="category tag">测试</a>  , Views: 4674 , Comments: <a href="http://www.xieziming.com/archives/7661.html#comments">1</a> , Index: 4757 , 14 November 2012</span>
+			<span class="date"><a href="http://www.xieziming.com/archives/7661.html" title="Permalink to WebDriver（一）">WebDriver（一）</a> , In <a href="http://www.xieziming.com/topic/testing" rel="category tag">测试</a>  , Views: 4674 , Comments: <a href="http://www.xieziming.com/archives/7661.html#comments">1</a> , Index: 4758 , 14 November 2012</span>
 <p>WebDriver与之前Selenium的JS注入实现不同，直接利用了浏览器native support来操作浏览器。所以对于不同平台，不同的浏览器，必须依赖一个特定的浏览器的native component来实现把WebDriver API的调用转化为浏览器的native invoke。</p>
 <p>在我们new一个WebDriver的过程中，Selenium首先会确认浏览器的native component是否存在可用而且版本匹配。接着就在目标浏览器里启动一整套Web Service，这套Web Service使用了Selenium自己设计定义的协议，名字叫做<strong>The WebDriver Wire Protocol</strong>。这套协议非常之强大，几乎可以操作浏览器做任何事情，包括打开、关闭、最大化、最小化、元素定位、元素点击、上传文件等等等等。</p>
 <p>WebDriver Wire协议是通用的，也就是说不管是FirefoxDriver还是ChromeDriver，启动之后都会在某一个端口启动基于这套协议的Web Service。例如FirefoxDriver初始化成功之后，默认会从http://localhost:7055开始，而ChromeDriver则大概是http://localhost:46350之类的。接下来，我们调用WebDriver的任何API，都需要借助一个<strong>ComandExecutor</strong>发送一个命令，实际上是一个HTTP request给46350端口上的Web Service。在我们的HTTP request的body中，会以WebDriver Wire协议规定的<strong>JSON</strong>格式的字符串来告诉Selenium我们希望浏览器接下来做什么事情。</p>
 <p>不同浏览器的WebDriver子类，都需要依赖特定的浏览器原生组件，例如Firefox就需要一个add-on名字叫webdriver.xpi。而IE的话就需要用到一个dll文件来转化Web Service的命令为浏览器native的调用。</p>
 		</div><!-- /entry -->		
 		<div class="entry">
-			<span class="date"><a href="http://www.xieziming.com/archives/7666.html" title="Permalink to RESTful">RESTful</a> , In <a href="http://www.xieziming.com/topic/testing" rel="category tag">测试</a>  , Views: 866 , Comments: <a href="http://www.xieziming.com/archives/7666.html#respond">0</a> , Index: 2921 , 11 November 2012</span>
+			<span class="date"><a href="http://www.xieziming.com/archives/7666.html" title="Permalink to RESTful">RESTful</a> , In <a href="http://www.xieziming.com/topic/testing" rel="category tag">测试</a>  , Views: 866 , Comments: <a href="http://www.xieziming.com/archives/7666.html#respond">0</a> , Index: 2922 , 11 November 2012</span>
 <p><strong>资源（Resources）</strong></p>
 <p>所谓&#8221;资源&#8221;，就是网络上的一个实体，或者说是网络上的一个具体信息。它可以是一段文本、一张图片、一首歌曲、一种服务，总之就是一个具体的实在。你可以用一个URI（统一资源定位符）指向它，每种资源对应一个特定的URI。要获取这个资源，访问它的URI就可以，因此URI就成了每一个资源的地址或独一无二的识别符。</p>
 <p><strong>表现层（Representation）</strong><br />
@@ -114,7 +114,7 @@ img.emoji {
 <p>客户端用到的手段，只能是HTTP协议。具体来说，就是HTTP协议里面，四个表示操作方式的动词：GET、POST、PUT、DELETE。它们分别对应四种基本操作：GET用来获取资源，POST用来新建资源（也可以用于更新资源），PUT用来更新资源，DELETE用来删除资源。</p>
 		</div><!-- /entry -->		
 		<div class="entry">
-			<span class="date"><a href="http://www.xieziming.com/archives/7620.html" title="Permalink to 遍历windows窗口控件">遍历windows窗口控件</a> , In <a href="http://www.xieziming.com/topic/testing" rel="category tag">测试</a>  , Views: 2366 , Comments: <a href="http://www.xieziming.com/archives/7620.html#respond">0</a> , Index: 6044 , 11 November 2012</span>
+			<span class="date"><a href="http://www.xieziming.com/archives/7620.html" title="Permalink to 遍历windows窗口控件">遍历windows窗口控件</a> , In <a href="http://www.xieziming.com/topic/testing" rel="category tag">测试</a>  , Views: 2366 , Comments: <a href="http://www.xieziming.com/archives/7620.html#respond">0</a> , Index: 6045 , 11 November 2012</span>
 <p><strong>FindWindowEx ：</strong></p>
 
 <div class="wp_code"><div class="pre"><pre class="cpp" style="font-family:'Times New Roman',Garamond, Times;">HWND FindWindowEx<span style="color: #008000;">&#40;</span>
@@ -158,18 +158,18 @@ img.emoji {
 	<div class="widget">
     <h3>Comments</h3>
     <ul>
-<li><a href="http://www.xieziming.com/dev/post-views#comment-102651" class="dashedline" title="hi dear, i wanna use">hi dear, i...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-102425" class="dashedline" title="You need to clear all">You need t...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-102403" class="dashedline" title="how can i reset _all_data?
+<li><a href="http://www.xieziming.com/dev/post-views#comment-102651" class="dashedline" title="hi dear, i wanna use">hi dear, i wann...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-102425" class="dashedline" title="You need to clear all">You need to cl...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-102403" class="dashedline" title="how can i reset _all_data?
 
-best">how can i reset...</a></li><li><a href="http://www.xieziming.com/calendar#comment-101819" class="dashedline" title="不错呐">不错呐</a></li><li><a href="http://www.xieziming.com/archives/9213.html#comment-101814" class="dashedline" title="我就是随便看看">我就是随便看看</a></li><li><a href="http://www.xieziming.com/archives/6717.html#comment-101385" class="dashedline" title="Is the same plagin for">Is the same p...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-98090" class="dashedline" title="install this plugin on wordpress">install this...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-89841" class="dashedline" title="Hello Dear Suny,
+best">how can i re...</a></li><li><a href="http://www.xieziming.com/calendar#comment-101819" class="dashedline" title="不错呐">不错呐</a></li><li><a href="http://www.xieziming.com/archives/9213.html#comment-101814" class="dashedline" title="我就是随便看看">我就是随便看看</a></li><li><a href="http://www.xieziming.com/archives/6717.html#comment-101385" class="dashedline" title="Is the same plagin for">Is the sam...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-98090" class="dashedline" title="install this plugin on wordpress">install this...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-89841" class="dashedline" title="Hello Dear Suny,
 
-I install your">Hello Dear S...</a></li>    </ul>
+I install your">Hello Dear...</a></li>    </ul>
     <div class="widgetbottom"></div>
   </div> 
 	
 	<div class="widget">
  		<h3>Rand Posts</h3>
 		<ul>
-<li><a href="http://www.xieziming.com/archives/2847.html" class="dashedline" title="这个夏天">这个夏天</a></li><li><a href="http://www.xieziming.com/archives/9508.html" class="dashedline" title="布拉格（三）">布拉格（三）</a></li><li><a href="http://www.xieziming.com/archives/251.html" class="dashedline" title="醉了">醉了</a></li><li><a href="http://www.xieziming.com/archives/8940.html" class="dashedline" title="新加坡">新加坡</a></li><li><a href="http://www.xieziming.com/archives/8672.html" class="dashedline" title="西塘夜（三）">西塘夜（三）</a></li><li><a href="http://www.xieziming.com/archives/247.html" class="dashedline" title="各有特色的单身公寓">各有特色的单身公寓</a></li><li><a href="http://www.xieziming.com/archives/9487.html" class="dashedline" title="UI Automation通过相对位置来进行对象识别">UI Automat...</a></li><li><a href="http://www.xieziming.com/archives/8925.html" class="dashedline" title="印尼雅加达">印尼雅加达</a></li>	
+<li><a href="http://www.xieziming.com/archives/500.html" class="dashedline" title="What is QQ">What is QQ</a></li><li><a href="http://www.xieziming.com/archives/3638.html" class="dashedline" title="真的要开始奋斗了！">真的要开始奋斗了！</a></li><li><a href="http://www.xieziming.com/archives/43.html" class="dashedline" title="Together Again">Together Ag...</a></li><li><a href="http://www.xieziming.com/archives/129.html" class="dashedline" title="谈谈我们部门">谈谈我们部门</a></li><li><a href="http://www.xieziming.com/archives/4771.html" class="dashedline" title="大栅栏">大栅栏</a></li><li><a href="http://www.xieziming.com/archives/6575.html" class="dashedline" title="同事">同事</a></li><li><a href="http://www.xieziming.com/archives/7774.html" class="dashedline" title="2012广州车展（三）">2012广州车展（三）</a></li><li><a href="http://www.xieziming.com/archives/3644.html" class="dashedline" title="如风般飞扬">如风般飞扬</a></li>	
 		</ul>
   	<div class="widgetbottom"></div>
 	</div>
@@ -178,7 +178,7 @@ I install your">Hello Dear S...</a></li>    </ul>
 </div><!-- /sidebar --></div><!-- /main -->
 <div id="footer">
 <p align="left">© <a href="http://www.xieziming.com/about" target="_blank"> 明 · 明 · 童 · 鞋</a></p>
-<!--86 queries in 11.837 seconds.-->
+<!--86 queries in 11.732 seconds.-->
 <script>
 var _hmt = _hmt || [];
 (function() {

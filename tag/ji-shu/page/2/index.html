@@ -96,7 +96,7 @@ img.emoji {
 <div id="content">	
 	<div class="post" id="post">			
 		<div class="entry">
-			<span class="date"><a href="http://www.xieziming.com/archives/7150.html" title="Permalink to Shell (二)">Shell (二)</a> , In <a href="http://www.xieziming.com/topic/ji-shu-wei-ji" rel="category tag">技术维基</a>  , Views: 621 , Comments: <a href="http://www.xieziming.com/archives/7150.html#respond">0</a> , Index: 2627 , 19 May 2010</span>
+			<span class="date"><a href="http://www.xieziming.com/archives/7150.html" title="Permalink to Shell (二)">Shell (二)</a> , In <a href="http://www.xieziming.com/topic/ji-shu-wei-ji" rel="category tag">技术维基</a>  , Views: 621 , Comments: <a href="http://www.xieziming.com/archives/7150.html#respond">0</a> , Index: 2628 , 19 May 2010</span>
 <p>先说一下，为何要用( )或{ }好了。许多时候，我们在shell操作上，需要在一定条件下一次执行多个命令，也就是说，要么不执行，要么就全执行，而不是每次依序的判断是否要执行下一个命令。或是，需要从一些命令执行优先次顺中得到豁免，如算术的2*(3+4)那样&#8230;<br />
 这时候，我们就可引入&#8221;命令群组&#8221;(command group)的概念：将多个命令集中处理。</p>
 <p>在shell command line中，一般人或许不太计较( )与{ }这两对符号的差异，虽然两者都可将多个命令作群组化处理，但若从技术细节上，却是很不一样的：</p>
@@ -107,7 +107,7 @@ img.emoji {
 <p>我这里只想补充一个概念，就是function。所谓的function，就是用一个名字去命名一个 command group，然后再调用这个名字去执行command group。从non-namedcommand group来推断，大概你也可以猜到我要说的是{ }了吧？</p>
 		</div><!-- /entry -->		
 		<div class="entry">
-			<span class="date"><a href="http://www.xieziming.com/archives/7145.html" title="Permalink to Shell (一)">Shell (一)</a> , In <a href="http://www.xieziming.com/topic/ji-shu-wei-ji" rel="category tag">技术维基</a>  , Views: 667 , Comments: <a href="http://www.xieziming.com/archives/7145.html#respond">0</a> , Index: 2817 , 19 May 2010</span>
+			<span class="date"><a href="http://www.xieziming.com/archives/7145.html" title="Permalink to Shell (一)">Shell (一)</a> , In <a href="http://www.xieziming.com/topic/ji-shu-wei-ji" rel="category tag">技术维基</a>  , Views: 667 , Comments: <a href="http://www.xieziming.com/archives/7145.html#respond">0</a> , Index: 2818 , 19 May 2010</span>
 <p>所谓环境变量其实就是那些会传给子进程的变量。简单而言，&#8221;遗传性&#8221;就是区分本地变量与环境变量的决定性指标。然而，从遗传的角度来看，我们也不难发现环境变量的另一个重要特征：环境变量只能从父进程到子进程单向继承。换句话说：在子进程中的环境如何变更，均不会影响父进程的环境。</p>
 <p>接下来，再让我们了解一下命令脚本(shell script)的概念。所谓的shell script讲起来很简单，就是将你平时在shell prompt后所输入的多行command line依序写入一个文件去而已。其中再加上一些条件判断、互动界面、参数运用、函数调用、等等技巧，得以让script更加&#8221;聪明&#8221;的执行，但若撇开这些技巧不谈，我们真的可以简单的看成script只不过依次执行预先写好的命令行而已。</p>
 <p>再结合以上两个概念(process + script)，那应该就不难理解如下这句话的意思了：正常来说，当我们执行一个shell script时，其实是先产生一个sub-shell的子进程，然后sub-shell再去产生命令行的子进程。然则，那让我们回到本章开始时所提到的例子再从新思考：<br />
@@ -118,7 +118,7 @@ cd /etc/aa/bb/cc可以执行，但是把这条命令写入shell时shell不执行
 <p>所谓source就是让script在当前shell内执行、而不是产生一个sub-shell来执行。由于所有执行结果均于当前shell内完成，若script的环境有所改变，当然也会改变当前环境了因此，只要我们要将原本单独输入的script命令行变成source命令的参数，就可轻易解决前例提到的问题了。</p>
 		</div><!-- /entry -->		
 		<div class="entry">
-			<span class="date"><a href="http://www.xieziming.com/archives/4302.html" title="Permalink to Ruby（三）">Ruby（三）</a> , In <a href="http://www.xieziming.com/topic/coding" rel="category tag">程序</a>  , Views: 735 , Comments: <a href="http://www.xieziming.com/archives/4302.html#respond">0</a> , Index: 4132 , 23 April 2010</span>
+			<span class="date"><a href="http://www.xieziming.com/archives/4302.html" title="Permalink to Ruby（三）">Ruby（三）</a> , In <a href="http://www.xieziming.com/topic/coding" rel="category tag">程序</a>  , Views: 735 , Comments: <a href="http://www.xieziming.com/archives/4302.html#respond">0</a> , Index: 4133 , 23 April 2010</span>
 <p>比较运算符<br />
 &#038;&#038;    并且<br />
 < =>    比较（例如：x< => y，如果x大于y返回1，x小于y返回-1，x等于y 返回0）<br />
@@ -163,9 +163,9 @@ young</p>
 	<div class="widget">
     <h3>Comments</h3>
     <ul>
-<li><a href="http://www.xieziming.com/dev/post-views#comment-102651" class="dashedline" title="hi dear, i wanna use">hi dear, i ...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-102425" class="dashedline" title="You need to clear all">You need t...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-102403" class="dashedline" title="how can i reset _all_data?
+<li><a href="http://www.xieziming.com/dev/post-views#comment-102651" class="dashedline" title="hi dear, i wanna use">hi dear, i wa...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-102425" class="dashedline" title="You need to clear all">You need to c...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-102403" class="dashedline" title="how can i reset _all_data?
 
-best">how can i res...</a></li><li><a href="http://www.xieziming.com/calendar#comment-101819" class="dashedline" title="不错呐">不错呐</a></li><li><a href="http://www.xieziming.com/archives/9213.html#comment-101814" class="dashedline" title="我就是随便看看">我就是随便看看</a></li><li><a href="http://www.xieziming.com/archives/6717.html#comment-101385" class="dashedline" title="Is the same plagin for">Is the same ...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-98090" class="dashedline" title="install this plugin on wordpress">install th...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-89841" class="dashedline" title="Hello Dear Suny,
+best">how can i rese...</a></li><li><a href="http://www.xieziming.com/calendar#comment-101819" class="dashedline" title="不错呐">不错呐</a></li><li><a href="http://www.xieziming.com/archives/9213.html#comment-101814" class="dashedline" title="我就是随便看看">我就是随便看看</a></li><li><a href="http://www.xieziming.com/archives/6717.html#comment-101385" class="dashedline" title="Is the same plagin for">Is the sam...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-98090" class="dashedline" title="install this plugin on wordpress">install th...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-89841" class="dashedline" title="Hello Dear Suny,
 
 I install your">Hello Dear Suny...</a></li>    </ul>
     <div class="widgetbottom"></div>
@@ -174,7 +174,7 @@ I install your">Hello Dear Suny...</a></li>    </ul>
 	<div class="widget">
  		<h3>Rand Posts</h3>
 		<ul>
-<li><a href="http://www.xieziming.com/archives/2156.html" class="dashedline" title="晨晨的小糖水">晨晨的小糖水</a></li><li><a href="http://www.xieziming.com/archives/3990.html" class="dashedline" title="上海城隍庙灯会">上海城隍庙灯会</a></li><li><a href="http://www.xieziming.com/archives/1538.html" class="dashedline" title="想照张彩色照片">想照张彩色照片</a></li><li><a href="http://www.xieziming.com/archives/2529.html" class="dashedline" title="DAS、NAS与SAN">DAS、NAS与SAN</a></li><li><a href="http://www.xieziming.com/archives/9188.html" class="dashedline" title="印度 · 火车 & 地铁">印度 &middot; 火车 &amp; 地铁</a></li><li><a href="http://www.xieziming.com/archives/4869.html" class="dashedline" title="北京798艺术区">北京798艺术区</a></li><li><a href="http://www.xieziming.com/archives/4153.html" class="dashedline" title="西湖">西湖</a></li><li><a href="http://www.xieziming.com/archives/6938.html" class="dashedline" title="倔强成长">倔强成长</a></li>	
+<li><a href="http://www.xieziming.com/archives/8404.html" class="dashedline" title="牛背山">牛背山</a></li><li><a href="http://www.xieziming.com/archives/198.html" class="dashedline" title="可怜的人儿">可怜的人儿</a></li><li><a href="http://www.xieziming.com/archives/9171.html" class="dashedline" title="印度 · 瓦拉纳西 · 人物">印度 &middot; 瓦拉纳西 &middot; 人...</a></li><li><a href="http://www.xieziming.com/archives/7999.html" class="dashedline" title="越南 · 精选">越南 &middot; 精选</a></li><li><a href="http://www.xieziming.com/archives/6094.html" class="dashedline" title="白哈巴">白哈巴</a></li><li><a href="http://www.xieziming.com/archives/9563.html" class="dashedline" title="佛罗伦萨（二）">佛罗伦萨（二）</a></li><li><a href="http://www.xieziming.com/archives/9573.html" class="dashedline" title="岘港">岘港</a></li><li><a href="http://www.xieziming.com/archives/8769.html" class="dashedline" title="日本拉面">日本拉面</a></li>	
 		</ul>
   	<div class="widgetbottom"></div>
 	</div>
@@ -183,7 +183,7 @@ I install your">Hello Dear Suny...</a></li>    </ul>
 </div><!-- /sidebar --></div><!-- /main -->
 <div id="footer">
 <p align="left">© <a href="http://www.xieziming.com/about" target="_blank"> 明 · 明 · 童 · 鞋</a></p>
-<!--85 queries in 16.728 seconds.-->
+<!--85 queries in 16.017 seconds.-->
 <script>
 var _hmt = _hmt || [];
 (function() {

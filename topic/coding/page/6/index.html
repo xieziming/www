@@ -96,7 +96,7 @@ img.emoji {
 <div id="content">	
 	<div class="post" id="post">			
 		<div class="entry">
-			<span class="date"><a href="http://www.xieziming.com/archives/7481.html" title="Permalink to Java单例模式">Java单例模式</a> , In <a href="http://www.xieziming.com/topic/coding" rel="category tag">程序</a>  , Views: 749 , Comments: <a href="http://www.xieziming.com/archives/7481.html#respond">0</a> , Index: 2636 , 09 October 2012</span>
+			<span class="date"><a href="http://www.xieziming.com/archives/7481.html" title="Permalink to Java单例模式">Java单例模式</a> , In <a href="http://www.xieziming.com/topic/coding" rel="category tag">程序</a>  , Views: 749 , Comments: <a href="http://www.xieziming.com/archives/7481.html#respond">0</a> , Index: 2637 , 09 October 2012</span>
 <p>单例模式的主要目的是希望对象只创建一个实例，并且提供一个全局的访问点。</p>
 
 <div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> SingletonKerriganA <span style="color: #009900;">&#123;</span>  
@@ -113,7 +113,7 @@ img.emoji {
 <p>这个写法我们把四点需求从上往下检测，发现第二点的时候就出了问题，假设这样的场景：两个线程并发调用SingletonKerriganA.getInstance()，假设线程一先判断完instance是否为null，既代码中的line A进入到line B的位置。刚刚判断完毕后，JVM将CPU资源切换给线程二，由于线程一还没执行line B，所以instance仍然是空的，因此线程二执行了new SignletonKerriganA()操作。片刻之后，线程一被重新唤醒，它执行的仍然是new SignletonKerriganA()操作，好了，问题来了，两个Kerrigan谁是李逵谁是李鬼？</p>
 		</div><!-- /entry -->		
 		<div class="entry">
-			<span class="date"><a href="http://www.xieziming.com/archives/7473.html" title="Permalink to Java静态工厂模式">Java静态工厂模式</a> , In <a href="http://www.xieziming.com/topic/coding" rel="category tag">程序</a>  , Views: 2263 , Comments: <a href="http://www.xieziming.com/archives/7473.html#respond">0</a> , Index: 5291 , 08 October 2012</span>
+			<span class="date"><a href="http://www.xieziming.com/archives/7473.html" title="Permalink to Java静态工厂模式">Java静态工厂模式</a> , In <a href="http://www.xieziming.com/topic/coding" rel="category tag">程序</a>  , Views: 2263 , Comments: <a href="http://www.xieziming.com/archives/7473.html#respond">0</a> , Index: 5292 , 08 October 2012</span>
 <p>创建类的实例的最常见的方式是用new语句调用类的构造方法。在这种情况下，程序可以创建类的任意多个实例，每执行一条new语句，都会导致Java虚拟机的堆区中产生一个新的对象。假如类需要进一步封装创建自身实例的细节，并且控制自身实例的数目，那么可以提供静态工厂方法。</p>
 <p>所谓的工厂是提供一个特定的类，这个类是专门用来创建对象实例，客户端无须关心具体的实现。这个模式由三个部分组成。</p>
 <p><strong>抽象类：</strong>它对外提供方法的调用，屏蔽了内部具体的实现。</p>
@@ -125,7 +125,7 @@ img.emoji {
 <p>(3) 静态工厂方法在选择返回类型时有更大的灵活性。使用静态工厂方法，可以通过调用方法时使用不同的参数创建不同类的实例，还可以创建非公有类的对象，这就封装了类的实现细节。</p>
 		</div><!-- /entry -->		
 		<div class="entry">
-			<span class="date"><a href="http://www.xieziming.com/archives/7457.html" title="Permalink to Firefox插件制作">Firefox插件制作</a> , In <a href="http://www.xieziming.com/topic/coding" rel="category tag">程序</a>  , Views: 904 , Comments: <a href="http://www.xieziming.com/archives/7457.html#respond">0</a> , Index: 4261 , 06 October 2012</span>
+			<span class="date"><a href="http://www.xieziming.com/archives/7457.html" title="Permalink to Firefox插件制作">Firefox插件制作</a> , In <a href="http://www.xieziming.com/topic/coding" rel="category tag">程序</a>  , Views: 904 , Comments: <a href="http://www.xieziming.com/archives/7457.html#respond">0</a> , Index: 4262 , 06 October 2012</span>
 <p>1、Firefox 的界面引擎是非常出色的，可以用XML和Javascript来定义界面的布局、属性、动作等。界面的布局XML是Firefox自定义的格式，叫做XUL ，XUL提供对界面各种元素如：按钮、菜单、工具栏等的描述，并将各个界面元素的动作以事件的形式邦定到Javascript. 这一点和HTML十分类似。</p>
 <p>2、Firefox 的插件是一个有特定目录结构和文件的文件夹，打包成zip文件后，再重命名为 XXX.xpi，便成了一个插件。通常的目录文件结构如下：</p>
 
@@ -172,9 +172,9 @@ img.emoji {
 	<div class="widget">
     <h3>Comments</h3>
     <ul>
-<li><a href="http://www.xieziming.com/dev/post-views#comment-102651" class="dashedline" title="hi dear, i wanna use">hi dear, i wan...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-102425" class="dashedline" title="You need to clear all">You need t...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-102403" class="dashedline" title="how can i reset _all_data?
+<li><a href="http://www.xieziming.com/dev/post-views#comment-102651" class="dashedline" title="hi dear, i wanna use">hi dear, i...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-102425" class="dashedline" title="You need to clear all">You need t...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-102403" class="dashedline" title="how can i reset _all_data?
 
-best">how can i res...</a></li><li><a href="http://www.xieziming.com/calendar#comment-101819" class="dashedline" title="不错呐">不错呐</a></li><li><a href="http://www.xieziming.com/archives/9213.html#comment-101814" class="dashedline" title="我就是随便看看">我就是随便看看</a></li><li><a href="http://www.xieziming.com/archives/6717.html#comment-101385" class="dashedline" title="Is the same plagin for">Is the sam...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-98090" class="dashedline" title="install this plugin on wordpress">install this...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-89841" class="dashedline" title="Hello Dear Suny,
+best">how can i re...</a></li><li><a href="http://www.xieziming.com/calendar#comment-101819" class="dashedline" title="不错呐">不错呐</a></li><li><a href="http://www.xieziming.com/archives/9213.html#comment-101814" class="dashedline" title="我就是随便看看">我就是随便看看</a></li><li><a href="http://www.xieziming.com/archives/6717.html#comment-101385" class="dashedline" title="Is the same plagin for">Is the same p...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-98090" class="dashedline" title="install this plugin on wordpress">install this p...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-89841" class="dashedline" title="Hello Dear Suny,
 
 I install your">Hello Dear...</a></li>    </ul>
     <div class="widgetbottom"></div>
@@ -183,7 +183,7 @@ I install your">Hello Dear...</a></li>    </ul>
 	<div class="widget">
  		<h3>Rand Posts</h3>
 		<ul>
-<li><a href="http://www.xieziming.com/archives/3281.html" class="dashedline" title="六月一日 快乐假期纪">六月一日 快乐假期纪</a></li><li><a href="http://www.xieziming.com/archives/6027.html" class="dashedline" title="大美新疆（三）">大美新疆（三）</a></li><li><a href="http://www.xieziming.com/archives/2809.html" class="dashedline" title="心理学中的一些故事">心理学中的一些故事</a></li><li><a href="http://www.xieziming.com/archives/5860.html" class="dashedline" title="珠江">珠江</a></li><li><a href="http://www.xieziming.com/archives/1375.html" class="dashedline" title="变速箱的工作原理">变速箱的工作原理</a></li><li><a href="http://www.xieziming.com/archives/9129.html" class="dashedline" title="斯里兰卡 · Nuwara Eliya">斯里兰卡 &middot; Nuw...</a></li><li><a href="http://www.xieziming.com/archives/259.html" class="dashedline" title="我来湖北做什么">我来湖北做什么</a></li><li><a href="http://www.xieziming.com/archives/1463.html" class="dashedline" title="生财有道， 何为道? ">生财有道， 何为道? </a></li>	
+<li><a href="http://www.xieziming.com/archives/9057.html" class="dashedline" title="大理 · 洱海（一）">大理 &middot; 洱海（一）</a></li><li><a href="http://www.xieziming.com/archives/281.html" class="dashedline" title="答辩压力">答辩压力</a></li><li><a href="http://www.xieziming.com/archives/7333.html" class="dashedline" title="川藏线（精选1）">川藏线（精选1）</a></li><li><a href="http://www.xieziming.com/archives/5852.html" class="dashedline" title="沙面（二）">沙面（二）</a></li><li><a href="http://www.xieziming.com/archives/994.html" class="dashedline" title="3月音乐推荐">3月音乐推荐</a></li><li><a href="http://www.xieziming.com/archives/1300.html" class="dashedline" title="桥接,NAT网络配置详解">桥接,NAT网络配置详解</a></li><li><a href="http://www.xieziming.com/archives/4444.html" class="dashedline" title="琶洲酒店">琶洲酒店</a></li><li><a href="http://www.xieziming.com/archives/432.html" class="dashedline" title="万象街头（四）">万象街头（四）</a></li>	
 		</ul>
   	<div class="widgetbottom"></div>
 	</div>
@@ -192,7 +192,7 @@ I install your">Hello Dear...</a></li>    </ul>
 </div><!-- /sidebar --></div><!-- /main -->
 <div id="footer">
 <p align="left">© <a href="http://www.xieziming.com/about" target="_blank"> 明 · 明 · 童 · 鞋</a></p>
-<!--86 queries in 12.489 seconds.-->
+<!--86 queries in 14.058 seconds.-->
 <script>
 var _hmt = _hmt || [];
 (function() {

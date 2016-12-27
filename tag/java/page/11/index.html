@@ -96,11 +96,11 @@ img.emoji {
 <div id="content">	
 	<div class="post" id="post">			
 		<div class="entry">
-			<span class="date"><a href="http://www.xieziming.com/archives/6795.html" title="Permalink to Java 多线程">Java 多线程</a> , In <a href="http://www.xieziming.com/topic/coding" rel="category tag">程序</a>  , Views: 1045 , Comments: <a href="http://www.xieziming.com/archives/6795.html#respond">0</a> , Index: 4312 , 30 January 2011</span>
+			<span class="date"><a href="http://www.xieziming.com/archives/6795.html" title="Permalink to Java 多线程">Java 多线程</a> , In <a href="http://www.xieziming.com/topic/coding" rel="category tag">程序</a>  , Views: 1045 , Comments: <a href="http://www.xieziming.com/archives/6795.html#respond">0</a> , Index: 4313 , 30 January 2011</span>
 <p>1、在Java程序中，JVM负责线程的调度。线程调度是指按照特定的机制为多个线程分配CPU的使用权。 调度的模式有两种：分时调度和抢占式调度。分时调度是所有线程轮流获得CPU使用权，并平均分配每个线程占用CPU的时间；抢占式调度是根据线程的优先级别来获取CPU的使用权。JVM的线程调度模式采用了抢占式模式。 2、Thread类实际上也是实现了Runnable接口的类。 在启动的多线程的时候，需要先通过Thread类的构造方法Thread(Runnable target) 构造出对象，然后调用Thread对象的start()方法来运行多线程代码。 实际上所有的多线程代码都是通过运行Thread的start()方法来运行的。因此，不管是扩展Thread类还是实现Runnable接口来实现多线程，最终还是通过Thread的对象的API来控制线程的，熟悉Thread类的API是进行多线程编程的基础。 3、JAVA多线程涉及到2个问题，一个是线程的调度，另一个是线程的同步 4、线程的状态有：new、runnable、running、waiting、timed_waiting、blocked、dead 当执行new Thread(Runnable r)后，新创建出来的线程处于new状态，这种线程不可能执行 当执行thread.start()后，线程处于runnable状态，这种情况下只要得到CPU，就可以开始执行了。runnable状态的线程，会接受JVM的调度，进入running状态，但是具体何时会进入这个状态，是随机不可知的 running状态中的线程最为复杂，可能会进入runnable、waiting、timed_waiting、blocked、dead状态： 如果CPU调度给了别的线程，或者执行了Thread.yield()方法，则进入runnable状态，但是也有可能立刻又进入running状态 如果执行了Thread.sleep(long)，或者thread.join(long)，或者在锁对象上调用object.wait(long)方法，则会进入timed_waiting状态 如果执行了thread.join()，或者在锁对象上调用了object.wait()方法，则会进入waiting状态 如果进入了同步方法或者同步代码块，没有获取锁对象的话，则会进入blocked状态 处于waiting状态中的线程，如果是因为thread.join()方法进入等待的话，在目标thread执行完毕之后，会回到runnable状态；如果是因为object.wait()方法进入等待的话，在锁对象执行object.notify()或者object.notifyAll()之后会回到runnable状态 处于timed_waiting状态中的线程，和waiting状态中的差不多，只不过是设定时间到了，就会回到runnable状态 处于blocked状态中的线程，只有获取了锁之后，才会脱离阻塞状态 当线程执行完毕，或者抛出了未捕获的异常之后，会进入dead状态，该线程结束</p>
 		</div><!-- /entry -->		
 		<div class="entry">
-			<span class="date"><a href="http://www.xieziming.com/archives/6967.html" title="Permalink to Java基础面试题">Java基础面试题</a> , In <a href="http://www.xieziming.com/topic/ji-shu-wei-ji" rel="category tag">技术维基</a>  , Views: 1152 , Comments: <a href="http://www.xieziming.com/archives/6967.html#respond">0</a> , Index: 3562 , 25 March 2010</span>
+			<span class="date"><a href="http://www.xieziming.com/archives/6967.html" title="Permalink to Java基础面试题">Java基础面试题</a> , In <a href="http://www.xieziming.com/topic/ji-shu-wei-ji" rel="category tag">技术维基</a>  , Views: 1152 , Comments: <a href="http://www.xieziming.com/archives/6967.html#respond">0</a> , Index: 3563 , 25 March 2010</span>
 <p><span style="color: #800080;">String是最基本的数据类型吗？</span></p>
 <blockquote><p>基本数据类型包括byte、int、char、long、float、double、boolean和short。<br />
 java.lang.String类是final类型的，因此不可以继承这个类、不能修改这个类。为了提高效率节省空间，我们应该用StringBuffer类</p></blockquote>
@@ -117,7 +117,7 @@ Java 提供两种不同的类型：引用类型和原始类型（或内置类型
 <blockquote><p>ArrayList和Vector都是使用数组方式存储数据，此数组元素数大于实际存储的数据以便增加和插入元素，它们都允许直接按序号索引元素，但是插入元素要涉及数组元素移动等内存操作，所以索引数据快而插入数据慢，Vector由于使用了synchronized方法（线程安全），通常性能上较ArrayList差，而LinkedList使用双向链表实现存储，按序号索引数据需要进行前向或后向遍历，但是插入数据时只需要记录本项的前后项即可，所以插入速度较快。</p></blockquote>
 		</div><!-- /entry -->		
 		<div class="entry">
-			<span class="date"><a href="http://www.xieziming.com/archives/6805.html" title="Permalink to Java垃圾回收算法">Java垃圾回收算法</a> , In <a href="http://www.xieziming.com/topic/coding" rel="category tag">程序</a>  , Views: 882 , Comments: <a href="http://www.xieziming.com/archives/6805.html#respond">0</a> , Index: 3594 , 05 February 2010</span>
+			<span class="date"><a href="http://www.xieziming.com/archives/6805.html" title="Permalink to Java垃圾回收算法">Java垃圾回收算法</a> , In <a href="http://www.xieziming.com/topic/coding" rel="category tag">程序</a>  , Views: 882 , Comments: <a href="http://www.xieziming.com/archives/6805.html#respond">0</a> , Index: 3595 , 05 February 2010</span>
 <p>    内存管理就是查找出不再使用的对象，释放这些对象占用的内存空间，为其他对象的分配提供足够的内存空间。在一些编程语言(C,C++)中，内存管理是程序员的职责。内存管理使开发变得复杂，而且会造成许多潜在的bug和不可知的崩溃。导致程序猿花费大量时间debug来修复这些很隐蔽的问题。</p>
 <p>    在精确的内存管理中经常发生一个问题是悬摆指针 (dangling references )。程序猿可能释放一个对象占用的内存空间，即使这个对象还在被其他对象引用。如果一个对象引用另一个被不小心 释放的对象，这个释放对象的内存空间可能被重新分配新的对象，这个时候，不可预期的结果就可能发生了，而且很可能是致命的。</p>
 <p>    另一个在精确内存管理中经常发生的问题是内存泄露 (menory leaks )。泄露经常是对象占用的内存空间不再被任何其他对象引用，但是这个对象没有被回收。例如，如果你打算回收一个列表的空间，但是不小心只释放了列表的第一个元素，这个列表的其他元素将一直持有内存空间，因为这个列表引用已经不存在了，其他元素占用的空间得不到释放，造成了泄露。久而久之，类似的泄露累计，将会填满内存空间，导致没有足够的内存分配给其他的新对象。</p>
@@ -152,18 +152,18 @@ Java 提供两种不同的类型：引用类型和原始类型（或内置类型
 	<div class="widget">
     <h3>Comments</h3>
     <ul>
-<li><a href="http://www.xieziming.com/dev/post-views#comment-102651" class="dashedline" title="hi dear, i wanna use">hi dear, i ...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-102425" class="dashedline" title="You need to clear all">You need to c...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-102403" class="dashedline" title="how can i reset _all_data?
+<li><a href="http://www.xieziming.com/dev/post-views#comment-102651" class="dashedline" title="hi dear, i wanna use">hi dear, i wa...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-102425" class="dashedline" title="You need to clear all">You need to c...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-102403" class="dashedline" title="how can i reset _all_data?
 
-best">how can i rese...</a></li><li><a href="http://www.xieziming.com/calendar#comment-101819" class="dashedline" title="不错呐">不错呐</a></li><li><a href="http://www.xieziming.com/archives/9213.html#comment-101814" class="dashedline" title="我就是随便看看">我就是随便看看</a></li><li><a href="http://www.xieziming.com/archives/6717.html#comment-101385" class="dashedline" title="Is the same plagin for">Is the same pl...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-98090" class="dashedline" title="install this plugin on wordpress">install this pl...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-89841" class="dashedline" title="Hello Dear Suny,
+best">how can i ...</a></li><li><a href="http://www.xieziming.com/calendar#comment-101819" class="dashedline" title="不错呐">不错呐</a></li><li><a href="http://www.xieziming.com/archives/9213.html#comment-101814" class="dashedline" title="我就是随便看看">我就是随便看看</a></li><li><a href="http://www.xieziming.com/archives/6717.html#comment-101385" class="dashedline" title="Is the same plagin for">Is the same...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-98090" class="dashedline" title="install this plugin on wordpress">install thi...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-89841" class="dashedline" title="Hello Dear Suny,
 
-I install your">Hello Dear...</a></li>    </ul>
+I install your">Hello Dear ...</a></li>    </ul>
     <div class="widgetbottom"></div>
   </div> 
 	
 	<div class="widget">
  		<h3>Rand Posts</h3>
 		<ul>
-<li><a href="http://www.xieziming.com/archives/4151.html" class="dashedline" title="乌镇夜景">乌镇夜景</a></li><li><a href="http://www.xieziming.com/archives/7002.html" class="dashedline" title="阳朔（一）">阳朔（一）</a></li><li><a href="http://www.xieziming.com/archives/6115.html" class="dashedline" title="明明 · 青海">明明 &middot; 青海</a></li><li><a href="http://www.xieziming.com/archives/7961.html" class="dashedline" title="柬埔寨 · 美食">柬埔寨 &middot; 美食</a></li><li><a href="http://www.xieziming.com/archives/142.html" class="dashedline" title="可怜的那么点工资">可怜的那么点工资</a></li><li><a href="http://www.xieziming.com/archives/6987.html" class="dashedline" title="红专厂（五）">红专厂（五）</a></li><li><a href="http://www.xieziming.com/archives/9509.html" class="dashedline" title="布拉格（四）">布拉格（四）</a></li><li><a href="http://www.xieziming.com/archives/148.html" class="dashedline" title="another good day">another good da...</a></li>	
+<li><a href="http://www.xieziming.com/archives/7666.html" class="dashedline" title="RESTful">RESTful</a></li><li><a href="http://www.xieziming.com/archives/6084.html" class="dashedline" title="敦煌 - 散图">敦煌 - 散图</a></li><li><a href="http://www.xieziming.com/archives/4889.html" class="dashedline" title="昌黎黄金海岸之翡翠岛">昌黎黄金海岸之翡翠岛</a></li><li><a href="http://www.xieziming.com/archives/183.html" class="dashedline" title="很郁闷，无论是哪方面...">很郁闷，无论是哪方面....</a></li><li><a href="http://www.xieziming.com/archives/3122.html" class="dashedline" title="C++ 类访问控制探讨">C++ 类访问控制探...</a></li><li><a href="http://www.xieziming.com/archives/408.html" class="dashedline" title="1月音乐推荐">1月音乐推荐</a></li><li><a href="http://www.xieziming.com/archives/5250.html" class="dashedline" title="听海">听海</a></li><li><a href="http://www.xieziming.com/archives/1479.html" class="dashedline" title="规律生活">规律生活</a></li>	
 		</ul>
   	<div class="widgetbottom"></div>
 	</div>
@@ -172,7 +172,7 @@ I install your">Hello Dear...</a></li>    </ul>
 </div><!-- /sidebar --></div><!-- /main -->
 <div id="footer">
 <p align="left">© <a href="http://www.xieziming.com/about" target="_blank"> 明 · 明 · 童 · 鞋</a></p>
-<!--85 queries in 15.944 seconds.-->
+<!--85 queries in 24.027 seconds.-->
 <script>
 var _hmt = _hmt || [];
 (function() {

@@ -96,7 +96,7 @@ img.emoji {
 <div id="content">	
 	<div class="post" id="post">			
 		<div class="entry">
-			<span class="date"><a href="http://www.xieziming.com/archives/7481.html" title="Permalink to Java单例模式">Java单例模式</a> , In <a href="http://www.xieziming.com/topic/coding" rel="category tag">程序</a>  , Views: 749 , Comments: <a href="http://www.xieziming.com/archives/7481.html#respond">0</a> , Index: 2636 , 09 October 2012</span>
+			<span class="date"><a href="http://www.xieziming.com/archives/7481.html" title="Permalink to Java单例模式">Java单例模式</a> , In <a href="http://www.xieziming.com/topic/coding" rel="category tag">程序</a>  , Views: 749 , Comments: <a href="http://www.xieziming.com/archives/7481.html#respond">0</a> , Index: 2637 , 09 October 2012</span>
 <p>单例模式的主要目的是希望对象只创建一个实例，并且提供一个全局的访问点。</p>
 
 <div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> SingletonKerriganA <span style="color: #009900;">&#123;</span>  
@@ -113,7 +113,7 @@ img.emoji {
 <p>这个写法我们把四点需求从上往下检测，发现第二点的时候就出了问题，假设这样的场景：两个线程并发调用SingletonKerriganA.getInstance()，假设线程一先判断完instance是否为null，既代码中的line A进入到line B的位置。刚刚判断完毕后，JVM将CPU资源切换给线程二，由于线程一还没执行line B，所以instance仍然是空的，因此线程二执行了new SignletonKerriganA()操作。片刻之后，线程一被重新唤醒，它执行的仍然是new SignletonKerriganA()操作，好了，问题来了，两个Kerrigan谁是李逵谁是李鬼？</p>
 		</div><!-- /entry -->		
 		<div class="entry">
-			<span class="date"><a href="http://www.xieziming.com/archives/7473.html" title="Permalink to Java静态工厂模式">Java静态工厂模式</a> , In <a href="http://www.xieziming.com/topic/coding" rel="category tag">程序</a>  , Views: 2263 , Comments: <a href="http://www.xieziming.com/archives/7473.html#respond">0</a> , Index: 5291 , 08 October 2012</span>
+			<span class="date"><a href="http://www.xieziming.com/archives/7473.html" title="Permalink to Java静态工厂模式">Java静态工厂模式</a> , In <a href="http://www.xieziming.com/topic/coding" rel="category tag">程序</a>  , Views: 2263 , Comments: <a href="http://www.xieziming.com/archives/7473.html#respond">0</a> , Index: 5292 , 08 October 2012</span>
 <p>创建类的实例的最常见的方式是用new语句调用类的构造方法。在这种情况下，程序可以创建类的任意多个实例，每执行一条new语句，都会导致Java虚拟机的堆区中产生一个新的对象。假如类需要进一步封装创建自身实例的细节，并且控制自身实例的数目，那么可以提供静态工厂方法。</p>
 <p>所谓的工厂是提供一个特定的类，这个类是专门用来创建对象实例，客户端无须关心具体的实现。这个模式由三个部分组成。</p>
 <p><strong>抽象类：</strong>它对外提供方法的调用，屏蔽了内部具体的实现。</p>
@@ -125,7 +125,7 @@ img.emoji {
 <p>(3) 静态工厂方法在选择返回类型时有更大的灵活性。使用静态工厂方法，可以通过调用方法时使用不同的参数创建不同类的实例，还可以创建非公有类的对象，这就封装了类的实现细节。</p>
 		</div><!-- /entry -->		
 		<div class="entry">
-			<span class="date"><a href="http://www.xieziming.com/archives/7437.html" title="Permalink to Equals与Hashcode">Equals与Hashcode</a> , In <a href="http://www.xieziming.com/topic/coding" rel="category tag">程序</a>  , Views: 908 , Comments: <a href="http://www.xieziming.com/archives/7437.html#respond">0</a> , Index: 2945 , 04 October 2012</span>
+			<span class="date"><a href="http://www.xieziming.com/archives/7437.html" title="Permalink to Equals与Hashcode">Equals与Hashcode</a> , In <a href="http://www.xieziming.com/topic/coding" rel="category tag">程序</a>  , Views: 908 , Comments: <a href="http://www.xieziming.com/archives/7437.html#respond">0</a> , Index: 2946 , 04 October 2012</span>
 <p>1. 首先equals()是从object类中继承过来的。 equals()方法在object类中定义如下：</p>
 
 <div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">boolean</span> equals<span style="color: #009900;">&#40;</span><span style="color: #003399;">Object</span> obj<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span> 
@@ -185,18 +185,18 @@ img.emoji {
 	<div class="widget">
     <h3>Comments</h3>
     <ul>
-<li><a href="http://www.xieziming.com/dev/post-views#comment-102651" class="dashedline" title="hi dear, i wanna use">hi dear, i wann...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-102425" class="dashedline" title="You need to clear all">You need to ...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-102403" class="dashedline" title="how can i reset _all_data?
+<li><a href="http://www.xieziming.com/dev/post-views#comment-102651" class="dashedline" title="hi dear, i wanna use">hi dear, i w...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-102425" class="dashedline" title="You need to clear all">You need to c...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-102403" class="dashedline" title="how can i reset _all_data?
 
-best">how can i re...</a></li><li><a href="http://www.xieziming.com/calendar#comment-101819" class="dashedline" title="不错呐">不错呐</a></li><li><a href="http://www.xieziming.com/archives/9213.html#comment-101814" class="dashedline" title="我就是随便看看">我就是随便看看</a></li><li><a href="http://www.xieziming.com/archives/6717.html#comment-101385" class="dashedline" title="Is the same plagin for">Is the same...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-98090" class="dashedline" title="install this plugin on wordpress">install this p...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-89841" class="dashedline" title="Hello Dear Suny,
+best">how can i re...</a></li><li><a href="http://www.xieziming.com/calendar#comment-101819" class="dashedline" title="不错呐">不错呐</a></li><li><a href="http://www.xieziming.com/archives/9213.html#comment-101814" class="dashedline" title="我就是随便看看">我就是随便看看</a></li><li><a href="http://www.xieziming.com/archives/6717.html#comment-101385" class="dashedline" title="Is the same plagin for">Is the same ...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-98090" class="dashedline" title="install this plugin on wordpress">install thi...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-89841" class="dashedline" title="Hello Dear Suny,
 
-I install your">Hello Dear...</a></li>    </ul>
+I install your">Hello Dear Suny...</a></li>    </ul>
     <div class="widgetbottom"></div>
   </div> 
 	
 	<div class="widget">
  		<h3>Rand Posts</h3>
 		<ul>
-<li><a href="http://www.xieziming.com/archives/254.html" class="dashedline" title="郁闷死了，麻城">郁闷死了，麻城</a></li><li><a href="http://www.xieziming.com/archives/6962.html" class="dashedline" title="程序员图书推荐">程序员图书推荐</a></li><li><a href="http://www.xieziming.com/archives/9445.html" class="dashedline" title="十二使徒岩">十二使徒岩</a></li><li><a href="http://www.xieziming.com/archives/7975.html" class="dashedline" title="西贡 · 邮局">西贡 &middot; 邮局</a></li><li><a href="http://www.xieziming.com/archives/5528.html" class="dashedline" title="网站配色表">网站配色表</a></li><li><a href="http://www.xieziming.com/archives/6880.html" class="dashedline" title="锅物工坊">锅物工坊</a></li><li><a href="http://www.xieziming.com/archives/7011.html" class="dashedline" title="兴坪夜">兴坪夜</a></li><li><a href="http://www.xieziming.com/archives/6681.html" class="dashedline" title="Amazon Robot">Amazon Robot</a></li>	
+<li><a href="http://www.xieziming.com/archives/6720.html" class="dashedline" title="Post Views Q & A">Post Views Q ...</a></li><li><a href="http://www.xieziming.com/archives/2150.html" class="dashedline" title="去聽夏天安靜的聲音(2)">去聽夏天安靜的聲音(2)</a></li><li><a href="http://www.xieziming.com/archives/5972.html" class="dashedline" title="十八埔">十八埔</a></li><li><a href="http://www.xieziming.com/archives/7709.html" class="dashedline" title="一德路">一德路</a></li><li><a href="http://www.xieziming.com/archives/461.html" class="dashedline" title="exam coming">exam coming</a></li><li><a href="http://www.xieziming.com/archives/7836.html" class="dashedline" title="马六甲（一）">马六甲（一）</a></li><li><a href="http://www.xieziming.com/archives/4054.html" class="dashedline" title="张江，一个鸟不拉屎的地方">张江，一个鸟不拉屎的地...</a></li><li><a href="http://www.xieziming.com/archives/3179.html" class="dashedline" title="芭提雅红灯区">芭提雅红灯区</a></li>	
 		</ul>
   	<div class="widgetbottom"></div>
 	</div>
@@ -205,7 +205,7 @@ I install your">Hello Dear...</a></li>    </ul>
 </div><!-- /sidebar --></div><!-- /main -->
 <div id="footer">
 <p align="left">© <a href="http://www.xieziming.com/about" target="_blank"> 明 · 明 · 童 · 鞋</a></p>
-<!--85 queries in 18.078 seconds.-->
+<!--85 queries in 26.348 seconds.-->
 <script>
 var _hmt = _hmt || [];
 (function() {

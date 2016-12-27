@@ -96,7 +96,7 @@ img.emoji {
 <div id="content">	
 	<div class="post" id="post">			
 		<div class="entry">
-			<span class="date"><a href="http://www.xieziming.com/archives/7150.html" title="Permalink to Shell (二)">Shell (二)</a> , In <a href="http://www.xieziming.com/topic/ji-shu-wei-ji" rel="category tag">技术维基</a>  , Views: 621 , Comments: <a href="http://www.xieziming.com/archives/7150.html#respond">0</a> , Index: 2627 , 19 May 2010</span>
+			<span class="date"><a href="http://www.xieziming.com/archives/7150.html" title="Permalink to Shell (二)">Shell (二)</a> , In <a href="http://www.xieziming.com/topic/ji-shu-wei-ji" rel="category tag">技术维基</a>  , Views: 621 , Comments: <a href="http://www.xieziming.com/archives/7150.html#respond">0</a> , Index: 2628 , 19 May 2010</span>
 <p>先说一下，为何要用( )或{ }好了。许多时候，我们在shell操作上，需要在一定条件下一次执行多个命令，也就是说，要么不执行，要么就全执行，而不是每次依序的判断是否要执行下一个命令。或是，需要从一些命令执行优先次顺中得到豁免，如算术的2*(3+4)那样&#8230;<br />
 这时候，我们就可引入&#8221;命令群组&#8221;(command group)的概念：将多个命令集中处理。</p>
 <p>在shell command line中，一般人或许不太计较( )与{ }这两对符号的差异，虽然两者都可将多个命令作群组化处理，但若从技术细节上，却是很不一样的：</p>
@@ -107,7 +107,7 @@ img.emoji {
 <p>我这里只想补充一个概念，就是function。所谓的function，就是用一个名字去命名一个 command group，然后再调用这个名字去执行command group。从non-namedcommand group来推断，大概你也可以猜到我要说的是{ }了吧？</p>
 		</div><!-- /entry -->		
 		<div class="entry">
-			<span class="date"><a href="http://www.xieziming.com/archives/7145.html" title="Permalink to Shell (一)">Shell (一)</a> , In <a href="http://www.xieziming.com/topic/ji-shu-wei-ji" rel="category tag">技术维基</a>  , Views: 667 , Comments: <a href="http://www.xieziming.com/archives/7145.html#respond">0</a> , Index: 2817 , 19 May 2010</span>
+			<span class="date"><a href="http://www.xieziming.com/archives/7145.html" title="Permalink to Shell (一)">Shell (一)</a> , In <a href="http://www.xieziming.com/topic/ji-shu-wei-ji" rel="category tag">技术维基</a>  , Views: 667 , Comments: <a href="http://www.xieziming.com/archives/7145.html#respond">0</a> , Index: 2818 , 19 May 2010</span>
 <p>所谓环境变量其实就是那些会传给子进程的变量。简单而言，&#8221;遗传性&#8221;就是区分本地变量与环境变量的决定性指标。然而，从遗传的角度来看，我们也不难发现环境变量的另一个重要特征：环境变量只能从父进程到子进程单向继承。换句话说：在子进程中的环境如何变更，均不会影响父进程的环境。</p>
 <p>接下来，再让我们了解一下命令脚本(shell script)的概念。所谓的shell script讲起来很简单，就是将你平时在shell prompt后所输入的多行command line依序写入一个文件去而已。其中再加上一些条件判断、互动界面、参数运用、函数调用、等等技巧，得以让script更加&#8221;聪明&#8221;的执行，但若撇开这些技巧不谈，我们真的可以简单的看成script只不过依次执行预先写好的命令行而已。</p>
 <p>再结合以上两个概念(process + script)，那应该就不难理解如下这句话的意思了：正常来说，当我们执行一个shell script时，其实是先产生一个sub-shell的子进程，然后sub-shell再去产生命令行的子进程。然则，那让我们回到本章开始时所提到的例子再从新思考：<br />
@@ -118,7 +118,7 @@ cd /etc/aa/bb/cc可以执行，但是把这条命令写入shell时shell不执行
 <p>所谓source就是让script在当前shell内执行、而不是产生一个sub-shell来执行。由于所有执行结果均于当前shell内完成，若script的环境有所改变，当然也会改变当前环境了因此，只要我们要将原本单独输入的script命令行变成source命令的参数，就可轻易解决前例提到的问题了。</p>
 		</div><!-- /entry -->		
 		<div class="entry">
-			<span class="date"><a href="http://www.xieziming.com/archives/6967.html" title="Permalink to Java基础面试题">Java基础面试题</a> , In <a href="http://www.xieziming.com/topic/ji-shu-wei-ji" rel="category tag">技术维基</a>  , Views: 1152 , Comments: <a href="http://www.xieziming.com/archives/6967.html#respond">0</a> , Index: 3562 , 25 March 2010</span>
+			<span class="date"><a href="http://www.xieziming.com/archives/6967.html" title="Permalink to Java基础面试题">Java基础面试题</a> , In <a href="http://www.xieziming.com/topic/ji-shu-wei-ji" rel="category tag">技术维基</a>  , Views: 1152 , Comments: <a href="http://www.xieziming.com/archives/6967.html#respond">0</a> , Index: 3563 , 25 March 2010</span>
 <p><span style="color: #800080;">String是最基本的数据类型吗？</span></p>
 <blockquote><p>基本数据类型包括byte、int、char、long、float、double、boolean和short。<br />
 java.lang.String类是final类型的，因此不可以继承这个类、不能修改这个类。为了提高效率节省空间，我们应该用StringBuffer类</p></blockquote>
@@ -163,18 +163,18 @@ Java 提供两种不同的类型：引用类型和原始类型（或内置类型
 	<div class="widget">
     <h3>Comments</h3>
     <ul>
-<li><a href="http://www.xieziming.com/dev/post-views#comment-102651" class="dashedline" title="hi dear, i wanna use">hi dear, i wann...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-102425" class="dashedline" title="You need to clear all">You need to ...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-102403" class="dashedline" title="how can i reset _all_data?
+<li><a href="http://www.xieziming.com/dev/post-views#comment-102651" class="dashedline" title="hi dear, i wanna use">hi dear, i wan...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-102425" class="dashedline" title="You need to clear all">You need to c...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-102403" class="dashedline" title="how can i reset _all_data?
 
-best">how can i re...</a></li><li><a href="http://www.xieziming.com/calendar#comment-101819" class="dashedline" title="不错呐">不错呐</a></li><li><a href="http://www.xieziming.com/archives/9213.html#comment-101814" class="dashedline" title="我就是随便看看">我就是随便看看</a></li><li><a href="http://www.xieziming.com/archives/6717.html#comment-101385" class="dashedline" title="Is the same plagin for">Is the same pla...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-98090" class="dashedline" title="install this plugin on wordpress">install this...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-89841" class="dashedline" title="Hello Dear Suny,
+best">how can i ...</a></li><li><a href="http://www.xieziming.com/calendar#comment-101819" class="dashedline" title="不错呐">不错呐</a></li><li><a href="http://www.xieziming.com/archives/9213.html#comment-101814" class="dashedline" title="我就是随便看看">我就是随便看看</a></li><li><a href="http://www.xieziming.com/archives/6717.html#comment-101385" class="dashedline" title="Is the same plagin for">Is the same...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-98090" class="dashedline" title="install this plugin on wordpress">install this...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-89841" class="dashedline" title="Hello Dear Suny,
 
-I install your">Hello Dear Sun...</a></li>    </ul>
+I install your">Hello Dear Su...</a></li>    </ul>
     <div class="widgetbottom"></div>
   </div> 
 	
 	<div class="widget">
  		<h3>Rand Posts</h3>
 		<ul>
-<li><a href="http://www.xieziming.com/archives/126.html" class="dashedline" title="《人生若只如初见》">《人生若只如初见》</a></li><li><a href="http://www.xieziming.com/archives/6188.html" class="dashedline" title="西北行青旅总结">西北行青旅总结</a></li><li><a href="http://www.xieziming.com/archives/9255.html" class="dashedline" title="归故里">归故里</a></li><li><a href="http://www.xieziming.com/archives/7822.html" class="dashedline" title="珠海">珠海</a></li><li><a href="http://www.xieziming.com/archives/7133.html" class="dashedline" title="自动控制理论（二）">自动控制理论（二）</a></li><li><a href="http://www.xieziming.com/archives/5483.html" class="dashedline" title="海口紫荆花青旅">海口紫荆花青旅</a></li><li><a href="http://www.xieziming.com/archives/21.html" class="dashedline" title="夜.独自倾听的歌曲">夜.独自倾听的歌曲</a></li><li><a href="http://www.xieziming.com/archives/4583.html" class="dashedline" title="JYWEDNG">JYWEDNG</a></li>	
+<li><a href="http://www.xieziming.com/archives/6967.html" class="dashedline" title="Java基础面试题">Java基础面试题</a></li><li><a href="http://www.xieziming.com/archives/271.html" class="dashedline" title="琐碎之事">琐碎之事</a></li><li><a href="http://www.xieziming.com/archives/3187.html" class="dashedline" title="出海">出海</a></li><li><a href="http://www.xieziming.com/archives/3977.html" class="dashedline" title="上海外滩">上海外滩</a></li><li><a href="http://www.xieziming.com/archives/9507.html" class="dashedline" title="布拉格（二）">布拉格（二）</a></li><li><a href="http://www.xieziming.com/archives/8517.html" class="dashedline" title="截屏工具（C++）API">截屏工具（C++）A...</a></li><li><a href="http://www.xieziming.com/archives/8654.html" class="dashedline" title="南京大学">南京大学</a></li><li><a href="http://www.xieziming.com/archives/7922.html" class="dashedline" title="吴哥窟（五）">吴哥窟（五）</a></li>	
 		</ul>
   	<div class="widgetbottom"></div>
 	</div>
@@ -183,7 +183,7 @@ I install your">Hello Dear Sun...</a></li>    </ul>
 </div><!-- /sidebar --></div><!-- /main -->
 <div id="footer">
 <p align="left">© <a href="http://www.xieziming.com/about" target="_blank"> 明 · 明 · 童 · 鞋</a></p>
-<!--86 queries in 11.830 seconds.-->
+<!--86 queries in 11.461 seconds.-->
 <script>
 var _hmt = _hmt || [];
 (function() {

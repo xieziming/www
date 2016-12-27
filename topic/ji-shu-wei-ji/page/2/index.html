@@ -96,7 +96,7 @@ img.emoji {
 <div id="content">	
 	<div class="post" id="post">			
 		<div class="entry">
-			<span class="date"><a href="http://www.xieziming.com/archives/7244.html" title="Permalink to Shell (四)">Shell (四)</a> , In <a href="http://www.xieziming.com/topic/ji-shu-wei-ji" rel="category tag">技术维基</a>  , Views: 456 , Comments: <a href="http://www.xieziming.com/archives/7244.html#respond">0</a> , Index: 2816 , 02 June 2010</span>
+			<span class="date"><a href="http://www.xieziming.com/archives/7244.html" title="Permalink to Shell (四)">Shell (四)</a> , In <a href="http://www.xieziming.com/topic/ji-shu-wei-ji" rel="category tag">技术维基</a>  , Views: 456 , Comments: <a href="http://www.xieziming.com/archives/7244.html#respond">0</a> , Index: 2817 , 02 June 2010</span>
 <p>谈到 I/O redirection ，不妨先让我们认识一下 File Descriptor (FD) 。程序的运算，在大部份情况下都是进行数据(data)的处理， 这些数据从哪读进？又送出到哪里呢？这就是 file descriptor(FD) 的功用了。</p>
 <p>在 shell 程序中，最常使用的 FD 大概有三个，分别为：</p>
 <p>0: Standard Input (STDIN)<br />
@@ -115,13 +115,13 @@ please skip.
 
 		</div><!-- /entry -->		
 		<div class="entry">
-			<span class="date"><a href="http://www.xieziming.com/archives/7170.html" title="Permalink to 链接器和装入器">链接器和装入器</a> , In <a href="http://www.xieziming.com/topic/ji-shu-wei-ji" rel="category tag">技术维基</a>  , Views: 878 , Comments: <a href="http://www.xieziming.com/archives/7170.html#respond">0</a> , Index: 3270 , 25 May 2010</span>
+			<span class="date"><a href="http://www.xieziming.com/archives/7170.html" title="Permalink to 链接器和装入器">链接器和装入器</a> , In <a href="http://www.xieziming.com/topic/ji-shu-wei-ji" rel="category tag">技术维基</a>  , Views: 878 , Comments: <a href="http://www.xieziming.com/archives/7170.html#respond">0</a> , Index: 3271 , 25 May 2010</span>
 <p><strong>1．静态链接、静态装入</strong></p>
 <p>这种方法最早被采用，其特点是简单，不需要操作系统提供任何额外的支持。像C这样的编程语言从很早开始就已经支持分别编译了，程序的不同模块可以并行开发，然后独立编译为相应的目标文件。在得到了所有的目标文件后，静态链接、静态装入的做法是将所有目标文件链接成一个可执行映象，随后在创建进程时将该可执行映象一次全部装入内存。</p>
 <p>举个简单的例子，假设我们开发了两个程序Prog1和Prog2，Prog1由main1.c、utilities.c以及errhdl1.c三部分组成，分别对应程序的主框架、一些公用的辅助函数（其作用相当于库）以及错误处理部分，这三部分代码编译后分别得到各自对应的目标文件main1.o、utilities.o以及errhdl1.o。同样，Prog2由main2.c、utilities.c以及errhdl2.c三部分组成，三部分代码编译后分别得到各自对应的目标文件main2.o、utilities.o以及errhdl2.o。值得注意的是，这里Prog1和Prog2使用了相同的公用辅助函数utilities.o。当我们采用静态链接、静态装入的方法，可以看到，首先就硬盘的使用来讲，虽然两个程序共享使用了utilities，但这并没有在硬盘保存的可执行程序映象上体现出来。相反，utilities.o被链接进了每一个用到它的程序的可执行映象。内存的使用也是如此，操作系统在创建进程时将程序的可执行映象一次全部装入内存，之后进程才能开始运行。如前所述，采用这种方法使得操作系统的实现变得非常简单，但其缺点也是显而易见的。首先，既然两个程序使用的是相同的utilities.o，那么我们只要在硬盘上保存utilities.o的一份拷贝应该就足够了；另外，假如程序在运行过程中没有出现任何错误，那么错误处理部分的代码就不应该被装入内存。因此静态链接、静态装入的方法不但浪费了硬盘空间，同时也浪费了内存空间。由于早期系统的内存资源十分宝贵，所以后者对早期的系统来讲更加致命。</p>
 		</div><!-- /entry -->		
 		<div class="entry">
-			<span class="date"><a href="http://www.xieziming.com/archives/7152.html" title="Permalink to Shell (三)">Shell (三)</a> , In <a href="http://www.xieziming.com/topic/ji-shu-wei-ji" rel="category tag">技术维基</a>  , Views: 719 , Comments: <a href="http://www.xieziming.com/archives/7152.html#respond">0</a> , Index: 3198 , 19 May 2010</span>
+			<span class="date"><a href="http://www.xieziming.com/archives/7152.html" title="Permalink to Shell (三)">Shell (三)</a> , In <a href="http://www.xieziming.com/topic/ji-shu-wei-ji" rel="category tag">技术维基</a>  , Views: 719 , Comments: <a href="http://www.xieziming.com/archives/7152.html#respond">0</a> , Index: 3199 , 19 May 2010</span>
 <p>在bash shell中，$( )与` ` (反引号)都是用来做命令替换用(command substitution)的。所谓的命令替换与我们第五章学过的变量替换差不多，都是用来重组命令行，完成引号里的命令行，然后将其结果替换出来，再重组命令行。</p>
 <p>在操作上，用$( )或` `都无所谓，只是我&#8221;个人&#8221;比较喜欢用$( )，理由是：</p>
 <p>1. ` `很容易与&#8217; &#8216; (单引号)搞混乱，尤其对初学者来说。有时在一些奇怪的字形显示中，两种符号是一模一样的(直竖两点)。当然了，有经验的朋友还是一眼就能分辩两者。只是，若能更好的避免混乱，又何乐不为呢？</p>
@@ -156,18 +156,18 @@ please skip.
 	<div class="widget">
     <h3>Comments</h3>
     <ul>
-<li><a href="http://www.xieziming.com/dev/post-views#comment-102651" class="dashedline" title="hi dear, i wanna use">hi dear, i...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-102425" class="dashedline" title="You need to clear all">You need t...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-102403" class="dashedline" title="how can i reset _all_data?
+<li><a href="http://www.xieziming.com/dev/post-views#comment-102651" class="dashedline" title="hi dear, i wanna use">hi dear, i w...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-102425" class="dashedline" title="You need to clear all">You need to c...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-102403" class="dashedline" title="how can i reset _all_data?
 
-best">how can i rese...</a></li><li><a href="http://www.xieziming.com/calendar#comment-101819" class="dashedline" title="不错呐">不错呐</a></li><li><a href="http://www.xieziming.com/archives/9213.html#comment-101814" class="dashedline" title="我就是随便看看">我就是随便看看</a></li><li><a href="http://www.xieziming.com/archives/6717.html#comment-101385" class="dashedline" title="Is the same plagin for">Is the same ...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-98090" class="dashedline" title="install this plugin on wordpress">install this pl...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-89841" class="dashedline" title="Hello Dear Suny,
+best">how can i res...</a></li><li><a href="http://www.xieziming.com/calendar#comment-101819" class="dashedline" title="不错呐">不错呐</a></li><li><a href="http://www.xieziming.com/archives/9213.html#comment-101814" class="dashedline" title="我就是随便看看">我就是随便看看</a></li><li><a href="http://www.xieziming.com/archives/6717.html#comment-101385" class="dashedline" title="Is the same plagin for">Is the same p...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-98090" class="dashedline" title="install this plugin on wordpress">install this p...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-89841" class="dashedline" title="Hello Dear Suny,
 
-I install your">Hello Dear S...</a></li>    </ul>
+I install your">Hello Dear Sun...</a></li>    </ul>
     <div class="widgetbottom"></div>
   </div> 
 	
 	<div class="widget">
  		<h3>Rand Posts</h3>
 		<ul>
-<li><a href="http://www.xieziming.com/archives/5811.html" class="dashedline" title="雪山">雪山</a></li><li><a href="http://www.xieziming.com/archives/5483.html" class="dashedline" title="海口紫荆花青旅">海口紫荆花青旅</a></li><li><a href="http://www.xieziming.com/archives/139.html" class="dashedline" title="My Saturday on 8.9">My Saturday on ...</a></li><li><a href="http://www.xieziming.com/archives/4441.html" class="dashedline" title="美食系列（36）">美食系列（36）</a></li><li><a href="http://www.xieziming.com/archives/7891.html" class="dashedline" title="下龙湾（四）">下龙湾（四）</a></li><li><a href="http://www.xieziming.com/archives/9461.html" class="dashedline" title="美食（三）">美食（三）</a></li><li><a href="http://www.xieziming.com/archives/1149.html" class="dashedline" title="泼水节（二）">泼水节（二）</a></li><li><a href="http://www.xieziming.com/archives/371.html" class="dashedline" title="假期中...">假期中...</a></li>	
+<li><a href="http://www.xieziming.com/archives/270.html" class="dashedline" title="中兴深圳安居房">中兴深圳安居房</a></li><li><a href="http://www.xieziming.com/archives/4668.html" class="dashedline" title="回忆">回忆</a></li><li><a href="http://www.xieziming.com/archives/9011.html" class="dashedline" title="湘西 · 凤凰">湘西 &middot; 凤凰</a></li><li><a href="http://www.xieziming.com/archives/8965.html" class="dashedline" title="手机里的缅甸（二）">手机里的缅甸（二）</a></li><li><a href="http://www.xieziming.com/archives/4501.html" class="dashedline" title="半岛明轩酒家">半岛明轩酒家</a></li><li><a href="http://www.xieziming.com/archives/4967.html" class="dashedline" title="草原上的牛羊">草原上的牛羊</a></li><li><a href="http://www.xieziming.com/archives/259.html" class="dashedline" title="我来湖北做什么">我来湖北做什么</a></li><li><a href="http://www.xieziming.com/archives/2156.html" class="dashedline" title="晨晨的小糖水">晨晨的小糖水</a></li>	
 		</ul>
   	<div class="widgetbottom"></div>
 	</div>
@@ -176,7 +176,7 @@ I install your">Hello Dear S...</a></li>    </ul>
 </div><!-- /sidebar --></div><!-- /main -->
 <div id="footer">
 <p align="left">© <a href="http://www.xieziming.com/about" target="_blank"> 明 · 明 · 童 · 鞋</a></p>
-<!--86 queries in 11.655 seconds.-->
+<!--86 queries in 12.011 seconds.-->
 <script>
 var _hmt = _hmt || [];
 (function() {
