@@ -14,7 +14,7 @@
 <link rel='dns-prefetch' href='//s.w.org' />
 <link rel="alternate" type="application/rss+xml" title="谢子明 &raquo; Recent Comments Feed" href="http://www.xieziming.com/recent/feed" />
 		<script type="text/javascript">
-			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/xieziming.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.7"}};
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/www.xieziming.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.7"}};
 			!function(a,b,c){function d(a){var b,c,d,e,f=String.fromCharCode;if(!k||!k.fillText)return!1;switch(k.clearRect(0,0,j.width,j.height),k.textBaseline="top",k.font="600 32px Arial",a){case"flag":return k.fillText(f(55356,56826,55356,56819),0,0),!(j.toDataURL().length<3e3)&&(k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,65039,8205,55356,57096),0,0),b=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,55356,57096),0,0),c=j.toDataURL(),b!==c);case"emoji4":return k.fillText(f(55357,56425,55356,57341,8205,55357,56507),0,0),d=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55357,56425,55356,57341,55357,56507),0,0),e=j.toDataURL(),d!==e}return!1}function e(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i,j=b.createElement("canvas"),k=j.getContext&&j.getContext("2d");for(i=Array("flag","emoji4"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
 		</script>
 		<style type="text/css">
@@ -99,56 +99,43 @@ img.emoji {
 <div id="main" class="mainbg">
 		<div id="content">
 									
-				<div class="post" id="post-3122">
+				<div class="post" id="post-883">
 					<div class="entry">
-							<span class="date"><a href="http://www.xieziming.com/archives/3122.html" title="Permalink to C++ 类访问控制探讨">C++ 类访问控制探讨</a> In <a href="http://www.xieziming.com/topic/coding" rel="category tag">程序</a> , Comments: <a href="http://www.xieziming.com/archives/3122.html#comments">1</a> , Previews: <a href="http://www.xieziming.com/analytics" target="_blank">100</a> , Read: <a href="http://www.xieziming.com/analytics" target="_blank">1121</a> , Wed, Mar 4 2009</span>
-							<p>类是将数据成员和进行于其上的一系列操作(成员函数)封装在一起,注意：成员函数可以操作数据成员（可以称类中的数据成员为泛数据成员）！<br />
-对象是类的实例化，怎样理解实例化？其实每一个实例对象都只是对其中的数据成员初始化，内存映像中每个对象仅仅保留属于自己的那份数据成员副本。而成员函数对于整个类而言却是共享的，即一个类只保留一份成员函数。<br />
-那么每个对象怎样和这些可以认为是“分离”的成员函数发生联系，即成员函数如何操作对象的数据成员？记住this指针，无论对象通过(.)操作或者(->)操作调用成员函数，编译时刻，编译器都会将这种调用转换成我们常见的全局函数的形式，并且多出一个参数(一般这个参数放在第一个)，然后将this指针传入这个参数。于是就完成了对象与成员函数的绑定(或联系).<br />
-实例化后就得到同一个类的多个不同的对象，既然成员函数共享的，那么成员函数就可以操作对象的数据成员。<br />
-问题是现在有多个对象，成员函数需要知道操作的是哪个对象的数据成员？<br />
-比如有对象obj1和obj2，都属于A类，A类有public成员函数foo()<br />
-如果obj1调用该函数，编译时会给foo函数传入this指针，obj1,foo中操作obj1自身的成员就不用任何修饰，直接访问，因为其中的数据成员自动根据this指针找到。<br />
-如果obj1调用该函数，同样可以访问同类的其他对象的数据成员！那么你需要做的是让foo函数知道是同类对象中哪个对象的数据成员，一个解决办法是传入同类其他对象的指针或引用，那么就可以操作同类其他对象的数据成员。<br />
-foo(A &#038;obj)<br />
-这样定义，然后调用：obj1.foo(obj2)<br />
-就可以在obj1访问obj2的数据成员，而无论这些数据成员是private还是protected</p>
+							<span class="date"><a href="http://www.xieziming.com/archives/883.html" title="Permalink to 那它为什么不走呢？">那它为什么不走呢？</a> In <a href="http://www.xieziming.com/topic/humor" rel="category tag">Humor</a> , Comments: <a href="http://www.xieziming.com/archives/883.html#comments">3</a> , Previews: <a href="http://www.xieziming.com/analytics" target="_blank">93</a> , Read: <a href="http://www.xieziming.com/analytics" target="_blank">729</a> , Fri, Mar 20 2009</span>
+							<p>如果有一台车，小明是司机，小华坐在他右边，小花坐在他后面，请问这台车是谁的呢？？ 答案：“如果”的</p>
+<p>有两个人掉到陷阱里了，死的人叫死人，活人叫什么？答案：叫救命啦</p>
+<p>1、 女儿对肚脐很好奇，就问爸爸，爸爸把脐带连着胎儿与母体的道理简单地讲了一下，说，婴儿离开母体之后，医生把脐带减断，并打了一个结，后来就成了肚脐。<br />
+　  女儿说：那医生为什么不打个蝴蝶结？</p>
+<p>2、六岁的女儿认真且严肃地问道：“妈妈，桌子到底有没有腿？“<br />
+　　妈妈：“当然有腿了，否则它如何立起来呢？”<br />
+　　女儿：“那它为什么不走呢？”</p>
+<p>3、宝宝正在睡觉，一只蚊子飞到了他的屁股上。<br />
+　　爸爸赶走蚊子，在宝宝的屁股上抹了些花露水。<br />
+　　宝宝惊醒了，大叫：妈妈，蚊子刚才在我的屁股上撒了一泡尿！</p>
+<p>4、一个同事有一个6岁的女儿，开始换牙了，<br />
+　　她的妈妈带她拔完牙回到单位里，<br />
+　　我妈问她：“牙还疼不疼？”<br />
+　　那小女孩的回答让旁边的一群人统统笑翻了：“啊呀，牙齿被留在医院里了，我不知道它疼不疼啊！”</p>
 					
 					</div><!-- /entry -->	
 				</div><!-- /post -->				
 							
-				<div class="post" id="post-1300">
+				<div class="post" id="post-1314">
 					<div class="entry">
-							<span class="date"><a href="http://www.xieziming.com/archives/1300.html" title="Permalink to 桥接,NAT网络配置详解">桥接,NAT网络配置详解</a> In <a href="http://www.xieziming.com/topic/ji-shu-wei-ji" rel="category tag">技术维基</a> , Comments: <a href="http://www.xieziming.com/archives/1300.html#comments">1</a> , Previews: <a href="http://www.xieziming.com/analytics" target="_blank">141</a> , Read: <a href="http://www.xieziming.com/analytics" target="_blank">2309</a> , Wed, Mar 4 2009</span>
-							<p>1、桥接：</p>
-<p>什么是桥？简单的说桥是一个接口，是一个在功能层面和eth0一样的东西。不同之处在于桥是由多个接口共同构成的。从以太层看，把每一个接口收到的数据复制到其他接口。同样，向桥写入数据，桥内的所有接口都会收到。</p>
-<p>现在要介绍一个设备，tap或着tun，简单的说这个东西是一块虚拟网卡。不同的是，tap是一个以太层的设备，而tun是Ip层的设备。（下面我们要使用的是tap。）具体来说tap/tun的工作原理是这样的：用户空间的程序向tap/tun写入数据，这些数据会传到内核的网络模块；内核网络模块也可以写入数据，而这些写入的数据又可以被用户空间的程序读到，正是因为这样，连上这块虚拟网卡的虚拟机就可以和宿主通信了！</p>
-<p>现在我们开始：<br />
-1.1 安装一些工具<br />
-apt-get install uml-utilities  //tunctl要用到，tunctl可以生成一个tap,我的理解是虚拟网卡<br />
-apt-get install bridge-utils //brctl要用到， brctl就是设置一个网桥了</p>
-<p>1.2 创建一个Tap设备：<br />
-[root@sunshine ~]# tunctl -u root -t tap0<br />
-Set &#8216;tap0&#8217; persistent and owned by uid 0</p>
-<p>-u：指明这个设备归谁所有（为了避免权限问题引出的不必要的麻烦，本文中创建的所有设备都属于root）；<br />
--t：指明设备名，可以任意起，但是最好遵循linux上的命名规范；<br />
-（如果要删除创建的Tap设备，请使用tunctl -d [tapdevicename]）</p>
+							<span class="date"><a href="http://www.xieziming.com/archives/1314.html" title="Permalink to 人文（二）">人文（二）</a> In <a href="http://www.xieziming.com/topic/da-xue" rel="category tag">大学</a> , Comments: <a href="http://www.xieziming.com/archives/1314.html#respond">0</a> , Previews: <a href="http://www.xieziming.com/analytics" target="_blank">236</a> , Read: <a href="http://www.xieziming.com/analytics" target="_blank">605</a> , Sat, Mar 14 2009</span>
+							<p>孟子曰：“人之所以异于禽兽者几希”（《孟子?离娄下》）。中国文化就是要在人的具体生命中凸显出这个“几希”，以开启其内在于人的生命、生活的人文世界。这个“几希”既确保了人之为人的意义，并由此而开启了真正的人的生活。但这个“几希”并不同于十八世纪德国的人文主义者，如歌德，借助柏拉图的“理型 ”而提出的“人格”概念，它是内在生命、生活而逆觉、证悟出的一个精神实体。这个精神实体可以切就孟子的“性善论”而说“性体”，亦可以切就阳明“良知教 ”而说“心体”，其实皆是一“道德的主体”。中国文化始终肯定在人的生命中有一个完全可以自我作主的道德主体，只要去作操持涵养的工夫，则这个主体便自然会在生命中呈现。故孔子曰：“仁远乎哉？我欲仁，斯仁至矣。”（《论语?述而》），“为仁由己，而由人乎哉”（《论语?颜渊》）；孟子亦曰：“恻隐之心，仁也；羞恶之心，义也；恭敬之心，礼也；是非之心，智也。仁、义、礼、智，非由外铄我也，我固有之也，弗思耳矣。故曰，求则得之，舍则失之”（《孟子?告子上》）。在中国文化里，通过人格的修养工夫而呈现的道德主体（心体或性体），才是真正的人之“本”，人文世界即是由这个“本”所开启。正因为人文世界系由道德主体所开启，故它并不是一种义理系统，而是一种精神境界，乃至强健的生活态度（“强健”取“天行健，君子以自强不息”之意），这就不是西方的人文主义所能尽其意的了。所以唐君毅说：“将中国之人文主义译为Humanism时，在内涵上受了委屈。”中国的人文主义是在由道德主体所开启的精神境界中综摄一切真理，消融一切价值，即在这种精神境界的润泽中，一切真理与价值不至于发生偏执与流弊。这若借用庄子的话说，便是：“其于本也，宏大而辟，深闳而肆，其于宗也，可谓稠适而上遂矣”（《庄子?天下》）。</p>
 					
 					</div><!-- /entry -->	
 				</div><!-- /post -->				
 							
-				<div class="post" id="post-1419">
+				<div class="post" id="post-945">
 					<div class="entry">
-							<span class="date"><a href="http://www.xieziming.com/archives/1419.html" title="Permalink to 于两情相悦下独守一方">于两情相悦下独守一方</a> In <a href="http://www.xieziming.com/topic/ci-jian-shan-shui" rel="category tag">此间山水</a> , Comments: <a href="http://www.xieziming.com/archives/1419.html#respond">0</a> , Previews: <a href="http://www.xieziming.com/analytics" target="_blank">131</a> , Read: <a href="http://www.xieziming.com/analytics" target="_blank">838</a> , Tue, Mar 3 2009</span>
-							<p>好久不曾提笔，好久忘却了该记下一些供将来回忆的东西。</p>
-<p>这个好久，已经趋于很久了，对于一个我这样的人，这个“很久”可能是我文字路上致命的一段沟壑。</p>
-<p>我不是一个能随心所欲灵感顿悟墨水涓流一刻思绪可换来下笔千言的人，我需要不停的锻炼我的神经活跃我的思维使我时刻处在胡思乱想的状态，这样我才能不至于陷于提笔无言搔头揉眼的痛苦状态。</p>
-<p>可是近来的生活近来的调情格调使我忘却自己天生的缺陷愚钝后天的无为无知。以前不相信什么壮志未酬报国无门能够催生雄浑壮阔弦惊天动的文章，不相信爱情缺伤亲情迷失能够迸发扣人心地婉转流恋的诗词，当我现在处于温柔之乡中，我完全相信了这一点。</p>
-<p>以前的我，动辄思苦，爱情的缺失使我迷恋文字的诉唱，我可以终日流走，沉怀于一个人的世界，追寻一段不存在的稀美爱情，这时是凄美且惆怅的，这时就激发我内心潜在的忧郁和伤悲，热闹中我寻找孤单，孤单中我追求热闹，看着众人疯狂而舞，我迷失自己舞到疯狂，直到自己筋疲力尽，一个人落魄离开。独行的路上，我是清醒的，清醒得痛苦，痛苦得我必须把此转移到其他东西上去，于是我选择了文字。然我于文字又不在行，笨拙而彳亍的进行着文句的再造，不为艺术品味，只为日后往事的迷恋。就这样一路彳亍，还留下了些许文句，我是欣慰的。</p>
+							<span class="date"><a href="http://www.xieziming.com/archives/945.html" title="Permalink to 领袖出巡">领袖出巡</a> In <a href="http://www.xieziming.com/topic/travel" rel="category tag">旅行</a> , Comments: <a href="http://www.xieziming.com/archives/945.html#comments">2</a> , Previews: <a href="http://www.xieziming.com/analytics" target="_blank">110</a> , Read: <a href="http://www.xieziming.com/analytics" target="_blank">960</a> , Wed, Mar 11 2009</span>
+							<p><a href="http://images.xieziming.com/upload/2009/nontopic/9.jpg" class="highslide" onclick="return hs.expand(this)"><img src="http://images.xieziming.com/upload/2009/nontopic/9.jpg"  alt="" /></a></p>
 					
 					</div><!-- /entry -->	
 				</div><!-- /post -->				
-						<div class="custom-pagenavi"><a href="http://www.xieziming.com/recent/" class="page" title="&laquo; First">&laquo; First</a> <a href="http://www.xieziming.com/recent/page/329" class="page" title="329">329</a> <span class="current">330</span><a href="http://www.xieziming.com/recent/page/331" class="page" title="331">331</a> <a href="http://www.xieziming.com/recent/page/332" class="page" title="332">332</a> <a href="http://www.xieziming.com/recent/page/333" class="page" title="333">333</a> <a href="http://www.xieziming.com/recent/page/334" class="page" title="334">334</a> <a href="http://www.xieziming.com/recent/page/335" class="page" title="335">335</a> <a href="http://www.xieziming.com/recent/page/336" class="page" title="336">336</a> <a href="http://www.xieziming.com/recent/page/337" class="page" title="337">337</a> <a href="http://www.xieziming.com/recent/page/338" class="page" title="338">338</a> <a href="http://www.xieziming.com/recent/page/411" class="page" title="始于 2006 &raquo">始于 2006 &raquo</a> </div>	
+						<div class="custom-pagenavi"><a href="http://www.xieziming.com/recent/" class="page" title="&laquo; First">&laquo; First</a> <a href="http://www.xieziming.com/recent/page/329" class="page" title="329">329</a> <span class="current">330</span><a href="http://www.xieziming.com/recent/page/331" class="page" title="331">331</a> <a href="http://www.xieziming.com/recent/page/332" class="page" title="332">332</a> <a href="http://www.xieziming.com/recent/page/333" class="page" title="333">333</a> <a href="http://www.xieziming.com/recent/page/334" class="page" title="334">334</a> <a href="http://www.xieziming.com/recent/page/335" class="page" title="335">335</a> <a href="http://www.xieziming.com/recent/page/336" class="page" title="336">336</a> <a href="http://www.xieziming.com/recent/page/337" class="page" title="337">337</a> <a href="http://www.xieziming.com/recent/page/338" class="page" title="338">338</a> <a href="http://www.xieziming.com/recent/page/413" class="page" title="始于 2006 &raquo">始于 2006 &raquo</a> </div>	
 			
 		</div><!-- /content -->		
 <div id="sidebar">
@@ -161,32 +148,32 @@ Set &#8216;tap0&#8217; persistent and owned by uid 0</p>
 </div><!-- /search -->	<div id="widgets">
 <div class="widget"><h3>Calendar</h3>
 <table id="wp-calendar">
-  									<caption>December 2016</caption>
+  									<caption>January 2017</caption>
   									<thead>
-                    <tr><th scope="col" title="S">S</th><th scope="col" title="M">M</th><th scope="col" title="T">T</th><th scope="col" title="W">W</th><th scope="col" title="T">T</th><th scope="col" title="F">F</th><th scope="col" title="S">S</th></tr></thead><tbody><tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>1</td><td>2</td><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">3<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">加班</span><br/><span class="time" style="color:#000000; " > Time : 14:29 - 22:29</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">这周继续加班做bug fix。</p><span class="event-title" style="color:#000000">小梁总婚礼</span><br/><span class="time" style="color:#000000; " > Time : 18:21 - 21:21</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">去长隆酒店参加梁伟彬和黄佩仪的婚礼，和去年小锅同一个地儿。菁菁也去了，虽坐同一桌但也是没讲一句话。</p></span></a></span></td></tr><tr><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">4<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">加班</span><br/><span class="time" style="color:#000000; " > Time : 14:29 - 22:29</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">这周继续加班做bug fix。</p></span></a></span></td><td>5</td><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">6<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">汉堡王</span><br/><span class="time" style="color:#000000; " > Time : 12:33 - 13:33</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">汉堡王最近做活动，逢二、四、六银联闪付满30减20，蛮划算的。</p></span></a></span></td><td>7</td><td>8</td><td>9</td><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">10<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">Spring Boot</span><br/><span class="time" style="color:#000000; " > Time : 12:19 - 22:19</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">宅在家看Spring Boot，准备最近把这本书看完，想起刚毕业那几年，每周至少消灭一本书。</p></span></a></span></td></tr><tr><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">11<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">加班</span><br/><span class="time" style="color:#000000; " > Time : 14:31 - 22:31</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">这周还是得继续加班做bug fix，都麻木了。</p></span></a></span></td><td>12</td><td>13</td><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">14<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">WFH</span><br/><span class="time" style="color:#000000; " > Time : 09:36 - 20:36</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">有点累，在家上班好了，中午顺便去买了肉回来自己炖汤。</p></span></a></span></td><td>15</td><td>16</td><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">17<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">《测试架构师修炼之道》</span><br/><span class="time" style="color:#000000; " > Time : 14:26 - 22:26</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">虽然不再做测试，也不再做测试开发，但有机会还是得看些书总结下。</p></span></a></span></td></tr><tr><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">18<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">《血战钢锯岭》</span><br/><span class="time" style="color:#000000; " > Time : 21:18 - 23:28</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">晚上和小锅去看，蛮感人的。吃完去沙湾吃猪杂粥，应该是我在那吃到的最新鲜的一次了。</p></span></a></span></td><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">19<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">CentOS</span><br/><span class="time" style="color:#000000; " > Time : 14:11 - 18:11</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">终于有点时间来把那盒子的win7转成CentOS来做server。配置vsftp花了我太多的时间。。。</p></span></a></span></td><td>20</td><td>21</td><td>22</td><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">23<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">体检</span><br/><span class="time" style="color:#000000; " > Time : 09:45 - 12:05</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">推到年底快过期了才终于来体检了，可惜还是没能早起，9点45才到爱康国宾，12点才搞完。</p></span></a></span></td><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">24<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">GitHub Pages</span><br/><span class="time" style="color:#000000; " > Time : 12:06 - 23:06</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">准备把博客页面全部静态化后放到GitHub上去，做个静态网站算了，不再host一个虚拟主机了。</p><span class="event-title" style="color:#000000">《你的名字》</span><br/><span class="time" style="color:#000000; " > Time : 19:12 - 21:21</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">都快下线了才想着赶紧找个地方把它看完，蛮不错的日本动画电影~</p></span></a></span></td></tr><tr><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">25<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">迁移完成</span><br/><span class="time" style="color:#000000; " > Time : 14:08 - 23:08</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">花了将近两天的时间把wordpress静态化下来，连同那近万张照片一起上传到GitHub。</p></span></a></span></td><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">26<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">日历静态化</span><br/><span class="time" style="color:#000000; " > Time : 15:10 - 20:10</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">昨天的静态化还是没能把日历插件搞定，今天又花了一下午的时间来搞这个。终于最后搞完了！</p></span></a></span></td><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td></tr><tr><td colspan="3" id="prev"><a href="http://www.xieziming.com/?month=nov&yr=2016">&laquo; Prev</a></td><td colspan="4" id="next"><a href="http://www.xieziming.com/?month=jan&yr=2017">Next &raquo;</a></td></tr></tbody></table>
+                    <tr><th scope="col" title="S">S</th><th scope="col" title="M">M</th><th scope="col" title="T">T</th><th scope="col" title="W">W</th><th scope="col" title="T">T</th><th scope="col" title="F">F</th><th scope="col" title="S">S</th></tr></thead><tbody><tr><tr><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">1<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">新年</span><br/><span class="time" style="color:#000000; " > Time : 00:10 - 00:10</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">出去过年的传统今年戛然而止，有点感冒，也是刚去完台北，来不及办日本的签证去北海道。</p></span></a></span></td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td></tr><tr><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td></tr><tr><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td><td>21</td></tr><tr><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td><td>28</td></tr><tr><td>29</td><td>30</td><td>31</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td colspan="3" id="prev"><a href="http://www.xieziming.com/?month=dec&yr=2016">&laquo; Prev</a></td><td colspan="4" id="next"><a href="http://www.xieziming.com/?month=feb&yr=2017">Next &raquo;</a></td></tr></tbody></table>
 <div class="widgetbottom"></div></div><!--/widget-->	
   <div class="widget">
  		<h3>Recent Posts</h3>
 		<ul>
-<li><a href="http://www.xieziming.com/archives/9579.html" class="dashedline" title="闽南 · 泉州">闽南 &middot; 泉州</a></li><li><a href="http://www.xieziming.com/archives/9578.html" class="dashedline" title="顺化 · HUE">顺化 &middot; HUE</a></li><li><a href="http://www.xieziming.com/archives/9577.html" class="dashedline" title="会安 · 春卷">会安 &middot; 春卷</a></li><li><a href="http://www.xieziming.com/archives/9576.html" class="dashedline" title="会安 · 夜灯">会安 &middot; 夜灯</a></li><li><a href="http://www.xieziming.com/archives/9575.html" class="dashedline" title="会安古镇">会安古镇</a></li><li><a href="http://www.xieziming.com/archives/9573.html" class="dashedline" title="岘港">岘港</a></li><li><a href="http://www.xieziming.com/archives/9535.html" class="dashedline" title="罗马">罗马</a></li><li><a href="http://www.xieziming.com/archives/9534.html" class="dashedline" title="卢浮宫">卢浮宫</a></li>						
+<li><a href="http://www.xieziming.com/archives/9602.html" class="dashedline" title="瑞芳 · 九份">瑞芳 &middot; 九份</a></li><li><a href="http://www.xieziming.com/archives/9601.html" class="dashedline" title="台北瑞芳">台北瑞芳</a></li><li><a href="http://www.xieziming.com/archives/9608.html" class="dashedline" title="台湾 · 艺术展">台湾 &middot; 艺术展</a></li><li><a href="http://www.xieziming.com/archives/9609.html" class="dashedline" title="中正纪念堂">中正纪念堂</a></li><li><a href="http://www.xieziming.com/archives/9603.html" class="dashedline" title="台北故宫">台北故宫</a></li><li><a href="http://www.xieziming.com/archives/9616.html" class="dashedline" title="Hualien">Hualien</a></li><li><a href="http://www.xieziming.com/archives/9607.html" class="dashedline" title="花莲 · 七星潭">花莲 &middot; 七星潭</a></li><li><a href="http://www.xieziming.com/archives/9599.html" class="dashedline" title="台北夜市">台北夜市</a></li>						
 		</ul>
   	<div class="widgetbottom"></div>
 	</div>
 	<div class="widget">
     <h3>Comments</h3>
     <ul>
-<li><a href="http://www.xieziming.com/dev/post-views#comment-102651" class="dashedline" title="hi dear, i wanna use">hi dear, i...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-102425" class="dashedline" title="You need to clear all">You need to...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-102403" class="dashedline" title="how can i reset _all_data?
+<li><a href="http://www.xieziming.com/dev/post-views#comment-102651" class="dashedline" title="hi dear, i wanna use">hi dear, i w...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-102425" class="dashedline" title="You need to clear all">You need to cle...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-102403" class="dashedline" title="how can i reset _all_data?
 
-best">how can i res...</a></li><li><a href="http://www.xieziming.com/calendar#comment-101819" class="dashedline" title="不错呐">不错呐</a></li><li><a href="http://www.xieziming.com/archives/9213.html#comment-101814" class="dashedline" title="我就是随便看看">我就是随便看看</a></li><li><a href="http://www.xieziming.com/archives/6717.html#comment-101385" class="dashedline" title="Is the same plagin for">Is the same...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-98090" class="dashedline" title="install this plugin on wordpress">install th...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-89841" class="dashedline" title="Hello Dear Suny,
+best">how can i rese...</a></li><li><a href="http://www.xieziming.com/calendar#comment-101819" class="dashedline" title="不错呐">不错呐</a></li><li><a href="http://www.xieziming.com/archives/9213.html#comment-101814" class="dashedline" title="我就是随便看看">我就是随便看看</a></li><li><a href="http://www.xieziming.com/archives/6717.html#comment-101385" class="dashedline" title="Is the same plagin for">Is the same p...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-98090" class="dashedline" title="install this plugin on wordpress">install thi...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-89841" class="dashedline" title="Hello Dear Suny,
 
-I install your">Hello Dear Su...</a></li>    </ul>
+I install your">Hello Dear...</a></li>    </ul>
     <div class="widgetbottom"></div>
   </div> 
 	
 	<div class="widget">
  		<h3>Rand Posts</h3>
 		<ul>
-<li><a href="http://www.xieziming.com/archives/9404.html" class="dashedline" title="大堡礁（一）">大堡礁（一）</a></li><li><a href="http://www.xieziming.com/archives/6406.html" class="dashedline" title="QTP DataTable">QTP DataTable</a></li><li><a href="http://www.xieziming.com/archives/9507.html" class="dashedline" title="布拉格（二）">布拉格（二）</a></li><li><a href="http://www.xieziming.com/archives/3984.html" class="dashedline" title="南京路夜景">南京路夜景</a></li><li><a href="http://www.xieziming.com/archives/4945.html" class="dashedline" title="呼伦贝尔（五）">呼伦贝尔（五）</a></li><li><a href="http://www.xieziming.com/archives/7290.html" class="dashedline" title="梅里雪山（二）">梅里雪山（二）</a></li><li><a href="http://www.xieziming.com/archives/245.html" class="dashedline" title="准备考试">准备考试</a></li><li><a href="http://www.xieziming.com/archives/6027.html" class="dashedline" title="大美新疆（三）">大美新疆（三）</a></li>	
+<li><a href="http://www.xieziming.com/archives/8948.html" class="dashedline" title="东南亚美食（二）">东南亚美食（二）</a></li><li><a href="http://www.xieziming.com/archives/104.html" class="dashedline" title="凯威自助">凯威自助</a></li><li><a href="http://www.xieziming.com/archives/8506.html" class="dashedline" title="Java Socket长连接">Java Socket长连接</a></li><li><a href="http://www.xieziming.com/archives/5972.html" class="dashedline" title="十八埔">十八埔</a></li><li><a href="http://www.xieziming.com/archives/4408.html" class="dashedline" title="美食系列（23）">美食系列（23）</a></li><li><a href="http://www.xieziming.com/archives/15.html" class="dashedline" title="舍友的第一封情诗">舍友的第一封情诗</a></li><li><a href="http://www.xieziming.com/archives/6618.html" class="dashedline" title="黄金交易风险控制">黄金交易风险控制</a></li><li><a href="http://www.xieziming.com/archives/9269.html" class="dashedline" title="梨花女子大学（一）">梨花女子大学（一）</a></li>	
 		</ul>
   	<div class="widgetbottom"></div>
 	</div>
@@ -195,7 +182,7 @@ I install your">Hello Dear Su...</a></li>    </ul>
 </div><!-- /sidebar --></div><!-- /main -->
 <div id="footer">
 <p align="left">© <a href="http://www.xieziming.com/about" target="_blank"> 明 · 明 · 童 · 鞋</a></p>
-<!--93 queries in 12.015 seconds.-->
+<!--93 queries in 11.983 seconds.-->
 <script>
 var _hmt = _hmt || [];
 (function() {

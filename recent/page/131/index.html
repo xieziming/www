@@ -14,7 +14,7 @@
 <link rel='dns-prefetch' href='//s.w.org' />
 <link rel="alternate" type="application/rss+xml" title="谢子明 &raquo; Recent Comments Feed" href="http://www.xieziming.com/recent/feed" />
 		<script type="text/javascript">
-			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/xieziming.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.7"}};
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/www.xieziming.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.7"}};
 			!function(a,b,c){function d(a){var b,c,d,e,f=String.fromCharCode;if(!k||!k.fillText)return!1;switch(k.clearRect(0,0,j.width,j.height),k.textBaseline="top",k.font="600 32px Arial",a){case"flag":return k.fillText(f(55356,56826,55356,56819),0,0),!(j.toDataURL().length<3e3)&&(k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,65039,8205,55356,57096),0,0),b=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,55356,57096),0,0),c=j.toDataURL(),b!==c);case"emoji4":return k.fillText(f(55357,56425,55356,57341,8205,55357,56507),0,0),d=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55357,56425,55356,57341,55357,56507),0,0),e=j.toDataURL(),d!==e}return!1}function e(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i,j=b.createElement("canvas"),k=j.getContext&&j.getContext("2d");for(i=Array("flag","emoji4"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
 		</script>
 		<style type="text/css">
@@ -99,67 +99,77 @@ img.emoji {
 <div id="main" class="mainbg">
 		<div id="content">
 									
-				<div class="post" id="post-7377">
+				<div class="post" id="post-7457">
 					<div class="entry">
-							<span class="date"><a href="http://www.xieziming.com/archives/7377.html" title="Permalink to VBS中的类">VBS中的类</a> In <a href="http://www.xieziming.com/topic/coding" rel="category tag">程序</a> , Comments: <a href="http://www.xieziming.com/archives/7377.html#respond">0</a> , Previews: <a href="http://www.xieziming.com/analytics" target="_blank">4080</a> , Read: <a href="http://www.xieziming.com/analytics" target="_blank">917</a> , Mon, Sep 17 2012</span>
-							<p>(1)Initialize 事件,在创建类的实例时发生（新建）此事件。</p>
+							<span class="date"><a href="http://www.xieziming.com/archives/7457.html" title="Permalink to Firefox插件制作">Firefox插件制作</a> In <a href="http://www.xieziming.com/topic/coding" rel="category tag">程序</a> , Comments: <a href="http://www.xieziming.com/archives/7457.html#respond">0</a> , Previews: <a href="http://www.xieziming.com/analytics" target="_blank">1092</a> , Read: <a href="http://www.xieziming.com/analytics" target="_blank">904</a> , Sat, Oct 6 2012</span>
+							<p>1、Firefox 的界面引擎是非常出色的，可以用XML和Javascript来定义界面的布局、属性、动作等。界面的布局XML是Firefox自定义的格式，叫做XUL ，XUL提供对界面各种元素如：按钮、菜单、工具栏等的描述，并将各个界面元素的动作以事件的形式邦定到Javascript. 这一点和HTML十分类似。</p>
+<p>2、Firefox 的插件是一个有特定目录结构和文件的文件夹，打包成zip文件后，再重命名为 XXX.xpi，便成了一个插件。通常的目录文件结构如下：</p>
 
-<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #E56717; font-weight: bold;">Private</span> <span style="color: #E56717; font-weight: bold;">Sub</span> Class_Initialize()
-    statements
-<span style="color: #8D38C9; font-weight: bold;">End</span> <span style="color: #E56717; font-weight: bold;">Sub</span></pre></div></div>
+<div class="wp_code"><div class="pre"><pre class="html" style="font-family:'Times New Roman',Garamond, Times;">extension.xpi:   
+/install.rdf
+/components/*
+/components/cmdline.js
+/defaults/
+/defaults/preferences/*.js
+/plugins/*
+/chrome.manifest
+/chrome/icons/default/*
+/chrome/
+/chrome/content/</pre></div></div>
 
-<p>当类初始化时，statements部分由零个或多个将要运行的代码语句组成。</p>
-<p>(2)Terminate 事件,在所关联的类的实例终止（销毁）时发生此事件。</p>
-
-<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #E56717; font-weight: bold;">Private</span> <span style="color: #E56717; font-weight: bold;">Sub</span> Class_Terminate()
-    statements
-<span style="color: #8D38C9; font-weight: bold;">End</span> <span style="color: #E56717; font-weight: bold;">Sub</span></pre></div></div>
-
-<p>当类初始化时，statements 部分由零个或多个将要运行的代码语句组成。</p>
+<p>这个目录中除了 chrome目录  chrome.manifest install.rdf  这三个以外都不是必须的。</p>
 					
 					</div><!-- /entry -->	
 				</div><!-- /post -->				
 							
-				<div class="post" id="post-7366">
+				<div class="post" id="post-7451">
 					<div class="entry">
-							<span class="date"><a href="http://www.xieziming.com/archives/7366.html" title="Permalink to QTP控制Java程序原理">QTP控制Java程序原理</a> In <a href="http://www.xieziming.com/topic/testing" rel="category tag">测试</a> , Comments: <a href="http://www.xieziming.com/archives/7366.html#respond">0</a> , Previews: <a href="http://www.xieziming.com/analytics" target="_blank">3528</a> , Read: <a href="http://www.xieziming.com/analytics" target="_blank">1779</a> , Sun, Sep 16 2012</span>
-							<p>首先，添加如下环境变量：</p>
+							<span class="date"><a href="http://www.xieziming.com/archives/7451.html" title="Permalink to Javascript之DOM">Javascript之DOM</a> In <a href="http://www.xieziming.com/topic/coding" rel="category tag">程序</a> , Comments: <a href="http://www.xieziming.com/archives/7451.html#comments">1</a> , Previews: <a href="http://www.xieziming.com/analytics" target="_blank">1869</a> , Read: <a href="http://www.xieziming.com/analytics" target="_blank">778</a> , Thu, Oct 4 2012</span>
+							<p>1.访问节点：<br />
+访问html元素：var oHtml=document.documentElement;<br />
+获取head元素：var oHead=oHtml.firstChild;<br />
+获取body元素：var oBody=oHtml.lastChild; 或者 var oBody=document.body;</p>
+<p>也可以通过childNodes来做同样的工作：<br />
+var oHead=oHtml.childNodes[0] 或者 oHtml.childNodes.item(0);<br />
+var oBody=oHtml.childNodes[1] 或者 oHtml.childNodes.item(1);</p>
+<p>判断节点间关系：</p>
 
-<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;">_JAVA_OPTIONS：
-<span style="color: #339933;">-</span>Xrunjvmhook <span style="color: #339933;">-</span>Xbootclasspath<span style="color: #339933;">/</span>a<span style="color: #339933;">:</span>C<span style="color: #339933;">:</span>\PROGRA~<span style="color: #cc66cc;">1</span>\HP\QUICKT~<span style="color: #cc66cc;">1</span>\bin\JAVA_S~<span style="color: #cc66cc;">1</span>\classes<span style="color: #339933;">;</span>C<span style="color: #339933;">:</span>\PROGRA~<span style="color: #cc66cc;">1</span>\HP\QUICKT~<span style="color: #cc66cc;">1</span>\bin\JAVA_S~<span style="color: #cc66cc;">1</span>\classes\jasmine.<span style="color: #006633;">jar</span>
-&nbsp;
-JAVA_TOOL_OPTIONS：
-<span style="color: #339933;">-</span>agentlib<span style="color: #339933;">:</span>jvmhook</pre></div></div>
+<div class="wp_code"><div class="pre"><pre class="javascript" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000066;">alert</span><span style="color: #009900;">&#40;</span>oHead.<span style="color: #660066;">parentNode</span><span style="color: #339933;">==</span>oHtml<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  
+<span style="color: #000066;">alert</span><span style="color: #009900;">&#40;</span>oBody.<span style="color: #660066;">previousSibling</span><span style="color: #339933;">==</span>oHead<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #000066;">alert</span><span style="color: #009900;">&#40;</span>oHead.<span style="color: #660066;">nextSibling</span><span style="color: #339933;">==</span>oBody<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #000066;">alert</span><span style="color: #009900;">&#40;</span>oHead.<span style="color: #660066;">ownerDocument</span><span style="color: #339933;">==</span>document<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre></div></div>
 
-<p>此时再起的JVM的时候会有如下log出现：</p>
+<p>2.检测节点类型：<br />
+通过节点的nodeType属性来检验节点类型：</p>
 
-<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;">Picked up JAVA_TOOL_OPTIONS<span style="color: #339933;">:</span> <span style="color: #339933;">-</span>agentlib<span style="color: #339933;">:</span>jvmhook
-Picked up _JAVA_OPTIONS<span style="color: #339933;">:</span> <span style="color: #339933;">-</span>Xrunjvmhook <span style="color: #339933;">-</span>Xbootclasspath<span style="color: #339933;">/</span>a<span style="color: #339933;">:</span>\PROGRA~<span style="color: #cc66cc;">1</span>\HP\QUICKT~<span style="color: #cc66cc;">1</span>\bin\JAVA_S~<span style="color: #cc66cc;">1</span>\classes<span style="color: #339933;">;</span>D<span style="color: #339933;">:</span>\PROGRA~<span style="color: #cc66cc;">1</span>\HP\QUICKT~<span style="color: #cc66cc;">1</span>\bin\JAVA_S~<span style="color: #cc66cc;">1</span>\classes\jasmine.<span style="color: #006633;">jar</span>
-Loading HP QuickTest Professional Java Support <span style="color: #009900;">&#40;</span>version 10.0.2297.0<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#40;</span>SUN 1.5.0_09<span style="color: #009900;">&#41;</span></pre></div></div>
+<div class="wp_code"><div class="pre"><pre class="javascript" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000066;">alert</span><span style="color: #009900;">&#40;</span>document.<span style="color: #660066;">nodeType</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>  <span style="color: #006600; font-style: italic;">//输出9</span></pre></div></div>
 
 					
 					</div><!-- /entry -->	
 				</div><!-- /post -->				
 							
-				<div class="post" id="post-7364">
+				<div class="post" id="post-7446">
 					<div class="entry">
-							<span class="date"><a href="http://www.xieziming.com/archives/7364.html" title="Permalink to Java启动参数">Java启动参数</a> In <a href="http://www.xieziming.com/topic/coding" rel="category tag">程序</a> , Comments: <a href="http://www.xieziming.com/archives/7364.html#respond">0</a> , Previews: <a href="http://www.xieziming.com/analytics" target="_blank">591</a> , Read: <a href="http://www.xieziming.com/analytics" target="_blank">843</a> , Sun, Sep 16 2012</span>
-							<p>java启动参数共分为三类；<br />
-其一是标准参数 （-），所有的JVM实现都必须实现这些参数的功能，而且向后兼容；<br />
-其二是非标准参数 （-X），默认jvm实现这些参数的功能，但是并不保证所有jvm实现都满足，且不保证向后兼容；<br />
-其三是非Stable参数 （-XX），此类参数各个jvm实现会有所不同，将来可能会随时取消，需要慎重使用；<br />
-本文主要描述标准参数部分，剩下的两个部分将会陆续推出； </p>
-<p><strong>标准参数 列表如下：</strong><br />
-<strong>-client </strong><br />
-设置jvm使用client模式，特点是启动速度比较快，但运行时性能和内存管理效率不高，通常用于客户端应用程序或者PC应用开发和调试。 </p>
-<p><strong>-server </strong><br />
-设置jvm使server模式，特点是启动速度比较慢，但运行时性能和内存管理效率很高，适用于生产环境。在具有64位能力的jdk环境下将默认启用该模式，而忽略-client参数。 </p>
-<p><strong>-agentlib:libname[=options] </strong><br />
-用于装载本地lib包,其中libname为本地代理库文件名，默认搜索路径为环境变量PATH中的路径，options为传给本地库启动时的参数，多个参数之间用逗号分隔。在 Windows平台上jvm搜索本地库名为libname.dll的文件，在linux上jvm搜索本地库名为libname.so的文件，搜索路径环境变量在不同系统上有所不同，比如Solaries上就默认搜索LD_LIBRARY_PATH。</p>
+							<span class="date"><a href="http://www.xieziming.com/archives/7446.html" title="Permalink to DOM">DOM</a> In <a href="http://www.xieziming.com/topic/coding" rel="category tag">程序</a> , Comments: <a href="http://www.xieziming.com/archives/7446.html#respond">0</a> , Previews: <a href="http://www.xieziming.com/analytics" target="_blank">1243</a> , Read: <a href="http://www.xieziming.com/analytics" target="_blank">668</a> , Thu, Oct 4 2012</span>
+							<p><strong>查找并访问节点：</strong><br />
+(1)通过使用 getElementById() 和 getElementsByTagName() 方法<br />
+(2)通过使用一个元素节点的 parentNode、firstChild 以及 lastChild 属性</p>
+<p>getElementById() 和 getElementsByTagName() 这两种方法，可查找整个 HTML 文档中的任何 HTML 元素。这两种方法会忽略文档的结构。假如您希望查找文档中所有的 </p>
+<p> 元素，getElementsByTagName() 会把它们全部找到，不管 </p>
+<p> 元素处于文档中的哪个层次。同时，getElementById() 方法也会返回正确的元素，不论它被隐藏在文档结构中的什么位置。</p>
+<p>注：getElementById() 无法工作在 XML 中。在 XML 文档中，您必须通过拥有类型 id 的属性来进行搜索，而此类型必须在 XML DTD 中进行声明。</p>
+
+<div class="wp_code"><div class="pre"><pre class="javascript" style="font-family:'Times New Roman',Garamond, Times;">document.<span style="color: #660066;">getElementById</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'maindiv'</span><span style="color: #009900;">&#41;</span>.<span style="color: #660066;">getElementsByTagName</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;p&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre></div></div>
+
+<p><strong>节点列表(nodeList)：</strong><br />
+当我们使用节点列表时，通常要把此列表保存在一个变量中，就像这样：</p>
+
+<div class="wp_code"><div class="pre"><pre class="javascript" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #003366; font-weight: bold;">var</span> x<span style="color: #339933;">=</span>document.<span style="color: #660066;">getElementsByTagName</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;p&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre></div></div>
+</p>
 					
 					</div><!-- /entry -->	
 				</div><!-- /post -->				
-						<div class="custom-pagenavi"><a href="http://www.xieziming.com/recent/" class="page" title="&laquo; First">&laquo; First</a> <a href="http://www.xieziming.com/recent/page/130" class="page" title="130">130</a> <span class="current">131</span><a href="http://www.xieziming.com/recent/page/132" class="page" title="132">132</a> <a href="http://www.xieziming.com/recent/page/133" class="page" title="133">133</a> <a href="http://www.xieziming.com/recent/page/134" class="page" title="134">134</a> <a href="http://www.xieziming.com/recent/page/135" class="page" title="135">135</a> <a href="http://www.xieziming.com/recent/page/136" class="page" title="136">136</a> <a href="http://www.xieziming.com/recent/page/137" class="page" title="137">137</a> <a href="http://www.xieziming.com/recent/page/138" class="page" title="138">138</a> <a href="http://www.xieziming.com/recent/page/139" class="page" title="139">139</a> <a href="http://www.xieziming.com/recent/page/411" class="page" title="始于 2006 &raquo">始于 2006 &raquo</a> </div>	
+						<div class="custom-pagenavi"><a href="http://www.xieziming.com/recent/" class="page" title="&laquo; First">&laquo; First</a> <a href="http://www.xieziming.com/recent/page/130" class="page" title="130">130</a> <span class="current">131</span><a href="http://www.xieziming.com/recent/page/132" class="page" title="132">132</a> <a href="http://www.xieziming.com/recent/page/133" class="page" title="133">133</a> <a href="http://www.xieziming.com/recent/page/134" class="page" title="134">134</a> <a href="http://www.xieziming.com/recent/page/135" class="page" title="135">135</a> <a href="http://www.xieziming.com/recent/page/136" class="page" title="136">136</a> <a href="http://www.xieziming.com/recent/page/137" class="page" title="137">137</a> <a href="http://www.xieziming.com/recent/page/138" class="page" title="138">138</a> <a href="http://www.xieziming.com/recent/page/139" class="page" title="139">139</a> <a href="http://www.xieziming.com/recent/page/413" class="page" title="始于 2006 &raquo">始于 2006 &raquo</a> </div>	
 			
 		</div><!-- /content -->		
 <div id="sidebar">
@@ -172,32 +182,32 @@ Loading HP QuickTest Professional Java Support <span style="color: #009900;">&#4
 </div><!-- /search -->	<div id="widgets">
 <div class="widget"><h3>Calendar</h3>
 <table id="wp-calendar">
-  									<caption>December 2016</caption>
+  									<caption>January 2017</caption>
   									<thead>
-                    <tr><th scope="col" title="S">S</th><th scope="col" title="M">M</th><th scope="col" title="T">T</th><th scope="col" title="W">W</th><th scope="col" title="T">T</th><th scope="col" title="F">F</th><th scope="col" title="S">S</th></tr></thead><tbody><tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>1</td><td>2</td><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">3<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">加班</span><br/><span class="time" style="color:#000000; " > Time : 14:29 - 22:29</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">这周继续加班做bug fix。</p><span class="event-title" style="color:#000000">小梁总婚礼</span><br/><span class="time" style="color:#000000; " > Time : 18:21 - 21:21</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">去长隆酒店参加梁伟彬和黄佩仪的婚礼，和去年小锅同一个地儿。菁菁也去了，虽坐同一桌但也是没讲一句话。</p></span></a></span></td></tr><tr><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">4<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">加班</span><br/><span class="time" style="color:#000000; " > Time : 14:29 - 22:29</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">这周继续加班做bug fix。</p></span></a></span></td><td>5</td><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">6<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">汉堡王</span><br/><span class="time" style="color:#000000; " > Time : 12:33 - 13:33</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">汉堡王最近做活动，逢二、四、六银联闪付满30减20，蛮划算的。</p></span></a></span></td><td>7</td><td>8</td><td>9</td><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">10<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">Spring Boot</span><br/><span class="time" style="color:#000000; " > Time : 12:19 - 22:19</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">宅在家看Spring Boot，准备最近把这本书看完，想起刚毕业那几年，每周至少消灭一本书。</p></span></a></span></td></tr><tr><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">11<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">加班</span><br/><span class="time" style="color:#000000; " > Time : 14:31 - 22:31</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">这周还是得继续加班做bug fix，都麻木了。</p></span></a></span></td><td>12</td><td>13</td><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">14<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">WFH</span><br/><span class="time" style="color:#000000; " > Time : 09:36 - 20:36</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">有点累，在家上班好了，中午顺便去买了肉回来自己炖汤。</p></span></a></span></td><td>15</td><td>16</td><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">17<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">《测试架构师修炼之道》</span><br/><span class="time" style="color:#000000; " > Time : 14:26 - 22:26</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">虽然不再做测试，也不再做测试开发，但有机会还是得看些书总结下。</p></span></a></span></td></tr><tr><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">18<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">《血战钢锯岭》</span><br/><span class="time" style="color:#000000; " > Time : 21:18 - 23:28</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">晚上和小锅去看，蛮感人的。吃完去沙湾吃猪杂粥，应该是我在那吃到的最新鲜的一次了。</p></span></a></span></td><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">19<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">CentOS</span><br/><span class="time" style="color:#000000; " > Time : 14:11 - 18:11</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">终于有点时间来把那盒子的win7转成CentOS来做server。配置vsftp花了我太多的时间。。。</p></span></a></span></td><td>20</td><td>21</td><td>22</td><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">23<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">体检</span><br/><span class="time" style="color:#000000; " > Time : 09:45 - 12:05</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">推到年底快过期了才终于来体检了，可惜还是没能早起，9点45才到爱康国宾，12点才搞完。</p></span></a></span></td><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">24<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">GitHub Pages</span><br/><span class="time" style="color:#000000; " > Time : 12:06 - 23:06</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">准备把博客页面全部静态化后放到GitHub上去，做个静态网站算了，不再host一个虚拟主机了。</p><span class="event-title" style="color:#000000">《你的名字》</span><br/><span class="time" style="color:#000000; " > Time : 19:12 - 21:21</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">都快下线了才想着赶紧找个地方把它看完，蛮不错的日本动画电影~</p></span></a></span></td></tr><tr><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">25<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">迁移完成</span><br/><span class="time" style="color:#000000; " > Time : 14:08 - 23:08</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">花了将近两天的时间把wordpress静态化下来，连同那近万张照片一起上传到GitHub。</p></span></a></span></td><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">26<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">日历静态化</span><br/><span class="time" style="color:#000000; " > Time : 15:10 - 20:10</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">昨天的静态化还是没能把日历插件搞定，今天又花了一下午的时间来搞这个。终于最后搞完了！</p></span></a></span></td><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td></tr><tr><td colspan="3" id="prev"><a href="http://www.xieziming.com/?month=nov&yr=2016">&laquo; Prev</a></td><td colspan="4" id="next"><a href="http://www.xieziming.com/?month=jan&yr=2017">Next &raquo;</a></td></tr></tbody></table>
+                    <tr><th scope="col" title="S">S</th><th scope="col" title="M">M</th><th scope="col" title="T">T</th><th scope="col" title="W">W</th><th scope="col" title="T">T</th><th scope="col" title="F">F</th><th scope="col" title="S">S</th></tr></thead><tbody><tr><tr><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">1<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">新年</span><br/><span class="time" style="color:#000000; " > Time : 00:10 - 00:10</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">出去过年的传统今年戛然而止，有点感冒，也是刚去完台北，来不及办日本的签证去北海道。</p></span></a></span></td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td></tr><tr><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td></tr><tr><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td><td>21</td></tr><tr><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td><td>28</td></tr><tr><td>29</td><td>30</td><td>31</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td colspan="3" id="prev"><a href="http://www.xieziming.com/?month=dec&yr=2016">&laquo; Prev</a></td><td colspan="4" id="next"><a href="http://www.xieziming.com/?month=feb&yr=2017">Next &raquo;</a></td></tr></tbody></table>
 <div class="widgetbottom"></div></div><!--/widget-->	
   <div class="widget">
  		<h3>Recent Posts</h3>
 		<ul>
-<li><a href="http://www.xieziming.com/archives/9579.html" class="dashedline" title="闽南 · 泉州">闽南 &middot; 泉州</a></li><li><a href="http://www.xieziming.com/archives/9578.html" class="dashedline" title="顺化 · HUE">顺化 &middot; HUE</a></li><li><a href="http://www.xieziming.com/archives/9577.html" class="dashedline" title="会安 · 春卷">会安 &middot; 春卷</a></li><li><a href="http://www.xieziming.com/archives/9576.html" class="dashedline" title="会安 · 夜灯">会安 &middot; 夜灯</a></li><li><a href="http://www.xieziming.com/archives/9575.html" class="dashedline" title="会安古镇">会安古镇</a></li><li><a href="http://www.xieziming.com/archives/9573.html" class="dashedline" title="岘港">岘港</a></li><li><a href="http://www.xieziming.com/archives/9535.html" class="dashedline" title="罗马">罗马</a></li><li><a href="http://www.xieziming.com/archives/9534.html" class="dashedline" title="卢浮宫">卢浮宫</a></li>						
+<li><a href="http://www.xieziming.com/archives/9602.html" class="dashedline" title="瑞芳 · 九份">瑞芳 &middot; 九份</a></li><li><a href="http://www.xieziming.com/archives/9601.html" class="dashedline" title="台北瑞芳">台北瑞芳</a></li><li><a href="http://www.xieziming.com/archives/9608.html" class="dashedline" title="台湾 · 艺术展">台湾 &middot; 艺术展</a></li><li><a href="http://www.xieziming.com/archives/9609.html" class="dashedline" title="中正纪念堂">中正纪念堂</a></li><li><a href="http://www.xieziming.com/archives/9603.html" class="dashedline" title="台北故宫">台北故宫</a></li><li><a href="http://www.xieziming.com/archives/9616.html" class="dashedline" title="Hualien">Hualien</a></li><li><a href="http://www.xieziming.com/archives/9607.html" class="dashedline" title="花莲 · 七星潭">花莲 &middot; 七星潭</a></li><li><a href="http://www.xieziming.com/archives/9599.html" class="dashedline" title="台北夜市">台北夜市</a></li>						
 		</ul>
   	<div class="widgetbottom"></div>
 	</div>
 	<div class="widget">
     <h3>Comments</h3>
     <ul>
-<li><a href="http://www.xieziming.com/dev/post-views#comment-102651" class="dashedline" title="hi dear, i wanna use">hi dear, i wan...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-102425" class="dashedline" title="You need to clear all">You need to...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-102403" class="dashedline" title="how can i reset _all_data?
+<li><a href="http://www.xieziming.com/dev/post-views#comment-102651" class="dashedline" title="hi dear, i wanna use">hi dear, i wa...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-102425" class="dashedline" title="You need to clear all">You need to...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-102403" class="dashedline" title="how can i reset _all_data?
 
-best">how can i rese...</a></li><li><a href="http://www.xieziming.com/calendar#comment-101819" class="dashedline" title="不错呐">不错呐</a></li><li><a href="http://www.xieziming.com/archives/9213.html#comment-101814" class="dashedline" title="我就是随便看看">我就是随便看看</a></li><li><a href="http://www.xieziming.com/archives/6717.html#comment-101385" class="dashedline" title="Is the same plagin for">Is the same pl...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-98090" class="dashedline" title="install this plugin on wordpress">install this p...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-89841" class="dashedline" title="Hello Dear Suny,
+best">how can i ...</a></li><li><a href="http://www.xieziming.com/calendar#comment-101819" class="dashedline" title="不错呐">不错呐</a></li><li><a href="http://www.xieziming.com/archives/9213.html#comment-101814" class="dashedline" title="我就是随便看看">我就是随便看看</a></li><li><a href="http://www.xieziming.com/archives/6717.html#comment-101385" class="dashedline" title="Is the same plagin for">Is the same pla...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-98090" class="dashedline" title="install this plugin on wordpress">install thi...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-89841" class="dashedline" title="Hello Dear Suny,
 
-I install your">Hello Dear S...</a></li>    </ul>
+I install your">Hello Dear Su...</a></li>    </ul>
     <div class="widgetbottom"></div>
   </div> 
 	
 	<div class="widget">
  		<h3>Rand Posts</h3>
 		<ul>
-<li><a href="http://www.xieziming.com/archives/7965.html" class="dashedline" title="吴哥 · 静谧">吴哥 &middot; 静谧</a></li><li><a href="http://www.xieziming.com/archives/8655.html" class="dashedline" title="南京国际青年旅舍">南京国际青年旅舍</a></li><li><a href="http://www.xieziming.com/archives/7573.html" class="dashedline" title="午餐">午餐</a></li><li><a href="http://www.xieziming.com/archives/240.html" class="dashedline" title="在成都">在成都</a></li><li><a href="http://www.xieziming.com/archives/186.html" class="dashedline" title="挨批鸟">挨批鸟</a></li><li><a href="http://www.xieziming.com/archives/6745.html" class="dashedline" title="GPB ITT">GPB ITT</a></li><li><a href="http://www.xieziming.com/archives/5966.html" class="dashedline" title="迷失">迷失</a></li><li><a href="http://www.xieziming.com/archives/5919.html" class="dashedline" title="我和我的同事">我和我的同事</a></li>	
+<li><a href="http://www.xieziming.com/archives/3566.html" class="dashedline" title="这一个让人安睡的下午">这一个让人安睡的下午</a></li><li><a href="http://www.xieziming.com/archives/7577.html" class="dashedline" title="圣雅堡">圣雅堡</a></li><li><a href="http://www.xieziming.com/archives/473.html" class="dashedline" title="Gixi restaurant">Gixi restaura...</a></li><li><a href="http://www.xieziming.com/archives/4828.html" class="dashedline" title="五大道夜景">五大道夜景</a></li><li><a href="http://www.xieziming.com/archives/7251.html" class="dashedline" title="二沙岛">二沙岛</a></li><li><a href="http://www.xieziming.com/archives/8889.html" class="dashedline" title="龙门石窟（一）">龙门石窟（一）</a></li><li><a href="http://www.xieziming.com/archives/2594.html" class="dashedline" title="paper-plane(二)">paper-plane(二)</a></li><li><a href="http://www.xieziming.com/archives/7955.html" class="dashedline" title="吉隆坡 · 地铁 · 巴士">吉隆坡 &middot; 地铁 &middot; 巴士</a></li>	
 		</ul>
   	<div class="widgetbottom"></div>
 	</div>
@@ -206,7 +216,7 @@ I install your">Hello Dear S...</a></li>    </ul>
 </div><!-- /sidebar --></div><!-- /main -->
 <div id="footer">
 <p align="left">© <a href="http://www.xieziming.com/about" target="_blank"> 明 · 明 · 童 · 鞋</a></p>
-<!--93 queries in 13.361 seconds.-->
+<!--93 queries in 11.526 seconds.-->
 <script>
 var _hmt = _hmt || [];
 (function() {

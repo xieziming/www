@@ -14,7 +14,7 @@
 <link rel='dns-prefetch' href='//s.w.org' />
 <link rel="alternate" type="application/rss+xml" title="谢子明 &raquo; Recent Comments Feed" href="http://www.xieziming.com/recent/feed" />
 		<script type="text/javascript">
-			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/xieziming.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.7"}};
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/www.xieziming.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.7"}};
 			!function(a,b,c){function d(a){var b,c,d,e,f=String.fromCharCode;if(!k||!k.fillText)return!1;switch(k.clearRect(0,0,j.width,j.height),k.textBaseline="top",k.font="600 32px Arial",a){case"flag":return k.fillText(f(55356,56826,55356,56819),0,0),!(j.toDataURL().length<3e3)&&(k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,65039,8205,55356,57096),0,0),b=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,55356,57096),0,0),c=j.toDataURL(),b!==c);case"emoji4":return k.fillText(f(55357,56425,55356,57341,8205,55357,56507),0,0),d=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55357,56425,55356,57341,55357,56507),0,0),e=j.toDataURL(),d!==e}return!1}function e(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i,j=b.createElement("canvas"),k=j.getContext&&j.getContext("2d");for(i=Array("flag","emoji4"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
 		</script>
 		<style type="text/css">
@@ -99,79 +99,82 @@ img.emoji {
 <div id="main" class="mainbg">
 		<div id="content">
 									
-				<div class="post" id="post-7446">
+				<div class="post" id="post-7499">
 					<div class="entry">
-							<span class="date"><a href="http://www.xieziming.com/archives/7446.html" title="Permalink to DOM">DOM</a> In <a href="http://www.xieziming.com/topic/coding" rel="category tag">程序</a> , Comments: <a href="http://www.xieziming.com/archives/7446.html#respond">0</a> , Previews: <a href="http://www.xieziming.com/analytics" target="_blank">1243</a> , Read: <a href="http://www.xieziming.com/analytics" target="_blank">668</a> , Thu, Oct 4 2012</span>
-							<p><strong>查找并访问节点：</strong><br />
-(1)通过使用 getElementById() 和 getElementsByTagName() 方法<br />
-(2)通过使用一个元素节点的 parentNode、firstChild 以及 lastChild 属性</p>
-<p>getElementById() 和 getElementsByTagName() 这两种方法，可查找整个 HTML 文档中的任何 HTML 元素。这两种方法会忽略文档的结构。假如您希望查找文档中所有的 </p>
-<p> 元素，getElementsByTagName() 会把它们全部找到，不管 </p>
-<p> 元素处于文档中的哪个层次。同时，getElementById() 方法也会返回正确的元素，不论它被隐藏在文档结构中的什么位置。</p>
-<p>注：getElementById() 无法工作在 XML 中。在 XML 文档中，您必须通过拥有类型 id 的属性来进行搜索，而此类型必须在 XML DTD 中进行声明。</p>
+							<span class="date"><a href="http://www.xieziming.com/archives/7499.html" title="Permalink to Java代理机制">Java代理机制</a> In <a href="http://www.xieziming.com/topic/coding" rel="category tag">程序</a> , Comments: <a href="http://www.xieziming.com/archives/7499.html#respond">0</a> , Previews: <a href="http://www.xieziming.com/analytics" target="_blank">1480</a> , Read: <a href="http://www.xieziming.com/analytics" target="_blank">670</a> , Thu, Oct 11 2012</span>
+							<p>代理模式的作用是：为其他对象提供一种代理以控制对这个对象的访问。在某些情况下，一个客户不想或者不能直接引用另一个对象，而代理对象可以在客户端和目标对象之间起到中介的作用。 </p>
+<p>代理模式一般涉及到的角色有： </p>
+<p><strong>抽象角色：</strong>声明真实对象和代理对象的共同接口； </p>
+<p><strong>代理角色：</strong>代理对象角色内部含有对真实对象的引用，从而可以操作真实对象，同时代理对象提供与真实对象相同的接口以便在任何时刻都能代替真实对象。同时，代理对象可以在执行真实对象操作时，附加其他的操作，相当于对真实对象进行封装。 </p>
+<p><strong>真实角色：</strong>代理角色所代表的真实对象，是我们最终要引用的对象。</p>
+<p>抽象角色：</p>
 
-<div class="wp_code"><div class="pre"><pre class="javascript" style="font-family:'Times New Roman',Garamond, Times;">document.<span style="color: #660066;">getElementById</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'maindiv'</span><span style="color: #009900;">&#41;</span>.<span style="color: #660066;">getElementsByTagName</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;p&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre></div></div>
-
-<p><strong>节点列表(nodeList)：</strong><br />
-当我们使用节点列表时，通常要把此列表保存在一个变量中，就像这样：</p>
-
-<div class="wp_code"><div class="pre"><pre class="javascript" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #003366; font-weight: bold;">var</span> x<span style="color: #339933;">=</span>document.<span style="color: #660066;">getElementsByTagName</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;p&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre></div></div>
-</p>
-					
-					</div><!-- /entry -->	
-				</div><!-- /post -->				
-							
-				<div class="post" id="post-7437">
-					<div class="entry">
-							<span class="date"><a href="http://www.xieziming.com/archives/7437.html" title="Permalink to Equals与Hashcode">Equals与Hashcode</a> In <a href="http://www.xieziming.com/topic/coding" rel="category tag">程序</a> , Comments: <a href="http://www.xieziming.com/archives/7437.html#respond">0</a> , Previews: <a href="http://www.xieziming.com/analytics" target="_blank">1141</a> , Read: <a href="http://www.xieziming.com/analytics" target="_blank">908</a> , Thu, Oct 4 2012</span>
-							<p>1. 首先equals()是从object类中继承过来的。 equals()方法在object类中定义如下：</p>
-
-<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">boolean</span> equals<span style="color: #009900;">&#40;</span><span style="color: #003399;">Object</span> obj<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span> 
-   <span style="color: #000000; font-weight: bold;">return</span> <span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">this</span> <span style="color: #339933;">==</span> obj<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> 
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">interface</span> Subject <span style="color: #009900;">&#123;</span> 
+  <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> request<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> 
 <span style="color: #009900;">&#125;</span></pre></div></div>
 
-<p>很明显是对两个对象的地址值进行的比较（即比较引用是否相同）。但是我们必需清楚，当String 、Math、Integer、Double等这些封装类在使用equals()方法时，已经覆盖了object类的equals（）方法。比如在String类中如下：</p>
+<p>真实角色：实现了Subject的request()方法。</p>
 
-<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">boolean</span> equals<span style="color: #009900;">&#40;</span><span style="color: #003399;">Object</span> anObject<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span> 
-   <span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">this</span> <span style="color: #339933;">==</span> anObject<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span> 
-      <span style="color: #000000; font-weight: bold;">return</span> <span style="color: #000066; font-weight: bold;">true</span><span style="color: #339933;">;</span> 
-   <span style="color: #009900;">&#125;</span> 
-  <span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>anObject <span style="color: #000000; font-weight: bold;">instanceof</span> <span style="color: #003399;">String</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span> 
-      <span style="color: #003399;">String</span> anotherString <span style="color: #339933;">=</span> <span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span><span style="color: #009900;">&#41;</span>anObject<span style="color: #339933;">;</span> 
-      <span style="color: #000066; font-weight: bold;">int</span> n <span style="color: #339933;">=</span> count<span style="color: #339933;">;</span> 
-      <span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>n <span style="color: #339933;">==</span> anotherString.<span style="color: #006633;">count</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span> 
-         <span style="color: #000066; font-weight: bold;">char</span> v1<span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> value<span style="color: #339933;">;</span> 
-         <span style="color: #000066; font-weight: bold;">char</span> v2<span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> anotherString.<span style="color: #006633;">value</span><span style="color: #339933;">;</span> 
-         <span style="color: #000066; font-weight: bold;">int</span> i <span style="color: #339933;">=</span> offset<span style="color: #339933;">;</span> 
-         <span style="color: #000066; font-weight: bold;">int</span> j <span style="color: #339933;">=</span> anotherString.<span style="color: #006633;">offset</span><span style="color: #339933;">;</span> 
-         <span style="color: #000000; font-weight: bold;">while</span> <span style="color: #009900;">&#40;</span>n<span style="color: #339933;">--</span> <span style="color: #339933;">!=</span> <span style="color: #cc66cc;">0</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span> 
-            <span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>v1<span style="color: #009900;">&#91;</span>i<span style="color: #339933;">++</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">!=</span> v2<span style="color: #009900;">&#91;</span>j<span style="color: #339933;">++</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span> <span style="color: #000000; font-weight: bold;">return</span> <span style="color: #000066; font-weight: bold;">false</span><span style="color: #339933;">;</span> 
-         <span style="color: #009900;">&#125;</span> 
-         <span style="color: #000000; font-weight: bold;">return</span> <span style="color: #000066; font-weight: bold;">true</span><span style="color: #339933;">;</span> 
-      <span style="color: #009900;">&#125;</span> 
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> RealSubject <span style="color: #000000; font-weight: bold;">implements</span> Subject <span style="color: #009900;">&#123;</span> 
+  <span style="color: #000000; font-weight: bold;">public</span> RealSubject<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span> <span style="color: #009900;">&#125;</span> 
+  <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> request<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span> 
+   <span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;From real subject.&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> 
   <span style="color: #009900;">&#125;</span> 
-  <span style="color: #000000; font-weight: bold;">return</span> <span style="color: #000066; font-weight: bold;">false</span><span style="color: #339933;">;</span> 
 <span style="color: #009900;">&#125;</span></pre></div></div>
 
 					
 					</div><!-- /entry -->	
 				</div><!-- /post -->				
 							
-				<div class="post" id="post-7000">
+				<div class="post" id="post-7496">
 					<div class="entry">
-							<span class="date"><a href="http://www.xieziming.com/archives/7000.html" title="Permalink to Java IO类">Java IO类</a> In <a href="http://www.xieziming.com/topic/coding" rel="category tag">程序</a> , Comments: <a href="http://www.xieziming.com/archives/7000.html#respond">0</a> , Previews: <a href="http://www.xieziming.com/analytics" target="_blank">633</a> , Read: <a href="http://www.xieziming.com/analytics" target="_blank">870</a> , Wed, Oct 3 2012</span>
-							<p>(1)FileInputStream和FileOutputStream<br />
-节点流，用于从文件中读取或往文件中写入字节流。如果在构造FileOutputStream时，文件已经存在，则覆盖这个文件。</p>
-<p>(2)BufferedInputStream和BufferedOutputStream<br />
-过滤流，需要使用已经存在的节点流来构造，提供带缓冲的读写，提高了读写的效率。</p>
-<p>(3)DataInputStream和DataOutputStream<br />
-过滤流，需要使用已经存在的节点流来构造，提供了读写Java中的基本数据类型的功能。</p>
-<p>(4)PipedInputStream和PipedOutputStream<br />
-管道流，用于线程间的通信。一个线程的PipedInputStream对象从另一个线程的PipedOutputStream对象读取输入。要使管道流有用，必须同时构造管道输入流和管道输出流。</p>
+							<span class="date"><a href="http://www.xieziming.com/archives/7496.html" title="Permalink to Java反射机制">Java反射机制</a> In <a href="http://www.xieziming.com/topic/coding" rel="category tag">程序</a> , Comments: <a href="http://www.xieziming.com/archives/7496.html#respond">0</a> , Previews: <a href="http://www.xieziming.com/analytics" target="_blank">1397</a> , Read: <a href="http://www.xieziming.com/analytics" target="_blank">748</a> , Thu, Oct 11 2012</span>
+							<p>JAVA反射机制是在运行状态中，对于任意一个类，都能够知道这个类的所有属性和方法；对于任意一个对象，都能够调用它的任意一个方法和属性；这种动态获取的信息以及动态调用对象的方法的功能称为java语言的反射机制。</p>
+<p>Java反射机制主要提供了以下功能： 在运行时判断任意一个对象所属的类；在运行时构造任意一个类的对象；在运行时判断任意一个类所具有的成员变量和方法；在运行时调用任意一个对象的方法。</p>
+<p>【案例1】通过一个对象获得完整的包名和类名</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000000; font-weight: bold;">package</span> <span style="color: #006699;">Reflect</span><span style="color: #339933;">;</span> 
+<span style="color: #008000; font-style: italic; font-weight: bold;">/**
+ * 通过一个对象获得完整的包名和类名
+ * */</span>
+<span style="color: #000000; font-weight: bold;">class</span> Demo<span style="color: #009900;">&#123;</span>
+    <span style="color: #666666; font-style: italic;">//other codes...</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">class</span> hello<span style="color: #009900;">&#123;</span>
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000066; font-weight: bold;">void</span> main<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> args<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+        Demo demo<span style="color: #339933;">=</span><span style="color: #000000; font-weight: bold;">new</span> Demo<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        <span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span>demo.<span style="color: #006633;">getClass</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>.<span style="color: #006633;">getName</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span></pre></div></div>
+
+<p>【运行结果】：Reflect.Demo</p>
 					
 					</div><!-- /entry -->	
 				</div><!-- /post -->				
-						<div class="custom-pagenavi"><a href="http://www.xieziming.com/recent/" class="page" title="&laquo; First">&laquo; First</a> <a href="http://www.xieziming.com/recent/page/128" class="page" title="128">128</a> <span class="current">129</span><a href="http://www.xieziming.com/recent/page/130" class="page" title="130">130</a> <a href="http://www.xieziming.com/recent/page/131" class="page" title="131">131</a> <a href="http://www.xieziming.com/recent/page/132" class="page" title="132">132</a> <a href="http://www.xieziming.com/recent/page/133" class="page" title="133">133</a> <a href="http://www.xieziming.com/recent/page/134" class="page" title="134">134</a> <a href="http://www.xieziming.com/recent/page/135" class="page" title="135">135</a> <a href="http://www.xieziming.com/recent/page/136" class="page" title="136">136</a> <a href="http://www.xieziming.com/recent/page/137" class="page" title="137">137</a> <a href="http://www.xieziming.com/recent/page/411" class="page" title="始于 2006 &raquo">始于 2006 &raquo</a> </div>	
+							
+				<div class="post" id="post-7486">
+					<div class="entry">
+							<span class="date"><a href="http://www.xieziming.com/archives/7486.html" title="Permalink to Java堆栈">Java堆栈</a> In <a href="http://www.xieziming.com/topic/coding" rel="category tag">程序</a> , Comments: <a href="http://www.xieziming.com/archives/7486.html#respond">0</a> , Previews: <a href="http://www.xieziming.com/analytics" target="_blank">1079</a> , Read: <a href="http://www.xieziming.com/analytics" target="_blank">607</a> , Tue, Oct 9 2012</span>
+							<p>Java中每个方法被执行的时候都会同时创建一个栈帧（stack frame）用于存储局部变量表、操作栈、动态链接、方法出口等信息。</p>
+<p>局部变量表存放了编译期可知的各种基本数据类型（boolean、byte、char、short、int、float、long、double）、对象引用（reference类型，它不等同于对象本身，根据不同的虚拟机实现，它可能是一个指向对象起始地址的引用指针，也可能指向一个代表对象的句柄或者其他与此对象相关的位置）和returnAddress类型（指向了一条字节码指令的地址）。</p>
+<p>Java把内存划分成两种：一种是栈内存，一种是堆内存。栈中存放是局部变量，堆中存放的是实例变量和对象(数组也是对象类型)。</p>
+<p>栈有一个很重要的特殊性，就是存在栈中的数据可以共享。假设我们同时定义：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #000066; font-weight: bold;">int</span> a <span style="color: #339933;">=</span> <span style="color: #cc66cc;">3</span><span style="color: #339933;">;</span> 
+<span style="color: #000066; font-weight: bold;">int</span> b <span style="color: #339933;">=</span> <span style="color: #cc66cc;">3</span>；</pre></div></div>
+
+<p>编译器先处理int a = 3；首先它会在栈中创建一个变量为a的引用，然后查找栈中是否有3这个值，假如没找到，就将3存放进来，然后将a指向3。接着处理int b = 3；在创建完b的引用变量后，由于在栈中已经有3这个值，便将b直接指向3。这样，就出现了a与b同时均指向3的情况。这时，假如再令a=4；那么编译器 会重新搜索栈中是否有4值，假如没有，则将4存放进来，并令a指向4；假如已经有了，则直接将a指向这个地址。因此a值的改变不会影响到b的值。要留意这 种数据的共享与两个对象的引用同时指向一个对象的这种共享是不同的，由于这种情况a的修改并不会影响到b, 它是由编译器完成的，它有利于节省空间。而一个对象引用变量修改了这个对象的内部状态，会影响到另一个对象引用变量。 </p>
+<p>String是一个特殊的包装类数据。可以用：</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #003399;">String</span> str <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">String</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;abc&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> 
+<span style="color: #003399;">String</span> str <span style="color: #339933;">=</span> <span style="color: #0000ff;">&quot;abc&quot;</span><span style="color: #339933;">;</span></pre></div></div>
+
+<p>两种的形式来创建，第一种是用new()来新建对象的，它会在存放于堆中。每调用一次就会创建一个新的对象。而第二种是先在栈中创建一个对String类的对象引用变量str，然后查找栈中有没有存放&#8221;abc&#8221;，假如没有，则将&#8221;abc&#8221;存放进栈，并令str指向”abc”，假如已经有”abc” 则直接令str指向“abc”。 </p>
+					
+					</div><!-- /entry -->	
+				</div><!-- /post -->				
+						<div class="custom-pagenavi"><a href="http://www.xieziming.com/recent/" class="page" title="&laquo; First">&laquo; First</a> <a href="http://www.xieziming.com/recent/page/128" class="page" title="128">128</a> <span class="current">129</span><a href="http://www.xieziming.com/recent/page/130" class="page" title="130">130</a> <a href="http://www.xieziming.com/recent/page/131" class="page" title="131">131</a> <a href="http://www.xieziming.com/recent/page/132" class="page" title="132">132</a> <a href="http://www.xieziming.com/recent/page/133" class="page" title="133">133</a> <a href="http://www.xieziming.com/recent/page/134" class="page" title="134">134</a> <a href="http://www.xieziming.com/recent/page/135" class="page" title="135">135</a> <a href="http://www.xieziming.com/recent/page/136" class="page" title="136">136</a> <a href="http://www.xieziming.com/recent/page/137" class="page" title="137">137</a> <a href="http://www.xieziming.com/recent/page/413" class="page" title="始于 2006 &raquo">始于 2006 &raquo</a> </div>	
 			
 		</div><!-- /content -->		
 <div id="sidebar">
@@ -184,32 +187,32 @@ img.emoji {
 </div><!-- /search -->	<div id="widgets">
 <div class="widget"><h3>Calendar</h3>
 <table id="wp-calendar">
-  									<caption>December 2016</caption>
+  									<caption>January 2017</caption>
   									<thead>
-                    <tr><th scope="col" title="S">S</th><th scope="col" title="M">M</th><th scope="col" title="T">T</th><th scope="col" title="W">W</th><th scope="col" title="T">T</th><th scope="col" title="F">F</th><th scope="col" title="S">S</th></tr></thead><tbody><tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>1</td><td>2</td><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">3<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">加班</span><br/><span class="time" style="color:#000000; " > Time : 14:29 - 22:29</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">这周继续加班做bug fix。</p><span class="event-title" style="color:#000000">小梁总婚礼</span><br/><span class="time" style="color:#000000; " > Time : 18:21 - 21:21</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">去长隆酒店参加梁伟彬和黄佩仪的婚礼，和去年小锅同一个地儿。菁菁也去了，虽坐同一桌但也是没讲一句话。</p></span></a></span></td></tr><tr><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">4<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">加班</span><br/><span class="time" style="color:#000000; " > Time : 14:29 - 22:29</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">这周继续加班做bug fix。</p></span></a></span></td><td>5</td><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">6<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">汉堡王</span><br/><span class="time" style="color:#000000; " > Time : 12:33 - 13:33</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">汉堡王最近做活动，逢二、四、六银联闪付满30减20，蛮划算的。</p></span></a></span></td><td>7</td><td>8</td><td>9</td><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">10<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">Spring Boot</span><br/><span class="time" style="color:#000000; " > Time : 12:19 - 22:19</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">宅在家看Spring Boot，准备最近把这本书看完，想起刚毕业那几年，每周至少消灭一本书。</p></span></a></span></td></tr><tr><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">11<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">加班</span><br/><span class="time" style="color:#000000; " > Time : 14:31 - 22:31</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">这周还是得继续加班做bug fix，都麻木了。</p></span></a></span></td><td>12</td><td>13</td><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">14<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">WFH</span><br/><span class="time" style="color:#000000; " > Time : 09:36 - 20:36</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">有点累，在家上班好了，中午顺便去买了肉回来自己炖汤。</p></span></a></span></td><td>15</td><td>16</td><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">17<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">《测试架构师修炼之道》</span><br/><span class="time" style="color:#000000; " > Time : 14:26 - 22:26</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">虽然不再做测试，也不再做测试开发，但有机会还是得看些书总结下。</p></span></a></span></td></tr><tr><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">18<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">《血战钢锯岭》</span><br/><span class="time" style="color:#000000; " > Time : 21:18 - 23:28</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">晚上和小锅去看，蛮感人的。吃完去沙湾吃猪杂粥，应该是我在那吃到的最新鲜的一次了。</p></span></a></span></td><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">19<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">CentOS</span><br/><span class="time" style="color:#000000; " > Time : 14:11 - 18:11</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">终于有点时间来把那盒子的win7转成CentOS来做server。配置vsftp花了我太多的时间。。。</p></span></a></span></td><td>20</td><td>21</td><td>22</td><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">23<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">体检</span><br/><span class="time" style="color:#000000; " > Time : 09:45 - 12:05</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">推到年底快过期了才终于来体检了，可惜还是没能早起，9点45才到爱康国宾，12点才搞完。</p></span></a></span></td><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">24<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">GitHub Pages</span><br/><span class="time" style="color:#000000; " > Time : 12:06 - 23:06</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">准备把博客页面全部静态化后放到GitHub上去，做个静态网站算了，不再host一个虚拟主机了。</p><span class="event-title" style="color:#000000">《你的名字》</span><br/><span class="time" style="color:#000000; " > Time : 19:12 - 21:21</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">都快下线了才想着赶紧找个地方把它看完，蛮不错的日本动画电影~</p></span></a></span></td></tr><tr><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">25<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">迁移完成</span><br/><span class="time" style="color:#000000; " > Time : 14:08 - 23:08</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">花了将近两天的时间把wordpress静态化下来，连同那近万张照片一起上传到GitHub。</p></span></a></span></td><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">26<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">日历静态化</span><br/><span class="time" style="color:#000000; " > Time : 15:10 - 20:10</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">昨天的静态化还是没能把日历插件搞定，今天又花了一下午的时间来搞这个。终于最后搞完了！</p></span></a></span></td><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td></tr><tr><td colspan="3" id="prev"><a href="http://www.xieziming.com/?month=nov&yr=2016">&laquo; Prev</a></td><td colspan="4" id="next"><a href="http://www.xieziming.com/?month=jan&yr=2017">Next &raquo;</a></td></tr></tbody></table>
+                    <tr><th scope="col" title="S">S</th><th scope="col" title="M">M</th><th scope="col" title="T">T</th><th scope="col" title="W">W</th><th scope="col" title="T">T</th><th scope="col" title="F">F</th><th scope="col" title="S">S</th></tr></thead><tbody><tr><tr><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">1<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">新年</span><br/><span class="time" style="color:#000000; " > Time : 00:10 - 00:10</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">出去过年的传统今年戛然而止，有点感冒，也是刚去完台北，来不及办日本的签证去北海道。</p></span></a></span></td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td></tr><tr><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td></tr><tr><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td><td>21</td></tr><tr><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td><td>28</td></tr><tr><td>29</td><td>30</td><td>31</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td colspan="3" id="prev"><a href="http://www.xieziming.com/?month=dec&yr=2016">&laquo; Prev</a></td><td colspan="4" id="next"><a href="http://www.xieziming.com/?month=feb&yr=2017">Next &raquo;</a></td></tr></tbody></table>
 <div class="widgetbottom"></div></div><!--/widget-->	
   <div class="widget">
  		<h3>Recent Posts</h3>
 		<ul>
-<li><a href="http://www.xieziming.com/archives/9579.html" class="dashedline" title="闽南 · 泉州">闽南 &middot; 泉州</a></li><li><a href="http://www.xieziming.com/archives/9578.html" class="dashedline" title="顺化 · HUE">顺化 &middot; HUE</a></li><li><a href="http://www.xieziming.com/archives/9577.html" class="dashedline" title="会安 · 春卷">会安 &middot; 春卷</a></li><li><a href="http://www.xieziming.com/archives/9576.html" class="dashedline" title="会安 · 夜灯">会安 &middot; 夜灯</a></li><li><a href="http://www.xieziming.com/archives/9575.html" class="dashedline" title="会安古镇">会安古镇</a></li><li><a href="http://www.xieziming.com/archives/9573.html" class="dashedline" title="岘港">岘港</a></li><li><a href="http://www.xieziming.com/archives/9535.html" class="dashedline" title="罗马">罗马</a></li><li><a href="http://www.xieziming.com/archives/9534.html" class="dashedline" title="卢浮宫">卢浮宫</a></li>						
+<li><a href="http://www.xieziming.com/archives/9602.html" class="dashedline" title="瑞芳 · 九份">瑞芳 &middot; 九份</a></li><li><a href="http://www.xieziming.com/archives/9601.html" class="dashedline" title="台北瑞芳">台北瑞芳</a></li><li><a href="http://www.xieziming.com/archives/9608.html" class="dashedline" title="台湾 · 艺术展">台湾 &middot; 艺术展</a></li><li><a href="http://www.xieziming.com/archives/9609.html" class="dashedline" title="中正纪念堂">中正纪念堂</a></li><li><a href="http://www.xieziming.com/archives/9603.html" class="dashedline" title="台北故宫">台北故宫</a></li><li><a href="http://www.xieziming.com/archives/9616.html" class="dashedline" title="Hualien">Hualien</a></li><li><a href="http://www.xieziming.com/archives/9607.html" class="dashedline" title="花莲 · 七星潭">花莲 &middot; 七星潭</a></li><li><a href="http://www.xieziming.com/archives/9599.html" class="dashedline" title="台北夜市">台北夜市</a></li>						
 		</ul>
   	<div class="widgetbottom"></div>
 	</div>
 	<div class="widget">
     <h3>Comments</h3>
     <ul>
-<li><a href="http://www.xieziming.com/dev/post-views#comment-102651" class="dashedline" title="hi dear, i wanna use">hi dear, i wan...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-102425" class="dashedline" title="You need to clear all">You need to...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-102403" class="dashedline" title="how can i reset _all_data?
+<li><a href="http://www.xieziming.com/dev/post-views#comment-102651" class="dashedline" title="hi dear, i wanna use">hi dear, i...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-102425" class="dashedline" title="You need to clear all">You need t...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-102403" class="dashedline" title="how can i reset _all_data?
 
-best">how can i rese...</a></li><li><a href="http://www.xieziming.com/calendar#comment-101819" class="dashedline" title="不错呐">不错呐</a></li><li><a href="http://www.xieziming.com/archives/9213.html#comment-101814" class="dashedline" title="我就是随便看看">我就是随便看看</a></li><li><a href="http://www.xieziming.com/archives/6717.html#comment-101385" class="dashedline" title="Is the same plagin for">Is the same p...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-98090" class="dashedline" title="install this plugin on wordpress">install this...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-89841" class="dashedline" title="Hello Dear Suny,
+best">how can i r...</a></li><li><a href="http://www.xieziming.com/calendar#comment-101819" class="dashedline" title="不错呐">不错呐</a></li><li><a href="http://www.xieziming.com/archives/9213.html#comment-101814" class="dashedline" title="我就是随便看看">我就是随便看看</a></li><li><a href="http://www.xieziming.com/archives/6717.html#comment-101385" class="dashedline" title="Is the same plagin for">Is the same p...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-98090" class="dashedline" title="install this plugin on wordpress">install this pl...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-89841" class="dashedline" title="Hello Dear Suny,
 
-I install your">Hello Dear ...</a></li>    </ul>
+I install your">Hello Dear Sun...</a></li>    </ul>
     <div class="widgetbottom"></div>
   </div> 
 	
 	<div class="widget">
  		<h3>Rand Posts</h3>
 		<ul>
-<li><a href="http://www.xieziming.com/archives/861.html" class="dashedline" title="初显疲态">初显疲态</a></li><li><a href="http://www.xieziming.com/archives/7655.html" class="dashedline" title="LoadRunner测试结果分析">LoadRunner测试结果...</a></li><li><a href="http://www.xieziming.com/archives/3168.html" class="dashedline" title="鳄鱼表演">鳄鱼表演</a></li><li><a href="http://www.xieziming.com/archives/4840.html" class="dashedline" title="泰山（二）">泰山（二）</a></li><li><a href="http://www.xieziming.com/archives/7620.html" class="dashedline" title="遍历windows窗口控件">遍历windows窗口控...</a></li><li><a href="http://www.xieziming.com/archives/35.html" class="dashedline" title="为耳朵寻找灵感～">为耳朵寻找灵感～</a></li><li><a href="http://www.xieziming.com/archives/5729.html" class="dashedline" title="凤凰酒吧">凤凰酒吧</a></li><li><a href="http://www.xieziming.com/archives/4143.html" class="dashedline" title="苏州一瞥">苏州一瞥</a></li>	
+<li><a href="http://www.xieziming.com/archives/428.html" class="dashedline" title="“酸菜鱼”（30，000kip）">&ldquo;酸菜鱼&rdquo;（30，00...</a></li><li><a href="http://www.xieziming.com/archives/8890.html" class="dashedline" title="龙门石窟（二）">龙门石窟（二）</a></li><li><a href="http://www.xieziming.com/archives/9327.html" class="dashedline" title="首尔街头">首尔街头</a></li><li><a href="http://www.xieziming.com/archives/6906.html" class="dashedline" title="顺德菜">顺德菜</a></li><li><a href="http://www.xieziming.com/archives/277.html" class="dashedline" title="迷失">迷失</a></li><li><a href="http://www.xieziming.com/archives/7836.html" class="dashedline" title="马六甲（一）">马六甲（一）</a></li><li><a href="http://www.xieziming.com/archives/13.html" class="dashedline" title="突然间的感受">突然间的感受</a></li><li><a href="http://www.xieziming.com/archives/4953.html" class="dashedline" title="草原村落">草原村落</a></li>	
 		</ul>
   	<div class="widgetbottom"></div>
 	</div>
@@ -218,7 +221,7 @@ I install your">Hello Dear ...</a></li>    </ul>
 </div><!-- /sidebar --></div><!-- /main -->
 <div id="footer">
 <p align="left">© <a href="http://www.xieziming.com/about" target="_blank"> 明 · 明 · 童 · 鞋</a></p>
-<!--93 queries in 13.023 seconds.-->
+<!--93 queries in 15.028 seconds.-->
 <script>
 var _hmt = _hmt || [];
 (function() {

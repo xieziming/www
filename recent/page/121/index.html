@@ -14,7 +14,7 @@
 <link rel='dns-prefetch' href='//s.w.org' />
 <link rel="alternate" type="application/rss+xml" title="谢子明 &raquo; Recent Comments Feed" href="http://www.xieziming.com/recent/feed" />
 		<script type="text/javascript">
-			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/xieziming.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.7"}};
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/www.xieziming.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.7"}};
 			!function(a,b,c){function d(a){var b,c,d,e,f=String.fromCharCode;if(!k||!k.fillText)return!1;switch(k.clearRect(0,0,j.width,j.height),k.textBaseline="top",k.font="600 32px Arial",a){case"flag":return k.fillText(f(55356,56826,55356,56819),0,0),!(j.toDataURL().length<3e3)&&(k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,65039,8205,55356,57096),0,0),b=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,55356,57096),0,0),c=j.toDataURL(),b!==c);case"emoji4":return k.fillText(f(55357,56425,55356,57341,8205,55357,56507),0,0),d=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55357,56425,55356,57341,55357,56507),0,0),e=j.toDataURL(),d!==e}return!1}function e(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i,j=b.createElement("canvas"),k=j.getContext&&j.getContext("2d");for(i=Array("flag","emoji4"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
 		</script>
 		<style type="text/css">
@@ -99,104 +99,62 @@ img.emoji {
 <div id="main" class="mainbg">
 		<div id="content">
 									
-				<div class="post" id="post-7729">
+				<div class="post" id="post-8811">
 					<div class="entry">
-							<span class="date"><a href="http://www.xieziming.com/archives/7729.html" title="Permalink to QTP调用外部函数">QTP调用外部函数</a> In <a href="http://www.xieziming.com/topic/testing" rel="category tag">测试</a> , Comments: <a href="http://www.xieziming.com/archives/7729.html#respond">0</a> , Previews: <a href="http://www.xieziming.com/analytics" target="_blank">789</a> , Read: <a href="http://www.xieziming.com/analytics" target="_blank">1249</a> , Sat, Nov 10 2012</span>
-							<p>QTP主要提供了3种DLL的调用方式，这3种调用方式分别为Extern、CreateObject和DotNetFactory。这3种调用方式都分别对应着不同类型的DLL。</p>
-<p>首先Extern所调用的DLL为WIN32 API &#8211; DLL，Createobject所调用的是ActiveX类型的DLL，这类DLL其实应用的最多，AOM \ EOM等都是此类型的DLL，最后一种.NET Factory是直接调用.Net framework 或者.NET自定义的DLL。</p>
-<p><strong>Extern：</strong><br />
-(1)例子一：</p>
+							<span class="date"><a href="http://www.xieziming.com/archives/8811.html" title="Permalink to Java源码混淆">Java源码混淆</a> In <a href="http://www.xieziming.com/topic/coding" rel="category tag">程序</a> , Comments: <a href="http://www.xieziming.com/archives/8811.html#respond">0</a> , Previews: <a href="http://www.xieziming.com/analytics" target="_blank">718</a> , Read: <a href="http://www.xieziming.com/analytics" target="_blank">479</a> , Sat, Nov 17 2012</span>
+							<p>Java程序的编译过程与C／C++程序的编译过程截然不同。C／C++程序经编译后生成的是二进制的机器码，这种代码只有在特定平台上才能运行，通过查找表编译器可以将所有变量和方法符号的引用转换成特定的内存偏移量。而Java编译器却既不能把变量和方法等符号的引用转换为数值引用，也不能确定程序执行过程中的内存布局，而是将这些符号的引用信息保留在class文件中，由解释器在运行过程中创建内存布局，然后再通过查找表来确定一个变量或方法所在的地址。</p>
+<p>因此Java字节码文件中保留了所有方法和变量的信息符号，而这些符号根据编码规则通常带有语义信息，这就为反编译Java类文件提供了可能。也正是由于Java本身的这种特性，使得Java类文件很容易被反编译成与原文件非常相似的文件。</p>
+<p>代码混淆技术是一种重要的软件保护方法，混淆的实质就是一种变换，通过这种变换把原来的代码变成与其功能相同或相近的，但是更难被理解和反编译的代码。由于混淆技术可以根据不同的目的，不同的混淆对象采用不同的方法，这使得混淆方法非常多。</p>
+<p><strong>代码混淆的分类</strong></p>
+<p>根据混淆变换原理，本文将代码混淆技术分为词法变换、控制混淆、数据混淆和类结构混淆，以下将分别对这四种混淆技术加以阐述。</p>
+<p><strong>词法变换</strong><br />
+词法变换的原理是对函数和变量的名称进行变换，使其违背Java命名规范中见名知义的原则。其原理依照Java虚拟机规范中有关类文件结构的规定，对常量池中存储的类、字段、方法和变量等名称的“CONSTANT Utf8 info&#8221;类型的数据项加以混淆，在保持程序语义不变的前提下将名字更改为毫无意义、无规律的字符串。这种方法具有单向性，并且没有引入额外的执行代价。目前Java字节码混淆器和混淆编译器大多支持这一功能。</p>
+<p>为了提高混淆算法的隐蔽性，Roo和Oord提出了使用标识符交换来进行词法变换，其思想是用标识符作交换而非更改成毫无意义的名字。标识符交换包括交换变量名、函数名和类型三种。使用标识符交换来进行词法变换在提高隐蔽性的同时，由于标识符的保留也为反编译者提供了方便，不具有单向性。</p>
+					
+					</div><!-- /entry -->	
+				</div><!-- /post -->				
+							
+				<div class="post" id="post-8807">
+					<div class="entry">
+							<span class="date"><a href="http://www.xieziming.com/archives/8807.html" title="Permalink to 制作Java Applet签名">制作Java Applet签名</a> In <a href="http://www.xieziming.com/topic/coding" rel="category tag">程序</a> , Comments: <a href="http://www.xieziming.com/archives/8807.html#respond">0</a> , Previews: <a href="http://www.xieziming.com/analytics" target="_blank">456</a> , Read: <a href="http://www.xieziming.com/analytics" target="_blank">489</a> , Sat, Nov 17 2012</span>
+							<p>(1)将java小程序打包</p>
 
-<div class="wp_code"><div class="pre"><pre class="vb" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #008000;">'#######启动浏览器######## 
-</span>systemutil.Run <span style="color: #800000;">&quot;iexplore.exe&quot;</span>
-&nbsp;
-<span style="color: #008000;">'#######创建API  Extern对象########## 
-</span>Extern.<span style="color: #151B8D; font-weight: bold;">Declare</span> micHWnd, <span style="color: #800000;">&quot;GetForegroundWindow&quot;</span>, <span style="color: #800000;">&quot;user32.dll&quot;</span>, <span style="color: #800000;">&quot;GetForegroundWindow&quot;</span>
-&nbsp;
-<span style="color: #008000;">'######使用WIN32 API获取窗口的句柄###### 
-</span>hwnd = Extern.GetForegroundWindow()
-&nbsp;
-<span style="color: #008000;">'########通过获取的句柄控制浏览器窗口并跳转百度##### 
-</span>Browser(<span style="color: #800000;">&quot;hwnd:=&quot;</span> &amp; hwnd).Navigate <span style="color: #800000;">&quot;http://www.baidu.com&quot;</span></pre></div></div>
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;">jar cvf test.<span style="color: #006633;">jar</span> test.<span style="color: #000000; font-weight: bold;">class</span></pre></div></div>
+
+<p>(2)生成名为chinani.store的密钥库,别名为chinani</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;">keytool <span style="color: #339933;">-</span>genkey <span style="color: #339933;">-</span>keystore chinani.<span style="color: #006633;">store</span> <span style="color: #339933;">-</span>alias chinani</pre></div></div>
+
+<p>密码：123456 (该密码及以后出现的密码都需要自己输入) 以下根据需要输入，最后确认：y<br />
+(3)导出chinani.cer数字证书</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;">keytool <span style="color: #339933;">-</span>export <span style="color: #339933;">-</span>keystore chinani.<span style="color: #006633;">store</span> <span style="color: #339933;">-</span>alias chinani <span style="color: #339933;">-</span>file chinani.<span style="color: #006633;">cer</span></pre></div></div>
+
+<p>(4)对test.jar文件进行签名</p>
+
+<div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;">jarsigner <span style="color: #339933;">-</span>keystore chinani.<span style="color: #006633;">store</span>  test.<span style="color: #006633;">jar</span> chinani</pre></div></div>
+
+<p>最后写一个html文件，运行此文件即可自动下载安装运行java小程序HTML文件内容如下：</p>
+
+<div class="wp_code"><div class="pre"><pre class="html" style="font-family:'Times New Roman',Garamond, Times;">&lt;applet code=Test archive=&quot;Test.jar&quot; width=320 height=300&gt;&lt;/applet&gt;</pre></div></div>
 
 					
 					</div><!-- /entry -->	
 				</div><!-- /post -->				
 							
-				<div class="post" id="post-7626">
+				<div class="post" id="post-8804">
 					<div class="entry">
-							<span class="date"><a href="http://www.xieziming.com/archives/7626.html" title="Permalink to 控制window程序">控制window程序</a> In <a href="http://www.xieziming.com/topic/testing" rel="category tag">测试</a> , Comments: <a href="http://www.xieziming.com/archives/7626.html#respond">0</a> , Previews: <a href="http://www.xieziming.com/analytics" target="_blank">785</a> , Read: <a href="http://www.xieziming.com/analytics" target="_blank">824</a> , Sat, Nov 10 2012</span>
-							<p>获取进程管理器中被选中进程的名字 ：</p>
-
-<div class="wp_code"><div class="pre"><pre class="cpp" style="font-family:'Times New Roman',Garamond, Times;"><span style="color: #0000ff;">int</span> APIENTRY WinMain<span style="color: #008000;">&#40;</span>HINSTANCE hInstance,HINSTANCE hPrevInstance,LPSTR lpCmdLine,<span style="color: #0000ff;">int</span> nCmdShow<span style="color: #008000;">&#41;</span><span style="color: #008000;">&#123;</span>
-	HWND hwnd<span style="color: #008080;">;</span>
-	<span style="color: #0000ff;">int</span> iItem<span style="color: #000080;">=</span><span style="color: #0000dd;">0</span><span style="color: #008080;">;</span>
-	LVITEM lvitem, <span style="color: #000040;">*</span>plvitem<span style="color: #008080;">;</span>
-	<span style="color: #0000ff;">char</span> ItemBuf<span style="color: #008000;">&#91;</span><span style="color: #0000dd;">512</span><span style="color: #008000;">&#93;</span>,<span style="color: #000040;">*</span>pItem<span style="color: #008080;">;</span>
-	DWORD PID<span style="color: #008080;">;</span>
-	HANDLE hProcess<span style="color: #008080;">;</span>
-	hwnd<span style="color: #000080;">=</span>FindWindow<span style="color: #008000;">&#40;</span><span style="color: #FF0000;">&quot;#32770&quot;</span>,<span style="color: #FF0000;">&quot;Windows 任务管理器&quot;</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
-	hwnd<span style="color: #000080;">=</span>FindWindowEx<span style="color: #008000;">&#40;</span>hwnd,<span style="color: #0000dd;">0</span>,<span style="color: #FF0000;">&quot;#32770&quot;</span>,<span style="color: #0000dd;">0</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
-	hwnd<span style="color: #000080;">=</span>FindWindowEx<span style="color: #008000;">&#40;</span>hwnd,<span style="color: #0000dd;">0</span>,<span style="color: #FF0000;">&quot;SysListView32&quot;</span>,<span style="color: #0000dd;">0</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
-	<span style="color: #0000ff;">if</span> <span style="color: #008000;">&#40;</span><span style="color: #000040;">!</span>hwnd<span style="color: #008000;">&#41;</span>
-		MessageBox<span style="color: #008000;">&#40;</span><span style="color: #0000ff;">NULL</span>,<span style="color: #FF0000;">&quot;[Windows 任务管理器] 尚未启动！&quot;</span>,<span style="color: #FF0000;">&quot;错误！&quot;</span>,<span style="color: #0000ff;">NULL</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
-	<span style="color: #0000ff;">else</span><span style="color: #008000;">&#123;</span>
-		iItem<span style="color: #000080;">=</span>SendMessage<span style="color: #008000;">&#40;</span>hwnd,LVM_GETNEXTITEM,<span style="color: #000040;">-</span><span style="color: #0000dd;">1</span>,LVNI_SELECTED<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
-		<span style="color: #0000ff;">if</span> <span style="color: #008000;">&#40;</span>iItem<span style="color: #000080;">==</span><span style="color: #000040;">-</span><span style="color: #0000dd;">1</span><span style="color: #008000;">&#41;</span>
-			MessageBox<span style="color: #008000;">&#40;</span><span style="color: #0000ff;">NULL</span>,<span style="color: #FF0000;">&quot;没有指定目标进程 ！&quot;</span>,<span style="color: #FF0000;">&quot;错误！&quot;</span>,<span style="color: #0000ff;">NULL</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
-		<span style="color: #0000ff;">else</span><span style="color: #008000;">&#123;</span>
-			GetWindowThreadProcessId<span style="color: #008000;">&#40;</span>hwnd, <span style="color: #000040;">&amp;</span>PID<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
-			hProcess<span style="color: #000080;">=</span>OpenProcess<span style="color: #008000;">&#40;</span>PROCESS_ALL_ACCESS,<span style="color: #0000ff;">false</span>,PID<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
-			<span style="color: #0000ff;">if</span> <span style="color: #008000;">&#40;</span><span style="color: #000040;">!</span>hProcess<span style="color: #008000;">&#41;</span>
-				MessageBox<span style="color: #008000;">&#40;</span><span style="color: #0000ff;">NULL</span>,<span style="color: #FF0000;">&quot;获取进程句柄操作失败！&quot;</span>,<span style="color: #FF0000;">&quot;错误！&quot;</span>,<span style="color: #0000ff;">NULL</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
-			<span style="color: #0000ff;">else</span><span style="color: #008000;">&#123;</span>
-				plvitem<span style="color: #000080;">=</span><span style="color: #008000;">&#40;</span>LVITEM<span style="color: #000040;">*</span><span style="color: #008000;">&#41;</span>VirtualAllocEx<span style="color: #008000;">&#40;</span>hProcess, <span style="color: #0000ff;">NULL</span>, <span style="color: #0000dd;">sizeof</span><span style="color: #008000;">&#40;</span>LVITEM<span style="color: #008000;">&#41;</span>, MEM_COMMIT, PAGE_READWRITE<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
-				pItem<span style="color: #000080;">=</span><span style="color: #008000;">&#40;</span><span style="color: #0000ff;">char</span><span style="color: #000040;">*</span><span style="color: #008000;">&#41;</span>VirtualAllocEx<span style="color: #008000;">&#40;</span>hProcess, <span style="color: #0000ff;">NULL</span>, <span style="color: #0000dd;">512</span>, MEM_COMMIT, PAGE_READWRITE<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
-				<span style="color: #0000ff;">if</span> <span style="color: #008000;">&#40;</span><span style="color: #008000;">&#40;</span><span style="color: #000040;">!</span>plvitem<span style="color: #008000;">&#41;</span><span style="color: #000040;">||</span><span style="color: #008000;">&#40;</span><span style="color: #000040;">!</span>pItem<span style="color: #008000;">&#41;</span><span style="color: #008000;">&#41;</span>
-					MessageBox<span style="color: #008000;">&#40;</span><span style="color: #0000ff;">NULL</span>,<span style="color: #FF0000;">&quot;无法分配内存！&quot;</span>,<span style="color: #FF0000;">&quot;错误！&quot;</span>,<span style="color: #0000ff;">NULL</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
-				<span style="color: #0000ff;">else</span><span style="color: #008000;">&#123;</span>
-					lvitem.<span style="color: #007788;">cchTextMax</span><span style="color: #000080;">=</span><span style="color: #0000dd;">512</span><span style="color: #008080;">;</span>
-					lvitem.<span style="color: #007788;">iSubItem</span><span style="color: #000080;">=</span><span style="color: #0000dd;">0</span><span style="color: #008080;">;</span> <span style="color: #666666;">//ProcessName</span>
-					lvitem.<span style="color: #007788;">pszText</span><span style="color: #000080;">=</span>pItem<span style="color: #008080;">;</span>
-					WriteProcessMemory<span style="color: #008000;">&#40;</span>hProcess, plvitem, <span style="color: #000040;">&amp;</span>lvitem, <span style="color: #0000dd;">sizeof</span><span style="color: #008000;">&#40;</span>LVITEM<span style="color: #008000;">&#41;</span>, <span style="color: #0000ff;">NULL</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
-					SendMessage<span style="color: #008000;">&#40;</span>hwnd, LVM_GETITEMTEXT, <span style="color: #008000;">&#40;</span>WPARAM<span style="color: #008000;">&#41;</span>iItem, <span style="color: #008000;">&#40;</span>LPARAM<span style="color: #008000;">&#41;</span>plvitem<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
-					ReadProcessMemory<span style="color: #008000;">&#40;</span>hProcess, pItem, ItemBuf, <span style="color: #0000dd;">512</span>, <span style="color: #0000ff;">NULL</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>	
-					MessageBox<span style="color: #008000;">&#40;</span><span style="color: #0000ff;">NULL</span>,ItemBuf,<span style="color: #FF0000;">&quot;ItemBuf&quot;</span>,<span style="color: #0000ff;">NULL</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
-				<span style="color: #008000;">&#125;</span>
-			<span style="color: #008000;">&#125;</span>
-		<span style="color: #008000;">&#125;</span>
-	<span style="color: #008000;">&#125;</span>
-	<span style="color: #666666;">//释放内存</span>
-	CloseHandle<span style="color: #008000;">&#40;</span>hwnd<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
-	CloseHandle<span style="color: #008000;">&#40;</span>hProcess<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
-	VirtualFreeEx<span style="color: #008000;">&#40;</span>hProcess, plvitem, <span style="color: #0000dd;">0</span>, MEM_RELEASE<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
-	VirtualFreeEx<span style="color: #008000;">&#40;</span>hProcess, pItem, <span style="color: #0000dd;">0</span>, MEM_RELEASE<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
-	<span style="color: #0000ff;">return</span> <span style="color: #0000dd;">0</span><span style="color: #008080;">;</span>
-<span style="color: #008000;">&#125;</span></pre></div></div>
-
+							<span class="date"><a href="http://www.xieziming.com/archives/8804.html" title="Permalink to Java源码加/解密">Java源码加/解密</a> In <a href="http://www.xieziming.com/topic/coding" rel="category tag">程序</a> , Comments: <a href="http://www.xieziming.com/archives/8804.html#respond">0</a> , Previews: <a href="http://www.xieziming.com/analytics" target="_blank">55</a> , Read: <a href="http://www.xieziming.com/analytics" target="_blank">427</a> , Sat, Nov 17 2012</span>
+							<p>对于传统的C或C++之类的语言来说，要在Web上保护源代码是很容易的，只要不发布它就可以。遗憾的是，Java程序的源代码很容易被别人偷看。只要有一个反编译器，任何人都可以分析别人的代码。Java的灵活性使得源代码很容易被窃取，但与此同时，它也使通过加密保护代码变得相对容易，我们唯一需要了解的就是Java的ClassLoader对象。当然，在加密过程中，有关Java Cryptography Extension（JCE）的知识也是必不可少的。</p>
+<p>有几种技术可以“模糊”Java类文件，使得反编译器处理类文件的效果大打折扣。然而，修改反编译器使之能够处理这些经过模糊处理的类文件并不是什么难事，所以不能简单地依赖模糊技术来保证源代码的安全。</p>
+<p>我们可以用流行的加密工具加密应用，比如PGP（Pretty Good Privacy）或GPG（GNU Privacy Guard）。这时，最终用户在运行应用之前必须先进行解密。但解密之后，最终用户就有了一份不加密的类文件，这和事先不进行加密没有什么差别。</p>
+<p>Java运行时装入字节码的机制隐含地意味着可以对字节码进行修改。JVM每次装入类文件时都需要一个称为ClassLoader的对象，这个对象负责把新的类装入正在运行的JVM。JVM给ClassLoader一个包含了待装入类（比如java.lang.Object）名字的字符串，然后由ClassLoader负责找到类文件，装入原始数据，并把它转换成一个Class对象。</p>
+<p>我们可以通过定制ClassLoader，在类文件执行之前修改它。这种技术的应用非常广泛――在这里，它的用途是在类文件装入之时进行解密，因此可以看成是一种即时解密器。由于解密后的字节码文件永远不会保存到文件系统，所以窃密者很难得到解密后的代码。</p>
+<p>由于把原始字节码转换成Class对象的过程完全由系统负责，所以创建定制ClassLoader对象其实并不困难，只需先获得原始数据，接着就可以进行包含解密在内的任何转换。</p>
 					
 					</div><!-- /entry -->	
 				</div><!-- /post -->				
-							
-				<div class="post" id="post-7636">
-					<div class="entry">
-							<span class="date"><a href="http://www.xieziming.com/archives/7636.html" title="Permalink to 控制Windows窗体(C#)">控制Windows窗体(C#)</a> In <a href="http://www.xieziming.com/topic/coding" rel="category tag">程序</a> , Comments: <a href="http://www.xieziming.com/archives/7636.html#respond">0</a> , Previews: <a href="http://www.xieziming.com/analytics" target="_blank">721</a> , Read: <a href="http://www.xieziming.com/analytics" target="_blank">994</a> , Thu, Nov 8 2012</span>
-							<p>Reflection意思为反射，在.NET中，它是获取运行时类型信息的方式。一般来说，.NET的应用程序由三个部分组成，分别是程序集(Assembly)、模块(Module)、类型(class)，而反射提供一种编程的方式，让程序员可以在程序运行期获得这三个组成部分的相关信息。<br />
-<strong>一、有关知识</strong><br />
-1. System.Assembly类<br />
-Assembly允许用户访问给定程序集的元数据，它也包含可以加载和执行程序集（程序集可执行的情况下）的方法。这个功能相当强大，可以轻易地取得组件内部所有信息，并且将其应用于映射的机制。常用的有LoadFrom()方法、GetType()方法等。Assembly类可以获得正在运行的装配件信息，也可以动态地加载装配件，以及在装配件中查找类型信息，并创建该类型的实例。</p>
-<p>2. System.Type类<br />
-Type实际上是一个抽象的基类，它有与每种数据类型对应的派生类，但一般情况下派生类只提供各种Type方法和属性的不同重载，返回对应数据类型的正确数据。它的大多数方法都是用于获取对应数据类型的成员信息，比如：构造函数、属性、方法和事件等，并且能够进行调用。常用的有GetMethod()方法、GetField()方法、GetProperty()方法等。</p>
-<p>3. 动态调用方法<br />
-方法动态调用是指在执行期利用映射取得的类型方法成员进行动态调用，通过调用实例的Invoke()方法来实现。Invoke方法用以进行方法的动态调用，其一般的定义形式如下：<br />
-Invoke(object obj, object[] parameters)<br />
-第一个为object类型参数，这个参数对象本身所参考的对象，为所要调用的方法其本身所属的来源对象，而第二个数组对象parameters则是调用指定方法所需的参数集合，若是调用的方法不需传入参数，这个对象数组会参考至一个null值。<br />
-<strong>二、映射实例</strong><br />
-下面通过一个实例，运用映射方法实现对Windows窗体的操纵。</p>
-					
-					</div><!-- /entry -->	
-				</div><!-- /post -->				
-						<div class="custom-pagenavi"><a href="http://www.xieziming.com/recent/" class="page" title="&laquo; First">&laquo; First</a> <a href="http://www.xieziming.com/recent/page/120" class="page" title="120">120</a> <span class="current">121</span><a href="http://www.xieziming.com/recent/page/122" class="page" title="122">122</a> <a href="http://www.xieziming.com/recent/page/123" class="page" title="123">123</a> <a href="http://www.xieziming.com/recent/page/124" class="page" title="124">124</a> <a href="http://www.xieziming.com/recent/page/125" class="page" title="125">125</a> <a href="http://www.xieziming.com/recent/page/126" class="page" title="126">126</a> <a href="http://www.xieziming.com/recent/page/127" class="page" title="127">127</a> <a href="http://www.xieziming.com/recent/page/128" class="page" title="128">128</a> <a href="http://www.xieziming.com/recent/page/129" class="page" title="129">129</a> <a href="http://www.xieziming.com/recent/page/411" class="page" title="始于 2006 &raquo">始于 2006 &raquo</a> </div>	
+						<div class="custom-pagenavi"><a href="http://www.xieziming.com/recent/" class="page" title="&laquo; First">&laquo; First</a> <a href="http://www.xieziming.com/recent/page/120" class="page" title="120">120</a> <span class="current">121</span><a href="http://www.xieziming.com/recent/page/122" class="page" title="122">122</a> <a href="http://www.xieziming.com/recent/page/123" class="page" title="123">123</a> <a href="http://www.xieziming.com/recent/page/124" class="page" title="124">124</a> <a href="http://www.xieziming.com/recent/page/125" class="page" title="125">125</a> <a href="http://www.xieziming.com/recent/page/126" class="page" title="126">126</a> <a href="http://www.xieziming.com/recent/page/127" class="page" title="127">127</a> <a href="http://www.xieziming.com/recent/page/128" class="page" title="128">128</a> <a href="http://www.xieziming.com/recent/page/129" class="page" title="129">129</a> <a href="http://www.xieziming.com/recent/page/413" class="page" title="始于 2006 &raquo">始于 2006 &raquo</a> </div>	
 			
 		</div><!-- /content -->		
 <div id="sidebar">
@@ -209,32 +167,32 @@ Invoke(object obj, object[] parameters)<br />
 </div><!-- /search -->	<div id="widgets">
 <div class="widget"><h3>Calendar</h3>
 <table id="wp-calendar">
-  									<caption>December 2016</caption>
+  									<caption>January 2017</caption>
   									<thead>
-                    <tr><th scope="col" title="S">S</th><th scope="col" title="M">M</th><th scope="col" title="T">T</th><th scope="col" title="W">W</th><th scope="col" title="T">T</th><th scope="col" title="F">F</th><th scope="col" title="S">S</th></tr></thead><tbody><tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>1</td><td>2</td><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">3<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">加班</span><br/><span class="time" style="color:#000000; " > Time : 14:29 - 22:29</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">这周继续加班做bug fix。</p><span class="event-title" style="color:#000000">小梁总婚礼</span><br/><span class="time" style="color:#000000; " > Time : 18:21 - 21:21</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">去长隆酒店参加梁伟彬和黄佩仪的婚礼，和去年小锅同一个地儿。菁菁也去了，虽坐同一桌但也是没讲一句话。</p></span></a></span></td></tr><tr><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">4<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">加班</span><br/><span class="time" style="color:#000000; " > Time : 14:29 - 22:29</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">这周继续加班做bug fix。</p></span></a></span></td><td>5</td><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">6<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">汉堡王</span><br/><span class="time" style="color:#000000; " > Time : 12:33 - 13:33</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">汉堡王最近做活动，逢二、四、六银联闪付满30减20，蛮划算的。</p></span></a></span></td><td>7</td><td>8</td><td>9</td><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">10<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">Spring Boot</span><br/><span class="time" style="color:#000000; " > Time : 12:19 - 22:19</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">宅在家看Spring Boot，准备最近把这本书看完，想起刚毕业那几年，每周至少消灭一本书。</p></span></a></span></td></tr><tr><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">11<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">加班</span><br/><span class="time" style="color:#000000; " > Time : 14:31 - 22:31</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">这周还是得继续加班做bug fix，都麻木了。</p></span></a></span></td><td>12</td><td>13</td><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">14<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">WFH</span><br/><span class="time" style="color:#000000; " > Time : 09:36 - 20:36</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">有点累，在家上班好了，中午顺便去买了肉回来自己炖汤。</p></span></a></span></td><td>15</td><td>16</td><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">17<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">《测试架构师修炼之道》</span><br/><span class="time" style="color:#000000; " > Time : 14:26 - 22:26</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">虽然不再做测试，也不再做测试开发，但有机会还是得看些书总结下。</p></span></a></span></td></tr><tr><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">18<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">《血战钢锯岭》</span><br/><span class="time" style="color:#000000; " > Time : 21:18 - 23:28</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">晚上和小锅去看，蛮感人的。吃完去沙湾吃猪杂粥，应该是我在那吃到的最新鲜的一次了。</p></span></a></span></td><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">19<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">CentOS</span><br/><span class="time" style="color:#000000; " > Time : 14:11 - 18:11</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">终于有点时间来把那盒子的win7转成CentOS来做server。配置vsftp花了我太多的时间。。。</p></span></a></span></td><td>20</td><td>21</td><td>22</td><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">23<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">体检</span><br/><span class="time" style="color:#000000; " > Time : 09:45 - 12:05</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">推到年底快过期了才终于来体检了，可惜还是没能早起，9点45才到爱康国宾，12点才搞完。</p></span></a></span></td><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">24<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">GitHub Pages</span><br/><span class="time" style="color:#000000; " > Time : 12:06 - 23:06</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">准备把博客页面全部静态化后放到GitHub上去，做个静态网站算了，不再host一个虚拟主机了。</p><span class="event-title" style="color:#000000">《你的名字》</span><br/><span class="time" style="color:#000000; " > Time : 19:12 - 21:21</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">都快下线了才想着赶紧找个地方把它看完，蛮不错的日本动画电影~</p></span></a></span></td></tr><tr><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">25<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">迁移完成</span><br/><span class="time" style="color:#000000; " > Time : 14:08 - 23:08</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">花了将近两天的时间把wordpress静态化下来，连同那近万张照片一起上传到GitHub。</p></span></a></span></td><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">26<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">日历静态化</span><br/><span class="time" style="color:#000000; " > Time : 15:10 - 20:10</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">昨天的静态化还是没能把日历插件搞定，今天又花了一下午的时间来搞这个。终于最后搞完了！</p></span></a></span></td><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td></tr><tr><td colspan="3" id="prev"><a href="http://www.xieziming.com/?month=nov&yr=2016">&laquo; Prev</a></td><td colspan="4" id="next"><a href="http://www.xieziming.com/?month=jan&yr=2017">Next &raquo;</a></td></tr></tbody></table>
+                    <tr><th scope="col" title="S">S</th><th scope="col" title="M">M</th><th scope="col" title="T">T</th><th scope="col" title="W">W</th><th scope="col" title="T">T</th><th scope="col" title="F">F</th><th scope="col" title="S">S</th></tr></thead><tbody><tr><tr><td><span class="calnk_side"><a href="http://www.xieziming.com/calendar"  style="background-color:#E4E6BF;" target="_blank">1<span style="background-color:#E4E6BF; color:#000000;"><span class="event-title" style="color:#000000">新年</span><br/><span class="time" style="color:#000000; " > Time : 00:10 - 00:10</span><br /><p style="font-size:85%; margin:10px; text-align:left; color:#000000">出去过年的传统今年戛然而止，有点感冒，也是刚去完台北，来不及办日本的签证去北海道。</p></span></a></span></td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td></tr><tr><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td></tr><tr><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td><td>21</td></tr><tr><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td><td>28</td></tr><tr><td>29</td><td>30</td><td>31</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td colspan="3" id="prev"><a href="http://www.xieziming.com/?month=dec&yr=2016">&laquo; Prev</a></td><td colspan="4" id="next"><a href="http://www.xieziming.com/?month=feb&yr=2017">Next &raquo;</a></td></tr></tbody></table>
 <div class="widgetbottom"></div></div><!--/widget-->	
   <div class="widget">
  		<h3>Recent Posts</h3>
 		<ul>
-<li><a href="http://www.xieziming.com/archives/9579.html" class="dashedline" title="闽南 · 泉州">闽南 &middot; 泉州</a></li><li><a href="http://www.xieziming.com/archives/9578.html" class="dashedline" title="顺化 · HUE">顺化 &middot; HUE</a></li><li><a href="http://www.xieziming.com/archives/9577.html" class="dashedline" title="会安 · 春卷">会安 &middot; 春卷</a></li><li><a href="http://www.xieziming.com/archives/9576.html" class="dashedline" title="会安 · 夜灯">会安 &middot; 夜灯</a></li><li><a href="http://www.xieziming.com/archives/9575.html" class="dashedline" title="会安古镇">会安古镇</a></li><li><a href="http://www.xieziming.com/archives/9573.html" class="dashedline" title="岘港">岘港</a></li><li><a href="http://www.xieziming.com/archives/9535.html" class="dashedline" title="罗马">罗马</a></li><li><a href="http://www.xieziming.com/archives/9534.html" class="dashedline" title="卢浮宫">卢浮宫</a></li>						
+<li><a href="http://www.xieziming.com/archives/9602.html" class="dashedline" title="瑞芳 · 九份">瑞芳 &middot; 九份</a></li><li><a href="http://www.xieziming.com/archives/9601.html" class="dashedline" title="台北瑞芳">台北瑞芳</a></li><li><a href="http://www.xieziming.com/archives/9608.html" class="dashedline" title="台湾 · 艺术展">台湾 &middot; 艺术展</a></li><li><a href="http://www.xieziming.com/archives/9609.html" class="dashedline" title="中正纪念堂">中正纪念堂</a></li><li><a href="http://www.xieziming.com/archives/9603.html" class="dashedline" title="台北故宫">台北故宫</a></li><li><a href="http://www.xieziming.com/archives/9616.html" class="dashedline" title="Hualien">Hualien</a></li><li><a href="http://www.xieziming.com/archives/9607.html" class="dashedline" title="花莲 · 七星潭">花莲 &middot; 七星潭</a></li><li><a href="http://www.xieziming.com/archives/9599.html" class="dashedline" title="台北夜市">台北夜市</a></li>						
 		</ul>
   	<div class="widgetbottom"></div>
 	</div>
 	<div class="widget">
     <h3>Comments</h3>
     <ul>
-<li><a href="http://www.xieziming.com/dev/post-views#comment-102651" class="dashedline" title="hi dear, i wanna use">hi dear, i...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-102425" class="dashedline" title="You need to clear all">You need t...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-102403" class="dashedline" title="how can i reset _all_data?
+<li><a href="http://www.xieziming.com/dev/post-views#comment-102651" class="dashedline" title="hi dear, i wanna use">hi dear, i w...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-102425" class="dashedline" title="You need to clear all">You need to cl...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-102403" class="dashedline" title="how can i reset _all_data?
 
-best">how can i rese...</a></li><li><a href="http://www.xieziming.com/calendar#comment-101819" class="dashedline" title="不错呐">不错呐</a></li><li><a href="http://www.xieziming.com/archives/9213.html#comment-101814" class="dashedline" title="我就是随便看看">我就是随便看看</a></li><li><a href="http://www.xieziming.com/archives/6717.html#comment-101385" class="dashedline" title="Is the same plagin for">Is the same p...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-98090" class="dashedline" title="install this plugin on wordpress">install this ...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-89841" class="dashedline" title="Hello Dear Suny,
+best">how can i r...</a></li><li><a href="http://www.xieziming.com/calendar#comment-101819" class="dashedline" title="不错呐">不错呐</a></li><li><a href="http://www.xieziming.com/archives/9213.html#comment-101814" class="dashedline" title="我就是随便看看">我就是随便看看</a></li><li><a href="http://www.xieziming.com/archives/6717.html#comment-101385" class="dashedline" title="Is the same plagin for">Is the same ...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-98090" class="dashedline" title="install this plugin on wordpress">install this ...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-89841" class="dashedline" title="Hello Dear Suny,
 
-I install your">Hello Dear ...</a></li>    </ul>
+I install your">Hello Dear Suny...</a></li>    </ul>
     <div class="widgetbottom"></div>
   </div> 
 	
 	<div class="widget">
  		<h3>Rand Posts</h3>
 		<ul>
-<li><a href="http://www.xieziming.com/archives/98.html" class="dashedline" title="寝室最黄档案解密">寝室最黄档案解密</a></li><li><a href="http://www.xieziming.com/archives/1859.html" class="dashedline" title="我一贱你就笑">我一贱你就笑</a></li><li><a href="http://www.xieziming.com/archives/8958.html" class="dashedline" title="启程">启程</a></li><li><a href="http://www.xieziming.com/archives/7852.html" class="dashedline" title="吉隆坡（二）">吉隆坡（二）</a></li><li><a href="http://www.xieziming.com/archives/9168.html" class="dashedline" title="印度 · 瓦拉纳西 · 晨游">印度 &middot; 瓦拉纳西 &middot;...</a></li><li><a href="http://www.xieziming.com/archives/9067.html" class="dashedline" title="建水 · 团山（一）">建水 &middot; 团山（一）</a></li><li><a href="http://www.xieziming.com/archives/7006.html" class="dashedline" title="龙脊梯田">龙脊梯田</a></li><li><a href="http://www.xieziming.com/archives/9419.html" class="dashedline" title="大洋路（四）">大洋路（四）</a></li>	
+<li><a href="http://www.xieziming.com/archives/4502.html" class="dashedline" title="香泰，真的很香">香泰，真的很香</a></li><li><a href="http://www.xieziming.com/archives/8859.html" class="dashedline" title="乔家大院（一）">乔家大院（一）</a></li><li><a href="http://www.xieziming.com/archives/9422.html" class="dashedline" title="大洋路（三）">大洋路（三）</a></li><li><a href="http://www.xieziming.com/archives/8728.html" class="dashedline" title="长洲岛（二）">长洲岛（二）</a></li><li><a href="http://www.xieziming.com/archives/7481.html" class="dashedline" title="Java单例模式">Java单例模式</a></li><li><a href="http://www.xieziming.com/archives/189.html" class="dashedline" title="凯威自助">凯威自助</a></li><li><a href="http://www.xieziming.com/archives/5731.html" class="dashedline" title="上海印象">上海印象</a></li><li><a href="http://www.xieziming.com/archives/9421.html" class="dashedline" title="大洋路（二）">大洋路（二）</a></li>	
 		</ul>
   	<div class="widgetbottom"></div>
 	</div>
@@ -243,7 +201,7 @@ I install your">Hello Dear ...</a></li>    </ul>
 </div><!-- /sidebar --></div><!-- /main -->
 <div id="footer">
 <p align="left">© <a href="http://www.xieziming.com/about" target="_blank"> 明 · 明 · 童 · 鞋</a></p>
-<!--93 queries in 12.151 seconds.-->
+<!--93 queries in 14.901 seconds.-->
 <script>
 var _hmt = _hmt || [];
 (function() {
