@@ -96,20 +96,20 @@ img.emoji {
 <div id="content">	
 	<div class="post" id="post">			
 		<div class="entry">
-			<span class="date"><a href="http://www.xieziming.com/archives/7140.html" title="Permalink to 漫谈工业过程控制系统">漫谈工业过程控制系统</a> , In <a href="http://www.xieziming.com/topic/network" rel="category tag">网摘</a>  , Views: 607 , Comments: <a href="http://www.xieziming.com/archives/7140.html#respond">0</a> , Index: 2883 , 13 May 2011</span>
+			<span class="date"><a href="http://www.xieziming.com/archives/7140.html" title="Permalink to 漫谈工业过程控制系统">漫谈工业过程控制系统</a> , In <a href="http://www.xieziming.com/topic/network" rel="category tag">网摘</a>  , Views: 607 , Comments: <a href="http://www.xieziming.com/archives/7140.html#respond">0</a> , Index: 2886 , 13 May 2011</span>
 <p>常见的工业控制系统有分布式控制系统（Distributed Control System，简称DCS）、可编程序逻辑控制器（Programmable Logic Controller，简称PLC）、容错控制器（Fail Safe Controller，简称FSC）、多功能控制器（Multifunctional Controller，简称MFC）等。FSC就是特别可靠的PLC，使用起来也特别麻烦；MFC是专用于强电系统（输变电、大功率电机、变频电机等）的PLC；所以粗粗归类，也就是PLC和DCS两大类。</p>
 <p>在谈PLC和DCS之前，应该指出，还有一类系统通常不作为工业过程控制问题考虑，那就是像导弹控制、汽车发动机控制、洗衣机控制、电热咖啡壶控制等，这些控制问题一般使用专用的控制系统，和被控制对象紧密结合，通常称为嵌入式系统（embeded control system），不在这篇小文的范围内。</p>
 <p>控制问题分两大类：连续控制和断续控制（也叫开关控制）。汽车的方向盘就是连续控制的一个例子，司机连续地恰到好处地转动方向盘以控制方向；电饭煲的温度控制就是断续控制的一个例子，只有开和关两个位置，按下开关后，温度上升到一定的时候，自动断电；温度下来了，又自动加电保温。稍微复杂一点的断续控制可以是多位控制，除了全开、全关两个位置外，中间还可以有一个甚至多个渐进的半开位置。一般来说，DCS适合连续过程控制，像化工、发电、冶金、造纸的工艺过程，PLC适合断续过程控制，像各种机电设备。这是由不同的历史背景导致的。在还没有计算机的远古时代，连续控制的PID是用气动或者电动调节器（行话叫单元仪表）实现的，连锁保护则是用继电器实现的。前者控制阀门或者变频电机连续变化，达到精确控制。后者则是自动化的开关控制，用于在某一事件触发下，自动执行一系列动作。复杂一点的继电器控制还有延时，可以执行一系列步骤，每一步可以包含一定的延时，传统上用凸轮实现。复杂继电器控制还可以包含滞环（也叫死区）等比较“反动”的功能。在很长的时间里，单元仪表和继电器之间是井水不犯河水，老死不相往来，直到数字式计算机的出现。</p>
 		</div><!-- /entry -->		
 		<div class="entry">
-			<span class="date"><a href="http://www.xieziming.com/archives/7125.html" title="Permalink to 自动控制理论（一）">自动控制理论（一）</a> , In <a href="http://www.xieziming.com/topic/network" rel="category tag">网摘</a>  , Views: 685 , Comments: <a href="http://www.xieziming.com/archives/7125.html#respond">0</a> , Index: 3829 , 13 May 2011</span>
+			<span class="date"><a href="http://www.xieziming.com/archives/7125.html" title="Permalink to 自动控制理论（一）">自动控制理论（一）</a> , In <a href="http://www.xieziming.com/topic/network" rel="category tag">网摘</a>  , Views: 685 , Comments: <a href="http://www.xieziming.com/archives/7125.html#respond">0</a> , Index: 3832 , 13 May 2011</span>
 <p>小时候喜欢看杂书，没什么东西看，不正在文化大革命嘛？不过看进去了两个“化”：机械化和自动化。打小就没有弄明白，这机械化和自动化到底有什么差别，机器不是自己就会动的吗？长大了，总算稍微明白了一点，这机械化是力气活，用机器代替人的体力劳动，但还是要人管着的，不然机器是不知道该干什么不该干什么的；这自动化嘛，就是代替人的重复脑力劳动，是用来管机器的。也就是说，自动化是管着机械化的，或者说学自动化的是管着学机械的……啊，不对，不对，哪是哪啊！</p>
 <p>有人考证古代就有自动化的实例，但现代意义上的自动控制开始于瓦特的蒸汽机。据说纽考门比瓦特先发明蒸汽机，但是蒸汽机的转速控制问题没有解决，弄不好转速飞升，机器损坏不说，还可能说大事故。瓦特在蒸汽机的转轴上安了一个小棍，棍的一端和放汽阀连着，棍的另一端是一个小重锤，棍中间某个地方通过支点和转轴连接。转轴转起来的时候，重锤由于离心力的缘故挥起来。转速太高了，重锤挥得很高，放汽阀就被按下去，转速下降；转速太低了，重锤不起来，放汽阀就被松开，转速回升。这样，蒸汽机可以自动保持稳定的转速，即保证安全，又方便使用。也就是因为这个小小的转速调节器，瓦特的名字和工业革命连在一起，而纽考门的名字就要到历史书里去找了。</p>
 <p>类似的例子在机械系统里很多，家居必备的抽水马桶是另一个例子。放水冲刷后，水箱里水位降低，浮子随水面下降，进水阀打开。随着水位的升高，进水阀逐渐关闭，直到水位达到规定高度，进水阀完全关闭，水箱的水正好准备下一次使用。这是一个非常简单但非常巧妙的水位控制系统，是一个经典的设计，但不容易用经典的控制理论来分析，不过这是题外话了。</p>
 <p>这些机械系统设计巧妙，工作可靠，实在是巧夺天工。但是在实用中，如果每次都需要这样的创造性思维，那太累，最好有一个系统的方法，可以解决“所有”的自动控制问题，这就是控制理论的由来。</p>
 		</div><!-- /entry -->		
 		<div class="entry">
-			<span class="date"><a href="http://www.xieziming.com/archives/7133.html" title="Permalink to 自动控制理论（二）">自动控制理论（二）</a> , In <a href="http://www.xieziming.com/topic/network" rel="category tag">网摘</a>  , Views: 567 , Comments: <a href="http://www.xieziming.com/archives/7133.html#respond">0</a> , Index: 3014 , 13 May 2011</span>
+			<span class="date"><a href="http://www.xieziming.com/archives/7133.html" title="Permalink to 自动控制理论（二）">自动控制理论（二）</a> , In <a href="http://www.xieziming.com/topic/network" rel="category tag">网摘</a>  , Views: 567 , Comments: <a href="http://www.xieziming.com/archives/7133.html#respond">0</a> , Index: 3017 , 13 May 2011</span>
 <p>形形色色的控制理论再牛，没有被控过程的数学模型，照样抓瞎。前面的洗澡水温就是一个数学模型。这个模型是杜撰的，当然可以很容易地给它所有模型参数。但在实际中，模型参数不会从天上掉下来。多少科学家毕生致力于建立某一特定的物理、生物、化学或别的学科的数学模型，基本机制已经清楚的模型都不容易建立，更不用说很多过程的基本机制或深层机制并不清楚。所以靠机理推导被控过程的数学模型是可能的，但对日常的控制问题来说，并不实际。这就是控制理论的另一个分支—辨识—一显身手的地方了。</p>
 <p>如果给定一个模型，也就是一个数学公式，给它一组输入数据，模型就可以计算出对应的输出数据。比如说，给定模型y=2*x+1，再给出x=1，2，3，4，那y就等于3，5，7，9，就这么很简单。辨识的问题反过来，先给定一个模型结构，在这里就是y=a*x+b，已知输入-输出数据是x=1，2时y=3，5，要求计算出a和b。显然，这是一个二元一次方程，谁都会解。在实际中，输入-输出的观察数据含有测量噪声，这对参数估计的精度不利；但通常积累观察的数据量远远超过未知参数的个数，不说数学，感觉上这就应该对克服测量噪声有利，关键是怎么利用这“多余”的数据。一个办法是把数据组两两配对，借众多的二元一次方程，然后对解出来的a和b作平均。还有一个办法就是有名的最小二乘法了，说穿了，就是以a和b为最优化的“控制量”，使模型输出和实际观测值之间的累积平方误差为最小。</p>
 <p>实际工业过程大多有多年的运行经验，大量的数据不成问题。对于大多数常见过程，模型的基本结构和定性性质也可以猜一个八九不离十，有了如此有力的数学“大锤”，那么应该可以砸开一切建模的硬核桃啦。且慢，世上没有真正的“神奇子弹”，一个问题解决了，另一个同等难度的问题又会出现。对于辨识来说，问题有好几个。</p>
@@ -143,18 +143,18 @@ img.emoji {
 	<div class="widget">
     <h3>Comments</h3>
     <ul>
-<li><a href="http://www.xieziming.com/dev/post-views#comment-102651" class="dashedline" title="hi dear, i wanna use">hi dear, i wan...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-102425" class="dashedline" title="You need to clear all">You need t...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-102403" class="dashedline" title="how can i reset _all_data?
+<li><a href="http://www.xieziming.com/dev/post-views#comment-102651" class="dashedline" title="hi dear, i wanna use">hi dear, i wann...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-102425" class="dashedline" title="You need to clear all">You need to...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-102403" class="dashedline" title="how can i reset _all_data?
 
-best">how can i rese...</a></li><li><a href="http://www.xieziming.com/calendar#comment-101819" class="dashedline" title="不错呐">不错呐</a></li><li><a href="http://www.xieziming.com/archives/9213.html#comment-101814" class="dashedline" title="我就是随便看看">我就是随便看看</a></li><li><a href="http://www.xieziming.com/archives/6717.html#comment-101385" class="dashedline" title="Is the same plagin for">Is the same ...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-98090" class="dashedline" title="install this plugin on wordpress">install this pl...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-89841" class="dashedline" title="Hello Dear Suny,
+best">how can i ...</a></li><li><a href="http://www.xieziming.com/calendar#comment-101819" class="dashedline" title="不错呐">不错呐</a></li><li><a href="http://www.xieziming.com/archives/9213.html#comment-101814" class="dashedline" title="我就是随便看看">我就是随便看看</a></li><li><a href="http://www.xieziming.com/archives/6717.html#comment-101385" class="dashedline" title="Is the same plagin for">Is the same pla...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-98090" class="dashedline" title="install this plugin on wordpress">install this...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-89841" class="dashedline" title="Hello Dear Suny,
 
-I install your">Hello Dear Su...</a></li>    </ul>
+I install your">Hello Dear ...</a></li>    </ul>
     <div class="widgetbottom"></div>
   </div> 
 	
 	<div class="widget">
  		<h3>Rand Posts</h3>
 		<ul>
-<li><a href="http://www.xieziming.com/archives/6749.html" class="dashedline" title="GLTc Annual Dinner">GLTc Annual Di...</a></li><li><a href="http://www.xieziming.com/archives/8811.html" class="dashedline" title="Java源码混淆">Java源码混淆</a></li><li><a href="http://www.xieziming.com/archives/672.html" class="dashedline" title="没有情人的情人节">没有情人的情人节</a></li><li><a href="http://www.xieziming.com/archives/1398.html" class="dashedline" title="若有所失">若有所失</a></li><li><a href="http://www.xieziming.com/archives/6826.html" class="dashedline" title="测试工程师如何和开发工程师交流">测试工程师如何和开发...</a></li><li><a href="http://www.xieziming.com/archives/6907.html" class="dashedline" title="那些公式">那些公式</a></li><li><a href="http://www.xieziming.com/archives/9415.html" class="dashedline" title="俯瞰凯恩斯（三）">俯瞰凯恩斯（三）</a></li><li><a href="http://www.xieziming.com/archives/6003.html" class="dashedline" title="Cross team function">Cross team fun...</a></li>	
+<li><a href="http://www.xieziming.com/archives/9532.html" class="dashedline" title="夏雨 · 红">夏雨 &middot; 红</a></li><li><a href="http://www.xieziming.com/archives/180.html" class="dashedline" title="额～ 吃什么好呢">额～ 吃什么好呢</a></li><li><a href="http://www.xieziming.com/archives/3185.html" class="dashedline" title="泰国水上市场">泰国水上市场</a></li><li><a href="http://www.xieziming.com/archives/4686.html" class="dashedline" title="我不想再流泪了">我不想再流泪了</a></li><li><a href="http://www.xieziming.com/archives/8948.html" class="dashedline" title="东南亚美食（二）">东南亚美食（二）</a></li><li><a href="http://www.xieziming.com/archives/9510.html" class="dashedline" title="布拉格（五）">布拉格（五）</a></li><li><a href="http://www.xieziming.com/archives/538.html" class="dashedline" title="我还要好好学习....">我还要好好学习....</a></li><li><a href="http://www.xieziming.com/archives/7113.html" class="dashedline" title="鼓浪屿系列（五）">鼓浪屿系列（五）</a></li>	
 		</ul>
   	<div class="widgetbottom"></div>
 	</div>
@@ -163,7 +163,7 @@ I install your">Hello Dear Su...</a></li>    </ul>
 </div><!-- /sidebar --></div><!-- /main -->
 <div id="footer">
 <p align="left">© <a href="http://www.xieziming.com/about" target="_blank"> 明 · 明 · 童 · 鞋</a></p>
-<!--86 queries in 12.367 seconds.-->
+<!--86 queries in 2.287 seconds.-->
 <script>
 var _hmt = _hmt || [];
 (function() {

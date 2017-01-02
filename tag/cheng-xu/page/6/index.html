@@ -96,13 +96,13 @@ img.emoji {
 <div id="content">	
 	<div class="post" id="post">			
 		<div class="entry">
-			<span class="date"><a href="http://www.xieziming.com/archives/7170.html" title="Permalink to 链接器和装入器">链接器和装入器</a> , In <a href="http://www.xieziming.com/topic/ji-shu-wei-ji" rel="category tag">技术维基</a>  , Views: 878 , Comments: <a href="http://www.xieziming.com/archives/7170.html#respond">0</a> , Index: 3272 , 25 May 2010</span>
+			<span class="date"><a href="http://www.xieziming.com/archives/7170.html" title="Permalink to 链接器和装入器">链接器和装入器</a> , In <a href="http://www.xieziming.com/topic/ji-shu-wei-ji" rel="category tag">技术维基</a>  , Views: 878 , Comments: <a href="http://www.xieziming.com/archives/7170.html#respond">0</a> , Index: 3274 , 25 May 2010</span>
 <p><strong>1．静态链接、静态装入</strong></p>
 <p>这种方法最早被采用，其特点是简单，不需要操作系统提供任何额外的支持。像C这样的编程语言从很早开始就已经支持分别编译了，程序的不同模块可以并行开发，然后独立编译为相应的目标文件。在得到了所有的目标文件后，静态链接、静态装入的做法是将所有目标文件链接成一个可执行映象，随后在创建进程时将该可执行映象一次全部装入内存。</p>
 <p>举个简单的例子，假设我们开发了两个程序Prog1和Prog2，Prog1由main1.c、utilities.c以及errhdl1.c三部分组成，分别对应程序的主框架、一些公用的辅助函数（其作用相当于库）以及错误处理部分，这三部分代码编译后分别得到各自对应的目标文件main1.o、utilities.o以及errhdl1.o。同样，Prog2由main2.c、utilities.c以及errhdl2.c三部分组成，三部分代码编译后分别得到各自对应的目标文件main2.o、utilities.o以及errhdl2.o。值得注意的是，这里Prog1和Prog2使用了相同的公用辅助函数utilities.o。当我们采用静态链接、静态装入的方法，可以看到，首先就硬盘的使用来讲，虽然两个程序共享使用了utilities，但这并没有在硬盘保存的可执行程序映象上体现出来。相反，utilities.o被链接进了每一个用到它的程序的可执行映象。内存的使用也是如此，操作系统在创建进程时将程序的可执行映象一次全部装入内存，之后进程才能开始运行。如前所述，采用这种方法使得操作系统的实现变得非常简单，但其缺点也是显而易见的。首先，既然两个程序使用的是相同的utilities.o，那么我们只要在硬盘上保存utilities.o的一份拷贝应该就足够了；另外，假如程序在运行过程中没有出现任何错误，那么错误处理部分的代码就不应该被装入内存。因此静态链接、静态装入的方法不但浪费了硬盘空间，同时也浪费了内存空间。由于早期系统的内存资源十分宝贵，所以后者对早期的系统来讲更加致命。</p>
 		</div><!-- /entry -->		
 		<div class="entry">
-			<span class="date"><a href="http://www.xieziming.com/archives/5528.html" title="Permalink to 网站配色表">网站配色表</a> , In <a href="http://www.xieziming.com/topic/ji-shu-wei-ji" rel="category tag">技术维基</a>  , Views: 716 , Comments: <a href="http://www.xieziming.com/archives/5528.html#respond">0</a> , Index: 3861 , 23 February 2010</span>
+			<span class="date"><a href="http://www.xieziming.com/archives/5528.html" title="Permalink to 网站配色表">网站配色表</a> , In <a href="http://www.xieziming.com/topic/ji-shu-wei-ji" rel="category tag">技术维基</a>  , Views: 716 , Comments: <a href="http://www.xieziming.com/archives/5528.html#respond">0</a> , Index: 3863 , 23 February 2010</span>
 <table cellspacing="2" width="550" align="center">
 <tbody>
 <tr>
@@ -139,7 +139,7 @@ img.emoji {
 </table>
 		</div><!-- /entry -->		
 		<div class="entry">
-			<span class="date"><a href="http://www.xieziming.com/archives/6805.html" title="Permalink to Java垃圾回收算法">Java垃圾回收算法</a> , In <a href="http://www.xieziming.com/topic/coding" rel="category tag">程序</a>  , Views: 882 , Comments: <a href="http://www.xieziming.com/archives/6805.html#respond">0</a> , Index: 3596 , 05 February 2010</span>
+			<span class="date"><a href="http://www.xieziming.com/archives/6805.html" title="Permalink to Java垃圾回收算法">Java垃圾回收算法</a> , In <a href="http://www.xieziming.com/topic/coding" rel="category tag">程序</a>  , Views: 882 , Comments: <a href="http://www.xieziming.com/archives/6805.html#respond">0</a> , Index: 3599 , 05 February 2010</span>
 <p>    内存管理就是查找出不再使用的对象，释放这些对象占用的内存空间，为其他对象的分配提供足够的内存空间。在一些编程语言(C,C++)中，内存管理是程序员的职责。内存管理使开发变得复杂，而且会造成许多潜在的bug和不可知的崩溃。导致程序猿花费大量时间debug来修复这些很隐蔽的问题。</p>
 <p>    在精确的内存管理中经常发生一个问题是悬摆指针 (dangling references )。程序猿可能释放一个对象占用的内存空间，即使这个对象还在被其他对象引用。如果一个对象引用另一个被不小心 释放的对象，这个释放对象的内存空间可能被重新分配新的对象，这个时候，不可预期的结果就可能发生了，而且很可能是致命的。</p>
 <p>    另一个在精确内存管理中经常发生的问题是内存泄露 (menory leaks )。泄露经常是对象占用的内存空间不再被任何其他对象引用，但是这个对象没有被回收。例如，如果你打算回收一个列表的空间，但是不小心只释放了列表的第一个元素，这个列表的其他元素将一直持有内存空间，因为这个列表引用已经不存在了，其他元素占用的空间得不到释放，造成了泄露。久而久之，类似的泄露累计，将会填满内存空间，导致没有足够的内存分配给其他的新对象。</p>
@@ -174,18 +174,18 @@ img.emoji {
 	<div class="widget">
     <h3>Comments</h3>
     <ul>
-<li><a href="http://www.xieziming.com/dev/post-views#comment-102651" class="dashedline" title="hi dear, i wanna use">hi dear, i wann...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-102425" class="dashedline" title="You need to clear all">You need to...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-102403" class="dashedline" title="how can i reset _all_data?
+<li><a href="http://www.xieziming.com/dev/post-views#comment-102651" class="dashedline" title="hi dear, i wanna use">hi dear, i...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-102425" class="dashedline" title="You need to clear all">You need to cle...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-102403" class="dashedline" title="how can i reset _all_data?
 
-best">how can i reset...</a></li><li><a href="http://www.xieziming.com/calendar#comment-101819" class="dashedline" title="不错呐">不错呐</a></li><li><a href="http://www.xieziming.com/archives/9213.html#comment-101814" class="dashedline" title="我就是随便看看">我就是随便看看</a></li><li><a href="http://www.xieziming.com/archives/6717.html#comment-101385" class="dashedline" title="Is the same plagin for">Is the same p...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-98090" class="dashedline" title="install this plugin on wordpress">install this pl...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-89841" class="dashedline" title="Hello Dear Suny,
+best">how can i res...</a></li><li><a href="http://www.xieziming.com/calendar#comment-101819" class="dashedline" title="不错呐">不错呐</a></li><li><a href="http://www.xieziming.com/archives/9213.html#comment-101814" class="dashedline" title="我就是随便看看">我就是随便看看</a></li><li><a href="http://www.xieziming.com/archives/6717.html#comment-101385" class="dashedline" title="Is the same plagin for">Is the same pla...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-98090" class="dashedline" title="install this plugin on wordpress">install this p...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-89841" class="dashedline" title="Hello Dear Suny,
 
-I install your">Hello Dear Sun...</a></li>    </ul>
+I install your">Hello Dear Su...</a></li>    </ul>
     <div class="widgetbottom"></div>
   </div> 
 	
 	<div class="widget">
  		<h3>Rand Posts</h3>
 		<ul>
-<li><a href="http://www.xieziming.com/archives/9173.html" class="dashedline" title="印度 · 泰姬陵">印度 &middot; 泰姬陵</a></li><li><a href="http://www.xieziming.com/archives/7965.html" class="dashedline" title="吴哥 · 静谧">吴哥 &middot; 静谧</a></li><li><a href="http://www.xieziming.com/archives/9603.html" class="dashedline" title="台北故宫">台北故宫</a></li><li><a href="http://www.xieziming.com/archives/7382.html" class="dashedline" title="QTP Action 参数传递">QTP Action 参...</a></li><li><a href="http://www.xieziming.com/archives/5322.html" class="dashedline" title="花开">花开</a></li><li><a href="http://www.xieziming.com/archives/8952.html" class="dashedline" title="手机里的长滩岛">手机里的长滩岛</a></li><li><a href="http://www.xieziming.com/archives/461.html" class="dashedline" title="exam coming">exam coming</a></li><li><a href="http://www.xieziming.com/archives/3428.html" class="dashedline" title="猜猜我是谁">猜猜我是谁</a></li>	
+<li><a href="http://www.xieziming.com/archives/268.html" class="dashedline" title="今 , 事真多...">今 , 事真多...</a></li><li><a href="http://www.xieziming.com/archives/3620.html" class="dashedline" title="你站在那不要动！等我飞奔过去！">你站在那不要动！等我飞奔过去！</a></li><li><a href="http://www.xieziming.com/archives/186.html" class="dashedline" title="挨批鸟">挨批鸟</a></li><li><a href="http://www.xieziming.com/archives/8963.html" class="dashedline" title="印尼雅加达">印尼雅加达</a></li><li><a href="http://www.xieziming.com/archives/2278.html" class="dashedline" title="website recommend">website reco...</a></li><li><a href="http://www.xieziming.com/archives/154.html" class="dashedline" title="夏末秋初，我的气球">夏末秋初，我的气球</a></li><li><a href="http://www.xieziming.com/archives/5976.html" class="dashedline" title="5个8块7">5个8块7</a></li><li><a href="http://www.xieziming.com/archives/134.html" class="dashedline" title="推荐个英语学习网站">推荐个英语学习网站</a></li>	
 		</ul>
   	<div class="widgetbottom"></div>
 	</div>
@@ -194,7 +194,7 @@ I install your">Hello Dear Sun...</a></li>    </ul>
 </div><!-- /sidebar --></div><!-- /main -->
 <div id="footer">
 <p align="left">© <a href="http://www.xieziming.com/about" target="_blank"> 明 · 明 · 童 · 鞋</a></p>
-<!--85 queries in 16.850 seconds.-->
+<!--85 queries in 3.268 seconds.-->
 <script>
 var _hmt = _hmt || [];
 (function() {

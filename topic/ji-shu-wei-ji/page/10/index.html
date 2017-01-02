@@ -96,7 +96,7 @@ img.emoji {
 <div id="content">	
 	<div class="post" id="post">			
 		<div class="entry">
-			<span class="date"><a href="http://www.xieziming.com/archives/934.html" title="Permalink to GNS3下搭建cisco实验环境">GNS3下搭建cisco实验环境</a> , In <a href="http://www.xieziming.com/topic/ji-shu-wei-ji" rel="category tag">技术维基</a>  , Views: 968 , Comments: <a href="http://www.xieziming.com/archives/934.html#respond">0</a> , Index: 5661 , 10 March 2009</span>
+			<span class="date"><a href="http://www.xieziming.com/archives/934.html" title="Permalink to GNS3下搭建cisco实验环境">GNS3下搭建cisco实验环境</a> , In <a href="http://www.xieziming.com/topic/ji-shu-wei-ji" rel="category tag">技术维基</a>  , Views: 968 , Comments: <a href="http://www.xieziming.com/archives/934.html#respond">0</a> , Index: 5663 , 10 March 2009</span>
 <p>今天第一次在GNS3环境下搭建cisco的实验环境,虽有些小挫折，但实验最后还是顺利结束。</p>
 <p>第一次搭建cisco实验环境好像是在大二下，可惜当时电脑配置差劲，模拟软件跑起来很辛苦，加上自己e文又实在太烂，后续就没怎么研究了。</p>
 <p>最近一直在研究信令网与ASON，发现还是很有必要重拾路由器等ip网络相关设备原理。哎～ 苦海无涯&#8230;..</p>
@@ -108,7 +108,7 @@ Remote host：127.0.0.1          ->Remote host：127.0.0.1<br />
 Remote port：20000               ->Remote port：30000</p>
 		</div><!-- /entry -->		
 		<div class="entry">
-			<span class="date"><a href="http://www.xieziming.com/archives/1300.html" title="Permalink to 桥接,NAT网络配置详解">桥接,NAT网络配置详解</a> , In <a href="http://www.xieziming.com/topic/ji-shu-wei-ji" rel="category tag">技术维基</a>  , Views: 2309 , Comments: <a href="http://www.xieziming.com/archives/1300.html#comments">1</a> , Index: 9236 , 04 March 2009</span>
+			<span class="date"><a href="http://www.xieziming.com/archives/1300.html" title="Permalink to 桥接,NAT网络配置详解">桥接,NAT网络配置详解</a> , In <a href="http://www.xieziming.com/topic/ji-shu-wei-ji" rel="category tag">技术维基</a>  , Views: 2309 , Comments: <a href="http://www.xieziming.com/archives/1300.html#comments">1</a> , Index: 9239 , 04 March 2009</span>
 <p>1、桥接：</p>
 <p>什么是桥？简单的说桥是一个接口，是一个在功能层面和eth0一样的东西。不同之处在于桥是由多个接口共同构成的。从以太层看，把每一个接口收到的数据复制到其他接口。同样，向桥写入数据，桥内的所有接口都会收到。</p>
 <p>现在要介绍一个设备，tap或着tun，简单的说这个东西是一块虚拟网卡。不同的是，tap是一个以太层的设备，而tun是Ip层的设备。（下面我们要使用的是tap。）具体来说tap/tun的工作原理是这样的：用户空间的程序向tap/tun写入数据，这些数据会传到内核的网络模块；内核网络模块也可以写入数据，而这些写入的数据又可以被用户空间的程序读到，正是因为这样，连上这块虚拟网卡的虚拟机就可以和宿主通信了！</p>
@@ -124,7 +124,7 @@ Set &#8216;tap0&#8217; persistent and owned by uid 0</p>
 （如果要删除创建的Tap设备，请使用tunctl -d [tapdevicename]）</p>
 		</div><!-- /entry -->		
 		<div class="entry">
-			<span class="date"><a href="http://www.xieziming.com/archives/732.html" title="Permalink to 光传输网网管DCN总结">光传输网网管DCN总结</a> , In <a href="http://www.xieziming.com/topic/ji-shu-wei-ji" rel="category tag">技术维基</a>  , Views: 1758 , Comments: <a href="http://www.xieziming.com/archives/732.html#respond">0</a> , Index: 7102 , 24 February 2009</span>
+			<span class="date"><a href="http://www.xieziming.com/archives/732.html" title="Permalink to 光传输网网管DCN总结">光传输网网管DCN总结</a> , In <a href="http://www.xieziming.com/topic/ji-shu-wei-ji" rel="category tag">技术维基</a>  , Views: 1758 , Comments: <a href="http://www.xieziming.com/archives/732.html#respond">0</a> , Index: 7105 , 24 February 2009</span>
 <p>SDH网管网是由两部分组成，根据协议可划分为TCP/IP-DCN和OSI-ECC。上层应用TCP/IP使EMS服务器、NMS服务器和各自的工作站实现互通，而且也实现了EMS和接入网元之间的通信。下层使用符合OSI框架的ECC协议使NE和NE节点实现互通。上层的TCP/IP－DCN可以使用数据网的路由器、网桥等数据设备实现。下层的OSI－ECC是构建在网元之间的DCC通道之上的数据通路。</p>
 <p>DCN网络的实现可以多种多样，在构建DCN网时需要大量采用集线器（HUB/SWITCH）、网桥（BRIDGE）、路由器（ROUTER）、MODEM或接口协议转换器等设备。对中兴网管系统而言，DCN负责NMS、EMS、接入网元之间的IP通信，另外，在网元之间的通信如果不走ECC通路，也可以采用DCN网络来连接，这个时候叫做内部DCN。一句话，DCN为SMN提供了基于TCP/IP的连接通路。</p>
 <p>最近一直关注网络监控方面的东西，看了许多文档，作为一个总结，写下本文，介绍分析各种DCN模型。</p>
@@ -158,9 +158,9 @@ Set &#8216;tap0&#8217; persistent and owned by uid 0</p>
 	<div class="widget">
     <h3>Comments</h3>
     <ul>
-<li><a href="http://www.xieziming.com/dev/post-views#comment-102651" class="dashedline" title="hi dear, i wanna use">hi dear, i wann...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-102425" class="dashedline" title="You need to clear all">You need to cl...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-102403" class="dashedline" title="how can i reset _all_data?
+<li><a href="http://www.xieziming.com/dev/post-views#comment-102651" class="dashedline" title="hi dear, i wanna use">hi dear, i w...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-102425" class="dashedline" title="You need to clear all">You need to cl...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-102403" class="dashedline" title="how can i reset _all_data?
 
-best">how can i re...</a></li><li><a href="http://www.xieziming.com/calendar#comment-101819" class="dashedline" title="不错呐">不错呐</a></li><li><a href="http://www.xieziming.com/archives/9213.html#comment-101814" class="dashedline" title="我就是随便看看">我就是随便看看</a></li><li><a href="http://www.xieziming.com/archives/6717.html#comment-101385" class="dashedline" title="Is the same plagin for">Is the sam...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-98090" class="dashedline" title="install this plugin on wordpress">install thi...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-89841" class="dashedline" title="Hello Dear Suny,
+best">how can i res...</a></li><li><a href="http://www.xieziming.com/calendar#comment-101819" class="dashedline" title="不错呐">不错呐</a></li><li><a href="http://www.xieziming.com/archives/9213.html#comment-101814" class="dashedline" title="我就是随便看看">我就是随便看看</a></li><li><a href="http://www.xieziming.com/archives/6717.html#comment-101385" class="dashedline" title="Is the same plagin for">Is the same...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-98090" class="dashedline" title="install this plugin on wordpress">install this...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-89841" class="dashedline" title="Hello Dear Suny,
 
 I install your">Hello Dear Sun...</a></li>    </ul>
     <div class="widgetbottom"></div>
@@ -169,7 +169,7 @@ I install your">Hello Dear Sun...</a></li>    </ul>
 	<div class="widget">
  		<h3>Rand Posts</h3>
 		<ul>
-<li><a href="http://www.xieziming.com/archives/9510.html" class="dashedline" title="布拉格（五）">布拉格（五）</a></li><li><a href="http://www.xieziming.com/archives/1444.html" class="dashedline" title="久未读书，心已乱">久未读书，心已乱</a></li><li><a href="http://www.xieziming.com/archives/118.html" class="dashedline" title="中兴通讯学院">中兴通讯学院</a></li><li><a href="http://www.xieziming.com/archives/6815.html" class="dashedline" title="回家的路">回家的路</a></li><li><a href="http://www.xieziming.com/archives/241.html" class="dashedline" title="精彩3G 汇聚中兴">精彩3G 汇聚中兴</a></li><li><a href="http://www.xieziming.com/archives/282.html" class="dashedline" title="答辩结束，被整死了...">答辩结束，被整死了...</a></li><li><a href="http://www.xieziming.com/archives/9349.html" class="dashedline" title="悉尼（二）">悉尼（二）</a></li><li><a href="http://www.xieziming.com/archives/4088.html" class="dashedline" title="花开的季节">花开的季节</a></li>	
+<li><a href="http://www.xieziming.com/archives/5806.html" class="dashedline" title="Team Function 2011-04">Team Funct...</a></li><li><a href="http://www.xieziming.com/archives/7913.html" class="dashedline" title="吴哥窟（二）">吴哥窟（二）</a></li><li><a href="http://www.xieziming.com/archives/4508.html" class="dashedline" title="美食系列（33）">美食系列（33）</a></li><li><a href="http://www.xieziming.com/archives/9356.html" class="dashedline" title="悉尼歌剧院（一）">悉尼歌剧院（一）</a></li><li><a href="http://www.xieziming.com/archives/9318.html" class="dashedline" title="长春">长春</a></li><li><a href="http://www.xieziming.com/archives/5495.html" class="dashedline" title="亚龙湾（二）">亚龙湾（二）</a></li><li><a href="http://www.xieziming.com/archives/1411.html" class="dashedline" title="“和谐”之说">&ldquo;和谐&rdquo;之说</a></li><li><a href="http://www.xieziming.com/archives/3286.html" class="dashedline" title="你那里……下雪了吗？">你那里&hellip;&hellip;下雪了吗？</a></li>	
 		</ul>
   	<div class="widgetbottom"></div>
 	</div>
@@ -178,7 +178,7 @@ I install your">Hello Dear Sun...</a></li>    </ul>
 </div><!-- /sidebar --></div><!-- /main -->
 <div id="footer">
 <p align="left">© <a href="http://www.xieziming.com/about" target="_blank"> 明 · 明 · 童 · 鞋</a></p>
-<!--86 queries in 12.011 seconds.-->
+<!--86 queries in 2.276 seconds.-->
 <script>
 var _hmt = _hmt || [];
 (function() {

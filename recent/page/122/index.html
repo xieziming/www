@@ -101,7 +101,7 @@ img.emoji {
 									
 				<div class="post" id="post-7693">
 					<div class="entry">
-							<span class="date"><a href="http://www.xieziming.com/archives/7693.html" title="Permalink to Solaris内存统计">Solaris内存统计</a> In <a href="http://www.xieziming.com/topic/ji-shu-wei-ji" rel="category tag">技术维基</a> , Comments: <a href="http://www.xieziming.com/archives/7693.html#respond">0</a> , Previews: <a href="http://www.xieziming.com/analytics" target="_blank">4643</a> , Read: <a href="http://www.xieziming.com/analytics" target="_blank">1783</a> , Sat, Nov 17 2012</span>
+							<span class="date"><a href="http://www.xieziming.com/archives/7693.html" title="Permalink to Solaris内存统计">Solaris内存统计</a> In <a href="http://www.xieziming.com/topic/ji-shu-wei-ji" rel="category tag">技术维基</a> , Tags: <a href="http://www.xieziming.com/tag/linux" rel="tag">linux</a>, <a href="http://www.xieziming.com/tag/cheng-xu" rel="tag">程序</a> , Previews: <a href="http://www.xieziming.com/analytics" target="_blank">4643</a> , Read: <a href="http://www.xieziming.com/analytics" target="_blank">1783</a> , Sat, Nov 17 2012</span>
 							<p>首先Solaris上的swap跟普通的Unix/Linux上的swap机制有一点不同，Solaris上的swap用的是一个Virtual Swap Space概念, swap空间再也不是单指硬盘的分区或文件。虚拟Swap空间包含两个部分：部分物理内存和传统上的swap分区。经过适当的配置，可以使系统需要swap空间时，先使用内存部分的swap空间，如果内存部分的swap空间不够，再使用磁盘部分的swap空间。这样，也许你硬盘上的swap空间很少得到使用了，甚至根本不需要swap分区。</p>
 <p><strong>物理内存:</strong></p>
 
@@ -121,7 +121,7 @@ total: 8376304k bytes allocated + 6829196k reserved = 15205500k used, 60836672k 
 							
 				<div class="post" id="post-7661">
 					<div class="entry">
-							<span class="date"><a href="http://www.xieziming.com/archives/7661.html" title="Permalink to WebDriver（一）">WebDriver（一）</a> In <a href="http://www.xieziming.com/topic/testing" rel="category tag">测试</a> , Comments: <a href="http://www.xieziming.com/archives/7661.html#comments">1</a> , Previews: <a href="http://www.xieziming.com/analytics" target="_blank">2356</a> , Read: <a href="http://www.xieziming.com/analytics" target="_blank">4674</a> , Wed, Nov 14 2012</span>
+							<span class="date"><a href="http://www.xieziming.com/archives/7661.html" title="Permalink to WebDriver（一）">WebDriver（一）</a> In <a href="http://www.xieziming.com/topic/testing" rel="category tag">测试</a> , Tags: <a href="http://www.xieziming.com/tag/selenium" rel="tag">Selenium</a>, <a href="http://www.xieziming.com/tag/ce-shi" rel="tag">测试</a> , Previews: <a href="http://www.xieziming.com/analytics" target="_blank">2356</a> , Read: <a href="http://www.xieziming.com/analytics" target="_blank">4674</a> , Wed, Nov 14 2012</span>
 							<p>WebDriver与之前Selenium的JS注入实现不同，直接利用了浏览器native support来操作浏览器。所以对于不同平台，不同的浏览器，必须依赖一个特定的浏览器的native component来实现把WebDriver API的调用转化为浏览器的native invoke。</p>
 <p>在我们new一个WebDriver的过程中，Selenium首先会确认浏览器的native component是否存在可用而且版本匹配。接着就在目标浏览器里启动一整套Web Service，这套Web Service使用了Selenium自己设计定义的协议，名字叫做<strong>The WebDriver Wire Protocol</strong>。这套协议非常之强大，几乎可以操作浏览器做任何事情，包括打开、关闭、最大化、最小化、元素定位、元素点击、上传文件等等等等。</p>
 <p>WebDriver Wire协议是通用的，也就是说不管是FirefoxDriver还是ChromeDriver，启动之后都会在某一个端口启动基于这套协议的Web Service。例如FirefoxDriver初始化成功之后，默认会从http://localhost:7055开始，而ChromeDriver则大概是http://localhost:46350之类的。接下来，我们调用WebDriver的任何API，都需要借助一个<strong>ComandExecutor</strong>发送一个命令，实际上是一个HTTP request给46350端口上的Web Service。在我们的HTTP request的body中，会以WebDriver Wire协议规定的<strong>JSON</strong>格式的字符串来告诉Selenium我们希望浏览器接下来做什么事情。</p>
@@ -132,7 +132,7 @@ total: 8376304k bytes allocated + 6829196k reserved = 15205500k used, 60836672k 
 							
 				<div class="post" id="post-7666">
 					<div class="entry">
-							<span class="date"><a href="http://www.xieziming.com/archives/7666.html" title="Permalink to RESTful">RESTful</a> In <a href="http://www.xieziming.com/topic/testing" rel="category tag">测试</a> , Comments: <a href="http://www.xieziming.com/archives/7666.html#respond">0</a> , Previews: <a href="http://www.xieziming.com/analytics" target="_blank">1014</a> , Read: <a href="http://www.xieziming.com/analytics" target="_blank">866</a> , Sun, Nov 11 2012</span>
+							<span class="date"><a href="http://www.xieziming.com/archives/7666.html" title="Permalink to RESTful">RESTful</a> In <a href="http://www.xieziming.com/topic/testing" rel="category tag">测试</a> , Tags: <a href="http://www.xieziming.com/tag/ce-shi" rel="tag">测试</a>, <a href="http://www.xieziming.com/tag/cheng-xu" rel="tag">程序</a> , Previews: <a href="http://www.xieziming.com/analytics" target="_blank">1014</a> , Read: <a href="http://www.xieziming.com/analytics" target="_blank">866</a> , Sun, Nov 11 2012</span>
 							<p><strong>资源（Resources）</strong></p>
 <p>所谓&#8221;资源&#8221;，就是网络上的一个实体，或者说是网络上的一个具体信息。它可以是一段文本、一张图片、一首歌曲、一种服务，总之就是一个具体的实在。你可以用一个URI（统一资源定位符）指向它，每种资源对应一个特定的URI。要获取这个资源，访问它的URI就可以，因此URI就成了每一个资源的地址或独一无二的识别符。</p>
 <p><strong>表现层（Representation）</strong><br />
@@ -171,18 +171,18 @@ total: 8376304k bytes allocated + 6829196k reserved = 15205500k used, 60836672k 
 	<div class="widget">
     <h3>Comments</h3>
     <ul>
-<li><a href="http://www.xieziming.com/dev/post-views#comment-102651" class="dashedline" title="hi dear, i wanna use">hi dear, i wann...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-102425" class="dashedline" title="You need to clear all">You need to ...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-102403" class="dashedline" title="how can i reset _all_data?
+<li><a href="http://www.xieziming.com/dev/post-views#comment-102651" class="dashedline" title="hi dear, i wanna use">hi dear, i wan...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-102425" class="dashedline" title="You need to clear all">You need to cle...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-102403" class="dashedline" title="how can i reset _all_data?
 
-best">how can i ...</a></li><li><a href="http://www.xieziming.com/calendar#comment-101819" class="dashedline" title="不错呐">不错呐</a></li><li><a href="http://www.xieziming.com/archives/9213.html#comment-101814" class="dashedline" title="我就是随便看看">我就是随便看看</a></li><li><a href="http://www.xieziming.com/archives/6717.html#comment-101385" class="dashedline" title="Is the same plagin for">Is the same pl...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-98090" class="dashedline" title="install this plugin on wordpress">install this...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-89841" class="dashedline" title="Hello Dear Suny,
+best">how can i re...</a></li><li><a href="http://www.xieziming.com/calendar#comment-101819" class="dashedline" title="不错呐">不错呐</a></li><li><a href="http://www.xieziming.com/archives/9213.html#comment-101814" class="dashedline" title="我就是随便看看">我就是随便看看</a></li><li><a href="http://www.xieziming.com/archives/6717.html#comment-101385" class="dashedline" title="Is the same plagin for">Is the same ...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-98090" class="dashedline" title="install this plugin on wordpress">install this...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-89841" class="dashedline" title="Hello Dear Suny,
 
-I install your">Hello Dear S...</a></li>    </ul>
+I install your">Hello Dear Su...</a></li>    </ul>
     <div class="widgetbottom"></div>
   </div> 
 	
 	<div class="widget">
  		<h3>Rand Posts</h3>
 		<ul>
-<li><a href="http://www.xieziming.com/archives/8833.html" class="dashedline" title="2013广州车展（三）">2013广州车展（三）</a></li><li><a href="http://www.xieziming.com/archives/9534.html" class="dashedline" title="卢浮宫">卢浮宫</a></li><li><a href="http://www.xieziming.com/archives/6762.html" class="dashedline" title="香港（十）">香港（十）</a></li><li><a href="http://www.xieziming.com/archives/9576.html" class="dashedline" title="会安 · 夜灯">会安 &middot; 夜灯</a></li><li><a href="http://www.xieziming.com/archives/581.html" class="dashedline" title="那你再使劲咬咬啊">那你再使劲咬咬啊</a></li><li><a href="http://www.xieziming.com/archives/8957.html" class="dashedline" title="手机里的菲律宾">手机里的菲律宾</a></li><li><a href="http://www.xieziming.com/archives/9525.html" class="dashedline" title="阿姆斯特丹（一）">阿姆斯特丹（一）</a></li><li><a href="http://www.xieziming.com/archives/242.html" class="dashedline" title="浑浑噩噩">浑浑噩噩</a></li>	
+<li><a href="http://www.xieziming.com/archives/538.html" class="dashedline" title="我还要好好学习....">我还要好好学习....</a></li><li><a href="http://www.xieziming.com/archives/8929.html" class="dashedline" title="曼德勒">曼德勒</a></li><li><a href="http://www.xieziming.com/archives/140.html" class="dashedline" title="评价开幕式要有个原则">评价开幕式要有个原则</a></li><li><a href="http://www.xieziming.com/archives/7913.html" class="dashedline" title="吴哥窟（二）">吴哥窟（二）</a></li><li><a href="http://www.xieziming.com/archives/7704.html" class="dashedline" title="圣心大教堂">圣心大教堂</a></li><li><a href="http://www.xieziming.com/archives/931.html" class="dashedline" title="从现在开始，不停做主角">从现在开始，不停做主角</a></li><li><a href="http://www.xieziming.com/archives/7182.html" class="dashedline" title="Live Calendar Previews">Live Calendar...</a></li><li><a href="http://www.xieziming.com/archives/5696.html" class="dashedline" title="旅行消散的时光">旅行消散的时光</a></li>	
 		</ul>
   	<div class="widgetbottom"></div>
 	</div>
@@ -191,7 +191,7 @@ I install your">Hello Dear S...</a></li>    </ul>
 </div><!-- /sidebar --></div><!-- /main -->
 <div id="footer">
 <p align="left">© <a href="http://www.xieziming.com/about" target="_blank"> 明 · 明 · 童 · 鞋</a></p>
-<!--93 queries in 12.122 seconds.-->
+<!--93 queries in 2.495 seconds.-->
 <script>
 var _hmt = _hmt || [];
 (function() {

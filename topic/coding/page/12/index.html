@@ -96,11 +96,11 @@ img.emoji {
 <div id="content">	
 	<div class="post" id="post">			
 		<div class="entry">
-			<span class="date"><a href="http://www.xieziming.com/archives/7182.html" title="Permalink to Live Calendar Previews">Live Calendar Previews</a> , In <a href="http://www.xieziming.com/topic/coding" rel="category tag">程序</a>  , Views: 983 , Comments: <a href="http://www.xieziming.com/archives/7182.html#respond">0</a> , Index: 4410 , 26 May 2011</span>
+			<span class="date"><a href="http://www.xieziming.com/archives/7182.html" title="Permalink to Live Calendar Previews">Live Calendar Previews</a> , In <a href="http://www.xieziming.com/topic/coding" rel="category tag">程序</a>  , Views: 983 , Comments: <a href="http://www.xieziming.com/archives/7182.html#respond">0</a> , Index: 4414 , 26 May 2011</span>
 <p><a href="http://images.xieziming.com/upload/2010/nontopic/10/2.jpg" class="highslide" onclick="return hs.expand(this)"><img src="http://images.xieziming.com/upload/2010/nontopic/10/2.jpg"  /></a></p>
 		</div><!-- /entry -->		
 		<div class="entry">
-			<span class="date"><a href="http://www.xieziming.com/archives/7174.html" title="Permalink to Live Calendar Usage">Live Calendar Usage</a> , In <a href="http://www.xieziming.com/topic/coding" rel="category tag">程序</a>  , Views: 1709 , Comments: <a href="http://www.xieziming.com/archives/7174.html#comments">9</a> , Index: 4567 , 26 May 2011</span>
+			<span class="date"><a href="http://www.xieziming.com/archives/7174.html" title="Permalink to Live Calendar Usage">Live Calendar Usage</a> , In <a href="http://www.xieziming.com/topic/coding" rel="category tag">程序</a>  , Views: 1709 , Comments: <a href="http://www.xieziming.com/archives/7174.html#comments">9</a> , Index: 4570 , 26 May 2011</span>
 <p><strong>1.</strong> Setting up your own calendar page by posting a new page,  adding  the following code to page content.</p>
 <p>Old version (still works) :</p>
 
@@ -118,7 +118,7 @@ img.emoji {
 
 		</div><!-- /entry -->		
 		<div class="entry">
-			<span class="date"><a href="http://www.xieziming.com/archives/6795.html" title="Permalink to Java 多线程">Java 多线程</a> , In <a href="http://www.xieziming.com/topic/coding" rel="category tag">程序</a>  , Views: 1045 , Comments: <a href="http://www.xieziming.com/archives/6795.html#respond">0</a> , Index: 4314 , 30 January 2011</span>
+			<span class="date"><a href="http://www.xieziming.com/archives/6795.html" title="Permalink to Java 多线程">Java 多线程</a> , In <a href="http://www.xieziming.com/topic/coding" rel="category tag">程序</a>  , Views: 1045 , Comments: <a href="http://www.xieziming.com/archives/6795.html#respond">0</a> , Index: 4316 , 30 January 2011</span>
 <p>1、在Java程序中，JVM负责线程的调度。线程调度是指按照特定的机制为多个线程分配CPU的使用权。 调度的模式有两种：分时调度和抢占式调度。分时调度是所有线程轮流获得CPU使用权，并平均分配每个线程占用CPU的时间；抢占式调度是根据线程的优先级别来获取CPU的使用权。JVM的线程调度模式采用了抢占式模式。 2、Thread类实际上也是实现了Runnable接口的类。 在启动的多线程的时候，需要先通过Thread类的构造方法Thread(Runnable target) 构造出对象，然后调用Thread对象的start()方法来运行多线程代码。 实际上所有的多线程代码都是通过运行Thread的start()方法来运行的。因此，不管是扩展Thread类还是实现Runnable接口来实现多线程，最终还是通过Thread的对象的API来控制线程的，熟悉Thread类的API是进行多线程编程的基础。 3、JAVA多线程涉及到2个问题，一个是线程的调度，另一个是线程的同步 4、线程的状态有：new、runnable、running、waiting、timed_waiting、blocked、dead 当执行new Thread(Runnable r)后，新创建出来的线程处于new状态，这种线程不可能执行 当执行thread.start()后，线程处于runnable状态，这种情况下只要得到CPU，就可以开始执行了。runnable状态的线程，会接受JVM的调度，进入running状态，但是具体何时会进入这个状态，是随机不可知的 running状态中的线程最为复杂，可能会进入runnable、waiting、timed_waiting、blocked、dead状态： 如果CPU调度给了别的线程，或者执行了Thread.yield()方法，则进入runnable状态，但是也有可能立刻又进入running状态 如果执行了Thread.sleep(long)，或者thread.join(long)，或者在锁对象上调用object.wait(long)方法，则会进入timed_waiting状态 如果执行了thread.join()，或者在锁对象上调用了object.wait()方法，则会进入waiting状态 如果进入了同步方法或者同步代码块，没有获取锁对象的话，则会进入blocked状态 处于waiting状态中的线程，如果是因为thread.join()方法进入等待的话，在目标thread执行完毕之后，会回到runnable状态；如果是因为object.wait()方法进入等待的话，在锁对象执行object.notify()或者object.notifyAll()之后会回到runnable状态 处于timed_waiting状态中的线程，和waiting状态中的差不多，只不过是设定时间到了，就会回到runnable状态 处于blocked状态中的线程，只有获取了锁之后，才会脱离阻塞状态 当线程执行完毕，或者抛出了未捕获的异常之后，会进入dead状态，该线程结束</p>
 		</div><!-- /entry -->		
 			
@@ -150,9 +150,9 @@ img.emoji {
 	<div class="widget">
     <h3>Comments</h3>
     <ul>
-<li><a href="http://www.xieziming.com/dev/post-views#comment-102651" class="dashedline" title="hi dear, i wanna use">hi dear, i wann...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-102425" class="dashedline" title="You need to clear all">You need to c...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-102403" class="dashedline" title="how can i reset _all_data?
+<li><a href="http://www.xieziming.com/dev/post-views#comment-102651" class="dashedline" title="hi dear, i wanna use">hi dear, i wann...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-102425" class="dashedline" title="You need to clear all">You need to cle...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-102403" class="dashedline" title="how can i reset _all_data?
 
-best">how can i re...</a></li><li><a href="http://www.xieziming.com/calendar#comment-101819" class="dashedline" title="不错呐">不错呐</a></li><li><a href="http://www.xieziming.com/archives/9213.html#comment-101814" class="dashedline" title="我就是随便看看">我就是随便看看</a></li><li><a href="http://www.xieziming.com/archives/6717.html#comment-101385" class="dashedline" title="Is the same plagin for">Is the same pl...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-98090" class="dashedline" title="install this plugin on wordpress">install th...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-89841" class="dashedline" title="Hello Dear Suny,
+best">how can i r...</a></li><li><a href="http://www.xieziming.com/calendar#comment-101819" class="dashedline" title="不错呐">不错呐</a></li><li><a href="http://www.xieziming.com/archives/9213.html#comment-101814" class="dashedline" title="我就是随便看看">我就是随便看看</a></li><li><a href="http://www.xieziming.com/archives/6717.html#comment-101385" class="dashedline" title="Is the same plagin for">Is the same pla...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-98090" class="dashedline" title="install this plugin on wordpress">install this ...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-89841" class="dashedline" title="Hello Dear Suny,
 
 I install your">Hello Dear S...</a></li>    </ul>
     <div class="widgetbottom"></div>
@@ -161,7 +161,7 @@ I install your">Hello Dear S...</a></li>    </ul>
 	<div class="widget">
  		<h3>Rand Posts</h3>
 		<ul>
-<li><a href="http://www.xieziming.com/archives/2907.html" class="dashedline" title="COM/LPT">COM/LPT</a></li><li><a href="http://www.xieziming.com/archives/4828.html" class="dashedline" title="五大道夜景">五大道夜景</a></li><li><a href="http://www.xieziming.com/archives/7327.html" class="dashedline" title="川藏线（杂-3）">川藏线（杂-3）</a></li><li><a href="http://www.xieziming.com/archives/4472.html" class="dashedline" title="深圳丽思卡尔顿">深圳丽思卡尔顿</a></li><li><a href="http://www.xieziming.com/archives/102.html" class="dashedline" title="闲的发慌">闲的发慌</a></li><li><a href="http://www.xieziming.com/archives/223.html" class="dashedline" title="生活是这么的单调">生活是这么的单调</a></li><li><a href="http://www.xieziming.com/archives/6618.html" class="dashedline" title="黄金交易风险控制">黄金交易风险控制</a></li><li><a href="http://www.xieziming.com/archives/5468.html" class="dashedline" title="煜涵">煜涵</a></li>	
+<li><a href="http://www.xieziming.com/archives/9544.html" class="dashedline" title="佛罗伦萨（一）">佛罗伦萨（一）</a></li><li><a href="http://www.xieziming.com/archives/85.html" class="dashedline" title="汉口一日游">汉口一日游</a></li><li><a href="http://www.xieziming.com/archives/3528.html" class="dashedline" title="新家初样">新家初样</a></li><li><a href="http://www.xieziming.com/archives/279.html" class="dashedline" title="后知后觉">后知后觉</a></li><li><a href="http://www.xieziming.com/archives/7838.html" class="dashedline" title="马六甲（二）">马六甲（二）</a></li><li><a href="http://www.xieziming.com/archives/9546.html" class="dashedline" title="米兰">米兰</a></li><li><a href="http://www.xieziming.com/archives/5495.html" class="dashedline" title="亚龙湾（二）">亚龙湾（二）</a></li><li><a href="http://www.xieziming.com/archives/7.html" class="dashedline" title="喜欢《人鱼小姐》">喜欢《人鱼小姐》</a></li>	
 		</ul>
   	<div class="widgetbottom"></div>
 	</div>
@@ -170,7 +170,7 @@ I install your">Hello Dear S...</a></li>    </ul>
 </div><!-- /sidebar --></div><!-- /main -->
 <div id="footer">
 <p align="left">© <a href="http://www.xieziming.com/about" target="_blank"> 明 · 明 · 童 · 鞋</a></p>
-<!--86 queries in 14.316 seconds.-->
+<!--86 queries in 2.772 seconds.-->
 <script>
 var _hmt = _hmt || [];
 (function() {

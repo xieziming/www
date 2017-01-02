@@ -397,7 +397,7 @@ body.altbg  {
 	font-weight: bold;
 	text-transform: uppercase;
 	border-bottom: 1px dashed #ccc;
-	}
+}
 #categories-list .entry-list-title {
 	margin: 0 0 2px;
 	line-height: 1em;
@@ -448,6 +448,14 @@ body.altbg  {
 .entry-list-content {
 		margin-top: 5px;
 		font-size: 13px;
+}
+
+.tag-list {
+	float: left;
+	word-wrap: break-word;
+	word-break: normal;
+	margin: 0 15px 0 15px;
+	width: 680px;
 }
 /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> SideBar <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
 

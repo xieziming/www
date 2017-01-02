@@ -96,14 +96,14 @@ img.emoji {
 <div id="content">	
 	<div class="post" id="post">			
 		<div class="entry">
-			<span class="date"><a href="http://www.xieziming.com/archives/7661.html" title="Permalink to WebDriver（一）">WebDriver（一）</a> , In <a href="http://www.xieziming.com/topic/testing" rel="category tag">测试</a>  , Views: 4674 , Comments: <a href="http://www.xieziming.com/archives/7661.html#comments">1</a> , Index: 4759 , 14 November 2012</span>
+			<span class="date"><a href="http://www.xieziming.com/archives/7661.html" title="Permalink to WebDriver（一）">WebDriver（一）</a> , In <a href="http://www.xieziming.com/topic/testing" rel="category tag">测试</a>  , Views: 4674 , Comments: <a href="http://www.xieziming.com/archives/7661.html#comments">1</a> , Index: 4762 , 14 November 2012</span>
 <p>WebDriver与之前Selenium的JS注入实现不同，直接利用了浏览器native support来操作浏览器。所以对于不同平台，不同的浏览器，必须依赖一个特定的浏览器的native component来实现把WebDriver API的调用转化为浏览器的native invoke。</p>
 <p>在我们new一个WebDriver的过程中，Selenium首先会确认浏览器的native component是否存在可用而且版本匹配。接着就在目标浏览器里启动一整套Web Service，这套Web Service使用了Selenium自己设计定义的协议，名字叫做<strong>The WebDriver Wire Protocol</strong>。这套协议非常之强大，几乎可以操作浏览器做任何事情，包括打开、关闭、最大化、最小化、元素定位、元素点击、上传文件等等等等。</p>
 <p>WebDriver Wire协议是通用的，也就是说不管是FirefoxDriver还是ChromeDriver，启动之后都会在某一个端口启动基于这套协议的Web Service。例如FirefoxDriver初始化成功之后，默认会从http://localhost:7055开始，而ChromeDriver则大概是http://localhost:46350之类的。接下来，我们调用WebDriver的任何API，都需要借助一个<strong>ComandExecutor</strong>发送一个命令，实际上是一个HTTP request给46350端口上的Web Service。在我们的HTTP request的body中，会以WebDriver Wire协议规定的<strong>JSON</strong>格式的字符串来告诉Selenium我们希望浏览器接下来做什么事情。</p>
 <p>不同浏览器的WebDriver子类，都需要依赖特定的浏览器原生组件，例如Firefox就需要一个add-on名字叫webdriver.xpi。而IE的话就需要用到一个dll文件来转化Web Service的命令为浏览器native的调用。</p>
 		</div><!-- /entry -->		
 		<div class="entry">
-			<span class="date"><a href="http://www.xieziming.com/archives/6830.html" title="Permalink to Selenium Core">Selenium Core</a> , In <a href="http://www.xieziming.com/topic/testing" rel="category tag">测试</a>  , Views: 6054 , Comments: <a href="http://www.xieziming.com/archives/6830.html#respond">0</a> , Index: 4772 , 11 March 2011</span>
+			<span class="date"><a href="http://www.xieziming.com/archives/6830.html" title="Permalink to Selenium Core">Selenium Core</a> , In <a href="http://www.xieziming.com/topic/testing" rel="category tag">测试</a>  , Views: 6054 , Comments: <a href="http://www.xieziming.com/archives/6830.html#respond">0</a> , Index: 4774 , 11 March 2011</span>
 <p>Selenium是ThroughtWorks公司的一个强大的开源Web功能测试工具系列，这个系列现在主要包括以下4款：</p>
 <p><strong>Selenium Core</strong>：支持DHTML的测试案例（效果类似数据驱动测试），它由一些纯js代码组成， 可以运行在windows/linux的不同browser上。它是Selenium IDE和Selenium RC的引擎。</p>
 <p><strong>Selenium IDE</strong>：支持并且只支持Firefox浏览器，属于Firefox的一个插件，支持的浏览器太少，而依附于Firefox 也不便于日后开展自动化测试，但是，它的录制快捷好用！并且有代码转换功能，可以把Selenium 语言测试用例转为C#,Java，PHP,Ruby，Prel,Groovy,Python等语言的测试案例。</p>
@@ -112,7 +112,7 @@ img.emoji {
 <p><strong>Selenium Core HTA</strong>：Selenium Core HTA其实是Selenium Core的额外模式，你只要Selenium Core配置稍加修改，即为HTA模式，Selenium Core HTA可以在IE最高安全等级（特权）下工作，这意味着它仅能在IE下工作，由于限制较大，下面将排除对Selenium Core HTA的讨论。</p>
 		</div><!-- /entry -->		
 		<div class="entry">
-			<span class="date"><a href="http://www.xieziming.com/archives/6832.html" title="Permalink to Selenium之WebDriver">Selenium之WebDriver</a> , In <a href="http://www.xieziming.com/topic/testing" rel="category tag">测试</a>  , Views: 4350 , Comments: <a href="http://www.xieziming.com/archives/6832.html#respond">0</a> , Index: 6317 , 12 February 2011</span>
+			<span class="date"><a href="http://www.xieziming.com/archives/6832.html" title="Permalink to Selenium之WebDriver">Selenium之WebDriver</a> , In <a href="http://www.xieziming.com/topic/testing" rel="category tag">测试</a>  , Views: 4350 , Comments: <a href="http://www.xieziming.com/archives/6832.html#respond">0</a> , Index: 6319 , 12 February 2011</span>
 <p><em><strong>（1）页面导航</strong></em>：</p>
 
 <div class="wp_code"><div class="pre"><pre class="java" style="font-family:'Times New Roman',Garamond, Times;">driver.<span style="color: #006633;">get</span><span style="color: #009900;">&#40;</span> <span style="color: #0000ff;">&quot;http://www.google.com&quot;</span> <span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre></div></div>
@@ -169,18 +169,18 @@ element.<span style="color: #006633;">getText</span><span style="color: #009900;
 	<div class="widget">
     <h3>Comments</h3>
     <ul>
-<li><a href="http://www.xieziming.com/dev/post-views#comment-102651" class="dashedline" title="hi dear, i wanna use">hi dear, i...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-102425" class="dashedline" title="You need to clear all">You need t...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-102403" class="dashedline" title="how can i reset _all_data?
+<li><a href="http://www.xieziming.com/dev/post-views#comment-102651" class="dashedline" title="hi dear, i wanna use">hi dear, i...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-102425" class="dashedline" title="You need to clear all">You need to cle...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-102403" class="dashedline" title="how can i reset _all_data?
 
-best">how can i rese...</a></li><li><a href="http://www.xieziming.com/calendar#comment-101819" class="dashedline" title="不错呐">不错呐</a></li><li><a href="http://www.xieziming.com/archives/9213.html#comment-101814" class="dashedline" title="我就是随便看看">我就是随便看看</a></li><li><a href="http://www.xieziming.com/archives/6717.html#comment-101385" class="dashedline" title="Is the same plagin for">Is the same pla...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-98090" class="dashedline" title="install this plugin on wordpress">install this...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-89841" class="dashedline" title="Hello Dear Suny,
+best">how can i re...</a></li><li><a href="http://www.xieziming.com/calendar#comment-101819" class="dashedline" title="不错呐">不错呐</a></li><li><a href="http://www.xieziming.com/archives/9213.html#comment-101814" class="dashedline" title="我就是随便看看">我就是随便看看</a></li><li><a href="http://www.xieziming.com/archives/6717.html#comment-101385" class="dashedline" title="Is the same plagin for">Is the same ...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-98090" class="dashedline" title="install this plugin on wordpress">install th...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-89841" class="dashedline" title="Hello Dear Suny,
 
-I install your">Hello Dear ...</a></li>    </ul>
+I install your">Hello Dear...</a></li>    </ul>
     <div class="widgetbottom"></div>
   </div> 
 	
 	<div class="widget">
  		<h3>Rand Posts</h3>
 		<ul>
-<li><a href="http://www.xieziming.com/archives/1305.html" class="dashedline" title="关于概率">关于概率</a></li><li><a href="http://www.xieziming.com/archives/3279.html" class="dashedline" title="童话梦世界">童话梦世界</a></li><li><a href="http://www.xieziming.com/archives/4828.html" class="dashedline" title="五大道夜景">五大道夜景</a></li><li><a href="http://www.xieziming.com/archives/9393.html" class="dashedline" title="库兰达火车">库兰达火车</a></li><li><a href="http://www.xieziming.com/archives/446.html" class="dashedline" title="funny thing">funny thing</a></li><li><a href="http://www.xieziming.com/archives/5562.html" class="dashedline" title="乡村">乡村</a></li><li><a href="http://www.xieziming.com/archives/7822.html" class="dashedline" title="珠海">珠海</a></li><li><a href="http://www.xieziming.com/archives/425.html" class="dashedline" title="老挝街景（三）">老挝街景（三）</a></li>	
+<li><a href="http://www.xieziming.com/archives/732.html" class="dashedline" title="光传输网网管DCN总结">光传输网网管DCN总结</a></li><li><a href="http://www.xieziming.com/archives/3114.html" class="dashedline" title="C/C++经典排序算法">C/C++经典排序算法</a></li><li><a href="http://www.xieziming.com/archives/7113.html" class="dashedline" title="鼓浪屿系列（五）">鼓浪屿系列（五）</a></li><li><a href="http://www.xieziming.com/archives/367.html" class="dashedline" title="Happy New Year">Happy New Y...</a></li><li><a href="http://www.xieziming.com/archives/727.html" class="dashedline" title="别紧张,我不是什么好人">别紧张,我不是什么好...</a></li><li><a href="http://www.xieziming.com/archives/4849.html" class="dashedline" title="紫禁城（二）">紫禁城（二）</a></li><li><a href="http://www.xieziming.com/archives/4403.html" class="dashedline" title="肉欲横流">肉欲横流</a></li><li><a href="http://www.xieziming.com/archives/350.html" class="dashedline" title="无聊的周末">无聊的周末</a></li>	
 		</ul>
   	<div class="widgetbottom"></div>
 	</div>
@@ -189,7 +189,7 @@ I install your">Hello Dear ...</a></li>    </ul>
 </div><!-- /sidebar --></div><!-- /main -->
 <div id="footer">
 <p align="left">© <a href="http://www.xieziming.com/about" target="_blank"> 明 · 明 · 童 · 鞋</a></p>
-<!--85 queries in 17.500 seconds.-->
+<!--85 queries in 3.398 seconds.-->
 <script>
 var _hmt = _hmt || [];
 (function() {

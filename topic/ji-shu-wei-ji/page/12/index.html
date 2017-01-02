@@ -96,7 +96,7 @@ img.emoji {
 <div id="content">	
 	<div class="post" id="post">			
 		<div class="entry">
-			<span class="date"><a href="http://www.xieziming.com/archives/1144.html" title="Permalink to 经典ARP实验">经典ARP实验</a> , In <a href="http://www.xieziming.com/topic/ji-shu-wei-ji" rel="category tag">技术维基</a>  , Views: 490 , Comments: <a href="http://www.xieziming.com/archives/1144.html#respond">0</a> , Index: 4475 , 15 April 2008</span>
+			<span class="date"><a href="http://www.xieziming.com/archives/1144.html" title="Permalink to 经典ARP实验">经典ARP实验</a> , In <a href="http://www.xieziming.com/topic/ji-shu-wei-ji" rel="category tag">技术维基</a>  , Views: 490 , Comments: <a href="http://www.xieziming.com/archives/1144.html#respond">0</a> , Index: 4477 , 15 April 2008</span>
 <p>> 1.无网关,A ping B,报Destination host unreachable.显然,A机器发现对方与自己不是同一网段,试图寻找网关,但网关不存在,所以报主机不可达,B上的Sniffer未抓到任何包, 观察网卡也是只发不收.显然数据没有出去,也没有发生卷一上所说的ARP广播过程.</p>
 <p>> 2.网关设成对方IP,能正常PING通.为什么能通?从A计算机Sniffer上抓到的包可以看出，A在PING对方过程中,A首先进行了ARP 广播,它广播询问11.1.1.1的MAC是什么!但这里有个问题,这个11.1.1.1到底指的是PING中指定的11.1.1.1还是网关中的 11.1.1.1呢?先不管它,一会实验就明白了.反正此时的结果是A问11.1.1.1的MAC,显然这个ARP广播是可以被B收到的(为什么就不用说了吧),而11.1.1.1正好就是B的IP地址,理所当然B要回应这个ARP请求.下图是A上的SNIFFER,A首先进行了ARP广播,然后收到了B 的应答.这样A就有了B的MAC,而B在接到A的ARP广播时候就学到A的MAC,所以双方可以PING通.</p>
 <p>>3.网关设成自己,A PING 对方一样是通的,A依然是先广播询问11.1.1.1的MAC,这个ARP广播被B接到后,B有义务应答,于是双方知道对方MAC,所以能PING通.与第2种情况不同的是,这里可以明确知道ARP中的11.1.1.1指的是PING中所指定的IP地址而不是网关(此时A网关是10.1.1.1了),那么第2种情况中的11.1.1.1也指的是PING中所指定的IP ?做个实验4看看!</p>
@@ -106,7 +106,7 @@ img.emoji {
 <p>   >4.3:PING和谁都不在一个网段的IP,超时,B上接到是A发出的关于100.1.1.1的ARP广播,由于不存在100.1.1.1这个地址,所以没有机器回应.图略.</p>
 		</div><!-- /entry -->		
 		<div class="entry">
-			<span class="date"><a href="http://www.xieziming.com/archives/567.html" title="Permalink to ECC路由表初探">ECC路由表初探</a> , In <a href="http://www.xieziming.com/topic/ji-shu-wei-ji" rel="category tag">技术维基</a>  , Views: 1378 , Comments: <a href="http://www.xieziming.com/archives/567.html#respond">0</a> , Index: 7305 , 01 April 2008</span>
+			<span class="date"><a href="http://www.xieziming.com/archives/567.html" title="Permalink to ECC路由表初探">ECC路由表初探</a> , In <a href="http://www.xieziming.com/topic/ji-shu-wei-ji" rel="category tag">技术维基</a>  , Views: 1378 , Comments: <a href="http://www.xieziming.com/archives/567.html#respond">0</a> , Index: 7307 , 01 April 2008</span>
 <p>中兴传输产品的ECC连接使用动态路由协议OSPF（开放式最短路径优先），当网络结构发生变化时，网元路由也会随之变化，如果使用ECC路由保护规则，则传输网络就可形成一个简单的自愈系统，抵御一定的风险。</p>
 <p>1) NCP路由表由于器件等原因设计的路由表大小理论值不超过180条，而实践检验超过128条路由ECC不稳定，64条以下ECC运行效果较佳。（这个数字与划域原则的数字是不是差不多？因为划域原则便是以此为基础的）</p>
 <p>2) NCP路由表是设备自动生成的，并且会随网络结构的变化实时变化。这也意味着，稳定的网络中各NCP路由表里的路由也是稳定的，不会多也不会少。</p>
@@ -114,7 +114,7 @@ img.emoji {
 <p>今天要说的就是网元路由表的形成，下面就以实际网络中某一站点截图为例进行路由表说明：</p>
 		</div><!-- /entry -->		
 		<div class="entry">
-			<span class="date"><a href="http://www.xieziming.com/archives/903.html" title="Permalink to 用VLAN分割广播域">用VLAN分割广播域</a> , In <a href="http://www.xieziming.com/topic/ji-shu-wei-ji" rel="category tag">技术维基</a>  , Views: 3019 , Comments: <a href="http://www.xieziming.com/archives/903.html#respond">0</a> , Index: 7757 , 07 March 2008</span>
+			<span class="date"><a href="http://www.xieziming.com/archives/903.html" title="Permalink to 用VLAN分割广播域">用VLAN分割广播域</a> , In <a href="http://www.xieziming.com/topic/ji-shu-wei-ji" rel="category tag">技术维基</a>  , Views: 3019 , Comments: <a href="http://www.xieziming.com/archives/903.html#respond">0</a> , Index: 7760 , 07 March 2008</span>
 <p><strong>冲突域</strong>：<br />
 冲突域指的是会产生冲突的最小范围，在计算机和计算机通过设备互联时，会建立一条通道，如果这条通道只允许瞬间一个数据报文通过，那么在同时如果有两个或更多的数据报文想从这里通过时就会出现冲突了。</p>
 <p>集线器，网桥，交换机，路由器分别对应ISO/OSI的哪一层：</p>
@@ -154,18 +154,18 @@ img.emoji {
 	<div class="widget">
     <h3>Comments</h3>
     <ul>
-<li><a href="http://www.xieziming.com/dev/post-views#comment-102651" class="dashedline" title="hi dear, i wanna use">hi dear, i w...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-102425" class="dashedline" title="You need to clear all">You need to cl...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-102403" class="dashedline" title="how can i reset _all_data?
+<li><a href="http://www.xieziming.com/dev/post-views#comment-102651" class="dashedline" title="hi dear, i wanna use">hi dear, i wan...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-102425" class="dashedline" title="You need to clear all">You need to cle...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-102403" class="dashedline" title="how can i reset _all_data?
 
-best">how can i res...</a></li><li><a href="http://www.xieziming.com/calendar#comment-101819" class="dashedline" title="不错呐">不错呐</a></li><li><a href="http://www.xieziming.com/archives/9213.html#comment-101814" class="dashedline" title="我就是随便看看">我就是随便看看</a></li><li><a href="http://www.xieziming.com/archives/6717.html#comment-101385" class="dashedline" title="Is the same plagin for">Is the same pla...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-98090" class="dashedline" title="install this plugin on wordpress">install this pl...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-89841" class="dashedline" title="Hello Dear Suny,
+best">how can i ...</a></li><li><a href="http://www.xieziming.com/calendar#comment-101819" class="dashedline" title="不错呐">不错呐</a></li><li><a href="http://www.xieziming.com/archives/9213.html#comment-101814" class="dashedline" title="我就是随便看看">我就是随便看看</a></li><li><a href="http://www.xieziming.com/archives/6717.html#comment-101385" class="dashedline" title="Is the same plagin for">Is the same...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-98090" class="dashedline" title="install this plugin on wordpress">install this ...</a></li><li><a href="http://www.xieziming.com/dev/post-views#comment-89841" class="dashedline" title="Hello Dear Suny,
 
-I install your">Hello Dear Suny...</a></li>    </ul>
+I install your">Hello Dear ...</a></li>    </ul>
     <div class="widgetbottom"></div>
   </div> 
 	
 	<div class="widget">
  		<h3>Rand Posts</h3>
 		<ul>
-<li><a href="http://www.xieziming.com/archives/8682.html" class="dashedline" title="上海夜">上海夜</a></li><li><a href="http://www.xieziming.com/archives/9312.html" class="dashedline" title="雪乡（三）">雪乡（三）</a></li><li><a href="http://www.xieziming.com/archives/4970.html" class="dashedline" title="草原上的村落（二）">草原上的村落（二）</a></li><li><a href="http://www.xieziming.com/archives/7116.html" class="dashedline" title="混搭菜">混搭菜</a></li><li><a href="http://www.xieziming.com/archives/7000.html" class="dashedline" title="Java IO类">Java IO类</a></li><li><a href="http://www.xieziming.com/archives/3273.html" class="dashedline" title="依旧夏天">依旧夏天</a></li><li><a href="http://www.xieziming.com/archives/6830.html" class="dashedline" title="Selenium Core">Selenium Core</a></li><li><a href="http://www.xieziming.com/archives/9133.html" class="dashedline" title="斯里兰卡 · Mirissa · 出海观鲸">斯里兰卡 &middot; Miris...</a></li>	
+<li><a href="http://www.xieziming.com/archives/6826.html" class="dashedline" title="测试工程师如何和开发工程师交流">测试工程师如何和开发...</a></li><li><a href="http://www.xieziming.com/archives/9506.html" class="dashedline" title="布拉格（一）">布拉格（一）</a></li><li><a href="http://www.xieziming.com/archives/7481.html" class="dashedline" title="Java单例模式">Java单例模式</a></li><li><a href="http://www.xieziming.com/archives/4813.html" class="dashedline" title="西单 VS 王府井">西单 VS 王府井</a></li><li><a href="http://www.xieziming.com/archives/4300.html" class="dashedline" title="Ruby（二）">Ruby（二）</a></li><li><a href="http://www.xieziming.com/archives/94.html" class="dashedline" title="毕业卖书记">毕业卖书记</a></li><li><a href="http://www.xieziming.com/archives/3428.html" class="dashedline" title="猜猜我是谁">猜猜我是谁</a></li><li><a href="http://www.xieziming.com/archives/8737.html" class="dashedline" title="长洲岛（六）">长洲岛（六）</a></li>	
 		</ul>
   	<div class="widgetbottom"></div>
 	</div>
@@ -174,7 +174,7 @@ I install your">Hello Dear Suny...</a></li>    </ul>
 </div><!-- /sidebar --></div><!-- /main -->
 <div id="footer">
 <p align="left">© <a href="http://www.xieziming.com/about" target="_blank"> 明 · 明 · 童 · 鞋</a></p>
-<!--86 queries in 12.090 seconds.-->
+<!--86 queries in 2.298 seconds.-->
 <script>
 var _hmt = _hmt || [];
 (function() {
